@@ -1,0 +1,121 @@
+# REVERCUE — CONTRACT BUILDER BLUEPRINT
+# File: contractbuilder.txt
+# Purpose: The contract builder. The requirement form, the template selection, the canvas, the after-approval chain, the client actions.
+# Audience: The AI building the frontend. Read design.txt, api.txt, and proposalbuilder.txt first.
+# The contract builder shares the canvas, the block library, the properties panel, the auto-save, the preview, and the share modal with the proposal builder. This file specifies the DIFFERENCES.
+
+# ============================================================
+# PART 1 — THE FLOW
+# ============================================================
+
+Stage 1: The requirement form (/contracts/new). The contract-specific fields.
+Stage 2: The template selection (/contracts/:id/edit?step=template). The same template grid, filtered to contract templates.
+Stage 3: The canvas (/contracts/:id/edit). The same three panels, with the contract-specific properties.
+
+# ============================================================
+# PART 2 — STAGE 1: THE REQUIREMENT FORM (the differences)
+# ============================================================
+
+The same layout as the proposal requirement form (centered card, header, footer). The fields differ:
+
+1. Client (required). Same segmented control (Existing | New).
+2. Which proposal is this contract for? (optional). A dropdown of the client's accepted/approved proposals. If selected, the scope, the pricing, and the timeline pre-fill from the proposal.
+3. Scope of work (required). A textarea. Pre-filled from the linked proposal if selected.
+4. Payment terms (required). A structured input: the amount, the schedule (e.g., "50% upfront, 50% on delivery"), the currency.
+5. Revision policy (required). A textarea (e.g., "2 rounds of revisions included. Additional rounds at $50/hour.").
+6. Cancellation policy (required). A textarea.
+7. Which sections do you want? (required, at least one). A checkbox group: Parties, Scope, Payment, Timeline, Revisions, Cancellation, Liability, Signatures. (NO FAQs, NO Embedded Questions.)
+8. After approval, what next? (required). A dropdown: "Show the requirement form" | "Show the invoice" | "Download PDF only". Helper: "This is what the client sees after they approve. The form/invoice options are available on Growth and Scale. On Free and Starter, the client sees the PDF only."
+   If the user is on Free/Starter and selects form/invoice: a note "This option is available on Growth and Scale. On your plan, the client will see the PDF."
+
+The footer: "Continue to builder" (gold, disabled until client, scope, payment terms, revision policy, cancellation policy, at least one section, after-approval).
+"Cancel" (ghost).
+
+The submit: POST /api/contracts/draft with { client_id, linked_proposal_id?, title, scope, payment_terms, timeline, revisions, cancellation, after_approval, currency }.
+
+# ============================================================
+# PART 3 — STAGE 2: THE TEMPLATE SELECTION (the differences)
+# ============================================================
+
+The same grid as the proposal builder, but filtered to contract templates (the templates with type = "contract").
+The "Suggested" badge matches the user's services.
+The "Start from blank" card is available.
+The upload modal: the type is pre-set to "Contract".
+
+# ============================================================
+# PART 4 — STAGE 3: THE CANVAS (the differences)
+# ============================================================
+
+The same three panels. The differences:
+
+## The block library (narrower)
+The contract uses: heading, paragraph, list, divider, two-column, timeline, signature, "I Have Questions" block.
+It does NOT have: FAQ list, embedded question, file upload, packages, pricing table (the payment terms are a paragraph/list, not a pricing table).
+The signature block: a block with two signature lines (Freelancer, Client) and a date. On the client view, the client's signature line shows "Approve" / "Decline" (the contract's actions), not a drawn signature.
+
+## The properties panel
+The global properties (brand colours, font, page) are the same.
+The "After approval" dropdown is in the document properties (a "Contract" tab): "Show the requirement form" | "Show the invoice" | "Download PDF only". The freelancer can change it here (it pre-filled from the requirement form).
+The document-level "I Have Questions" toggle: on/off. If on, the client sees the "I Have Questions" button at the bottom of the contract.
+
+## The canvas content
+The sections: Parties, Scope, Payment, Timeline, Revisions, Cancellation, Liability, Signatures.
+The "Signatures" section at the bottom: the two signature lines + the date. On the client view, the client's side has the Approve / Decline / I Have Questions buttons.
+
+## The preview
+The same live preview. The client's view shows:
+  The contract title, "Prepared for [Client]", the reference number.
+  The sections.
+  The three actions at the bottom: "Approve" (gold), "Decline" (ghost, red border), "I Have Questions" (ghost, if the toggle is on).
+  The Approve modal: "By approving, you confirm you have reviewed this contract. This is not a legally binding e-signature." Confirm.
+  The Decline modal: "Are you sure?" + an optional reason. Confirm.
+  The I Have Questions: a text box. Submit. The question goes to the freelancer's dashboard.
+
+## The share modal
+The same as the proposal, with the message pre-filled: "Hi [Client], here is the contract for [project]. Review it and let me know if you have any questions."
+The line: "Revercue does not send the message. You send it from your own account."
+If password-protected: the password (copyable) + "Send the password separately."
+
+## The create (publish)
+Same as the proposal. After publish, the client's view has the three actions.
+
+## The after-approval chain (the client side)
+When the client approves:
+  If after_approval = "form": the client sees the requirement form (the freelancer's form, if one exists for this client) or a message "The freelancer will send you a form next."
+  If after_approval = "invoice": the client sees the invoice (the freelancer's invoice, if one exists) or a message "The freelancer will send you an invoice next."
+  If after_approval = "pdf_only": the client sees "Approved. Thank you." + a "Download PDF" button.
+  On Free/Starter: always the PDF only (the form/invoice chain is Growth/Scale).
+
+# ============================================================
+# PART 5 — THE CLIENT-FACING CONTRACT VIEW (/c/:publicId)
+# ============================================================
+
+The same layout as the public proposal, with:
+  The header: the freelancer's logo and name, the contract title, "Prepared for [Client]", the reference number.
+  The sections (Parties, Scope, Payment, Timeline, Revisions, Cancellation, Liability, Signatures).
+  The three actions at the bottom.
+  The footer: "This contract is not a legally binding e-signature until both parties sign. The Approve action is a confirmation, not a signature." + the "Powered by Revercue" (removed on Scale/Teams).
+
+The states:
+  The password wall (if protected).
+  The closed page (if archived).
+  The expired banner (if past the expiry date).
+  The invalid link.
+  The approved state: "Approved. Thank you." + the after-approval next step (form/invoice/PDF).
+  The declined state: "Declined. Thank you for letting us know."
+  The question state: the text box; after submit, "Your question has been sent. You can still approve or decline."
+
+# ============================================================
+# PART 6 — THE DESIGN RULES
+# ============================================================
+
+The same rules as the proposal builder, with:
+  The contract has NO FAQs and NO embedded questions. The "I Have Questions" is at the document level, not per question.
+  The signature block is the contract's closing. The client's Approve is the equivalent of a signature (stated honestly in the modal).
+  The after-approval chain is the thread's continuation. The contract is not the end; it is the bridge to the form or the invoice.
+  The gold rule: the "Create" button in the builder, the "Approve" button on the client view. One gold per screen.
+  The decline is a ghost button with a red border, not a red filled button. It is a secondary action, not the primary.
+
+# ============================================================
+# END OF CONTRACT BUILDER
+# ============================================================
