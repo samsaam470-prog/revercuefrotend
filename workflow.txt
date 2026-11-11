@@ -169,4 +169,219 @@ Entry: /proposals/:id/edit?step=template.
 Content: the template cards (thumbnail, name, one-line description, "Suggested" gold badge if the tags match the user's services), "Start from blank", "Upload your own template" (Growth/Scale), "Use a template from a URL" (Growth/Scale).
 Actions:
   Click a template card -> the builder canvas loads with the template rendered and the placeholders filled (/proposals/:id/edit).
-  Click "Start from blank" -> the canvas opens empty, with the
+  Click "Start from blank" -> the canvas opens empty, with the requirement form data in the suggestions panel (/proposals/:id/edit?blank=true).
+  Click "Upload your own template" -> a modal (HTML file or URL); POST /api/templates/upload; the template appears in the list.
+  Click "Use a template from a URL" -> a field; POST /api/templates/upload with the URL; the template appears.
+Exit: the builder canvas.
+States: the template cards show a skeleton while loading. The upload modal has file validation (HTML, max size) or URL validation. The error state "Could not upload the template. Retry."
+
+## Flow D5 — The builder canvas
+Entry: /proposals/:id/edit.
+Content: the three panels (sections left, canvas center, properties right), the top bar (Back, Title, Undo/Redo, Preview, Save, Create gold, ⋮).
+Actions:
+  Click a block -> the properties panel shows its fields. Edit the text, colour, data.
+  Drag a block -> reorder.
+  Click "Add section" -> a dropdown of block types; insert at the cursor.
+  Click "Preview" -> a split pane (desktop) or modal (mobile) shows the client's view live. Read-only.
+  Click "Save" -> PATCH /api/proposals/:id; a toast "Saved."
+  Auto-save every 60 seconds; on session end, navigator.sendBeacon to /api/proposals/:id/autosave?token=...
+  Click "Create" -> if validation passes, POST /api/proposals/:id/publish; the response has the public_id; the share modal opens.
+  Click "⋮" -> Duplicate, Archive, Delete, Password (Growth/Scale), Allow PDF download (toggle).
+Exit: the share modal (on Create), the proposals list (on Back), the dashboard (on Logo).
+States: the auto-save indicator next to the title ("Saved" / "Saving..." / "Unsaved changes"). The validation errors scroll to the section. The loading state on Create is a spinner. The password modal has the password field (min 6) and the password-protected count.
+
+## Flow D6 — The share modal
+Entry: after "Create" (publish). Or from the ⋮ "Share" on a published document.
+Content: "Your proposal is ready." The public link (copyable, mono). A message field (pre-filled). The share buttons (WhatsApp, Email, Instagram, Facebook, X, Threads, Copy Link). The line "Revercue does not send the message. You send it from your own account." If password-protected: the password shown (copyable) and "Send the password separately." "Done" (gold).
+Actions:
+  Click a share button -> the device's native share sheet with the link + message.
+  Click "Copy Link" -> the link is copied; a toast "Link copied."
+  Click "Done" -> POST /api/proposals/:id/share (log the share); the modal closes; return to the proposals list.
+Exit: the proposals list.
+States: the copy button shows "Copied" for 2 seconds. The share buttons are disabled if the public_id is missing (unlikely after Create).
+
+## Flow D7 — The contract builder
+Same as the proposal builder, with:
+  The requirement form has contract-specific fields (which proposal is this for, scope, payment terms, revision policy, cancellation policy, after-approval dropdown).
+  The canvas has no FAQs, no embedded questions. "I Have Questions" at the document level.
+  The after-approval dropdown (form / invoice / pdf_only) is in the properties panel.
+  The share modal pre-fills "Here is the contract for [project]. Review it and let me know if you have any questions."
+  On the client side, the contract has Approve / Decline / I Have Questions.
+
+## Flow D8 — The form editor
+Same as the builder, but:
+  The left panel is the question list (drag to reorder, "+ Add question", "+ Upload Markdown").
+  The center panel is the question editor (text, type, options, required, explanation, adaptive branching on Growth/Scale, file upload limits).
+  The right panel is the form settings (title, description, expiry date, thank-you page on Scale).
+  The top bar: Back, Title, Preview, Test (runs the branching in test mode, no save), Create (gold), ⋮.
+  The share modal pre-fills "I need a few details before we start. It takes about 5 minutes. [link]".
+  On submit (client side), the Prompt Creator runs and the thank-you page shows (default on Free/Starter/Growth, custom on Scale).
+
+## Flow D9 — The invoice builder
+Same as the builder, but:
+  The requirement form has invoice-specific fields (which contract is this for, line items, currency, tax, payment arrangement Option A/B, due date, notes).
+  The center panel is the line-items table + a notes block + a payment-instructions block.
+  The right panel has the payment arrangement (editable), the due date, the brand colours.
+  The share modal pre-fills "Here is the invoice for [project]. You can pay via the link inside. [link]".
+  On the client side, the invoice has the Buy Now button (Option A redirect / Option B account details + proof upload).
+  The "Confirm payment" action is on the invoice detail (the freelancer side), which marks the invoice confirmed and adds a payment row.
+
+## Flow D10 — The CRM list
+Entry: /crm.
+Content: the table (name, email, channel, last message, documents count, latest status, interest on Scale), the search, the filter (All/Active/Archived/Not interested), the sort, "+ Add client" (gold), "Export CSV".
+Actions:
+  Click a row -> the client detail (/crm/:clientId).
+  Click "+ Add client" -> the add-client modal (name, email, company, phone, channel); POST /api/crm/clients; a toast; the list refreshes.
+  Click "Export CSV" -> GET /api/crm/clients/export; the browser downloads the CSV.
+  Click the ⋮ -> Edit, Archive, Mark not interested (Scale), Delete.
+Exit: the client detail.
+States: the table shows a skeleton. The empty state "No clients yet. Create a proposal, contract, invoice, or form — the client is added automatically. Or add one manually." + the CTA. On Free, creating a document for a new client shows a notification "Add [email] to your CRM?" (the auto-add is Starter+).
+
+## Flow D11 — The client detail
+Entry: /crm/:clientId.
+Content: the header (name, email, channel, interest badge on Scale, the "Create proposal/contract/invoice/form" buttons), the communication log (the main body, a timeline), the documents (grouped by type), the notes (plan-limited), the follow-ups (with "Mark done").
+Actions:
+  Click "Create proposal" -> /proposals/new?client_id=:id (pre-filled).
+  Click a document -> the builder or the public view.
+  Click "Add note" -> a textarea; POST /api/crm/clients/:id/notes; the list refreshes.
+  Click "Add communication" -> the writing area (entry type, direction, channel, message, estimated time, linked document, next step, follow-up date); POST /api/crm/clients/:id/communication; the timeline refreshes.
+  Click "Mark done" on a follow-up -> PATCH /api/crm/communication/:id with follow_up_done = 1.
+  Click the interest badge (Scale) -> the interest breakdown (the signals).
+Exit: the builder, the public view, the CRM list.
+States: the timeline shows a skeleton. The empty state "No communication yet. Add the first entry." The notes limit reached shows "You have 3 of 3 notes. Upgrade to add more." The interest breakdown is a modal.
+
+## Flow D12 — The settings pages
+Entry: /settings. The left nav (Profile, Plan & Billing, Security, Notifications, Saved FAQs, Saved Packages, Revision Prices, What Revercue Knows, Delete Account).
+Content: each section is a card. The "Save changes" (gold) is disabled until a change is made. The "Cancel" (ghost) reverts.
+Actions:
+  Profile: name, business, website, Fiverr, services, brand colours, logo upload. PATCH /api/settings/profile.
+  Plan & Billing: the current plan, the usage bars, the payment history, the upgrade/downgrade, the add-ons (Scale), the receipt download. POST /api/settings/plan/upgrade-request, /downgrade, GET /receipt/:id.
+  Security: change password, 2FA toggle, active sessions list. POST /api/settings/security/change-password, /2fa, GET /sessions, POST /sessions/:id/logout, /logout-all.
+  Notifications: the email notifications toggle (Growth/Scale), the per-event toggles, the newsletter toggle, the FormSubmit status card. PATCH /api/settings/notifications, POST /api/settings/formsubmit-activate.
+  Saved FAQs: the list, the "Add FAQ" form, the "Keep it" button on the 10-day warning. GET/POST/DELETE /api/settings/saved-faqs, POST /:id/keep.
+  Saved Packages: the list, the "Add package" form, the "Keep it" button. GET/POST/DELETE /api/settings/saved-packages, POST /:id/keep.
+  Revision Prices: the category + price list. GET/PATCH /api/settings/revision-prices.
+  What Revercue Knows: the read-only transparency page (Scale/Teams). GET /api/settings/what-revercue-knows.
+  Delete Account: the danger card, the type-your-email confirmation, the 5-day grace, the cancel. POST /api/settings/delete-account, /cancel-deletion.
+Exit: the dashboard, or the section itself.
+States: the plan page shows the usage bars (red at 90%). The upgrade modal has the "Copy Payoneer email" button. The downgrade flow has the document selection. The delete account has the two-step confirmation.
+
+# ============================================================
+# PART 5 — THE CLIENT-FACING FLOW (the client's side)
+# ============================================================
+
+## Flow C1 — The client opens a proposal link
+Entry: the client clicks /p/:publicId (from WhatsApp, email, wherever the freelancer sent it).
+Content: the freelancer's logo and name, the proposal title, "Prepared for [Client]", the reference number, the reading time, the sections, the FAQs (collapsible), the embedded questions, the info icons, the packages (selectable), the "Next step" section, the footer (contact, "This is an offer, not a contract", the PDF download if enabled).
+Actions:
+  Expand an FAQ -> a tracking event (Growth+).
+  Answer an embedded question -> a tracking event.
+  Click "Ask a question" (if the toggle is on) -> a text box; POST /api/public/p/:publicId/question; a notification to the freelancer.
+  Select a package -> a tracking event; the selection is stored.
+  Click "Download PDF" (if enabled) -> the PDF.
+  No Accept button. The client replies on WhatsApp or email.
+Exit: none (the client leaves the page). The freelancer sees the activity.
+States: the password wall if protected (enter the password, 30-min session, 3 attempts, 15-min lock). The closed page if archived ("This proposal is no longer available."). The expired banner if past the expiry date. The invalid link "This document doesn't exist or has been removed."
+
+## Flow C2 — The client opens a contract link
+Same as the proposal, plus:
+  The three actions at the bottom: "Approve" (gold), "Decline" (ghost, danger border), "I Have Questions" (ghost).
+  Approve: a modal "By approving, you confirm you have reviewed this contract. This is not a legally binding e-signature." Confirm -> POST /api/public/c/:publicId/action with action=approve. The contract is marked approved. If the freelancer set an after-approval action (form/invoice on Growth/Scale), the client sees the next step. Otherwise, "Approved. Thank you." + a PDF download.
+  Decline: a modal "Are you sure?" + an optional reason. Confirm -> POST with action=decline. "Declined. Thank you for letting us know."
+  I Have Questions: a text box; POST with action=question; the question appears on the freelancer's dashboard; the client can still approve or decline.
+States: the password wall, the closed page, the expired banner, the invalid link — same as the proposal.
+
+## Flow C3 — The client opens an invoice link
+Same as the proposal, plus:
+  The line items table, the subtotal/tax/total, the due date, the payment terms, the notes.
+  Option A: "Buy Now" (gold) -> redirects to the freelancer's payment link.
+  Option B: the account details displayed clearly + "Buy Now" -> the account details + an optional "Upload payment proof" field.
+  After payment (Option B): the client uploads the proof -> POST /api/public/i/:publicId/proof. The status becomes "Proof submitted." The freelancer confirms. The client sees "Payment confirmed. Thank you." + a "Download receipt" button.
+States: the overdue banner if past the due date. The password wall. The closed page.
+
+## Flow C4 — The client opens a form link
+Same as the proposal, plus:
+  The questions in order, one page at a time (or all on one page, the freelancer chooses).
+  The progress indicator (if multi-page).
+  "Next", "Back", "Submit" (gold, disabled until the required questions are answered).
+  On submit, POST /api/public/f/:publicId/submit. The response has the thank_you_config (null on Free/Starter/Growth -> the default page; the custom page on Scale).
+  The default page: "Thank you. Your answers have been sent to [freelancer]." + "Powered by Revercue."
+  The custom page (Scale): the freelancer's heading, body, optional button, logo.
+States: the closed page if the form is closed/expired. The password wall. The client cannot submit twice (a browser cookie/session blocks the second submit with "You've already submitted this form.").
+
+## Flow C5 — The password wall
+Entry: any protected document (/p/, /c/, /i/, /f/).
+Content: the centered card "This document is protected." The password field, "Continue" (gold), the error line.
+Actions: enter the password -> POST /api/public/<type>/:publicId/unlock. Correct: a 30-minute signed cookie; the document opens. Wrong: "Incorrect password. 2 attempts remaining." 3 wrong: "Too many attempts. Try again in 15 minutes." The input is disabled.
+Exit: the document (on success), the wall (on wrong).
+States: the attempts decrement. The lock timer. The session cookie.
+
+# ============================================================
+# PART 6 — THE NOTIFICATION FLOW
+# ============================================================
+
+## Flow N1 — The bell (in-app)
+Entry: any app page. The bell is in the top bar.
+Content: the unread badge (the count from the page response, piggybacked). Click the bell: the dropdown with the last 10 notifications, the "Mark all as read" ghost, the "View all" ghost.
+Actions:
+  Click a notification -> mark as read (PATCH /api/notifications/:id/read); open the client/document.
+  Click "Mark all as read" -> PATCH /api/notifications/read-all; the badge clears.
+  Click "View all" -> /notifications (the full page with filters).
+  Click the × on a notification -> dismiss (DELETE /api/notifications/:id).
+Exit: the client/document, the notifications page.
+States: the dropdown shows a skeleton while loading. The empty state "No notifications yet. You'll see client activity here."
+
+## Flow N2 — The email (Growth/Scale/Teams)
+Entry: the client opens a proposal, approves a contract, submits a form, pays an invoice.
+Content: the email via FormSubmit to the freelancer's email, per the event toggle. The in-app notification is always written; the email is the opt-in layer.
+Actions: the freelancer clicks the link in the email -> the client/document.
+Exit: the app.
+States: if the plan does not have email notifications (Free/Starter), no email. If the event toggle is off, no email. The in-app notification still appears.
+
+# ============================================================
+# PART 7 — THE ERROR AND UTILITY FLOW
+# ============================================================
+
+## Flow E1 — 404
+Entry: any invalid route.
+Content: "404" gold eyebrow, "This page doesn't exist." headline, "The link may be broken, or the page may have been moved." subtext, "Go to dashboard" (gold, if logged in) or "Go to home" (gold, if not), "Need help? Contact us."
+Exit: the dashboard or the home.
+
+## Flow E2 — 403
+Entry: a protected route without a valid JWT, or a plan-gated route on the wrong plan.
+Content: "403" gold eyebrow, "You don't have access to this." headline, "You may need to log in, or this feature may not be available on your plan." subtext, "Log in" (gold, if not logged in) or "Upgrade plan" (gold, if plan-gated) or "Go to dashboard" (ghost).
+Exit: the login, the settings plan, the dashboard.
+
+## Flow E3 — 500
+Entry: any route when the Worker throws.
+Content: "500" gold eyebrow, "Something went wrong." headline, "We've been notified. Try again in a moment." subtext, "Try again" (gold), "Go to dashboard" (ghost), the reference code (mono).
+Exit: the retry reloads the page; the dashboard.
+
+## Flow E4 — Offline
+Entry: the browser is offline, or a fetch fails with a network error.
+Content: "OFFLINE" gold eyebrow, "You're offline." headline, "Check your connection and try again. Your work is saved." subtext, "Retry" (gold), "If you were in the middle of editing, your draft is saved locally."
+Exit: the retry (when back online).
+
+## Flow E5 — Session expired
+Entry: a 401 from an API call.
+Content: "SESSION EXPIRED" gold eyebrow, "You've been logged out." headline, "Your session expired for security. Log in again to continue." subtext, "Log in" (gold).
+Exit: /login?returnTo=<the path>. The token is cleared.
+
+# ============================================================
+# PART 8 — THE GLOBAL RULES
+# ============================================================
+
+Every button goes somewhere. No dead buttons.
+Every form has a success state and an error state. The success state replaces the form or shows a toast. The error state is inline below the field or below the button.
+Every list has an empty state (with a CTA), a loading state (skeleton), and an error state (with a retry).
+Every plan gate shows the upgrade message, not a silent failure.
+Every destructive action has a confirmation modal.
+The 401 redirects to /session-expired (or /login if not logged in).
+The 403 shows the ForbiddenPage (with the upgrade CTA if plan-gated).
+The gold rule: one gold button per screen.
+The auto-save: 60-second interval + session-end beacon + explicit save. The indicator is next to the title.
+The FormSubmit copy is exact on every screen that mentions it.
+
+# ============================================================
+# END OF WORKFLOW
+# ============================================================
