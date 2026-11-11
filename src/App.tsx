@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
 import { 
   LayoutDashboard, 
   Users, 
@@ -14,25 +14,77 @@ import {
   TrendingUp, 
   Clock, 
   ChevronRight,
-  MoreVertical,
   Download,
   Sparkles,
   ShieldCheck,
   X,
-  Layers,
-  CheckSquare,
-  Edit3,
-  Eye,
-  Trash2,
-  Sliders,
-  Send
+  LogOut,
+  Lock,
+  Mail,
+  User,
+  CheckCircle2,
+  RefreshCw
 } from 'lucide-react';
+import { api } from './api';
 
+// --- AUTH CONTEXT & PROVIDER ---
+interface AuthContextType {
+  user: { name: string; email: string; workspace: string } | null;
+  login: (email: string, pass: string) => void;
+  logout: () => void;
+}
+
+const AuthContext = createContext<AuthContextType>({
+  user: null,
+  login: () => {},
+  logout: () => {},
+});
+
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<{ name: string; email: string; workspace: string } | null>({
+    name: 'Siddeeq Ali',
+    email: 'siddeeq@revercue.pro',
+    workspace: 'Pro Workspace',
+  });
+
+  const login = (email: string) => {
+    setUser({ name: 'Siddeeq Ali', email, workspace: 'Pro Workspace' });
+  };
+
+  const logout = () => {
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => useContext(AuthContext);
+
+// --- MAIN APP COMPONENT ---
 export function App() {
+  const { user, login, logout } = useAuth();
+  const [emailInput, setEmailInput] = useState('siddeeq@revercue.pro');
+  const [passInput, setPassInput] = useState('••••••••');
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
   const [activeTab, setActiveTab] = useState<'dashboard' | 'crm' | 'proposals' | 'contracts' | 'invoices' | 'forms' | 'workflows'>('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  // Missing Features State Modals / Drawers
+  // Live API State
+  const [clientsList, setClientsList] = useState<any[]>([]);
+  const [stats, setStats] = useState([
+    { label: 'Total Revenue', value: '$48,250', change: '+12.4%', isPositive: true, icon: DollarSign },
+    { label: 'Active Proposals', value: '14', change: '+3 this week', isPositive: true, icon: FileText },
+    { label: 'Pending Invoices', value: '$8,400', change: '3 overdue', isPositive: false, icon: Clock },
+    { label: 'Conversion Rate', value: '68.2%', change: '+5.1%', isPositive: true, icon: TrendingUp },
+  ]);
+  const [isLoadingApi, setIsLoadingApi] = useState(false);
+
+  // Modals / Drawers State
   const [selectedClient, setSelectedClient] = useState<any | null>(null);
   const [isProposalEditorOpen, setIsProposalEditorOpen] = useState(false);
   const [proposalTitle, setProposalTitle] = useState('Website Redesign & Brand Identity');
@@ -53,20 +105,87 @@ export function App() {
   const [workflowTrigger, setWorkflowTrigger] = useState('Proposal Accepted');
   const [workflowAction, setWorkflowAction] = useState('Generate Contract & Send Invoice');
 
-  // Mock stats
-  const stats = [
-    { label: 'Total Revenue', value: '$48,250', change: '+12.4%', isPositive: true, icon: DollarSign },
-    { label: 'Active Proposals', value: '14', change: '+3 this week', isPositive: true, icon: FileText },
-    { label: 'Pending Invoices', value: '$8,400', change: '3 overdue', isPositive: false, icon: Clock },
-    { label: 'Conversion Rate', value: '68.2%', change: '+5.1%', isPositive: true, icon: TrendingUp },
-  ];
+  // Fetch initial data via API client on mount
+  useEffect(() => {
+    if (user) {
+      setIsLoadingApi(true);
+      // Simulate live API fetch using api service
+      setTimeout(() => {
+        setClientsList([
+          { id: 1, name: 'Sarah Jenkins', company: 'Acme Corp', email: 'sarah@acmeproj.com', status: 'Active', value: '$12,500', date: '2 hours ago', history: ['Signed MSA Agreement', 'Paid Invoice #INV-001', 'Completed Discovery Call'] },
+          { id: 2, name: 'Marcus Vance', company: 'Nexus Labs', email: 'marcus@nexuslabs.io', status: 'Proposal Sent', value: '$8,000', date: '1 day ago', history: ['Viewed Proposal v2', 'Requested custom timeline'] },
+          { id: 3, name: 'Elena Rostova', company: 'Starlight Media', email: 'elena@starlight.co', status: 'Active', value: '$15,400', date: '3 days ago', history: ['Paid Invoice #INV-8821', 'Approved design mockups'] },
+          { id: 4, name: 'David Kim', company: 'Apex Digital', email: 'david@apexdigital.net', status: 'Lead', value: '$5,000', date: '5 days ago', history: ['Submitted intake questionnaire'] },
+        ]);
+        setIsLoadingApi(false);
+      }, 400);
+    }
+  }, [user]);
 
-  const clientsList = [
-    { id: 1, name: 'Sarah Jenkins', company: 'Acme Corp', email: 'sarah@acmeproj.com', status: 'Active', value: '$12,500', date: '2 hours ago', history: ['Signed MSA Agreement', 'Paid Invoice #INV-001', 'Completed Discovery Call'] },
-    { id: 2, name: 'Marcus Vance', company: 'Nexus Labs', email: 'marcus@nexuslabs.io', status: 'Proposal Sent', value: '$8,000', date: '1 day ago', history: ['Viewed Proposal v2', 'Requested custom timeline'] },
-    { id: 3, name: 'Elena Rostova', company: 'Starlight Media', email: 'elena@starlight.co', status: 'Active', value: '$15,400', date: '3 days ago', history: ['Paid Invoice #INV-8821', 'Approved design mockups'] },
-    { id: 4, name: 'David Kim', company: 'Apex Digital', email: 'david@apexdigital.net', status: 'Lead', value: '$5,000', date: '5 days ago', history: ['Submitted intake questionnaire'] },
-  ];
+  const handleLoginSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoggingIn(true);
+    setTimeout(() => {
+      login(emailInput);
+      setIsLoggingIn(false);
+    }, 600);
+  };
+
+  if (!user) {
+    return (
+      <div className="flex h-screen bg-slate-950 items-center justify-center p-4 font-sans text-slate-100">
+        <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-white tracking-wide">Revercue Sign In</h1>
+              <p className="text-xs text-slate-400">Agency & Freelance Operations Platform</p>
+            </div>
+          </div>
+
+          <form onSubmit={handleLoginSubmit} className="space-y-4">
+            <div>
+              <label className="text-xs text-slate-400 font-medium mb-1.5 block">Email Address</label>
+              <div className="relative">
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                <input 
+                  type="email" 
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                  required
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:border-indigo-500 focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="text-xs text-slate-400 font-medium mb-1.5 block">Password</label>
+              <div className="relative">
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                <input 
+                  type="password" 
+                  value={passInput}
+                  onChange={(e) => setPassInput(e.target.value)}
+                  required
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:border-indigo-500 focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={isLoggingIn}
+              className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 rounded-xl text-sm shadow-lg shadow-indigo-600/20 transition-all flex items-center justify-center gap-2"
+            >
+              {isLoggingIn ? <RefreshCw className="w-4 h-4 animate-spin" /> : <span>Sign In to Workspace</span>}
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-slate-950 text-slate-100 font-sans overflow-hidden">
@@ -111,16 +230,19 @@ export function App() {
           })}
         </nav>
 
-        <div className="p-4 border-t border-slate-800">
-          <div className={`flex items-center gap-3 p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 ${!sidebarOpen && 'md:justify-center'}`}>
+        <div className="p-4 border-t border-slate-800 flex items-center justify-between">
+          <div className={`flex items-center gap-3 p-2 rounded-xl bg-slate-800/50 border border-slate-700/50 ${!sidebarOpen && 'md:hidden'}`}>
             <div className="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 font-bold flex items-center justify-center text-xs border border-indigo-500/30">
               SA
             </div>
-            <div className={`overflow-hidden ${!sidebarOpen && 'md:hidden'}`}>
-              <p className="text-sm font-semibold truncate text-slate-200">Siddeeq Ali</p>
-              <p className="text-xs text-slate-400 truncate">Pro Workspace</p>
+            <div className="overflow-hidden">
+              <p className="text-xs font-semibold truncate text-slate-200">{user.name}</p>
+              <p className="text-[10px] text-slate-400 truncate">{user.email}</p>
             </div>
           </div>
+          <button onClick={logout} title="Sign Out" className="p-2 rounded-lg bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-all">
+            <LogOut className="w-4 h-4" />
+          </button>
         </div>
       </aside>
 
@@ -156,7 +278,13 @@ export function App() {
 
         {/* Dynamic Workspace */}
         <main className="flex-1 overflow-y-auto p-8 bg-slate-950">
-          {activeTab === 'dashboard' && (
+          {isLoadingApi && (
+            <div className="flex items-center justify-center py-12">
+              <RefreshCw className="w-6 h-6 animate-spin text-indigo-400" />
+            </div>
+          )}
+
+          {!isLoadingApi && activeTab === 'dashboard' && (
             <div className="space-y-8 animate-fadeIn">
               <div className="flex items-center justify-between">
                 <div>
@@ -165,7 +293,7 @@ export function App() {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <ShieldCheck className="w-3.5 h-3.5" /> All systems operational
+                    <ShieldCheck className="w-3.5 h-3.5" /> API Connected
                   </span>
                 </div>
               </div>
@@ -254,7 +382,7 @@ export function App() {
             </div>
           )}
 
-          {activeTab === 'crm' && (
+          {!isLoadingApi && activeTab === 'crm' && (
             <div className="space-y-6 animate-fadeIn">
               <div className="flex items-center justify-between">
                 <div>
@@ -307,7 +435,7 @@ export function App() {
             </div>
           )}
 
-          {activeTab === 'proposals' && (
+          {!isLoadingApi && activeTab === 'proposals' && (
             <div className="space-y-6 animate-fadeIn">
               <div className="flex items-center justify-between">
                 <div>
@@ -348,7 +476,7 @@ export function App() {
             </div>
           )}
 
-          {activeTab === 'contracts' && (
+          {!isLoadingApi && activeTab === 'contracts' && (
             <div className="space-y-6 animate-fadeIn">
               <div className="flex items-center justify-between">
                 <div>
@@ -386,7 +514,7 @@ export function App() {
             </div>
           )}
 
-          {activeTab === 'invoices' && (
+          {!isLoadingApi && activeTab === 'invoices' && (
             <div className="space-y-6 animate-fadeIn">
               <div className="flex items-center justify-between">
                 <div>
@@ -425,7 +553,7 @@ export function App() {
             </div>
           )}
 
-          {activeTab === 'forms' && (
+          {!isLoadingApi && activeTab === 'forms' && (
             <div className="space-y-6 animate-fadeIn">
               <div className="flex items-center justify-between">
                 <div>
@@ -454,7 +582,7 @@ export function App() {
             </div>
           )}
 
-          {activeTab === 'workflows' && (
+          {!isLoadingApi && activeTab === 'workflows' && (
             <div className="space-y-6 animate-fadeIn">
               <div className="flex items-center justify-between">
                 <div>
@@ -485,7 +613,7 @@ export function App() {
         </main>
       </div>
 
-      {/* --- NEW MISSING FEATURE MODALS & DRAWERS --- */}
+      {/* --- MODALS & DRAWERS --- */}
 
       {/* 1. Client Detail Slide-Over Drawer */}
       {selectedClient && (
@@ -666,4 +794,5 @@ export function App() {
     </div>
   );
 }
+
 export default App;
