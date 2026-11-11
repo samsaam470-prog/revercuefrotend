@@ -1,0 +1,342 @@
+# REVERCUE — DESIGN SYSTEM
+# File: design.txt
+# Purpose: The palette, typography, spacing, radius, states, and the component library.
+# Audience: The AI building the frontend. Read architecture.txt first. This file is the foundation every screen uses.
+# No Tailwind. No UI kit. Plain CSS with CSS variables. The components are hand-built.
+# The rule: no interactive element ships without all six states.
+
+# ============================================================
+# PART 1 — THE TOKENS (src/styles/tokens.css)
+# ============================================================
+
+:root {
+  /* Palette */
+  --bg-base: #0A0A0A;
+  --bg-card: #141414;
+  --bg-elevated: #1C1C1C;
+  --border: #2A2A2A;
+  --border-strong: #3A3A3A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A0A0A0;
+  --text-tertiary: #6B6B6B;
+  --gold: #C9A961;
+  --gold-hover: #D9B971;
+  --gold-soft: rgba(201, 169, 97, 0.12);
+  --green: #4ADE80;
+  --red: #F87171;
+  --amber: #FBBF24;
+
+  /* Typography */
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+  --size-display: 48px;
+  --size-headline: 32px;
+  --size-title: 20px;
+  --size-body: 15px;
+  --size-label: 13px;
+  --size-caption: 12px;
+  --size-mono: 13px;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  --line-tight: 1.2;
+  --line-normal: 1.5;
+  --line-relaxed: 1.7;
+
+  /* Spacing (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* Radius */
+  --radius-card: 8px;
+  --radius-modal: 12px;
+  --radius-button: 6px;
+  --radius-input: 6px;
+  --radius-pill: 999px;
+
+  /* Shadow */
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-gold-glow: 0 40px 120px rgba(201, 169, 97, 0.15);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+}
+
+# ============================================================
+# PART 2 — THE COMPONENT LIBRARY (src/components/ui/)
+# ============================================================
+
+## Button
+File: Button.tsx
+Props:
+  variant: "primary" | "secondary" | "ghost" | "danger" | "text" (default: "primary")
+  size: "sm" | "md" | "lg" (default: "md")
+  loading: boolean (default: false)
+  disabled: boolean (default: false)
+  fullWidth: boolean (default: false)
+  type: "button" | "submit" | "reset" (default: "button")
+  onClick: () => void
+  children: ReactNode
+
+Variants:
+  primary: bg var(--gold), text var(--bg-base), hover bg var(--gold-hover), 6px radius, 12px 24px padding (md).
+  secondary: bg transparent, 1px solid var(--border-strong), text var(--text-primary), hover bg var(--bg-elevated).
+  ghost: bg transparent, text var(--text-secondary), hover text var(--text-primary), no border.
+  danger: bg transparent, 1px solid var(--red), text var(--red), hover bg rgba(248, 113, 113, 0.1).
+  text: bg transparent, text var(--gold), hover text var(--gold-hover), underline on hover.
+
+Sizes:
+  sm: 8px 16px padding, 13px font.
+  md: 12px 24px padding, 15px font.
+  lg: 16px 32px padding, 17px font.
+
+States (every variant):
+  default: as specified.
+  hover: as specified.
+  focus: 2px solid var(--gold) ring, offset 2px.
+  active: transform translateY(1px).
+  disabled: 50% opacity, cursor not-allowed, no hover.
+  loading: label replaced by a 16px spinner (var(--bg-base) for primary, var(--gold) for others), width fixed.
+
+## Input
+File: Input.tsx
+Props:
+  label: string (required)
+  helper: string (optional)
+  error: string (optional)
+  type: "text" | "email" | "password" | "url" | "number" (default: "text")
+  placeholder: string
+  value: string
+  onChange: (value: string) => void
+  disabled: boolean
+  required: boolean
+  id: string
+
+Structure:
+  <div class="input-group">
+    <label for={id}>{label}</label>
+    <input id={id} type={type} ... />
+    {helper && <span class="helper">{helper}</span>}
+    {error && <span class="error">{error}</span>}
+  </div>
+
+Styles:
+  label: 13px, weight 500, color var(--text-primary), margin-bottom 8px, display block.
+  input: 100% width, bg var(--bg-base), 1px solid var(--border), 6px radius, 12px 16px padding, 15px font, color var(--text-primary).
+  input::placeholder: color var(--text-tertiary).
+  helper: 12px, color var(--text-tertiary), margin-top 4px.
+  error: 12px, color var(--red), margin-top 4px.
+
+States:
+  default: 1px solid var(--border).
+  hover: 1px solid var(--border-strong).
+  focus: 1px solid var(--gold), box-shadow 0 0 0 3px var(--gold-soft).
+  disabled: 50% opacity, cursor not-allowed.
+  error: 1px solid var(--red).
+
+## Textarea
+Same as Input, with rows prop (default 4), resize: vertical.
+
+## Select
+Same as Input, with options: { value, label }[], native <select> styled.
+
+## Checkbox
+File: Checkbox.tsx
+Props: label, checked, onChange, disabled, error.
+Structure: a <label> wrapping a hidden <input type="checkbox"> + a custom box + the label text.
+Custom box: 20px square, 1px border, 6px radius, gold check when checked.
+Focus: 2px gold ring on the custom box.
+
+## Fieldset
+File: Fieldset.tsx
+Props: legend (string), error (optional), children.
+Structure: <fieldset><legend>{legend}</legend>{children}{error && <span class="error">}</fieldset>
+Styles: fieldset has no border, 0 padding. legend: 13px, weight 500, color var(--text-primary), margin-bottom 12px.
+Rule: every group of related inputs (e.g., the services checkboxes, the question options) lives in a Fieldset. The legend is the group label. This is the fix for the "question and options disconnected" failure.
+
+## Card
+File: Card.tsx
+Props: children, padding ("sm" | "md" | "lg" = "md"), className.
+Styles: bg var(--bg-card), 1px solid var(--border), 8px radius, padding 16px (sm) / 24px (md) / 32px (lg).
+
+## Badge
+File: Badge.tsx
+Props: variant: "default" | "gold" | "green" | "red" | "amber" | "muted", children.
+Styles: 999px radius, 4px 10px padding, 12px font, weight 500.
+  default: bg var(--bg-elevated), text var(--text-secondary).
+  gold: bg var(--gold-soft), text var(--gold).
+  green: bg rgba(74, 222, 128, 0.12), text var(--green).
+  red: bg rgba(248, 113, 113, 0.12), text var(--red).
+  amber: bg rgba(251, 191, 36, 0.12), text var(--amber).
+  muted: bg transparent, 1px border var(--border), text var(--text-tertiary).
+
+## Modal
+File: Modal.tsx
+Props: open, onClose, title, children, footer, size ("sm" | "md" | "lg" = "md").
+Structure: a fixed overlay (rgba(0,0,0,0.7), backdrop-filter blur(4px)) + a centered panel.
+Panel: bg var(--bg-card), 1px solid var(--border-strong), 12px radius, shadow var(--shadow-modal), max-width 400/560/720px, padding 32px.
+Header: title (20px, weight 600), a × close button (ghost).
+Footer: right-aligned buttons.
+Behaviour: focus-trapped, Escape closes, click outside closes.
+Animation: fade in 150ms, scale from 0.95 to 1.
+
+## Table
+File: Table.tsx
+Props: columns: { key, label, render? }[], data: any[], loading, empty, onRowClick.
+Structure: a <table> with <thead> and <tbody>.
+Styles:
+  th: 13px, weight 500, color var(--text-secondary), text-align left, padding 12px 16px, border-bottom 1px solid var(--border).
+  td: 15px, color var(--text-primary), padding 16px, border-bottom 1px solid var(--border).
+  tr:hover: bg var(--bg-elevated), cursor pointer (if onRowClick).
+  loading: skeleton rows.
+  empty: a centered <EmptyState> spanning all columns.
+
+## Toast
+File: Toast.tsx
+Props: (via context) message, type: "success" | "error" | "info", duration (default 4000).
+Structure: a fixed container top-right, stack of toast cards.
+Card: bg var(--bg-card), 1px border, 8px radius, 12px 16px padding, shadow, icon + message + ×.
+Types:
+  success: green left border, check icon.
+  error: red left border, × icon.
+  info: gold left border, info icon.
+Animation: slide in from right, fade out.
+
+## Spinner
+File: Spinner.tsx
+Props: size (16 | 20 | 24), color (var(--gold) default).
+A CSS rotating circle (border 2px solid var(--border), border-top-color var(--color), border-radius 50%, animation spin 0.8s linear infinite).
+
+## EmptyState
+File: EmptyState.tsx
+Props: icon?, title, description?, action?: { label, onClick }, secondary?: { label, onClick }.
+Structure: centered, max-width 400px, padding 48px 24px.
+  Icon (line icon, 48px, color var(--text-tertiary)).
+  Title (20px, weight 600, color var(--text-primary)).
+  Description (15px, color var(--text-secondary), margin-top 8px).
+  Action (Button primary, margin-top 24px).
+  Secondary (Button ghost, margin-top 8px).
+
+## Skeleton
+File: Skeleton.tsx
+Props: width, height, radius.
+A grey block (bg var(--bg-elevated)) with a subtle shimmer animation (background linear-gradient moving left to right).
+
+# ============================================================
+# PART 3 — THE LAYOUT COMPONENTS (src/components/layout/)
+# ============================================================
+
+## PublicLayout
+Structure: <PublicHeader /> <main>{outlet}</main> <StartFreeBand /> <PublicFooter />
+The StartFreeBand is omitted on the legal pages (Privacy, Terms, Security) and on Contact, Beta, SignUp, LogIn.
+
+## PublicHeader
+Sticky, 64px, bg var(--bg-base), 1px bottom border.
+Left: Logo. Center: nav links. Right: "Log in" ghost + "Start Free" gold.
+On scroll (after 20px): bg var(--bg-card), backdrop-filter blur(8px).
+Mobile: logo left, hamburger right. Hamburger opens a full-screen overlay.
+
+## PublicFooter
+bg var(--bg-card), 5-column grid (2fr 1fr 1fr 1fr 1.5fr), 64px padding.
+Bottom bar: 1px top border, copyright left, social icons right.
+
+## StartFreeBand
+Centered, max-width 640px, 96px vertical padding, bg var(--bg-card) with 1px top and bottom border.
+Headline (serif 32px) + subtext (body) + two buttons (gold + ghost).
+
+## AppLayout
+Structure: <AppHeader /> <div class="app-body"><AppSidebar /> <main>{outlet}</main></div>
+The sidebar is contextual (the section nav), hidden on the dashboard overview (full-width), shown on lists and settings.
+Mobile: the sidebar becomes a bottom sheet.
+
+## AppHeader
+Sticky, 64px, bg var(--bg-base), 1px bottom border.
+Left: Logo. Center: the seven nav items (Dashboard, Proposals, Contracts, Forms, Invoices, CRM, Settings). Active: gold underline.
+Right: NotificationBell + Avatar (dropdown: Profile, Settings, Log out).
+
+## AuthLayout
+Minimal header (logo only, back-arrow to Home on the left). The card centered (max-width 400px). No footer.
+
+## ClientLayout
+No header, no footer. The freelancer's logo and name at the top of the document. A minimal "Powered by Revercue" at the bottom (removed on Scale/Teams).
+
+# ============================================================
+# PART 4 — THE SHARED COMPONENTS (src/components/shared/)
+# ============================================================
+
+## Logo
+"[R] Revercue" — the bracket in gold, the text in white, 24px serif.
+
+## FAQItem
+A native <details> element: <summary> with the question (15px, weight 500) and a chevron; the answer (15px, color var(--text-secondary), padding 16px 0). The chevron rotates on open.
+
+## ScreenshotCard
+The gold-glow card: bg var(--bg-card), 1px border, 12px radius, overflow hidden, box-shadow var(--shadow-gold-glow). The <img> is inside, full width. Optional rotate prop (2deg for the hero).
+
+## NotificationBell
+The bell icon (line icon) + a badge (unread count, small red circle top-right). Click opens a dropdown panel (380px wide, bg var(--bg-card), 1px border, 8px radius, max-height 480px, scrollable) with the last 10 notifications.
+
+## StatusBadge
+A Badge that maps the status to a variant: draft -> muted, published -> gold, archived -> muted, approved -> green, declined -> red, paid -> green, overdue -> red, proof_submitted -> amber.
+
+## PlanBadge
+A Badge: Free -> muted, Starter -> default, Growth -> gold, Scale -> green, Teams -> amber.
+
+# ============================================================
+# PART 5 — THE BUILDER COMPONENTS (src/components/builder/)
+# ============================================================
+
+## Canvas
+The editable document. Renders the template's structure as a list of blocks. Each block is a <BlockRenderer>. Click selects a block. Drag reorders. The canvas has a visible boundary (max-width 720px, bg white for the client view? No — the canvas is the app's dark theme; the client view is the light document). The canvas shows the template's colours (the freelancer's brand), not the app's dark palette.
+
+## BlockLibrary
+The left panel. A list of block types (heading, paragraph, image, graph, shape, pricing table, timeline, FAQ, embedded question, file upload, button, divider, two-column, three-column). Drag to insert. Click to insert at the cursor.
+
+## BlockRenderer
+Renders one block by type. Each block has a hover state (a subtle border + the block actions: replace, delete, duplicate, move up, move down).
+
+## PropertyPanel
+The right panel. Shows the selected block's properties (text, colour, font, size, data, options) as the appropriate Input/Select/ColourPicker components.
+
+## TopBar
+Back, Title (editable inline), Undo/Redo, Preview, Save, Create (gold), ⋮ (more menu).
+
+## TemplatePicker
+The template selection screen. A grid of template cards (thumbnail, name, description, "Suggested" gold badge, "Use this template" button). Plus "Start from blank", "Upload your own template" (Growth/Scale), "Use a template from a URL" (Growth/Scale).
+
+## ShareModal
+"Your proposal is ready." The public link (copyable, mono). A message field (pre-filled). The share buttons (WhatsApp, Email, Instagram, Facebook, X, Threads, Copy Link). The line "Revercue does not send the message. You send it from your own account." If password-protected: the password (copyable) + "Send the password separately." "Done" (gold).
+
+## PreviewPane
+The client's view, live, in a split pane (desktop) or modal (mobile). Read-only. Uses the freelancer's brand.
+
+# ============================================================
+# PART 6 — THE RULES
+# ============================================================
+
+1. Every interactive element has all six states (default, hover, focus, active, disabled, loading).
+2. Gold is for one thing per screen: the primary action. The secondary is a ghost.
+3. Serif for headlines only. Sans for body. Mono for copyables. No fourth font.
+4. Every field has a label, a helper (optional), and an error line. The label is always visible (no placeholder-as-label).
+5. Every group of related inputs lives in a Fieldset with a legend. This is the fix for the "question and options disconnected" failure.
+6. Every list, table, and feed has: a loading state (skeleton), an empty state (with a CTA), an error state (with a retry).
+7. Every destructive action has a confirmation modal.
+8. Every modal is focus-trapped, closes on Escape and click outside.
+9. No stock photos. No second font. No AI claims in the copy.
+10. The FormSubmit copy is exact on every screen that mentions it.
+
+# ============================================================
+# END OF DESIGN SYSTEM
+# ============================================================
