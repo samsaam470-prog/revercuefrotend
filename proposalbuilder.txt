@@ -1,0 +1,277 @@
+# REVERCUE — PROPOSAL BUILDER BLUEPRINT
+# File: proposalbuilder.txt
+# Purpose: The proposal builder. The requirement form, the template selection, the canvas, the block library, the properties, the auto-save, the preview, the share.
+# Audience: The AI building the frontend. Read design.txt and api.txt first.
+# The builder is the largest screen in the product. It must not look generic.
+# The proposal's design belongs to the TEMPLATE. The builder is the TOOLSET. The freelancer edits the template's blocks. The template is the starting layout; the edits are structured data.
+
+# ============================================================
+# PART 1 — THE FLOW (the three stages)
+# ============================================================
+
+Stage 1: The requirement form (/proposals/new). The user answers 8 questions about the proposal.
+Stage 2: The template selection (/proposals/:id/edit?step=template). The user picks a template (or blank, or uploads).
+Stage 3: The canvas (/proposals/:id/edit). The user edits, previews, creates, shares.
+
+The user cannot skip Stage 1. The template selection cannot be skipped (blank is a choice).
+The back button on Stage 2 returns to Stage 1 (the draft is kept). The back button on Stage 3 returns to the proposals list (with a save confirmation).
+
+# ============================================================
+# PART 2 — STAGE 1: THE REQUIREMENT FORM
+# ============================================================
+
+Route: /proposals/new.
+Layout: a centered card (max-width 720px, bg var(--bg-card), 1px border, 8px radius, 48px padding). The minimal app header (logo, back-arrow to /dashboard).
+
+## The header
+Eyebrow (gold, 12px, uppercase): NEW PROPOSAL.
+Headline (serif 28px): "Tell us about this proposal."
+Subtext (15px, var(--text-secondary)): "A few questions first. We'll pre-fill the rest."
+
+## The fields (in order)
+1. Client (required). A segmented control: "Existing client" | "New client".
+   Existing: a searchable dropdown of the CRM clients (name, email). On select, the client's details pre-fill.
+   New: two inputs (client name, client email). On blur, if the email matches an existing CRM client, a suggestion appears: "This email exists. Use [Client]?" with a "Use existing" button.
+2. Problem you're solving (required). A textarea (4 rows, min 10 chars). Helper: "What is the client's problem? One or two sentences."
+3. Which sections do you want? (required, at least one). A checkbox group in a Fieldset:
+   Introduction, Scope, Timeline, Pricing, Terms, FAQs, Embedded Questions, About You, Next Step.
+   Each has a one-line description below the label.
+4. If FAQs checked: an "Add FAQs" area.
+   A "Saved FAQs" tab (Growth/Scale) shows the saved FAQs with checkboxes to include.
+   A "Manual" tab: a list of Q/A pairs with "+ Add FAQ". Each FAQ: question (input), answer (textarea).
+   An "Upload Markdown" button: parses Q:/A: patterns.
+5. If Embedded Questions checked: an "Add questions" area.
+   A list of questions. Each: question text (input), type (dropdown: short text, long text, file upload, single-choice, multiple-choice, combined text + choice), options (for choice types), required (toggle), explanation (optional textarea, shows as an info icon), "Allow Client To Ask A Question" (toggle).
+   "+ Add question".
+   An "Upload Markdown" button: parses N:/a: patterns.
+6. Currency (required, default USD). A dropdown (USD, EUR, GBP, etc.).
+7. Timeline length (optional). A text input (e.g., "4–6 weeks").
+8. Tone (required, default Formal). A segmented control: Formal | Friendly | Concise.
+   Helper: "The tone affects the template's default wording."
+
+## The footer
+"Continue to builder" (gold). Disabled until: client selected/entered, problem filled (min 10 chars), at least one section checked.
+"Cancel" (ghost) -> /dashboard (with a confirmation if any field is filled: "Discard this draft?").
+
+## The submit
+POST /api/proposals/draft with: { client_id? OR client_name + client_email, title (auto-generated from the client name + "Proposal", editable later), problem, sections, currency, timeline_length, tone, faqs?, questions? }.
+The response: { success, id, status: "draft", client_id }.
+On success: navigate to /proposals/:id/edit?step=template.
+On error 403 plan_limit_reached: a modal "You have 5 of 5 active documents. Archive or delete one to create a proposal." with "Manage documents" (-> /proposals?status=published) and "Cancel".
+On error 400: the inline errors below the fields.
+
+## The states
+Loading: the "Continue" button shows a spinner.
+Error: inline below each field (red text, 12px).
+The plan limit: the modal above.
+The existing-email suggestion: a small info banner below the email field, with the "Use existing" button.
+
+# ============================================================
+# PART 3 — STAGE 2: THE TEMPLATE SELECTION
+# ============================================================
+
+Route: /proposals/:id/edit?step=template.
+Layout: a full-width page (max-width 1120px, 48px padding). The minimal app header. A progress indicator at the top: "Step 2 of 3 — Choose a template" (the steps: Details, Template, Build).
+
+## The header
+Headline (serif 32px): "Choose a starting point."
+Subtext (15px, var(--text-secondary)): "Pick a template, or start from blank. You can change everything later."
+
+## The template grid
+A grid of cards (3 per row desktop, 1 mobile). Each card:
+  A thumbnail (16:10, the template's rendered preview, bg white or the template's brand colour).
+  The template name (16px, weight 600).
+  A one-line description (13px, var(--text-secondary)).
+  A "Suggested" gold badge if the template's tags match the user's services (from the onboarding profile). Suggested templates appear first.
+  A "Use this template" button (gold on hover, ghost by default).
+Cards: bg var(--bg-card), 1px border, 8px radius, overflow hidden. Hover: border var(--border-strong), slight lift (transform translateY(-2px)).
+Data: GET /api/templates (returns { built_in: [], custom: [] }, each with a "suggested" boolean).
+
+## The special cards (in the grid, first)
+"Start from blank" — an empty-canvas card with a dashed border. The description: "An empty canvas with the block library. The form data appears in the suggestions panel."
+"Upload your own template" (Growth/Scale only) — a card with an upload icon. Clicking opens the upload modal.
+"Use a template from a URL" (Growth/Scale only) — a card with a link icon. Clicking opens the URL input modal.
+
+## The upload modal (Growth/Scale)
+Title: "Upload your own template."
+Two tabs: "Upload HTML" | "Use a URL".
+Upload HTML: a file input (accept .html), a name input, a type dropdown (Proposal), a tags input (comma-separated). "Upload" (gold).
+Use a URL: a URL input (validated), the same name/type/tags fields. "Fetch and use" (gold).
+On submit: POST /api/templates/upload (multipart for the file, JSON for the URL).
+Success: the modal closes, the template appears in the grid (under "Your templates"), selected. Navigate to /proposals/:id/edit.
+Errors: 403 forbidden (plan), 403 plan_limit_reached (Growth 10, Scale 15 — "You have 10 of 10 custom templates."), 400 invalid_payload (file type, URL invalid), 400 fetch_failed (the URL could not be fetched).
+
+## The selection
+Clicking "Use this template" (or a card) -> PATCH /api/proposals/:id with { template_id } (optional; the backend associates the template).
+Then navigate to /proposals/:id/edit (the canvas).
+Clicking "Start from blank" -> PATCH /api/proposals/:id with { blank: true }. Navigate to /proposals/:id/edit?blank=true.
+
+## The states
+Loading: the template cards show skeletons.
+Empty: if no templates exist (unlikely — the built-ins always exist), "No templates yet. Start from blank."
+Error: "Could not load templates. Retry." + a retry button.
+
+# ============================================================
+# PART 4 — STAGE 3: THE CANVAS (the builder)
+# ============================================================
+
+Route: /proposals/:id/edit (or ?blank=true for the blank canvas).
+Layout: the full-screen builder. Three panels + a top bar. No app header, no sidebar. The builder is a focused workspace.
+
+## The top bar (64px, bg var(--bg-base), 1px bottom border)
+Left: "← Back" (ghost text, returns to the proposals list with a save confirmation).
+Center: the title (editable inline, 16px, weight 600) + the auto-save indicator next to it ("Saved" green / "Saving..." amber / "Unsaved changes" grey, 12px).
+Right: "Preview" (ghost), "Save" (ghost), "Create" (gold), "⋮" (more menu).
+
+The more menu: Duplicate, Archive, Delete, "Require a password" (Growth/Scale toggle), "Allow client to download PDF" (toggle).
+
+## The left panel (240px, bg var(--bg-base), 1px right border)
+Two tabs: "Sections" | "Blocks".
+Sections tab: the list of sections (the ones the user selected in the requirement form, plus any added). Each: a drag handle, the section name, a visibility eye toggle, a × delete. Drag to reorder. Click to scroll the canvas to that section. "+ Add section" at the bottom -> a dropdown of section types.
+Blocks tab: the block library. A grid of block types (heading, paragraph, image, graph, shape, pricing table, timeline, FAQ, embedded question, file upload, button, divider, two-column, three-column). Each: an icon, the name. Drag into the canvas, or click to insert at the cursor.
+If ?blank=true: the suggestions panel appears below the block library. It lists the requirement form data as insertable items: "Client: Acme Co.", "Problem: ...", "Sections: Introduction, Scope, Pricing", "FAQs: ...", "Questions: ...". Click an item -> it inserts as the appropriate block at the cursor.
+
+## The center panel (the canvas, flex 1, overflow-y auto)
+The template rendered. A visible page boundary: max-width 720px, centered, bg white (the document is a light page, even in the dark app — the freelancer is designing a document the client reads on a white page), 1px border, 8px radius, 48px padding, margin 48px auto.
+Each section is a block group. Each block inside the section is selectable (click -> a 2px gold border + the block actions on hover: replace, delete, duplicate, move up, move down).
+The blocks render with the template's colours and the user's brand colours (from Settings).
+The text blocks are contenteditable inline (the user types directly) OR editable in the right panel (the spec uses the right panel for precision; inline editing is a later refinement).
+The canvas shows the template's default layout with the placeholders filled from the requirement form (client name, problem, sections, FAQs, questions).
+
+## The right panel (320px, bg var(--bg-base), 1px left border)
+The properties of the selected block. Empty state: "Select a block to edit its properties." (centered, 14px, var(--text-tertiary)).
+Per block type:
+  Heading: text (input), level (H1/H2/H3 segmented), colour (picker), font family (dropdown), size (slider), weight (dropdown), alignment (left/center/right).
+  Paragraph: text (textarea, rich — bold/italic/link), colour, font family, size, line height, alignment.
+  Image: upload (B2 via /api/files/upload), alt text, caption, width (slider), alignment, radius.
+  Graph: type (bar/line/pie segmented), data (a small table of labels + values), colours (a palette picker), title, axis labels, legend toggle.
+  Shape: type (circle/square/divider/badge), colour, size, radius, text (if badge).
+  Pricing table: line items (a small table: description, quantity, unit price), currency, tax, total, colours, alignment.
+  Timeline: milestones (label + date rows), orientation (vertical/horizontal), colours.
+  FAQ: question (input), answer (textarea), reorder (drag), "show expanded by default" (toggle).
+  Embedded question: question text, type (dropdown), options (for choice types), required (toggle), explanation (textarea, shows as an info icon), "Allow Client To Ask A Question" (toggle).
+  File upload: label, max files, max size.
+  Button: text, URL, colour, radius, size.
+  Divider: colour, thickness.
+  Two-column / three-column: gap, column widths, background.
+The properties save on change (debounced 300ms) to the local state, and the auto-save sends them.
+
+## The global properties (a "Document" tab in the right panel, or a gear icon in the top bar)
+Brand colours (two pickers, pre-filled from Settings).
+Font family (a dropdown of the available fonts).
+Base font size (a slider).
+Page background (a picker, default white).
+Page padding (a slider).
+Max width (a slider, default 720px).
+
+## The preview
+Clicking "Preview" opens a split pane (desktop: the canvas shrinks to 60%, the preview takes 40% on the right) or a modal (mobile: full-screen).
+The preview renders the client's view:
+  The freelancer's logo and name at the top.
+  The proposal title, "Prepared for [Client]", the reference number, the reading time.
+  The sections in order.
+  The FAQs collapsed (clickable to expand, but disabled in preview — it is read-only).
+  The embedded questions (interactive but disabled).
+  The info icons (hover shows the explanation).
+  The packages (selectable in the real view, disabled in preview).
+  The "Next step" section.
+  The "Powered by Revercue" (removed on Scale/Teams).
+  No Accept button.
+The preview updates live as the user edits (debounced).
+The preview has a "Close preview" (ghost) at the top.
+
+## The auto-save
+Every 60 seconds while there are unsaved changes: PATCH /api/proposals/:id with the content. The auto-save indicator shows "Saving..." then "Saved".
+On window blur / visibilitychange (hidden): navigator.sendBeacon to /api/proposals/:id/autosave?token=<jwt> with the last content.
+On beforeunload: the same sendBeacon.
+On explicit "Save": PATCH /api/proposals/:id, the indicator "Saved".
+If the auto-save fails: a toast "Could not save. Check your connection. Retrying in 60 seconds." The next interval retries.
+
+## The create (publish)
+Clicking "Create":
+  Validate: the title (non-empty), at least one section, the pricing (if the pricing section is added, at least one line item).
+  If invalid: scroll to the first error, show the inline error.
+  If valid: POST /api/proposals/:id/publish.
+  On success: the response has the public_id and the URL. Open the share modal.
+  On error 403 plan_limit_reached: the "active document limit" modal.
+  On error 500: a toast "Could not create the proposal. Try again."
+
+## The share modal (after Create)
+Title: "Your proposal is ready."
+The public link (mono, copyable) with a "Copy" button.
+A message field (pre-filled: "Hi [Client], here is the proposal we discussed. Let me know if you have any questions." — editable).
+The share buttons (native share sheet): WhatsApp, Email, Instagram, Facebook, X, Threads, Copy Link.
+The line: "Revercue does not send the message. You send it from your own account." (the correction, always visible).
+If password-protected: a line "Send the password separately." + the password (mono, copyable).
+"Done" (gold) -> POST /api/proposals/:id/share (log the share) -> close -> /proposals (the list).
+
+## The states
+The canvas: the template renders with a skeleton while the draft loads.
+The properties panel: the empty state "Select a block to edit its properties."
+The preview: a skeleton while rendering the first time, then live.
+The auto-save: the indicator (Saved / Saving... / Unsaved changes).
+The create: the spinner in the button, then the share modal or the error.
+The plan limit: the modal.
+
+# ============================================================
+# PART 5 — THE BLOCK LIBRARY (the full list)
+# ============================================================
+
+## Text blocks
+Heading: H1, H2, H3.
+Paragraph: rich text (bold, italic, link).
+Quote: a styled blockquote.
+List: bulleted or numbered.
+
+## Media blocks
+Image: upload, alt, caption.
+Graph: bar, line, pie.
+Video embed: a URL (YouTube, Vimeo) — later refinement.
+File: a downloadable file (a PDF attachment).
+
+## Layout blocks
+Divider: a horizontal line.
+Spacer: a vertical gap (slider).
+Two-column: two columns, each can hold blocks.
+Three-column: three columns.
+Card: a bordered container with a title + body.
+
+## Document-specific blocks
+Pricing table: line items, currency, tax, total.
+Packages: the Basic/Standard/Premium comparison (the default table, editable, removable). The "Recommended" badge on one.
+Timeline: milestones with dates.
+FAQ list: a list of Q/A (collapsible on the client view).
+Embedded question: a question the client answers (type, options, required, explanation, "Ask a question" toggle).
+File upload: a client-facing upload field.
+Button: a CTA (text, URL, colour).
+Signature: a signature line (later refinement — the contract uses it).
+The "Next step" block: a pre-formatted block with the freelancer's contact (email, WhatsApp) and the "Reply to move forward" line.
+
+# ============================================================
+# PART 6 — THE TEMPLATE MODEL
+# ============================================================
+
+A template is an HTML file with placeholders (e.g., {{client_name}}, {{problem}}, {{sections}}, {{faqs}}, {{questions}}) stored in B2.
+The template metadata (name, type, tags, b2_key, source) is in D1's templates table.
+When the user selects a template, the backend renders the HTML with the placeholder values, and returns the rendered blocks as structured data (the block list with properties).
+The user's edits are saved as structured data (the block list), NOT as modified HTML.
+On the client view, the backend merges the template's structure with the user's structured data and renders the final page.
+This is the separation: the template is the starting layout, the user's edits are the data, the client view is the merge.
+
+# ============================================================
+# PART 7 — THE DESIGN RULES FOR THE BUILDER
+# ============================================================
+
+The canvas is a light page (bg white) in a dark app. The freelancer is designing a document, not an app screen.
+The builder is a workspace, not a form. The tools are in the panels; the canvas is the document.
+The template is the starting layout; the block library is the toolset; the user's edits are data.
+The gold rule: the "Create" button is the only gold in the builder. The selected block border is gold (2px), but that is a state, not a button.
+Every block has the six states (default, hover, selected, editing, disabled, error).
+The auto-save indicator is always visible (next to the title), so the user knows the state.
+The preview is live and read-only. It shows the client's view, not the builder's view.
+The "Revercue does not send" line is in the share modal, always.
+The FormSubmit copy is not in the builder (it is in the auth flow), but the proposal's client view carries the freelancer's brand, not Revercue's.
+
+# ============================================================
+# END OF PROPOSAL BUILDER
+# ============================================================
