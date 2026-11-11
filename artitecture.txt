@@ -1,0 +1,360 @@
+# REVERCUE — FRONTEND ARCHITECTURE
+# File: architecture.txt
+# Purpose: The frontend file system, routing, state, API client, and build.
+# Audience: The AI or developer building the frontend. READ THIS FIRST.
+# Every other blueprint (design.txt, publicsite.txt, the builders, the dashboard) assumes this structure.
+
+# ============================================================
+# PART 1 — THE STACK
+# ============================================================
+
+Framework: React 18 + TypeScript + Vite.
+Routing: React Router v6 (client-side routing).
+Styling: CSS variables + a small component library (no Tailwind, no UI kit). The design system is in design.txt.
+State: React Query (TanStack Query) for server state; React Context for auth and the notification badge. No Redux.
+Forms: React Hook Form + Zod (the same Zod schemas as the backend where possible).
+Icons: Lucide React (line icons, consistent stroke).
+Fonts: Instrument Serif (display/headline), Inter (title/body/label/caption), JetBrains Mono (mono). Loaded via Google Fonts or self-hosted.
+Build: Vite. Output: `dist/`. Deployed to Cloudflare Pages.
+API base URL: `https://revercue-api.samsaam470.workers.dev` (from an environment variable `VITE_API_BASE_URL`).
+
+# ============================================================
+# PART 2 — THE FOLDER STRUCTURE
+# ============================================================
+
+revercuefrotend/
+├── .gitignore
+├── index.html                      (the Vite entry, the root div)
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+├── .env.example                    (VITE_API_BASE_URL)
+├── architecture.txt                (this file, for the AI)
+├── design.txt                      (the design system, for the AI)
+├── publicsite.txt                  (the public site, for the AI)
+├── proposalbuilder.txt             (the proposal builder, for the AI)
+├── contractbuilder.txt             (the contract builder, for the AI)
+├── formbuilder.txt                 (the form editor, for the AI)
+├── invoicebuilder.txt              (the invoice builder, for the AI)
+├── crm.txt                         (the CRM, for the AI)
+├── dashboard.txt                   (the dashboard, for the AI)
+├── screenshot.txt                  (the screenshot guide, for the AI)
+├── api.txt                         (the API contract, for the AI)
+├── public/
+│   ├── favicon.svg
+│   ├── og-image.png
+│   ├── screenshots/                (the real screenshots, 1x and 2x, added by the screenshot step)
+│   │   ├── dashboard-overview.png
+│   │   ├── dashboard-overview@2x.png
+│   │   ├── proposal-builder.png
+│   │   ├── proposal-builder@2x.png
+│   │   ├── public-proposal.png
+│   │   ├── public-invoice.png
+│   │   ├── contract-view.png
+│   │   ├── form-editor.png
+│   │   ├── crm-client-detail.png
+│   │   ├── builder-blocks.png
+│   │   ├── suggestion-card.png
+│   │   ├── code-screen.png
+│   │   ├── what-revercue-knows.png
+│   │   └── pricing-table.png
+│   └── robots.txt
+└── src/
+    ├── main.tsx                    (the React root, the Router, the QueryClient, the AuthProvider)
+    ├── App.tsx                     (the route tree)
+    ├── styles/
+    │   ├── tokens.css              (the CSS variables: palette, typography, spacing, radius)
+    │   ├── global.css              (the reset, the base styles, the font faces)
+    │   └── utilities.css           (the small utility classes: .container, .stack, .row, .grid-2, .grid-3)
+    ├── components/
+    │   ├── ui/                     (the design system components, from design.txt)
+    │   │   ├── Button.tsx
+    │   │   ├── Input.tsx
+    │   │   ├── Textarea.tsx
+    │   │   ├── Select.tsx
+    │   │   ├── Checkbox.tsx
+    │   │   ├── Fieldset.tsx
+    │   │   ├── Card.tsx
+    │   │   ├── Badge.tsx
+    │   │   ├── Modal.tsx
+    │   │   ├── Table.tsx
+    │   │   ├── Toast.tsx
+    │   │   ├── Spinner.tsx
+    │   │   ├── EmptyState.tsx
+    │   │   ├── Skeleton.tsx
+    │   │   └── index.ts            (the barrel export)
+    │   ├── layout/
+    │   │   ├── PublicHeader.tsx
+    │   │   ├── PublicFooter.tsx
+    │   │   ├── PublicLayout.tsx     (header + outlet + footer)
+    │   │   ├── AppHeader.tsx        (the dashboard top bar: logo, nav, bell, avatar)
+    │   │   ├── AppSidebar.tsx       (the contextual sidebar)
+    │   │   ├── AppLayout.tsx        (header + sidebar + outlet)
+    │   │   └── AuthLayout.tsx       (the minimal header for signup/login)
+    │   ├── shared/
+    │   │   ├── Logo.tsx
+    │   │   ├── StartFreeBand.tsx    (the reusable CTA band)
+    │   │   ├── FAQItem.tsx          (the <details> element)
+    │   │   ├── ScreenshotCard.tsx   (the gold-glow card for screenshots)
+    │   │   ├── NotificationBell.tsx (the bell + dropdown)
+    │   │   ├── StatusBadge.tsx      (the status pill: published, draft, archived, paid, etc.)
+    │   │   └── PlanBadge.tsx        (Free/Starter/Growth/Scale/Teams)
+    │   └── builder/
+    │       ├── Canvas.tsx           (the editable document canvas)
+    │       ├── BlockLibrary.tsx     (the left panel block list)
+    │       ├── BlockRenderer.tsx    (renders one block by type)
+    │       ├── PropertyPanel.tsx    (the right panel for the selected block)
+    │       ├── TopBar.tsx           (back, title, undo/redo, preview, save, create, more)
+    │       ├── TemplatePicker.tsx   (the template selection screen)
+    │       ├── ShareModal.tsx       (the share sheet, "Revercue does not send")
+    │       └── PreviewPane.tsx      (the client's view, live)
+    ├── pages/
+    │   ├── public/                  (the 14 public pages, from publicsite.txt)
+    │   │   ├── HomePage.tsx
+    │   │   ├── FeaturesPage.tsx
+    │   │   ├── PricingPage.tsx
+    │   │   ├── ComparePage.tsx
+    │   │   ├── GuidesPage.tsx
+    │   │   ├── GuideDetailPage.tsx
+    │   │   ├── AboutPage.tsx
+    │   │   ├── ContactPage.tsx
+    │   │   ├── BlogPage.tsx
+    │   │   ├── BlogPostPage.tsx
+    │   │   ├── BetaPage.tsx
+    │   │   ├── PrivacyPage.tsx
+    │   │   ├── TermsPage.tsx
+    │   │   └── SecurityPage.tsx
+    │   ├── auth/
+    │   │   ├── SignupPage.tsx
+    │   │   ├── SignupTransitionPage.tsx
+    │   │   ├── CodeScreenPage.tsx
+    │   │   ├── LoginPage.tsx
+    │   │   └── ForgotPasswordPage.tsx
+    │   ├── onboarding/
+    │   │   ├── OnboardingStep1Page.tsx
+    │   │   ├── OnboardingStep2Page.tsx
+    │   │   ├── OnboardingStep4Page.tsx
+    │   │   └── OnboardingStep5Page.tsx
+    │   ├── app/                     (the dashboard, from dashboard.txt)
+    │   │   ├── DashboardOverviewPage.tsx
+    │   │   ├── ProposalsListPage.tsx
+    │   │   ├── ContractsListPage.tsx
+    │   │   ├── FormsListPage.tsx
+    │   │   ├── InvoicesListPage.tsx
+    │   │   └── SettingsPage.tsx
+    │   ├── builder/                 (the builders, from the builder blueprints)
+    │   │   ├── ProposalBuilderPage.tsx
+    │   │   ├── ContractBuilderPage.tsx
+    │   │   ├── FormEditorPage.tsx
+    │   │   └── InvoiceBuilderPage.tsx
+    │   ├── crm/                     (the CRM, from crm.txt)
+    │   │   ├── CrmListPage.tsx
+    │   │   └── ClientDetailPage.tsx
+    │   ├── client/                  (the client-facing pages, no login)
+    │   │   ├── PublicProposalPage.tsx
+    │   │   ├── PublicContractPage.tsx
+    │   │   ├── PublicInvoicePage.tsx
+    │   │   ├── PublicFormPage.tsx
+    │   │   ├── PasswordWall.tsx
+    │   │   ├── ClosedPage.tsx
+    │   │   └── ProofUploadPage.tsx
+    │   ├── admin/                   (the admin dashboard, separate Pages project — optional)
+    │   └── utility/
+    │       ├── NotFoundPage.tsx
+    │       ├── ForbiddenPage.tsx
+    │       ├── ServerErrorPage.tsx
+    │       ├── OfflinePage.tsx
+    │       └── SessionExpiredPage.tsx
+    ├── api/
+    │   ├── client.ts                (the fetch wrapper: base URL, auth header, error handling)
+    │   ├── auth.ts                  (the auth endpoints)
+    │   ├── onboarding.ts
+    │   ├── dashboard.ts
+    │   ├── proposals.ts
+    │   ├── contracts.ts
+    │   ├── forms.ts
+    │   ├── invoices.ts
+    │   ├── public.ts                (the client-facing endpoints)
+    │   ├── files.ts
+    │   ├── crm.ts
+    │   ├── settings.ts
+    │   ├── notifications.ts
+    │   ├── templates.ts
+    │   └── admin.ts
+    ├── hooks/
+    │   ├── useAuth.ts               (the auth context: user, token, login, logout)
+    │   ├── useToast.ts              (the toast context)
+    │   ├── useNotifications.ts      (the bell: unread count from the page response)
+    │   ├── useAutoSave.ts           (the 60-second interval + the session-end beacon)
+    │   ├── usePlanGate.ts           (reads the user's plan, checks a feature flag)
+    │   └── useDebounce.ts
+    ├── lib/
+    │   ├── constants.ts             (the plan limits, mirrored from the backend)
+    │   ├── formatters.ts            (currency, date, relative time)
+    │   ├── validators.ts            (the Zod schemas: email, password, url)
+    │   ├── storage.ts               (the localStorage helpers for the offline draft)
+    │   └── errors.ts                (the error code to user message map)
+    ├── types/
+    │   ├── index.ts                 (the shared types: User, Client, Proposal, Contract, Form, Invoice, Notification)
+    │   ├── api.ts                   (the request/response types)
+    │   └── blocks.ts                (the builder block types)
+    └── contexts/
+        ├── AuthContext.tsx
+        ├── ToastContext.tsx
+        └── PlanContext.tsx          (the user's plan, the feature gates)
+
+# ============================================================
+# PART 3 — THE ROUTING
+# ============================================================
+
+Public routes (no auth, PublicLayout):
+  /                    -> HomePage
+  /features            -> FeaturesPage
+  /pricing             -> PricingPage
+  /compare             -> ComparePage
+  /guides              -> GuidesPage
+  /guides/:slug        -> GuideDetailPage
+  /about               -> AboutPage
+  /contact             -> ContactPage
+  /blog                -> BlogPage
+  /blog/:slug          -> BlogPostPage
+  /beta                -> BetaPage
+  /privacy             -> PrivacyPage
+  /terms               -> TermsPage
+  /security            -> SecurityPage
+
+Auth routes (no auth, AuthLayout):
+  /signup              -> SignupPage
+  /signup/transition   -> SignupTransitionPage
+  /signup/code         -> CodeScreenPage
+  /login               -> LoginPage
+  /login/code          -> CodeScreenPage (2FA)
+  /forgot-password     -> ForgotPasswordPage
+  /forgot-password/code -> CodeScreenPage
+
+Onboarding routes (auth, AuthLayout):
+  /onboarding/step-1   -> OnboardingStep1Page
+  /onboarding/step-2   -> OnboardingStep2Page
+  /onboarding/step-4   -> OnboardingStep4Page
+  /onboarding/step-5   -> OnboardingStep5Page
+
+App routes (auth, AppLayout):
+  /dashboard           -> DashboardOverviewPage
+  /proposals           -> ProposalsListPage
+  /proposals/new       -> ProposalBuilderPage (requirement form first)
+  /proposals/:id/edit  -> ProposalBuilderPage
+  /contracts           -> ContractsListPage
+  /contracts/new       -> ContractBuilderPage
+  /contracts/:id/edit  -> ContractBuilderPage
+  /forms               -> FormsListPage
+  /forms/new           -> FormEditorPage
+  /forms/:id/edit      -> FormEditorPage
+  /invoices            -> InvoicesListPage
+  /invoices/new        -> InvoiceBuilderPage
+  /invoices/:id/edit   -> InvoiceBuilderPage
+  /crm                 -> CrmListPage
+  /crm/:clientId       -> ClientDetailPage
+  /settings            -> SettingsPage (the layout with the settings nav)
+  /settings/profile    -> ProfileSection
+  /settings/plan       -> PlanSection
+  /settings/security   -> SecuritySection
+  /settings/notifications -> NotificationsSection
+  /settings/saved-faqs -> SavedFaqsSection
+  /settings/saved-packages -> SavedPackagesSection
+  /settings/revision-prices -> RevisionPricesSection
+  /settings/what-revercue-knows -> WhatRevercueKnowsSection
+  /settings/delete-account -> DeleteAccountSection
+  /notifications       -> NotificationsPage (full page)
+
+Client-facing routes (no auth, no header/footer, ClientLayout):
+  /p/:publicId         -> PublicProposalPage
+  /c/:publicId         -> PublicContractPage
+  /i/:publicId         -> PublicInvoicePage
+  /f/:publicId         -> PublicFormPage
+  /i/:publicId/proof   -> ProofUploadPage
+
+Utility routes:
+  *                    -> NotFoundPage
+  /403                 -> ForbiddenPage
+  /500                 -> ServerErrorPage
+  /offline             -> OfflinePage
+  /session-expired     -> SessionExpiredPage
+
+Route guards:
+  The AppLayout checks the auth token. If missing or expired: redirect to /login?returnTo=<path>.
+  The onboarding routes check the user's onboarding_step. If step < the route's step: redirect to the correct step.
+  The plan-gated routes (e.g., /settings/what-revercue-knows on a non-Scale plan): show the ForbiddenPage with an "Upgrade" CTA.
+
+# ============================================================
+# PART 4 — THE API CLIENT
+# ============================================================
+
+The `src/api/client.ts` is the single fetch wrapper. Every API module imports it. It handles:
+  The base URL (from `import.meta.env.VITE_API_BASE_URL`).
+  The auth header (the JWT from the AuthContext, in `Authorization: Bearer <token>`).
+  The JSON body (serialize, set `Content-Type: application/json`).
+  The error shape: on non-2xx, parse `{ error, message, details }` and throw an `ApiError` with the code, the message, and the status.
+  The 401 handling: clear the token, redirect to /session-expired (or /login if the user was not logged in).
+  The 403 handling: the ForbiddenPage, with the plan upgrade message if the error is `forbidden` and the route is plan-gated.
+  The pagination: `?page=&limit=` passed through, the response `{ data, pagination }` returned as-is.
+
+The API modules (`auth.ts`, `proposals.ts`, etc.) are thin: each exports typed functions that call `client.get`, `client.post`, `client.patch`, `client.delete`. The types come from `src/types/api.ts`, which mirrors the backend contract in `api.txt`. **The AI must not invent endpoints.** Every function maps to a route in `api.txt`.
+
+# ============================================================
+# PART 5 — THE STATE MODEL
+# ============================================================
+
+Server state: React Query. Each query key is a tuple: `['proposals']`, `['proposals', id]`, `['crm', 'clients']`, `['dashboard', 'summary']`. Mutations invalidate the relevant keys.
+Auth state: AuthContext. Holds `{ user, token, login, logout, isAuthenticated, isEmailVerified }`. The token is in `localStorage` (or `sessionStorage` for the session-only option). On app load, the context reads the token, calls `/api/auth/me` once, and sets the user.
+Plan state: PlanContext. Reads `user.plan` from the AuthContext. Exposes `hasFeature(feature)` for the plan gates (the constants mirror the backend `constants.ts`).
+Toast state: ToastContext. Exposes `toast.success(msg)`, `toast.error(msg)`, `toast.info(msg)`. A single container at the app root renders the toasts (top-right, 4s, dismissible).
+Notification badge: the unread count is **piggybacked** on the page responses (the dashboard summary, the list responses). The `useNotifications` hook reads it from the last response and stores it in a context. No separate poll, no SSE (unless you choose SSE later). The bell dropdown fetches `/api/notifications?limit=10` on click.
+Auto-save: the `useAutoSave` hook. A 60-second interval calls the save function while there are unsaved changes. On `beforeunload` and `visibilitychange` (hidden), it sends the last content via `navigator.sendBeacon` to the autosave route (the token in the query string). The explicit save button calls the same function.
+
+# ============================================================
+# PART 6 — THE BUILD
+# ============================================================
+
+dev:    npm run dev       (Vite dev server on http://localhost:5173)
+build:  npm run build     (Vite production build to dist/)
+preview: npm run preview  (preview the build locally)
+typecheck: tsc --noEmit
+lint:   eslint src --ext .ts,.tsx
+
+Deploy: Cloudflare Pages. The build command is `npm run build`, the output directory is `dist/`. The `VITE_API_BASE_URL` is set in the Pages environment variables (Production and Preview).
+The public site and the app are the **same** Pages project (one bundle, two route trees). The admin dashboard is a **separate** Pages project (`adminrevercue.pages.dev`) with its own `admin/` folder, built separately.
+
+# ============================================================
+# PART 7 — THE BUILD ORDER (what the AI builds first)
+# ============================================================
+
+1.  `architecture.txt` is read. The AI sets up: package.json, tsconfig, vite.config, index.html, the folder structure, the CSS tokens, the global styles, the API client, the contexts (Auth, Toast, Plan), the layout shells (PublicLayout, AuthLayout, AppLayout, ClientLayout), the utility pages (404, 403, 500, offline, session-expired).
+2.  `design.txt` is read. The AI builds the component library (Button, Input, Textarea, Select, Checkbox, Fieldset, Card, Badge, Modal, Table, Toast, Spinner, EmptyState, Skeleton) and a `/dev/components` page that renders every component in every state. This page is the visual QA. It is not shipped (behind a dev flag).
+3.  `publicsite.txt` is read. The AI builds the 14 public pages, in the order: shell (header/footer) -> Home -> Pricing -> Features -> Compare -> Guides -> About -> Contact -> Blog -> Beta -> Privacy/Terms/Security -> Sign Up/Log In. The screenshots are **placeholders** at this stage (a grey box with the alt text).
+4.  `api.txt` is read. The AI wires the public forms (Contact, Beta, Waitlist) to the real endpoints.
+5.  The auth screens are wired to `/api/auth/signup`, `/api/auth/login`, `/api/auth/verify-email`, etc.
+6.  The onboarding screens are wired to `/api/onboarding/*`.
+7.  `dashboard.txt` is read. The AI builds the dashboard shell, the Overview, the list screens, the settings.
+8.  The builders are read (`proposalbuilder.txt`, `contractbuilder.txt`, `formbuilder.txt`, `invoicebuilder.txt`). The AI builds them in that order.
+9.  `crm.txt` is read. The AI builds the CRM list and the client detail.
+10. `screenshot.txt` is read. The AI **captures the real screenshots** of the built screens (the exact route, the sample data, the state, the crop), saves them to `public/screenshots/`, and **replaces the placeholders** in the public site. This is the last step, because the screenshots need the built product.
+11. The API client is audited against `api.txt`: every function maps to a route, no invented endpoints.
+
+# ============================================================
+# PART 8 — THE RULES (the AI must not deviate)
+# ============================================================
+
+No Tailwind. No UI kit (MUI, Chakra, shadcn). The design system is hand-built from `design.txt`. This is deliberate: the UI must be Revercue, not a generic library.
+No CSS-in-JS. Plain CSS files with the tokens as CSS variables.
+No invented endpoints. Every API call maps to `api.txt`.
+No fake data in production. The sample data is only for the screenshot capture (a dev-only seed), never in the shipped app.
+No stock photos. The screenshots are real product. The founder photo and the blog covers are real photos.
+No AI claims on the public site. The product uses patterns. The copy must not say "AI" anywhere.
+No gold on two buttons per screen. The gold rule holds on every screen.
+No generic forms. Every field has a label, a helper, an error, and six states.
+No screen without an empty state. Every list, table, feed has one.
+No second font. Serif headlines, sans body, mono for copyables.
+
+# ============================================================
+# END OF ARCHITECTURE
+# ============================================================
