@@ -1,0 +1,170 @@
+# REVERCUE — CRM BLUEPRINT
+# File: crm.txt
+# Purpose: The client record. The list, the detail (communication log, documents, notes, follow-ups, interest level), the writing area, the revenue tab.
+# Audience: The AI building the frontend. Read design.txt, api.txt, and dashboard.txt first.
+# The CRM is the thread's home. The client record is where the thread lands. The communication log is the main body. The documents are grouped. The notes are plan-limited. The follow-ups are actionable.
+
+# ============================================================
+# PART 1 — THE LIST (/crm)
+# ============================================================
+
+Header: "Clients" (headline serif) + "+ Add client" (gold) + "Export CSV" (ghost).
+A filter bar: All / Active / Archived / Not interested (pills). A search input (filters by name, email, company, debounced). A sort dropdown (Last activity / Name / Date added).
+A table:
+  Columns: Name, Email, Channel (a badge), Last message (relative), Documents (count), Latest status (the most recent document's status, a StatusBadge), Interest (Scale only — a badge with the 0-100 level), Actions (⋮).
+  Row click: the client detail (/crm/:clientId).
+  ⋮ menu: Edit, Archive, Mark not interested (Scale), Delete.
+Data: GET /api/crm/clients?search=&filter=&sort=&page=&limit=.
+The "Add client" modal: name (required), email (required), company, phone, channel. On submit, POST /api/crm/clients. On success, a toast "Client added." and the list refreshes. On error 409 conflict, "A client with this email already exists."
+The "Export CSV" button: GET /api/crm/clients/export, the browser downloads the CSV.
+Empty state: "No clients yet. Create a proposal, contract, invoice, or form — the client is added automatically. Or add one manually." + the "+ Add client" CTA.
+Loading: skeleton rows.
+Error: "Could not load clients. Retry." + a retry button.
+On Free: creating a document for a new client shows a notification "Add [email] to your CRM?" (the auto-add is Starter+).
+
+# ============================================================
+# PART 2 — THE CLIENT DETAIL (/crm/:clientId)
+# ============================================================
+
+The client record is a vertical page, not a modal. It is the thread's home.
+
+## The header
+The client name (headline serif, 32px).
+The email (mono, copyable, with a "Copy" button).
+The company (if set).
+The channel badge (Email / WhatsApp / Phone / In-person / Other).
+The interest badge (Scale): a pill with the 0-100 level and the label (low/medium/high). Clicking it opens the interest breakdown.
+The "Create proposal / contract / invoice / form" buttons (the thread continues from the client record). Each opens the requirement form with the client pre-selected (/proposals/new?client_id=:id, etc.).
+
+## The communication log (the main body)
+A timeline, newest first. Each entry:
+  An icon per type: message_sent (arrow up), reply_received (arrow down), follow_up (clock), follow_up_done (check), document_created (file), document_shared (link).
+  The direction (outgoing/incoming) for messages, as a badge.
+  The channel (Email / WhatsApp / Phone / In-person / Other), as a badge.
+  The message text (15px, var(--text-primary)).
+  The estimated time (if set, e.g., "5 min").
+  The linked document (if any): a link to the document (title + status badge).
+  The next step (if set) + the follow-up date (if set), as a small block.
+  The relative timestamp ("2 hours ago").
+  A "Mark done" button on follow-ups (PATCH /api/crm/communication/:id with follow_up_done = 1).
+An "Add communication" button (gold text) opens the writing area (Part 3).
+Empty state: "No communication yet. Add the first entry." + the "Add communication" CTA.
+Loading: a skeleton timeline (3 placeholder entries).
+The timeline is paginated (100 per page); a "Load more" ghost at the bottom.
+
+## The documents (grouped by type)
+Four groups: Proposals, Contracts, Invoices, Forms.
+Each group is a small table: Title (or invoice number), Status (StatusBadge), Last activity (relative), a link to the builder or the public view.
+The archived documents appear with a grey "Archived" badge.
+The "Create" buttons at the top of each group (Create proposal, etc.) open the requirement form with the client pre-selected.
+Empty state per group: "No proposals yet." (or the group's type) + the create CTA.
+
+## The notes (plan-limited)
+A list of notes (newest first). Each: the note text, the relative timestamp, a × delete.
+An "Add note" textarea + "Save" (gold). POST /api/crm/clients/:id/notes.
+The limits: Free 3 per client, Starter 10, Growth+ unlimited.
+When the limit is reached: "You have 3 of 3 notes. Upgrade to add more." + the upgrade link.
+Empty state: "No notes yet." + the "Add note" textarea.
+
+## The follow-ups
+A list of the open follow-ups (from the communication log, where follow_up_done = 0 and follow_up_date <= now). Each: the next step (the text), the date (relative, red if overdue), a "Mark done" button.
+Empty state: "No follow-ups due." (a positive state — the user is on top of things).
+
+## The interest breakdown (Scale)
+Clicking the interest badge opens a modal:
+  The 0-100 score (a large number), the label (low/medium/high).
+  The signals (a list): message count, last message direction, proposal opened, proposal answered, contract approved, invoice paid, days since last interaction, marked not interested. Each with a +/− contribution.
+  The arithmetic: the base 50, the +/− per signal, the final score.
+  The one-line: "This is arithmetic, not AI. It uses your communication log and the document tracking."
+The signals are read-only. The user does not edit the interest directly.
+
+## The revenue tab (Scale)
+A tab or a section "Revenue" in the client detail (or in the CRM list header):
+  Earned from this client (the sum of confirmed payments).
+  Spent on this client (the sum of expenses).
+  Profit (earned − spent).
+  The expense list (date, category, platform, amount, note). An "Add expense" button (gold) opens the expense modal (client pre-selected, amount, category, platform, date, note). POST /api/settings/expenses.
+  The price suggestion: "You spent $1,200 on this client. Your last project: $4,000. At a 30% margin, charge $5,200." (a suggestion, not a gate).
+The revenue tab is Scale only. On Free/Starter/Growth, the tab is visible but locked: "Revenue tracking is available on Scale. [Upgrade]".
+
+# ============================================================
+# PART 3 — THE WRITING AREA
+# ============================================================
+
+The writing area is the form that creates a communication log entry. It is where the freelancer plans the message they are about to send.
+
+A modal (max-width 560px) or a slide-over panel from the right:
+  Title: "Add communication" (or "Reply" if the user clicked "Reply" on an entry).
+  To: the client (pre-selected, read-only).
+  Replying to (optional): a dropdown of the last 5 communication entries (or "New message"). If selected, the previous message is shown below for context.
+  Follow-up (optional): a dropdown of the client's open follow-ups (or "None").
+  Entry type: Message sent / Reply received / Follow-up / Follow-up done / Document created / Document shared. (The default is "Message sent".)
+  Direction: Outgoing / Incoming. (The default is Outgoing for "Message sent", Incoming for "Reply received".)
+  Channel: Email / WhatsApp / Phone / In-person / Other.
+  Message text (textarea, required for message types).
+  Estimated time (optional, e.g., "5 min").
+  Linked document (optional): a dropdown of the client's documents.
+  Next step (optional): a text input.
+  Follow-up date (optional): a date picker.
+  The "Suggested phrasing" panel (Scale only): if the client has previous messages, a small panel shows: "You usually send a short check-in after 2 days. Previous message: 'Just checking you saw the proposal — happy to answer any questions.' [Use this]". Clicking "Use this" inserts the text into the message area. The user edits it. This is a previous message, not a generated one.
+  "Save to log" (gold) + "Copy message" (ghost) + "Cancel" (ghost).
+
+"Save to log": POST /api/crm/clients/:id/communication with the entry. On success, a toast "Logged." and the timeline refreshes.
+"Copy message": copies the message text to the clipboard. A toast "Copied." The user pastes it into their email or WhatsApp. Revercue does not send.
+
+The writing area is for every plan. The "Suggested phrasing" panel is Scale only.
+
+# ============================================================
+# PART 4 — THE INTEREST LEVEL (Scale)
+# ============================================================
+
+The interest level is a 0-100 score, calculated from the client's behaviour. It is arithmetic, not AI.
+
+The signals and the scoring:
+  Base: 50.
+  Message count: +5 per message, capped at +30.
+  Last message direction: incoming +15, outgoing −10.
+  Proposal opened: +10.
+  Proposal answered: +15.
+  Contract approved: +20.
+  Invoice paid: +25.
+  Days since last interaction: −2 per day, capped at −30.
+  Marked not interested: −40.
+  The score is clamped to 0-100.
+
+The interest appears:
+  On the client detail (a badge).
+  On the CRM list (a column).
+  On the dashboard as a flag: if a client marked "not interested" shows 80%+, a suggestion "Reopen the conversation" fires.
+  The suggestion is pattern-based (the interest level is the pattern).
+
+The interest is recalculated on every new communication entry (in the backend). The frontend reads the value from the client record.
+
+# ============================================================
+# PART 5 — THE DESIGN RULES
+# ============================================================
+
+The client record is the thread's home. The communication log is the main body, not a tab. The documents are grouped below. The notes are a card. The follow-ups are a card. The interest is a badge + a modal.
+The "Create proposal / contract / invoice / form" buttons are at the top, so the thread continues from the client record.
+The writing area is a form, not a chat. It creates a log entry. The "Copy message" is the sending action (the user sends from their own account).
+The gold rule: the "Add communication" (gold text button) and the "Save to log" (gold). On the list, the "+ Add client" (gold). One gold per screen.
+The notes limit is shown honestly ("You have 3 of 3 notes. Upgrade to add more."), not hidden.
+The interest breakdown is a modal with the arithmetic. It is not a black box.
+The revenue tab is visible on every plan, locked on Free/Starter/Growth ("Revenue tracking is available on Scale."). The lock is the upsell.
+The "Suggested phrasing" (Scale) is a previous message, not a generated one. The copy must not say "AI".
+The follow-ups empty state is positive ("No follow-ups due."), not a sad placeholder.
+
+# ============================================================
+# PART 6 — THE CLIENT-FACING INTERACTION (how the CRM updates)
+# ============================================================
+
+When the client opens a proposal -> the notification is created -> the dashboard shows it -> the communication log has a "document_shared" entry (from when the freelancer shared it) -> the client's activity is tracked (by plan).
+When the client answers an embedded question -> the answer is stored -> the freelancer sees it on the client record (the document detail).
+When the client asks a question -> the question is added to the communication log (a "reply_received" entry) -> a notification.
+When the client approves a contract -> the contract status becomes approved -> a notification -> the client record shows the approved contract.
+When the client pays an invoice -> the invoice status becomes proof_submitted or confirmed -> a notification -> the revenue tracker counts it (Scale).
+The CRM does not need to be manually updated. The thread updates it.
+
+# ============================================================
+# END OF CRM BLUEPRINT
+# ============================================================
