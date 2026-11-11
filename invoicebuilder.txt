@@ -1,0 +1,158 @@
+# REVERCUE — INVOICE BUILDER BLUEPRINT
+# File: invoicebuilder.txt
+# Purpose: The invoice builder. The requirement form, the line-items table, the payment arrangement (Option A/B), the proof upload, the confirm payment.
+# Audience: The AI building the frontend. Read design.txt, api.txt, and proposalbuilder.txt first.
+# The invoice builder is SIMPLER than the proposal/contract canvas. An invoice is a structured document (a table), not a designed one. The builder is a line-items editor + a payment arrangement + a notes block.
+
+# ============================================================
+# PART 1 — THE FLOW
+# ============================================================
+
+Stage 1: The requirement form (/invoices/new). The invoice-specific fields.
+Stage 2: The builder (/invoices/:id/edit). The line-items table + the payment arrangement + the notes.
+Stage 3: The publish and share (/invoices/:id/publish, then the share modal).
+The invoice does NOT use the template selection screen. An invoice is a table, not a designed document. The "template" for an invoice is the freelancer's brand (logo, colours), applied automatically.
+
+# ============================================================
+# PART 2 — STAGE 1: THE REQUIREMENT FORM
+# ============================================================
+
+The same layout as the proposal requirement form (centered card, header, footer). The fields:
+
+1. Client (required). Same segmented control (Existing | New).
+2. Which contract is this invoice for? (optional). A dropdown of the client's approved contracts. If selected, the line items, the currency, and the total pre-fill from the contract.
+3. Line items (required, at least one). A small table: description (input), quantity (number), unit price (number), total (computed). "+ Add line item". The subtotal, the tax, the total are shown below.
+4. Currency (required, default USD). A dropdown.
+5. Tax (optional, default 0). A number + a label (e.g., "VAT 20%").
+6. Payment arrangement (required). Two cards:
+   Option A — "External payment link." A URL input (e.g., a Stripe, PayPal, or Wise link). The client is redirected to the link to pay.
+   Option B — "Your account details." The fields: bank name, account number, IBAN, SWIFT, account holder. A toggle "Allow the client to upload a payment proof." If on, the client sees an upload field after paying.
+7. Due date (required). A date picker. Not in the past.
+8. Notes to client (optional). A textarea (e.g., "Payment due within 14 days. Late payments incur a 5% fee.").
+
+The footer: "Continue to builder" (gold, disabled until client, at least one line item, payment arrangement, due date).
+"Cancel" (ghost).
+
+The submit: POST /api/invoices/draft with { client_id, linked_contract_id?, line_items: [], currency, tax, total, payment_arrangement: { type: "link", url } OR { type: "account", details, allow_proof }, due_date, notes }.
+The response includes the invoice_number (auto-generated: INV-2026-0042).
+
+# ============================================================
+# PART 3 — STAGE 2: THE BUILDER
+# ============================================================
+
+Route: /invoices/:id/edit.
+Layout: a two-panel layout (line-items editor left, preview/settings right) OR a single centered card with the line-items table and the payment arrangement below. The spec uses a centered card (max-width 900px) because an invoice is a form, not a canvas.
+
+## The top bar
+Left: "← Back" (ghost).
+Center: the invoice number (mono) + the title (editable, default "Invoice for [Client]").
+Right: "Preview" (ghost), "Save" (ghost), "Create" (gold), "⋮" (more: Duplicate, Archive, Delete).
+
+## The header block
+The freelancer's logo and name (from Settings, read-only — "Change in Settings").
+The client's name and email (from the requirement form, editable via a "Change client" link).
+The invoice number (auto-generated, read-only).
+The invoice date (today, editable).
+The due date (from the requirement form, editable).
+
+## The line-items table
+A table: Description (input), Quantity (number), Unit price (number), Total (computed, read-only).
+Each row: a drag handle, a × delete. "+ Add line item" at the bottom.
+Below the table: the subtotal, the tax (an input + a label), the total (bold).
+The line items are editable inline.
+
+## The payment arrangement
+The same two options as the requirement form, editable here:
+Option A: the URL field + a "Test link" (opens the URL in a new tab).
+Option B: the account details + the "Allow proof upload" toggle.
+
+## The notes
+A textarea for the notes to the client.
+
+## The brand
+The freelancer's logo (read-only, from Settings) and the brand colours (read-only, from Settings). The invoice uses them automatically. No template selection.
+
+## The preview
+A "Preview" button opens the client's view (a modal or a new tab): the invoice with the line items, the payment arrangement, the proof upload (if Option B), the "Buy Now" button. Read-only.
+
+## The create (publish)
+Validate: the line items (at least one with a description and a price), the due date, the payment arrangement (Option A URL valid / Option B details filled).
+POST /api/invoices/:id/publish.
+On success: the public_id and URL. The share modal.
+
+## The share modal
+"Your invoice is ready." The link (mono, copyable). The message (pre-filled: "Hi [Client], here is the invoice for [project]. You can pay via the link inside. [link]"). The share buttons. The "Revercue does not send" line. "Done".
+
+# ============================================================
+# PART 4 — THE CLIENT-FACING INVOICE (/i/:publicId)
+# ============================================================
+
+The client's view:
+  The freelancer's logo and name.
+  The invoice number, the invoice date, the due date.
+  "Billed to [Client]."
+  The line items table (description, quantity, unit price, total).
+  The subtotal, the tax, the total.
+  The notes.
+  The payment section:
+    Option A: a "Buy Now" (gold) button that redirects to the freelancer's payment link.
+    Option B: the account details displayed clearly + a "Buy Now" (gold) button that goes to the account details + an optional "Upload payment proof" field (if allow_proof).
+  The footer: "This is not a receipt until payment is confirmed." + "Powered by Revercue" (removed on Scale/Teams).
+
+The states:
+  The overdue banner (if past the due date).
+  The password wall (if protected).
+  The closed page (if archived).
+  The invalid link.
+  The proof submitted state: "Proof received. [Freelancer] will confirm within 2 business days."
+  The confirmed state: "Payment confirmed. Thank you." + a "Download receipt" button.
+  The Option A redirect: the client clicks "Buy Now", the browser opens the payment link, the invoice page shows "You were redirected to the payment link. If you completed the payment, you can close this page." (Option A does not have a proof upload; the freelancer confirms manually.)
+
+# ============================================================
+# PART 5 — THE PROOF UPLOAD (/i/:publicId/proof)
+# ============================================================
+
+The client uploads a screenshot or a receipt (image/PDF, max 5 MB).
+A preview (thumbnail).
+"Upload" (gold).
+On upload: "Proof received. [Freelancer] will confirm within 2 business days." + the line "The screenshot is deleted after 5 days for your privacy. A copy is emailed to [freelancer]."
+The file goes to B2 (the private bucket) via /api/files/upload, then the invoice status becomes proof_submitted, and a notification is created.
+The freelancer sees the proof on the invoice detail (a thumbnail) and confirms the payment.
+
+# ============================================================
+# PART 6 — THE CONFIRM PAYMENT (the freelancer side)
+# ============================================================
+
+On the invoices list, an invoice with status proof_submitted has a "Confirm payment" action in the ⋮ menu (or a button on the invoice detail).
+Clicking it: a confirmation modal "Confirm the payment of $X for invoice INV-2026-0042?" + "Confirm" (gold).
+POST /api/invoices/:id/confirm-payment.
+On success: the invoice status becomes confirmed, a payments row is created in Turso (the revenue tracker reads it), a notification is created, the client sees "Payment confirmed."
+If the invoice was Option A (no proof), the freelancer confirms manually (the client paid via the external link).
+
+# ============================================================
+# PART 7 — THE REVENUE TRACKER (Scale)
+# ============================================================
+
+When the freelancer confirms a payment, the revenue tracker counts it:
+  The dashboard revenue this month includes it.
+  The pending payments line excludes it.
+  The CRM revenue tab (Scale) shows the earned total.
+  The price suggestion in the builders uses the expense data (the freelancer added the expenses per client).
+
+# ============================================================
+# PART 8 — THE DESIGN RULES
+# ============================================================
+
+The invoice is a structured document, not a designed one. No template selection. The builder is a line-items editor + a payment arrangement + a notes block.
+The line-items table is the invoice's core. The table is clear, the totals are bold, the tax is labelled.
+The payment arrangement is the invoice's action. Option A (link) and Option B (account details + proof) are the two paths.
+The client's "Buy Now" is the only gold on the client view.
+The proof upload is a separate page (/i/:publicId/proof), not a modal, so the client can bookmark it.
+The "not a receipt until payment is confirmed" line is honest.
+The invoice number is auto-generated (INV-YEAR-NNNN). The freelancer does not type it.
+The brand (logo, colours) is applied automatically from Settings. The freelancer does not set it per invoice.
+The gold rule: the "Create" button in the builder, the "Buy Now" on the client view. One gold per screen.
+
+# ============================================================
+# END OF INVOICE BUILDER
+# ============================================================
