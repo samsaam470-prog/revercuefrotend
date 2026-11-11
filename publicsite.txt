@@ -1,0 +1,351 @@
+# REVERCUE — PUBLIC SITE BLUEPRINT
+# File: publicsite.txt
+# Purpose: The complete specification for the Revercue public marketing site.
+# Audience: The AI or developer building the frontend. Read this file first.
+# Do not deviate from the palette, typography, or layout contracts.
+# Every screen must answer: who is the user, what are they doing in 10s, what is the smallest screen.
+
+# ============================================================
+# PART 0 — THE PRODUCT (what the public site sells)
+# ============================================================
+
+Revercue is a SaaS tool for freelancers and agencies.
+Thesis: "A thread, not disconnected workflows."
+The client work is one thread: proposal -> contract -> requirement form -> invoice -> client record.
+The documents are interactive links, not PDFs.
+The client opens a link, reads, answers embedded questions, asks questions, selects a package.
+The freelancer sees the activity (opened, time spent, clicks, answers).
+The client record builds itself.
+The product does not use AI. It uses patterns (keyword matching, frequency counting).
+The plans: Free, Starter, Growth ($29), Scale ($49), Teams ($99 base, MVP 2.0).
+
+# ============================================================
+# PART 1 — DESIGN SYSTEM (locked before any screen)
+# ============================================================
+
+## Palette (CSS variables)
+--bg-base: #0A0A0A;
+--bg-card: #141414;
+--bg-elevated: #1C1C1C;
+--border: #2A2A2A;
+--border-strong: #3A3A3A;
+--text-primary: #FFFFFF;
+--text-secondary: #A0A0A0;
+--text-tertiary: #6B6B6B;
+--gold: #C9A961;
+--gold-hover: #D9B971;
+--green: #4ADE80;
+--red: #F87171;
+--amber: #FBBF24;
+
+## Typography
+Display: Serif (Instrument Serif or similar), 40-48px, weight 400. Public hero headlines only.
+Headline: Serif, 28-32px, weight 400. Page titles, section headers.
+Title: Sans (Inter or similar), 18-20px, weight 600. Card titles.
+Body: Sans, 15px, weight 400. Paragraphs, descriptions.
+Label: Sans, 13px, weight 500. Form labels, table headers, nav.
+Caption: Sans, 12px, weight 400. Timestamps, helper text.
+Mono: JetBrains Mono, 13px, weight 400. Links, reference numbers, copyable values.
+
+Rule: serif for headlines only. Sans for everything else. Mono for copyables. No fourth font.
+
+## Spacing
+4px base scale: 4, 8, 12, 16, 24, 32, 48, 64, 96.
+Card padding: 24px desktop, 16px mobile.
+Section gap: 32px.
+Page padding: 48px desktop, 24px mobile.
+
+## Radius
+Cards: 8px.
+Modals: 12px.
+Buttons: 6px.
+Inputs: 6px.
+Badges/tags: 999px.
+
+## States (every interactive element must define all six)
+Default: as specified.
+Hover: background var(--bg-elevated), border var(--border-strong).
+Focus: 2px solid var(--gold) ring, offset 2px.
+Active: background var(--bg-card), 2px gold left border.
+Disabled: 50% opacity, cursor not-allowed.
+Loading: 16px spinner replaces label, button width fixed.
+Error: 1px solid var(--red) border, error text below in caption red.
+
+Rule: no interactive element ships without all six states.
+
+## The gold rule
+Gold is for ONE thing per screen: the primary action.
+If two gold buttons appear, one is wrong. The secondary is a ghost button (transparent, 1px border, white text).
+
+# ============================================================
+# PART 2 — GLOBAL FRAME (every page)
+# ============================================================
+
+## Header (sticky, 64px)
+Structure: Logo left | Nav center | [Log in] + [Start Free] right.
+Background: var(--bg-base), 1px bottom border var(--border).
+On scroll: background var(--bg-card), soft blur (backdrop-filter: blur(8px)).
+Logo: "[R] Revercue" — 24px serif wordmark, gold bracket, white text.
+Nav: Features, Pricing, Compare, Guides, About, Blog. Label 13px, var(--text-secondary), hover var(--text-primary). Active page: 2px gold underline.
+Right: "Log in" (ghost text button) + "Start Free" (gold filled button).
+Mobile (<768px): logo left, hamburger right. Hamburger opens full-screen overlay: bg-base, six links stacked as title size, Log in and Start Free at bottom. Close on link click or Escape.
+
+Gold rule: on every page except Home, the header Start Free is the only gold above the fold. On Home, the hero CTA is gold and the header Start Free is a ghost.
+
+## Footer (every page)
+Background: var(--bg-card), 64px top padding, 48px bottom.
+Column 1 (240px): logo, the thesis line (body, var(--text-secondary)).
+Column 2: Product — Features, Pricing, Compare, Guides.
+Column 3: Company — About, Blog, Contact, Beta.
+Column 4: Legal — Privacy, Terms, Security.
+Column 5: Stay in the loop — email input + Subscribe (gold outline button). On submit: "Thanks. You're in."
+Bottom bar: 1px top border, copyright left, social icons right (X, LinkedIn).
+
+## The Start Free band (before footer, every page except legal pages)
+Centered, max-width 640px, 96px vertical padding, bg-card band with 1px border top and bottom.
+Headline: "Ready to stop losing the thread?" (headline serif, white).
+Subtext: "One link. One thread. From proposal to payment." (body, var(--text-secondary)).
+Primary: "Start Free" (gold). Secondary: "See Pricing" (ghost).
+
+# ============================================================
+# PART 3 — THE 14 PAGES
+# ============================================================
+
+## Page 1 — Home (the conversion page)
+Section 1 — Hero
+  Eyebrow (gold, uppercase, 12px, letter-spacing 0.1em): "YOUR CLIENT WORK IS ONE THREAD"
+  Headline (display serif, 48px desktop/36px mobile, white, max-width 800px, centered):
+    "Your client work is one thread."
+  Subheadline (body 17px, var(--text-secondary), max-width 640px, centered):
+    "Proposal. Contract. Form. Invoice. Client. In one place, not five.
+     Interactive links, not PDFs. The client record builds itself."
+  CTAs: [Start Free] (gold) + [See Pricing] (ghost), centered, side by side.
+  Trust line (caption, var(--text-tertiary)): "Free plan. No credit card. 2 minutes to set up."
+  Image: REAL Dashboard Overview screenshot, full width, in a bg-card card (1px border, 12px radius) with a gold glow behind (0 40px 120px rgba(201,169,97,0.15)), slightly rotated 2deg. On mobile: no rotation, full width.
+
+Section 2 — The thread (three steps)
+  Heading (headline serif, centered): "One thread, three steps."
+  Three step cards (bg-card, 1px border, 24px padding):
+    01 Create — "Build the proposal from a template."
+    02 Share — "Send the link from your own account."
+    03 Track — "See who opened, what they answered, what's next."
+  Arrows between them on desktop (hidden on mobile, stacked).
+  Image: REAL Proposal Builder screenshot (three panels, template rendered), full width, same gold-glow card treatment.
+
+Section 3 — The five modules (feature grid)
+  Heading (headline serif, centered): "Everything in one place."
+  Five cards (3+2 grid desktop, 1 column mobile):
+    Proposals — "Interactive links with packages, FAQs, questions."
+    Contracts — "Approve, decline, or ask a question."
+    Forms — "Adaptive requirement forms with branching."
+    Invoices — "Pay by link or account details + proof."
+    CRM — "The client record, the communication log, the follow-ups."
+  Each card: gold line icon, title, body (two lines max). NO screenshot in this section.
+
+Section 4 — The client view (second real screenshot)
+  Heading: "What your client sees." Subtext: "A clean page. Your brand. No login. No PDF."
+  Two screenshots side by side (stacked on mobile):
+    REAL Public Proposal View (with a sample freelancer brand).
+    REAL Public Invoice View (with payment options).
+  Both in the gold-glow card treatment. The point: the client never sees Revercue's brand on Scale/Teams.
+
+Section 5 — Social proof (CONDITIONAL)
+  Heading: "What freelancers say."
+  Three testimonial cards. REAL quotes, names, roles.
+  If no real testimonials exist: OMIT this section entirely. A fake testimonial is worse than none.
+
+Section 6 — Pricing teaser
+  Heading: "Simple, honest pricing."
+  Five compact plan chips in a row (scroll horizontally on mobile): Free $0, Starter $12, Growth $29, Scale $49, Teams (waitlist).
+  Below: [See full pricing] (ghost), links to /pricing.
+
+Section 7 — The FAQs
+  Heading: "Questions, answered."
+  Each FAQ is a native <details> element: title summary row with a chevron, answer inside.
+  Show the first 12 FAQs. A "Show all 49" ghost button expands the rest inline.
+  The 49 FAQs are the full list from the product spec (the activation email, the templates, the plans, the retention, the data, etc.).
+
+Section 8 — Start Free band.
+Mobile: headline 36px, subheadline 16px, CTAs stacked full-width. Hero screenshot: no rotation, full width, 4:3 crop. Modules: 1 column. Client view: stacked. Pricing chips: horizontal scroll.
+
+## Page 2 — Features
+Layout: Header, then a sticky sub-nav (Proposals | Contracts | Forms | Invoices | CRM | Builder | Suggestions) that scrolls to each section, then one section per module.
+Each section: two-column — the REAL screenshot left, the feature bullets right (5-7 bullets, body, var(--text-secondary), gold dot). On mobile: stacked.
+Screenshots: Proposal Builder canvas, Contract View (Approve/Decline/I Have Questions), Form Editor, Invoice View, CRM Client Detail, Builder Block Library, Suggestion Card.
+Then: Start Free band, footer.
+
+## Page 3 — Pricing
+Heading: "Start free. Upgrade when the thread pays for itself."
+Five cards (Free, Starter, Growth $29, Scale $49, Teams $99 base waitlisted). The middle card (Growth) has a gold "Most popular" badge. Teams is dimmed with "Not available yet" and "Join waitlist" (opens a modal, email only).
+Each card: plan name, price (display serif 36px), role line, a 5-item feature list (the key gates), a CTA.
+Below: the full comparison table (every gate from the plan table: active documents, retention, storage, draft retention, archive, notes, custom templates, saved FAQs, saved packages, password-protected docs, email notifications, adaptive forms, advanced tracking, custom thank-you, what-revercue-knows, revenue tracker, expense entry, price suggestion, teams features). Sticky first column on horizontal scroll.
+Then: the billing FAQs ("How do I pay?" Payoneer manual 24h; "Can I downgrade?" yes at cycle end, documents archived; "What happens to my documents if I downgrade?" archived, PDF emailed, 7-day grace; "Do you offer refunds?" no, MVP 1.0; "Can I pay annually?" not yet).
+Then: Start Free band, footer.
+
+## Page 4 — Compare
+Heading: "The thread vs. the stack of tools you're using now."
+A factual table: rows are the jobs (proposal, contract, form, invoice, client record, tracking, follow-ups, suggestions, price). Columns: Revercue, PDF + email, Notion.
+Icons: green check, red cross, amber warning. NO emoji in production — line icons.
+No competitor bashing. The comparison is factual.
+Then: one paragraph: "What Revercue is not — not a CRM replacement, not a project manager, not an accounting tool. The thread."
+Then: Start Free band, footer.
+
+## Page 5 — Guides
+Heading: "How to run the thread, from proposal to payment."
+Filter bar: All | Proposals | Contracts | Pricing | Follow-ups.
+Guide cards (3 per row desktop, 1 mobile): a REAL screenshot cover, a title, a one-line excerpt, a read time. Links to /guides/:slug.
+The 12 guides are the MVP content: write a proposal, price a project, follow up, handle a revision, get paid, scope a project, write a contract, build a requirement form, set up a CRM, use templates, use the suggestion engine, read the tracking.
+Guide page: max-width 720px, serif headline, sans body, sticky TOC desktop, Start Free CTA at end. Each has a meta description and an OG image (the real screenshot).
+Then: Start Free band, footer.
+
+## Page 6 — About
+Heading: "Why Revercue exists."
+Real founder photo (320px round) — a real photo, not an avatar. If no photo, text-only intro.
+Three paragraphs: the problem (the thread is broken across five tools), the thesis (one thread, one place), the promise (the client record builds itself, the documents are links, the suggestions learn your pattern).
+"What we believe" — four bullets:
+  The thread matters more than any single document.
+  The client should not need an account to read a proposal.
+  The product should not use AI to guess. Patterns are enough.
+  Your data is yours. We store it. We do not read it.
+"The roadmap" — one line: MVP 1.0 the thread. MVP 2.0 the API. v3 MCP. v5 the agent. (Gold accent on MVP 1.0.)
+Then: Start Free band, footer.
+
+## Page 7 — Contact
+Heading: "We read every message."
+Two columns:
+  Left: the form — name, email, topic (Question / Feedback / Partnership / Other), message. All required except topic. "Send message" gold, disabled until name, email, message filled and email valid.
+  Right: direct email (hello@revercue.com), response time (within 1 business day), "For bug reports: use the feedback form in Settings > Feedback."
+On submit: a success state replaces the form: "Thanks. We read every message. We'll reply to [email] within 1 business day." + "Send another" ghost.
+Then: footer only (no Start Free band — a CTA after a contact form is pushy).
+
+## Page 8 — Blog
+Heading: "Notes on the thread."
+Featured post: a two-column card (real screenshot or real photo cover left, title/excerpt/meta right). One per page.
+Post grid: three per row, each a cover, title, date. Covers are real screenshots or real photos, not abstract gradients.
+Post page: max-width 720px, serif headline, sans body, gold reading progress bar at top, Start Free CTA at end, related posts grid (3).
+MVP 1.0: 3-5 posts. The blog is a credibility surface, not a content machine.
+Then: Start Free band, footer.
+
+## Page 9 — Beta
+Heading: "Help shape the thread. Get Scale free for 3 months."
+Two columns:
+  Left: the form — name, email, account type, services (checkbox group), proposals per month, what to test (optional). "Apply for beta" gold.
+  Right: "What you get" (Scale free 3 months, direct line to the founder, feedback shapes roadmap, early access to Delivery Box test) and "What we ask" (use it on 2 real clients, 15-min call at the end, honest feedback).
+On submit: "Thanks. We review every application. If you're a fit, you'll hear from us within 5 business days."
+Then: footer only.
+
+## Page 10 — Sign Up
+Minimal header: logo only, no nav, no Start Free. A back-arrow to Home on the left.
+The card: bg-card, 1px border, 12px radius, 40px padding, max-width 400px, centered.
+Fields:
+  Eyebrow: START FREE. Headline: "Your thread starts here."
+  Email.
+  Password (with a 5-segment strength bar: red -> amber -> green).
+  [Continue with Google] (ghost with the Google icon).
+  Checkbox: "I agree to the Terms and Privacy Policy" (required). Links open in new tab.
+  Checkbox: "Send me product updates (optional)" (unchecked by default).
+  [Create account] (gold), disabled until TOS checked.
+On submit: spinner, then the 5-second transition screen (full-page, bg-base, gold spinner, the exact FormSubmit copy):
+  "Check your inbox. FormSubmit will send you an activation email. That activation email lets us know that you are open to transactional emails, app notifications, and security alerts. This activation will not opt you in to the newsletter."
+Then the code screen: six boxes, the prominent gold-bordered FormSubmit message (the exact copy above), countdown, [Verify] gold, [Resend code] ghost disabled 90s with countdown, the persistent disclaimer below.
+Mobile: card full-width with 24px page padding.
+
+## Page 11 — Log In
+Same layout as Sign Up, with:
+  Email, password, [Continue with Google], "Forgot password?" link.
+  No TOS checkbox.
+  [Log in] gold, disabled until email + password filled.
+On submit: if 2FA is on, the code screen (disclaimer only, no prominent box); otherwise the dashboard.
+Footer link: "New here? Start free."
+
+## Forgot Password
+Same card: email field, [Send reset code] gold. On submit: "Check your inbox. FormSubmit will send you a code." Then the code screen (disclaimer only), then the new password fields.
+
+## Pages 12-14 — Privacy, Terms, Security
+Shared legal layout:
+  Left column: sticky table of contents (label size, current section gold). Hidden on mobile (a "Contents" collapsible at top).
+  Right column: the legal text, max-width 720px, body 16px, line-height 1.7. Section headers title size. "Last updated" date under the page title.
+  No Start Free band. Footer only.
+
+Privacy sections:
+  1. What we collect (account, product, tracking, payment — the exact list from "What Revercue knows about me").
+  2. How we use it (the product, support, billing, suggestions — no sale, no advertising).
+  3. Who we share it with (Cloudflare, Backblaze B2, Turso, FormSubmit, Payoneer — "store but do not read").
+  4. Retention (document by plan, 5-day tracking, 90-day notifications, 3-month saved FAQs/packages, 5-day account deletion).
+  5. Your rights (export, delete, correct, contact email, GDPR/CCPA line).
+  6. Contact.
+
+Terms sections:
+  1. The service (what Revercue is, what it is not — not a law firm, not an accountant, not a payment processor).
+  2. Your account (one person, accuracy, password security).
+  3. Acceptable use (no illegal content, no spam, no API abuse, no reselling).
+  4. Payment (the plans, Payoneer manual, no refunds MVP 1.0, downgrade rules).
+  5. Termination (user can delete, Revercue can suspend for abuse, data handling).
+  6. Liability (standard limitation, "as is").
+  7. Governing law.
+
+Security sections (a trust page, not a legal page):
+  1. Encryption (TLS 1.3 in transit, AES-256 at rest, bcrypt for passwords, Argon2id for document passwords).
+  2. Storage (private B2 bucket, Worker proxy, no direct storage URLs, unguessable public IDs, noindex).
+  3. Retention (5-day tracking, 90-day notifications, PDF-before-deletion).
+  4. Access (the team sees account data, not content; the exception stated honestly).
+  5. The third parties (the same list, "store but do not read").
+  6. What we do not do (no AI analysis of content, no cross-site tracking, no data sale).
+
+# ============================================================
+# PART 4 — THE IMAGE SYSTEM (12 real screenshots)
+# ============================================================
+
+The site uses REAL product screenshots. Never stock photos. Never abstract illustrations. The product sells itself by showing itself.
+
+Screenshots needed:
+  1. Dashboard Overview (full) — Home hero.
+  2. Proposal Builder (three panels, template rendered) — Home thread section, Features.
+  3. Public Proposal View (with a sample freelancer brand) — Home client view.
+  4. Public Invoice View (with the payment options) — Home client view.
+  5. Contract View (Approve / Decline / I Have Questions) — Features.
+  6. Form Editor (questions, branching) — Features.
+  7. CRM Client Detail (communication log, documents, notes) — Features.
+  8. Builder Block Library (the left panel, blocks visible) — Features.
+  9. Suggestion Card (the "client agreed — create contract" card) — Features.
+  10. Code Screen (the FormSubmit message, six boxes) — Sign Up page.
+  11. Settings > What Revercue Knows (the transparency page) — Security page.
+  12. Pricing Comparison Table (the real table) — Pricing page.
+
+Screenshot rules:
+  Real product, real data. Sample freelancer "Acme Studio", sample clients "Acme Co.", "Beta Ltd.", sample amounts. Never lorem ipsum, never "John Doe".
+  The real brand: the screenshots show the freelancer's brand on client-facing pages (a neutral, tasteful placeholder — a serif wordmark, a warm palette), not "Revercue". The dashboard screenshots show the Revercue shell (gold accent, dark palette).
+  The gold-glow treatment: every screenshot in a bg-card card, 1px border, 12px radius, with a 0 40px 120px rgba(201,169,97,0.15) glow. Home hero: 2deg rotation. Everywhere else: straight.
+  Crop: 16:10 for hero and features, 4:3 for cards. Captured at 2x, exported 1x and 2x.
+  Alt text: describes what it shows, not "screenshot". E.g., "The Revercue dashboard with the stat strip, suggested actions, and recent activity."
+
+# ============================================================
+# PART 5 — THE BUILD ORDER
+# ============================================================
+
+Build 1: The design system. The tokens (palette, typography, spacing, radius, states) as CSS variables and a small component library (Button, Input, Card, Badge, Modal, Table, Toast, Fieldset). No page yet. This is the foundation that prevents the "bad colours, bad structure" failure.
+
+Build 2: The public site shell. Header, footer, the layout. Then the Home page. Then Pricing, Compare, Guides, About, Contact, Blog, Beta, Privacy, Terms, Security. Sign Up and Log In are last (they need the auth flow wired).
+
+Build 3: The auth screens. Sign Up, the 5-second transition, the code screen (with the exact FormSubmit copy), Log In, Forgot Password.
+
+Build 4: The dashboard shell and the Dashboard Overview.
+
+Build 5: The builder.
+
+# ============================================================
+# PART 6 — THE FAILURE MODES TO AVOID
+# ============================================================
+
+No generic forms. Every field has a label, a helper line, an error line, and six states. The question and its options live in one fieldset, not as siblings with no container.
+No stock photos. Real screenshots only.
+No second font. Serif headlines, sans body, mono for copyables. Three, no more.
+No gold on two buttons per screen.
+No public page without a CTA (except the legal pages — a CTA on a privacy page is tone-deaf).
+No screen without the empty state defined.
+No fake testimonials. If they do not exist, omit the section.
+No AI in the product. Patterns are enough. The site must not claim AI.
+
+# ============================================================
+# END OF BLUEPRINT
+# ============================================================
