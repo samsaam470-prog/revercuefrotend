@@ -1,0 +1,158 @@
+# REVERCUE — WHAT IT IS
+# File: revercue.txt
+# Purpose: The product thesis, in one file. Read this FIRST before any other blueprint.
+# Audience: The AI building the frontend. It must not deviate from this thesis.
+# The thesis is one line: "A thread, not disconnected workflows."
+
+# ============================================================
+# PART 1 — THE THESIS
+# ============================================================
+
+Revercue is a tool for freelancers and agencies.
+
+The client work is one thread: proposal -> contract -> requirement form -> invoice -> client record.
+Most tools break the thread across five apps: a proposal in one, a contract in another, a form in a third, an invoice in a fourth, a CRM in a fifth. The freelancer copy-pastes between them. The client sees five different links. The context is lost.
+
+Revercue keeps the thread in one place. The documents are interactive links, not PDFs. The client opens a link, reads, answers embedded questions, asks questions, selects a package. The freelancer sees the activity (opened, time spent, clicks, answers). The client record builds itself.
+
+The product does not use AI. It uses patterns: keyword matching for the suggestions, frequency counting for the learned pattern, arithmetic for the interest level and the price suggestion. No AI model, no API, no content sent to a third party. The copy must not say "AI" anywhere.
+
+# ============================================================
+# PART 2 — THE FIVE MODULES
+# ============================================================
+
+1. Proposals — interactive links with packages (Basic/Standard/Premium), FAQs (collapsible), embedded questions, info icons per question, a per-question "Ask a Question" toggle, optional password protection.
+2. Contracts — approve / decline / I Have Questions. An after-approval chain: show the requirement form, show the invoice, or download the PDF.
+3. Requirement Forms — adaptive forms with branching. A question builder, not a canvas. A Prompt Creator runs on submit (pattern-based).
+4. Invoices — pay by link (Option A) or account details + proof upload (Option B). A confirm-payment action.
+5. CRM — the client record: the communication log (the main body), the documents (grouped by type), the notes, the follow-ups, the interest level (Scale), the revenue tab (Scale).
+
+The Document Builder is the engine that the proposal, contract, and invoice builders share. It is a sub-module, not a sixth module. It is the canvas, the block library, the properties panel, the template selection, the template model, the auto-save, the preview, the share modal.
+
+# ============================================================
+# PART 3 — THE THREAD (the core idea)
+# ============================================================
+
+The thread is the client relationship: the proposal that started it, the contract that sealed it, the form that collected the requirements, the invoice that got you paid, and the client record that holds it all.
+
+Every document is connected to the client. When the freelancer creates a document for an existing client, it is linked to the client record automatically. The client record shows the thread: the proposal, the contract, the form, the invoice, the communication log.
+
+The freelancer does not re-type the client's details. The client record does not need to be built manually. It builds itself from the documents.
+
+# ============================================================
+# PART 4 — THE DOCUMENTS (links, not PDFs)
+# ============================================================
+
+A document is a public link (e.g., https://revercue.pages.dev/p/a8Kp92xQ...).
+The client opens the link, no login. The link is unguessable (20+ random characters), noindex, nofollow.
+The document is interactive: the client can expand the FAQs, answer the embedded questions, ask a question (if the toggle is on), select a package, download the PDF (if enabled).
+The freelancer sees the activity (opened, time spent, clicks, answers) by plan.
+The document is not a dead file. It is a conversation.
+
+# ============================================================
+# PART 5 — THE PLANS
+# ============================================================
+
+Free ($0) — try it out.
+Starter ($12/month) — solo, light use. Custom templates, email notifications.
+Growth ($29/month) — solo, power user. Adaptive forms (3), basic recommendations, no Revercue branding on the public pages, custom templates (10), saved FAQs (10), saved packages (10), password-protected docs (15).
+Scale ($49/month) — solo professional, full feature set. Advanced tracking, interest level, revenue tracker, expense entry, price suggestion, what-revercue-knows page, custom thank-you page, custom templates (15), saved FAQs (30), saved packages (15), password-protected docs (50).
+Teams ($99 base, MVP 2.0) — agency team. Handoff Dashboard, roles, bulk transfer, audit log, team attribution.
+
+The plan ladder: Free -> Starter -> Growth -> Scale -> Teams. The market convention is respected (Starter below Growth below Scale below Teams).
+
+# ============================================================
+# PART 6 — THE RETENTION MODEL
+# ============================================================
+
+The documents are rented. The CRM record is owned.
+
+Every document has a retention period by plan (1/3/12/24/36 months). When the retention ends, the document is permanently deleted. Before deletion, a PDF is emailed to the freelancer. The CRM record survives: the client name, email, dates, service, the communication log summary, the interest level (Scale), and a reference: "[Proposal: deleted on [date]. PDF was emailed on [date].]"
+
+Drafts have their own retention: 10/30/50/80/80 days. They do not count against the active-document limit. If not published within the draft retention, they are deleted (PDF emailed first).
+
+Archive makes the public link unusable. The document stays in the records. It is removed from the active-document count. Archive limits: Free 5 at once / 15 days; Starter 15 / 30 days; Growth, Scale, Teams 30 / 30 days. When the archive retention ends, the document is permanently deleted (PDF emailed first). The published retention is paused during archive. Unarchive resumes it.
+
+# ============================================================
+# PART 7 — THE TRACKING (by plan)
+# ============================================================
+
+Free: opened (yes/no).
+Starter: opened-at timestamp.
+Growth: time spent (estimate), button clicks.
+Scale: exact time, session timeline, deselect, typing time, per-question time, "not submitted" state, behavioural signals.
+
+The tracking is reduced to a time-spent total after 5 days. The raw events are deleted. The tracking is per document; the dashboard shows the summary; the client record shows the per-client activity.
+
+# ============================================================
+# PART 8 — THE SUGGESTIONS (patterns, not AI)
+# ============================================================
+
+The suggestion engine has three parts: instructions (the "what to suggest"), patterns (the "when to suggest"), pairings (the link between them).
+
+The admin writes the instructions and the patterns, and pairs them. The system evaluates the pattern; when it matches, the instruction fires. The default applies the first time. After 3-5 actions, the system adjusts to the user's own pattern (e.g., "you usually follow up after 3 days" instead of the default 2). That is MVP 1.0.
+
+The cross-user acceptance rate and the partner-platform suggestion are MVP 2.0.
+
+The suggestion is not automatic. The user clicks the button and creates the document. The suggestion is a prompt, not an action.
+
+# ============================================================
+# PART 9 — THE PLANS AND THE TEAM
+# ============================================================
+
+The five plans are Free, Starter, Growth, Scale, Teams. Teams is MVP 2.0.
+The team features (the Handoff Dashboard, the roles, the bulk transfer, the audit log) are not in MVP 1.0.
+The Teams plan is on the waitlist.
+
+# ============================================================
+# PART 10 — THE ROADMAP
+# ============================================================
+
+MVP 1.0: the thread. The five modules, the builder, the CRM, the basic suggestion engine, the revenue/pending display, the simple Scale tracker, the public site, the admin dashboard, the FormSubmit activation.
+MVP 2.0: the API keys, the per-call metering, the advanced suggestion engine (cross-user, suppression, partner, re-ranking), the full revenue tracker (personal expenses, currency, chart), the Teams features.
+v3: the MCP, the tokens, the programmatic API together.
+v5: the Agent Hub. Teams first, then Scale. Learns from the team's knowledge, logs, patterns, templates, client history.
+
+The Delivery Box is a post-MVP, invite-only test (Teams first, the testimonial is the value). The minimal version: a deliverable URL, feedback (stars or a written testimonial with a permission toggle), a revision request with a price per category if set.
+
+# ============================================================
+# PART 11 — THE PRODUCT PROMISE
+# ============================================================
+
+One link. One thread. From proposal to payment.
+The client never sees Revercue's brand on Scale/Teams. The documents carry the freelancer's brand.
+The freelancer sees what the client did, when, and for how long.
+The client record builds itself.
+The freelancer does not re-type the client's details.
+The suggestions learn the freelancer's pattern.
+The data is the freelancer's. Revercue stores it. Revercue does not read it. The team sees the account details, not the content.
+
+# ============================================================
+# PART 12 — THE DESIGN PRINCIPLES
+# ============================================================
+
+Gold is for one thing per screen: the primary action. The secondary is a ghost.
+Serif for headlines. Sans for body. Mono for copyables. No fourth font.
+Every interactive element has all six states (default, hover, focus, active, disabled, loading).
+Every field has a label, a helper (optional), an error, and the six states. The label is always visible (no placeholder-as-label).
+Every group of related inputs lives in a Fieldset with a legend.
+Every list, table, feed has a loading state (skeleton), an empty state (with a CTA), an error state (with a retry).
+Every destructive action has a confirmation modal.
+No stock photos. No second font. No AI claims in the copy.
+The FormSubmit copy is exact on every screen that mentions it.
+
+# ============================================================
+# PART 13 — THE FAILURES TO AVOID
+# ============================================================
+
+The interview platform's frontend failed because the question and its options were siblings with no container. The result: the question floated, the options drifted, the visual grouping was lost. Fix: every question and its options live in one card/fieldset. The question is the heading, the options are a vertical stack inside.
+
+The previous backend failed because the code was written but never tested. The signup returned 500, and the cause was hidden. Fix: the frontend must be tested after each screen. Every route has a real API call. Every form has a success and an error state.
+
+The previous build failed because the route files were not in the commit. Fix: the frontend must be built and tested incrementally. Every commit must be deployable.
+
+The generic failure: a builder that looks like a form, not a workspace. Fix: the proposal/contract/invoice builders are canvases with a block library and a properties panel. The form editor is a question builder. The CRM is a record, not a form.
+
+# ============================================================
+# END OF WHAT IT IS
+# ============================================================
