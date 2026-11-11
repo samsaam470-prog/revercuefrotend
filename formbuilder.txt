@@ -1,0 +1,170 @@
+# REVERCUE — FORM BUILDER BLUEPRINT
+# File: formbuilder.txt
+# Purpose: The form editor. The question list, the question types, the branching, the thank-you page, the test mode, the Prompt Creator.
+# Audience: The AI building the frontend. Read design.txt, api.txt, and workflow.txt first.
+# The form editor is NOT a canvas. It is a question builder. The proposal/contract/invoice use the canvas; the form uses a simpler two-panel layout (question list left, question editor center, settings right).
+
+# ============================================================
+# PART 1 — THE FLOW
+# ============================================================
+
+Stage 1: The form editor (/forms/new or /forms/:id/edit). There is no separate requirement form — the editor IS the form builder. The user opens it and builds the questions.
+Stage 2: The preview (/forms/:id/edit?preview=true or a split pane). The client's view.
+Stage 3: The share (/forms/:id/publish, then the share modal).
+
+# ============================================================
+# PART 2 — THE EDITOR LAYOUT
+# ============================================================
+
+Route: /forms/new or /forms/:id/edit.
+Layout: the full-screen builder. A top bar + two panels (question list left, question editor + settings center/right). No three-panel canvas.
+
+## The top bar (64px)
+Left: "← Back" (ghost).
+Center: the title (editable inline) + the auto-save indicator.
+Right: "Preview" (ghost), "Test" (ghost), "Create" (gold), "⋮" (more: Duplicate, Archive, Delete).
+
+## The left panel (280px, bg var(--bg-base), 1px right border)
+The question list. Each question: a drag handle, the question number (Q1, Q2, ...), the question text (truncated), a type icon, a required dot.
+Drag to reorder. Click to select (the center panel shows it).
+"+ Add question" at the bottom.
+"+ Upload Markdown" at the bottom (parses N:/a: patterns into questions).
+A progress indicator at the top: "5 questions. 2 required."
+
+## The center panel (flex 1, overflow-y auto)
+The selected question's editor:
+  Question text (input, required).
+  Question type (dropdown): short text, long text, file upload, single-choice, multiple-choice, combined text + choice.
+  Options (for choice types): a list of options, each with a label, a code (auto-generated, editable), a drag handle, a × delete. "+ Add option". An "Other" toggle (adds an "Other" option with a text box).
+  Required (toggle).
+  Explanation (optional textarea). Shows to the client as an info icon next to the question.
+  Adaptive branching (Growth/Scale only): "If the client answers [option], show questions [multi-select]." A note: "Branching is available on Growth and Scale."
+  File upload limits (if file upload): max files (number), max size (number, MB).
+  For the combined text + choice type: the text field + the choice options.
+Below the question editor: the form settings (a collapsible section or a tab):
+  Form title (input).
+  Form description (textarea).
+  Expiry date (optional date picker).
+  Thank-you page (Scale/Teams only): a tab with heading, body (textarea), optional button text + URL, optional logo. The default is "Thank you. Your answers have been sent to [freelancer]." + "Powered by Revercue." On Free/Starter/Growth, the custom page is not available (a note: "Custom thank-you pages are available on Scale.").
+  One page or multi-page: a toggle. If multi-page, max 3 questions per page.
+
+## The right panel (320px) — optional
+If the center panel is the question editor, the right panel can show the form settings (title, description, expiry, thank-you, page mode). This is a layout choice: the AI can put the form settings in a right panel or in a collapsible section below the question editor. The spec uses the right panel for the settings, the center for the question editor.
+
+# ============================================================
+# PART 3 — THE QUESTION TYPES
+# ============================================================
+
+Short text: a single-line input.
+Long text: a textarea (configurable rows).
+File upload: a file input (image/PDF, max size, max files).
+Single-choice: radio buttons (the options).
+Multiple-choice: checkboxes (the options).
+Combined text + choice: a text input + the choice options (e.g., "What is your budget? [text] or [< $1k] [< $5k] [> $5k]").
+Dropdown: a native select (the options) — a variant of single-choice.
+
+Each question has: text, type, options (for choice types), required, explanation, branching (Growth/Scale), file limits (if file upload).
+
+# ============================================================
+# PART 4 — THE BRANCHING (Growth/Scale)
+# ============================================================
+
+The branching model:
+  For a question, the freelancer sets: "If the client answers [option X], show questions [Q3, Q5]."
+  A question can have multiple rules (if option A -> show Q3; if option B -> show Q5).
+  The default: all questions are shown unless a branching rule hides them.
+  The client view evaluates the branching: when the client answers, the conditional questions appear or hide.
+
+The UI:
+  A "Branching" section in the question editor (below the options).
+  A list of rules: each is "If answer is [option] -> show [questions multi-select]". "+ Add rule".
+  A note: "Branching is available on Growth and Scale." (If the plan does not allow it, the section is hidden and a note appears.)
+
+The limits: Growth 3 adaptive forms (the forms with branching), Scale 15, Teams unlimited. If the user is on Growth and has 3 adaptive forms, creating a 4th with branching is blocked with "You have 3 of 3 adaptive forms. Upgrade to Scale for 15."
+
+# ============================================================
+# PART 5 — THE TEST MODE
+# ============================================================
+
+Clicking "Test" opens a modal (or a new tab) with the client's view in test mode:
+  The questions render as the client sees them.
+  The branching runs: the user answers, the conditional questions appear.
+  A banner at the top: "Test mode. No data is saved."
+  A "Close test" (ghost) at the top.
+  The submit is disabled (or shows "Test submission — not saved").
+The test mode uses the same branching logic as the real client view. It is the QA before sharing.
+
+# ============================================================
+# PART 6 — THE PREVIEW
+# ============================================================
+
+Clicking "Preview" opens the client's view (read-only, no branching interaction — the branching runs only in test mode). The preview shows the form as the client will see it:
+  The freelancer's logo and name.
+  The form title, description, "Estimated time: 5 minutes."
+  The questions (all shown, no branching).
+  The thank-you page preview at the bottom (the default or the custom).
+  A "Close preview" (ghost).
+
+# ============================================================
+# PART 7 — THE CREATE (PUBLISH)
+# ============================================================
+
+Clicking "Create":
+  Validate: the title (non-empty), at least one question, each question has text, each choice question has at least 2 options.
+  If invalid: scroll to the first error.
+  If valid: POST /api/forms/:id/publish.
+  On success: the public_id and URL. Open the share modal.
+The share modal: "Your form is ready." The link (mono, copyable). The message (pre-filled: "Hi [Client], I need a few details before we start. It takes about 5 minutes. [link]"). The share buttons. The "Revercue does not send" line. "Done".
+
+# ============================================================
+# PART 8 — THE CLIENT-FACING FORM (/f/:publicId)
+# ============================================================
+
+The client's view:
+  The header: the freelancer's logo and name, the form title, the description, "Estimated time."
+  The questions in order, one page at a time (if multi-page) or all on one page.
+  The progress indicator (if multi-page).
+  Each question: the type-appropriate input, the info icon (if an explanation), the "Other" text box (if the option is "Other").
+  The branching: the conditional questions appear when the answer triggers them.
+  "Next" / "Back" (if multi-page), "Submit" (gold, disabled until the required questions are answered).
+  The validation: the required questions must be answered; the inline errors below each empty required field.
+  On submit: POST /api/public/f/:publicId/submit.
+  On success: the thank-you page (the default or the custom on Scale).
+  The second submit: "You've already submitted this form." (a browser cookie/session, not an account).
+
+The states:
+  The closed page (if the form is closed/expired).
+  The password wall (if protected).
+  The invalid link.
+  The submit loading: a spinner in the button.
+  The submit error: a red line below the button.
+
+# ============================================================
+# PART 9 — THE PROMPT CREATOR
+# ============================================================
+
+When the client submits the form, the backend runs the Prompt Creator:
+  It reads the answers.
+  It picks a pattern (a template) based on the service type and the answers.
+  It generates a prompt (a paragraph the freelancer can copy into their AI tool of choice).
+  It saves the prompt to the form's generated_prompt field.
+  The freelancer sees the prompt on the form's detail (or the submission notification).
+The Prompt Creator is pattern-based, not AI. The prompt is a structured paragraph with the client's answers. The freelancer copies it to their own AI tool.
+The prompt appears on the form's submissions page (a "View generated prompt" button).
+
+# ============================================================
+# PART 10 — THE DESIGN RULES
+# ============================================================
+
+The form editor is a question builder, not a canvas. The left panel is the question list, the center is the question editor, the right is the settings.
+Every question and its options live in the same card/fieldset. The question is the heading, the options are a vertical stack inside. This is the fix for the "question and options disconnected" failure.
+Every question has a label, a helper (optional), an error (required), and the six states.
+The branching is Growth/Scale only. On Free/Starter, the branching section is hidden with a note.
+The custom thank-you page is Scale/Teams only. On Free/Starter/Growth, the default page is shown.
+The test mode is separate from the preview. The test mode runs the branching; the preview is read-only.
+The Prompt Creator is pattern-based. The copy must not say "AI."
+The gold rule: the "Create" button in the editor, the "Submit" button on the client view. One gold per screen.
+
+# ============================================================
+# END OF FORM BUILDER
+# ============================================================
