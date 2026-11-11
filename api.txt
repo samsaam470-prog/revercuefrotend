@@ -1,0 +1,415 @@
+# REVERCUE — API CONTRACT
+# File: api.txt
+# Purpose: Every endpoint the frontend calls. The request body, the response shape, the error codes.
+# Audience: The AI building the frontend. It must not invent endpoints. Every function in src/api/ maps to a route here.
+# Base URL: https://revercue-api.samsaam470.workers.dev
+# Auth: Authorization: Bearer <user_jwt> for user routes; Bearer <admin_jwt> for admin routes; none for public routes.
+# Content-Type: application/json for all requests and responses, except file uploads (multipart/form-data) and CSV/PDF downloads.
+# Error shape (every error): { "error": "error_code", "message": "Human-readable message.", "details": {} }
+# Error codes: invalid_payload, unauthorized, forbidden, not_found, conflict, rate_limited, plan_limit_reached, config_error, internal_server_error.
+# Status codes: 200 ok, 201 created, 400 validation, 401 auth, 403 forbidden/plan, 404 not found, 409 conflict, 429 rate limit, 500 server.
+# Pagination: ?page=1&limit=50 -> response includes { data: [], pagination: { page, limit, total, total_pages } }.
+# Timestamps: ISO 8601 strings.
+
+# ============================================================
+# PART 1 — AUTH (/api/auth)
+# ============================================================
+
+## POST /api/auth/signup
+Body: { email, password, tos_accepted: true, newsletter_opt_in: boolean }
+Response 201: { success: true, token: "pre-auth-jwt", user: { id, email, plan: "free", onboarding_step: 1, email_verified: false } }
+Errors: 400 invalid_payload (email, password < 8, tos not true), 409 conflict (email exists), 429 rate_limited.
+Side effects: creates the user in Turso (bcrypt hash), stores the OTP (hashed, 5-min expiry), sends the OTP via FormSubmit to the user's email (first send triggers the activation email).
+
+## POST /api/auth/login
+Body: { email, password }
+Response 200: { success: true, token, user: { id, email, plan, onboarding_step, two_factor_enabled } } OR { success: true, requires_2fa: true, pre_2fa_token }
+Errors: 400 invalid_payload, 401 invalid_credentials, 429 rate_limited (5 attempts / 15 min).
+Side effects: creates a session row, updates last_login_at. If 2FA is on, sends the 2FA OTP via FormSubmit and returns the pre_2fa_token (no full token yet).
+
+## POST /api/auth/google
+Body: { id_token }
+Response 200: same shape as login.
+Errors: 400 invalid_payload, 401 invalid_google_token.
+Side effects: if the user is new, creates the account (onboarding_step 1) and sends a welcome email via FormSubmit.
+
+## POST /api/auth/verify-email
+Headers: Authorization: Bearer <pre-auth-jwt>
+Body: { code: "6 digits" }
+Response 200: { success: true, email_verified: true, token: "full-jwt" }
+Errors: 400 invalid_code (with attempts_remaining), 400 code_expired, 429 too_many_attempts, 401 unauthorized.
+Side effects: sets email_verified = 1, deletes the OTP row.
+
+## POST /api/auth/resend-verification
+Headers: Authorization: Bearer <pre-auth-jwt>
+Response 200: { success: true, cooldown_seconds: 90 }
+Errors: 429 cooldown_active (with retry_after), 429 rate_limited.
+Side effects: generates a new OTP, sends it via FormSubmit.
+
+## POST /api/auth/2fa/verify
+Body: { code: "6 digits", pre_2fa_token }
+Response 200: { success: true, token, user }
+Errors: 400 invalid_code (with attempts_remaining), 400 code_expired, 429 too_many_attempts, 401 unauthorized.
+Side effects: creates a session row, updates last_login_at.
+
+## POST /api/auth/2fa/resend
+Body: { pre_2fa_token }
+Response 200: { success: true, cooldown_seconds: 90 }
+Errors: 429 cooldown_active, 401 unauthorized.
+
+## POST /api/auth/password-reset/request
+Body: { email }
+Response 200: { success: true } (always, even if the email does not exist — no leak)
+Side effects: if the email exists, sends a reset OTP via FormSubmit.
+
+## POST /api/auth/password-reset/verify
+Body: { email, code, new_password }
+Response 200: { success: true }
+Errors: 400 invalid_payload, 400 invalid_code, 400 code_expired, 429 too_many_attempts.
+Side effects: updates the password hash (bcrypt), revokes all sessions.
+
+## GET /api/auth/me
+Headers: Authorization: Bearer <user-jwt>
+Response 200: { user: { id, email, name, plan, onboarding_step, formsubmit_activated, tutorial_completed, email_verified, two_factor_enabled } }
+Errors: 401 unauthorized.
+
+## POST /api/auth/logout
+Headers: Authorization: Bearer <user-jwt>
+Response 200: { success: true }
+Side effects: revokes the current session (sets revoked_at).
+
+# ============================================================
+# PART 2 — ONBOARDING (/api/onboarding)
+# ============================================================
+
+All routes require the user JWT.
+
+## PATCH /api/onboarding/step-1
+Body: { account_type: "freelancer" | "agency" }
+Response 200: { success: true, onboarding_step: 2 }
+Errors: 400 invalid_payload.
+
+## PATCH /api/onboarding/step-2
+Body: { name, business_name, services: [], volume_per_month, website, fiverr_profile, agency_name, agency_size, brand_primary, brand_secondary }
+Response 200: { success: true, onboarding_step: 3 }
+Errors: 400 invalid_payload (name required).
+
+## POST /api/onboarding/website-help
+Body: { name, email, website_type, business, timeline, notes }
+Response 201: { success: true }
+Errors: 400 invalid_payload.
+
+## PATCH /api/onboarding/step-4
+Body: { tos_accepted: true, newsletter_opt_in: boolean }
+Response 200: { success: true, onboarding_step: 5 }
+
+## PATCH /api/onboarding/step-5
+Body: { plan: "free" | "waitlist", plan_requested: "starter" | "growth" | "scale" }
+Response 200: { success: true, onboarding_step: 6 }
+Side effects: if waitlist, creates a waitlist row.
+
+## PATCH /api/onboarding/tutorial
+Body: { completed: boolean } OR { skipped: boolean }
+Response 200: { success: true }
+
+# ============================================================
+# PART 3 — DASHBOARD (/api/dashboard)
+# ============================================================
+
+## GET /api/dashboard/summary
+Response 200: { active_documents, clients, follow_ups_due, revenue_this_month, pending_total, pending_count, unread_notifications }
+(The unread_notifications is piggybacked here; the bell reads it from this response, not a separate poll.)
+
+## GET /api/dashboard/suggestions
+Response 200: { suggestions: [ { id, type, client_id, document_id, title, body, action_url } ] }
+(Growth: follow-up only. Scale: follow-up + document suggestion + interest flag + form reminder. Free/Starter: empty list.)
+
+## GET /api/dashboard/activity?limit=10
+Response 200: { activity: [ { id, event_type, client_id, document_id, title, created_at } ] }
+
+# ============================================================
+# PART 4 — PROPOSALS (/api/proposals)
+# ============================================================
+
+All routes require the user JWT.
+
+## GET /api/proposals?status=&page=&limit=
+Response 200: { data: [ { id, title, client_id, status, public_id, total_time_spent_seconds, created_at } ], pagination: {...} }
+
+## POST /api/proposals/draft
+Body: { client_id? OR client_name + client_email, title, problem, sections: [], currency, timeline_length, tone }
+Response 201: { success: true, id, status: "draft", client_id }
+Errors: 400 invalid_payload, 403 plan_limit_reached (active-document limit).
+
+## GET /api/proposals/:id
+Response 200: { proposal: { ...all fields } }
+Errors: 404 not_found.
+
+## PATCH /api/proposals/:id
+Body: { title, content: {...}, currency, expiry_date, brand_primary, brand_secondary, allow_pdf_download }
+Response 200: { success: true, updated_at }
+Errors: 404 not_found.
+
+## POST /api/proposals/:id/publish
+Response 200: { success: true, public_id, url }
+Errors: 403 plan_limit_reached, 404 not_found.
+Side effects: sets status = published, generates public_id, creates a notification.
+
+## POST /api/proposals/:id/duplicate
+Body: { client_id? }
+Response 201: { success: true, id, status: "draft" }
+Errors: 403 plan_limit_reached, 404 not_found.
+
+## POST /api/proposals/:id/archive
+Response 200: { success: true, status: "archived", archive_deletion_date }
+Errors: 403 archive_limit_reached, 404 not_found.
+
+## POST /api/proposals/:id/unarchive
+Response 200: { success: true, status: "published" }
+Errors: 404 not_found.
+
+## POST /api/proposals/:id/share
+Body: { channel }
+Response 200: { success: true }
+Side effects: creates a communication_log entry (document_shared). The user sends the link themselves.
+
+## POST /api/proposals/:id/password
+Body: { password } OR { remove: true }
+Response 200: { success: true, password_protected: true/false, count: "3 of 15 used" }
+Errors: 403 forbidden (plan does not allow), 403 plan_limit_reached (count full), 400 invalid_payload (password < 6).
+
+## POST /api/proposals/:id/autosave?token=<jwt>
+Body: { content: {...} }
+Response 200: { success: true }
+(The sendBeacon route; the token is in the query string because sendBeacon cannot set headers.)
+
+## DELETE /api/proposals/:id
+Response 200: { success: true }
+Side effects: deletes the proposal; the B2 files and the PDF email are handled by the backend.
+
+# ============================================================
+# PART 5 — CONTRACTS (/api/contracts)
+# ============================================================
+
+Same shape as proposals, plus:
+
+## POST /api/contracts/:id/action
+Body: { action: "approve" | "decline" | "question", question? }
+Response 200: { success: true }
+(On the public side, this is POST /api/public/c/:publicId/action. The admin side reads the result.)
+
+The draft body: { client_id, linked_proposal_id?, title, scope, payment_terms, timeline, revisions, cancellation, after_approval: "form" | "invoice" | "pdf_only", currency }
+
+# ============================================================
+# PART 6 — FORMS (/api/forms)
+# ============================================================
+
+Same shape as proposals, plus:
+
+## POST /api/forms/:id/submit (the public side is /api/public/f/:publicId/submit)
+Body: { service_type, answers: {} }
+Response 200: { success: true, generated_prompt, thank_you_config: null | {...} }
+
+The draft body: { client_id?, title, description, questions: [], branching: {}, thank_you_config? (Scale) }
+
+# ============================================================
+# PART 7 — INVOICES (/api/invoices)
+# ============================================================
+
+Same shape as proposals, plus:
+
+## POST /api/invoices/:id/confirm-payment
+Response 200: { success: true, status: "confirmed" }
+Side effects: sets confirmed_at, creates a payments row in Turso (the revenue tracker reads it).
+
+The draft body: { client_id, linked_contract_id?, line_items: [], currency, tax, total, payment_arrangement: { type: "link", url } OR { type: "account", details, allow_proof }, due_date, notes }
+
+# ============================================================
+# PART 8 — PUBLIC CLIENT-FACING (/api/public)
+# ============================================================
+
+No auth. The public_id is the access token.
+
+## GET /api/public/p/:publicId
+Response 200: { proposal: {...} }
+Errors: 404 not_found, 403 forbidden (draft), 410 gone (archived, with { closed: true }), 401 password_wall (with { password_wall: true }), 410 expired.
+
+## POST /api/public/p/:publicId/unlock
+Body: { password }
+Response 200: { success: true, session_token }
+Errors: 401 invalid_password (with attempts_remaining), 429 too_many_attempts.
+
+## POST /api/public/p/:publicId/events
+Body: { session_token, event_type, event_data }
+Response 200: { success: true }
+
+## POST /api/public/p/:publicId/question
+Body: { session_token, question_id, question_text }
+Response 201: { success: true }
+
+## GET /api/public/c/:publicId
+## POST /api/public/c/:publicId/unlock
+## POST /api/public/c/:publicId/action (approve/decline/question)
+
+## GET /api/public/i/:publicId
+## POST /api/public/i/:publicId/unlock
+## POST /api/public/i/:publicId/buy-now
+Response 200: { success: true, redirect: "url" } OR { success: true, show_account_details: true }
+## POST /api/public/i/:publicId/proof (multipart, file)
+
+## GET /api/public/f/:publicId
+## POST /api/public/f/:publicId/unlock
+## POST /api/public/f/:publicId/submit
+Body: { service_type, answers }
+Response 200: { success: true, generated_prompt, thank_you_config }
+
+## GET /api/files/:key
+The B2 proxy. Streams the file with access checks. Cache-Control: public, max-age=31536000, immutable.
+
+# ============================================================
+# PART 9 — CRM (/api/crm)
+# ============================================================
+
+## GET /api/crm/clients?search=&filter=&sort=&page=
+Response 200: { data: [ { id, name, email, company, channel, last_message_at, status, interest_level } ], pagination: {...} }
+
+## POST /api/crm/clients
+Body: { name, email, company, phone, channel }
+Response 201: { success: true, id }
+Errors: 400 invalid_payload, 409 conflict (email exists).
+
+## GET /api/crm/clients/:id
+Response 200: { client, communication: [], notes: [], documents: { proposals: [], contracts: [], invoices: [], forms: [] } }
+Errors: 404 not_found.
+
+## PATCH /api/crm/clients/:id
+Body: { name, email, company, phone, channel }
+Response 200: { success: true }
+
+## DELETE /api/crm/clients/:id?keep_documents=true|false
+Response 200: { success: true }
+
+## POST /api/crm/clients/:id/notes
+Body: { note }
+Response 201: { success: true, id }
+Errors: 403 plan_limit_reached (Free 3, Starter 10 per client).
+
+## GET /api/crm/clients/:id/communication
+Response 200: { data: [] }
+
+## POST /api/crm/clients/:id/communication
+Body: { entry_type, direction, channel, message_text, estimated_time, linked_document_type, linked_document_id, next_step, follow_up_date }
+Response 201: { success: true, id }
+Side effects: computes intent_tag, updates suggestion_patterns, recalculates interest (Scale).
+
+## PATCH /api/crm/communication/:id
+Body: { follow_up_done, message_text, next_step }
+Response 200: { success: true }
+
+## DELETE /api/crm/communication/:id
+Response 200: { success: true }
+
+## GET /api/crm/clients/export
+Response 200: CSV file (Content-Type: text/csv).
+
+# ============================================================
+# PART 10 — SETTINGS (/api/settings)
+# ============================================================
+
+## GET /api/settings/profile, PATCH /api/settings/profile
+## POST /api/settings/logo (multipart)
+## GET /api/settings/plan
+Response 200: { plan, expires_at, active_documents, payments: [] }
+## POST /api/settings/plan/upgrade-request (body: { plan })
+## POST /api/settings/plan/downgrade (body: { keep_document_ids: [] })
+## GET /api/settings/plan/receipt/:paymentId (PDF)
+## POST /api/settings/security/change-password (body: { current_password, new_password })
+## POST /api/settings/security/2fa (body: { enabled, current_password })
+## GET /api/settings/security/sessions
+## POST /api/settings/security/sessions/:id/logout
+## POST /api/settings/security/sessions/logout-all
+## GET /api/settings/notifications, PATCH /api/settings/notifications
+## POST /api/settings/formsubmit-activate
+## GET /api/settings/saved-faqs, POST, PATCH /:id, DELETE /:id, POST /:id/keep
+## GET /api/settings/saved-packages, POST, PATCH /:id, DELETE /:id, POST /:id/keep
+## GET /api/settings/revision-prices, PATCH /api/settings/revision-prices
+## GET /api/settings/revenue (Scale)
+## POST /api/settings/expenses (Scale)
+## GET /api/settings/what-revercue-knows (Scale/Teams)
+## POST /api/settings/delete-account (body: { email_confirmation })
+## POST /api/settings/cancel-deletion
+
+# ============================================================
+# PART 11 — NOTIFICATIONS (/api/notifications)
+# ============================================================
+
+## GET /api/notifications/unread-count
+Response 200: { count }
+
+## GET /api/notifications?limit=10&page=1&filter=all|unread
+Response 200: { data: [], pagination: {...} }
+
+## PATCH /api/notifications/:id/read
+## PATCH /api/notifications/read-all
+## DELETE /api/notifications/:id
+
+# ============================================================
+# PART 12 — TEMPLATES (/api/templates)
+# ============================================================
+
+## GET /api/templates
+Response 200: { built_in: [], custom: [] } (each with a "suggested" boolean)
+
+## GET /api/templates/:id
+Response 200: { template, html }
+
+## POST /api/templates/upload (multipart: file OR url)
+Response 201: { success: true, id, b2_key }
+Errors: 403 forbidden (plan), 403 plan_limit_reached (Growth 10, Scale 15).
+
+## DELETE /api/templates/:id
+Response 200: { success: true }
+
+# ============================================================
+# PART 13 — ADMIN (/api/admin)
+# ============================================================
+
+All admin routes (except login) require the admin JWT.
+
+## POST /api/admin/login (body: { username, password })
+## GET /api/admin/overview
+## GET /api/admin/users?search=&plan=
+## GET /api/admin/users/:id
+## PATCH /api/admin/users/:id/plan (body: { plan, expires_at, amount, reference })
+## DELETE /api/admin/users/:id
+## GET /api/admin/waitlist, PATCH /api/admin/waitlist/:id/status
+## GET /api/admin/beta-testers, PATCH /api/admin/beta-testers/:id/status
+## GET /api/admin/contact-messages, PATCH /api/admin/contact-messages/:id/status
+## GET /api/admin/website-help, PATCH /api/admin/website-help/:id/status
+## GET /api/admin/payments
+## GET /api/admin/feedback, PATCH /api/admin/feedback/:id/status
+## GET /api/admin/templates
+## GET /api/admin/suggestions/instructions, POST
+## GET /api/admin/suggestions/patterns, POST
+## GET /api/admin/suggestions/pairings, POST
+## GET /api/admin/health
+## GET /api/admin/notes, POST
+
+# ============================================================
+# PART 14 — THE RATE LIMITS
+# ============================================================
+
+Signup: 5 / hour / IP.
+Login: 5 / 15 min / IP.
+OTP resend: 1 / 90 sec / user, 5 / hour / user.
+2FA verify: 3 attempts / code.
+Password reset: 3 / hour / email.
+Change password: 3 / hour / user.
+Public document open: 100 / hour / IP.
+File upload: 20 / hour / user.
+Admin login: 5 / 15 min / IP.
+General API: 300 / min / user.
+
+# ============================================================
+# END OF API CONTRACT
+# ============================================================
