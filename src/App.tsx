@@ -7,34 +7,98 @@ import {
   Receipt, 
   FormInput, 
   GitBranch, 
-  Settings, 
   Bell, 
   Search, 
   Plus, 
   DollarSign, 
   TrendingUp, 
-  CheckCircle2, 
   Clock, 
-  AlertCircle,
   ChevronRight,
   MoreVertical,
   Download,
-  Send,
   Sparkles,
-  ShieldCheck
+  ShieldCheck,
+  X,
+  ArrowRight
 } from 'lucide-react';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'crm' | 'proposals' | 'contracts' | 'invoices' | 'forms' | 'workflows'>('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  // Mock stats
+  // New Interactive Modals / Drawers State
+  const [selectedClient, setSelectedClient] = useState<any | null>(null);
+  const [isProposalEditorOpen, setIsProposalEditorOpen] = useState(false);
+  const [isFormBuilderOpen, setIsFormBuilderOpen] = useState(false);
+  const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false);
+
+  // Mock Data states
+  const [clients, setClients] = useState([
+    { id: 1, name: 'Sarah Jenkins', company: 'Acme Corp', status: 'Active', value: '$12,500', date: '2 hours ago', email: 'sarah@acmecorp.com', phone: '+1 (555) 019-2834' },
+    { id: 2, name: 'Marcus Vance', company: 'Nexus Labs', status: 'Proposal Sent', value: '$8,000', date: '1 day ago', email: 'marcus@nexuslabs.io', phone: '+1 (555) 432-8711' },
+    { id: 3, name: 'Elena Rostova', company: 'Starlight Media', status: 'Active', value: '$15,400', date: '3 days ago', email: 'elena@starlight.co', phone: '+1 (555) 789-3421' },
+    { id: 4, name: 'David Kim', company: 'Apex Digital', status: 'Lead', value: '$5,000', date: '5 days ago', email: 'david@apexdigital.net', phone: '+1 (555) 234-9082' },
+  ]);
+
+  const [proposals, setProposals] = useState([
+    { id: 1, title: 'Brand Redesign & Web App', client: 'Acme Corp', amount: '$12,500', status: 'Accepted', date: 'Aug 24, 2026' },
+    { id: 2, title: 'Growth Marketing Retainer', client: 'Nexus Labs', amount: '$4,500/mo', status: 'Viewed', date: 'Aug 22, 2026' },
+    { id: 3, title: 'E-Commerce Checkout Flow', client: 'Starlight Media', amount: '$9,200', status: 'Draft', date: 'Aug 20, 2026' },
+  ]);
+
+  const [forms, setForms] = useState([
+    { id: 1, title: 'Client Brand Intake Questionnaire', responses: 12, status: 'Published' },
+    { id: 2, title: 'Website Audit & Scope Request', responses: 8, status: 'Published' }
+  ]);
+
+  const [workflows, setWorkflows] = useState([
+    { id: 1, trigger: 'When Proposal is Accepted', action: 'Create Contract & Send Invoice', status: 'Active' },
+    { id: 2, trigger: 'When Invoice is Paid', action: 'Create Onboarding Task & Send Welcome Email', status: 'Active' },
+  ]);
+
+  // New Proposal Form State
+  const [newPropTitle, setNewPropTitle] = useState('');
+  const [newPropClient, setNewPropClient] = useState('');
+  const [newPropAmount, setNewPropAmount] = useState('');
+
+  // New Form Builder State
+  const [newFormTitle, setNewFormTitle] = useState('');
+  const [formFields] = useState([ { id: 1, type: 'text', label: 'Company Name' }, { id: 2, type: 'textarea', label: 'Project Goals' } ]);
+
+  // New Workflow State
+  const [newTrigger, setNewTrigger] = useState('When Proposal is Accepted');
+  const [newAction, setNewAction] = useState('Send Thank You Email');
+
   const stats = [
     { label: 'Total Revenue', value: '$48,250', change: '+12.4%', isPositive: true, icon: DollarSign },
-    { label: 'Active Proposals', value: '14', change: '+3 this week', isPositive: true, icon: FileText },
+    { label: 'Active Proposals', value: proposals.length.toString(), change: '+3 this week', isPositive: true, icon: FileText },
     { label: 'Pending Invoices', value: '$8,400', change: '3 overdue', isPositive: false, icon: Clock },
     { label: 'Conversion Rate', value: '68.2%', change: '+5.1%', isPositive: true, icon: TrendingUp },
   ];
+
+  const handleCreateProposal = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newPropTitle || !newPropClient) return;
+    setProposals([{ id: Date.now(), title: newPropTitle, client: newPropClient, amount: newPropAmount || '$5,000', status: 'Draft', date: 'Just now' }, ...proposals]);
+    setIsProposalEditorOpen(false);
+    setNewPropTitle('');
+    setNewPropClient('');
+    setNewPropAmount('');
+  };
+
+  const handleCreateForm = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newFormTitle) return;
+    setForms([{ id: Date.now(), title: newFormTitle, responses: 0, status: 'Published' }, ...forms]);
+    setIsFormBuilderOpen(false);
+    setNewFormTitle('');
+  };
+
+  const handleCreateWorkflow = (e: React.FormEvent) => {
+    e.preventDefault();
+    setWorkflows([{ id: Date.now(), trigger: newTrigger, action: newAction, status: 'Active' }, ...workflows]);
+    setIsWorkflowModalOpen(false);
+  };
 
   return (
     <div className="flex h-screen bg-slate-950 text-slate-100 font-sans overflow-hidden">
@@ -53,7 +117,7 @@ export function App() {
           {[
             { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
             { id: 'crm', label: 'CRM & Clients', icon: Users },
-            { id: 'proposals', label: 'Proposals', icon: FileText },
+            { id: 'proposals', label: 'Proposal Builder', icon: FileText },
             { id: 'contracts', label: 'Contracts', icon: FileSignature },
             { id: 'invoices', label: 'Invoices', icon: Receipt },
             { id: 'forms', label: 'Form Builder', icon: FormInput },
@@ -112,7 +176,15 @@ export function App() {
               <Bell className="w-4 h-4" />
               <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
             </button>
-            <button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-lg shadow-indigo-600/20 transition-all">
+            <button 
+              onClick={() => {
+                if (activeTab === 'proposals') setIsProposalEditorOpen(true);
+                else if (activeTab === 'forms') setIsFormBuilderOpen(true);
+                else if (activeTab === 'workflows') setIsWorkflowModalOpen(true);
+                else setIsProposalEditorOpen(true);
+              }}
+              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-lg shadow-indigo-600/20 transition-all"
+            >
               <Plus className="w-4 h-4" />
               <span>Create New</span>
             </button>
@@ -163,7 +235,7 @@ export function App() {
                 <div className="lg:col-span-2 bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6">
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="text-lg font-semibold text-white">Recent Client Activity</h2>
-                    <button className="text-xs font-medium text-indigo-400 hover:text-indigo-300">View all</button>
+                    <button onClick={() => setActiveTab('crm')} className="text-xs font-medium text-indigo-400 hover:text-indigo-300">View all</button>
                   </div>
                   <div className="space-y-4">
                     {[
@@ -191,7 +263,7 @@ export function App() {
                     <h2 className="text-lg font-semibold text-white mb-2">Quick Actions</h2>
                     <p className="text-xs text-slate-400 mb-6">Frequently used tools for your agency workflow.</p>
                     <div className="space-y-3">
-                      <button onClick={() => setActiveTab('proposals')} className="w-full flex items-center justify-between p-3.5 rounded-xl bg-slate-800/60 hover:bg-indigo-600/10 hover:border-indigo-500/30 border border-slate-700/50 transition-all text-sm font-medium text-slate-200 group">
+                      <button onClick={() => setIsProposalEditorOpen(true)} className="w-full flex items-center justify-between p-3.5 rounded-xl bg-slate-800/60 hover:bg-indigo-600/10 hover:border-indigo-500/30 border border-slate-700/50 transition-all text-sm font-medium text-slate-200 group">
                         <span className="flex items-center gap-2.5">
                           <FileText className="w-4 h-4 text-indigo-400" /> New Proposal
                         </span>
@@ -229,7 +301,7 @@ export function App() {
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-2xl font-bold tracking-tight text-white">CRM & Client Pipeline</h1>
-                  <p className="text-sm text-slate-400">Manage client relationships, contact history, and deal stages.</p>
+                  <p className="text-sm text-slate-400">Manage client relationships, contact history, and deal stages. Click a client for full timeline.</p>
                 </div>
                 <button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all">
                   <Plus className="w-4 h-4" /> Add Client
@@ -239,7 +311,7 @@ export function App() {
               <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl overflow-hidden">
                 <div className="p-4 border-b border-slate-800 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium text-white">All Clients (6)</span>
+                    <span className="text-sm font-medium text-white">All Clients ({clients.length})</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <input type="text" placeholder="Filter clients..." className="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-200" />
@@ -258,14 +330,16 @@ export function App() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-800/60">
-                      {[
-                        { name: 'Sarah Jenkins', company: 'Acme Corp', status: 'Active', value: '$12,500', date: '2 hours ago' },
-                        { name: 'Marcus Vance', company: 'Nexus Labs', status: 'Proposal Sent', value: '$8,000', date: '1 day ago' },
-                        { name: 'Elena Rostova', company: 'Starlight Media', status: 'Active', value: '$15,400', date: '3 days ago' },
-                        { name: 'David Kim', company: 'Apex Digital', status: 'Lead', value: '$5,000', date: '5 days ago' },
-                      ].map((client, idx) => (
-                        <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
-                          <td className="px-6 py-4 font-medium text-white">{client.name}</td>
+                      {clients.map((client) => (
+                        <tr 
+                          key={client.id} 
+                          onClick={() => setSelectedClient(client)}
+                          className="hover:bg-slate-800/40 cursor-pointer transition-colors group"
+                        >
+                          <td className="px-6 py-4 font-medium text-white flex items-center gap-2">
+                            {client.name}
+                            <ArrowRight className="w-3.5 h-3.5 text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </td>
                           <td className="px-6 py-4 text-slate-400">{client.company}</td>
                           <td className="px-6 py-4">
                             <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${
@@ -278,8 +352,8 @@ export function App() {
                           </td>
                           <td className="px-6 py-4 font-semibold text-white">{client.value}</td>
                           <td className="px-6 py-4 text-slate-400">{client.date}</td>
-                          <td className="px-6 py-4 text-right">
-                            <button className="p-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-all">
+                          <td className="px-6 py-4 text-right" onClick={(e) => e.stopPropagation()}>
+                            <button onClick={() => setSelectedClient(client)} className="p-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-all">
                               <MoreVertical className="w-4 h-4" />
                             </button>
                           </td>
@@ -299,18 +373,17 @@ export function App() {
                   <h1 className="text-2xl font-bold tracking-tight text-white">Proposal Builder</h1>
                   <p className="text-sm text-slate-400">Create high-converting interactive proposals with embedded pricing.</p>
                 </div>
-                <button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+                <button 
+                  onClick={() => setIsProposalEditorOpen(true)}
+                  className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-indigo-600/20"
+                >
                   <Plus className="w-4 h-4" /> Create Proposal
                 </button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[
-                  { title: 'Brand Redesign & Web App', client: 'Acme Corp', amount: '$12,500', status: 'Accepted', date: 'Aug 24, 2026' },
-                  { title: 'Growth Marketing Retainer', client: 'Nexus Labs', amount: '$4,500/mo', status: 'Viewed', date: 'Aug 22, 2026' },
-                  { title: 'E-Commerce Checkout Flow', client: 'Starlight Media', amount: '$9,200', status: 'Draft', date: 'Aug 20, 2026' },
-                ].map((prop, idx) => (
-                  <div key={idx} className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition-all">
+                {proposals.map((prop) => (
+                  <div key={prop.id} className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition-all">
                     <div>
                       <div className="flex items-center justify-between mb-3">
                         <span className={`text-xs font-semibold px-2.5 py-1 rounded-md ${
@@ -327,7 +400,7 @@ export function App() {
                     </div>
                     <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
                       <span className="text-lg font-bold text-indigo-400">{prop.amount}</span>
-                      <button className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white transition-all">
+                      <button onClick={() => setIsProposalEditorOpen(true)} className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white transition-all">
                         Edit Proposal
                       </button>
                     </div>
@@ -426,18 +499,33 @@ export function App() {
                   <h1 className="text-2xl font-bold tracking-tight text-white">Client Intake Form Builder</h1>
                   <p className="text-sm text-slate-400">Design custom forms and questionnaires for seamless client onboarding.</p>
                 </div>
-                <button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+                <button 
+                  onClick={() => setIsFormBuilderOpen(true)}
+                  className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-indigo-600/20"
+                >
                   <Plus className="w-4 h-4" /> New Form
                 </button>
               </div>
 
-              <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-8 text-center">
-                <FormInput className="w-12 h-12 text-indigo-400 mx-auto mb-4" />
-                <h3 className="text-lg font-bold text-white mb-2">No custom forms created yet</h3>
-                <p className="text-sm text-slate-400 max-w-md mx-auto mb-6">Build interactive intake forms to capture client requirements and automatically feed them into your CRM pipeline.</p>
-                <button className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all">
-                  Create First Intake Form
-                </button>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {forms.map((form) => (
+                  <div key={form.id} className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                          {form.status}
+                        </span>
+                        <span className="text-xs text-slate-400">{form.responses} responses</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-white mb-2">{form.title}</h3>
+                      <p className="text-xs text-slate-400 mb-4">Embedded form URL ready for client sharing.</p>
+                    </div>
+                    <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
+                      <button onClick={() => setIsFormBuilderOpen(true)} className="text-xs font-semibold text-indigo-400 hover:text-indigo-300">Edit Form Fields</button>
+                      <button className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white">Copy Link</button>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -449,17 +537,17 @@ export function App() {
                   <h1 className="text-2xl font-bold tracking-tight text-white">Workflow Automations</h1>
                   <p className="text-sm text-slate-400">Automate your client lifecycle triggers, task assignments, and follow-ups.</p>
                 </div>
-                <button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+                <button 
+                  onClick={() => setIsWorkflowModalOpen(true)}
+                  className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-indigo-600/20"
+                >
                   <Plus className="w-4 h-4" /> New Automation
                 </button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  { trigger: 'When Proposal is Accepted', action: 'Create Contract & Send Invoice', status: 'Active' },
-                  { trigger: 'When Invoice is Paid', action: 'Create Onboarding Task & Send Welcome Email', status: 'Active' },
-                ].map((wf, idx) => (
-                  <div key={idx} className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6">
+                {workflows.map((wf) => (
+                  <div key={wf.id} className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                         {wf.status}
@@ -477,6 +565,227 @@ export function App() {
           )}
         </main>
       </div>
+
+      {/* --- NEW MODALS / INTERACTIVE DRAWERS --- */}
+
+      {/* 1. Client Detail Slide-over Modal */}
+      {selectedClient && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end animate-fadeIn">
+          <div className="w-full max-w-lg bg-slate-900 border-l border-slate-800 h-full p-6 flex flex-col justify-between overflow-y-auto">
+            <div>
+              <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+                <div>
+                  <h2 className="text-xl font-bold text-white">{selectedClient.name}</h2>
+                  <p className="text-sm text-indigo-400">{selectedClient.company}</p>
+                </div>
+                <button onClick={() => setSelectedClient(null)} className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="space-y-6">
+                <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-2">
+                  <p className="text-xs font-semibold uppercase text-slate-400">Contact Details</p>
+                  <p className="text-sm text-slate-200">Email: <span className="text-indigo-400">{selectedClient.email}</span></p>
+                  <p className="text-sm text-slate-200">Phone: <span className="text-slate-300">{selectedClient.phone}</span></p>
+                  <p className="text-sm text-slate-200">Active Deal Value: <span className="font-bold text-emerald-400">{selectedClient.value}</span></p>
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-bold text-white mb-3">Activity Timeline</h3>
+                  <div className="space-y-3 border-l-2 border-indigo-500/30 pl-4 ml-2">
+                    <div className="relative">
+                      <div className="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-indigo-500" />
+                      <p className="text-xs font-semibold text-white">Proposal Viewed</p>
+                      <p className="text-xs text-slate-400">Client opened brand redesign proposal</p>
+                      <span className="text-[10px] text-slate-500">2 hours ago</span>
+                    </div>
+                    <div className="relative">
+                      <div className="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-slate-700" />
+                      <p className="text-xs font-semibold text-white">Intake Form Completed</p>
+                      <p className="text-xs text-slate-400">Submitted requirements questionnaire</p>
+                      <span className="text-[10px] text-slate-500">Yesterday</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-slate-800 flex items-center justify-end gap-3">
+              <button onClick={() => setSelectedClient(null)} className="px-4 py-2 rounded-xl bg-slate-800 text-sm font-semibold text-white hover:bg-slate-700">
+                Close
+              </button>
+              <button className="px-4 py-2 rounded-xl bg-indigo-600 text-sm font-semibold text-white hover:bg-indigo-500">
+                Send Message
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 2. Proposal Builder Modal */}
+      {isProposalEditorOpen && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
+          <div className="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <FileText className="w-5 h-5 text-indigo-400" /> Create Interactive Proposal
+              </h2>
+              <button onClick={() => setIsProposalEditorOpen(false)} className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleCreateProposal} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold uppercase text-slate-400 mb-1">Proposal Title</label>
+                <input 
+                  type="text" 
+                  value={newPropTitle} 
+                  onChange={(e) => setNewPropTitle(e.target.value)} 
+                  placeholder="e.g., Full Stack Web Application & UI/UX" 
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+                  required
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold uppercase text-slate-400 mb-1">Client Name / Company</label>
+                  <input 
+                    type="text" 
+                    value={newPropClient} 
+                    onChange={(e) => setNewPropClient(e.target.value)} 
+                    placeholder="e.g., Apex Digital" 
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold uppercase text-slate-400 mb-1">Total Budget Amount</label>
+                  <input 
+                    type="text" 
+                    value={newPropAmount} 
+                    onChange={(e) => setNewPropAmount(e.target.value)} 
+                    placeholder="e.g., $10,500" 
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-slate-800 flex items-center justify-end gap-3">
+                <button type="button" onClick={() => setIsProposalEditorOpen(false)} className="px-4 py-2 rounded-xl bg-slate-800 text-sm font-semibold text-white hover:bg-slate-700">
+                  Cancel
+                </button>
+                <button type="submit" className="px-4 py-2 rounded-xl bg-indigo-600 text-sm font-semibold text-white hover:bg-indigo-500 shadow-lg shadow-indigo-600/30">
+                  Save & Publish Proposal
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 3. Form Builder Modal */}
+      {isFormBuilderOpen && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
+          <div className="w-full max-w-xl bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <FormInput className="w-5 h-5 text-indigo-400" /> Create Client Intake Form
+              </h2>
+              <button onClick={() => setIsFormBuilderOpen(false)} className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleCreateForm} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold uppercase text-slate-400 mb-1">Form Title</label>
+                <input 
+                  type="text" 
+                  value={newFormTitle} 
+                  onChange={(e) => setNewFormTitle(e.target.value)} 
+                  placeholder="e.g., Brand & Scope Discovery Questionnaire" 
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+                  required
+                />
+              </div>
+
+              <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-2">
+                <p className="text-xs font-semibold uppercase text-slate-400">Included Fields</p>
+                {formFields.map(field => (
+                  <div key={field.id} className="flex items-center justify-between p-2 rounded-lg bg-slate-900 border border-slate-800">
+                    <span className="text-sm text-white">{field.label}</span>
+                    <span className="text-xs text-indigo-400 uppercase">{field.type}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-4 border-t border-slate-800 flex items-center justify-end gap-3">
+                <button type="button" onClick={() => setIsFormBuilderOpen(false)} className="px-4 py-2 rounded-xl bg-slate-800 text-sm font-semibold text-white hover:bg-slate-700">
+                  Cancel
+                </button>
+                <button type="submit" className="px-4 py-2 rounded-xl bg-indigo-600 text-sm font-semibold text-white hover:bg-indigo-500 shadow-lg shadow-indigo-600/30">
+                  Save & Publish Form
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 4. Workflow Builder Modal */}
+      {isWorkflowModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
+          <div className="w-full max-w-xl bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <GitBranch className="w-5 h-5 text-indigo-400" /> New Workflow Automation
+              </h2>
+              <button onClick={() => setIsWorkflowModalOpen(false)} className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleCreateWorkflow} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold uppercase text-slate-400 mb-1">Trigger Event</label>
+                <select 
+                  value={newTrigger} 
+                  onChange={(e) => setNewTrigger(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+                >
+                  <option value="When Proposal is Accepted">When Proposal is Accepted</option>
+                  <option value="When Invoice is Paid">When Invoice is Paid</option>
+                  <option value="When Intake Form is Submitted">When Intake Form is Submitted</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold uppercase text-slate-400 mb-1">Automated Action</label>
+                <select 
+                  value={newAction} 
+                  onChange={(e) => setNewAction(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+                >
+                  <option value="Create Contract & Send Invoice">Create Contract & Send Invoice</option>
+                  <option value="Create Onboarding Task & Send Welcome Email">Create Onboarding Task & Send Welcome Email</option>
+                  <option value="Assign Client to CRM Pipeline">Assign Client to CRM Pipeline</option>
+                </select>
+              </div>
+
+              <div className="pt-4 border-t border-slate-800 flex items-center justify-end gap-3">
+                <button type="button" onClick={() => setIsWorkflowModalOpen(false)} className="px-4 py-2 rounded-xl bg-slate-800 text-sm font-semibold text-white hover:bg-slate-700">
+                  Cancel
+                </button>
+                <button type="submit" className="px-4 py-2 rounded-xl bg-indigo-600 text-sm font-semibold text-white hover:bg-indigo-500 shadow-lg shadow-indigo-600/30">
+                  Enable Automation
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
