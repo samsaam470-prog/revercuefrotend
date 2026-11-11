@@ -1,0 +1,172 @@
+# REVERCUE — THE SCREEN WORKFLOW
+# File: workflow.txt
+# Purpose: The screen-to-screen flow. What happens after each action, every transition, every state.
+# Audience: The AI building the frontend. Read architecture.txt and publicsite.txt first.
+# Every screen has: the entry (how the user arrives), the actions (what they can do), the exit (where each action goes), the states (empty, loading, error, success).
+# The rule: no screen without a defined exit. Every button goes somewhere. Every form has a success state and an error state.
+
+# ============================================================
+# PART 1 — THE PUBLIC VISITOR FLOW
+# ============================================================
+
+## Flow P1 — Home -> Sign Up
+Entry: the visitor lands on / (Home).
+Actions: read the hero, scroll to the features, the pricing teaser, the FAQs, click "Start Free".
+Exit: /signup. The "Start Free" CTA is gold, in the header and in the hero. The "See Pricing" ghost goes to /pricing.
+States: the FAQ "Show all 49" expands inline (no navigation). The pricing chips are links to /pricing.
+
+## Flow P2 — Pricing -> Sign Up or Waitlist
+Entry: /pricing.
+Actions: read the five cards, the comparison table, the billing FAQs, click a plan CTA.
+Exit: Free/Starter/Growth/Scale CTAs -> /signup. The Teams CTA -> the waitlist modal (email only), then a toast "You're on the list. We'll be in touch."
+States: the comparison table scrolls horizontally on mobile. The waitlist modal has email validation, a loading state, a success state, an error state.
+
+## Flow P3 — Guides -> Guide -> Sign Up
+Entry: /guides.
+Actions: read the guide cards, click one.
+Exit: /guides/:slug. The guide page has a sticky TOC on desktop, a "Start Free" CTA at the end. The CTA goes to /signup.
+States: the guide page is static, no loading. The CTA is the only interactive element.
+
+## Flow P4 — Contact -> Success
+Entry: /contact.
+Actions: fill the form (name, email, topic, message), click "Send message".
+Exit: on submit, POST /api/contact. On success, the form is replaced by the success state: "Thanks. We read every message. We'll reply to [email] within 1 business day." + "Send another" ghost. On error, the form stays, the error is shown below the button.
+States: the button is disabled until name, email, message are filled and the email is valid. The loading state is a spinner in the button. The success state replaces the form. The error state is a red line below the button.
+
+## Flow P5 — Beta -> Success
+Entry: /beta.
+Actions: fill the form (name, email, account type, services, proposals/month, what to test), click "Apply for beta".
+Exit: on submit, POST /api/beta. On success, a success state: "Thanks. We review every application. If you're a fit, you'll hear from us within 5 business days." On error, the form stays with the error.
+States: the services is a checkbox group (at least one). The "what to test" is optional. The button is disabled until the required fields are filled.
+
+## Flow P6 — Any public page -> Log In
+Entry: the header "Log in" on any public page.
+Exit: /login. The "returnTo" is the current path, so after login the user returns to where they were.
+
+# ============================================================
+# PART 2 — THE SIGNUP FLOW (the first real user action)
+# ============================================================
+
+## Flow S1 — Sign Up form
+Entry: /signup. The minimal header (logo only, back-arrow to Home).
+Actions: fill email, password, check TOS (required), optionally check newsletter, click "Create account" or "Continue with Google".
+Exit: on submit, POST /api/auth/signup.
+  Success: the response has a pre-auth token. The app stores it in sessionStorage. It navigates to /signup/transition.
+  Error 409 (conflict): the email is already registered. Show "This email is already registered. Log in instead?" with a link to /login.
+  Error 400 (invalid_payload): the email is invalid or the password is too short. Show the inline error below the field.
+  Error 429 (rate_limited): "Too many attempts. Try again in a minute."
+States: the "Create account" button is disabled (50% opacity) until TOS is checked. The password strength bar fills as the user types. The Google button opens the Google OAuth flow, then returns to /signup/transition on success.
+
+## Flow S2 — Signup transition (5 seconds)
+Entry: /signup/transition. The user has just signed up.
+Content: full-page, bg-base, a gold spinner, the exact FormSubmit copy:
+  "Check your inbox. FormSubmit will send you an activation email. That activation email lets us know that you are open to transactional emails, app notifications, and security alerts. This activation will not opt you in to the newsletter."
+Actions: none. The screen auto-advances after 5 seconds (or when the Worker responds) to /signup/code.
+Exit: /signup/code.
+States: the spinner is the only motion. No buttons, no links. The user reads the copy.
+
+## Flow S3 — Signup code screen
+Entry: /signup/code. The pre-auth token is in sessionStorage.
+Content: six code boxes, the prominent gold-bordered FormSubmit message (the exact copy above), the countdown (5:00), "Verify" (gold), "Resend code" (ghost, disabled 90s with a countdown), the persistent disclaimer below.
+Actions:
+  Enter the 6 digits -> "Verify" becomes enabled. On click, POST /api/auth/verify-email with the code and the pre-auth token.
+    Success: the response has the full user JWT. Store it. Navigate to /onboarding/step-1.
+    Error 400 (invalid_code): "Incorrect code. 2 attempts remaining." The attempts decrement.
+    Error 429 (too_many_attempts): "Too many attempts. Try again in 15 minutes."
+    Error 400 (code_expired): "The code expired. Click Resend."
+  "Resend code" -> after 90s, POST /api/auth/resend-verification. On success, a toast "Code sent. Check your inbox." and the countdown resets. On error 429 (cooldown_active), show the retry_after in the button label.
+Exit: on verify success, /onboarding/step-1.
+States: the countdown ticks down. The "Resend" is disabled with the remaining seconds. The error is a red line below the boxes. The loading state is a spinner in the "Verify" button.
+
+# ============================================================
+# PART 3 — THE ONBOARDING FLOW (the 5 steps)
+# ============================================================
+
+## Flow O1 — Step 1 (Freelancer or Agency)
+Entry: /onboarding/step-1. The user has a full JWT and email_verified = true.
+Content: two large cards (Freelancer, Agency), "Continue" (gold, disabled until one is selected).
+Actions: select a card -> "Continue" enabled. On click, PATCH /api/onboarding/step-1 with account_type.
+Exit: /onboarding/step-2. The response has onboarding_step = 2.
+States: the selected card has a gold border and a light gold background. The unselected card is bg-card with 1px border.
+
+## Flow O2 — Step 2 (profile)
+Entry: /onboarding/step-2.
+Content:
+  If Freelancer: name, business name, email (read-only), services (checkbox group), proposals per month (dropdown), website (optional), Fiverr profile (optional).
+  If Agency: name, agency name, email (read-only), agency size, services, proposals per month, website (optional), brand colours (optional).
+  "Continue" (gold).
+Actions:
+  Fill the fields -> "Continue" enabled when name is filled.
+  If website is blank on Continue: an inline message "You didn't add a website. Do you have one?" with three options: add it (re-focus the field), skip (continue), "I need help" (opens the website-help inline form: website type, timeline, notes; POST /api/website-help; then continue).
+  On Continue, PATCH /api/onboarding/step-2 with the profile.
+Exit: /onboarding/step-4 (the legal consent step).
+States: the services is a checkbox group (at least one). The volume dropdown is 1–3, 4–10, 11–20, 20+. The email field is read-only with a grey background and a helper "To change your email, contact support."
+
+## Flow O3 — Step 4 (legal consent)
+Entry: /onboarding/step-4.
+Content: the TOS + Privacy checkbox (pre-checked from signup), the newsletter checkbox (pre-checked from signup), "Continue" (gold).
+Actions: on Continue, PATCH /api/onboarding/step-4 with newsletter_opt_in.
+Exit: /onboarding/step-5.
+States: the TOS checkbox must stay checked. If the user unchecks it, "Continue" is disabled with a message "You must accept the Terms to continue."
+
+## Flow O4 — Step 5 (plan selection)
+Entry: /onboarding/step-5.
+Content: five plan cards (Free, Starter, Growth, Scale, Teams). The "Recommended" badge on the plan that matches the "proposals per month" answer (1–3 -> Free, 4–10 -> Starter, 11–20 -> Growth, 20+ -> Scale). Free is selected by default. The paid plans show "Join Waitlist" (opens the waitlist modal, email only). "Continue" (gold).
+Actions: select a plan -> Continue. On Continue, PATCH /api/onboarding/step-5 with plan (free) or plan_requested (the waitlist plan).
+Exit: /dashboard. The onboarding_step is now 6. The tutorial starts.
+States: the selected plan has a gold border. The paid plans have a "Join Waitlist" ghost button instead of a "Select" button. The waitlist modal has email validation and a success toast.
+
+## Flow O5 — The tutorial (overlay on the dashboard)
+Entry: /dashboard, after onboarding step 5. The tutorial is an overlay with a dimmed background.
+Content: 10 steps (Welcome, New Proposal, New Contract, New Form, New Invoice, Recent Activity, Follow-ups Due, CRM, Settings, Done). Each step is a popover anchored to the element it describes.
+Actions: "Next", "Back", "Skip", "Done". On Done or Skip, PATCH /api/onboarding/tutorial with completed or skipped.
+Exit: the overlay closes. The dashboard is visible. The FormSubmit activation banner appears (if formsubmit_activated = false and banner_dismissed = false).
+States: the overlay is focus-trapped. Escape does not close it (it is a tutorial). The "Skip" is a ghost text button. The "Done" is gold.
+
+# ============================================================
+# PART 4 — THE DASHBOARD FLOW
+# ============================================================
+
+## Flow D1 — Dashboard Overview (the first load after onboarding)
+Entry: /dashboard.
+Content: the FormSubmit banner (if not activated), the greeting, the 4 stat cards, the pending payments line, the suggested actions (Growth/Scale), the create row, the recent activity, the empty state (if no data).
+Actions:
+  Click a stat card -> the filtered list (/proposals?status=published, /crm, /crm?filter=follow-ups-due, /invoices?status=confirmed).
+  Click the pending line -> /invoices?filter=pending.
+  Click a suggestion "Do it" -> the suggestion's action (open the client record, create the contract, etc.).
+  Click a suggestion "Dismiss" -> the suggestion is removed for that client/document.
+  Click "Create proposal" -> the proposal requirement form (/proposals/new).
+  Click "Create contract" -> /contracts/new. "Create invoice" -> /invoices/new. "Create form" -> /forms/new.
+  Click an activity item -> the client record or the document.
+  Click the FormSubmit banner "I clicked the activation link" -> PATCH /api/settings/formsubmit-activate; the banner disappears. Click "×" -> the banner disappears (banner_dismissed = true).
+Exit: the routes above.
+States: the stat cards show a skeleton while loading. The suggestions show a skeleton while loading. The activity feed shows the empty state "Nothing yet." The first-login empty state replaces sections 3–7.
+
+## Flow D2 — Proposals list
+Entry: /proposals (or from the dashboard stat card).
+Content: the table (title, client, status badge, last activity, actions), the filter bar (All/Drafts/Published/Archived), the search, the "Create proposal" (gold) top-right.
+Actions:
+  Click a row -> the proposal builder (/proposals/:id/edit).
+  Click "Create proposal" -> the requirement form (/proposals/new).
+  Click the ⋮ -> Duplicate (POST /api/proposals/:id/duplicate; a toast; the list refreshes), Archive (POST /archive; a confirmation modal; the list refreshes), Delete (DELETE; a confirmation modal; the list refreshes).
+  Type in search -> the list filters live (debounced).
+  Click a filter -> the list filters by status.
+Exit: the builder, the requirement form.
+States: the table shows a skeleton while loading. The empty state "No proposals yet. Create your first proposal." + the CTA. The error state "Could not load proposals. Retry." with a retry button.
+
+## Flow D3 — The proposal requirement form
+Entry: /proposals/new. The user clicked "Create proposal".
+Content: the client selector (Existing client searchable dropdown / New client name+email), the problem textarea, the sections checkboxes, the FAQs upload (if FAQs checked), the questions upload (if Embedded Questions checked), the currency, the timeline, the tone, "Continue to builder" (gold).
+Actions:
+  Select an existing client -> the fields pre-fill. Select "New client" with an email already in the CRM -> a suggestion "This email exists. Use [Client]?"
+  Fill the required fields -> "Continue" enabled.
+  On Continue, POST /api/proposals/draft. The response has the draft ID.
+Exit: the template selection screen (/proposals/:id/edit?step=template), then the builder canvas.
+States: the "Continue" is disabled until client + problem + at least one section. The errors are inline below each field. The loading state is a spinner in the button.
+
+## Flow D4 — The template selection
+Entry: /proposals/:id/edit?step=template.
+Content: the template cards (thumbnail, name, one-line description, "Suggested" gold badge if the tags match the user's services), "Start from blank", "Upload your own template" (Growth/Scale), "Use a template from a URL" (Growth/Scale).
+Actions:
+  Click a template card -> the builder canvas loads with the template rendered and the placeholders filled (/proposals/:id/edit).
+  Click "Start from blank" -> the canvas opens empty, with the
