@@ -1,0 +1,150 @@
+# REVERCUE — SCREENSHOT CAPTURE GUIDE
+# File: screenshot.txt
+# Purpose: How to capture the 12 real product screenshots, where to save them, and where they appear in the public site.
+# Audience: The AI (or the developer) after building the dashboard and the builders. This is the LAST step, because the screenshots need the built product.
+# The public site uses REAL screenshots, not stock photos, not abstract illustrations. The product sells itself by showing itself.
+
+# ============================================================
+# PART 1 — THE RULES (before any capture)
+# ============================================================
+
+1. Real product, real data. Use a sample freelancer "Acme Studio" (a serif wordmark, a warm palette). Sample clients "Acme Co.", "Beta Ltd.", "Gamma Inc." Sample amounts ($500, $1,200, $2,500). Never lorem ipsum, never "John Doe."
+2. The real brand. On the client-facing pages (proposal, contract, invoice, form), the screenshots show the FREELANCER's brand (Acme Studio), not "Revercue". On the dashboard screenshots, show the Revercue shell (gold accent, dark palette).
+3. The state matters. Capture the screen in a REALISTIC state: the stat strip with numbers, the suggestion card with a real suggestion, the activity feed with real events. Not an empty state (unless the empty state is the point).
+4. The crop. 16:10 for the hero and the feature sections. 4:3 for the cards. Captured at 2x (retina), exported at 1x and 2x.
+5. The gold-glow treatment. Every screenshot sits in a card (bg var(--bg-card), 1px border, 12px radius) with a gold glow behind (0 40px 120px rgba(201,169,97,0.15)). On the Home hero: 2deg rotation. Everywhere else: straight.
+6. The alt text. Every screenshot has alt text that describes what it shows, not "screenshot". E.g., "The Revercue dashboard with the stat strip, suggested actions, and recent activity."
+
+# ============================================================
+# PART 2 — THE 12 SCREENSHOTS
+# ============================================================
+
+## 1. Dashboard Overview (full)
+Route: /dashboard (logged in, with data).
+Data: 12 active documents, 8 clients, 3 follow-ups due, $2,900 revenue this month, $4,200 pending (3 invoices), 1 overdue ($1,200). The suggestion card with 3 suggestions (follow up with Acme Co., create a contract for Beta Ltd., reopen Gamma Inc.). The recent activity with 10 events.
+Crop: 16:10, full width.
+Saved as: public/screenshots/dashboard-overview.png (and @2x).
+Appears: Home hero (the first screenshot), the Dashboard section on the Features page.
+
+## 2. Proposal Builder (three panels, template rendered)
+Route: /proposals/:id/edit (a draft with the "Minimal Proposal" template, the Acme Co. data filled, the sections visible, a block selected).
+Data: the template rendered, the sections list on the left, the properties panel on the right (the selected block's properties).
+Crop: 16:10, full width.
+Saved as: public/screenshots/proposal-builder.png (and @2x).
+Appears: Home thread section (the second screenshot), the Features page (the Proposals section).
+
+## 3. Public Proposal View (with the Acme Studio brand)
+Route: /p/:publicId (the proposal from screenshot 2, published).
+Data: Acme Studio's logo, the proposal title "Website Redesign for Acme Co.", the sections, the FAQs collapsed, the packages (Basic $500, Standard $1,200, Premium $2,500), the embedded questions.
+Crop: 16:10.
+Saved as: public/screenshots/public-proposal.png (and @2x).
+Appears: Home client-view section, the Features page.
+
+## 4. Public Invoice View (with the payment options)
+Route: /i/:publicId (an invoice from Acme Studio to Acme Co.).
+Data: the invoice number INV-2026-0042, the line items, the total $1,200, the payment arrangement (Option A: a "Buy Now" button, or Option B: the account details + the proof upload).
+Crop: 16:10.
+Saved as: public/screenshots/public-invoice.png (and @2x).
+Appears: Home client-view section (side by side with screenshot 3).
+
+## 5. Contract View (Approve / Decline / I Have Questions)
+Route: /c/:publicId (a contract from Acme Studio to Beta Ltd.).
+Data: the contract sections, the three actions at the bottom (Approve gold, Decline ghost with red border, I Have Questions ghost).
+Crop: 16:10.
+Saved as: public/screenshots/contract-view.png (and @2x).
+Appears: the Features page (the Contracts section).
+
+## 6. Form Editor (questions, branching)
+Route: /forms/:id/edit (a form with 5 questions, one with branching).
+Data: the question list on the left, the question editor in the center, the settings on the right, one branching rule visible.
+Crop: 16:10.
+Saved as: public/screenshots/form-editor.png (and @2x).
+Appears: the Features page (the Forms section).
+
+## 7. CRM Client Detail (communication log, documents, notes)
+Route: /crm/:clientId (Acme Co. with 6 communication entries, 3 documents, 2 notes, 1 follow-up due).
+Data: the timeline, the documents grouped, the notes, the follow-up, the interest badge (Scale, 72% high).
+Crop: 16:10.
+Saved as: public/screenshots/crm-client-detail.png (and @2x).
+Appears: the Features page (the CRM section).
+
+## 8. Builder Block Library (the left panel, blocks visible)
+Route: /proposals/:id/edit, zoomed to the left panel (or a crop of the left panel).
+Data: the block library grid with the block types visible (heading, paragraph, image, graph, shape, pricing table, timeline, FAQ, embedded question, file upload, button, divider, two-column, three-column).
+Crop: 4:3 (a tight crop on the left panel).
+Saved as: public/screenshots/builder-blocks.png (and @2x).
+Appears: the Features page (the Builder section).
+
+## 9. Suggestion Card (the "client agreed — create contract" card)
+Route: /dashboard, zoomed to the suggestion card (or a crop).
+Data: the suggestion "The client agreed to move forward. Create a contract?" with the "Create contract" button and the "Dismiss" button.
+Crop: 4:3 (a tight crop on the suggestion).
+Saved as: public/screenshots/suggestion-card.png (and @2x).
+Appears: the Features page (the Suggestions section).
+
+## 10. Code Screen (the FormSubmit message, six boxes)
+Route: /signup/code (with the pre-auth token, the six code boxes, the prominent gold-bordered FormSubmit message).
+Data: the six boxes, the gold-bordered message, the countdown, the "Verify" (gold) and "Resend code" (ghost).
+Crop: 4:3 (the card).
+Saved as: public/screenshots/code-screen.png (and @2x).
+Appears: the Sign Up page (a small image in the flow explanation).
+
+## 11. Settings > What Revercue Knows (the transparency page)
+Route: /settings/what-revercue-knows (Scale).
+Data: the account data table, the private data list, the "what the team can see" list, the encryption summary.
+Crop: 16:10.
+Saved as: public/screenshots/what-revercue-knows.png (and @2x).
+Appears: the Security page.
+
+## 12. Pricing Comparison Table (the real table)
+Route: /pricing, zoomed to the comparison table.
+Data: the full table (the rows: active documents, retention, storage, custom templates, saved FAQs, saved packages, password-protected docs, email notifications, adaptive forms, advanced tracking, revenue tracker, etc.; the columns: Free, Starter, Growth, Scale, Teams).
+Crop: 16:10.
+Saved as: public/screenshots/pricing-table.png (and @2x).
+Appears: the Pricing page (below the five cards).
+
+# ============================================================
+# PART 3 — THE CAPTURE PROCESS (for the AI)
+# ============================================================
+
+After building the dashboard and the builders:
+1. Seed the sample data (Acme Studio, Acme Co., Beta Ltd., Gamma Inc., the documents, the communication entries, the expenses). A dev-only seed script (not shipped).
+2. Start the dev server (npm run dev).
+3. Log in as the sample freelancer.
+4. For each screenshot:
+   a. Navigate to the route.
+   b. Set the data to the realistic state (Part 2).
+   c. Open the browser's screenshot tool (or a tool like Playwright/Puppeteer at 2x device pixel ratio).
+   d. Capture the screen (the full page or the specified crop).
+   e. Save to public/screenshots/ with the specified name (1x and @2x).
+5. Replace the placeholders in the public site: the Home hero, the thread section, the client-view section, the Features sections, the Pricing table, the Security page, the Sign Up page.
+6. Verify the images load (the correct path, the correct alt text, the gold-glow treatment).
+7. Remove the sample data seed from the production build (it is dev-only).
+
+# ============================================================
+# PART 4 — THE PLACEHOLDERS (before the screenshots exist)
+# ============================================================
+
+Before the real screenshots are captured, the public site uses placeholders:
+  A grey box (bg var(--bg-elevated)) with the correct aspect ratio (16:10 or 4:3).
+  A caption in the center: "Screenshot: [the screen name]" (e.g., "Screenshot: Dashboard Overview").
+  The alt text is the final alt text (so the SEO is correct from day one).
+The placeholders are replaced in the last step (after the screenshots are captured). The site is functional with placeholders; the real screenshots are the final polish.
+
+# ============================================================
+# PART 5 — THE DESIGN RULES FOR THE SCREENSHOTS
+# ============================================================
+
+The screenshots are the product's face. They must look like the product, not a mockup.
+No stock photos. No abstract illustrations. No "happy people at a laptop."
+The client-facing screenshots show the freelancer's brand (Acme Studio), not Revercue's. This is the white-label proof.
+The dashboard screenshots show the Revercue shell (gold accent, dark palette). This is the product's face.
+The gold-glow treatment is consistent. The hero is rotated (2deg); the rest are straight.
+The alt text describes what the screenshot shows, not "screenshot."
+The crop is consistent: 16:10 for the hero and features, 4:3 for the cards.
+The data is realistic: real names, real amounts, real statuses. Never lorem ipsum.
+The empty states are not the screenshots (unless the point is the empty state). The screenshots show the product in use.
+
+# ============================================================
+# END OF SCREENSHOT GUIDE
+# ============================================================
