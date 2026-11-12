@@ -21,7 +21,7 @@ export interface TableProps<T> {
   rowKey?: (row: T, index: number) => string;
 }
 
-export function Table<T extends Record<string, unknown>>({
+export function Table<T>({
   columns,
   data,
   loading = false,
@@ -91,7 +91,7 @@ export function Table<T extends Record<string, unknown>>({
                 >
                   {column.render
                     ? column.render(row, rowIndex)
-                    : (row[column.key] as ReactNode) ?? "—"}
+                    : ((row as Record<string, unknown>)[column.key] as ReactNode) ?? "—"}
                 </td>
               ))}
             </tr>

@@ -1,0 +1,178 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Check, Minus, X } from "lucide-react";
+import { PLANS } from "../../lib/constants";
+import { faqsByGroup } from "../../lib/faqs";
+import { FAQItem } from "../../components/shared/FAQItem";
+import { WaitlistModal } from "../../components/shared/WaitlistModal";
+import { PricingVisual } from "../../components/visuals";
+import type { PlanName } from "../../types";
+
+const ROWS: { label: string; key: keyof (typeof PLANS)[0]["limits"] | "password" | "interest" | "suggestions" | "brand" | "thankyou" }[] = [
+  { label: "Active documents", key: "active_documents" },
+  { label: "Document retention (months)", key: "retention_months" },
+  { label: "Draft retention (days)", key: "draft_retention_days" },
+  { label: "Archive (count / days)", key: "archive_count" },
+  { label: "Storage (GB)", key: "storage_gb" },
+  { label: "Notes per client", key: "notes_per_client" },
+  { label: "Custom templates", key: "custom_templates" },
+  { label: "Saved FAQs", key: "saved_faqs" },
+  { label: "Saved packages", key: "saved_packages" },
+  { label: "Password-protected documents", key: "password" },
+  { label: "Adaptive forms", key: "adaptive_forms" },
+  { label: "Interest level and revenue tracker", key: "interest" },
+  { label: "Document suggestions", key: "suggestions" },
+  { label: "No Revercue branding", key: "brand" },
+  { label: "Custom thank-you page", key: "thankyou" },
+];
+
+function cell(plan: PlanName, key: (typeof ROWS)[0]["key"]): string {
+  const definition = PLANS.find((plan_) => plan_.id === plan);
+  if (!definition) return "—";
+  switch (key) {
+    case "password":
+      return plan === "free" || plan === "starter" ? "—" : `${definition.limits.password_protected}`;
+    case "interest":
+      return plan === "scale" || plan === "teams" ? "Yes" : "—";
+    case "suggestions":
+      return plan === "growth" ? "Follow-ups" : plan === "scale" || plan === "teams" ? "Full set" : "—";
+    case "brand":
+      return plan === "free" || plan === "starter" ? "—" : "Yes";
+    case "thankyou":
+      return plan === "scale" || plan === "teams" ? "Yes" : "—";
+    default: {
+      const value = definition.limits[key];
+      if (value === null) return "Unlimited";
+      return String(value);
+    }
+  }
+}
+
+export function PricingPage() {
+  const [waitlist, setWaitlist] = useState<{ plan: PlanName } | null>(null);
+  const billingFaqs = faqsByGroup(["plans"]);
+
+  return (
+    <div className="page page-wide">
+      <div className="page-head text-center" style={{ margin: "0 auto 48px" }}>
+        <p className="eyebrow">Pricing</p>
+        <h1>Start free. Upgrade when the thread pays for itself.</h1>
+        <p>
+          Free is available now. Starter, Growth and Scale are invite-only in the fresh state. Teams
+          is in beta.
+        </p>
+      </div>
+
+      <div className="plan-grid">
+        {PLANS.map((plan) => {
+          const featured = plan.id === "growth";
+          return (
+            <div
+              key={plan.id}
+              className={`plan-card${featured ? " featured" : ""}${plan.status === "waitlist" ? " dimmed" : ""}`}
+            >
+              <div className="between">
+                <strong>{plan.name}</strong>
+                {featured && <span className="badge badge-gold">Most popular</span>}
+              </div>
+              <div>
+                <div className="price">
+                  {plan.price === null ? `$${plan.base}` : `$${plan.price}`}
+                  {plan.price !== 0 && <span className="caption"> /mo{plan.price === null ? " base" : ""}</span>}
+                </div>
+                <div className="role">{plan.role}</div>
+              </div>
+              <ul>
+                {plan.features.slice(0, 5).map((feature) => (
+                  <li key={feature}>
+                    <Check size={13} /> <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="stack-2">
+                <span className="badge badge-muted">{plan.statusLabel}</span>
+                {plan.id === "free" ? (
+                  <Link to="/signup" className="btn btn-primary btn-sm btn-full">
+                    Start free
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-sm btn-full"
+                    onClick={() => setWaitlist({ plan: plan.id })}
+                  >
+                    {plan.id === "teams" ? "Join the beta" : "Join waitlist"}
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <section className="section">
+        <div className="section-head">
+          <h2>Compare every gate.</h2>
+          <p>The full table, not a highlight reel.</p>
+        </div>
+        <div className="table-wrap">
+          <table className="data">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                {PLANS.map((plan) => (
+                  <th key={plan.id}>{plan.name}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {ROWS.map((row) => (
+                <tr key={row.label}>
+                  <td>{row.label}</td>
+                  {PLANS.map((plan) => {
+                    const value = cell(plan.id, row.key);
+                    return (
+                      <td key={plan.id}>
+                        {value === "Yes" ? (
+                          <Check size={15} className="check-cell" />
+                        ) : value === "—" ? (
+                          <Minus size={15} className="cross-cell" />
+                        ) : (
+                          value
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="mt-6">
+          <PricingVisual />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-head">
+          <h2>Billing questions.</h2>
+        </div>
+        <div className="faq-list">
+          {billingFaqs.map((faq) => (
+            <FAQItem key={faq.id} question={faq.question} answer={faq.answer} />
+          ))}
+        </div>
+        <p className="caption text-center mt-6">
+          <X size={12} style={{ display: "inline", verticalAlign: "-2px" }} /> No refunds. Downgrades
+          take effect at the end of the cycle and archive the documents above the new limit.
+        </p>
+      </section>
+
+      <WaitlistModal
+        open={Boolean(waitlist)}
+        onClose={() => setWaitlist(null)}
+        plan={waitlist?.plan}
+      />
+    </div>
+  );
+}

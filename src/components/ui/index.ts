@@ -23,3 +23,5 @@ export { EmptyState } from "./EmptyState";
 export type { EmptyStateProps } from "./EmptyState";
 export { Skeleton, SkeletonLines } from "./Skeleton";
 export { ConfirmDialog } from "./ConfirmDialog";
+export { Tabs } from "./Tabs";
+export type { TabsProps, TabItem } from "./Tabs";

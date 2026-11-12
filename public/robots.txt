@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Client documents are unguessable and are never indexed.
+Disallow: /p/
+Disallow: /c/
+Disallow: /i/
+Disallow: /f/
+Disallow: /dashboard
+Disallow: /proposals
+Disallow: /contracts
+Disallow: /forms
+Disallow: /invoices
+Disallow: /crm
+Disallow: /settings
+Disallow: /notifications

@@ -1,0 +1,396 @@
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { contractsApi } from "../../api/contracts";
+import { crmApi } from "../../api/crm";
+import { Canvas, blocksFromProposal } from "../../components/builder/Canvas";
+import { TopBar } from "../../components/builder/TopBar";
+import { TemplatePicker } from "../../components/builder/TemplatePicker";
+import { PreviewPane } from "../../components/builder/PreviewPane";
+import { ShareModal } from "../../components/builder/ShareModal";
+import { Button } from "../../components/ui/Button";
+import { Input } from "../../components/ui/Input";
+import { Textarea } from "../../components/ui/Textarea";
+import { Select } from "../../components/ui/Select";
+import { Checkbox } from "../../components/ui/Checkbox";
+import { Fieldset } from "../../components/ui/Fieldset";
+import { Spinner } from "../../components/ui/Spinner";
+import { useAutoSave } from "../../hooks/useAutoSave";
+import { useToast } from "../../hooks/useToast";
+import { usePlanGate } from "../../hooks/usePlanGate";
+import { CURRENCIES } from "../../lib/constants";
+import { errorMessage } from "../../lib/errors";
+import { ApiError } from "../../types/api";
+import type { Block, DocContent } from "../../types";
+
+const SECTIONS = ["Parties", "Scope", "Payment", "Timeline", "Revisions", "Cancellation", "Liability", "Signatures"];
+
+const EMPTY_DOC: DocContent = {
+  blocks: [],
+  brand_primary: "#c9a961",
+  brand_secondary: "#1a1a1a",
+  page_background: "#ffffff",
+  max_width: 720,
+};
+
+export function ContractBuilderPage() {
+  const { id } = useParams<{ id: string }>();
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
+  if (!id) return <ContractRequirementForm />;
+
+  return params.get("step") === "template" ? (
+    <TemplatePicker
+      type="contract"
+      onBack={() => navigate("/contracts/new")}
+      onPick={async () => navigate(`/contracts/${id}/edit`, { replace: true })}
+    />
+  ) : (
+    <ContractCanvas id={id} />
+  );
+}
+
+function ContractRequirementForm() {
+  const navigate = useNavigate();
+  const toast = useToast();
+  const { hasFeature } = usePlanGate();
+  const [clientId, setClientId] = useState("");
+  const [scope, setScope] = useState("");
+  const [amount, setAmount] = useState("");
+  const [schedule, setSchedule] = useState("50% upfront, 50% on delivery");
+  const [currency, setCurrency] = useState("USD");
+  const [timeline, setTimeline] = useState("");
+  const [revisions, setRevisions] = useState("Two rounds of revisions included. Additional rounds billed separately.");
+  const [cancellation, setCancellation] = useState("Either party may cancel with 14 days' written notice.");
+  const [sections, setSections] = useState<string[]>(["Parties", "Scope", "Payment", "Revisions", "Signatures"]);
+  const [afterApproval, setAfterApproval] = useState<"form" | "invoice" | "pdf_only">(
+    hasFeature("adaptive_forms") ? "form" : "pdf_only",
+  );
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const clients = useQuery({ queryKey: ["crm", "clients", "picker"], queryFn: () => crmApi.list({ limit: 100 }) });
+
+  const valid = clientId && scope.trim() && amount && revisions.trim() && cancellation.trim() && sections.length > 0;
+
+  const submit = async () => {
+    const next: Record<string, string> = {};
+    if (!clientId) next.client = "Choose a client.";
+    if (!scope.trim()) next.scope = "Describe the scope.";
+    if (!amount) next.amount = "Enter the amount.";
+    if (!revisions.trim()) next.revisions = "State the revision policy.";
+    if (!cancellation.trim()) next.cancellation = "State the cancellation policy.";
+    setErrors(next);
+    if (Object.keys(next).length > 0) return;
+
+    setLoading(true);
+    try {
+      const response = await contractsApi.draft({
+        client_id: clientId,
+        title: `Contract — ${clients.data?.data.find((client) => client.id === clientId)?.name || "Client"}`,
+        scope,
+        payment_terms: `${currency} ${amount} — ${schedule}`,
+        timeline: timeline || undefined,
+        revisions,
+        cancellation,
+        after_approval: afterApproval,
+        currency,
+        sections,
+      });
+      navigate(`/contracts/${response.id}/edit?step=template`);
+    } catch (cause) {
+      const apiError = cause as ApiError;
+      toast.error(errorMessage(apiError.code, apiError.message));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="onboarding-wrap">
+      <div className="onboarding-card" style={{ maxWidth: 720 }}>
+        <p className="eyebrow">New contract</p>
+        <h1>Tell us about this contract.</h1>
+        <p className="muted" style={{ marginBottom: 24 }}>
+          The same canvas as a proposal, with the contract's own sections and the after-approval chain.
+        </p>
+
+        <div className="stack-4">
+          <Select
+            id="contract-client"
+            label="Client"
+            value={clientId}
+            placeholder="Choose a client"
+            options={(clients.data?.data ?? []).map((client) => ({
+              value: client.id,
+              label: `${client.name} — ${client.email}`,
+            }))}
+            onChange={setClientId}
+            error={errors.client}
+          />
+          <Textarea
+            id="contract-scope"
+            label="Scope of work"
+            value={scope}
+            onChange={setScope}
+            error={errors.scope}
+            rows={4}
+            required
+          />
+          <div className="two-up">
+            <Input
+              id="contract-amount"
+              label="Amount"
+              type="number"
+              value={amount}
+              onChange={setAmount}
+              error={errors.amount}
+              required
+            />
+            <Select
+              id="contract-currency"
+              label="Currency"
+              value={currency}
+              options={CURRENCIES.map((value) => ({ value, label: value }))}
+              onChange={setCurrency}
+            />
+          </div>
+          <Input
+            id="contract-schedule"
+            label="Payment schedule"
+            value={schedule}
+            onChange={setSchedule}
+            helper="For example: 50% upfront, 50% on delivery."
+          />
+          <Input id="contract-timeline" label="Timeline" value={timeline} onChange={setTimeline} helper="Optional." />
+          <Textarea
+            id="contract-revisions"
+            label="Revision policy"
+            value={revisions}
+            onChange={setRevisions}
+            error={errors.revisions}
+            rows={3}
+            required
+          />
+          <Textarea
+            id="contract-cancellation"
+            label="Cancellation policy"
+            value={cancellation}
+            onChange={setCancellation}
+            error={errors.cancellation}
+            rows={3}
+            required
+          />
+          <Fieldset legend="Which sections do you want?">
+            {SECTIONS.map((section) => (
+              <Checkbox
+                key={section}
+                id={`contract-section-${section}`}
+                label={section}
+                checked={sections.includes(section)}
+                onChange={() =>
+                  setSections((current) =>
+                    current.includes(section) ? current.filter((item) => item !== section) : [...current, section],
+                  )
+                }
+              />
+            ))}
+          </Fieldset>
+          <Select
+            id="contract-after"
+            label="After approval, what next?"
+            value={afterApproval}
+            options={[
+              { value: "form", label: "Show the requirement form" },
+              { value: "invoice", label: "Show the invoice" },
+              { value: "pdf_only", label: "Download PDF only" },
+            ]}
+            onChange={(value) => setAfterApproval(value as typeof afterApproval)}
+            helper={
+              hasFeature("adaptive_forms")
+                ? "The form and invoice options are part of your plan."
+                : "The form and invoice chain is available on Growth and Scale. On your plan the client sees the PDF."
+            }
+          />
+        </div>
+
+        <div className="between mt-8">
+          <Button variant="ghost" onClick={() => navigate("/dashboard")}>
+            Cancel
+          </Button>
+          <Button onClick={submit} loading={loading} disabled={!valid}>
+            Continue to builder
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ContractCanvas({ id }: { id: string }) {
+  const navigate = useNavigate();
+  const toast = useToast();
+  const query = useQuery({ queryKey: ["contract", id], queryFn: () => contractsApi.get(id) });
+  const [title, setTitle] = useState("");
+  const [doc, setDoc] = useState<DocContent>(EMPTY_DOC);
+  const [blocks, setBlocks] = useState<Block[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [preview, setPreview] = useState(false);
+  const [share, setShare] = useState<{ url: string } | null>(null);
+  const [creating, setCreating] = useState(false);
+  const [initialised, setInitialised] = useState(false);
+
+  const contract = query.data?.contract;
+
+  useEffect(() => {
+    if (!contract || initialised) return;
+    setTitle(contract.title);
+    if (contract.content?.blocks?.length) {
+      setDoc({ ...EMPTY_DOC, ...contract.content });
+      setBlocks(contract.content.blocks);
+    } else {
+      setBlocks(
+        blocksFromProposal({
+          problem: contract.scope,
+          sections: ["Parties", "Scope", "Payment", "Timeline", "Revisions", "Cancellation", "Signatures"],
+        }),
+      );
+      setBlocks((current) => [
+        ...current.filter((block) => block.type !== "next_step"),
+        { id: "signature", type: "signature" },
+      ]);
+    }
+    setInitialised(true);
+  }, [contract, initialised]);
+
+  const payload = useMemo(() => ({ title, content: { ...doc, blocks } }), [title, doc, blocks]);
+
+  const autosave = useAutoSave({
+    onSave: async (value) => {
+      await contractsApi.update(id, value as { title: string; content: DocContent });
+    },
+    beaconPath: `/api/contracts/${id}/autosave`,
+    enabled: initialised,
+  });
+
+  useEffect(() => {
+    if (initialised) autosave.markDirty(payload);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [payload, initialised]);
+
+  if (query.isLoading) {
+    return (
+      <div className="auth-split">
+        <Spinner size={32} />
+      </div>
+    );
+  }
+
+  if (!contract) {
+    return (
+      <div className="page page-narrow">
+        <h1 className="serif">Could not load this contract.</h1>
+        <Button className="mt-6" onClick={() => navigate("/contracts")}>
+          Back to contracts
+        </Button>
+      </div>
+    );
+  }
+
+  const publish = async () => {
+    setCreating(true);
+    try {
+      await autosave.save(payload);
+      const response = await contractsApi.publish(id);
+      setShare({ url: response.url });
+    } catch (cause) {
+      const apiError = cause as ApiError;
+      toast.error(errorMessage(apiError.code, apiError.message));
+    } finally {
+      setCreating(false);
+    }
+  };
+
+  return (
+    <div className="builder">
+      <TopBar
+        title={title}
+        onTitleChange={setTitle}
+        saveState={autosave.state}
+        onBack={() => navigate("/contracts")}
+        onPreview={() => setPreview(true)}
+        onSave={() => void autosave.save(payload)}
+        onCreate={publish}
+        creating={creating}
+        moreItems={[
+          {
+            label: "Archive",
+            onClick: async () => {
+              await contractsApi.archive(id);
+              navigate("/contracts");
+            },
+          },
+          {
+            label: "Delete",
+            danger: true,
+            onClick: async () => {
+              await contractsApi.remove(id);
+              navigate("/contracts");
+            },
+          },
+        ]}
+      />
+      <Canvas
+        doc={doc}
+        blocks={blocks}
+        selectedId={selectedId}
+        onSelect={setSelectedId}
+        onBlocksChange={setBlocks}
+        onDocChange={(patch) => setDoc((current) => ({ ...current, ...patch }))}
+        sections={["Parties", "Scope", "Payment", "Timeline", "Revisions", "Cancellation", "Liability", "Signatures"]}
+        blockDefinitions={[
+          { type: "heading", label: "Heading", hint: "Section title" },
+          { type: "paragraph", label: "Paragraph", hint: "Body text" },
+          { type: "list", label: "List", hint: "Bulleted" },
+          { type: "divider", label: "Divider", hint: "A line" },
+          { type: "two_column", label: "Two columns", hint: "Side by side" },
+          { type: "timeline", label: "Timeline", hint: "Milestones" },
+          { type: "signature", label: "Signature", hint: "Two signature lines" },
+        ]}
+        clientName={contract.client_name || "the client"}
+        title={title}
+        reference={contract.public_id?.slice(0, 8) || "draft"}
+        showAfterApproval
+        afterApproval={contract.after_approval || "pdf_only"}
+        onAfterApprovalChange={async (value) => {
+          await contractsApi.update(id, { after_approval: value as "form" | "invoice" | "pdf_only" });
+          toast.success("After-approval step updated.");
+        }}
+      />
+
+      <PreviewPane
+        open={preview}
+        onClose={() => setPreview(false)}
+        title={title}
+        clientName={contract.client_name || "the client"}
+        reference={contract.public_id?.slice(0, 8) || "draft"}
+        blocks={blocks}
+        doc={doc}
+        footnote="This contract is not a legally binding e-signature until both parties sign."
+      />
+
+      <ShareModal
+        open={Boolean(share)}
+        onClose={() => setShare(null)}
+        title="Your contract is ready."
+        url={share?.url || ""}
+        defaultMessage={`Hi ${contract.client_name || "there"}, here is the contract for the project. Review it and let me know if you have any questions.`}
+        onDone={async () => {
+          await contractsApi.share(id, "manual");
+          setShare(null);
+          navigate("/contracts");
+        }}
+      />
+    </div>
+  );
+}

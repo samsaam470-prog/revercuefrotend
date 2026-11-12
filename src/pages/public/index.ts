@@ -1,0 +1,12 @@
+export { HomePage } from "./HomePage";
+export { FeaturesPage } from "./FeaturesPage";
+export { PricingPage } from "./PricingPage";
+export { ComparePage } from "./ComparePage";
+export { GuidesPage } from "./GuidesPage";
+export { GuideDetailPage } from "./GuideDetailPage";
+export { AboutPage } from "./AboutPage";
+export { ContactPage } from "./ContactPage";
+export { BlogPage } from "./BlogPage";
+export { BlogPostPage } from "./BlogPostPage";
+export { BetaPage } from "./BetaPage";
+export { PrivacyPage, TermsPage, SecurityPage } from "./LegalPages";
