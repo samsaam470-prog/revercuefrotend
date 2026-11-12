@@ -1,0 +1,67 @@
+﻿# REVERCUE — THE 17 GUIDES
+# File: guides.txt
+# The public guides. Each is a page (/guides/:slug) with a max-width 720px, a serif headline, a sans body, a sticky TOC on desktop, a "Start Free" CTA at the end.
+# Each guide has a meta description and a CodeVisual (not a screenshot).
+
+## 1. Getting started (/guides/getting-started)
+The signup, the onboarding, the first proposal. The 5-minute path. The CodeVisual: the DashboardVisual.
+
+## 2. The dashboard (/guides/dashboard)
+The stat strip, the suggested actions, the create row, the activity feed. What each card does. The CodeVisual: the DashboardVisual.
+
+## 3. The proposal builder (/guides/proposal-builder)
+The requirement form, the template selection, the canvas, the block library, the properties panel, the auto-save, the preview, the share. The CodeVisual: the BuilderVisual.
+
+## 4. The contract builder (/guides/contract-builder)
+The same, plus the after-approval chain, the signature block, the client actions (Approve, Decline, I Have Questions). The CodeVisual: the ContractVisual.
+
+## 5. The form editor (/guides/form-editor)
+The question list, the question types, the branching, the test mode, the thank-you page. The CodeVisual: the FormVisual.
+
+## 6. The invoice builder (/guides/invoice-builder)
+The line items, the payment arrangement (Option A/B), the proof upload, the confirm payment. The CodeVisual: the InvoiceVisual.
+
+## 7. The CRM (/guides/crm)
+The list, the client detail, the communication log, the notes, the follow-ups, the writing area, the interest level, the 15-day summary. The CodeVisual: the CrmVisual.
+
+## 8. The client-facing pages (/guides/client-pages)
+The public proposal, contract, invoice, form. What the client sees. The password wall, the closed page, the proof upload. The CodeVisual: the ProposalVisual and the InvoiceVisual.
+
+## 9. The UI elements (/guides/ui-elements)
+The 13 blocks: the heading, the paragraph, the image, the chart, the diagram, the icon, the pricing table, the timeline, the FAQ list, the embedded question, the button, the divider, the two-column. What each does, where it goes, how to edit it. The CodeVisual: a sample document with the 13 blocks.
+
+## 10. The visual intelligence (/guides/visual-intelligence)
+How the pipeline decides the visuals, how the template's zones work, how to edit the visuals. The CodeVisual: the BuilderVisual with the zones highlighted.
+
+## 11. The design system (/guides/design-system)
+The colours, the fonts, the spacing, the components. Why the design is dark, why the gold, why the serif. The CodeVisual: the component library.
+
+## 12. The tracking (/guides/tracking)
+What is tracked on each plan, how to read the activity, the 5-day retention. The CodeVisual: the DashboardVisual with the activity feed.
+
+## 13. The suggestions (/guides/suggestions)
+The follow-up, the document suggestion, the interest flag, the price suggestion. How they work, how to dismiss them. The CodeVisual: the SuggestionVisual.
+
+## 14. The templates (/guides/templates)
+The built-in templates, the custom templates, the upload, the URL, the blank. The CodeVisual: the template selection screen.
+
+## 15. The settings (/guides/settings)
+The profile, the plan, the security, the notifications, the saved FAQs, the saved packages, the what-revercue-knows, the delete account. The CodeVisual: the settings pages.
+
+## 16. The privacy and the data (/guides/privacy)
+What is stored, who can see it, the retention, the export, the delete. The CodeVisual: the SecurityVisual.
+
+## 17. The troubleshooting (/guides/troubleshooting)
+The common issues: the FormSubmit activation, the browser feature, the document not opening, the payment proof. The CodeVisual: the CodeScreenVisual.
+
+## The guide page layout
+- The headline (the guide title, serif 32px).
+- The last updated date (caption).
+- The sticky TOC (the section headers).
+- The sections (h2, body, the CodeVisual where relevant).
+- The "Start Free" CTA at the end (gold + ghost).
+- The related guides (3 cards).
+- The footer.
+
+## The rules
+No "AI" in the guides. The helper is "the helper." The plans are "available now" / "invite-only" / "in beta." The payment is "join the waitlist." Teams is "in beta."

@@ -1,0 +1,49 @@
+﻿# REVERCUE — THE FOUR RULES (the source of truth for the copy)
+# File: rules.txt
+# Every other blueprint file references these rules. The frontend copy must follow them.
+
+## Rule 1 — No "AI", no "local model", no "browser model"
+The product must NOT say, imply, or hint that a model runs in the user's browser. No "AI", "local AI", "local model", "browser model", "WebGPU", "WebLLM", "runs on your device", "your GPU", "downloaded model".
+
+The replacement: "the helper", "the rewrite", "the suggestion", "the review".
+- "Ask AI" -> "Ask the helper"
+- "The local model rewrites the text" -> "The helper rewrites the text"
+- "The model runs in your browser" -> (removed)
+- "Your browser doesn't support this feature" -> "This feature is not available in your browser" (no reason)
+
+## Rule 2 — No "MVP", no version names
+The product must NOT say "MVP", "MVP 1.0", "MVP 2.0", "v1", "v2", "v3", "v5", "later version", "future release".
+
+The replacement: "available now", "invite-only, join the waitlist", "in beta, join the beta", "contact us".
+
+## Rule 3 — No "Payoneer", no manual payment copy
+The product must NOT say "Pay via Payoneer", "send the receipt", "upgraded within 24 hours", "manual payment".
+
+The replacement: "Revercue is in a fresh state. The paid plans are invite-only. Join the waitlist, and the team will reach out when a spot opens. The Free plan is available now, no invitation needed."
+
+## Rule 4 — Teams is in beta
+Teams is NOT "MVP 2.0", NOT "not available yet", NOT "invite-only". Teams is in beta. The copy: "Teams is in beta. Join the beta. The team is testing the team features with a small group. The team will reach out when a spot opens."
+
+## Rule 5 — The footer buttons (not an AI chat)
+The footer does NOT have an AI chat. It has four buttons that open the external tools (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled prompt. The prompt is written by Revercue. The answer comes from the external tool. Revercue does not host it.
+
+The prompt: "Explain Revercue: a freelancer tool for the thread from proposal to contract to invoice to CRM. The tagline is 'Your work should speak, not you.' The thesis is 'a thread, not disconnected workflows.' The Free plan is available now. The paid plans (Starter, Growth, Scale) are invite-only in the fresh state — join the waitlist. Teams is in beta — join the beta. The product does not use AI; it uses patterns. Answer in 2–3 sentences."
+
+## Rule 6 — The FAQ count is 100
+The Home page shows the first 12 + "Show all 100." The Pricing page shows the plans subset. The Features page shows the features subset. The Security page shows the data subset. The Guides page has the how-to subset.
+
+## Rule 7 — The visuals are code, not screenshots
+The public site uses the `CodeVisual` components (the real product UI rendered as a React component), not screenshots. The `<ScreenshotCard>` is replaced by `<CodeVisual>`. The visuals are responsive, animated, and share the same components as the product.
+
+## Rule 8 — The plan status (the fresh state)
+- Free: available now.
+- Starter: invite-only (join the waitlist).
+- Growth: invite-only (join the waitlist).
+- Scale: invite-only (join the waitlist).
+- Teams: in beta (join the beta).
+
+## Rule 9 — The tagline
+"Your work should speak, not you."
+
+## Rule 10 — The thesis
+"A thread, not disconnected workflows."
