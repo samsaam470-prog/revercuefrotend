@@ -1,0 +1,64 @@
+:root {
+  /* Palette */
+  --bg-base: #0a0a0a;
+  --bg-card: #141414;
+  --bg-elevated: #1c1c1c;
+  --border: #2a2a2a;
+  --border-strong: #3a3a3a;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-tertiary: #6b6b6b;
+  --gold: #c9a961;
+  --gold-hover: #d9b971;
+  --gold-soft: rgba(201, 169, 97, 0.12);
+  --green: #4ade80;
+  --red: #f87171;
+  --amber: #fbbf24;
+
+  /* Typography */
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
+
+  --size-display: 48px;
+  --size-headline: 32px;
+  --size-title: 20px;
+  --size-body: 15px;
+  --size-label: 13px;
+  --size-caption: 12px;
+  --size-mono: 13px;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  --line-tight: 1.2;
+  --line-normal: 1.5;
+  --line-relaxed: 1.7;
+
+  /* Spacing (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* Radius */
+  --radius-card: 8px;
+  --radius-modal: 12px;
+  --radius-button: 6px;
+  --radius-input: 6px;
+  --radius-pill: 999px;
+
+  /* Shadow */
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-gold-glow: 0 40px 120px rgba(201, 169, 97, 0.15);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+}
