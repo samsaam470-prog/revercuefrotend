@@ -1289,3 +1289,222 @@ Errors: 400 invalid_payload (no file, > 10 MB), 403 plan_limit_reached (storage 
 # ============================================================
 # END OF THE NEW ROUTES
 # ============================================================
+
+# ============================================================
+# PART 15 — THE PIPELINE (the new routes)
+# ============================================================
+
+## POST /api/extract
+Layer 1: the search. The Worker calls Wikipedia, FreeSerp, DuckDuckGo, OpenStreetMap, Openverse, Wikimedia, Iconify. Returns the raw research + the samples + the image URL + the icons.
+Body: { client_name, client_email?, industry, service, client_website?, user_website?, location? }
+Response 200: { success: true, user_id, result: { business_name, industry, service, value_prop, key_points: [], image_url, location, wiki_attribution, samples: [] } }
+Errors: 400 invalid_payload (client_name, industry, service required), 500 extract_failed.
+
+## POST /api/extract/visuals
+Layer 4: the visual assets (the simpler version). Returns the Openverse image URL, the Iconify icon name, the QuickChart URL.
+Body: { requests: [{ type: 'image' | 'icon' | 'chart', query }] }
+Response 200: { success: true, assets: [] }
+Errors: 400 invalid_payload.
+
+## POST /api/organize
+Layer 3: the pattern fix. Reads the user's patterns (the saved FAQs, the packages, the previous documents, the communication log). Fixes the Layer 2 output. Marks the missing sections. Uses the sample-learning.
+Body: { industry, service, client_id?, tone?, sections?: [], layer2: {}, samples?: [] }
+Response 200: { success: true, result: { tone, sections: [], suggested_faqs: [], suggested_packages: [], suggested_template, patterns_used: { tone, follow_up_days, packages_count }, learned_structure: { sections: [], has_faqs, has_pricing, has_timeline, tone_hints: [] }, missing: [] } }
+Errors: 400 invalid_payload, 500 organize_failed.
+
+## POST /api/organize/visuals
+Layer 4: the validated visuals. Validates the LLM's visual requests, builds the Mermaid diagram, calls the APIs (Openverse, Iconify, QuickChart), returns the assets.
+Body: { requests: [{ type: 'image' | 'icon' | 'chart' | 'diagram' | 'svg', query, section_id?, data? }] }
+Response 200: { success: true, assets: [], rejected: [] }
+Errors: 400 invalid_payload, 500 visuals_failed.
+
+# ============================================================
+# PART 16 — THE SUMMARY (the 15-day job)
+# ============================================================
+
+## GET /api/summary/:clientId
+The read. The client record shows the summary.
+Response 200: { summary, generated_at }
+Errors: 401 unauthorized, 404 not_found.
+
+## POST /api/summary/:clientId/schedule
+The scheduling. The archive/not-interested route calls it. The 15-day job is created.
+Response 200: { success: true }
+Errors: 401 unauthorized, 404 not_found.
+
+## POST /api/summary/:clientId/generate
+The manual trigger. The admin (or the user) generates the summary now.
+Response 200: { success: true, summary, generated_at }
+Errors: 401 unauthorized, 404 not_found, 500 summary_failed.
+
+# ============================================================
+# PART 17 — THE CRM NEW ROUTES
+# ============================================================
+
+## GET /api/crm/clients/:id/interest
+The interest breakdown (Scale/Teams only).
+Response 200: { score, signals: { message_count, last_incoming, proposal_opened, proposal_answered, contract_approved, invoice_paid, days_since_last, marked_not_interested }, contributions: [{ signal, value }], arithmetic }
+Errors: 403 forbidden (plan), 404 not_found.
+
+## POST /api/crm/clients/:id/suggest-message
+The writing area helper. Returns the draft + the last 3 messages for the context. The frontend uses the helper (the local rewrite).
+Body: { draft }
+Response 200: { success: true, draft, context: [], note }
+Errors: 400 invalid_payload.
+
+## POST /api/crm/clients/:id/archive
+The client archive. Schedules the 15-day summary.
+Response 200: { success: true, status: 'archived' }
+
+## POST /api/crm/clients/:id/not-interested
+The client not-interested. Schedules the 15-day summary.
+Response 200: { success: true, status: 'not_interested' }
+
+# ============================================================
+# PART 18 — THE SETTINGS NEW ROUTES
+# ============================================================
+
+## GET /api/settings/price-suggestion/:clientId?margin=30
+The price suggestion (Scale/Teams only).
+Response 200: { client_id, spent_total, last_invoice_total, margin_percent, recommended_price, reason }
+Errors: 403 forbidden, 404 not_found.
+
+## GET /api/settings/upgrade-status
+The waitlist/beta status.
+Response 200: { data: [{ id, plan_requested, status, created_at }] }
+Errors: 401 unauthorized.
+
+## POST /api/settings/plan/downgrade
+The downgrade flow. The user selects the documents to keep; the backend archives the rest; the plan changes.
+Body: { plan, keep_document_ids: [] }
+Response 200: { success: true, plan, archived_count }
+Errors: 400 invalid_payload (same plan), 401 unauthorized.
+
+## POST /api/settings/security/change-password
+The password change. Revokes the other sessions.
+Body: { current_password, new_password }
+Response 200: { success: true }
+Errors: 400 invalid_payload, 401 invalid_credentials, 403 forbidden (Google user).
+
+## POST /api/settings/security/2fa
+The 2FA toggle. Requires the current password.
+Body: { enabled, current_password }
+Response 200: { success: true, two_factor_enabled }
+Errors: 401 invalid_credentials.
+
+## GET /api/settings/security/sessions
+The sessions list.
+Response 200: { sessions: [{ id, device, browser, ip_hash, location, last_active_at, created_at }] }
+
+## POST /api/settings/security/sessions/logout-all
+The log out all sessions.
+Response 200: { success: true }
+
+# ============================================================
+# PART 19 — THE ADMIN NEW ROUTES
+# ============================================================
+
+## POST /api/admin/upgrade-requests/:id/confirm
+The admin confirms the upgrade request. The plan changes, the payment row is created.
+Body: { plan?, amount?, reference? }
+Response 200: { success: true, user_id, plan }
+Errors: 404 not_found.
+
+## GET /api/admin/upgrade-requests
+The admin lists the pending upgrade requests.
+Response 200: { data: [] }
+
+## POST /api/admin/templates/upload
+The admin uploads the HTML template (the sanitized, the B2 store).
+Body: multipart (file, name, type, tags)
+Response 201: { success: true, id, b2_key }
+Errors: 400 invalid_payload, 500 upload_failed.
+
+## GET /api/admin/payments/:id/receipt
+The receipt PDF.
+Response 200: application/pdf
+Errors: 404 not_found.
+
+## POST /api/admin/waitlist/:id/invite
+The admin invites the waitlist user.
+Response 200: { success: true, email, plan }
+Errors: 404 not_found.
+
+## POST /api/admin/waitlist/:id/mark-paid
+The admin marks the waitlist user as paid (the plan upgrade, the payment row).
+Body: { plan?, amount?, reference? }
+Response 200: { success: true }
+Errors: 404 not_found (the user has not signed up yet).
+
+## POST /api/admin/health/retry-email/:id
+The admin retries a failed email.
+Response 200: { success: true }
+
+## POST /api/admin/health/run-cron/:job
+The admin runs a cron manually (the job: 'retention', 'summary', 'proof-cleanup').
+Response 200: { success: true, job, ...result }
+Errors: 400 invalid_job.
+
+## PATCH /api/admin/notes/:id
+The admin edits a note.
+Body: { note }
+Response 200: { success: true }
+
+## DELETE /api/admin/notes/:id
+The admin deletes a note.
+Response 200: { success: true }
+
+## GET /api/admin/users/export
+The users CSV.
+Response 200: text/csv
+
+# ============================================================
+# PART 20 — THE PUBLIC NEW ROUTES
+# ============================================================
+
+## POST /api/public/p/:publicId/close
+The tracking close. The public proposal view sends the closed_at + the time spent.
+Body: { time_spent_seconds }
+Response 200: { success: true }
+Errors: 404 not_found.
+
+## POST /api/public/c/:publicId/close
+The tracking close for the contract.
+Body: { time_spent_seconds }
+
+## POST /api/public/i/:publicId/close
+The tracking close for the invoice.
+Body: { time_spent_seconds }
+
+## POST /api/public/f/:publicId/close
+The tracking close for the form.
+Body: { time_spent_seconds }
+
+## GET /api/public/p/:publicId/pdf
+The proposal PDF download.
+Response 200: application/pdf (or text/html if the binary PDF is not available)
+Errors: 404 not_found, 500 pdf_failed.
+
+## GET /api/public/c/:publicId/pdf
+The contract PDF download.
+Response 200: application/pdf
+Errors: 404 not_found, 500 pdf_failed.
+
+## GET /api/public/i/:publicId/pdf
+The invoice PDF download.
+Response 200: application/pdf
+Errors: 404 not_found, 500 pdf_failed.
+
+# ============================================================
+# PART 21 — THE FILES NEW ROUTE
+# ============================================================
+
+## POST /api/files/upload
+The upload. Checks the plan's storage limit against the `file_uploads` table. Stores the file in B2.
+Body: multipart (file, prefix?)
+Response 201: { success: true, key, url }
+Errors: 400 invalid_payload (no file, > 10 MB), 403 plan_limit_reached (storage full), 500 upload_failed.
+
+# ============================================================
+# END OF THE NEW ROUTES
+# ============================================================
