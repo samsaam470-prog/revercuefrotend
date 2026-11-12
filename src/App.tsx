@@ -52,7 +52,6 @@ export default function App() {
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="/terms" element={<TermsPage />} />
       <Route path="/security" element={<SecurityPage />} />
-
       <Route path="/dashboard" element={<DashboardOverviewPage />} />
       <Route path="/proposals" element={<ProposalsListPage />} />
       <Route path="/contracts" element={<ContractsListPage />} />
@@ -60,15 +59,12 @@ export default function App() {
       <Route path="/invoices" element={<InvoicesListPage />} />
       <Route path="/settings" element={<SettingsPage />} />
       <Route path="/notifications" element={<NotificationsPage />} />
-
       <Route path="/proposals/new" element={<ProposalBuilderPage />} />
       <Route path="/contracts/new" element={<ContractBuilderPage />} />
       <Route path="/forms/new" element={<FormEditorPage />} />
       <Route path="/invoices/new" element={<InvoiceBuilderPage />} />
-
       <Route path="/crm" element={<CrmListPage />} />
       <Route path="/crm/:id" element={<ClientDetailPage />} />
-
       <Route path="/p/:publicId" element={<PublicProposalPage />} />
       <Route path="/c/:publicId" element={<PublicContractPage />} />
       <Route path="/i/:publicId" element={<PublicInvoicePage />} />
@@ -76,7 +72,6 @@ export default function App() {
       <Route path="/unlock" element={<PasswordWall />} />
       <Route path="/closed" element={<ClosedPage />} />
       <Route path="/proof" element={<ProofUploadPage />} />
-
       <Route path="/403" element={<ForbiddenPage />} />
       <Route path="/500" element={<ServerErrorPage />} />
       <Route path="/offline" element={<OfflinePage />} />
