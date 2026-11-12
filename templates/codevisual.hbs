@@ -1,0 +1,10 @@
+﻿export function {{NAME}}({ scale = {{SCALE}} }: { scale?: number }) {
+  return (
+    <div className="code-visual" style={{ transform: `scale(${scale})`, transformOrigin: 'top left' }}>
+      <div className="code-visual-header">{{LABEL}}</div>
+      <div className="code-visual-body">
+        {{BODY}}
+      </div>
+    </div>
+  );
+}
