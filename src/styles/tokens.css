@@ -1,0 +1,25 @@
+﻿:root {
+  --bg-base: #0A0A0A;
+  --bg-card: #141414;
+  --bg-elevated: #1C1C1C;
+  --border: #2A2A2A;
+  --border-strong: #3A3A3A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A0A0A0;
+  --text-tertiary: #6B6B6B;
+  --gold: #C9A961;
+  --gold-hover: #D9B971;
+  --gold-soft: rgba(201, 169, 97, 0.12);
+  --green: #4ADE80;
+  --red: #F87171;
+  --amber: #FBBF24;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --radius-card: 8px; --radius-modal: 12px; --radius-button: 6px; --radius-input: 6px; --radius-pill: 999px;
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-gold-glow: 0 40px 120px rgba(201, 169, 97, 0.15);
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+}
