@@ -1,0 +1,63 @@
+﻿# REVERCUE — THE THEME MODES
+# File: mode.txt
+# The three modes: dark (the default), light, and system (the default mode follows the OS).
+# The rules: no "AI", no "MVP", no "Payoneer", Teams in beta. The gold rule. The six states.
+
+## THE THREE MODES
+
+### 1. Dark (the default, the brand)
+The product's identity. The dark base, the gold, the serif headlines.
+--bg-base: #0A0A0A;
+--bg-card: #141414;
+--bg-elevated: #1C1C1C;
+--border: #2A2A2A;
+--border-strong: #3A3A3A;
+--text-primary: #FFFFFF;
+--text-secondary: #A0A0A0;
+--text-tertiary: #6B6B6B;
+--gold: #C9A961;
+--gold-hover: #D9B971;
+--gold-soft: rgba(201, 169, 97, 0.12);
+--green: #4ADE80;
+--red: #F87171;
+--amber: #FBBF24;
+
+### 2. Light (the optional)
+The same structure, the inverted palette. The gold stays (the brand). The dark base becomes the light base.
+--bg-base: #FAFAFA;
+--bg-card: #FFFFFF;
+--bg-elevated: #F0F0F0;
+--border: #E0E0E0;
+--border-strong: #C0C0C0;
+--text-primary: #111111;
+--text-secondary: #555555;
+--text-tertiary: #888888;
+--gold: #B8943F;
+--gold-hover: #C9A961;
+--gold-soft: rgba(184, 148, 63, 0.12);
+--green: #22C55E;
+--red: #EF4444;
+--amber: #F59E0B;
+
+### 3. System (the default mode)
+The mode follows the OS preference (the `prefers-color-scheme`). If the OS is dark, the app is dark. If the OS is light, the app is light.
+The system mode is the **default** for a new user. The user can change it in Settings -> Appearance.
+
+## THE TOGGLE (Settings -> Appearance)
+A segmented control: [Dark] [Light] [System]. The current mode is highlighted (the gold).
+The "System" label: "Follow your device's setting."
+The change is saved to `localStorage` (`revercue_mode`: `dark` | `light` | `system`).
+On app load, the `ThemeProvider` reads the `localStorage` and applies the mode. If `system`, it reads the `prefers-color-scheme` media query.
+
+## THE CSS
+The `tokens.css` has the `:root` (dark) and the `[data-theme="light"]` (light). The `ThemeProvider` sets the `data-theme` attribute on the `<html>`.
+The components use the CSS variables (no hardcoded colours). The gold rule holds in both modes: the gold is the accent, the primary button.
+The public site, the dashboard, the builders, the client pages, the admin: all use the same tokens. The mode is global.
+
+## THE RULES
+- The dark mode is the default. The light mode is optional. The system mode is the default for a new user.
+- The gold is the accent in both modes. The gold rule holds.
+- The six states (default, hover, focus, active, disabled, loading, error) are in both modes.
+- No "AI", no "MVP", no "Payoneer", Teams in beta (the copy).
+- The FormSubmit copy is exact.
+- The auto-save, the notification badge (piggybacked), the gold rule: unchanged in both modes.

@@ -1,283 +1,81 @@
-# REVERCUE — DASHBOARD BLUEPRINT
+﻿# REVERCUE — DASHBOARD BLUEPRINT
 # File: dashboard.txt
-# Purpose: The authenticated dashboard. The shell, the Overview, the list screens, the settings.
-# Audience: The AI building the frontend. Read architecture.txt, design.txt, and workflow.txt first.
-# The builders (proposal, contract, form, invoice) have their own files. This file covers the shell, the Overview, the four list screens, the CRM list, and the settings pages.
+# The authenticated dashboard. The shell, the Overview, the list screens, the settings, the notifications.
+# The rules: no "AI", no "MVP", no "Payoneer", Teams in beta. The gold rule. The six states. The dark/light/system mode.
 
-# ============================================================
-# PART 1 — THE SHELL (AppLayout)
-# ============================================================
+## THE SHELL
+### The top bar (AppHeader)
+Sticky, 64px, bg var(--bg-base), 1px bottom border.
+Left: the logo. Center: the 7 nav (Dashboard, Proposals, Contracts, Forms, Invoices, CRM, Settings). Active: gold underline. Right: the NotificationBell (the unread badge, piggybacked) + the avatar (Profile, Settings, Log out).
+Mobile (<768px): the logo left, the bell right, a hamburger.
 
-The shell is the frame around every authenticated page.
+### The sidebar (AppSidebar)
+Contextual: Dashboard (hidden), Proposals (the filters + Create), Contracts, Forms, Invoices (the filters), CRM (the filters + Add client), Settings (the 9 sections).
+240px, bg var(--bg-base), 1px right border. Active: 2px gold left border.
+Mobile: a bottom sheet.
 
-## The top bar (AppHeader)
-Sticky, 64px, bg var(--bg-base), 1px bottom border var(--border).
-Left: the Revercue logo ("[R] Revercue").
-Center: seven nav items (Dashboard, Proposals, Contracts, Forms, Invoices, CRM, Settings). Label 13px, weight 500, color var(--text-secondary). Active: color var(--text-primary), 2px gold underline. Hover: color var(--text-primary).
-Right: the NotificationBell (bell + unread badge) + the avatar (a circle with the user's initial, opens a dropdown: Profile, Settings, Log out).
-Mobile (<768px): the logo left, the bell right, a hamburger that opens the full-screen nav overlay.
+### The notification bell
+The unread count from the page response (the dashboard summary, the list responses). No poll. Click: the dropdown (380px, the last 10). Footer: View all -> /notifications.
 
-## The sidebar (AppSidebar)
-Contextual. The sidebar content changes per section:
-  Dashboard: hidden (full-width).
-  Proposals: the filters (All, Drafts, Published, Archived) + "Create proposal" (gold).
-  Contracts: the filters + "Create contract".
-  Forms: the filters + "Create form".
-  Invoices: the filters (All, Drafts, Published, Paid, Overdue) + "Create invoice".
-  CRM: the filters (All, Active, Archived, Not interested) + "+ Add client".
-  Settings: the settings nav (Profile, Plan & Billing, Security, Notifications, Saved FAQs, Saved Packages, Revision Prices, What Revercue Knows, Delete Account).
-Style: 240px wide, bg var(--bg-base), 1px right border. The active item: 2px gold left border, bg var(--bg-elevated).
-Mobile: the sidebar becomes a bottom sheet (a "Filters" button at the top of the content).
+## THE OVERVIEW (/dashboard)
+1. The FormSubmit banner (if not activated): "Activate FormSubmit to receive emails. We sent an activation email to [email]. Click the link. One-time step." [I clicked] [x].
+2. The greeting (serif 32px): "Good morning, [Name]." The date (caption).
+3. The stat strip (4 cards): Active documents, Clients, Follow-ups due (red if >0), Revenue this month. Each card links.
+4. The pending line: "Pending payments: $4,200 (3 invoices)." The overdue: red. Links to /invoices?filter=pending.
+5. The suggested actions (Growth basic, Scale advanced): a card with the list (max 5). "Do it" (gold text), "Dismiss" (ghost). Free/Starter: hidden.
+6. The create row: "Create proposal" (gold), "Create contract", "Create invoice", "Create form" (ghost).
+7. The recent activity: the last 10. Empty: "Nothing yet."
+8. The empty state (first login): "Welcome to Revercue. You don't have any documents yet." + "Create your first proposal" (gold) + "Read the Guides."
 
-## The notification bell (NotificationBell)
-The unread count is piggybacked on the page responses (the dashboard summary, the list responses). The bell reads it from the last response, not a separate poll.
-Click the bell: a dropdown (380px wide, bg var(--bg-card), 1px border, 8px radius, max-height 480px, scrollable) with:
-  Header: "Notifications" + "Mark all as read" (ghost text).
-  The list: the last 10 notifications, each with an icon, a one-line description, a relative timestamp. Unread rows have a gold left border and a lighter background.
-  Footer: "View all" (ghost) -> /notifications.
-Empty state: "No notifications yet. You'll see client activity here."
+## THE 4 LIST SCREENS
+Each: the header (the title + the Create gold), the filter bar (the pills), the search, the table (the Table component), the empty state, the loading (skeleton), the error (retry).
+- Proposals: Title, Client, Status, Last activity, Actions (Duplicate, Archive, Delete).
+- Contracts: Title, Client, Status, After approval, Last activity.
+- Forms: Title, Client, Status, Submissions, Last activity.
+- Invoices: Invoice #, Client, Status, Total, Due date, Last activity. The filter: All / Drafts / Published / Paid / Overdue / Pending.
 
-# ============================================================
-# PART 2 — THE DASHBOARD OVERVIEW (/dashboard)
-# ============================================================
+## THE CRM LIST (/crm)
+The header: "Clients" + "+ Add client" (gold) + "Export CSV".
+The filter: All / Active / Archived / Not interested. The search. The sort.
+The table: Name, Email, Channel, Last message, Documents, Latest status, Interest (Scale), Actions.
+The Add client modal: name, email, company, phone, channel.
+The empty state: "No clients yet. Create a proposal, contract, invoice, or form — the client is added automatically. Or add one manually."
 
-This is the first screen after onboarding. It answers: "What needs my attention today?"
+## THE CLIENT DETAIL (/crm/:id)
+The header: the name, the email (mono), the company, the channel, the interest badge (Scale), the "Create proposal/contract/invoice/form" buttons.
+The communication log (the main body, the timeline): the icon, the direction, the channel, the message, the estimated time, the linked document, the next step, the follow-up date, the relative time, the Mark done.
+The documents (grouped: Proposals, Contracts, Invoices, Forms).
+The notes (Free 3, Starter 10, Growth+ unlimited). The limit message.
+The follow-ups (the open, the Mark done).
+The interest breakdown (Scale): the modal (the score, the signals, the arithmetic).
+The revenue tab (Scale): the earned, the spent, the profit, the expense list, the price suggestion.
+The writing area (the modal): the client pre-selected, the message, the helper (if available), the "Copy message" (Revercue does not send), the "Save to log."
 
-Top to bottom:
+## THE SETTINGS (/settings)
+The left nav: Profile, Plan & Billing, Security, Notifications, Saved FAQs, Saved Packages, Revision Prices, What Revercue Knows, Appearance, Delete Account.
+Each section: a card + "Save changes" (gold, disabled until a change) + "Cancel."
+- Profile: name, email (read-only), business, website, Fiverr, services, brand colours, logo.
+- Plan & Billing: the current plan, the usage bars (red at 90%), the waitlist status (not the payment history), the upgrade (the waitlist modal).
+- Security: the password change (the current, the new, the confirm), the 2FA toggle, the sessions list, the log out all.
+- Notifications: the email notifications (Growth/Scale), the per-event toggles, the newsletter, the FormSubmit status card.
+- Saved FAQs (Growth/Scale): the list, the Add FAQ, the Keep it (the 10-day warning).
+- Saved Packages (Growth/Scale): the list, the Add package, the Keep it.
+- Revision Prices (Scale/Teams): the category + price list.
+- What Revercue Knows (Scale/Teams): the read-only transparency page.
+- Appearance: the [Dark] [Light] [System] segmented control. The current mode. The change saves to localStorage.
+- Delete Account: the danger card, the type-your-email confirmation, the 5-day grace, the cancel.
 
-## 1. The FormSubmit banner (conditional)
-Shown only if formsubmit_activated = false AND banner_dismissed = false AND the tutorial has ended.
-Full width, bg var(--bg-card), 1px gold border, 8px radius, 16px 24px padding.
-Content: a gold info icon left, the text middle, two buttons right:
-  "I clicked the activation link" (gold).
-  "×" (ghost).
-Text: "Activate FormSubmit to receive emails. We sent an activation email to [email]. Click the link. One-time step."
-Clicking either button hides the banner permanently (PATCH /api/settings/formsubmit-activate or banner_dismissed = true).
+## THE NOTIFICATIONS PAGE (/notifications)
+The header: "Notifications" + "Mark all as read." The filter: All / Unread / Client activity / System. The list (25/page): the icon, the description, the relative time, the link, the dismiss. The empty: "No notifications yet."
 
-## 2. The greeting
-Headline (serif, 32px): "Good morning, [Name]." (The time-of-day variant: morning/afternoon/evening.)
-Caption (12px, var(--text-tertiary)): the date, e.g., "Tuesday, November 11, 2026."
-Not a card. A human greeting.
-
-## 3. The stat strip
-Four cards in a row (2x2 on mobile). Each card: bg var(--bg-card), 1px border, 8px radius, 24px padding. A click target (the whole card is a link).
-  Card 1: the number (24px, weight 600, white), the label "Active documents" (12px, var(--text-secondary)). Links to /proposals?status=published.
-  Card 2: the number, "Clients". Links to /crm.
-  Card 3: the number, "Follow-ups due today". The number is red if > 0. Links to /crm?filter=follow-ups-due.
-  Card 4: the number (e.g., "$2,900"), "Revenue this month". Links to /invoices?status=confirmed.
-On Free/Starter/Growth, a small caption below the revenue card: "Profit: available on Scale." (The lock is a one-line teaser.)
-Data: GET /api/dashboard/summary (one call, returns all four + the pending + the unread count).
-
-## 4. The pending payments line
-Below the stat strip, a single line (14px, var(--text-secondary)):
-  "Pending payments: $4,200 (3 invoices)."
-If any is overdue, a second line in red: "Overdue: $1,200 (1 invoice)."
-Clicking opens /invoices?filter=pending.
-
-## 5. The suggested actions (Growth basic, Scale advanced)
-A card (bg var(--bg-card), 1px border, 8px radius, 24px padding).
-Title: "Suggested actions" (20px, weight 600).
-A list (max 5), each item:
-  An icon (follow-up clock, document suggestion, interest flag).
-  A one-line description (e.g., "Follow up with Acme Co. — proposal sent 2 days ago, no response.").
-  Two buttons: "Do it" (gold text button), "Dismiss" (ghost text button).
-Clicking "Do it" runs the suggestion's action (open the client record, create the contract, etc.).
-Clicking "Dismiss" removes the suggestion for that client/document (does not reappear).
-Free/Starter: the card is not shown at all.
-Empty state: "Nothing needs your attention right now."
-
-## 6. The create row
-Four buttons: "Create proposal" (gold), "Create contract" (ghost), "Create invoice" (ghost), "Create form" (ghost).
-These are Create, not Send. The label is the correction.
-Each opens the corresponding requirement form (/proposals/new, /contracts/new, /invoices/new, /forms/new).
-
-## 7. The recent activity
-A card (bg var(--bg-card), 1px border, 8px radius, 24px padding).
-Title: "Recent activity" (20px, weight 600).
-A list of the last 10 events (from GET /api/dashboard/activity?limit=10). Each: an icon, a one-line description ("Acme Co. opened the proposal."), a relative timestamp ("2 hours ago"), a link to the client/document.
-Empty state: "Nothing yet. Your activity will appear here."
-
-## 8. The empty state (first login)
-If no documents AND no clients, sections 3-7 are replaced by a centered card:
-  "Welcome to Revercue. You don't have any documents yet." (headline serif).
-  "Create your first proposal" (gold) + "Read the Guides" (ghost).
-The stat strip still shows zeros (honest).
-
-## The design rules for the Overview
-Gold is only on the FormSubmit banner button and the "Create proposal" button.
-The stat strip is four cards, never five. The pending is a line, not a fifth card.
-The activity feed is the last card, not the first.
-No charts. The revenue is a number. A chart is a v2 feature.
-Every card has a skeleton loading state and an empty state.
-
-# ============================================================
-# PART 3 — THE FOUR LIST SCREENS
-# ============================================================
-
-## Proposals list (/proposals)
-Header: "Proposals" (headline serif) + "Create proposal" (gold) top-right.
-A filter bar: All / Drafts / Published / Archived (pills). The active pill is gold.
-A search input (filters by title or client name, debounced).
-A table (the Table component):
-  Columns: Title, Client, Status (StatusBadge), Last activity (relative), Actions (⋮).
-  Row click: the builder (/proposals/:id/edit).
-  ⋮ menu: Duplicate, Archive, Delete.
-Data: GET /api/proposals?status=&page=&limit=.
-Empty state: "No proposals yet. Create your first proposal." + the CTA.
-Loading: skeleton rows.
-Error: "Could not load proposals. Retry." + a retry button.
-
-## Contracts list (/contracts)
-Same structure. Columns: Title, Client, Status, After approval (form/invoice/pdf), Last activity.
-The status values: draft, published, approved, declined, archived.
-The ⋮ menu: Archive, Delete.
-
-## Forms list (/forms)
-Same structure. Columns: Title, Client (or "—" if not linked), Status, Submissions (count), Last activity.
-The status values: draft, published, closed, archived.
-
-## Invoices list (/invoices)
-Same structure. Columns: Invoice #, Client, Status, Total, Due date, Last activity.
-The status values: draft, published, proof_submitted, confirmed, verified, overdue, archived.
-The filter: All / Drafts / Published / Paid / Overdue / Pending.
-The ⋮ menu: Confirm payment (if proof_submitted), Archive, Delete.
-
-# ============================================================
-# PART 4 — THE CRM LIST (/crm)
-# ============================================================
-
-Header: "Clients" (headline serif) + "+ Add client" (gold) + "Export CSV" (ghost).
-A filter bar: All / Active / Archived / Not interested. A search. A sort (Last activity / Name / Date added).
-A table:
-  Columns: Name, Email, Channel (a badge), Last message (relative), Documents (count), Latest status (the most recent document's status), Interest (Scale only — a badge with the 0-100 level), Actions (⋮).
-  Row click: the client detail (/crm/:clientId).
-  ⋮ menu: Edit, Archive, Mark not interested (Scale), Delete.
-The "Add client" modal: name, email, company, phone, channel. On submit, POST /api/crm/clients.
-The "Export CSV" button: GET /api/crm/clients/export, the browser downloads.
-Empty state: "No clients yet. Create a proposal, contract, invoice, or form — the client is added automatically. Or add one manually." + the CTA.
-On Free: creating a document for a new client shows a notification "Add [email] to your CRM?" (the auto-add is Starter+).
-
-# ============================================================
-# PART 5 — THE CLIENT DETAIL (/crm/:clientId)
-# ============================================================
-
-The client record is the thread's home. It is a vertical page, not a modal.
-
-## Header
-The client name (headline serif), the email (mono, copyable), the company, the channel badge.
-The interest badge (Scale): a pill with the 0-100 level and the label (low/medium/high).
-The "Create proposal / contract / invoice / form" buttons (the thread continues from the client record).
-
-## The communication log (the main body)
-A timeline, newest first. Each entry:
-  An icon per type (message_sent, reply_received, follow_up, follow_up_done, document_created, document_shared).
-  The direction (outgoing/incoming) for messages.
-  The channel badge.
-  The message text.
-  The estimated time (if set).
-  The linked document (if any).
-  The next step + the follow-up date (if set).
-  The relative timestamp.
-  A "Mark done" button on follow-ups (PATCH /api/crm/communication/:id with follow_up_done = 1).
-An "Add communication" button (gold text) opens the writing area:
-  Entry type, direction, channel, message text, estimated time, linked document (dropdown), next step, follow-up date.
-  POST /api/crm/clients/:id/communication.
-Empty state: "No communication yet. Add the first entry."
-
-## The documents (grouped by type)
-Four groups: Proposals, Contracts, Invoices, Forms. Each is a small table (title, status, last activity, a link to the builder or the public view).
-The archived documents appear with a grey "Archived" badge.
-
-## The notes (plan-limited)
-A list of notes (newest first). An "Add note" textarea + "Save" (gold).
-Free: 3 per client. Starter: 10. Growth+: unlimited.
-When the limit is reached: "You have 3 of 3 notes. Upgrade to add more." + the upgrade link.
-
-## The follow-ups
-A list of the open follow-ups (from the communication log, where follow_up_done = 0 and follow_up_date <= now). Each: the next step, the date (relative), a "Mark done" button.
-
-## The interest breakdown (Scale)
-Clicking the interest badge opens a modal:
-  The 0-100 score, the label.
-  The signals: message count, last message direction, proposal opened, proposal answered, contract approved, invoice paid, days since last interaction, marked not interested.
-  The arithmetic: the base 50, the +/− per signal.
-  The one-line: "This is arithmetic, not AI. It uses your communication log and the document tracking."
-
-# ============================================================
-# PART 6 — THE SETTINGS PAGES (/settings)
-# ============================================================
-
-The settings shell: a left nav (the settings sections) + a content card per section.
-Every section: a card (bg var(--bg-card), 1px border, 8px radius, 24px padding) with a "Save changes" (gold, disabled until a change) + "Cancel" (ghost).
-
-## Profile
-Personal info: name (required), email (read-only, "To change your email, contact support."), business name, website (validated), Fiverr profile (validated).
-Services: a checkbox group (Design, Development, Copywriting, Video, Marketing/SEO, Consulting, Other). "Other" reveals a text input.
-Brand: two colour pickers (primary, secondary), a logo upload (PNG/SVG, max 1 MB), a preview.
-PATCH /api/settings/profile. POST /api/settings/logo for the logo.
-
-## Plan & Billing
-Current plan: the plan name, the price, the renewal date.
-Usage this month: four progress bars (active documents, storage, archive, password-protected). Red at 90%.
-Payment history: a table (date, plan, amount, method, reference, status) + a "Download receipt" link per row.
-Actions: "Upgrade plan" (opens the plan comparison modal), "Downgrade plan" (opens the downgrade flow), "Add-ons" (Scale only).
-The upgrade modal: the plan cards, "Select", "Pay via Payoneer to [email], send the receipt to [email], and your account will be upgraded within 24 hours." + "Copy Payoneer email".
-The downgrade flow: the document selection, the "Confirm downgrade", the 7-day grace.
-
-## Security
-Password: current password, new password (strength indicator), confirm. "Update password" (gold). PATCH /api/settings/security/change-password. On success, a confirmation email and all other sessions revoked.
-2FA: a toggle. Turning on/off requires the current password. POST /api/settings/security/2fa.
-Active sessions: a list (device, browser, IP hashed, last active, location). Each with a "Log out" button. A "Log out all other sessions" (gold outline). GET /api/settings/security/sessions, POST /sessions/:id/logout, POST /sessions/logout-all.
-
-## Notifications
-Email notifications (Growth/Scale): a master toggle + per-event toggles (proposal opened, accepted/declined, contract approved/declined, form submitted, invoice paid, proof uploaded). Free/Starter: the card says "Email notifications are available on Growth and Scale. Upgrade."
-Newsletter: a toggle (the marketing opt-in, separate from the transactional emails).
-FormSubmit status card: "Activated ✅" or "Not activated ⚠️" + the "I clicked the activation link" button.
-PATCH /api/settings/notifications, POST /api/settings/formsubmit-activate.
-
-## Saved FAQs (Growth/Scale)
-A list of saved FAQs (question, answer, title, last used, a deletion warning if within 10 days). An "Add FAQ" form. A "Keep it" button on the warning. GET/POST/DELETE /api/settings/saved-faqs, POST /:id/keep.
-Limits: Growth 10, Scale 30. 3-month retention.
-
-## Saved Packages (Growth/Scale)
-A list of saved packages (name, price, deliverables, description, Recommended flag, last used, the 10-day warning). An "Add package" form. GET/POST/DELETE /api/settings/saved-packages, POST /:id/keep.
-Limits: Growth 10, Scale 15. 3-month retention.
-
-## Revision Prices (Scale/Teams)
-A list of categories, each with a price (optional). The freelancer sets a revision price per category (e.g., "Design revision: $50"). The client sees the price on the revision request. GET/PATCH /api/settings/revision-prices.
-
-## What Revercue Knows (Scale/Teams)
-The read-only transparency page. Sections: account data, private data, what the team can see, what is encrypted, what is shared with third parties, what you can do with your data, what Revercue does not know. GET /api/settings/what-revercue-knows.
-
-## Delete Account
-The danger card: "This permanently deletes your account, your documents, your client records, and your communication log. You have 5 days to change your mind. Before deletion, we email you a copy of your documents and client records."
-The "Delete my account" (red). The confirmation modal: type your email to confirm. POST /api/settings/delete-account.
-During the 5 days: a banner on login "Your account is scheduled for deletion on [date]. [Cancel deletion]." POST /api/settings/cancel-deletion.
-
-# ============================================================
-# PART 7 — THE NOTIFICATIONS PAGE (/notifications)
-# ============================================================
-
-Header: "Notifications" (headline serif) + "Mark all as read" (ghost).
-A filter: All / Unread / Client activity / System.
-A list (paginated, 25 per page) of all notifications. Each: an icon, a description, a relative timestamp, a link. Unread rows have a gold left border. A × to dismiss.
-Empty state: "No notifications yet. You'll see client activity here."
-GET /api/notifications?page=&filter=, PATCH /read-all, DELETE /:id.
-
-# ============================================================
-# PART 8 — THE DESIGN RULES FOR THE DASHBOARD
-# ============================================================
-
-Gold is for one thing per screen: the primary action. On the Overview, it is the "Create proposal" button (and the FormSubmit banner button). On the lists, it is the "Create [document]" button. On settings, it is the "Save changes".
-Every list has: a loading skeleton, an empty state (with a CTA), an error state (with a retry).
-Every destructive action has a confirmation modal.
-Every plan gate shows the upgrade message, not a silent failure.
-Every card has a job. If a card does not answer "what do I do next," it is removed.
-The stat strip is four cards. The pending is a line. The activity is the last card. No charts in MVP 1.0.
-The client detail is the thread's home: the communication log is the main body, the documents are grouped, the notes are plan-limited, the follow-ups are actionable.
-The settings are cards. Each section saves explicitly (no auto-save in settings). The "Save changes" is disabled until a change is made.
-The FormSubmit copy is exact on the banner, the status card, and the upgrade prompts.
-
-# ============================================================
-# END OF DASHBOARD BLUEPRINT
-# ============================================================
+## THE DESIGN RULES
+The gold rule: one gold per screen (the Create, the Save changes).
+The six states: every interactive element.
+The empty state: every list.
+The loading: the skeleton.
+The error: the retry.
+The dark/light/system mode: the tokens.
+The client record: the thread's home. The communication log is the main body.
+The settings: the appearance section (the dark/light/system).
+The FormSubmit copy: exact.
+No "AI", no "MVP", no "Payoneer", Teams in beta.

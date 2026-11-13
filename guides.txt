@@ -2,6 +2,7 @@
 # File: guides.txt
 # The public guides. Each is a page (/guides/:slug) with a max-width 720px, a serif headline, a sans body, a sticky TOC on desktop, a "Start Free" CTA at the end.
 # Each guide has a meta description and a CodeVisual (not a screenshot).
+# The rules: no "AI", no "MVP", no "Payoneer", Teams in beta.
 
 ## 1. Getting started (/guides/getting-started)
 The signup, the onboarding, the first proposal. The 5-minute path. The CodeVisual: the DashboardVisual.
@@ -34,7 +35,7 @@ The 13 blocks: the heading, the paragraph, the image, the chart, the diagram, th
 How the pipeline decides the visuals, how the template's zones work, how to edit the visuals. The CodeVisual: the BuilderVisual with the zones highlighted.
 
 ## 11. The design system (/guides/design-system)
-The colours, the fonts, the spacing, the components. Why the design is dark, why the gold, why the serif. The CodeVisual: the component library.
+The colours, the fonts, the spacing, the components. Why the design is dark, why the gold, why the serif. The three modes (dark, light, system). The CodeVisual: the component library.
 
 ## 12. The tracking (/guides/tracking)
 What is tracked on each plan, how to read the activity, the 5-day retention. The CodeVisual: the DashboardVisual with the activity feed.
@@ -46,7 +47,7 @@ The follow-up, the document suggestion, the interest flag, the price suggestion.
 The built-in templates, the custom templates, the upload, the URL, the blank. The CodeVisual: the template selection screen.
 
 ## 15. The settings (/guides/settings)
-The profile, the plan, the security, the notifications, the saved FAQs, the saved packages, the what-revercue-knows, the delete account. The CodeVisual: the settings pages.
+The profile, the plan, the security, the notifications, the saved FAQs, the saved packages, the what-revercue-knows, the delete account, the appearance (the dark/light/system). The CodeVisual: the settings pages.
 
 ## 16. The privacy and the data (/guides/privacy)
 What is stored, who can see it, the retention, the export, the delete. The CodeVisual: the SecurityVisual.
