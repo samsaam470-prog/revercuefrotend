@@ -1,20 +1,17 @@
 ﻿# REVERCUE — THE COMPARISON
 # File: compare.txt
-# The /compare page. A factual comparison between Revercue and the alternatives. No competitor bashing.
-# Every claim must be true. The alternatives are good tools; they are just not the thread.
+# The /compare page. A factual comparison. No competitor bashing.
 
-## The alternatives (the three columns)
+## The alternatives
+1. Revercue — the thread: proposal, contract, form, invoice, CRM.
+2. PDF + email — the traditional way.
+3. Notion — the all-purpose workspace.
 
-1. **Revercue** — the thread: proposal, contract, form, invoice, CRM, in one place.
-2. **PDF + email** — the traditional way: a PDF attached to an email.
-3. **Notion** — the all-purpose workspace: pages, databases, docs.
-
-## The comparison table (the rows are the jobs)
-
+## The comparison table
 | The job | Revercue | PDF + email | Notion |
 |---|---|---|---|
-| Proposal | Interactive link: packages, FAQs, embedded questions, the client selects a package. | A static PDF. The client replies by email. | A page. The client reads it. No package selection, no tracking. |
-| Contract | Approve, Decline, or I Have Questions. The after-approval chain (form or invoice). | A PDF. The client signs and emails it back. | A page. The client reads it. No approve/decline. |
+| Proposal | Interactive link: packages, FAQs, embedded questions, the client selects a package. | A static PDF. The client replies by email. | A page. The client reads it. No package selection. |
+| Contract | Approve, Decline, or I Have Questions. The after-approval chain. | A PDF. The client signs and emails it back. | A page. The client reads it. No approve/decline. |
 | Requirement form | Adaptive form with branching. The Prompt Creator on submit. | A Word doc or a Google Form. Manual. | A database or a page. Manual. |
 | Invoice | Pay by link or account details + proof upload. The confirm payment. | A PDF. The client pays by bank transfer and emails the receipt. | A page. No payment. |
 | Client record | Builds itself from the documents. The communication log, the notes, the follow-ups, the interest level (Scale). | None. The client is a name in the inbox. | A database. Manual. The client is a row. |
@@ -24,13 +21,8 @@
 | Price | Free (available now). The paid plans are invite-only (join the waitlist). Teams is in beta (join the beta). | Free. | Free tier, then paid. |
 | The design | The dark base, the gold, the serif headlines, the mono for copyables. The code-made visuals. | The PDF template. | The Notion template. |
 
-## The one paragraph (what Revercue is not)
-
-> "Revercue is not a CRM replacement. It is not a project manager. It is not an accounting tool. It is the thread: the proposal, the contract, the form, the invoice, and the client record, in one place. If you already have a CRM, Revercue can sit next to it. If you already have an accounting tool, Revercue can sit next to it. The thread is the gap; the other tools are the rest."
+## What Revercue is not
+Revercue is not a CRM replacement. It is not a project manager. It is not an accounting tool. It is the thread: the proposal, the contract, the form, the invoice, and the client record, in one place. If you already have a CRM, Revercue can sit next to it. If you already have an accounting tool, Revercue can sit next to it. The thread is the gap; the other tools are the rest.
 
 ## The rules
-- No competitor bashing. The alternatives are good tools. They are not the thread.
-- Every claim is true. The tracking is by plan. The suggestions are on Growth/Scale. The Teams plan is in beta.
-- No "AI" in the comparison. The product uses patterns.
-- No "MVP". The plans are "available now" / "invite-only" / "in beta".
-- No "Payoneer". The paid plans are invite-only. Join the waitlist.
+No competitor bashing. Every claim is true. No "AI" in the comparison. The product uses patterns. No "MVP". The plans are "available now" / "invite-only" / "in beta". No "Payoneer". The paid plans are invite-only. Join the waitlist.
