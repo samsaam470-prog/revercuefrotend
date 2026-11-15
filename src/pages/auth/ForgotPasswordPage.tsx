@@ -41,7 +41,7 @@ export function ForgotPasswordPage() {
       <p className="eyebrow">Password reset</p>
       <h1>Reset your password.</h1>
       <p className="lede">
-        Enter your email. If the account exists, FormSubmit sends a reset code. We answer the same way
+        Enter your email. If the account exists, we send a reset code by email. We answer the same way
         whether or not the address is registered.
       </p>
       <form className="auth-form" onSubmit={submit} noValidate>

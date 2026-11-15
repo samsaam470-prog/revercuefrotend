@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "../../components/ui/Checkbox";
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 import { authApi } from "../../api/auth";
+import { GoogleButton } from "../../components/shared/GoogleButton";
 import { preAuthStore } from "../../lib/storage";
 import { emailSchema, passwordStrength, passwordSchema, strengthLabel } from "../../lib/validators";
 import { errorMessage, fieldErrors } from "../../lib/errors";
 import { ApiError } from "../../types/api";
-
-const GOOGLE_CLIENT_ID = (import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined) || "";
 
 export function SignupPage() {
   const navigate = useNavigate();
@@ -98,26 +97,7 @@ export function SignupPage() {
           {password && <p className="caption">{strengthLabel(score)} password</p>}
         </div>
 
-        <Button
-          type="button"
-          variant="secondary"
-          fullWidth
-          onClick={() => {
-            if (!GOOGLE_CLIENT_ID) {
-              setFormError(
-                "Google sign-in is not configured for this build. Use email and password, or ask the team to enable the Google client.",
-              );
-              return;
-            }
-            window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(
-              GOOGLE_CLIENT_ID,
-            )}&redirect_uri=${encodeURIComponent(`${window.location.origin}/signup/transition`)}&response_type=token%20id_token&scope=openid%20email%20profile&nonce=${Math.random()
-              .toString(36)
-              .slice(2)}`;
-          }}
-        >
-          Continue with Google
-        </Button>
+        <GoogleButton />
 
         <Checkbox
           id="signup-tos"
@@ -156,10 +136,6 @@ export function SignupPage() {
 
       <p className="auth-alt">
         Already have an account? <Link to="/login">Log in</Link>
-      </p>
-      <p className="auth-foot">
-        The activation email is about transactional mail, app notifications and security alerts. It
-        does not opt you in to the newsletter.
       </p>
     </div>
   );

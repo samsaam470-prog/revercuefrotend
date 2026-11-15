@@ -3,7 +3,9 @@ import type { Paginated } from "../types/api";
 import type { DocumentSummary, Invoice, LineItem, PaymentArrangement } from "../types";
 
 export interface InvoiceDraftPayload {
-  client_id: string;
+  client_id?: string;
+  client_name?: string;
+  client_email?: string;
   linked_contract_id?: string;
   line_items: LineItem[];
   currency: string;

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowDown, ArrowUp, Plus, Trash2 } from "lucide-react";
 import { formsApi } from "../../api/forms";
+import { crmApi } from "../../api/crm";
 import { TopBar } from "../../components/builder/TopBar";
 import { ShareModal } from "../../components/builder/ShareModal";
 import { Modal } from "../../components/ui/Modal";
@@ -51,13 +52,25 @@ export function FormEditorPage() {
   const [questions, setQuestions] = useState<FormQuestion[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const [pageMode, setPageMode] = useState<"single" | "multi">("single");
-  const [thankYou, setThankYou] = useState({ heading: "", body: "" });
+  const [thankYou, setThankYou] = useState({
+    heading: "",
+    body: "",
+    button_text: "",
+    button_url: "",
+    logo_url: "",
+  });
+  const [clientId, setClientId] = useState("");
+  const [expiry, setExpiry] = useState("");
   const [testOpen, setTestOpen] = useState(false);
   const [share, setShare] = useState<{ url: string } | null>(null);
   const [creating, setCreating] = useState(false);
   const [initialised, setInitialised] = useState(false);
 
   const form = query.data?.form;
+  const clients = useQuery({
+    queryKey: ["crm", "clients", "picker"],
+    queryFn: () => crmApi.list({ limit: 100 }),
+  });
 
   useEffect(() => {
     if (!form || initialised) return;
@@ -68,7 +81,12 @@ export function FormEditorPage() {
     setThankYou({
       heading: form.thank_you_config?.heading || "",
       body: form.thank_you_config?.body || "",
+      button_text: form.thank_you_config?.button_text || "",
+      button_url: form.thank_you_config?.button_url || "",
+      logo_url: form.thank_you_config?.logo_url || "",
     });
+    setClientId(form.client_id || "");
+    setExpiry(form.expiry_date ? form.expiry_date.slice(0, 10) : "");
     setInitialised(true);
   }, [form, initialised]);
 
@@ -80,12 +98,21 @@ export function FormEditorPage() {
       description,
       questions,
       page_mode: pageMode,
+      client_id: clientId || undefined,
+      expiry_date: expiry || undefined,
       thank_you_config:
-        hasFeature("custom_thank_you") && (thankYou.heading || thankYou.body)
-          ? { heading: thankYou.heading, body: thankYou.body }
+        hasFeature("custom_thank_you") &&
+        (thankYou.heading || thankYou.body || thankYou.button_text || thankYou.logo_url)
+          ? {
+              heading: thankYou.heading,
+              body: thankYou.body,
+              button_text: thankYou.button_text || undefined,
+              button_url: thankYou.button_url || undefined,
+              logo_url: thankYou.logo_url || undefined,
+            }
           : null,
     }),
-    [title, description, questions, pageMode, thankYou, hasFeature],
+    [title, description, questions, pageMode, thankYou, clientId, expiry, hasFeature],
   );
 
   const autosave = useAutoSave({
@@ -129,8 +156,15 @@ export function FormEditorPage() {
     }
     setCreating(true);
     try {
-      if (id) await autosave.save(payload);
-      const response = await formsApi.publish(id as string);
+      let targetId = id;
+      if (targetId) {
+        await autosave.save(payload);
+      } else {
+        const created = await formsApi.draft(payload);
+        targetId = created.id;
+        navigate(`/forms/${created.id}/edit`, { replace: true });
+      }
+      const response = await formsApi.publish(targetId as string);
       setShare({ url: response.url });
     } catch (cause) {
       const apiError = cause as ApiError;
@@ -390,6 +424,26 @@ export function FormEditorPage() {
               ]}
               onChange={(value) => setPageMode(value as "single" | "multi")}
             />
+            <Select
+              id="form-client"
+              label="Client"
+              value={clientId}
+              placeholder="None — share it before the client exists"
+              options={(clients.data?.data ?? []).map((client) => ({
+                value: client.id,
+                label: `${client.name} — ${client.email}`,
+              }))}
+              onChange={setClientId}
+              helper="Optional. A form can be shared before it is linked to a client."
+            />
+            <Input
+              id="form-expiry"
+              label="Expiry date"
+              type="date"
+              value={expiry}
+              onChange={setExpiry}
+              helper="Optional. The form closes after this date."
+            />
             <Fieldset legend="Thank-you page">
               <Input
                 id="thankyou-heading"
@@ -406,6 +460,35 @@ export function FormEditorPage() {
                 onChange={(value) => setThankYou((current_) => ({ ...current_, body: value }))}
                 disabled={!hasFeature("custom_thank_you")}
                 rows={3}
+              />
+              <Input
+                id="thankyou-button-text"
+                label="Button label"
+                value={thankYou.button_text}
+                onChange={(value) => setThankYou((current_) => ({ ...current_, button_text: value }))}
+                disabled={!hasFeature("custom_thank_you")}
+                placeholder="Back to the site"
+                helper="Optional."
+              />
+              <Input
+                id="thankyou-button-url"
+                label="Button link"
+                type="url"
+                value={thankYou.button_url}
+                onChange={(value) => setThankYou((current_) => ({ ...current_, button_url: value }))}
+                disabled={!hasFeature("custom_thank_you")}
+                placeholder="https://"
+                helper="Optional."
+              />
+              <Input
+                id="thankyou-logo"
+                label="Logo URL"
+                type="url"
+                value={thankYou.logo_url}
+                onChange={(value) => setThankYou((current_) => ({ ...current_, logo_url: value }))}
+                disabled={!hasFeature("custom_thank_you")}
+                placeholder="https://"
+                helper="Optional. Falls back to your profile logo."
               />
             </Fieldset>
           </div>

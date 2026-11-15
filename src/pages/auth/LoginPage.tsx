@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
+import { GoogleButton } from "../../components/shared/GoogleButton";
 import { authApi } from "../../api/auth";
 import { useAuth } from "../../hooks/useAuth";
 import { emailSchema } from "../../lib/validators";
@@ -19,6 +20,39 @@ export function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const returnTo = params.get("returnTo") || "/dashboard";
+
+  // Google returns the id_token in the URL hash; exchange it once, then clean the URL.
+  useEffect(() => {
+    if (params.get("google") !== "1") return;
+    const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    const idToken = hash.get("id_token");
+    if (!idToken) {
+      const reason = hash.get("error");
+      setFormError(reason ? "Google sign-in was cancelled. Try again or use your password." : "");
+      window.history.replaceState(null, "", "/login");
+      return;
+    }
+    setLoading(true);
+    authApi
+      .google(idToken)
+      .then(async (response) => {
+        if (response.token && response.user) {
+          setSession(response.token, response.user);
+          navigate(returnTo, { replace: true });
+        } else if (response.requires_2fa && response.pre_2fa_token) {
+          sessionStorage.setItem("revercue_pre_2fa", response.pre_2fa_token);
+          navigate("/login/code");
+        } else {
+          setFormError("Google sign-in did not return a session. Try again.");
+        }
+      })
+      .catch((cause: ApiError) => setFormError(errorMessage(cause.code, cause.message)))
+      .finally(() => {
+        setLoading(false);
+        window.history.replaceState(null, "", "/login");
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -44,6 +78,10 @@ export function LoginPage() {
       }
     } catch (cause) {
       const apiError = cause as ApiError;
+      if (apiError.status === 0) {
+        navigate("/offline", { replace: true });
+        return;
+      }
       if (apiError.code === "invalid_payload") setErrors(fieldErrors(apiError.details));
       setFormError(errorMessage(apiError.code, apiError.message));
     } finally {
@@ -56,6 +94,9 @@ export function LoginPage() {
       <p className="eyebrow">Log in</p>
       <h1>Pick the thread back up.</h1>
       <p className="lede">Your documents, your clients, your log.</p>
+
+      <GoogleButton />
+      <p className="auth-divider">or use your email</p>
 
       <form className="auth-form" onSubmit={submit} noValidate>
         <Input

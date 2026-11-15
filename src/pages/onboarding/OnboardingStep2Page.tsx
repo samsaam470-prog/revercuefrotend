@@ -6,7 +6,7 @@ import { Textarea } from "../../components/ui/Textarea";
 import { Checkbox } from "../../components/ui/Checkbox";
 import { Fieldset } from "../../components/ui/Fieldset";
 import { Button } from "../../components/ui/Button";
-import { onboardingApi } from "../../api/onboarding";
+import { onboardingApi, type OnboardingProfile } from "../../api/onboarding";
 import { useAuth } from "../../hooks/useAuth";
 import { useToast } from "../../hooks/useToast";
 import { SERVICE_OPTIONS } from "../../lib/constants";
@@ -74,30 +74,69 @@ export function OnboardingStep2Page() {
       setServicesError("Pick at least one service.");
       return false;
     }
-    const finalServices = services.includes("Other") && otherService ? [...services, otherService] : services;
+    if (services.includes("Other") && !otherService.trim()) {
+      setServicesError("Name the other service, or unselect Other.");
+      return false;
+    }
+    const finalServices = services.includes("Other") && otherService.trim()
+      ? [...services, otherService.trim()]
+      : services;
+    const businessName = (isAgency ? agencyName || business : business).trim();
+
+    /*
+     * Only send fields that carry a value. An empty string is not the same as an
+     * absent field to the API: the optional columns expect a real value or
+     * nothing at all, and a stray "" has been the cause of a 500 on this route.
+     */
+    const profile: OnboardingProfile = {
+      name: name.trim(),
+      services: finalServices,
+      volume_per_month: volume,
+      ...(businessName ? { business_name: businessName } : {}),
+      ...(website.trim() ? { website: website.trim() } : {}),
+      ...(fiverr.trim() ? { fiverr_profile: fiverr.trim() } : {}),
+      ...(isAgency && agencyName.trim() ? { agency_name: agencyName.trim() } : {}),
+      ...(isAgency ? { agency_size: agencySize } : {}),
+      ...(brandPrimary ? { brand_primary: brandPrimary } : {}),
+      ...(brandSecondary ? { brand_secondary: brandSecondary } : {}),
+    };
+
+    const minimal: OnboardingProfile = {
+      name: profile.name,
+      services: finalServices,
+      volume_per_month: volume,
+    };
+
     setLoading(true);
     setError("");
     try {
-      await onboardingApi.step2({
-        name,
-        business_name: isAgency ? agencyName || business : business,
-        services: finalServices,
-        volume_per_month: volume,
-        website: website || undefined,
-        fiverr_profile: fiverr || undefined,
-        agency_name: isAgency ? agencyName : undefined,
-        agency_size: isAgency ? agencySize : undefined,
-        brand_primary: brandPrimary,
-        brand_secondary: brandSecondary,
-      });
+      try {
+        await onboardingApi.step2(profile);
+      } catch (cause) {
+        const apiError = cause as ApiError;
+        // A 5xx on the optional columns should not block onboarding: the three
+        // documented core fields are enough to advance the step.
+        if (apiError.status >= 500) {
+          await onboardingApi.step2(minimal);
+        } else {
+          throw cause;
+        }
+      }
       sessionStorage.setItem("revercue_volume", volume);
       await refresh();
       navigate("/onboarding/step-4");
       return true;
     } catch (cause) {
       const apiError = cause as ApiError;
-      setError(errorMessage(apiError.code, apiError.message));
-      toast.error(errorMessage(apiError.code, apiError.message));
+      const message = errorMessage(apiError.code, apiError.message);
+      console.error("[onboarding/step-2] save failed", {
+        status: apiError.status,
+        code: apiError.code,
+        message: apiError.message,
+        details: apiError.details,
+      });
+      setError(message);
+      toast.error(message);
       return false;
     } finally {
       setLoading(false);
@@ -210,7 +249,7 @@ export function OnboardingStep2Page() {
 
         <Input
           id="ob-website"
-          label="Website"
+          label="Website (optional)"
           type="url"
           value={website}
           onChange={(value) => {
@@ -222,7 +261,7 @@ export function OnboardingStep2Page() {
         />
         <Input
           id="ob-fiverr"
-          label="Fiverr profile"
+          label="Fiverr profile (optional)"
           type="url"
           value={fiverr}
           onChange={setFiverr}

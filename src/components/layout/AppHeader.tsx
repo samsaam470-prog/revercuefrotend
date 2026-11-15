@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { LogOut, Settings, User as UserIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { NotificationBell } from "../shared/NotificationBell";
+import { ThemeToggle } from "../shared/ThemeToggle";
 import { useAuth } from "../../hooks/useAuth";
 import { initials } from "../../lib/formatters";
 
@@ -49,6 +50,7 @@ export function AppHeader() {
         ))}
       </nav>
       <div className="app-header-right">
+        <ThemeToggle />
         <NotificationBell />
         <div style={{ position: "relative" }} ref={wrapRef}>
           <button

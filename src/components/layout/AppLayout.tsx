@@ -3,9 +3,10 @@ import { AppHeader } from "./AppHeader";
 import { AppSidebar } from "./AppSidebar";
 import { Spinner } from "../ui/Spinner";
 import { useAuth } from "../../hooks/useAuth";
+import { OfflinePage } from "../../pages/utility";
 
 export function AppLayout() {
-  const { user, loading } = useAuth();
+  const { user, loading, offline } = useAuth();
   const location = useLocation();
 
   if (loading) {
@@ -14,6 +15,10 @@ export function AppLayout() {
         <Spinner size={32} />
       </div>
     );
+  }
+
+  if (offline) {
+    return <OfflinePage />;
   }
 
   if (!user) {

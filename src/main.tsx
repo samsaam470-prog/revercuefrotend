@@ -7,6 +7,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { ToastProvider } from "./contexts/ToastContext";
 import { PlanProvider } from "./contexts/PlanContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import "./styles/tokens.css";
 import "./styles/global.css";
 import "./styles/utilities.css";
@@ -28,17 +29,19 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <ToastProvider>
-          <AuthProvider>
-            <PlanProvider>
-              <NotificationProvider>
-                <App />
-              </NotificationProvider>
-            </PlanProvider>
-          </AuthProvider>
-        </ToastProvider>
-      </BrowserRouter>
+      <ThemeProvider>
+        <BrowserRouter>
+          <ToastProvider>
+            <AuthProvider>
+              <PlanProvider>
+                <NotificationProvider>
+                  <App />
+                </NotificationProvider>
+              </PlanProvider>
+            </AuthProvider>
+          </ToastProvider>
+        </BrowserRouter>
+      </ThemeProvider>
     </QueryClientProvider>
   </React.StrictMode>,
 );

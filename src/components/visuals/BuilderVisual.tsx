@@ -35,7 +35,8 @@ export function BuilderVisual() {
             ))}
           </div>
         </div>
-        <div style={{ background: "#f4f1ea", padding: 10 }}>
+        <div style={{ background: "#f4f1ea", padding: 10, position: "relative", overflow: "hidden" }}>
+          <span className="cv-cursor" aria-hidden="true" />
           <div
             style={{
               background: "#fff",
@@ -75,7 +76,9 @@ export function BuilderVisual() {
         </div>
         <div>
           <span className="cv-label">Properties</span>
-          <div style={{ fontSize: 9, marginTop: 4 }}>Heading</div>
+          <div style={{ fontSize: 9, marginTop: 4 }} className="cv-selected-property">
+            Heading
+          </div>
           <div className="cv-line" style={{ height: 16, marginTop: 4 }} />
           <span className="cv-label" style={{ display: "block", marginTop: 8 }}>
             Level

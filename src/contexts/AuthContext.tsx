@@ -17,6 +17,8 @@ export interface AuthState {
   user: User | null;
   token: string | null;
   loading: boolean;
+  /** The API could not be reached. The session is kept, not cleared. */
+  offline: boolean;
   isAuthenticated: boolean;
   isEmailVerified: boolean;
   setSession: (token: string, user?: User) => void;
@@ -31,6 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(() => tokenStore.get());
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(Boolean(tokenStore.get()));
+  const [offline, setOffline] = useState(false);
   const tokenRef = useRef<string | null>(token);
   tokenRef.current = token;
   const navigate = useNavigate();
@@ -52,8 +55,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const response = await authApi.me(current);
       setUser(response.user);
+      setOffline(false);
       return response.user;
-    } catch {
+    } catch (cause) {
+      // A network failure is not an authentication failure: keep the token and
+      // show the offline state instead of silently signing the user out.
+      if ((cause as { status?: number }).status === 0) {
+        setOffline(true);
+        return null;
+      }
       clear();
       return null;
     } finally {
@@ -100,6 +110,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       user,
       token,
       loading,
+      offline,
       isAuthenticated: Boolean(token && user),
       isEmailVerified: Boolean(user?.email_verified),
       setSession,
@@ -107,7 +118,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signOut,
       refresh,
     }),
-    [user, token, loading, setSession, signIn, signOut, refresh],
+    [user, token, loading, offline, setSession, signIn, signOut, refresh],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

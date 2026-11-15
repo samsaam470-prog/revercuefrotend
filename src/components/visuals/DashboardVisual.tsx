@@ -1,4 +1,14 @@
 import { Activity, Clock, DollarSign, FileText, Users } from "lucide-react";
+import { useCountUp } from "../../hooks/useCountUp";
+
+function StatValue({ value, money }: { value: number; money?: boolean }) {
+  const display = useCountUp(value);
+  return (
+    <b className="cv-stat" style={{ marginTop: 4 }}>
+      {money ? `$${display.toLocaleString("en-US")}` : display}
+    </b>
+  );
+}
 
 /** The dashboard shell: stat strip, suggested actions, create row, activity feed. */
 export function DashboardVisual() {
@@ -6,7 +16,7 @@ export function DashboardVisual() {
     { value: 12, label: "Active documents", icon: FileText },
     { value: 8, label: "Clients", icon: Users },
     { value: 3, label: "Follow-ups due", icon: Clock },
-    { value: "$2,900", label: "Revenue this month", icon: DollarSign },
+    { value: 2900, label: "Revenue this month", icon: DollarSign, money: true },
   ];
   const activity = [
     "Acme Co. opened the proposal · 2h ago",
@@ -29,7 +39,7 @@ export function DashboardVisual() {
           {stats.map((stat) => (
             <div key={stat.label} className="cv-box">
               <stat.icon size={11} color="var(--gold)" />
-              <b style={{ marginTop: 4 }}>{stat.value}</b>
+              <StatValue value={stat.value} money={stat.money} />
               <span>{stat.label}</span>
             </div>
           ))}

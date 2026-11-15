@@ -3,9 +3,18 @@ import type { RequestOptions } from "../types/api";
 import { tokenStore } from "../lib/storage";
 import { NETWORK_MESSAGE } from "../lib/errors";
 
+const configuredBase = ((import.meta.env.VITE_API_BASE_URL as string | undefined) || "").trim();
+
+/*
+ * In dev the API is reached through the Vite proxy (see vite.config.ts): the API
+ * does not send CORS headers, so a cross-origin call would be blocked by the
+ * browser. The proxy makes it same-origin. A production build uses the
+ * absolute base URL from VITE_API_BASE_URL.
+ */
 const BASE = (
-  (import.meta.env.VITE_API_BASE_URL as string | undefined) ||
-  "https://revercue-api.samsaam470.workers.dev"
+  import.meta.env.DEV
+    ? ""
+    : configuredBase || "https://revercue-api.samsaam470.workers.dev"
 ).replace(/\/$/, "");
 
 let unauthorizedHandler: (() => void) | null = null;
@@ -16,7 +25,7 @@ export function setUnauthorizedHandler(handler: (() => void) | null): void {
 }
 
 function buildUrl(path: string, query?: RequestOptions["query"]): string {
-  const url = new URL(BASE + path);
+  const url = new URL(BASE + path, typeof window === "undefined" ? "http://localhost" : window.location.origin);
   if (query) {
     for (const [key, value] of Object.entries(query)) {
       if (value !== undefined && value !== null && value !== "") {

@@ -32,6 +32,7 @@ const FILTERS: Record<string, { base: string; items: string[]; create: { to: str
 
 const SETTINGS_NAV = [
   { to: "/settings/profile", label: "Profile" },
+  { to: "/settings/appearance", label: "Appearance" },
   { to: "/settings/plan", label: "Plan & Billing" },
   { to: "/settings/security", label: "Security" },
   { to: "/settings/notifications", label: "Notifications" },

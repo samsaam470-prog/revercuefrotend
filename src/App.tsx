@@ -1,4 +1,7 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { ScrollToTop } from "./components/shared/ScrollToTop";
+import { Reveal } from "./components/shared/Reveal";
 import { PublicLayout } from "./components/layout/PublicLayout";
 import { AuthLayout } from "./components/layout/AuthLayout";
 import { AppLayout } from "./components/layout/AppLayout";
@@ -8,6 +11,8 @@ import {
   BlogPage,
   BlogPostPage,
   ComparePage,
+  CompareDetailPage,
+  CompareCriteriaPage,
   ContactPage,
   FeaturesPage,
   GuideDetailPage,
@@ -54,17 +59,41 @@ import {
   PublicInvoicePage,
   PublicProposalPage,
 } from "./pages/client";
-import { NotFoundPage } from "./pages/utility";
+import {
+  ForbiddenPage,
+  NotFoundPage,
+  OfflinePage,
+  ServerErrorPage,
+  SessionExpiredPage,
+} from "./pages/utility";
 
 export function App() {
+  const { pathname } = useLocation();
+
+  /* The helper downloads silently in the background. No panel, no progress. */
+  useEffect(() => {
+    let cancelled = false;
+    void import("./lib/webllm").then((helper) => {
+      if (!cancelled && helper.isAvailable()) helper.scheduleWarmup();
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Reveal />
+      <div className="route-view" key={pathname}>
+        <Routes>
       {/* public site */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/features" element={<FeaturesPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/compare" element={<ComparePage />} />
+        <Route path="/compare/criteria" element={<CompareCriteriaPage />} />
+        <Route path="/compare/:slug" element={<CompareDetailPage />} />
         <Route path="/guides" element={<GuidesPage />} />
         <Route path="/guides/:slug" element={<GuideDetailPage />} />
         <Route path="/about" element={<AboutPage />} />
@@ -112,6 +141,7 @@ export function App() {
         {(
           [
             "profile",
+            "appearance",
             "plan",
             "security",
             "notifications",
@@ -143,7 +173,13 @@ export function App() {
       <Route path="/i/:publicId/proof" element={<ProofUploadPage />} />
       <Route path="/f/:publicId" element={<PublicFormPage />} />
 
+      <Route path="/offline" element={<OfflinePage />} />
+      <Route path="/session-expired" element={<SessionExpiredPage />} />
+      <Route path="/403" element={<ForbiddenPage />} />
+      <Route path="/500" element={<ServerErrorPage />} />
       <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+        </Routes>
+      </div>
+    </>
   );
 }

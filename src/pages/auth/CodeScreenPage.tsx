@@ -6,7 +6,6 @@ import { authApi } from "../../api/auth";
 import { preAuthStore } from "../../lib/storage";
 import { useAuth } from "../../hooks/useAuth";
 import { useToast } from "../../hooks/useToast";
-import { FORMSUBMIT_COPY } from "../../lib/constants";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
 import { passwordSchema } from "../../lib/validators";
@@ -212,13 +211,6 @@ export function CodeScreenPage() {
             : `We sent a six-digit code to ${resetState.email || "your email"}.`}
       </p>
 
-      {mode === "signup" && (
-        <div className="formsubmit-card" style={{ marginBottom: 20 }}>
-          <strong>FormSubmit activation</strong>
-          {FORMSUBMIT_COPY}
-        </div>
-      )}
-
       <div className="code-boxes" onPaste={onPaste}>
         {digits.map((digit, index) => (
           <input
@@ -263,10 +255,6 @@ export function CodeScreenPage() {
         </Button>
       </div>
 
-      <p className="auth-foot">
-        The activation email lets us know you are open to transactional emails, app notifications and
-        security alerts. It does not opt you in to the newsletter.
-      </p>
       <p className="auth-alt">
         <Link to="/login">Back to log in</Link>
       </p>

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 import { invoicesApi } from "../../api/invoices";
+import { contractsApi } from "../../api/contracts";
 import { crmApi } from "../../api/crm";
 import { TopBar } from "../../components/builder/TopBar";
 import { ShareModal } from "../../components/builder/ShareModal";
@@ -19,7 +20,7 @@ import { CURRENCIES } from "../../lib/constants";
 import { formatCurrency } from "../../lib/formatters";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
-import type { Invoice, LineItem, PaymentArrangement } from "../../types";
+import type { DocumentSummary, Invoice, LineItem, PaymentArrangement } from "../../types";
 
 export function InvoiceBuilderPage() {
   const { id } = useParams<{ id: string }>();
@@ -29,7 +30,11 @@ export function InvoiceBuilderPage() {
 function InvoiceRequirementForm() {
   const navigate = useNavigate();
   const toast = useToast();
+  const [mode, setMode] = useState<"existing" | "new">("new");
   const [clientId, setClientId] = useState("");
+  const [clientName, setClientName] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
+  const [contractId, setContractId] = useState("");
   const [items, setItems] = useState<LineItem[]>([{ description: "", quantity: 1, unit_price: 0 }]);
   const [currency, setCurrency] = useState("USD");
   const [tax, setTax] = useState("0");
@@ -50,15 +55,25 @@ function InvoiceRequirementForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const clients = useQuery({ queryKey: ["crm", "clients", "picker"], queryFn: () => crmApi.list({ limit: 100 }) });
+  const contracts = useQuery({
+    queryKey: ["contracts", "picker"],
+    queryFn: () => contractsApi.list({ status: "signed", limit: 100 }),
+  });
   const subtotal = items.reduce((sum, item) => sum + (Number(item.quantity) || 0) * (Number(item.unit_price) || 0), 0);
   const total = subtotal + (Number(tax) || 0);
 
-  const valid = clientId && items.some((item) => item.description && item.unit_price >= 0) && dueDate &&
+  const valid =
+    (mode === "existing" ? Boolean(clientId) : Boolean(clientName.trim())) &&
+    Boolean(clientEmail.trim()) &&
+    items.some((item) => item.description && item.unit_price >= 0) &&
+    dueDate &&
     (arrangement === "link" ? Boolean(link) : Boolean(details.bank_name || details.iban || details.account_number));
 
   const submit = async () => {
     const next: Record<string, string> = {};
-    if (!clientId) next.client = "Choose a client.";
+    if (mode === "existing" && !clientId) next.client = "Choose a client.";
+    if (mode === "new" && !clientName.trim()) next.clientName = "Enter the client's name.";
+    if (!clientEmail.trim()) next.clientEmail = "Enter the client's email.";
     if (!items.some((item) => item.description)) next.items = "Add at least one line item.";
     if (!dueDate) next.due = "Pick a due date.";
     if (arrangement === "link" && !link) next.arrangement = "Add the payment link.";
@@ -73,7 +88,10 @@ function InvoiceRequirementForm() {
           ? { type: "link", url: link }
           : { type: "account", details, allow_proof: allowProof };
       const response = await invoicesApi.draft({
-        client_id: clientId,
+        client_id: mode === "existing" ? clientId : undefined,
+        client_name: mode === "new" ? clientName.trim() : undefined,
+        client_email: clientEmail.trim(),
+        linked_contract_id: contractId || undefined,
         line_items: items.filter((item) => item.description),
         currency,
         tax: Number(tax) || 0,
@@ -103,17 +121,66 @@ function InvoiceRequirementForm() {
         </p>
 
         <div className="stack-4">
+          <div>
+            <span className="field-label">Client</span>
+            <div className="segmented" style={{ marginTop: 8 }}>
+              <button type="button" aria-pressed={mode === "existing"} onClick={() => setMode("existing")}>
+                Existing client
+              </button>
+              <button type="button" aria-pressed={mode === "new"} onClick={() => setMode("new")}>
+                New client
+              </button>
+            </div>
+          </div>
+          {mode === "existing" ? (
+            <Select
+              id="invoice-client"
+              label="Client"
+              value={clientId}
+              placeholder="Choose a client"
+              options={(clients.data?.data ?? []).map((client) => ({
+                value: client.id,
+                label: `${client.name} — ${client.email}`,
+              }))}
+              onChange={(value) => {
+                setClientId(value);
+                const found = clients.data?.data.find((client) => client.id === value);
+                if (found) setClientEmail(found.email);
+              }}
+              error={errors.client}
+              required
+            />
+          ) : (
+            <Input
+              id="invoice-client-name"
+              label="Client name"
+              value={clientName}
+              onChange={setClientName}
+              error={errors.clientName}
+              required
+            />
+          )}
+          <Input
+            id="invoice-client-email"
+            label="Client email"
+            type="email"
+            value={clientEmail}
+            onChange={setClientEmail}
+            error={errors.clientEmail}
+            helper="Where the invoice is delivered."
+            required
+          />
           <Select
-            id="invoice-client"
-            label="Client"
-            value={clientId}
-            placeholder="Choose a client"
-            options={(clients.data?.data ?? []).map((client) => ({
-              value: client.id,
-              label: `${client.name} — ${client.email}`,
+            id="invoice-contract"
+            label="Which contract is this invoice for?"
+            value={contractId}
+            placeholder="None — standalone invoice"
+            options={(contracts.data?.data ?? []).map((contract: DocumentSummary) => ({
+              value: contract.id,
+              label: contract.title,
             }))}
-            onChange={setClientId}
-            error={errors.client}
+            onChange={setContractId}
+            helper="Optional. The currency and the terms come from it."
           />
 
           <fieldset className="fieldset">

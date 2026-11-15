@@ -2,6 +2,8 @@ export { HomePage } from "./HomePage";
 export { FeaturesPage } from "./FeaturesPage";
 export { PricingPage } from "./PricingPage";
 export { ComparePage } from "./ComparePage";
+export { CompareCriteriaPage } from "./CompareCriteriaPage";
+export { CompareDetailPage } from "./CompareDetailPage";
 export { GuidesPage } from "./GuidesPage";
 export { GuideDetailPage } from "./GuideDetailPage";
 export { AboutPage } from "./AboutPage";

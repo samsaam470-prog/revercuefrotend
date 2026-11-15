@@ -3,7 +3,9 @@ import type { Paginated } from "../types/api";
 import type { Contract, DocContent, DocumentSummary } from "../types";
 
 export interface ContractDraftPayload {
-  client_id: string;
+  client_id?: string;
+  client_name?: string;
+  client_email?: string;
   linked_proposal_id?: string;
   title: string;
   scope: string;

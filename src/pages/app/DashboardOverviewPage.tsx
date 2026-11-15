@@ -21,7 +21,7 @@ import { Skeleton, SkeletonLines } from "../../components/ui/Skeleton";
 import { EmptyState } from "../../components/ui/EmptyState";
 import { Button } from "../../components/ui/Button";
 import { TutorialOverlay } from "../../components/shared/TutorialOverlay";
-import { FORMSUBMIT_BANNER } from "../../lib/constants";
+import { FORMSUBMIT_COPY } from "../../lib/constants";
 import { formatCurrency, formatLongDate, formatRelative, greeting } from "../../lib/formatters";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
@@ -101,7 +101,7 @@ export function DashboardOverviewPage() {
         <div className="banner" role="status">
           <Info size={18} />
           <div className="body">
-            {FORMSUBMIT_BANNER} We sent it to {user?.email}.
+            {FORMSUBMIT_COPY} We sent it to {user?.email}.
           </div>
           <Button size="sm" onClick={activate}>
             I clicked the activation link

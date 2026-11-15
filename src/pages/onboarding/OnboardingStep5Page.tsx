@@ -78,14 +78,14 @@ export function OnboardingStep5Page() {
               type="button"
               className={`plan-mini${isSelected ? " selected" : ""}`}
               onClick={() => {
-                setPlan(option.id);
-                setRequested(option.status === "waitlist" || option.status === "beta" ? option.id : null);
-                if (option.status !== "available") setWaitlistPlan(option.id);
+                setPlan(option.id as any);
+                setRequested((option.status === "waitlist" || option.status === "beta" ? option.id : null) as any);
+                if (option.status !== "available") setWaitlistPlan(option.id as any);
               }}
               aria-pressed={isSelected}
             >
               <b>{option.name}</b>
-              {option.price === null ? `$${option.base} base` : option.price === 0 ? "Free" : `$${option.price}/mo`}
+              {option.price == null ? `$${option.price ?? 0} base` : option.price === 0 ? "Free" : `$${option.price}/mo`}
               <span style={{ display: "block", marginTop: 4 }}>
                 {option.status === "available" ? "available now" : option.status === "beta" ? "in beta" : "waitlist"}
               </span>

@@ -1,8 +1,12 @@
+/* Dark is the base. Light is an explicit override, never an inversion of the gold. */
 :root {
+  color-scheme: dark;
+
   /* Palette */
   --bg-base: #0a0a0a;
   --bg-card: #141414;
   --bg-elevated: #1c1c1c;
+  --bg-inset: #050505;
   --border: #2a2a2a;
   --border-strong: #3a3a3a;
   --text-primary: #ffffff;
@@ -11,9 +15,12 @@
   --gold: #c9a961;
   --gold-hover: #d9b971;
   --gold-soft: rgba(201, 169, 97, 0.12);
+  --gold-contrast: #0a0a0a;
   --green: #4ade80;
   --red: #f87171;
   --amber: #fbbf24;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --overlay: rgba(0, 0, 0, 0.65);
 
   /* Typography */
   --font-display: "Instrument Serif", Georgia, serif;
@@ -41,6 +48,7 @@
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
+  --space-5: 20px;
   --space-6: 24px;
   --space-8: 32px;
   --space-12: 48px;
@@ -55,10 +63,109 @@
   --radius-pill: 999px;
 
   /* Shadow */
-  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-modal: 0 20px 60px var(--shadow-color);
   --shadow-gold-glow: 0 40px 120px rgba(201, 169, 97, 0.15);
 
-  /* Transitions */
+  /* Transitions and motion */
   --transition-fast: 150ms ease;
   --transition-normal: 200ms ease;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-slow: 600ms;
+}
+
+/* The light mode follows mode.txt: the same structure, the inverted palette, the gold stays. */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-base: #fafafa;
+  --bg-card: #ffffff;
+  --bg-elevated: #f0f0f0;
+  --bg-inset: #ededed;
+  --border: #e0e0e0;
+  --border-strong: #c0c0c0;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-tertiary: #888888;
+  --gold: #b8943f;
+  --gold-hover: #c9a961;
+  --gold-soft: rgba(184, 148, 63, 0.12);
+  --gold-contrast: #111111;
+  --green: #22c55e;
+  --red: #ef4444;
+  --amber: #f59e0b;
+  --shadow-color: rgba(0, 0, 0, 0.12);
+  --overlay: rgba(17, 17, 17, 0.38);
+  --shadow-gold-glow: 0 40px 120px rgba(184, 148, 63, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms linear;
+    --transition-normal: 0ms linear;
+    --duration-slow: 0ms;
+  }
+}
+
+/* Semantic motion, used by the public visuals and the app chrome. */
+@keyframes rv-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rv-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rv-bar-grow {
+  from {
+    transform: scaleY(0.02);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes rv-cursor {
+  0%,
+  8% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  14% {
+    opacity: 1;
+  }
+  46% {
+    transform: translate(96px, 54px);
+  }
+  62% {
+    transform: translate(96px, 54px) scale(0.88);
+  }
+  72% {
+    transform: translate(96px, 54px) scale(1);
+  }
+  100% {
+    transform: translate(96px, 54px);
+    opacity: 1;
+  }
+}
+
+@keyframes rv-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--gold-soft);
+  }
+  50% {
+    box-shadow: 0 0 0 4px var(--gold-soft);
+  }
 }

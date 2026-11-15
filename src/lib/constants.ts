@@ -244,14 +244,51 @@ export const THESIS = "A thread, not disconnected workflows.";
 export const CURRENCIES = ["USD", "EUR", "GBP", "CAD", "AUD", "INR", "NGN", "AED"];
 
 export const SERVICE_OPTIONS = [
-  "Design",
+  "Web Design",
   "Development",
-  "Copywriting",
+  "SEO",
   "Video",
-  "Marketing/SEO",
+  "Copywriting",
   "Consulting",
   "Other",
 ];
+
+export const INDUSTRY_OPTIONS = [
+  { value: "Restaurant", label: "Restaurant" },
+  { value: "Real Estate", label: "Real Estate" },
+  { value: "E-commerce", label: "E-commerce" },
+  { value: "SaaS", label: "SaaS" },
+  { value: "Agency", label: "Agency" },
+  { value: "Healthcare", label: "Healthcare" },
+  { value: "Education", label: "Education" },
+  { value: "Other", label: "Other" },
+];
+
+export const SECTION_OPTIONS = [
+  "Introduction",
+  "Scope",
+  "Timeline",
+  "Pricing",
+  "Terms",
+  "FAQs",
+  "Embedded Questions",
+  "About You",
+  "Next Step",
+];
+
+export const CONTRACT_SECTIONS = [
+  "Parties",
+  "Scope",
+  "Payment",
+  "Timeline",
+  "Revisions",
+  "Cancellation",
+  "Liability",
+  "Signatures",
+];
+
+export const TONES = ["Formal", "Friendly", "Concise"];
+export const SCROLL_LENGTHS = ["Short", "Medium", "Long"];
 
 export const CHANNELS = ["Email", "WhatsApp", "Phone", "In-person", "Other"];
 
@@ -259,3 +296,9 @@ export const FAQ_BATCH_FIRST = 12;
 
 export const FOOTER_ASSISTANT_PROMPT =
   "Explain Revercue: a freelancer tool for the thread from proposal to contract to invoice to CRM. The tagline is 'Your work should speak, not you.' The thesis is 'a thread, not disconnected workflows.' The Free plan is available now. The paid plans (Starter, Growth, Scale) are invite-only in the fresh state — join the waitlist. Teams is in beta — join the beta. The product does not use AI; it uses patterns. Answer in 2–3 sentences.";
+
+export function formatStorage(gb: number | null | undefined): string {
+  if (gb == null) return "Unlimited";
+  if (gb >= 1) return `${Number.isInteger(gb) ? gb : gb.toFixed(2)} GB`;
+  return `${Math.round(gb * 1000)} MB`;
+}

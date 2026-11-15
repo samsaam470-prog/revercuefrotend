@@ -1,63 +1,41 @@
-import { AlertTriangle, Check, X } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-
-type Mark = "yes" | "no" | "partial";
-
-const COLUMNS = ["Revercue", "PDF + email", "Notion"];
-const ROWS: { job: string; values: [Mark, Mark, Mark] }[] = [
-  { job: "Proposal", values: ["yes", "partial", "partial"] },
-  { job: "Contract with three client actions", values: ["yes", "no", "no"] },
-  { job: "Requirement form with branching", values: ["yes", "no", "partial"] },
-  { job: "Invoice with pay-by-link or proof upload", values: ["yes", "no", "no"] },
-  { job: "Client record built from the documents", values: ["yes", "no", "partial"] },
-  { job: "Tracking: opened, time spent, answers", values: ["yes", "no", "no"] },
-  { job: "Follow-ups due, per client", values: ["yes", "no", "partial"] },
-  { job: "Suggestions from your own pattern", values: ["yes", "no", "no"] },
-  { job: "One link for the whole thread", values: ["yes", "no", "no"] },
-];
-
-function MarkIcon({ mark }: { mark: Mark }) {
-  if (mark === "yes") return <Check size={16} className="check-cell" aria-label="Yes" />;
-  if (mark === "partial")
-    return <AlertTriangle size={16} className="warn-cell" aria-label="Partly" />;
-  return <X size={16} className="cross-cell" aria-label="No" />;
-}
+import { COMPETITORS } from "../../lib/competitors";
 
 export function ComparePage() {
   return (
-    <div className="page">
+    <div className="page page-wide">
       <div className="page-head">
         <p className="eyebrow">Compare</p>
-        <h1>The thread vs. the stack of tools you're using now.</h1>
+        <h1>Revercue, next to the tools you already know.</h1>
         <p>
-          A factual comparison of the jobs a freelancer has to do. No competitor bashing: each tool
-          is good at what it does, and none of them keeps the thread.
+          Seven comparisons, one job: the proposal, the contract, the requirement form, the invoice
+          and the client record, kept on one thread. No competitor bashing — each tool is good at
+          what it does, and the question is what happens between the pieces.
         </p>
       </div>
 
-      <div className="table-wrap">
-        <table className="data">
-          <thead>
-            <tr>
-              <th>Job</th>
-              {COLUMNS.map((column) => (
-                <th key={column}>{column}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {ROWS.map((row) => (
-              <tr key={row.job}>
-                <td>{row.job}</td>
-                {row.values.map((mark, index) => (
-                  <td key={index}>
-                    <MarkIcon mark={mark} />
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <Link to="/compare/criteria" className="compare-criteria-banner">
+        <span>
+          <strong>Thirteen questions, eight platforms.</strong> The same breakdown for every tool —
+          CRM, projects, automation, invoicing, portal, time, team, pricing.
+        </span>
+        <span className="compare-more">
+          Open the 13-point comparison <ArrowRight size={14} />
+        </span>
+      </Link>
+
+      <div className="compare-grid">
+        {COMPETITORS.map((competitor) => (
+          <Link key={competitor.slug} to={`/compare/${competitor.slug}`} className="compare-card">
+            <span className="compare-kind">{competitor.kind}</span>
+            <h2>{competitor.name}</h2>
+            <p>{competitor.summary}</p>
+            <span className="compare-more">
+              Read the comparison <ArrowRight size={14} />
+            </span>
+          </Link>
+        ))}
       </div>
 
       <section className="section">
@@ -66,14 +44,11 @@ export function ComparePage() {
             What Revercue is not.
           </h2>
           <p className="muted">
-            Not a CRM replacement, not a project manager, not an accounting tool. It is the thread:
-            proposal, contract, requirement form, invoice and client record, connected. If you already
-            have a CRM you love, Revercue does not ask you to leave it — it asks you to stop
-            copy-pasting between five tabs.
-          </p>
-          <p className="caption mt-4">
-            Legends: check means the job is native, the warning means partial or manual, the cross
-            means it is not what the tool is for.
+            Revercue is not a CRM replacement. It is not a project manager. It is not an accounting
+            tool. It is the thread: the proposal, the contract, the form, the invoice, and the client
+            record, in one place. If you already have a CRM, Revercue can sit next to it. If you
+            already have an accounting tool, Revercue can sit next to it. The thread is the gap; the
+            other tools are the rest.
           </p>
           <Link to="/signup" className="btn btn-primary mt-6">
             Start Free

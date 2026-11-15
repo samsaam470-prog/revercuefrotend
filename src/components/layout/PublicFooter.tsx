@@ -1,18 +1,77 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Logo } from "../shared/Logo";
-import { FOOTER_ASSISTANT_PROMPT } from "../../lib/constants";
+import {
+  ChatGptIcon,
+  ClaudeIcon,
+  FacebookIcon,
+  GeminiIcon,
+  InstagramIcon,
+  PerplexityIcon,
+  ThreadsIcon,
+  XIcon,
+  YoutubeIcon,
+} from "../shared/BrandIcons";
+import { marketingApi } from "../../api/public";
+import { emailSchema } from "../../lib/validators";
+import { errorMessage } from "../../lib/errors";
+import { ApiError } from "../../types/api";
 
-const ASSISTANTS = [
-  { name: "ChatGPT", url: "https://chat.openai.com/", slug: "ChatGPT" },
-  { name: "Perplexity", url: "https://www.perplexity.ai/", slug: "Perplexity" },
-  { name: "Claude", url: "https://claude.ai/", slug: "Claude" },
-  { name: "Gemini", url: "https://gemini.google.com/", slug: "Gemini" },
+type EnvKey =
+  | "VITE_X_URL"
+  | "VITE_IG_URL"
+  | "VITE_FB_URL"
+  | "VITE_THREADS_URL"
+  | "VITE_YT_URL"
+  | "VITE_CHATGPT_PROMPT_URL"
+  | "VITE_PERPLEXITY_PROMPT_URL"
+  | "VITE_CLAUDE_PROMPT_URL"
+  | "VITE_GEMINI_PROMPT_URL";
+
+function env(key: EnvKey): string {
+  const value = import.meta.env[key] as string | undefined;
+  return (value || "").trim();
+}
+
+const ASSISTANTS: { name: string; key: EnvKey; Icon: typeof ChatGptIcon }[] = [
+  { name: "ChatGPT", key: "VITE_CHATGPT_PROMPT_URL", Icon: ChatGptIcon },
+  { name: "Perplexity", key: "VITE_PERPLEXITY_PROMPT_URL", Icon: PerplexityIcon },
+  { name: "Claude", key: "VITE_CLAUDE_PROMPT_URL", Icon: ClaudeIcon },
+  { name: "Gemini", key: "VITE_GEMINI_PROMPT_URL", Icon: GeminiIcon },
+];
+
+const SOCIALS: { name: string; key: EnvKey; Icon: typeof XIcon }[] = [
+  { name: "X", key: "VITE_X_URL", Icon: XIcon },
+  { name: "Instagram", key: "VITE_IG_URL", Icon: InstagramIcon },
+  { name: "Facebook", key: "VITE_FB_URL", Icon: FacebookIcon },
+  { name: "Threads", key: "VITE_THREADS_URL", Icon: ThreadsIcon },
+  { name: "YouTube", key: "VITE_YT_URL", Icon: YoutubeIcon },
 ];
 
 export function PublicFooter() {
   const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+  const [state, setState] = useState<"idle" | "loading" | "done">("idle");
+  const [error, setError] = useState("");
+
+  const subscribe = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!emailSchema.safeParse(email).success) {
+      setError("Enter a valid email address.");
+      return;
+    }
+    setError("");
+    setState("loading");
+    try {
+      await marketingApi.newsletter(email);
+      setState("done");
+    } catch (cause) {
+      const apiError = cause as ApiError;
+      setError(errorMessage(apiError.code, apiError.message));
+      setState("idle");
+    }
+  };
+
+
 
   return (
     <footer className="pub-footer">
@@ -21,7 +80,7 @@ export function PublicFooter() {
           <div style={{ marginBottom: 16 }}>
             <Logo />
           </div>
-          <p style={{ maxWidth: 240 }}>
+          <p style={{ maxWidth: 250 }}>
             Your work should speak, not you. A thread, not disconnected workflows.
           </p>
         </div>
@@ -44,69 +103,110 @@ export function PublicFooter() {
           <Link to="/privacy">Privacy</Link>
           <Link to="/terms">Terms</Link>
           <Link to="/security">Security</Link>
-          <a href="mailto:hello@revercue.com">hello@revercue.com</a>
         </div>
         <div className="foot-col">
           <h4>Stay in the loop</h4>
-          {subscribed ? (
+          {state === "done" ? (
             <p className="caption">Thanks. You're in.</p>
           ) : (
-            <form
-              className="subscribe"
-              onSubmit={(event) => {
-                event.preventDefault();
-                if (!email) return;
-                setSubscribed(true);
-              }}
-            >
+            <form className="subscribe" onSubmit={subscribe} noValidate>
               <label htmlFor="footer-email" className="sr-only">
                 Email address
               </label>
-              <input
-                id="footer-email"
-                type="email"
-                placeholder="you@studio.com"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-              <button type="submit" className="btn btn-secondary btn-sm">
-                Subscribe
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <input
+                  id="footer-email"
+                  type="email"
+                  placeholder="you@studio.com"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    setError("");
+                  }}
+                  aria-invalid={Boolean(error)}
+                  aria-describedby={error ? "footer-email-error" : undefined}
+                  required
+                />
+                {error && (
+                  <span className="error" id="footer-email-error" role="alert">
+                    {error}
+                  </span>
+                )}
+              </div>
+              <button type="submit" className="btn btn-secondary btn-sm" disabled={state === "loading"}>
+                {state === "loading" ? "…" : "Subscribe"}
               </button>
             </form>
           )}
+          <p className="caption" style={{ marginTop: 6 }}>
+            Optional. Product updates only, never the activation emails.
+          </p>
+
           <div style={{ marginTop: 20 }}>
             <h4>Explain Revercue with</h4>
-            <div className="inline">
-              {ASSISTANTS.map((assistant) => (
-                <a
-                  key={assistant.slug}
-                  className="caption"
-                  href={`${assistant.url}?q=${encodeURIComponent(FOOTER_ASSISTANT_PROMPT)}`}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  title={`Open ${assistant.name} with a pre-filled prompt`}
-                >
-                  {assistant.name}
-                </a>
-              ))}
+            <div className="assistant-links">
+              {ASSISTANTS.map((assistant) => {
+                const href = env(assistant.key);
+                const icon = <assistant.Icon size={18} />;
+                return href ? (
+                  <a
+                    key={assistant.name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={assistant.name}
+                    title={assistant.name}
+                    className="assistant-link"
+                  >
+                    {icon}
+                  </a>
+                ) : (
+                  <span
+                    key={assistant.name}
+                    className="assistant-link is-empty"
+                    role="img"
+                    aria-label={assistant.name}
+                    title={`Set ${assistant.key} in the environment`}
+                  >
+                    {icon}
+                  </span>
+                );
+              })}
             </div>
-            <p className="caption" style={{ marginTop: 8 }}>
-              These open an external tool with a prompt we wrote. The answer comes from the tool, not
-              from Revercue.
-            </p>
+
           </div>
         </div>
       </div>
       <div className="foot-bottom">
         <span>© {new Date().getFullYear()} Revercue. Your data is yours.</span>
         <div className="socials">
-          <a href="https://x.com" target="_blank" rel="noreferrer noopener" aria-label="X">
-            X
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn">
-            LinkedIn
-          </a>
+          {SOCIALS.map((social) => {
+            const href = env(social.key);
+            const icon = <social.Icon size={18} />;
+            return href ? (
+              <a
+                key={social.name}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.name}
+                title={social.name}
+                className="social"
+              >
+                {icon}
+              </a>
+            ) : (
+              <span
+                key={social.name}
+                className="social is-empty"
+                role="img"
+                aria-label={social.name}
+                title={`Set ${social.key} in the environment`}
+              >
+                {icon}
+              </span>
+            );
+          })}
         </div>
       </div>
     </footer>

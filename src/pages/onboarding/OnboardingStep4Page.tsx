@@ -73,10 +73,6 @@ export function OnboardingStep4Page() {
         {!tos && (
           <p className="notice notice-red">You must accept the Terms to continue.</p>
         )}
-        <p className="caption">
-          The FormSubmit activation is separate again: it covers transactional emails, app
-          notifications and security alerts, and it does not opt you in to the newsletter.
-        </p>
       </div>
 
       {error && <p className="notice notice-red mt-6">{error}</p>}

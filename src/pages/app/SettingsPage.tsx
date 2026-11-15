@@ -18,7 +18,9 @@ import { WaitlistModal } from "../../components/shared/WaitlistModal";
 import { useAuth } from "../../hooks/useAuth";
 import { usePlanGate } from "../../hooks/usePlanGate";
 import { useToast } from "../../hooks/useToast";
-import { PLANS, PLAN_LIMITS, SERVICE_OPTIONS, FORMSUBMIT_COPY } from "../../lib/constants";
+import { useTheme } from "../../hooks/useTheme";
+import type { ThemeMode } from "../../contexts/ThemeContext";
+import { PLANS, PLAN_LIMITS, SERVICE_OPTIONS, FORMSUBMIT_COPY, formatStorage } from "../../lib/constants";
 import { formatCurrency, formatDate, formatRelative } from "../../lib/formatters";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
@@ -26,6 +28,7 @@ import type { PlanName } from "../../types";
 
 export type SettingsSection =
   | "profile"
+  | "appearance"
   | "plan"
   | "security"
   | "notifications"
@@ -37,6 +40,7 @@ export type SettingsSection =
 
 const TITLES: Record<SettingsSection, { title: string; subtitle: string }> = {
   profile: { title: "Profile", subtitle: "Your details and the brand that appears on client pages." },
+  appearance: { title: "Appearance", subtitle: "Dark, light, or follow your system. The choice stays on this device." },
   plan: { title: "Plan & Billing", subtitle: "Your plan, your usage and your payment history." },
   security: { title: "Security", subtitle: "Password, two-factor and the sessions that are open." },
   notifications: { title: "Notifications", subtitle: "Email events, the newsletter and the FormSubmit status." },
@@ -58,6 +62,7 @@ export function SettingsPage({ section }: { section: SettingsSection }) {
         </div>
       </div>
       {section === "profile" && <ProfileSection />}
+      {section === "appearance" && <AppearanceSection />}
       {section === "plan" && <PlanSection />}
       {section === "security" && <SecuritySection />}
       {section === "notifications" && <NotificationsSection />}
@@ -67,6 +72,65 @@ export function SettingsPage({ section }: { section: SettingsSection }) {
       {section === "what-revercue-knows" && <WhatRevercueKnowsSection />}
       {section === "delete-account" && <DeleteAccountSection />}
     </>
+  );
+}
+
+/* ---------------------------------------------------------- appearance */
+
+function AppearanceSection() {
+  const { mode, resolved, setMode } = useTheme();
+  const options: { value: ThemeMode; label: string; hint: string }[] = [
+    { value: "dark", label: "Dark", hint: "The near-black app with the white document page." },
+    { value: "light", label: "Light", hint: "A warm paper app. The gold and the serif stay." },
+    { value: "system", label: "System", hint: "Follow the device setting and change with it." },
+  ];
+
+  return (
+    <div className="card card-lg" style={{ maxWidth: 640 }}>
+      <Fieldset legend="Theme" helper="It applies to the public site, the dashboard, the builders and the client pages. Saved on this device only.">
+        <div className="segmented" role="radiogroup" aria-label="Theme">
+          {options.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              role="radio"
+              aria-checked={mode === option.value}
+              aria-pressed={mode === option.value}
+              onClick={() => setMode(option.value)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </Fieldset>
+      <p className="caption" style={{ marginTop: 12 }}>
+        Now showing: <strong>{resolved}</strong>
+        {mode === "system" ? " (following your system)" : ""}. The setting is remembered in this
+        browser; it does not change your account.
+      </p>
+      <div className="theme-preview" aria-hidden="true">
+        <div className="theme-preview-bar">
+          <span className="mark">R</span>
+          <span>Preview</span>
+        </div>
+        <div className="theme-preview-body">
+          <div className="theme-preview-card">
+            <span className="theme-preview-label">Active documents</span>
+            <strong>12</strong>
+          </div>
+          <div className="theme-preview-card">
+            <span className="theme-preview-label">Follow-ups due</span>
+            <strong>3</strong>
+          </div>
+          <span className="btn btn-primary btn-sm">Create proposal</span>
+        </div>
+      </div>
+      {options.map((option) => (
+        <p className="caption" key={option.value} style={{ marginTop: 8 }}>
+          <strong>{option.label}:</strong> {option.hint}
+        </p>
+      ))}
+    </div>
   );
 }
 
@@ -141,8 +205,24 @@ function ProfileSection() {
         helper="To change your email, contact support."
       />
       <Input id="profile-business" label="Business name" value={business} onChange={setBusiness} />
-      <Input id="profile-website" label="Website" type="url" value={website} onChange={setWebsite} placeholder="https://" />
-      <Input id="profile-fiverr" label="Fiverr profile" type="url" value={fiverr} onChange={setFiverr} placeholder="https://fiverr.com/" />
+      <Input
+        id="profile-website"
+        label="Website (optional)"
+        type="url"
+        value={website}
+        onChange={setWebsite}
+        placeholder="https://"
+        helper="Appears on your client documents when set."
+      />
+      <Input
+        id="profile-fiverr"
+        label="Fiverr profile (optional)"
+        type="url"
+        value={fiverr}
+        onChange={setFiverr}
+        placeholder="https://fiverr.com/"
+        helper="Only if you take work there."
+      />
 
       <Fieldset legend="Services" helper="Used to decide which templates are marked Suggested.">
         {SERVICE_OPTIONS.map((service) => (
@@ -238,7 +318,7 @@ function PlanSection() {
       used: query.data?.active_documents ?? 0,
       max: limits.active_documents,
     },
-    { label: "Storage (GB)", used: query.data?.storage_gb ?? 0, max: limits.storage_gb },
+    { label: "Storage", used: query.data?.storage_gb ?? 0, max: limits.storage_gb },
     { label: "Archived", used: query.data?.archive_count ?? 0, max: limits.archive_count },
     {
       label: "Password-protected",
@@ -256,8 +336,8 @@ function PlanSection() {
               {definition.name} <PlanBadge plan={plan} />
             </h2>
             <p className="muted" style={{ fontSize: 14 }}>
-              {definition.price === null
-                ? `$${definition.base} base — ${definition.statusLabel}`
+              {definition.price == null
+                ? `$${definition.price ?? 0} base — ${definition.statusLabel}`
                 : definition.price === 0
                   ? "Free — available now"
                   : `$${definition.price}/month — ${definition.statusLabel}`}
@@ -288,7 +368,10 @@ function PlanSection() {
               <div className="labels">
                 <span>{row.label}</span>
                 <span>
-                  {row.used} {max === null ? "of unlimited" : `of ${max}`}
+                  {row.label === "Storage" ? formatStorage(row.used) : row.used}{" "}
+                  {max === null
+                    ? "of unlimited"
+                    : `of ${row.label === "Storage" ? formatStorage(max) : max}`}
                 </span>
               </div>
               <div className={`usage-bar${percent >= 90 ? " high" : ""}`}>

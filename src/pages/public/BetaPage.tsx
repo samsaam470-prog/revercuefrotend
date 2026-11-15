@@ -151,26 +151,21 @@ export function BetaPage() {
         )}
 
         <div className="stack-4">
-          <div className="card card-md">
-            <h3 style={{ marginBottom: 12 }}>What you get</h3>
-            <ul className="stack-2 muted" style={{ fontSize: 14 }}>
-              <li>Scale free for 3 months</li>
-              <li>A direct line to the founder</li>
-              <li>Feedback that shapes the roadmap</li>
-              <li>Early access to the Delivery Box test</li>
-            </ul>
-          </div>
-          <div className="card card-md">
-            <h3 style={{ marginBottom: 12 }}>What we ask</h3>
-            <ul className="stack-2 muted" style={{ fontSize: 14 }}>
-              <li>Use it on two real clients</li>
-              <li>A 15-minute call at the end</li>
-              <li>Honest feedback, including what is missing</li>
-            </ul>
+          <div className="card card-md stack-3">
+            <h3>What the beta is</h3>
+            <p className="muted" style={{ fontSize: 14 }}>
+              Teams is the agency plan: the Handoff Dashboard, the team roles, the bulk transfer, the
+              audit log and the team attribution. The team is testing those features with a small
+              group before they open the plan.
+            </p>
+            <p className="muted" style={{ fontSize: 14 }}>
+              You can join from this page. If a spot is free, the team reaches out with the next
+              steps. Free is available now, no invitation needed.
+            </p>
           </div>
           <p className="caption">
-            Free is available now, no invitation needed. The beta is specifically for the Teams
-            features.
+            Team seats are handled manually while Teams is in beta, so an application is a
+            conversation, not a checkout.
           </p>
         </div>
       </div>

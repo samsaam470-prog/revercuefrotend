@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { contractsApi } from "../../api/contracts";
+import { proposalsApi } from "../../api/proposals";
 import { crmApi } from "../../api/crm";
 import { Canvas, blocksFromProposal } from "../../components/builder/Canvas";
 import { TopBar } from "../../components/builder/TopBar";
@@ -54,7 +55,11 @@ function ContractRequirementForm() {
   const navigate = useNavigate();
   const toast = useToast();
   const { hasFeature } = usePlanGate();
+  const [mode, setMode] = useState<"existing" | "new">("new");
   const [clientId, setClientId] = useState("");
+  const [clientName, setClientName] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
+  const [proposalId, setProposalId] = useState("");
   const [scope, setScope] = useState("");
   const [amount, setAmount] = useState("");
   const [schedule, setSchedule] = useState("50% upfront, 50% on delivery");
@@ -70,12 +75,25 @@ function ContractRequirementForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const clients = useQuery({ queryKey: ["crm", "clients", "picker"], queryFn: () => crmApi.list({ limit: 100 }) });
+  const accepted = useQuery({
+    queryKey: ["proposals", "accepted", "picker"],
+    queryFn: () => proposalsApi.list({ status: "accepted", limit: 100 }),
+  });
 
-  const valid = clientId && scope.trim() && amount && revisions.trim() && cancellation.trim() && sections.length > 0;
+  const valid =
+    (mode === "existing" ? Boolean(clientId) : Boolean(clientName.trim())) &&
+    Boolean(clientEmail.trim()) &&
+    scope.trim() &&
+    amount &&
+    revisions.trim() &&
+    cancellation.trim() &&
+    sections.length > 0;
 
   const submit = async () => {
     const next: Record<string, string> = {};
-    if (!clientId) next.client = "Choose a client.";
+    if (mode === "existing" && !clientId) next.client = "Choose a client.";
+    if (mode === "new" && !clientName.trim()) next.clientName = "Enter the client's name.";
+    if (!clientEmail.trim()) next.clientEmail = "Enter the client's email.";
     if (!scope.trim()) next.scope = "Describe the scope.";
     if (!amount) next.amount = "Enter the amount.";
     if (!revisions.trim()) next.revisions = "State the revision policy.";
@@ -85,9 +103,16 @@ function ContractRequirementForm() {
 
     setLoading(true);
     try {
+      const clientLabel =
+        mode === "existing"
+          ? clients.data?.data.find((client) => client.id === clientId)?.name || "Client"
+          : clientName.trim();
       const response = await contractsApi.draft({
-        client_id: clientId,
-        title: `Contract — ${clients.data?.data.find((client) => client.id === clientId)?.name || "Client"}`,
+        client_id: mode === "existing" ? clientId : undefined,
+        client_name: mode === "new" ? clientName.trim() : undefined,
+        client_email: clientEmail.trim(),
+        linked_proposal_id: proposalId || undefined,
+        title: `Contract — ${clientLabel}`,
         scope,
         payment_terms: `${currency} ${amount} — ${schedule}`,
         timeline: timeline || undefined,
@@ -116,17 +141,66 @@ function ContractRequirementForm() {
         </p>
 
         <div className="stack-4">
+          <div>
+            <span className="field-label">Client</span>
+            <div className="segmented" style={{ marginTop: 8 }}>
+              <button type="button" aria-pressed={mode === "existing"} onClick={() => setMode("existing")}>
+                Existing client
+              </button>
+              <button type="button" aria-pressed={mode === "new"} onClick={() => setMode("new")}>
+                New client
+              </button>
+            </div>
+          </div>
+          {mode === "existing" ? (
+            <Select
+              id="contract-client"
+              label="Client"
+              value={clientId}
+              placeholder="Choose a client"
+              options={(clients.data?.data ?? []).map((client) => ({
+                value: client.id,
+                label: `${client.name} — ${client.email}`,
+              }))}
+              onChange={(value) => {
+                setClientId(value);
+                const found = clients.data?.data.find((client) => client.id === value);
+                if (found) setClientEmail(found.email);
+              }}
+              error={errors.client}
+              required
+            />
+          ) : (
+            <Input
+              id="contract-client-name"
+              label="Client name"
+              value={clientName}
+              onChange={setClientName}
+              error={errors.clientName}
+              required
+            />
+          )}
+          <Input
+            id="contract-client-email"
+            label="Client email"
+            type="email"
+            value={clientEmail}
+            onChange={setClientEmail}
+            error={errors.clientEmail}
+            helper="Where the contract is sent for signature."
+            required
+          />
           <Select
-            id="contract-client"
-            label="Client"
-            value={clientId}
-            placeholder="Choose a client"
-            options={(clients.data?.data ?? []).map((client) => ({
-              value: client.id,
-              label: `${client.name} — ${client.email}`,
+            id="contract-proposal"
+            label="Which proposal is this contract for?"
+            value={proposalId}
+            placeholder="None — start from scratch"
+            options={(accepted.data?.data ?? []).map((proposal) => ({
+              value: proposal.id,
+              label: proposal.title,
             }))}
-            onChange={setClientId}
-            error={errors.client}
+            onChange={setProposalId}
+            helper="Optional. The scope and the payment terms come from it."
           />
           <Textarea
             id="contract-scope"

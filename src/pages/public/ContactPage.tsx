@@ -95,7 +95,7 @@ export function ContactPage() {
             />
             <Select
               id="contact-topic"
-              label="Topic"
+              label="Topic (optional)"
               value={topic}
               options={TOPICS}
               onChange={setTopic}
@@ -119,10 +119,11 @@ export function ContactPage() {
 
         <div className="stack-4">
           <div>
-            <p className="eyebrow">Direct email</p>
-            <a href="mailto:hello@revercue.com" className="mono" style={{ color: "var(--gold)" }}>
-              hello@revercue.com
-            </a>
+            <p className="eyebrow">How to reach us</p>
+            <p className="muted" style={{ fontSize: 14 }}>
+              This form is the way in. It reaches the same inbox as everything else, and it gives us
+              the context to answer properly. There is no public email address to copy.
+            </p>
           </div>
           <div>
             <p className="eyebrow">Response time</p>

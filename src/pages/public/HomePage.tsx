@@ -11,7 +11,7 @@ import {
 import { CodeVisual } from "../../components/visuals";
 import { FAQItem } from "../../components/shared/FAQItem";
 import { FAQS } from "../../lib/faqs";
-import { PLANS } from "../../lib/constants";
+import { PLANS, TAGLINE, THESIS } from "../../lib/constants";
 
 const MODULES = [
   { icon: FileText, title: "Proposals", body: "Interactive links with packages, FAQs and questions." },
@@ -34,8 +34,8 @@ export function HomePage() {
   return (
     <>
       <section className="hero">
-        <p className="eyebrow">Your client work is one thread</p>
-        <h1>Your client work is one thread.</h1>
+        <p className="eyebrow">{THESIS}</p>
+        <h1>{TAGLINE}</h1>
         <p className="lede">
           {"Proposal. Contract. Form. Invoice. Client. In one place, not five.\nInteractive links, not PDFs. The client record builds itself."}
         </p>
@@ -53,9 +53,10 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="page">
+      <section className="page" data-reveal>
         <div className="section-head">
-          <h2>One thread, three steps.</h2>
+          <h2>Your client work is one thread.</h2>
+          <p>Three steps, one link: create, share, track.</p>
         </div>
         <div className="thread-grid">
           {STEPS.map((step) => (
@@ -71,7 +72,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="page">
+      <section className="page" data-reveal>
         <div className="section-head">
           <h2>Everything in one place.</h2>
         </div>
@@ -86,7 +87,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="page">
+      <section className="page" data-reveal>
         <div className="section-head">
           <h2>What your client sees.</h2>
           <p>A clean page. Your brand. No login. No PDF.</p>
@@ -101,7 +102,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="page">
+      <section className="page" data-reveal>
         <div className="section-head">
           <h2>Simple, honest pricing.</h2>
           <p>Free is available now. The paid plans are invite-only. Teams is in beta.</p>
@@ -109,10 +110,10 @@ export function HomePage() {
         <div className="pricing-chips">
           {PLANS.map((plan) => (
             <Link to="/pricing" className="chip" key={plan.id}>
-              <b>{plan.price === null ? `$${plan.base}` : `$${plan.price}`}</b>
+              <b>{plan.price == null ? `$${plan.price ?? 0}` : `$${plan.price}`}</b>
               <span>
                 {plan.name}
-                {plan.price === null ? " base" : ""} ·{" "}
+                {plan.price != null ? " (monthly)" : ""} ·{" "}
                 {plan.status === "available"
                   ? "available now"
                   : plan.status === "beta"
@@ -129,7 +130,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="page">
+      <section className="page" data-reveal>
         <div className="section-head">
           <h2>Questions, answered.</h2>
           <p>The first twelve, then the rest. No modal, no accordion library.</p>
