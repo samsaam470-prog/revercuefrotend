@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { proposalsApi, pipelineApi, type PackageInput } from "../../api/proposals";
 import { crmApi } from "../../api/crm";
+import { settingsApi } from "../../api/settings";
 import { ApiError } from "../../types/api";
 import { errorMessage } from "../../lib/errors";
 import {
@@ -24,16 +25,14 @@ import { Select } from "../ui/Select";
 import { Textarea } from "../ui/Textarea";
 import type { FormQuestion } from "../../types";
 
-const DEFAULT_PACKAGES: PackageInput[] = [
-  { name: "Basic", price: 0, deliverables: "" },
-  { name: "Standard", price: 0, deliverables: "" },
-  { name: "Premium", price: 0, deliverables: "" },
-];
+const blankPackages = (): PackageInput[] => [{ name: "", price: 0, deliverables: "" }];
 
 export function ProposalRequirementForm() {
   const navigate = useNavigate();
   const toast = useToast();
-  const { limits } = usePlanGate();
+  const { limits, hasFeature } = usePlanGate();
+  const canPrefillPackages = hasFeature("saved_packages");
+  const canPrefillFaqs = hasFeature("saved_faqs");
   const [mode, setMode] = useState<"existing" | "new">("new");
   const [clientId, setClientId] = useState("");
   const [clientName, setClientName] = useState("");
@@ -47,7 +46,7 @@ export function ProposalRequirementForm() {
   const [audience, setAudience] = useState("");
   const [cta, setCta] = useState("");
   const [sections, setSections] = useState<string[]>(["Introduction", "Scope", "Pricing"]);
-  const [packages, setPackages] = useState<PackageInput[]>(DEFAULT_PACKAGES);
+  const [packages, setPackages] = useState<PackageInput[]>(blankPackages);
   const [faqs, setFaqs] = useState<{ question: string; answer: string }[]>([]);
   const [questions, setQuestions] = useState<FormQuestion[]>([]);
   const [currency, setCurrency] = useState("USD");
@@ -58,10 +57,47 @@ export function ProposalRequirementForm() {
   const [limitOpen, setLimitOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const savedPackages = useQuery({
+    queryKey: ["settings", "saved-packages", "prefill"],
+    queryFn: () => settingsApi.savedPackages(),
+    enabled: canPrefillPackages,
+  });
+  const savedFaqsQuery = useQuery({
+    queryKey: ["settings", "saved-faqs", "prefill"],
+    queryFn: () => settingsApi.savedFaqs(),
+    enabled: canPrefillFaqs,
+  });
+
   const clients = useQuery({
     queryKey: ["crm", "clients", "picker"],
     queryFn: () => crmApi.list({ limit: 100 }),
   });
+
+  const prefilled = useRef({ packages: false, faqs: false });
+
+  /* Saved packages and saved FAQs are part of Growth and Scale; below that the
+     rows stay blank and the helper says so. */
+  useEffect(() => {
+    if (!canPrefillPackages || prefilled.current.packages) return;
+    const rows = savedPackages.data?.data ?? [];
+    if (rows.length === 0) return;
+    prefilled.current.packages = true;
+    setPackages(
+      rows.map((row) => ({
+        name: row.name,
+        price: row.price,
+        deliverables: row.deliverables || row.description || "",
+      })),
+    );
+  }, [canPrefillPackages, savedPackages.data]);
+
+  useEffect(() => {
+    if (!canPrefillFaqs || prefilled.current.faqs) return;
+    const rows = savedFaqsQuery.data?.data ?? [];
+    if (rows.length === 0) return;
+    prefilled.current.faqs = true;
+    setFaqs(rows.map((row) => ({ question: row.question, answer: row.answer })));
+  }, [canPrefillFaqs, savedFaqsQuery.data]);
 
   const toggleSection = (section: string) => {
     setSections((current) =>
@@ -332,6 +368,11 @@ export function ProposalRequirementForm() {
         {sections.includes("Pricing") && (
           <div className="form-section">
             <p className="form-section-title">Packages</p>
+            {!canPrefillPackages && (
+              <p className="helper">
+                Saved packages fill this on Growth and Scale. Add them here for now.
+              </p>
+            )}
             <div className="form-stack">
               {packages.map((item, index) => (
                 <div className="card card-md stack-3" key={index}>
@@ -392,6 +433,11 @@ export function ProposalRequirementForm() {
         {sections.includes("FAQs") && (
           <div className="form-section">
             <p className="form-section-title">FAQs</p>
+            {!canPrefillFaqs && (
+              <p className="helper">
+                Saved FAQs fill this on Growth and Scale. Write them here for now.
+              </p>
+            )}
             <div className="form-stack">
               {faqs.map((faq, index) => (
                 <div className="card card-md stack-3" key={index}>
