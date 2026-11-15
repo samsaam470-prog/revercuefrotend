@@ -52,7 +52,7 @@ export const PLANS: PlanDefinition[] = [
       saved_packages: 0,
       password_protected: 0,
       adaptive_forms: 0,
-      storage_gb: 0.5,
+      storage_gb: 0.05,
     },
   },
   {
@@ -81,7 +81,7 @@ export const PLANS: PlanDefinition[] = [
       saved_packages: 0,
       password_protected: 0,
       adaptive_forms: 0,
-      storage_gb: 2,
+      storage_gb: 0.1,
     },
   },
   {
@@ -111,7 +111,7 @@ export const PLANS: PlanDefinition[] = [
       saved_packages: 10,
       password_protected: 15,
       adaptive_forms: 3,
-      storage_gb: 20,
+      storage_gb: 1,
     },
   },
   {
@@ -141,7 +141,7 @@ export const PLANS: PlanDefinition[] = [
       saved_packages: 15,
       password_protected: 50,
       adaptive_forms: 15,
-      storage_gb: 100,
+      storage_gb: 5,
     },
   },
   {
@@ -171,7 +171,7 @@ export const PLANS: PlanDefinition[] = [
       saved_packages: 999,
       password_protected: 999,
       adaptive_forms: 999,
-      storage_gb: 500,
+      storage_gb: 10,
     },
   },
 ];
@@ -299,6 +299,10 @@ export const FOOTER_ASSISTANT_PROMPT =
 
 export function formatStorage(gb: number | null | undefined): string {
   if (gb == null) return "Unlimited";
-  if (gb >= 1) return `${Number.isInteger(gb) ? gb : gb.toFixed(2)} GB`;
+  if (gb >= 1) {
+    return Number.isInteger(gb)
+      ? `${gb} GB (${(gb * 1024).toLocaleString("en-US")} MB)`
+      : `${gb.toFixed(2)} GB`;
+  }
   return `${Math.round(gb * 1000)} MB`;
 }
