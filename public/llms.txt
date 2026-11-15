@@ -1,0 +1,63 @@
+# Revercue
+
+> Your work should speak, not you.
+> A thread, not disconnected workflows.
+
+Revercue is a client-work product for freelancers and small agencies. The thread is the product: one client, one link, from the proposal to the contract to the form to the invoice to the client record. The documents are interactive links, not PDFs. The client opens a link, reads, answers, chooses a package, and the record updates itself.
+
+Site: https://revercue.pages.dev
+
+## The thread
+
+- **Proposal** — an interactive link with packages, FAQs, embedded questions and info icons. The client selects a package and asks a question without an account. A password can gate the page.
+- **Contract** — the client approves, declines, or asks a question. Approval can chain into the requirement form, the invoice, or a PDF, depending on the setting.
+- **Form** — the requirement form. Adaptive on Growth and above: the branching shows only the questions that matter. The Prompt Creator writes the question set from a short brief.
+- **Invoice** — pay by link, or bank details with a proof-of-payment upload. The line items, the tax, the currency and the due date are on the page the client already has.
+- **CRM** — the client record, the communication log, the notes and the follow-ups. On Scale it adds the interest level, the revenue tracker and a writing area. The record builds itself from the documents.
+
+## The plans
+
+- **Free** — available now. 5 active documents, 1-month retention, 50 MB storage, 3 notes per client, the full thread.
+- **Starter** — invite-only, join the waitlist. 20 active documents, 3-month retention, 100 MB storage, 10 notes per client, 3 custom templates, email notifications.
+- **Growth** — invite-only, join the waitlist. 100 active documents, 12-month retention, 1 GB storage, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, no Revercue branding, 10 saved FAQs, 10 saved packages, 10 custom templates.
+- **Scale** — invite-only, join the waitlist. 300 active documents, 24-month retention, 5 GB storage, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, the custom thank-you page, the pattern learning, 30 saved FAQs, 15 saved packages, 15 custom templates.
+- **Teams** — in beta, join the beta. 500 active documents, 36-month retention, 10 GB storage, everything on Scale, plus the team features: the Handoff Dashboard, the roles, the bulk transfer and the audit log.
+
+An active document is a published document with a public link. Drafts, archived documents and deleted documents do not count. A password-protected document counts once: the password is a gate, not a second document. An adaptive form counts once: the branching is a feature, not a second form.
+
+## The patterns, not magic
+
+Revercue does not use AI. It uses patterns: keyword matching, frequency counting and arithmetic over the user's own history and the public research. The helper is a tool, not an action — every suggestion is a prompt the user clicks, and the user decides whether to accept it. The product is the pen; the user is the author.
+
+## The retention
+
+The documents are rented; the CRM record is owned. When a document's retention runs out it is deleted, but a PDF is emailed to the user before the deletion, and the client record, the notes and the communication log survive. The thread outlives the document.
+
+## The data
+
+The documents are private: the user and the client they were sent to. The team sees the account details — the email, the name, the plan and the usage — for support and billing. The team does not read the documents, the client records or the communication log. The exception is a report of illegal use or a legal requirement.
+
+## The key pages
+
+- Home: https://revercue.pages.dev/
+- Features: https://revercue.pages.dev/features
+- Pricing: https://revercue.pages.dev/pricing
+- Compare: https://revercue.pages.dev/compare
+- Guides: https://revercue.pages.dev/guides
+- About: https://revercue.pages.dev/about
+- Contact: https://revercue.pages.dev/contact
+- Blog: https://revercue.pages.dev/blog
+- Beta: https://revercue.pages.dev/beta
+- Privacy: https://revercue.pages.dev/privacy
+- Terms: https://revercue.pages.dev/terms
+- Security: https://revercue.pages.dev/security
+
+## FAQ highlights
+
+- **What is Revercue?** The thread for freelancer client work: proposal, contract, form, invoice and client record, connected, with interactive links instead of PDFs.
+- **How is this different from sending a PDF?** A PDF is a dead file. A Revercue document is a link: the client selects a package, answers a question, approves a contract, and the record updates. You see the activity.
+- **What are the plans?** Free is available now. Starter, Growth and Scale are invite-only — join the waitlist. Teams is in beta — join the beta.
+- **Does Revercue use AI?** No. It uses patterns: keyword matching, frequency counting and arithmetic. Every suggestion is a prompt you click, never an action taken for you.
+- **What happens to my documents when retention ends?** The document is deleted, a PDF is emailed to you first, and the client record stays. The documents are rented; the CRM record is owned.
+
+The product does not use AI. It uses patterns. Your work should speak, not you.

@@ -5,7 +5,6 @@ import { PLANS, formatStorage } from "../../lib/constants";
 import { faqsByGroup } from "../../lib/faqs";
 import { FAQItem } from "../../components/shared/FAQItem";
 import { WaitlistModal } from "../../components/shared/WaitlistModal";
-import { PricingVisual } from "../../components/visuals";
 import type { PlanName } from "../../types";
 
 const ROWS: { label: string; key: keyof (typeof PLANS)[0]["limits"] | "password" | "interest" | "suggestions" | "brand" | "thankyou" }[] = [
@@ -147,9 +146,6 @@ export function PricingPage() {
               ))}
             </tbody>
           </table>
-        </div>
-        <div className="mt-6">
-          <PricingVisual />
         </div>
       </section>
 

@@ -732,6 +732,20 @@ export const FAQS: Faq[] = [
     answer:
       "You can use Revercue on any device — a laptop, a desktop, a tablet, or a phone. The product works in any modern browser (Chrome, Edge, Safari, Firefox). For the best experience when building and rendering documents with visuals (charts, diagrams, images), we suggest a device with 4 GB of RAM or more. The documents are interactive and can get heavy; a modern browser with enough memory keeps the rendering smooth. On older or low-memory devices, the core product works, but the visual rendering may be slower.",
   },
+  {
+    id: 102,
+    group: "product",
+    question: 'What is "Ask the helper"?',
+    answer:
+      "Ask the helper is the inline assistant in the builder. You select a piece of text, click Ask the helper, and it can rewrite the text in a different tone, fix the grammar, expand it, simplify it, or change the wording. The helper is a tool, not an action. It suggests a rewrite; you decide whether to replace the text, insert it below, or cancel. The helper is not a separate product; it is the assistant inside the tools you already use. It runs in your browser, and the content is not sent to a server. If your browser does not support it, the Ask the helper button is not shown, and you edit the text manually.",
+  },
+  {
+    id: 103,
+    group: "documents",
+    question: "What is post-document analysis?",
+    answer:
+      "Post-document analysis is the review that runs after you click Create. It reads the document and gives you a quality score (0–100) and a list of issues. The score is both the pattern engine's (the structure, the missing sections, the tone consistency) and the helper's (the readability, the flow, the clarity). The issues are tagged by source (From this client's history, From your usual method, From what works). You see the score and the issues, and you decide whether to fix them or publish anyway. The analysis is not a gate; it is a quality signal.",
+  },
 ];
 
 export const FAQ_TOTAL = FAQS.length;

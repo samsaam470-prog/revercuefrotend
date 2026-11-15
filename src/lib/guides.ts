@@ -818,6 +818,47 @@ const BASE_GUIDES: Guide[] = [
       },
     ],
   },
+  {
+    slug: "plans-explained",
+    title: "The plans, explained",
+    excerpt:
+      "The five plans, what each one adds, and the limits that actually change how you work.",
+    category: "Pricing",
+    readMinutes: 6,
+    updated: "2026-11-15",
+    visual: "PricingVisual",
+    sections: [
+      {
+        heading: "Five plans, two states",
+        paragraphs: [
+          "Free is available now. Starter, Growth and Scale are invite-only: join the waitlist and the team reaches out when a spot opens. Teams is in beta: join the beta and the team tests the team features with you. Nothing about the thread changes between the plans. The proposal, the contract, the form, the invoice and the client record are the same product on every tier. What changes is how much of it you can keep at once, and how long you keep it.",
+        ],
+      },
+      {
+        heading: "What each tier adds",
+        paragraphs: [
+          "Free gives you 5 active documents, 1-month retention, 50 MB of storage, 3 notes per client, and the full thread. It is the product, not a demo.",
+          "Starter adds room and a voice: 20 active documents, 3-month retention, 100 MB, 10 notes per client, 3 custom templates, and email notifications.",
+          "Growth adds the features that change how a document is made: 100 active documents, 12-month retention, 1 GB, 10 custom templates, 10 saved FAQs, 10 saved packages, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, and no Revercue branding on the client pages.",
+          "Scale adds the numbers: 300 active documents, 24-month retention, 5 GB, 15 custom templates, 30 saved FAQs, 15 saved packages, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, the custom thank-you page, and the full set of suggestions.",
+          "Teams adds the people: 500 active documents, 36-month retention, 10 GB, everything on Scale, and the team features — the Handoff Dashboard, the roles, the bulk transfer and the audit log. Teams is in beta.",
+        ],
+      },
+      {
+        heading: "The limits that actually matter",
+        paragraphs: [
+          "Active documents are the live ones: published, with a public link. A draft is not active. An archived document is not active. Deleting ends it. The password is a gate on a published document, not a second document, so a password-protected proposal still counts once. The same is true of an adaptive form: the branching is a feature of the form, not a second form.",
+          "Drafts have their own clock: 10 days on Free, 30 on Starter, 50 on Growth, 80 on Scale and Teams. Publish inside it or lose the draft. The archive has a count and a window too: 5 for 15 days on Free, 15 for 30 on Starter, 30 for 30 on Growth and above.",
+        ],
+      },
+      {
+        heading: "What happens when a document expires",
+        paragraphs: [
+          "The documents are rented; the client record is owned. When retention runs out, the document is deleted — but a PDF is emailed to you before the deletion, and the CRM record, the communication log and the notes stay. The thread survives the document. That is the difference between renting a document and owning the relationship.",
+        ],
+      },
+    ],
+  },
 ];
 
 /*

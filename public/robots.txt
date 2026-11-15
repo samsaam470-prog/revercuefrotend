@@ -6,11 +6,18 @@ Disallow: /p/
 Disallow: /c/
 Disallow: /i/
 Disallow: /f/
+
+# The app is private.
 Disallow: /dashboard
+Disallow: /settings
+Disallow: /crm
 Disallow: /proposals
 Disallow: /contracts
 Disallow: /forms
 Disallow: /invoices
-Disallow: /crm
-Disallow: /settings
 Disallow: /notifications
+
+# The admin is not public.
+Disallow: /admin
+
+Sitemap: https://revercue.pages.dev/sitemap.xml
