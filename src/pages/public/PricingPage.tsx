@@ -34,7 +34,9 @@ function cell(plan: PlanName, key: (typeof ROWS)[0]["key"]): string {
     case "interest":
       return plan === "scale" || plan === "teams" ? "Yes" : "—";
     case "suggestions":
-      return plan === "growth" ? "Follow-ups" : plan === "scale" || plan === "teams" ? "Full set" : "—";
+      if (plan === "free" || plan === "starter") return "Basic";
+      if (plan === "growth") return "Basic + saved";
+      return "Advanced";
     case "brand":
       return plan === "free" || plan === "starter" ? "—" : "Yes";
     case "thankyou":

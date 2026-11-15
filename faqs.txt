@@ -41,7 +41,7 @@ Q11. What are the plans?
 A11. Free (available now), Starter, Growth, Scale (invite-only), and Teams (in beta). The paid plans are invite-only in the fresh state. You join the waitlist, and the team reaches out when a spot opens. Teams is in beta. You join the beta.
 
 Q12. What is the difference between the plans?
-A12. The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and the basics. Starter adds custom templates and email notifications. Growth adds adaptive forms, the basic suggestions, and no Revercue branding on the public pages. Scale adds advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, and the custom thank-you page. Teams adds the team features (in beta).
+A12. The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and the basic suggestions. Starter adds custom templates and email notifications on the same basic suggestions. Growth adds the saved FAQs and the saved packages on top of the basic suggestions, plus adaptive forms and no Revercue branding on the public pages. Scale adds advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, and the custom thank-you page. Teams adds the team features (in beta).
 
 Q13. How do I pay?
 A13. The paid plans are invite-only in the fresh state. Join the waitlist. The team will contact you with the next steps when a spot opens. The Free plan is available now, no invitation needed.
