@@ -1,14 +1,9 @@
-# REVERCUE — THE 49 FAQs
+﻿# REVERCUE — THE 100 FAQs
 # File: faqs.txt
-# Purpose: The complete FAQ copy and placement for the public site.
-# Audience: The AI building the public site. Read publicsite.txt first for the layout.
-# The FAQs appear on: Home (first 12, "Show all 49" expands), Pricing (the billing FAQs), the Features page (the feature FAQs), and the Guides page (the how-to FAQs).
-# Every FAQ is a native <details> element: the summary row with a chevron, the answer inside. No modal, no accordion library.
-# The answers are written to be honest, not marketing. They name the trade-offs.
+# The rules: no "AI", no "MVP", no "Payoneer", Teams in beta. The Home page shows the first 12 + "Show all 100."
+# The answers are honest, not marketing. They name the trade-offs.
 
-# ============================================================
-# GROUP 1 — THE PRODUCT (what Revercue is)
-# ============================================================
+## GROUP 1 — THE PRODUCT (Q1–Q10)
 
 Q1. What is Revercue?
 A1. Revercue is a tool for freelancers and agencies. It keeps your client work in one thread: proposal, contract, requirement form, invoice, and client record. The documents are interactive links, not PDFs. The client opens a link, reads, answers questions, and selects a package. You see the activity, and the client record builds itself.
@@ -23,7 +18,7 @@ Q4. Is this a CRM?
 A4. It has a CRM, but it is not just a CRM. The client record is one part of the thread. The thread is the product. The CRM is where the thread lands.
 
 Q5. Does Revercue use AI?
-A5. No. The product uses patterns: keyword matching for the suggestions, frequency counting for the learned pattern, arithmetic for the interest level and the price suggestion. No AI model, no API, no content sent to a third party. The "AI" in the public site's footer buttons is a marketing assistant that reads the public site only, not your data.
+A5. No. The product uses patterns: keyword matching for the suggestions, frequency counting for the learned pattern, arithmetic for the interest level and the price suggestion. No AI model, no content sent to a third party. The footer has four buttons that open your AI tool (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled prompt about Revercue. The answer comes from your tool, not from us.
 
 Q6. What are the five modules?
 A6. Proposals, Contracts, Requirement Forms, Invoices, and the CRM. The Document Builder is the engine that the proposal, contract, and invoice builders share. The form editor is a separate tool. The CRM is a record.
@@ -34,166 +29,302 @@ A7. The thread is the client relationship: the proposal that started it, the con
 Q8. Can I use only one module?
 A8. Yes. You can use only proposals, or only invoices, or only the CRM. The thread is more powerful when you use all of it, but you are not forced to. The Free plan lets you try the whole thread.
 
-# ============================================================
-# GROUP 2 — THE PLANS AND THE PRICING
-# ============================================================
+Q9. What is the tagline?
+A9. "Your work should speak, not you."
 
-Q9. What are the plans?
-A9. Free ($0), Starter ($12/month), Growth ($29/month), Scale ($49/month), and Teams ($99 base, MVP 2.0, on the waitlist). The prices are monthly. There is no annual plan yet.
+Q10. What is the thesis?
+A10. "A thread, not disconnected workflows."
 
-Q10. What is the difference between the plans?
-A10. The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and the basics. Starter adds custom templates and email notifications. Growth adds adaptive forms, the basic suggestions, and no Revercue branding on the public pages. Scale adds advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, and the custom thank-you page. Teams adds the team features (MVP 2.0).
+## GROUP 2 — THE PLANS AND THE PRICING (Q11–Q22)
 
-Q11. How do I pay?
-A11. Via Payoneer, manually. You select the plan, we send you the Payoneer details, you pay, you send the receipt, and your account is upgraded within 24 hours. There is no automated checkout in MVP 1.0.
+Q11. What are the plans?
+A11. Free (available now), Starter, Growth, Scale (invite-only), and Teams (in beta). The paid plans are invite-only in the fresh state. You join the waitlist, and the team reaches out when a spot opens. Teams is in beta. You join the beta.
 
-Q12. Can I pay annually?
-A12. Not yet. Annual billing is a later feature. The monthly plan is the only option in MVP 1.0.
+Q12. What is the difference between the plans?
+A12. The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and the basics. Starter adds custom templates and email notifications. Growth adds adaptive forms, the basic suggestions, and no Revercue branding on the public pages. Scale adds advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, and the custom thank-you page. Teams adds the team features (in beta).
 
-Q13. Can I downgrade?
-A13. Yes. At the end of your billing cycle. You choose which documents to keep within the new plan's limit. The rest are archived (not deleted), and you have 7 days to download the PDFs. After 7 days, the archived documents follow the new plan's archive retention.
+Q13. How do I pay?
+A13. The paid plans are invite-only in the fresh state. Join the waitlist. The team will contact you with the next steps when a spot opens. The Free plan is available now, no invitation needed.
 
-Q14. What happens to my documents if I downgrade?
-A14. You keep up to the new plan's active-document limit. The rest are archived. A PDF of each is emailed to you. The archived documents are deleted after the new plan's archive retention (15 days on Free, 30 days on paid plans). The CRM records (client name, email, dates, summary) survive. The document content is rented; the CRM record is owned.
+Q14. Can I pay annually?
+A14. Annual billing is not available yet. Join the waitlist for updates.
 
-Q15. Do you offer refunds?
-A15. No. MVP 1.0 has no refunds. If you downgrade, the plan changes at the end of the cycle. If you delete your account, the data is deleted after a 5-day grace period.
+Q15. Can I downgrade?
+A15. Yes. At the end of your billing cycle. You choose which documents to keep within the new plan's limit. The rest are archived, and you have 7 days to download the PDFs.
 
-Q16. What is the Teams plan?
-A16. Teams is the agency plan. It adds the Handoff Dashboard, team roles, bulk transfer, the audit log, and team attribution. It is MVP 2.0, not available yet. You can join the waitlist from the Pricing page.
+Q16. What happens to my documents if I downgrade?
+A16. You keep up to the new plan's active-document limit. The rest are archived. A PDF of each is emailed to you. The archived documents are deleted after the new plan's archive retention. The CRM records survive.
 
-# ============================================================
-# GROUP 3 — THE DOCUMENTS AND THE BUILDER
-# ============================================================
+Q17. Do you offer refunds?
+A17. No refunds. If you downgrade, the plan changes at the end of the cycle. If you delete your account, the data is deleted after a 5-day grace period.
 
-Q17. Can I add a custom template?
-A17. Yes, on Growth, Scale, and Teams. You can upload your own HTML template as a file, or paste a URL (for example, a template hosted on a CDN). Revercue fetches it, sanitizes it, caches it, and renders it in your builder. Your custom template appears in your template selection screen for future documents, with a "Suggested" badge if it matches your services.
+Q18. What is the Teams plan?
+A18. Teams is the agency plan. It adds the Handoff Dashboard, the team roles, the bulk transfer, the audit log, and the team attribution. Teams is in beta. The team is testing the team features with a small group. You can join the beta from the Pricing page.
 
-Q18. Will my template be available to other users?
-A18. No. Your custom template is private to your account. No other user can see it. The Revercue team cannot see it either. It is stored in your file storage, not in a shared library.
+Q19. What is the difference between the waitlist and the beta?
+A19. The waitlist is for the paid plans (Starter, Growth, Scale). The paid plans are invite-only in the fresh state. You join the waitlist, and the team reaches out when a spot opens. The beta is for Teams. Teams is in beta. You join the beta, and the team will reach out to include you in the test. The Free plan is available now.
 
-Q19. Can I use a blank template?
-A19. Yes. On the template selection screen, there is a "Start from blank" card. It opens an empty canvas with the block library. The requirement form you filled will not be applied to the blank canvas — a blank template has no structure to pre-fill. Instead, the data from the form (client name, problem, sections, FAQs, questions) appears in the suggestions panel while you build. You can insert any of it with one click. A blank template is for when you want to design the document yourself, with the form data available as building blocks, not as a pre-assembled layout.
+Q20. What is the Free plan?
+A20. The Free plan is free forever, not a trial. It includes 5 active documents, 1-month retention, 50 MB storage, 3 notes per client, and the full thread. It is enough to try the product with real clients.
 
-Q20. Can I request a feature or a specific colour or font?
-A20. Yes. You can request a specific colour, font, feature, or anything else. There are two ways: when the feedback prompt appears after a milestone (your first document, first client, first payment), or from Settings → Feedback, which is always available. Every request goes to the feedback inbox in the Revercue admin dashboard. We read every message. We do not promise to build everything, but we do read everything.
+Q21. What happens if I exceed my plan's active-document limit?
+A21. You cannot create a new document. The app says: "You have 5 of 5 active documents. Archive or delete one to create a new one." You can archive a document (it no longer counts) or delete one.
 
-Q21. Can I edit a document after I share it?
-A21. Yes. The document is a live link. When you edit it, the client sees the new version on the next open. The communication log records "Document edited." If you want immutable versions, that is a later feature. In MVP 1.0, editing a shared document changes it live.
+Q22. What happens if I exceed my storage limit?
+A22. You cannot upload a new file. The app says: "Storage limit reached (50 MB on your plan)." You can delete an old file or join the waitlist for a paid plan.
 
-Q22. What is the "Make new from this" action?
-A22. On any document, there is a "Make new from this" action. It copies the content (text, sections, FAQs, questions, colours, line items, everything), opens the copy in the builder, and lets you change the client name and any other field. The new document is a new active document. It counts against your limit. The original stays as it was.
+## GROUP 3 — THE DOCUMENTS AND THE BUILDER (Q23–Q42)
 
-Q23. Can I password-protect a document?
-A23. Yes, on Growth and Scale. In the share modal, toggle "Require a password," set a password (min 6 characters), and send it to the client separately (e.g., on WhatsApp). The client sees a password wall. The link alone will not open the document. The session remembers the password for 30 minutes. Three wrong attempts lock the wall for 15 minutes. Growth allows 15 password-protected documents active at once. Scale allows 50.
+Q23. Can I add a custom template?
+A23. Yes, on Growth, Scale, and Teams. You can upload your own HTML template as a file, or paste a URL. Revercue fetches it, sanitizes it, caches it, and renders it in your builder. Your custom template appears in your template selection screen.
 
-Q24. What happens when the retention period ends?
-A24. The document is permanently deleted. Before deletion, a PDF is emailed to you. The CRM record survives: the client name, email, dates, service, and the communication log summary. The rule: the document and its answers are rented; the CRM record and the summary are owned.
+Q24. Will my template be available to other users?
+A24. No. Your custom template is private to your account. No other user can see it. The team cannot see it either. It is stored in your file storage, not in a shared library.
 
-Q25. What is the draft retention?
-A25. A draft is a document created but not published. Drafts have their own retention: Free 10 days, Starter 30, Growth 50, Scale 80, Teams 80. If you do not publish the draft within that period, it is deleted. A PDF is emailed to you first. A draft does not count against the active-document limit.
+Q25. Can I use a blank template?
+A25. Yes. On the template selection screen, there is a "Start from blank" card. It opens an empty canvas with the block library. The requirement form data appears in the suggestions panel. You can insert any of it with one click.
 
-Q26. What is the archive?
-A26. Archive makes the public link unusable. The document stays in your records. It is removed from the active-document count. Archive limits: Free 5 archived at once, 15-day retention; Starter 15, 30 days; Growth, Scale, Teams 30, 30 days. When the archive retention ends, the document is permanently deleted (PDF emailed first). You can unarchive, and the link works again.
+Q26. Can I request a feature or a specific colour or font?
+A26. Yes. Use the feedback prompt after a milestone, or Settings → Feedback, which is always available. Every request goes to the feedback inbox. We read every message. We do not promise to build everything, but we do read everything.
 
-Q27. What are the saved FAQs?
-A27. On Growth and Scale, you can save FAQs to a personal library. When you create a proposal, the saved FAQs are pre-filled automatically. You can edit, delete, or add more. A saved FAQ is deleted from the library after 3 months of not being used. You are warned 10 days before deletion. The limits: Growth 10, Scale 30. Free and Starter do not have saved FAQs.
+Q27. Can I edit a document after I share it?
+A27. Yes. The document is a live link. When you edit it, the client sees the new version on the next open. The communication log records "Document edited."
 
-Q28. What are the saved packages?
-A28. On Growth and Scale, you can save a package (name, price, deliverables, description, Recommended flag). It appears in the builder's "Saved packages" section. Insert it, edit it, reuse it. Limits: Growth 10, Scale 15. Retention: 3 months of not being used, 10-day warning, then deleted.
+Q28. What is the "Make new from this" action?
+A28. On any document, it copies the content, opens the copy in the builder, and lets you change the client and any other field. The new document is a new active document. It counts against your limit. The original stays as it was.
 
-# ============================================================
-# GROUP 4 — THE TRACKING AND THE SUGGESTIONS
-# ============================================================
+Q29. Can I password-protect a document?
+A29. Yes, on Growth and Scale. In the share modal, toggle "Require a password," set a password (min 6 characters), and send it to the client separately. The client sees a password wall. The session remembers the password for 30 minutes. Three wrong attempts lock the wall for 15 minutes. Growth allows 15 password-protected documents; Scale allows 50.
 
-Q29. What tracking do I get on each plan?
-A29. Free: opened (yes/no). Starter: opened-at timestamp. Growth: time spent (estimate), button clicks. Scale: exact time, session timeline, deselect, typing time, per-question time, "not submitted" state, behavioural signals. The tracking is reduced to a time-spent total after 5 days; the raw events are deleted.
+Q30. What happens when the retention period ends?
+A30. The document is permanently deleted. Before deletion, a PDF is emailed to you. The CRM record survives: the client name, email, dates, service, and a one-line summary. The documents are rented; the CRM record is owned.
 
-Q30. What is the interest level?
-A30. On Scale, the app calculates a 0–100 interest level from the client's behaviour: message count, last message direction, proposal opened, proposal answered, contract approved, invoice paid, days since last interaction, and whether you marked them not interested. It is arithmetic, not AI. It appears on the client record and on the dashboard as a flag when a client marked "not interested" shows 80%+.
+Q31. What is the draft retention?
+A31. A draft is a document created but not published. Drafts have their own retention: Free 10 days, Starter 30, Growth 50, Scale 80, Teams 80. If you do not publish the draft, it is deleted. A PDF is emailed to you first. A draft does not count against the active-document limit.
 
-Q31. How does the suggestion engine work?
-A31. The admin writes instructions (the "what to suggest") and patterns (the "when to suggest") and pairs them. The system evaluates the pattern; when it matches, the instruction fires. The default applies the first time. After 3–5 actions, the system adjusts to your own pattern (e.g., "you usually follow up after 3 days" instead of the default 2). That is MVP 1.0. The cross-user acceptance rate and the partner-platform suggestion are MVP 2.0.
+Q32. What is the archive?
+A32. Archiving makes the public link unusable. The document stays in your records. It is removed from the active-document count. Archive limits: Free 5 at once, 15-day retention; Starter 15, 30 days; Growth, Scale, Teams 30, 30 days. When the archive retention ends, the document is permanently deleted.
 
-Q32. Does the suggestion engine learn from my data?
-A32. Yes, in MVP 1.0. The system records what you do with each suggestion (accept, dismiss, ignore) and adjusts the timing and the path to your own pattern. It is arithmetic on your own data, not a model. The cross-user learning (which suggestions work across all users) is MVP 2.0.
+Q33. What are the saved FAQs?
+A33. On Growth and Scale, you can save FAQs to a personal library. When you create a proposal, the saved FAQs are pre-filled automatically. A saved FAQ is deleted after 3 months of not being used. You are warned 10 days before deletion. Growth 10, Scale 30. Free and Starter do not have saved FAQs.
 
-Q33. Can I disable email notifications for specific things?
-A33. Yes. On Growth and Scale, Settings → Notifications shows each event with its own toggle: proposal opened, proposal accepted or declined, contract approved or declined, form submitted, invoice paid, and payment proof uploaded. Turn off any event you do not want an email for. The other events still send. In-app notifications are always on; email is the opt-in layer. Email notifications are not available on Free and Starter. They will be available on Teams when it ships.
+Q34. What are the saved packages?
+A34. On Growth and Scale, you can save a package (name, price, deliverables, description, Recommended flag). It appears in the builder's "Saved packages" section. Limits: Growth 10, Scale 15. Retention: 3 months, 10-day warning.
 
-Q34. What is the revenue tracker?
-A34. On Scale, the revenue tracker shows earned, spent on clients, and profit. You add an expense per client, with a category (hosting, subcontractor, ads, etc.) and a platform tag (Namecheap, GoDaddy, Adobe Premiere, etc.). The tracker shows the profit and a price-triggered suggestion in the builders: "You spent $1,200 on Acme Co. At a 30% margin, charge $5,200." On all plans, the dashboard shows revenue this month and pending payments. The full tracker (personal expenses, currency conversion, chart) is MVP 2.0.
+Q35. What is the scroll length?
+A35. It is the length of the document. Short, Medium, or Long. It drives the number of sections and the number of visuals. Short is 3–4 sections; Long is 8–12 sections.
 
-# ============================================================
-# GROUP 5 — THE FORMSubmit ACTIVATION
-# ============================================================
+Q36. What is the visual intelligence?
+A36. It is the system that decides where a visual goes in the document. It reads the content and decides: this section needs an image, this section needs a chart, this section needs a diagram, this section needs an icon. The visual is placed in the template's zone. The visual is editable.
 
-Q35. Why do I need to activate the FormSubmit link?
-A35. FormSubmit will send you an activation email. That activation email lets us know that you are open to transactional emails, app notifications, and security alerts. This activation will not opt you in to the newsletter. It is a one-time step, and it protects you from unsolicited email. After you activate, all future emails arrive directly.
+Q37. What are the UI elements?
+A37. The building blocks of the document: the heading, the paragraph, the image, the chart, the diagram, the icon, the pricing table, the timeline, the FAQ list, the embedded question, the button, the divider, the two-column layout. They are placed in the template's zones and filled by the pipeline. You can edit, move, or remove them.
 
-Q36. Why does FormSubmit send me emails?
-A36. FormSubmit is the service Revercue uses to deliver your transactional emails, app notifications, and security alerts. It asks you to activate once. That activation lets us know you are open to those emails. It will not opt you in to the newsletter. After you activate, the emails arrive directly.
+Q38. What is the design system?
+A38. The set of colours, fonts, spacing, and components that every screen uses. The dark base (#0A0A0A), the gold accent (#C9A961), the serif headlines, the sans body, the mono for copyables. The components: the Button, the Input, the Card, the Badge, the Modal, the Table, the Toast, the Fieldset. Every screen uses them.
 
-Q37. What happens if I do not activate?
-A37. You will not receive security emails (OTP codes, password resets) or app notifications (proposal opened, contract approved, invoice paid). The in-app notifications still appear in the bell. But the email layer is blocked until you activate. The dashboard banner and the Settings → Notifications card remind you.
+Q39. What is the code-made visual?
+A39. It is the product's UI rendered as a real component, not a screenshot. The public site shows the actual dashboard, the actual builder, the actual chart, built from the same code as the product. When the product changes, the marketing page changes. The visual is responsive and animated.
 
-Q38. Is the activation a newsletter signup?
-A38. No. The activation is for transactional emails, app notifications, and security alerts. It is not the newsletter. The newsletter is a separate opt-in, on the signup screen and in Settings → Notifications. You can turn the newsletter off and still receive the transactional emails.
+Q40. Why is the design dark?
+A40. The dark base is the product's identity. It is calm, focused, and premium. The gold is the accent. The serif headlines give the product a document feel. The sans body is readable. The mono is for the copyable values.
 
-# ============================================================
-# GROUP 6 — THE DATA AND THE PRIVACY
-# ============================================================
+Q41. What is the password wall?
+A41. When a document is password-protected, the client sees a wall: "This document is protected. Enter the password to continue." The client enters the password, and the document opens. The session remembers the password for 30 minutes. Three wrong attempts lock the wall for 15 minutes.
 
-Q39. Do you sell my data?
-A39. No. We do not sell your data. We do not share your client data with any third party. The infrastructure providers (Cloudflare, Backblaze B2, Turso) store the data but do not read it. FormSubmit delivers your emails but does not read your documents. Payoneer processes your payments. The full list is on the Security page and in Settings → What Revercue knows about me (Scale).
+Q42. What is the closed page?
+A42. When a document is archived, the client who opens the link sees a closed page: "This proposal is no longer available." No content. The freelancer's contact. The link is not a 404; it is a designed "closed" page.
 
-Q40. What does the Revercue team see?
-A40. The team sees your account details (email, name, business name, plan, usage counts, last login, feedback, payment records) for support and billing. The team does not see the content of your documents, your client names, your communication log, your notes, your saved FAQs, your templates, or your tracking data. The exception is a report of illegal use or a legal requirement, stated honestly on the transparency page.
+## GROUP 4 — THE TRACKING AND THE SUGGESTIONS (Q43–Q52)
 
-Q41. What is encrypted?
-A41. All data is encrypted in transit (TLS 1.3) and at rest (AES-256). Your password is hashed with bcrypt. Your document passwords are hashed with Argon2id. Your documents are stored in Backblaze B2 (private bucket) and served through a Cloudflare Worker proxy. The links are unguessable and noindex. The full encryption summary is on the Security page.
+Q43. What tracking do I get on each plan?
+A43. Free: opened (yes/no). Starter: opened-at timestamp. Growth: time spent (estimate) and button clicks. Scale: exact time, session timeline, deselect, typing time, per-question time, not-submitted state, behavioural signals. The tracking is reduced to a time-spent total after 5 days; the raw events are deleted.
 
-Q42. What happens to my data if I delete my account?
-A42. You have a 5-day grace period. Before deletion, a PDF of your documents and a CSV of your clients are emailed to you. After 5 days, the account, the documents, the client records, the communication log, the files, and the feedback are deleted. The payment records are kept for tax and legal reasons. The admin notes about the account are kept. You can cancel the deletion by logging in and clicking "Cancel deletion" during the 5 days.
+Q44. What is the interest level?
+A44. On Scale, it is a 0–100 score calculated from the client's behaviour: the message count, the last message direction, the proposal opened, the proposal answered, the contract approved, the invoice paid, the days since the last interaction, and whether you marked them not interested. It is arithmetic, not AI.
 
-Q43. Can I export my data?
-A43. Yes. Settings → Export gives you a CSV of your clients and a PDF of your documents. The export is a separate action, not tied to the transparency page.
+Q45. How does the suggestion engine work?
+A45. The admin writes instructions (the "what to suggest") and patterns (the "when to suggest") and pairs them. The system evaluates the pattern; when it matches, the instruction fires. The default applies the first time. After 3–5 actions, the system adjusts to your own pattern.
 
-Q44. What is the "What Revercue knows about me" page?
-A44. On Scale and Teams, Settings → What Revercue knows about me is a read-only transparency page. It shows what the platform stores about you, what is private (encrypted, only you can see it), what the team can see, what is encrypted, what is shared with third parties, what you can do with your data, and what Revercue does not know. The one-line rule: "We store your data so the product works. We do not read it. The team sees your account details, nothing more."
+Q46. Does the suggestion engine learn from my data?
+A46. Yes. It records what you do with each suggestion (accept, dismiss, ignore) and adjusts the timing and the path to your own pattern. It is arithmetic on your own data.
 
-# ============================================================
-# GROUP 7 — THE ACCOUNT AND THE SUPPORT
-# ============================================================
+Q47. Can I disable email notifications for specific things?
+A47. Yes. On Growth and Scale, Settings → Notifications shows each event with its own toggle. Turn off any event you do not want an email for. The other events still send. In-app notifications are always on; email is the opt-in layer.
 
-Q45. How do I reset my password?
-A45. On the Log In screen, click "Forgot password?" Enter your email. FormSubmit will send you a reset code (after activation, if you have not activated yet). Enter the code and set a new password. All other sessions are revoked. The confirmation email is sent to you.
+Q48. What is the revenue tracker?
+A48. On Scale, it shows the earned, the spent on clients, and the profit. You add an expense per client, with a category and a platform. The tracker shows the profit and a price-triggered suggestion in the builders.
 
-Q46. How do I enable 2FA?
-A46. Settings → Security → Two-factor authentication. Toggle it on. You will enter a 6-digit code from your email at every login. Turning it on or off requires your current password. If you lose access to your email, the admin resets 2FA manually.
+Q49. What is the price suggestion?
+A49. On Scale, the builders show: "You spent $1,200 on Acme Co. At a 30% margin, charge $5,200." It reads the expenses, the last invoice, and your target margin. The suggestion is not a gate; you can ignore it.
 
-Q47. How do I delete my account?
-A47. Settings → Delete Account. Type your email address to confirm. Your account is scheduled for deletion in 5 days. A PDF of your documents and a CSV of your clients are emailed to you. You can cancel the deletion by logging in and clicking "Cancel deletion" during the 5 days. After 5 days, the data is deleted, the payment records are kept.
+Q50. What is the follow-up?
+A50. It is the reminder you set in the communication log. You set a follow-up date and a next step. On the date, the dashboard's "Follow-ups due today" count increases, and a notification is created. You click "Mark done" when it is done.
 
-Q48. How do I contact support?
-A48. The Contact page has a form (name, email, topic, message). We read every message and reply within 1 business day. For bug reports, use Settings → Feedback. For feature requests, the same. The direct email is hello@revercue.com.
+Q51. What is the form reminder?
+A51. On Scale, when a client opens a form and does not submit it after 3 days, a suggestion fires: "The client opened the form 3 days ago, not submitted. Send a reminder?"
 
-Q49. Is there a mobile app?
-A49. Not yet. The public site and the dashboard are responsive and work in the mobile browser. A native app is a later feature. The client-facing pages (proposal, contract, invoice, form) are mobile-first and work on any phone.
+Q52. What is the reopen suggestion?
+A52. On Scale, when a client is marked "not interested" but the interest level is 80%+, a suggestion fires: "The client marked not interested, but the interest is 82%. Reopen the conversation?"
 
-# ============================================================
-# WHERE EACH FAQ APPEARS
-# ============================================================
+## GROUP 5 — THE FORMSubmit ACTIVATION (Q53–Q56)
 
-Home: Q1–Q12 (the product, the plans, the key objections). "Show all 49" expands the rest inline.
-Pricing: Q9–Q16 (the plans, the payment, the downgrade, the refunds).
-Features: Q17–Q28 (the documents, the builder, the templates, the password, the retention, the archive, the saved FAQs/packages).
-Features (continued): Q29–Q34 (the tracking, the interest level, the suggestions, the notifications, the revenue tracker).
-Home (the activation block): Q35–Q38 (the FormSubmit activation, the why, the newsletter distinction).
-Security: Q39–Q44 (the data, the privacy, the encryption, the deletion, the export, the transparency page).
-Contact / About: Q45–Q49 (the account, the 2FA, the deletion, the support, the mobile app).
-Guides: the how-to FAQs (the proposal, the contract, the form, the invoice, the CRM) — a subset of Q17–Q34, rewritten as how-to steps in the guide articles.
+Q53. Why do I need to activate the FormSubmit link?
+A53. FormSubmit will send you an activation email. That activation email lets us know that you are open to transactional emails, app notifications, and security alerts. This activation will not opt you in to the newsletter. It is a one-time step.
 
-# ============================================================
-# END OF FAQS
-# ============================================================
+Q54. Why does FormSubmit send me emails?
+A54. FormSubmit is the service Revercue uses to deliver your transactional emails, app notifications, and security alerts. It asks you to activate once. That activation lets us know you are open to those emails. It will not opt you in to the newsletter.
+
+Q55. What happens if I do not activate?
+A55. You will not receive security emails (OTP codes, password resets) or app notifications. The in-app notifications still appear in the bell. But the email layer is blocked until you activate. The dashboard banner and the Settings → Notifications card remind you.
+
+Q56. Is the activation a newsletter signup?
+A56. No. The activation is for transactional emails, app notifications, and security alerts. It is not the newsletter. The newsletter is a separate opt-in, on the signup screen and in Settings → Notifications.
+
+## GROUP 6 — THE DATA AND THE PRIVACY (Q57–Q68)
+
+Q57. Do you sell my data?
+A57. No. We do not sell your data. We do not share your client data with any third party. The infrastructure providers (Cloudflare, Backblaze B2, Turso) store the data but do not read it.
+
+Q58. What does the Revercue team see?
+A58. The team sees your account details (email, name, business name, plan, usage counts, last login, feedback) for support and billing. The team does not see the content of your documents, your client names, your communication log, your notes, your saved FAQs, your templates, or your tracking data. The exception is a report of illegal use or a legal requirement.
+
+Q59. What is encrypted?
+A59. All data is encrypted in transit (TLS 1.3) and at rest (AES-256). Your password is hashed with bcrypt. Your document passwords are hashed. Your documents are stored in a private bucket and served through a Worker proxy.
+
+Q60. What happens to my data if I delete my account?
+A60. You have a 5-day grace period. Before deletion, a PDF of your documents and a CSV of your clients are emailed to you. After 5 days, the account, the documents, the client records, the communication log, the files, and the feedback are deleted. The payment records are kept for tax and legal reasons.
+
+Q61. Can I export my data?
+A61. Yes. Settings → Export gives you a CSV of your clients and a PDF of your documents.
+
+Q62. What is the "What Revercue knows about me" page?
+A62. On Scale and Teams, Settings → What Revercue knows about me is a read-only transparency page. It shows what the platform stores about you, what is private, what the team can see, what is encrypted, what is shared with third parties, what you can do with your data, and what Revercue does not know.
+
+Q63. Where is my data stored?
+A63. In Cloudflare (the Workers, the D1 database), in Turso (the auth and admin data), and in Backblaze B2 (the files). The infrastructure providers store the data but do not read it.
+
+Q64. Who can see my documents?
+A64. Only you and the client you shared the link with. The documents are private. The team does not read them. The exception is a report of illegal use or a legal requirement.
+
+Q65. Do you use my data to train a model?
+A65. No. We do not train a model on your data. The product uses the patterns (the aggregates, anonymized) to improve the suggestions, not your specific content. The data is yours.
+
+Q66. What is the 15-day summary?
+A66. When you close a client (archive or mark not interested), 15 days later the app generates a summary: a 2–3 sentence recap of the relationship. The summary is saved to the client record. You are notified when it is ready.
+
+Q67. Can I see the team's access to my data?
+A67. The team does not access your content. There is nothing to log. The team sees the account details (email, name, plan, usage) for support and billing. The "What Revercue knows" page states the exception (illegal use, legal requirement).
+
+Q68. What is the retention model?
+A68. The documents are rented; the CRM record is owned. Every document has a retention period by plan. When the retention ends, the document is deleted, and a PDF is emailed to you. The CRM record survives.
+
+## GROUP 7 — THE CRM (Q69–Q80)
+
+Q69. What is the writing area?
+A69. It is the form in the CRM where you plan the message you are about to send. You choose the client, write the message, and the helper (if available) suggests improvements and fixes the grammar. You copy the message and send it from your own email or WhatsApp. Revercue does not send.
+
+Q70. What is the communication log?
+A70. It is the timeline of the client relationship: the messages sent, the replies received, the follow-ups, the documents created and shared. It is the main body of the client record.
+
+Q71. What are the client notes?
+A71. They are the private notes you write about the client. Free allows 3 per client, Starter 10, Growth and above unlimited. The notes are only visible to you.
+
+Q72. What are the follow-ups?
+A72. They are the reminders you set in the communication log. You set a follow-up date and a next step. On the date, the dashboard's "Follow-ups due today" count increases, and a notification is created.
+
+Q73. What is the client profile?
+A73. It is the saved memory: the name, email, company, phone, channel, industry, target audience, website, value proposition, key points, logo. It is built once (on the first document for the client) and reused.
+
+Q74. What is the interest breakdown?
+A74. On Scale, it is the modal that shows the 0–100 score, the signals (the message count, the last direction, the proposal opened, the contract approved, the invoice paid, the days since), the arithmetic, and the one-line: "This is arithmetic, not AI."
+
+Q75. What is the revenue tab?
+A75. On Scale, it is the client-level view: the earned from this client, the spent on this client, the profit, the expense list, and the price suggestion.
+
+Q76. What is the expense entry?
+A76. On Scale, you add an expense per client: the amount, the category (domain, hosting, video editing, etc.), the platform (Namecheap, GoDaddy, Adobe Premiere, etc.), the date, the note.
+
+Q77. What is the 15-day summary for?
+A77. It is the permanent record of the closed relationship. When you return months later, you read the summary and remember the client.
+
+Q78. Can I reopen a closed client?
+A78. Yes. On the client detail, the "Reopen" action sets the status back to active. The summary is not deleted; it stays as the record.
+
+Q79. Can I delete a client?
+A79. Yes. The delete action removes the client record. The documents linked to the client are kept (or deleted, your choice). The communication log is deleted with the client.
+
+Q80. What is the client's channel?
+A80. It is the preferred channel: Email, WhatsApp, Phone, In-person, Other. It is used in the communication log and the writing area.
+
+## GROUP 8 — THE DESIGN AND THE UI (Q81–Q90)
+
+Q81. What are the six states?
+A81. Every interactive element has six states: default, hover, focus (2px gold ring), active, disabled (50% opacity), loading (spinner), error (1px red border).
+
+Q82. What is the gold rule?
+A82. Gold is for one thing per screen: the primary action. If two gold buttons appear, one is wrong. The secondary is a ghost button.
+
+Q83. Why serif for headlines?
+A83. The serif gives the product a document feel. The headline is the title of the page. The sans body is readable. The mono is for the copyable values.
+
+Q84. What is the Fieldset?
+A84. It is the component that groups related inputs. Every group of checkboxes, radios, or options lives in a Fieldset with a legend. This is the fix for the "question and options disconnected" failure.
+
+Q85. What is the empty state?
+A85. Every list, table, and feed has an empty state: a short headline, a description, and a CTA. It is not a placeholder; it is a first-class screen.
+
+Q86. What is the loading state?
+A86. Every list, table, and feed has a loading state: a skeleton (a grey block with a shimmer). It is not a spinner in the middle of the page.
+
+Q87. What is the error state?
+A87. Every list, table, and feed has an error state: a short message and a "Retry" button. It is not a silent failure.
+
+Q88. What is the destructive action confirmation?
+A88. Every destructive action (delete, archive, downgrade, delete account) has a confirmation modal. The modal names the consequence.
+
+Q89. What is the form validation?
+A89. Every field has a label (always visible), a helper (optional), and an error line. The error appears below the field in red. The submit button is disabled until the required fields are valid.
+
+Q90. What is the responsive behavior?
+A90. Every screen is mobile-first. The header collapses to a hamburger. The tables scroll horizontally. The cards stack. The modals are full-screen on mobile.
+
+## GROUP 9 — THE SUPPORT (Q91–Q100)
+
+Q91. How do I contact support?
+A91. The Contact page has a form. We reply within one business day. For bug reports, use Settings → Feedback. The direct email is hello@revercue.com.
+
+Q92. Is there a mobile app?
+A92. Not yet. The public site and the dashboard are responsive and work in the mobile browser. The client-facing pages are mobile-first.
+
+Q93. What browsers are supported?
+A93. Recent versions of Chrome, Edge, Safari, and Firefox. The core product works on every modern browser. Some advanced features (the visual intelligence, the dynamic visuals) require a modern browser. If a feature is not available, the page shows a small notice: "This feature is not available in your browser." The pattern engine is the fallback.
+
+Q94. How do I reset my password?
+A94. On the Log In screen, click "Forgot password?" Enter your email. You will receive a reset code. Enter the code and set a new password. All other sessions are revoked.
+
+Q95. How do I enable 2FA?
+A95. Settings → Security → Two-factor authentication. Toggle it on. You will enter a 6-digit code from your email at every login. Turning it on or off requires your current password.
+
+Q96. How do I delete my account?
+A96. Settings → Delete Account. Type your email address to confirm. Your account is scheduled for deletion in 5 days. A PDF of your documents and a CSV of your clients are emailed to you. You can cancel the deletion by logging in during the 5 days.
+
+Q97. What are the footer buttons?
+A97. They open your AI tool (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled question about Revercue. The answer comes from your tool, not from us. The prompt is written by us, so the answer is about the product. If you want the official answer, read the FAQs, the Guides, or the Pricing page.
+
+Q98. How can I trust you?
+A98. Trust is earned, not given. You do not need to trust us blindly. Check the Security page (the encryption, the storage, the retention), the Privacy page (what we collect, who we share it with), the "What Revercue knows about me" page (on Scale), and the Compare page. The Free plan exists so you can try the product without paying. The data is yours; the export is in Settings. The trust is built on the transparency.
+
+Q99. Why is a feature not available in my browser?
+A99. Revercue uses some modern browser technologies. These features are limited to recent versions of Chrome, Edge, Safari, and Firefox. On older browsers, some features may not be available. The core product works on every modern browser. If a feature is not available, the page shows a small notice. The pattern-based suggestions are the fallback.
+
+Q100. What makes Revercue different?
+A100. Three things. The thread: the client work in one place. The interactive document: the documents are links, not PDFs. The client record builds itself. The design: the product is built to feel like one workspace, not five tools. The honesty: the product does not claim AI where it uses patterns. The data is yours. The trust is earned by the transparency.
+
+## WHERE EACH FAQ APPEARS
+Home: Q1–Q12 + "Show all 100."
+Pricing: Q11–Q22.
+Features: Q23–Q52.
+Security: Q57–Q68.
+Contact: Q91–Q100.
+Guides: the how-to subset.

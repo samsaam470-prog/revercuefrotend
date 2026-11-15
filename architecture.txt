@@ -1,0 +1,71 @@
+﻿# REVERCUE — FRONTEND ARCHITECTURE
+# File: architecture.txt
+# The stack, the folder structure, the routing, the API client, the state, the build order.
+
+## THE STACK
+React 18 + TypeScript + Vite. React Router v6. TanStack Query (server state). React Context (auth, toast, plan). React Hook Form + Zod. Lucide React. The fonts: Instrument Serif (display/headline), Inter (body/label), JetBrains Mono (mono). The build: Vite -> dist/ -> Cloudflare Pages. The API: VITE_API_BASE_URL=https://revercue-api.samsaam470.workers.dev.
+
+## THE FOLDER STRUCTURE
+revercuefrotend/
+- .gitignore, .env.example, package.json, tsconfig.json, vite.config.ts, index.html
+- the .txt blueprints (revercue.txt, rules.txt, design.txt, api.txt, architecture.txt, workflow.txt, faqs.txt, publicsite.txt, compare.txt, guides.txt, visuals.txt, dashboard.txt, the 4 builder files, crm.txt, admin.txt, screenshot.txt)
+- public/screenshots/ (the code-made visuals, if any)
+- src/main.tsx, src/App.tsx, src/vite-env.d.ts
+- src/styles/ (tokens.css, global.css)
+- src/components/ui/ (Button, Input, Textarea, Select, Checkbox, Fieldset, Card, Badge, Modal, Table, Toast, Spinner, EmptyState, Skeleton, CodeVisual)
+- src/components/layout/ (PublicHeader, PublicFooter, StartFreeBand, PublicLayout, AuthLayout, AppHeader, AppSidebar, AppLayout, ClientLayout, AdminLayout)
+- src/components/shared/ (Logo, FAQItem, NotificationBell, StatusBadge, PlanBadge, FooterButtons)
+- src/components/visuals/ (the 12 CodeVisuals)
+- src/components/builder/ (Canvas, BlockLibrary, BlockRenderer, PropertyPanel, TopBar, TemplatePicker, ShareModal, PreviewPane)
+- src/pages/public/ (the 14 pages: Home, Features, Pricing, Compare, Guides, GuideDetail, About, Contact, Blog, BlogPost, Beta, Privacy, Terms, Security)
+- src/pages/auth/ (Signup, SignupTransition, CodeScreen, Login, ForgotPassword)
+- src/pages/onboarding/ (Step1, Step2, Step4, Step5)
+- src/pages/app/ (Dashboard, Proposals, Contracts, Forms, Invoices, Settings, Notifications)
+- src/pages/builder/ (ProposalBuilder, ContractBuilder, FormEditor, InvoiceBuilder)
+- src/pages/crm/ (CrmList, ClientDetail)
+- src/pages/client/ (PublicProposal, PublicContract, PublicInvoice, PublicForm, PasswordWall, ClosedPage, ProofUpload)
+- src/pages/utility/ (NotFound, Forbidden, ServerError, Offline, SessionExpired)
+- src/pages/admin/ (the 14 admin pages)
+- src/api/ (client.ts, auth.ts, onboarding.ts, dashboard.ts, proposals.ts, contracts.ts, forms.ts, invoices.ts, public.ts, files.ts, crm.ts, settings.ts, notifications.ts, templates.ts, admin.ts, extract.ts, organize.ts, summary.ts)
+- src/hooks/ (useAuth, useToast, useNotifications, useAutoSave, usePlanGate, useDebounce)
+- src/lib/ (constants.ts, formatters.ts, validators.ts, storage.ts, errors.ts)
+- src/types/ (index.ts, api.ts, blocks.ts)
+- src/contexts/ (AuthContext, ToastContext, PlanContext)
+
+## THE ROUTING
+Public (PublicLayout): /, /features, /pricing, /compare, /guides, /guides/:slug, /about, /contact, /blog, /blog/:slug, /beta, /privacy, /terms, /security.
+Auth (AuthLayout): /signup, /signup/transition, /signup/code, /login, /login/code, /forgot-password, /forgot-password/code.
+Onboarding (AuthLayout): /onboarding/step-1, /step-2, /step-4, /step-5.
+App (AppLayout): /dashboard, /proposals, /proposals/new, /proposals/:id/edit, /contracts, /contracts/new, /contracts/:id/edit, /forms, /forms/new, /forms/:id/edit, /invoices, /invoices/new, /invoices/:id/edit, /crm, /crm/:id, /settings, /settings/*, /notifications.
+Client (ClientLayout): /p/:publicId, /c/:publicId, /i/:publicId, /f/:publicId, /i/:publicId/proof.
+Utility: /403, /500, /offline, /session-expired, * (NotFound).
+
+## THE API CLIENT
+src/api/client.ts: the fetch wrapper (the base URL, the auth header, the JSON body, the error shape, the 401 -> /session-expired). Each module (auth.ts, proposals.ts, etc.) is the typed function that calls the client. No invented endpoints. Every function maps to api.txt.
+
+## THE STATE
+Server state: TanStack Query (the query keys: ['proposals'], ['proposals', id], ['crm', 'clients'], ['dashboard', 'summary']). The mutations invalidate the keys.
+Auth: AuthContext (the user, the token, the login, the logout, the isAuthenticated).
+Plan: PlanContext (the plan, the hasFeature).
+Toast: ToastContext (the toast.success/error/info).
+Notification badge: piggybacked on the page responses (the dashboard summary, the list responses). No separate poll.
+Auto-save: the useAutoSave (the 60-second interval + the session-end beacon + the explicit save).
+
+## THE BUILD
+dev: npm run dev (Vite, localhost:5173). build: npm run build (tsc + vite build -> dist/). preview: npm run preview. typecheck: tsc --noEmit. Deploy: Cloudflare Pages (the build command, the output dir dist/, the VITE_API_BASE_URL).
+
+## THE BUILD ORDER
+1. The foundation (the config, the tokens, the API client, the contexts, the layouts, the utility pages).
+2. The design system (the 15 UI components, the 6 layouts, the 7 shared).
+3. The CodeVisuals (the 12).
+4. The public site (the 14 pages, the 17 guides, the 3 blog posts).
+5. The auth (the 5 screens).
+6. The onboarding (the 5 steps).
+7. The dashboard (the shell, the Overview, the 4 lists, the settings, the notifications).
+8. The builders (the 4).
+9. The CRM (the list, the detail).
+10. The client pages (the 7).
+11. The admin (the 14 pages, the separate project).
+
+## THE RULES
+No Tailwind. No UI kit. Plain CSS with the tokens. No CSS-in-JS. No invented endpoints. No fake data in production. No stock photos. No AI claims. No "MVP". No "Payoneer". Teams is in beta. The gold rule. The six states. The Fieldset. The empty state. The FormSubmit copy is exact. The auto-save is the 60-second interval + the beacon + the explicit save. The notification badge is piggybacked. The client-facing pages carry the freelancer's brand.
