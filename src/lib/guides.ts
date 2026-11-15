@@ -137,6 +137,26 @@ const BASE_GUIDES: Guide[] = [
           "A published link is live immediately. Editing the document changes that same link, so if the client is reading while you edit, they see the new version on their next load. That is deliberate: one link, one source of truth.",
         ],
       },
+      {
+        heading: "Ask the helper",
+        paragraphs: [
+          "The builder has a helper. It is the inline assistant that works on the text you select. You are writing the introduction, the scope, the FAQ answer, the invoice note. You select a sentence or a paragraph. A small Ask the helper button appears. You click it. A popover opens with the quick actions: make it formal, make it friendly, make it concise, expand, fix the grammar, simplify, change the wording. You can also type a custom instruction: make it sound more confident. The helper rewrites the selected text. You see the before and after. You click Replace, Insert below, or Cancel. You can also edit the rewrite before you use it.",
+          "The helper is a tool, not an action. It does not change the document on its own. It suggests a rewrite; you decide. The helper is not a separate product; it is the assistant inside the builder you already use.",
+        ],
+      },
+      {
+        heading: "Where the helper runs, and what that means for your data",
+        paragraphs: [
+          "The helper runs in your browser. That means the model and the rewrite happen on your device, not on a Revercue server. The text you select is not sent to Revercue. It is not sent to the team. It is not stored in the database. It does not leave your browser. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it, on your device. If your browser does not support the helper, the Ask the helper button is not shown, and you edit the text manually. The helper is the pen, not the author. You are the author. The content stays on your device.",
+        ],
+      },
+      {
+        heading: "Post-document analysis",
+        paragraphs: [
+          "After you click Create, the document is not just published. It is analyzed. The analysis runs in two layers. The pattern engine checks the structure: the sections you chose, the missing sections, the pricing, the timeline, the tone consistency, the CTA. The helper checks the prose: the readability, the flow, the clarity, the repetition. The two layers produce a quality score (0–100) and a list of issues.",
+          "Each issue is tagged by source: From this client's history (the client's previous documents, the communication log), From your usual method (the saved FAQs, the packages, the previous proposals), From what works (the winning templates of the whole product). You see the score and the issues. You decide whether to fix them or publish anyway. The analysis is not a gate; it is a quality signal. A score of 80+ is ready. A score of 50–79 is good, but a few improvements. A score under 50 is not ready; the issues are blocking. The analysis is the second pair of eyes, not the final word. You are the author. The analysis is the mirror.",
+        ],
+      },
     ],
   },
   {
@@ -169,6 +189,26 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "Approve, Decline, or I Have Questions. Approve opens a confirmation that asks for the client's name and an explicit tick, and says plainly that it is not a legally binding e-signature. Decline asks once and takes an optional reason so you can revise and resend.",
           "A question goes to your dashboard and the client can still approve afterwards, because a question is not a refusal. When the client uses the after-approval chain, the next step is created only after you confirm it; nothing is auto-issued on their approval.",
+        ],
+      },
+      {
+        heading: "Ask the helper",
+        paragraphs: [
+          "The builder has a helper. It is the inline assistant that works on the text you select. You are writing the introduction, the scope, the FAQ answer, the invoice note. You select a sentence or a paragraph. A small Ask the helper button appears. You click it. A popover opens with the quick actions: make it formal, make it friendly, make it concise, expand, fix the grammar, simplify, change the wording. You can also type a custom instruction: make it sound more confident. The helper rewrites the selected text. You see the before and after. You click Replace, Insert below, or Cancel. You can also edit the rewrite before you use it.",
+          "The helper is a tool, not an action. It does not change the document on its own. It suggests a rewrite; you decide. The helper is not a separate product; it is the assistant inside the builder you already use.",
+        ],
+      },
+      {
+        heading: "Where the helper runs, and what that means for your data",
+        paragraphs: [
+          "The helper runs in your browser. That means the model and the rewrite happen on your device, not on a Revercue server. The text you select is not sent to Revercue. It is not sent to the team. It is not stored in the database. It does not leave your browser. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it, on your device. If your browser does not support the helper, the Ask the helper button is not shown, and you edit the text manually. The helper is the pen, not the author. You are the author. The content stays on your device.",
+        ],
+      },
+      {
+        heading: "Post-document analysis",
+        paragraphs: [
+          "After you click Create, the document is not just published. It is analyzed. The analysis runs in two layers. The pattern engine checks the structure: the sections you chose, the missing sections, the pricing, the timeline, the tone consistency, the CTA. The helper checks the prose: the readability, the flow, the clarity, the repetition. The two layers produce a quality score (0–100) and a list of issues.",
+          "Each issue is tagged by source: From this client's history (the client's previous documents, the communication log), From your usual method (the saved FAQs, the packages, the previous proposals), From what works (the winning templates of the whole product). You see the score and the issues. You decide whether to fix them or publish anyway. The analysis is not a gate; it is a quality signal. A score of 80+ is ready. A score of 50–79 is good, but a few improvements. A score under 50 is not ready; the issues are blocking. The analysis is the second pair of eyes, not the final word. You are the author. The analysis is the mirror.",
         ],
       },
     ],
@@ -212,6 +252,26 @@ const BASE_GUIDES: Guide[] = [
           "When the client submits, the answers are stored on the form and the client record. The structured paragraph assembled from the answers is a pattern, not a model: you copy it into whichever tool you like, and it is written in your own words, from their answers.",
         ],
       },
+      {
+        heading: "Ask the helper",
+        paragraphs: [
+          "The builder has a helper. It is the inline assistant that works on the text you select. You are writing the introduction, the scope, the FAQ answer, the invoice note. You select a sentence or a paragraph. A small Ask the helper button appears. You click it. A popover opens with the quick actions: make it formal, make it friendly, make it concise, expand, fix the grammar, simplify, change the wording. You can also type a custom instruction: make it sound more confident. The helper rewrites the selected text. You see the before and after. You click Replace, Insert below, or Cancel. You can also edit the rewrite before you use it.",
+          "The helper is a tool, not an action. It does not change the document on its own. It suggests a rewrite; you decide. The helper is not a separate product; it is the assistant inside the builder you already use.",
+        ],
+      },
+      {
+        heading: "Where the helper runs, and what that means for your data",
+        paragraphs: [
+          "The helper runs in your browser. That means the model and the rewrite happen on your device, not on a Revercue server. The text you select is not sent to Revercue. It is not sent to the team. It is not stored in the database. It does not leave your browser. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it, on your device. If your browser does not support the helper, the Ask the helper button is not shown, and you edit the text manually. The helper is the pen, not the author. You are the author. The content stays on your device.",
+        ],
+      },
+      {
+        heading: "Post-document analysis",
+        paragraphs: [
+          "After you click Create, the document is not just published. It is analyzed. The analysis runs in two layers. The pattern engine checks the structure: the sections you chose, the missing sections, the pricing, the timeline, the tone consistency, the CTA. The helper checks the prose: the readability, the flow, the clarity, the repetition. The two layers produce a quality score (0–100) and a list of issues.",
+          "Each issue is tagged by source: From this client's history (the client's previous documents, the communication log), From your usual method (the saved FAQs, the packages, the previous proposals), From what works (the winning templates of the whole product). You see the score and the issues. You decide whether to fix them or publish anyway. The analysis is not a gate; it is a quality signal. A score of 80+ is ready. A score of 50–79 is good, but a few improvements. A score under 50 is not ready; the issues are blocking. The analysis is the second pair of eyes, not the final word. You are the author. The analysis is the mirror.",
+        ],
+      },
     ],
   },
   {
@@ -245,6 +305,26 @@ const BASE_GUIDES: Guide[] = [
           "A proof upload moves the invoice to Proof submitted and notifies you. You confirm it from the invoices list, which records a payment for the revenue tracker and shows the client Payment confirmed. The confirmation is a human step by design: a screenshot is evidence, not proof.",
           "With Option A you confirm manually once the money arrives. The line stays honest on both sides: this is not a receipt until payment is confirmed, and the client page says so under the total.",
           "Overdue is derived from the due date, not from a reminder you have to set. An invoice past its date shows Overdue in red on your list and on the client's page, and it appears in the pending line on the dashboard.",
+        ],
+      },
+      {
+        heading: "Ask the helper",
+        paragraphs: [
+          "The builder has a helper. It is the inline assistant that works on the text you select. You are writing the introduction, the scope, the FAQ answer, the invoice note. You select a sentence or a paragraph. A small Ask the helper button appears. You click it. A popover opens with the quick actions: make it formal, make it friendly, make it concise, expand, fix the grammar, simplify, change the wording. You can also type a custom instruction: make it sound more confident. The helper rewrites the selected text. You see the before and after. You click Replace, Insert below, or Cancel. You can also edit the rewrite before you use it.",
+          "The helper is a tool, not an action. It does not change the document on its own. It suggests a rewrite; you decide. The helper is not a separate product; it is the assistant inside the builder you already use.",
+        ],
+      },
+      {
+        heading: "Where the helper runs, and what that means for your data",
+        paragraphs: [
+          "The helper runs in your browser. That means the model and the rewrite happen on your device, not on a Revercue server. The text you select is not sent to Revercue. It is not sent to the team. It is not stored in the database. It does not leave your browser. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it, on your device. If your browser does not support the helper, the Ask the helper button is not shown, and you edit the text manually. The helper is the pen, not the author. You are the author. The content stays on your device.",
+        ],
+      },
+      {
+        heading: "Post-document analysis",
+        paragraphs: [
+          "After you click Create, the document is not just published. It is analyzed. The analysis runs in two layers. The pattern engine checks the structure: the sections you chose, the missing sections, the pricing, the timeline, the tone consistency, the CTA. The helper checks the prose: the readability, the flow, the clarity, the repetition. The two layers produce a quality score (0–100) and a list of issues.",
+          "Each issue is tagged by source: From this client's history (the client's previous documents, the communication log), From your usual method (the saved FAQs, the packages, the previous proposals), From what works (the winning templates of the whole product). You see the score and the issues. You decide whether to fix them or publish anyway. The analysis is not a gate; it is a quality signal. A score of 80+ is ready. A score of 50–79 is good, but a few improvements. A score under 50 is not ready; the issues are blocking. The analysis is the second pair of eyes, not the final word. You are the author. The analysis is the mirror.",
         ],
       },
     ],
@@ -285,6 +365,18 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "On Scale the interest badge opens the arithmetic: base fifty, plus and minus per signal, clamped to zero and one hundred. Opens, time spent, questions and replies move it; what the client says does not. It is arithmetic, not a model, and the breakdown is always visible.",
           "The revenue tab shows earned, spent and profit per client, plus the price suggestion built from your own expenses. If the plan does not include it, the tab is replaced by a card that says which plan does, rather than a broken table.",
+        ],
+      },
+      {
+        heading: "The writing area",
+        paragraphs: [
+          "The writing area is the form in the CRM where you plan the message you are about to send. You open it from the client record. You write the message. The helper (if your browser supports it) suggests improvements: the warmer opening, the clearer ask, the grammar and the typos, the rewrite. The helper runs in your browser; the content is not sent to Revercue, not sent to the team, not stored in the database. The team cannot read the message. You see the suggestions. You accept them, edit them, or ignore them. You click Copy message. The message is copied. You paste it into your own email or WhatsApp. Revercue does not send the message. You send it from your own account. The writing area is the plan, not the send. The thread is the record; the message is the user's.",
+        ],
+      },
+      {
+        heading: "The communication log",
+        paragraphs: [
+          "The communication log is the timeline of the client relationship. It is the main body of the client record. Each entry is a message sent, a reply received, a follow-up, a document created, a document shared. Each entry has the direction (the outgoing, the incoming), the channel (the email, the WhatsApp, the phone), the message, the estimated time, the linked document, the next step, the follow-up date. The log is the memory. The interest level reads the log; the suggestions read the log; the 15-day summary reads the log. The log is the thread's history. You add the entry; the log keeps it. The log is the timeline, not the inbox. The inbox is the message; the log is the record.",
         ],
       },
     ],
@@ -479,6 +571,12 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "On Scale the price suggestion is built from your own expenses and your own past invoices. It shows the arithmetic, not just a number: what you spent, what you charged, what margin you kept. If you have not entered expenses, it says so instead of guessing.",
           "Use it as a second opinion, not an oracle. You know what the work is worth to this client; the suggestion only knows what it has cost you before.",
+        ],
+      },
+      {
+        heading: "What each plan gets",
+        paragraphs: [
+          "The suggestions are not the same on every plan. The plan shapes the suggestion. The Free plan has no suggestions. The Free plan is the thread; the suggestions are the intelligence. The Starter plan has no suggestions. The Starter is the room; the suggestions are the next tier. The Growth plan has the basic suggestions: the follow-up (the proposal sent, the no response after X days), the document suggestion (the client agreed — create a contract), the saved FAQs and the saved packages (the reusable content). The Growth suggestions use the admin's defaults: the default follow-up timing (the 2 days), the default pattern (the keyword list). The Scale plan has the advanced suggestions: the follow-up (the user's own median delay, not the default), the document suggestion (the user's own intent to document pattern, not the default), the interest flag (the client marked not interested, the interest 80%+), the form reminder (the client opened the form, not submitted after 3 days), the price suggestion (the expenses + the last invoice + the margin), the reopen (the not-interested client, the high interest). The Scale suggestions use the user's own pattern: the user's own data, the user's own history. The Teams plan has the Scale's suggestions, plus the team's suggestions (the Handoff Dashboard, the roles, the team's pattern). The Teams is in beta. The suggestions are the intelligence; the plan shapes the depth.",
         ],
       },
     ],
