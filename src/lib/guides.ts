@@ -627,6 +627,79 @@ const BASE_GUIDES: Guide[] = [
       },
     ],
   },
+  {
+    slug: "how-revercue-makes-a-document",
+    title: "How Revercue makes a document",
+    excerpt:
+      "Your previous patterns, the search engines, the pattern engine, the UI engines, the old proposals, and the details you add in the form.",
+    category: "Product",
+    readMinutes: 9,
+    updated: "2026-11-15",
+    visual: "BuilderVisual",
+    sections: [
+      {
+        heading: "Between the click and the document",
+        paragraphs: [
+          "You click Create proposal. You fill the form. You pick a template. You click Continue. And the document is there. But what happened between the click and the document?",
+          "Here is the honest answer. The document is not a template with blank fields. It is built from six sources, in order. Each source adds something the others cannot. The form is the foundation. The patterns are the memory. The search engines are the research. The pattern engine is the structure. The old proposals are the precedent. The UI engines are the visual language. The six together are the document.",
+        ],
+      },
+      {
+        heading: "1. The details you add in the form",
+        paragraphs: [
+          "The form is the first source. It is the only source that is entirely yours. You add the client, the client email, the industry, the service, the client website, your website, the problem you are solving, the target audience, the call to action, the sections you want, the packages, the FAQs, the embedded questions, the currency, the timeline, the tone, the scroll length. Every detail is used. None of it is ignored. The form is the foundation: the document is built on the facts you gave it.",
+          "The form is also the boundary. The product does not invent the client, the industry, the service, or the problem. Those are yours. The search engines and the pattern engine add the context, the structure, and the visual language, but they do not change the facts. If you say the client is a restaurant in Islamabad, the document is a restaurant in Islamabad. The product does not guess. It builds on what you said.",
+        ],
+      },
+      {
+        heading: "2. Your previous patterns",
+        paragraphs: [
+          "The product remembers. It is not a blank slate. Every document you have created, every template you have picked, every tone you have used, every follow-up you have sent, every FAQ you have saved, every package you have offered. The product reads your own history and builds the new document from your own pattern, not a generic one.",
+          "If you usually use a formal tone, the document is formal. If you usually follow up after three days, the suggestion is three days. If you usually offer three packages at $500, $1,200, and $2,500, the new document offers the same structure. If you usually include a What is included FAQ, the new document includes it. If you usually start with a Problem section and end with a Next step, the document follows the same shape. The pattern is the memory: the document sounds like you, because it is built from you.",
+          "The pattern is not a lock. You can change anything. The pattern is the starting point, not the final. If you want a different tone, you change it. If you want a different package, you change it. The pattern is the default, and the default is your own.",
+        ],
+      },
+      {
+        heading: "3. The search engines",
+        paragraphs: [
+          "The product searches. It does not invent the industry context, the client details, the definitions, or the images. It fetches them. The search engines are the research: the industry summary, the client website metadata, the definitions of the unfamiliar terms, the location context, the images, the icons. Each search engine has a purpose, and the product uses the right one for the right question.",
+          "The industry search returns the context: the summary of the industry, the image that represents it. The client search returns the samples: the public proposals and the business context. The definition search returns the meaning of the unfamiliar terms. The location search returns the geographic context, when it is relevant. The image search returns the image that fits the subject. The icon search returns the icon that represents the service. The product does not use every search engine for every document. It uses the one that is needed for the question at hand.",
+          "The research is the context. The document is not a generic proposal; it is a proposal for a restaurant, or a SaaS, or an agency. The industry summary, the client website, the definitions, the images: those are what make the document specific, not generic. The research is the difference between a template and a document.",
+        ],
+      },
+      {
+        heading: "4. The pattern engine",
+        paragraphs: [
+          "The product organizes. The research is not a pile of facts. It is a structure. The pattern engine takes the research and the form and organizes them into the sections you chose. It fixes the tone, the completeness, the flow. It marks the missing information. It never invents.",
+          "The pattern engine also uses the sample proposals for the structure. The public proposals are the reference for the shape: the sections, the order, the tone, the pricing presentation. The pattern engine reads the structure of the samples, not the text. It does not copy the samples; it learns the shape. The structure is the form, and the text is yours.",
+          "The pattern engine is the structure. It is the difference between a document that reads like a list of facts and a document that reads like a proposal. The facts are the research; the structure is the pattern engine. The two together are the document.",
+        ],
+      },
+      {
+        heading: "5. The old proposals",
+        paragraphs: [
+          "The product learns from your own work. Your previous proposals are the precedent. The structure, the sections, the tone, the packages, the FAQs, the call to action. The new document follows the same shape. If you usually include a timeline, the new document includes a timeline. If you usually use a specific pricing table, the new document uses the same table. If you usually end with a Book a call button, the new document ends with the same button.",
+          "The old proposals are not copied. They are the reference. The product reads the structure of your own work and builds the new document from the same shape. The precedent is the consistency: the document is not a new experiment every time; it is your own work, continued.",
+        ],
+      },
+      {
+        heading: "6. The UI engines",
+        paragraphs: [
+          "The product visualizes. The document is not just text. It has the charts, the diagrams, the images, the icons, the tables, the shapes. The UI engines are the visual language: the chart that shows the revenue, the diagram that shows the process, the image that shows the industry, the icon that shows the service, the table that shows the pricing, the shape that separates the sections.",
+          "The UI engines are not a fixed layout. The product decides where the visual goes, not the template. The template defines the zone; the UI engines fill it. If the section has numbers, the chart. If the section has a process, the diagram. If the section has a service, the icon. If the section has a comparison, the table. The visual is placed in the zone, and the zone is the template is.",
+          "The visual is editable. You can change the chart, the diagram, the image, the icon, the table. The UI engines are the starting point, not the final. The visual language is the difference between a document that reads like a wall of text and a document that reads like a designed proposal.",
+        ],
+      },
+      {
+        heading: "The result",
+        paragraphs: [
+          "The document is not a template. It is your pattern, your research, your structure, your precedent, your visual language, and your form details, in one document. The six sources are the document. The form is the foundation. The patterns are the memory. The search engines are the research. The pattern engine is the structure. The old proposals are the precedent. The UI engines are the visual language.",
+          "The document is editable. You can change anything. The product is the pen; you are the author. The template is the starting point; the document is yours. The next step: the template, the edit, the preview, the link, the share. The client opens the link, reads the document, answers the questions, selects the package. The thread continues.",
+          "The product does not use AI. It uses patterns, search engines, and UI engines. The patterns are your own. The search engines are the research. The UI engines are the visual language. The document is the thread's first artifact. The thread is the product. Your work should speak, not you.",
+        ],
+      },
+    ],
+  },
 ];
 
 /*
