@@ -44,6 +44,7 @@ function cell(plan: PlanName, key: (typeof ROWS)[0]["key"]): string {
       const value = definition.limits[key];
       if (value === null) return "Unlimited";
       if (key === "storage_gb") return formatStorage(value);
+      if (value >= 999) return "Unlimited";
       return String(value);
     }
   }

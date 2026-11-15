@@ -700,6 +700,124 @@ const BASE_GUIDES: Guide[] = [
       },
     ],
   },
+  {
+    slug: "why-invite-only",
+    title: "Why the paid plans are invite-only",
+    excerpt:
+      "Why Revercue's paid plans are invite-only, what the waitlist means, and how the invite works.",
+    category: "Pricing",
+    readMinutes: 7,
+    updated: "2026-11-15",
+    visual: "PricingVisual",
+    sections: [
+      {
+        heading: "Why can't I just pay and start?",
+        paragraphs: [
+          "You land on the pricing page. You see the plans. The Free plan is available now. The paid plans — Starter, Growth, Scale — say Join the waitlist. Teams says Join the beta. You may wonder: why can't I just pay and start?",
+          "Here is the honest answer. Revercue is in a fresh state. The product is built, the thread works, the Free plan is live. But the paid plans are not a checkout. They are an invitation. The waitlist is the invitation. The team reaches out when a spot opens. This is not a marketing trick. It is a deliberate choice, and here is why.",
+        ],
+      },
+      {
+        heading: "1. The product is new, and the support is real",
+        paragraphs: [
+          "Revercue is not a large company with a support team of fifty. It is a small team, and the support is personal. When a paid user has a problem, the team answers. When a paid user has a question, the team replies. When a paid user wants a feature, the team reads it. The invitation is how the team keeps the support real. If the paid plans were open, the team could not answer every user. The waitlist is the queue. The team invites the next user when it can support them well.",
+        ],
+      },
+      {
+        heading: "2. The paid plans carry more, and the more needs care",
+        paragraphs: [
+          "The Free plan is 5 active documents, 1-month retention, 50 MB storage, 3 notes per client. The paid plans carry more: 20, 100, or 300 active documents; 3, 12, or 24 months of retention; 100 MB, 1 GB, or 5 GB of storage; the advanced tracking, the interest level, the revenue tracker, the pattern learning, the saved FAQs, the saved packages. The more is not a switch. It is a relationship. The team wants to onboard each paid user, not just charge them. The invitation is the onboarding. The team shows the user what the paid plan does, and why it matters. The user is not alone with a new tier; the team is there.",
+        ],
+      },
+      {
+        heading: "3. The paid plans shape the product",
+        paragraphs: [
+          "The first paid users are not just customers. They are the product's test. They find the bugs, they ask for the features, they tell the team what works and what does not. The invitation is how the team keeps the first paid users close. If the paid plans were open, the first 100 users would be anonymous. The team would not know them, and the product would not learn from them. The waitlist is the feedback loop. The team invites the users who will shape the product, not the users who will just pay.",
+        ],
+      },
+      {
+        heading: "4. The fresh state is honest",
+        paragraphs: [
+          "The product is in a fresh state. It is not hiding behind a coming soon page. The Free plan is live. The thread works. The paid plans are the next tier, and the team is inviting the users one at a time. This is the honest version of launching. The team is not pretending the paid plans are open when they are not. The waitlist is the truth: the paid plans are coming, and the team is inviting the users when the product is ready for them.",
+        ],
+      },
+      {
+        heading: "What the waitlist means",
+        paragraphs: [
+          "The waitlist is a form. You add your email, the plan you want, and why. The team reads every entry. The team invites the users when a spot opens. The invitation is an email: You are invited to the plan. Here is what happens next. The invitation includes the onboarding, the support, and the plan's details. The invitation is not a payment link. It is the start of the relationship.",
+          "If you are on the waitlist and you do not hear back, it is not a rejection. It is the queue. The team invites the users as the product grows. The Free plan is still there. You can use the thread today, with the Free plan, while you wait. The Free plan is not a trial; it is the product, with the limits. The paid plans are the next step, when the team can support them.",
+        ],
+      },
+      {
+        heading: "What the beta means",
+        paragraphs: [
+          "Teams is in beta. The team features — the Handoff Dashboard, the roles, the bulk transfer, the audit log — are being tested with a small group. The beta is the co-creation. The team invites the beta users, the beta users use the features, the team learns, the features improve. The beta is not the same as the waitlist. The waitlist is the queue for the paid plans. The beta is the test for the team features. Both are the invitation. Both are the honest version of launching.",
+        ],
+      },
+      {
+        heading: "The invitation is the product's promise",
+        paragraphs: [
+          "The paid plans are invite-only because the product is new, the support is real, the more needs care, the first users shape the product, and the fresh state is honest. The invitation is not a limitation. It is the product's promise: the team is there, the onboarding is real, the feedback matters, the users are known. The waitlist is the queue. The Free plan is available now. The paid plans are the next step, when the team can support them.",
+          "If you are a freelancer with a real client, the Free plan is enough to start. The thread is there. The proposal, the contract, the form, the invoice, the client record. The paid plans are the next tier, when the team invites you. The Free plan is the product; the paid plans are the product with more. The invitation is the honest bridge between the two. Your work should speak, not you.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "active-documents",
+    title: "What are active documents",
+    excerpt:
+      "What an active document is, what counts against the limit, what does not, and how the password-protected and adaptive forms follow the same rule.",
+    category: "Pricing",
+    readMinutes: 6,
+    updated: "2026-11-15",
+    visual: "DashboardVisual",
+    sections: [
+      {
+        heading: "What is an active document?",
+        paragraphs: [
+          "Every plan has an active-document limit. The Free plan has 5. The Starter has 20. The Growth has 100. The Scale has 300. The Teams has 500. You may wonder: what is an active document? What counts? What does not?",
+          "Here is the honest answer. An active document is a document that is published and shareable. It has a public link. The client can open it. The client can read it, answer the questions, select a package, ask a question. The document is live. It is the thread's current artifact. The active-document limit is the number of live documents you can have at one time.",
+        ],
+      },
+      {
+        heading: "What counts against the limit",
+        paragraphs: [
+          "The documents that are published and shareable. The proposal with a public link. The contract with a public link. The form with a public link. The invoice with a public link. Each one counts. If you have 3 published proposals, 1 published contract, and 1 published invoice, you have 5 active documents. The Free plan's 5 is full.",
+          "The password-protected documents count. The password is a layer on top of the published document; it is not a different document. The document is still active; the client still opens the link; the password is the gate. The password-protected document is the published document with a wall. It counts against the limit. The Growth plan has 15 password-protected documents active at one time; the Scale plan has 50. The number is the active password-protected documents, not the total documents. The limit is the same rule: the published document counts, the password is the gate.",
+          "The adaptive forms count. The branching, the questions, the thank-you page: those are features of the form. The form is still a published document. The client still opens the link; the branching is the logic. The adaptive form is the published form with the logic. It counts against the limit. The Growth plan has 3 adaptive forms; the Scale plan has 15; the Teams plan has unlimited. The number is the active adaptive forms, not the total forms. The limit is the same rule: the published form counts, the logic is the feature.",
+        ],
+      },
+      {
+        heading: "What does not count against the limit",
+        paragraphs: [
+          "The drafts. A draft is a document that has been created but not published. It has no public link. The client cannot open it. The draft is the work in progress, not the live document. The draft does not count against the active-document limit. The draft has its own retention: Free 10 days, Starter 30, Growth 50, Scale 80, Teams 80. If the draft is not published within the retention, it is deleted. The draft is the before, the active document is the after. The limit is the after.",
+          "The archived documents. An archived document is a document that was published and then archived. The public link no longer works. The document is not live. The archived document does not count against the active-document limit. The archive has its own limit: Free 5 at once, 15 days; Starter 15, 30 days; Growth, Scale and Teams 30, 30 days. The archive is the closed, the active document is the open. The limit is the open.",
+          "The deleted documents. A deleted document is gone. It does not count. The delete is the end, the active document is the now. The limit is the now.",
+        ],
+      },
+      {
+        heading: "The password-protected and the adaptive: the same rule",
+        paragraphs: [
+          "The password-protected document and the adaptive form follow the same rule as the published document: they count. The password is not a second document; it is the gate on the published document. The branching is not a second form; it is the logic on the published form. The active document is the published document, with or without the password, with or without the branching. The limit is the published document. The password and the branching are the features, not the count.",
+          "The password-protected limit (Growth 15, Scale 50) and the adaptive-form limit (Growth 3, Scale 15, Teams unlimited) are sub-limits. They are the number of the active documents that can have the feature. The active-document limit is the total. The sub-limit is the part. The two are the same rule: the published document counts, the feature is the gate. The Growth plan can have 100 active documents, of which 15 can have a password and 3 can be adaptive. The Scale plan can have 300 active documents, of which 50 can have a password and 15 can be adaptive. The Teams plan can have 500 active documents, of which 50 can have a password and unlimited can be adaptive.",
+        ],
+      },
+      {
+        heading: "Why the limit exists",
+        paragraphs: [
+          "The limit is the storage and the support. Each active document is stored, tracked, and supported. The limit is how the plan keeps the product sustainable. The Free plan has 5; the Starter 20; the Growth 100; the Scale 300; the Teams 500. The limit is the ceiling, not the floor. You can have fewer; you cannot have more. The limit is the plan's shape.",
+          "The limit is also the nudge. When you reach the limit, the product says: You have 5 of 5 active documents. Archive or delete one to create a new one. The nudge is not a block; it is a decision. You archive a document (the link closes, the document is kept, the active count decreases) or you delete a document (the document is gone, the active count decreases). The nudge is the housekeeping. The active document is the live document; the archive is the closed; the delete is the gone. The limit is the live.",
+        ],
+      },
+      {
+        heading: "The one-line rule",
+        paragraphs: [
+          "An active document is a published, shareable document. The password-protected document is an active document with a gate. The adaptive form is an active form with logic. The draft is not active. The archived is not active. The deleted is not active. The limit is the published documents. The password and the branching are the features, not the count. The active document is the thread's current artifact; the limit is the thread's current size. Your work should speak, not you.",
+        ],
+      },
+    ],
+  },
 ];
 
 /*

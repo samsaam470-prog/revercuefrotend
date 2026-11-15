@@ -63,14 +63,14 @@ export const PLANS: PlanDefinition[] = [
     status: "waitlist",
     statusLabel: "Invite-only — join the waitlist",
     features: [
-      "25 active documents",
+      "20 active documents",
       "3-month document retention",
       "Opened-at timestamps",
       "10 notes per client",
       "Custom templates (3)",
     ],
     limits: {
-      active_documents: 25,
+      active_documents: 20,
       retention_months: 3,
       draft_retention_days: 30,
       archive_count: 15,
@@ -122,7 +122,7 @@ export const PLANS: PlanDefinition[] = [
     status: "waitlist",
     statusLabel: "Invite-only — join the waitlist",
     features: [
-      "Unlimited active documents",
+      "300 active documents",
       "24-month document retention",
       "Advanced tracking and session timeline",
       "Interest level and revenue tracker",
@@ -130,7 +130,7 @@ export const PLANS: PlanDefinition[] = [
       "Custom templates (15), saved FAQs (30), saved packages (15)",
     ],
     limits: {
-      active_documents: null,
+      active_documents: 300,
       retention_months: 24,
       draft_retention_days: 80,
       archive_count: 30,
@@ -160,7 +160,7 @@ export const PLANS: PlanDefinition[] = [
       "Audit log",
     ],
     limits: {
-      active_documents: null,
+      active_documents: 500,
       retention_months: 36,
       draft_retention_days: 80,
       archive_count: 30,
