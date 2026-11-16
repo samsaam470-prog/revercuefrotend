@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI access guide — Revercue</title>
+    <meta
+      name="description"
+      content="Where to find everything in Revercue: a directory of every public page, each product module and its real status, the AI resources, demo instructions, access rules and known limitations."
+    />
+    <link rel="canonical" href="https://revercue.pages.dev/ai-access" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#faf7f1" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/json" href="/ai-capabilities.json" title="Revercue capabilities" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/ai/ai.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-head">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Revercue home">
+          <img src="/logo-mark.png" alt="" width="26" height="26" />
+          Revercue
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/features">Features</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/guides">Guides</a>
+          <a href="/ai-overview">AI overview</a>
+          <a href="/ai-demo">Demo</a>
+          <a href="/ai-access" aria-current="page">AI access</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="wrap">
+      <div class="page-head">
+        <p class="eyebrow">AI access guide</p>
+        <h1>Where to find everything in Revercue.</h1>
+        <p class="lede">
+          This is the index for AI agents, crawlers, evaluation tools and the people who run them. It
+          maps every public page, explains what each one actually contains, records the real status of
+          each product module, and points to the three companion resources: the overview, the demo and
+          the machine-readable capabilities file.
+        </p>
+        <p class="meta">
+          <span>Last reviewed: 16 November 2026</span>
+          <span>Applies to: revercue.pages.dev</span>
+          <span>Demo data: synthetic</span>
+        </p>
+
+        <div class="note">
+          <p>
+            <strong>Read this before exploring.</strong> Revercue is a client-work product for
+            freelancers and small agencies. The production application is a client-rendered React app:
+            every application page requires an account and JavaScript. This page, the overview, the
+            changelog and the demo's written explanations are plain HTML and stay readable with
+            JavaScript disabled. The demo is an interactive <em>simulation</em> with synthetic data — it
+            is not the production application and it does not contact Revercue servers.
+          </p>
+        </div>
+
+        <nav class="toc" aria-labelledby="toc-title">
+          <h2 id="toc-title">On this page</h2>
+          <ol>
+            <li><a href="#introduction">What Revercue is</a></li>
+            <li><a href="#directory">Website navigation directory</a></li>
+            <li><a href="#features">Product features directory</a></li>
+            <li><a href="#resources">AI resources</a></li>
+            <li><a href="#demo">Demo instructions</a></li>
+            <li><a href="#access">Access and limitations</a></li>
+            <li><a href="#cross-links">Cross-linking</a></li>
+          </ol>
+        </nav>
+      </div>
+
+      <section class="section" id="introduction">
+        <h2>1. What Revercue is</h2>
+        <p>
+          Revercue keeps one client's work in one connected thread: a proposal, a contract, a
+          requirement form, an invoice and the client record that holds them together. A proposal is an
+          interactive link rather than a PDF — the client opens it, reads the scope, picks a package,
+          asks a question and approves, without creating an account. The contract, form and invoice use
+          the same idea, and the client record is built from what happens in those documents.
+        </p>
+        <p>
+          The public website is the product's shop window: what the thread is, what each document does,
+          what each plan costs and what is available today. The Free plan is available now. Starter,
+          Growth and Scale are invite-only while the product is in its fresh state: you join a waitlist.
+          Teams is in beta: you apply to the beta. Those statuses are repeated on
+          <a href="/pricing">the pricing page</a> and in the demo, and they are the source of truth.
+        </p>
+
+        <h3>What the site offers</h3>
+        <ul>
+          <li>Product pages that describe the document workflow and the module set, with rendered product UI.</li>
+          <li>Real plan limits, a comparison table and the billing terms.</li>
+          <li>A comparison section written against seven named tools, with a published criteria page.</li>
+          <li>24 task-level guides and a five-post blog about client work.</li>
+          <li>Legal and trust pages: privacy, terms and a security page written to be checkable.</li>
+          <li>Account routes: sign-up, login, password reset and a five-step onboarding.</li>
+          <li>The application itself, behind authentication.</li>
+          <li>This AI access system: access, overview, demo, changelog and capabilities JSON.</li>
+        </ul>
+
+        <h3>Who the product is for</h3>
+        <p>
+          Freelancers and small agencies who sell services and run several documents per client:
+          designers, developers, copywriters, consultants and small studios. The product assumes the
+          reader sends the link from their own inbox and wants to see what the client did with it.
+          Nothing here is aimed at large enterprises: the plans top out at a 500-document Teams plan
+          that is still in beta.
+        </p>
+
+        <h3>Why this guide exists</h3>
+        <p>
+          So that an agent can find its way around without guessing, without creating an account and
+          without mistaking marketing copy for a capability. Each entry below states what the page
+          contains, whether it needs JavaScript, whether the content survives without it, and whether it
+          is public or behind login.
+        </p>
+      </section>
+
+      <section class="section" id="directory">
+        <h2>2. Website navigation directory</h2>
+        <p>
+          Every route in the application, grouped by audience. The production app is client-rendered:
+          with JavaScript disabled a route returns the app shell and no page body. The exceptions are
+          the AI pages and the static files, which are delivered as complete HTML or plain text.
+        </p>
+
+        <h3>Public marketing, content and trust pages</h3>
+        <div class="table-wrap">
+          <table>
+            <caption>Public routes. No account required. All are JavaScript-rendered except the AI pages.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Page and URL</th>
+                <th scope="col">What it contains</th>
+                <th scope="col">JavaScript</th>
+                <th scope="col">Without JavaScript</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Home<br /><code>/</code></th>
+                <td>
+                  The thesis and the pitch: "a thread, not disconnected workflows". Hero with the
+                  dashboard visual, the create–share–track sequence, module cards for proposals,
+                  contracts, forms, invoices and CRM, product screenshots, plan prompt and footer links.
+                </td>
+                <td>Required for content</td>
+                <td>App shell only</td>
+              </tr>
+              <tr>
+                <th scope="row">Features<br /><code>/features</code></th>
+                <td>
+                  Seven documented sections — proposals, contracts, requirement forms, invoices, CRM,
+                  the builder and suggestions — each with a short explanation, bullet list, product
+                  visual and a related FAQ. This is the deepest public description of the module set.
+                </td>
+                <td>Required</td>
+                <td>App shell only</td>
+              </tr>
+              <tr>
+                <th scope="row">Pricing<br /><code>/pricing</code></th>
+                <td>
+                  Five plans with real limits: Free (available now), Starter $12, Growth $29 and Scale
+                  $49 per month (invite-only, waitlist), Teams (beta, on invitation, base $99). A full
+                  comparison table and billing FAQ. The only working call to action is Start free;
+                  paid plans open a waitlist form.
+                </td>
+                <td>Required</td>
+                <td>App shell only</td>
+              </tr>
+              <tr>
+                <th scope="row">Compare<br /><code>/compare</code></th>
+                <td>
+                  A comparison hub against seven alternatives: Bonsai, HoneyBook, Dubsado, Moxie,
+                  Plutio, Agiled and the Google/Microsoft document suite. Each comparison page
+                  (<code>/compare/{slug}</code>) states its criteria; <code>/compare/criteria</code>
+                  explains how the comparison is scored. These are the vendor's own published claims.
+                </td>
+                <td>Required</td>
+                <td>App shell only</td>
+              </tr>
+              <tr>
+                <th scope="row">Guides<br /><code>/guides</code></th>
+                <td>
+                  The index of 24 task-level guides across Proposals, Contracts, Pricing, Follow-ups and
+                  Product. Each guide (<code>/guides/{slug}</code>) walks through the actual screens,
+                  with product visuals, and ends with related guides.
+                </td>
+                <td>Required</td>
+                <td>App shell only</td>
+              </tr>
+              <tr>
+                <th scope="row">About<br /><code>/about</code></th>
+                <td>
+                  Why the product exists, in the founder's words: five tools and a lost thread, the
+                  beliefs behind the design, and what the product deliberately does not do.
+                </td>
+                <td>Required</td>
+                <td>App shell only</td>
+              </tr>
+              <tr>
+                <th scope="row">Blog<br /><code>/blog</code></th>
+                <td>
+                  Five essays about client work: the thread as the product, links instead of PDFs,
+                  patterns instead of inference, the self-building client record and what a proposal is
+                  for. Individual posts live at <code>/blog/{slug}</code>.
+                </td>
+                <td>Required</td>
+                <td>App shell only</td>
+              </tr>
+              <tr>
+                <th scope="row">Contact<br /><code>/contact</code></th>
+                <td>
+                  The only public contact route: a form with name, email, topic and message. There is no
+                  public email address. It is also the route for reporting a suspected vulnerability
+                  (put "security" in the topic) and for accessibility problems.
+                </td>
+                <td>Required; form posts to the API</td>
+                <td>App shell only</td>
+              </tr>
+              <tr>
+                <th scope="row">Beta<br /><code>/beta</code></th>
+                <td>
+                  The Teams beta application: name, email, account type, services, monthly volume and
+                  what the applicant wants to test. Applications are reviewed by hand; there is no
+                  self-serve checkout for Teams.
+                </td>
+                <td>Required; form posts to the API</td>
+                <td>App shell only</td>
+              </tr>
+              <tr>
+                <th scope="row">Privacy<br /><code>/privacy</code></th>
+                <td>
+                  What is collected (account, product, tracking, payment and support data), how it is
+                  used, the processors (Cloudflare, Backblaze B2, Turso, FormSubmit, the payment
+                  provider), retention by plan, user rights, cookies and account deletion.
+                </td>
+                <td>Required</td>
+                <td>App shell only</td>
+              </tr>
+              <tr>
+                <th scope="row">Terms<br /><code>/terms</code></th>
+                <td>
+                  The service agreement: acceptable use, the plans, content ownership, retention,
+                  billing and cancellation, availability, liability, changes and governing law.
+                </td>
+                <td>Required</td>
+                <td>App shell only</td>
+              </tr>
+              <tr>
+                <th scope="row">Security<br /><code>/security</code></th>
+                <td>
+                  A checkable trust page: TLS 1.3, AES-256 at rest, bcrypt for account passwords,
+                  Argon2id for document passwords, scoped session tokens, the private file bucket behind
+                  a Worker proxy, unguessable public IDs, noindex on client pages, retention and the
+                  incident-notification practice. It also states what the team cannot see and what the
+                  product does not do.
+                </td>
+                <td>Required</td>
+                <td>App shell only</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Account and onboarding routes</h3>
+        <div class="table-wrap">
+          <table>
+            <caption>Unauthenticated account routes. Creating an account in production is a real commitment: do not do it automatically.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Page and URL</th>
+                <th scope="col">What it contains</th>
+                <th scope="col">Access</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Sign up<br /><code>/signup</code></th>
+                <td>
+                  Email, password, terms acceptance and an optional newsletter checkbox. Offers Google
+                  sign-in only when that client is configured; otherwise the button says so. Submitting
+                  triggers a six-digit email activation code.
+                </td>
+                <td>Public form</td>
+              </tr>
+              <tr>
+                <th scope="row">Activation code<br /><code>/signup/code</code></th>
+                <td>
+                  The six-digit code screen used after sign-up. The code expires and the resend button
+                  is rate-limited.
+                </td>
+                <td>Public</td>
+              </tr>
+              <tr>
+                <th scope="row">Login<br /><code>/login</code></th>
+                <td>Email and password, plus Google sign-in when configured and a link to password reset.</td>
+                <td>Public</td>
+              </tr>
+              <tr>
+                <th scope="row">Login code<br /><code>/login/code</code></th>
+                <td>The two-factor step for accounts that have 2FA switched on: a six-digit email code.</td>
+                <td>Public</td>
+              </tr>
+              <tr>
+                <th scope="row">Password reset<br /><code>/forgot-password</code>, <code>/forgot-password/code</code></th>
+                <td>Request a reset code by email, then enter the code and choose a new password.</td>
+                <td>Public</td>
+              </tr>
+              <tr>
+                <th scope="row">Onboarding<br /><code>/onboarding/step-1</code> … <code>/onboarding/step-5</code></th>
+                <td>
+                  Five steps after sign-up: account type (freelancer or agency), profile and services,
+                  legal consent, plan selection (Free is available; paid plans join a waitlist) and a
+                  tutorial overlay. Step 3 redirects to step 4.
+                </td>
+                <td>Authenticated, incomplete onboarding</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Application routes</h3>
+        <div class="table-wrap">
+          <table>
+            <caption>All app routes require a signed-in account. None of them is reachable in the public demo.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Page and URL</th>
+                <th scope="col">What it contains</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Dashboard<br /><code>/dashboard</code></th>
+                <td>
+                  The four stat cards (active documents, clients, follow-ups due, revenue this month),
+                  the pending-payments line, suggested actions with Do it and Dismiss, the create row
+                  and the recent activity feed.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Proposals list<br /><code>/proposals</code></th>
+                <td>The proposal index: status, client, value and last activity, with the create action.</td>
+              </tr>
+              <tr>
+                <th scope="row">Proposal builder<br /><code>/proposals/new</code>, <code>/proposals/{id}/edit</code></th>
+                <td>
+                  The requirement form, template selection (blank, built-in templates, saved templates),
+                  the three-panel canvas (sections and blocks, document, properties), auto-save,
+                  preview and the share sheet. The research panel and the on-device helper sit here.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Contracts<br /><code>/contracts</code>, <code>/contracts/new</code>, <code>/contracts/{id}/edit</code></th>
+                <td>
+                  The contract index and the contract builder: sections for parties, scope, payment,
+                  timeline, revisions, cancellation, liability and signatures, plus the after-approval
+                  choice (form, invoice or PDF).
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Requirement forms<br /><code>/forms</code>, <code>/forms/new</code>, <code>/forms/{id}/edit</code></th>
+                <td>
+                  The form index and the question builder: seven question types, required flags,
+                  branching on Growth and above, one page or multi-page, the thank-you step and the
+                  Prompt Creator.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Invoices<br /><code>/invoices</code>, <code>/invoices/new</code>, <code>/invoices/{id}/edit</code></th>
+                <td>
+                  Line items, quantity, unit price, tax, totals, due date, the payment arrangement
+                  (external payment link, or bank details with a proof upload) and the confirm-payment
+                  action that records revenue.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">CRM<br /><code>/crm</code>, <code>/crm/{id}</code></th>
+                <td>
+                  The client list and the client record: communication log, notes, follow-ups, the
+                  documents attached to the client, interest level and revenue on Scale, and the
+                  15-day summary. The record is built from the documents.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Notifications<br /><code>/notifications</code></th>
+                <td>The notification queue, with a mark-all-read action.</td>
+              </tr>
+              <tr>
+                <th scope="row">Settings<br /><code>/settings/{section}</code></th>
+                <td>
+                  Ten sections: profile, appearance (dark, light, system), plan, security (2FA, sessions),
+                  notifications, saved FAQs, saved packages, revision prices, what-revercue-knows and
+                  delete account. <code>/settings</code> redirects to <code>/settings/profile</code>.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Client-facing document pages</h3>
+        <div class="table-wrap">
+          <table>
+            <caption>Public in the sense that the client needs no account; the link itself is an unguessable capability URL.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Page and URL</th>
+                <th scope="col">What it contains</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Public proposal<br /><code>/p/{publicId}</code></th>
+                <td>
+                  The proposal in the freelancer's branding: packages, collapsible FAQs, embedded
+                  questions, info icons, approve or decline. May be gated by a password on Growth and
+                  above, and shows a closed page when the document is closed or expired.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Public contract<br /><code>/c/{publicId}</code></th>
+                <td>Approve, Decline, or I Have Questions. Explicitly not an e-signature; the action is recorded.</td>
+              </tr>
+              <tr>
+                <th scope="row">Public invoice<br /><code>/i/{publicId}</code></th>
+                <td>
+                  The invoice the client receives: line items, totals, due date, the payment link or the
+                  bank details, and the overdue state.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Proof upload<br /><code>/i/{publicId}/proof</code></th>
+                <td>A file upload for bank-transfer proof, used with the account-details payment option.</td>
+              </tr>
+              <tr>
+                <th scope="row">Public form<br /><code>/f/{publicId}</code></th>
+                <td>The requirement form as the client fills it: the question set, branching, progress and the thank-you page.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Utility, error and static resources</h3>
+        <div class="table-wrap">
+          <table>
+            <caption>Error routes are part of the app; the static resources are served as files.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Page and URL</th>
+                <th scope="col">What it contains</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Offline<br /><code>/offline</code></th>
+                <td>What still works when the network is gone: documents already open in the browser.</td>
+              </tr>
+              <tr>
+                <th scope="row">Session expired<br /><code>/session-expired</code></th>
+                <td>The explanation and a route back to login.</td>
+              </tr>
+              <tr>
+                <th scope="row">Forbidden<br /><code>/403</code></th>
+                <td>Shown when an account lacks access to a resource.</td>
+              </tr>
+              <tr>
+                <th scope="row">Server error<br /><code>/500</code></th>
+                <td>The generic failure page, with a retry path.</td>
+              </tr>
+              <tr>
+                <th scope="row">Not found<br /><code>/{unknown}</code></th>
+                <td>The app's 404 page for any route the router does not recognise.</td>
+              </tr>
+              <tr>
+                <th scope="row">AI access<br /><code>/ai-access</code></th>
+                <td>This page. Static HTML, readable without JavaScript.</td>
+              </tr>
+              <tr>
+                <th scope="row">AI overview<br /><code>/ai-overview</code></th>
+                <td>The self-contained product reference: identity, workflow, module documentation, pricing, security, status.</td>
+              </tr>
+              <tr>
+                <th scope="row">AI demo<br /><code>/ai-demo</code></th>
+                <td>The guided tutorial, the synthetic interactive simulation and the evaluation workspace.</td>
+              </tr>
+              <tr>
+                <th scope="row">AI changelog<br /><code>/ai-changelog</code></th>
+                <td>The verified record of changes relevant to agents.</td>
+              </tr>
+              <tr>
+                <th scope="row">Capabilities JSON<br /><code>/ai-capabilities.json</code></th>
+                <td>Machine-readable modules, statuses, plans, demo flags and resource URLs.</td>
+              </tr>
+              <tr>
+                <th scope="row">llms.txt<br /><code>/llms.txt</code></th>
+                <td>A plain-text summary of the product, plans and key pages, written for language tools.</td>
+              </tr>
+              <tr>
+                <th scope="row">Sitemap and robots<br /><code>/sitemap.xml</code>, <code>/robots.txt</code></th>
+                <td>The canonical public URL list and the crawler rules. Private app and client routes are disallowed.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <h2>3. Product features directory</h2>
+        <p>
+          Only modules that exist in the application are listed. Statuses are
+          <span class="pill pill--available">available</span>,
+          <span class="pill pill--partial">partial</span>,
+          <span class="pill pill--beta">beta</span>,
+          <span class="pill pill--waitlist">invite-only</span> and
+          <span class="pill pill--unverified">unverified</span>. "Available" means the route and the
+          API calls exist; it does not mean a public visitor can exercise it without an account.
+        </p>
+
+        <div class="grid">
+          <article class="card">
+            <p class="meta"><span class="pill pill--available">Available</span><span>Account required</span></p>
+            <h3>Dashboard</h3>
+            <p>
+              The landing screen of the app. Four stat cards (active documents, clients, follow-ups
+              due, revenue this month), a pending-payments line, suggested actions with Do it and
+              Dismiss, a create row and a recent activity feed. Each stat links to the filtered list
+              behind it.
+            </p>
+            <p class="small muted">
+              Availability depends on the account and its plan data. Cannot be tested publicly; the
+              demo simulates the same layout with synthetic numbers. Suggested actions and the interest
+              arithmetic are plan-gated.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--available">Available</span><span>Account required</span></p>
+            <h3>CRM</h3>
+            <p>
+              The client record and the thread's home: the communication log, notes, follow-ups, the
+              documents tied to the client, and on Scale the interest level and revenue tracker. The
+              record is built from the documents rather than typed in a second time. Clients can be
+              exported as CSV.
+            </p>
+            <p class="small muted">
+              Notes are limited by plan (3 on Free). Interest level and revenue are Scale features. The
+              record is only as complete as the documents sent.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--available">Available</span><span>Account required</span></p>
+            <h3>Proposals</h3>
+            <p>
+              Built in a three-panel builder from a blank page, a built-in template or a saved
+              template, with 13 block types, sections, auto-save, preview and a share sheet. The client
+              page shows packages, collapsible FAQs, embedded questions and info icons; the client picks
+              a package and can approve or decline. Opens are tracked.
+            </p>
+            <p class="small muted">
+              The share sheet gives a link and a message but never sends the email itself. Password
+              protection is Growth and above. The built-in template set currently covers proposal and
+              contract documents.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--available">Available</span><span>Account required</span></p>
+            <h3>Contracts</h3>
+            <p>
+              A contract builder with the usual clause sections and three client actions: Approve,
+              Decline, or I Have Questions. Approval can continue the thread to the requirement form,
+              the invoice or a PDF, depending on the after-approval setting. Every action is written to
+              the communication log.
+            </p>
+            <p class="small muted">
+              This is not an e-signature and the product does not claim to be one. There is no legally
+              verified signature trail. Approval is an in-page action by whoever holds the link.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--available">Available</span><span>Account required</span></p>
+            <h3>Requirement forms</h3>
+            <p>
+              A question builder with seven question types (short text, long text, file upload, single
+              choice, multiple choice, combined, dropdown), required flags, one-page or multi-page
+              layouts, a thank-you step and a Prompt Creator that assembles the answers into a
+              structured paragraph for the next document.
+            </p>
+            <p class="small muted">
+              Branching and adaptive forms are Growth and above; the custom thank-you page is Scale.
+              File uploads depend on the account's storage allowance.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--available">Available</span><span>Account required</span></p>
+            <h3>Invoices</h3>
+            <p>
+              Line items, quantities, unit prices, tax, totals, an auto-generated INV-YEAR-NNNN number
+              and a due date. Two ways to get paid: an external payment link, or bank details with an
+              optional proof-of-payment upload. Confirming payment records revenue for the tracker.
+            </p>
+            <p class="small muted">
+              Revercue does not process card payments itself; the payment link points at the user's own
+              provider. Proof uploads are reviewed by the user, not verified by Revercue.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--available">Available</span><span>Account required</span></p>
+            <h3>Builder and templates</h3>
+            <p>
+              The shared document editor: sections and blocks on the left, a white page in the canvas,
+              properties on the right, undo and redo, preview, and auto-save with a visible state.
+              Built-in templates ship with the product; saved templates are a Starter-and-above feature.
+            </p>
+            <p class="small muted">
+              The builder is per document type, not a free-form page designer. The saved-template list
+              is loaded from the account; when the API is unavailable the built-in templates still
+              render.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--partial">Partial</span><span>Plan-gated</span></p>
+            <h3>Suggestions and patterns</h3>
+            <p>
+              Suggested next actions derived from the account's own activity: a follow-up that is due,
+              a contract that should follow an accepted proposal, a client warm enough to reopen. Each
+              suggestion offers Do it or Dismiss, and Do it only opens the right screen — it never
+              creates or sends anything.
+            </p>
+            <p class="small muted">
+              Basic suggestions appear on Growth and above; the advanced set (document suggestions,
+              interest flags, price suggestion) is Scale. What is shown depends on the data in the
+              account.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--partial">Partial</span><span>Device-dependent</span></p>
+            <h3>The helper</h3>
+            <p>
+              An optional writing helper inside the builders: select a passage, ask for a clearer
+              version, keep what you like. Its work happens on the visitor's own device, so the selected
+              text is not sent to a Revercue server. Suggestions elsewhere in the product are written
+              rules over the user's record, not generated text.
+            </p>
+            <p class="small muted">
+              The helper depends on the browser and device capability and loads silently in the
+              background. On a machine that cannot run it, the button is unavailable rather than
+              failing. It was not exercised in this environment.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--available">Available</span><span>Public links</span></p>
+            <h3>Client-facing pages</h3>
+            <p>
+              The public proposal, contract, form and invoice pages the client opens without an account.
+              Long random IDs, noindex and nofollow, a password wall on growth plans, a closed state,
+              and no advertising or third-party analytics pixels.
+            </p>
+            <p class="small muted">
+              The link is a capability URL: anyone who holds it can open the page unless it is password
+              protected. There are no demo links published here, because production documents are private.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--available">Available</span><span>Server features</span></p>
+            <h3>Accounts, plans and settings</h3>
+            <p>
+              Email and password sign-up with a six-digit activation code, Google sign-in when
+              configured, password reset, optional email 2FA, ten settings sections, plan status and
+              account deletion with a grace period.
+            </p>
+            <p class="small muted">
+              Plan changes and subscription billing run through the payment provider; the frontend shows
+              plan status but this environment cannot verify a live checkout. Paid plans are invite-only,
+              so there is no open purchase flow to test.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--beta">Beta</span><span>Manual onboarding</span></p>
+            <h3>Teams</h3>
+            <p>
+              The agency plan: everything on Scale plus the Handoff Dashboard, team roles, bulk transfer,
+              team attribution and an audit log. Join from <a href="/beta">the beta page</a>; seats are
+              handled manually while the plan is in beta.
+            </p>
+            <p class="small muted">
+              In beta means under active testing with a small group. The plan exists in the product and
+              pricing data; its team features could not be exercised here.
+            </p>
+          </article>
+        </div>
+
+        <div class="note note--warn">
+          <p>
+            <strong>What is not claimed.</strong> No public API, no integrations directory, no
+            e-signature, no card processing inside Revercue, no formal security certification, no
+            customer testimonials and no published performance benchmarks. If a capability is not
+            described here or in the overview, treat it as unverified rather than assumed.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="resources">
+        <h2>4. AI resources</h2>
+        <div class="grid">
+          <article class="card">
+            <h3><a href="/ai-overview">/ai-overview</a></h3>
+            <p>
+              The self-contained product reference. Identity, workflow, per-module documentation with
+              statuses, target customers, positioning, real pricing, security, current product status
+              and links. Enough to evaluate Revercue without opening another page.
+            </p>
+          </article>
+          <article class="card">
+            <h3><a href="/ai-demo">/ai-demo</a></h3>
+            <p>
+              The guided eight-step tutorial, a synthetic interactive simulation of the six modules,
+              the evaluation workspace (user-facing answer, recommendation and feedback report) and the
+              evaluation rules. No account, no production data, no real payments.
+            </p>
+          </article>
+          <article class="card">
+            <h3><a href="/ai-capabilities.json">/ai-capabilities.json</a></h3>
+            <p>
+              The same facts as structured JSON: identity, resource URLs, module statuses and demo
+              flags, plan table, security summary, demo policy and last-updated date. Content type
+              <code>application/json</code>.
+            </p>
+          </article>
+          <article class="card">
+            <h3><a href="/ai-changelog">/ai-changelog</a></h3>
+            <p>
+              The verified record of releases relevant to agents: what changed, what was added, what
+              was fixed, known issues and changes to demo availability. Only entries that can be traced
+              to the repository are listed.
+            </p>
+          </article>
+          <article class="card">
+            <h3><a href="/llms.txt">/llms.txt</a></h3>
+            <p>
+              A plain-text product summary for language tools: the thread, the plans, the pattern
+              approach and the key page URLs.
+            </p>
+          </article>
+          <article class="card">
+            <h3><a href="/sitemap.xml">/sitemap.xml</a> and <a href="/robots.txt">/robots.txt</a></h3>
+            <p>
+              The canonical public URL list and the crawler rules, including which private routes are
+              disallowed and where the sitemap lives.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="demo">
+        <h2>5. Demo instructions</h2>
+        <p>
+          There is no production demo account. Revercue does not publish credentials, and no visitor or
+          agent should create an account in production to look around. What exists is
+          <a href="/ai-demo">/ai-demo</a>: a self-contained simulation that runs entirely in the browser.
+        </p>
+
+        <h3>How to enter</h3>
+        <ol>
+          <li>Open <a href="/ai-demo">/ai-demo</a>. Registration is not required and no data leaves the page.</li>
+          <li>Read the welcome section. It states what the simulation is and what it is not.</li>
+          <li>Work through the eight tutorial steps in order. Each step explains the module, what to inspect and what result to expect.</li>
+          <li>Use the interactive panel to try the actions described in the steps. Every action is synthetic and reversible.</li>
+          <li>Press <strong>Reset demo</strong> at any time to return the synthetic data to its starting state.</li>
+          <li>Finish in the evaluation workspace: write the user-facing answer, pick a recommendation and complete the feedback report.</li>
+        </ol>
+
+        <h3>What an agent can explore</h3>
+        <ul>
+          <li>The dashboard figures, suggested actions and activity feed, driven by the demo state.</li>
+          <li>A synthetic client record with a communication log that grows as actions are taken.</li>
+          <li>A proposal: view the client-facing version, select a package, ask a question.</li>
+          <li>A contract: approve, decline or ask a question, and see the thread advance.</li>
+          <li>A requirement form: answer two questions and submit them.</li>
+          <li>An invoice: see line items and totals, then mark it paid in the simulation.</li>
+          <li>The connection between those actions and the client record, which is the product's thesis.</li>
+        </ul>
+
+        <h3>Permitted actions</h3>
+        <p>
+          Reading every page, following every public link, using the simulation, and completing the
+          evaluation. Public pages may be linked to and quoted with attribution.
+        </p>
+
+        <h3>Restricted actions</h3>
+        <ul>
+          <li>Signing up, logging in or creating accounts in production on someone else's behalf.</li>
+          <li>Attempting to open another user's client document, guessing public IDs, or bypassing a password wall.</li>
+          <li>Sending messages through the contact or beta forms as an automated test.</li>
+          <li>Any destructive action against the production API, or load testing it.</li>
+          <li>Treating the simulation's synthetic data as real customer data, or the simulation as proof that the production app works.</li>
+        </ul>
+
+        <h3>Synthetic data</h3>
+        <p>
+          The demo's clients, documents, amounts and activity are fictional and generated for the page.
+          There is no real email, no payment processor, no file storage and no database behind it. The
+          reset button restores the starting state, and everything is kept in the browser session only.
+        </p>
+
+        <h3>Completing the tutorial and evaluation</h3>
+        <p>
+          The tutorial is complete when all eight steps have been read and the simulation actions for
+          each step have been tried. The evaluation is complete when three things exist: a user-facing
+          answer, one recommendation category with its evidence and confidence level, and a feedback
+          report. Both outputs have copy buttons; the report has no submission endpoint and the page
+          says so. To send feedback through the product's own route, use
+          <a href="/contact">the contact form</a>.
+        </p>
+      </section>
+
+      <section class="section" id="access">
+        <h2>6. Access and limitations</h2>
+
+        <h3>Publicly accessible</h3>
+        <p>
+          Every page in the marketing, content and trust group is public: home, features, pricing,
+          compare, guides, about, blog, contact, beta, privacy, terms and security. So are the AI
+          resources, the sitemap, robots and llms.txt.
+        </p>
+
+        <h3>Login-protected</h3>
+        <p>
+          The dashboard, proposals, contracts, forms, invoices, CRM, notifications, settings, all
+          builders and onboarding are behind authentication. Client document pages are not behind
+          authentication but depend on a private, unguessable link that this guide does not publish.
+        </p>
+
+        <h3>JavaScript-dependent</h3>
+        <p>
+          The production site is a single-page React application. Without JavaScript the application
+          routes return an empty shell, so a crawler sees no product copy on them. The AI pages, the
+          sitemap, robots and llms.txt are delivered as complete static files. The demo's written
+          explanations are in the HTML; its interactive panel needs JavaScript.
+        </p>
+
+        <h3>Features that cannot be tested publicly</h3>
+        <ul>
+          <li>Anything that writes to an account: creating or editing documents, sharing, tracking, uploading files.</li>
+          <li>The dashboard's real figures, suggestions and revenue arithmetic.</li>
+          <li>Plan billing and subscription changes; paid plans are invite-only.</li>
+          <li>Team features while Teams is in beta.</li>
+          <li>Email delivery: activation codes, notifications and document reminders.</li>
+          <li>Password walls on client documents, and every production client page.</li>
+          <li>The on-device helper, which depends on the visitor's device.</li>
+        </ul>
+
+        <h3>Automated access</h3>
+        <p>
+          The public pages may be crawled and read. Do not attempt to authenticate, do not create
+          accounts, do not submit forms, do not probe private or client routes, and do not treat the
+          site as a load-test target. <code>robots.txt</code> disallows the private app namespaces and
+          the client document prefixes; it is a crawler hint, not a security boundary. No public API or
+          agent endpoint exists.
+        </p>
+
+        <h3>Reporting an error or an accessibility problem</h3>
+        <p>
+          Use <a href="/contact">the contact form</a> with the page and what happened. For a suspected
+          vulnerability, choose the security topic and include reproduction steps; do not test against
+          another account. Accessibility problems are welcome through the same form. Signed-in users
+          can also use Settings → Feedback, which attaches the account context.
+        </p>
+
+        <h3>Known gaps in this guide</h3>
+        <ul>
+          <li>The AI pages are new and their content has not been reviewed by a second person.</li>
+          <li>The demo is a simulation, so it verifies the workflow's shape, not the production implementation.</li>
+          <li>Plan status, limits and prices are copied from the application's constants on 16 November 2026; they can change.</li>
+          <li>No formal security certification exists, and none is claimed.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="cross-links">
+        <h2>7. Cross-linking</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>AI resources</h3>
+            <ul>
+              <li><a href="/ai-overview">Product overview</a></li>
+              <li><a href="/ai-demo">Interactive demo and tutorial</a></li>
+              <li><a href="/ai-changelog">Changelog</a></li>
+              <li><a href="/ai-capabilities.json">Capabilities JSON</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Product</h3>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/features">Features</a></li>
+              <li><a href="/pricing">Pricing</a></li>
+              <li><a href="/compare">Compare</a></li>
+              <li><a href="/guides">Guides</a></li>
+              <li><a href="/beta">Teams beta</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Trust and contact</h3>
+            <ul>
+              <li><a href="/security">Security</a></li>
+              <li><a href="/privacy">Privacy</a></li>
+              <li><a href="/terms">Terms</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <div>
+          <a class="brand" href="/" aria-label="Revercue home">
+            <img src="/logo-mark.png" alt="" width="24" height="24" />
+            Revercue
+          </a>
+          <p class="small muted">
+            The thread for client work: proposal, contract, requirement form, invoice and client record.
+            Your work should speak, not you.
+          </p>
+        </div>
+        <div>
+          <h2>Product</h2>
+          <ul>
+            <li><a href="/features">Features</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/guides">Guides</a></li>
+            <li><a href="/compare">Compare</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>For AI agents</h2>
+          <ul>
+            <li><a href="/ai-access">AI access</a></li>
+            <li><a href="/ai-overview">AI overview</a></li>
+            <li><a href="/ai-demo">AI demo</a></li>
+            <li><a href="/ai-changelog">Changelog</a></li>
+            <li><a href="/ai-capabilities.json">Capabilities JSON</a></li>
+            <li><a href="/llms.txt">llms.txt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Trust</h2>
+          <ul>
+            <li><a href="/security">Security</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <p class="fine">
+          © 2026 Revercue. Last reviewed 16 November 2026. This page is documentation, not marketing:
+          it describes only what the application and its public pages support.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
