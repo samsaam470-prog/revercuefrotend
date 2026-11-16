@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link2, Plus, Upload } from "lucide-react";
 import { templatesApi } from "../../api/templates";
+import { BUILT_IN_TEMPLATES, blocksForTemplate, type BuiltInTemplate } from "../../lib/templates";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { Modal } from "../ui/Modal";
 import { Skeleton } from "../ui/Skeleton";
-import { EmptyState } from "../ui/EmptyState";
 import { usePlanGate } from "../../hooks/usePlanGate";
 import { useToast } from "../../hooks/useToast";
 import { errorMessage } from "../../lib/errors";
@@ -14,7 +14,7 @@ import { ApiError } from "../../types/api";
 
 export interface TemplatePickerProps {
   type: "proposal" | "contract";
-  onPick: (templateId: string | null) => void;
+  onPick: (choice: { templateId: string | null; blocks?: BuiltInTemplate["blocks"] }) => void;
   onBack: () => void;
 }
 
@@ -31,6 +31,7 @@ export function TemplatePicker({ type, onPick, onBack }: TemplatePickerProps) {
   const query = useQuery({ queryKey: ["templates", type], queryFn: () => templatesApi.list(type) });
   const canUpload = hasFeature("custom_templates");
 
+  const builtIn = BUILT_IN_TEMPLATES[type];
   const templates = [...(query.data?.built_in ?? []), ...(query.data?.custom ?? [])].sort(
     (a, b) => Number(Boolean(b.suggested)) - Number(Boolean(a.suggested)),
   );
@@ -47,7 +48,7 @@ export function TemplatePicker({ type, onPick, onBack }: TemplatePickerProps) {
       });
       toast.success("Template added.");
       setUploadOpen(false);
-      onPick(response.id);
+      onPick({ templateId: response.id });
     } catch (cause) {
       const apiError = cause as ApiError;
       toast.error(errorMessage(apiError.code, apiError.message));
@@ -89,22 +90,18 @@ export function TemplatePicker({ type, onPick, onBack }: TemplatePickerProps) {
           )}
 
           {query.isError && (
-            <div className="card card-md">
-              <EmptyState
-                title="Could not load templates."
-                description={errorMessage((query.error as ApiError)?.code)}
-                action={{ label: "Retry", onClick: () => void query.refetch() }}
-              />
-            </div>
+            <p className="caption" style={{ marginBottom: 12 }}>
+              Your uploaded templates could not be loaded. The built-in layouts below still work.
+            </p>
           )}
 
-          {!query.isLoading && !query.isError && (
+          {(
             <div className="card-grid">
               <button
                 type="button"
                 className="link-card"
                 style={{ borderStyle: "dashed", textAlign: "left" }}
-                onClick={() => onPick(null)}
+                onClick={() => onPick({ templateId: null })}
               >
                 <Plus size={20} color="var(--gold)" />
                 <h3 style={{ marginTop: 10 }}>Start from blank</h3>
@@ -142,7 +139,54 @@ export function TemplatePicker({ type, onPick, onBack }: TemplatePickerProps) {
                 </>
               )}
 
-              {templates.map((template) => (
+              {builtIn.map((template) => (
+                <div className="link-card" key={template.id}>
+                  <div
+                    style={{
+                      height: 120,
+                      borderRadius: 6,
+                      background: "linear-gradient(135deg, #1c1c1c, #262626)",
+                      border: "1px solid var(--border)",
+                      display: "grid",
+                      placeItems: "center",
+                      fontFamily: "var(--font-display)",
+                      fontSize: 18,
+                      color: "var(--text-tertiary)",
+                    }}
+                  >
+                    {template.name}
+                  </div>
+                  <div className="between" style={{ marginTop: 12 }}>
+                    <h3>{template.name}</h3>
+                    {template.suggested ? (
+                      <span className="badge badge-gold">Suggested</span>
+                    ) : (
+                      <span className="badge badge-muted">Built-in</span>
+                    )}
+                  </div>
+                  <p>{template.description}</p>
+                  <div className="mt-4">
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => onPick({ templateId: template.id, blocks: blocksForTemplate(template) })}
+                    >
+                      Use this template
+                    </Button>
+                  </div>
+                </div>
+              ))}
+
+              {query.isLoading && (
+                <div className="link-card">
+                  <Skeleton height={120} />
+                  <div className="mt-4">
+                    <Skeleton height={14} width="60%" />
+                  </div>
+                </div>
+              )}
+
+              {!query.isLoading && templates.map((template) => (
                 <div className="link-card" key={template.id}>
                   <div
                     style={{
@@ -165,7 +209,7 @@ export function TemplatePicker({ type, onPick, onBack }: TemplatePickerProps) {
                   </div>
                   <p>{template.description || "A built-in starting layout."}</p>
                   <div className="mt-4">
-                    <Button size="sm" variant="secondary" onClick={() => onPick(template.id)}>
+                    <Button size="sm" variant="secondary" onClick={() => onPick({ templateId: template.id })}>
                       Use this template
                     </Button>
                   </div>
@@ -174,8 +218,8 @@ export function TemplatePicker({ type, onPick, onBack }: TemplatePickerProps) {
             </div>
           )}
 
-          {!query.isLoading && templates.length === 0 && (
-            <p className="caption mt-4">No templates yet. Start from blank — the block library has everything.</p>
+          {!query.isLoading && !query.isError && templates.length === 0 && (
+            <p className="caption mt-4">No uploaded templates yet. The two built-in layouts above are always available.</p>
           )}
         </div>
       </div>

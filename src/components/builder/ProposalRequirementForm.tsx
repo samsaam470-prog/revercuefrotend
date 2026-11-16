@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { proposalsApi, pipelineApi, type PackageInput } from "../../api/proposals";
+import { saveResearch } from "../../lib/pipeline";
 import { crmApi } from "../../api/crm";
 import { settingsApi } from "../../api/settings";
 import { ApiError } from "../../types/api";
@@ -162,14 +163,10 @@ export function ProposalRequirementForm() {
           target_audience: audience.trim() || undefined,
         })
         .then((result) => {
-          try {
-            sessionStorage.setItem(
-              `revercue_research_${response.id}`,
-              JSON.stringify(result.notes ?? []),
-            );
-          } catch {
-            /* the notes are a convenience, not a requirement */
-          }
+          saveResearch(response.id, {
+            notes: result.notes ?? [],
+            images: result.images ?? [],
+          });
         })
         .catch(() => undefined);
 

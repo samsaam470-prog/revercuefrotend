@@ -11,6 +11,8 @@ import { PreviewPane } from "../../components/builder/PreviewPane";
 import { ShareModal } from "../../components/builder/ShareModal";
 import { DocumentReview } from "../../components/builder/DocumentReview";
 import { analyzeDocument, type Review } from "../../lib/analysis";
+import { markPipelineDone, pipelineDone, runDraftPipeline } from "../../lib/pipeline";
+import { isBuiltIn } from "../../lib/templates";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { Textarea } from "../../components/ui/Textarea";
@@ -46,7 +48,16 @@ export function ContractBuilderPage() {
     <TemplatePicker
       type="contract"
       onBack={() => navigate("/contracts/new")}
-      onPick={async () => navigate(`/contracts/${id}/edit`, { replace: true })}
+      onPick={async ({ templateId, blocks }) => {
+        if (templateId && isBuiltIn(templateId)) {
+          try {
+            sessionStorage.setItem(`revercue_template_${id}`, JSON.stringify(blocks ?? []));
+          } catch {
+            /* the canvas falls back to the generated skeleton */
+          }
+        }
+        navigate(`/contracts/${id}/edit`, { replace: true });
+      }}
     />
   ) : (
     <ContractCanvas id={id} />
@@ -327,16 +338,27 @@ function ContractCanvas({ id }: { id: string }) {
       setDoc({ ...EMPTY_DOC, ...contract.content });
       setBlocks(contract.content.blocks);
     } else {
-      setBlocks(
-        blocksFromProposal({
-          problem: contract.scope,
-          sections: ["Parties", "Scope", "Payment", "Timeline", "Revisions", "Cancellation", "Signatures"],
-        }),
-      );
-      setBlocks((current) => [
-        ...current.filter((block) => block.type !== "next_step"),
-        { id: "signature", type: "signature" },
-      ]);
+      let templateBlocks: Block[] | null = null;
+      try {
+        const stored = sessionStorage.getItem(`revercue_template_${id}`);
+        if (stored) templateBlocks = JSON.parse(stored) as Block[];
+      } catch {
+        templateBlocks = null;
+      }
+      if (templateBlocks?.length) {
+        setBlocks(templateBlocks);
+      } else {
+        setBlocks(
+          blocksFromProposal({
+            problem: contract.scope,
+            sections: ["Parties", "Scope", "Payment", "Timeline", "Revisions", "Cancellation", "Signatures"],
+          }),
+        );
+        setBlocks((current) => [
+          ...current.filter((block) => block.type !== "next_step"),
+          { id: "signature", type: "signature" },
+        ]);
+      }
     }
     setInitialised(true);
   }, [contract, initialised]);
@@ -350,6 +372,46 @@ function ContractCanvas({ id }: { id: string }) {
     beaconPath: `/api/contracts/${id}/autosave`,
     enabled: initialised,
   });
+
+  /* The first draft fills the template's clauses from the contract itself. */
+  useEffect(() => {
+    if (!initialised || blocks.length === 0) return;
+    if (pipelineDone(id)) return;
+    const hasPlaceholders = blocks.some(
+      (block) =>
+        Boolean(block.meta?.placeholder) ||
+        Boolean(block.text && /\{\{/.test(block.text)),
+    );
+    if (!hasPlaceholders) return;
+
+    let cancelled = false;
+    void runDraftPipeline({
+      id,
+      blocks,
+      sections: SECTIONS,
+      tone: "formal",
+      withVisuals: false,
+      fills: {
+        parties: `${contract?.client_name || "The client"} and the freelancer.`,
+        scope: contract?.scope || "",
+        payment_terms: contract?.payment_terms || "",
+        timeline: contract?.timeline || "",
+        revisions: contract?.revisions || "",
+        cancellation: contract?.cancellation || "",
+      },
+    })
+      .then((result) => {
+        if (cancelled) return;
+        setBlocks(result.blocks);
+        markPipelineDone(id);
+      })
+      .catch(() => undefined);
+
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialised]);
 
   useEffect(() => {
     if (initialised) autosave.markDirty(payload);

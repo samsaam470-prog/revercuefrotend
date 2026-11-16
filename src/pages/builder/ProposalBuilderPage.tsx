@@ -11,6 +11,15 @@ import { PreviewPane } from "../../components/builder/PreviewPane";
 import { ShareModal } from "../../components/builder/ShareModal";
 import { DocumentReview } from "../../components/builder/DocumentReview";
 import { analyzeDocument, type Review } from "../../lib/analysis";
+import { ResearchPanel } from "../../components/builder/ResearchPanel";
+import {
+  markPipelineDone,
+  pipelineDone,
+  readResearch,
+  runDraftPipeline,
+  type Research,
+} from "../../lib/pipeline";
+import { isBuiltIn } from "../../lib/templates";
 import { ConfirmDialog } from "../../components/ui/ConfirmDialog";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
@@ -60,8 +69,17 @@ export function ProposalBuilderPage() {
     <TemplatePicker
       type="proposal"
       onBack={() => navigate("/proposals/new")}
-      onPick={async (templateId) => {
-        if (templateId) await proposalsApi.update(id, { template_id: templateId });
+      onPick={async ({ templateId, blocks }) => {
+        if (templateId && !isBuiltIn(templateId)) {
+          await proposalsApi.update(id, { template_id: templateId }).catch(() => undefined);
+        }
+        if (blocks) {
+          try {
+            sessionStorage.setItem(`revercue_template_${id}`, JSON.stringify(blocks));
+          } catch {
+            /* the picker still opens the canvas with the generated skeleton */
+          }
+        }
         navigate(`/proposals/${id}/edit`, { replace: true });
       }}
     />
@@ -88,6 +106,11 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
   const [pendingShare, setPendingShare] = useState<{ url: string; publicId: string } | null>(null);
   const [creating, setCreating] = useState(false);
   const [initialised, setInitialised] = useState(false);
+  const [research, setResearch] = useState<Research>(() => readResearch(id));
+  const [pipeline, setPipeline] = useState<{
+    running: boolean;
+    source?: "helper" | "backend" | "pattern";
+  }>({ running: false });
 
   const proposal = query.data?.proposal;
 
@@ -99,13 +122,22 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
       setDoc({ ...EMPTY_DOC, ...content });
       setBlocks(content.blocks);
     } else if (!blank) {
+      let templateBlocks: Block[] | null = null;
+      try {
+        const stored = sessionStorage.getItem(`revercue_template_${id}`);
+        if (stored) templateBlocks = JSON.parse(stored) as Block[];
+      } catch {
+        templateBlocks = null;
+      }
       setBlocks(
-        blocksFromProposal({
-          problem: proposal.problem,
-          sections: proposal.sections,
-          faqs: proposal.faqs,
-          questions: proposal.questions,
-        }),
+        templateBlocks?.length
+          ? templateBlocks
+          : blocksFromProposal({
+              problem: proposal.problem,
+              sections: proposal.sections,
+              faqs: proposal.faqs,
+              questions: proposal.questions,
+            }),
       );
     }
     setDoc({
@@ -125,6 +157,76 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     beaconPath: `/api/proposals/${id}/autosave`,
     enabled: initialised,
   });
+
+  /* The research lands a moment after the draft is created; pick it up here. */
+  useEffect(() => {
+    if (research.notes.length) return;
+    const timer = setInterval(() => {
+      const next = readResearch(id);
+      if (next.notes.length || next.images.length) {
+        setResearch(next);
+        clearInterval(timer);
+      }
+    }, 1500);
+    return () => clearInterval(timer);
+  }, [id, research.notes.length]);
+
+  useEffect(() => {
+    if (!initialised || blocks.length === 0 || pipeline.running) return;
+    if (pipelineDone(id)) return;
+    const hasPlaceholders = blocks.some(
+      (block) =>
+        Boolean(block.meta?.placeholder) ||
+        (block.items ?? []).some((item) => /\{\{/.test(item.label || "")) ||
+        Boolean(block.text && /\{\{/.test(block.text)),
+    );
+    if (!hasPlaceholders && !readResearch(id).notes.length) return;
+
+    let cancelled = false;
+    setPipeline({ running: true });
+
+    const extra = proposal as typeof proposal & {
+      industry?: string;
+      packages?: { name: string; price: number; deliverables?: string }[];
+    };
+    const sectionList = proposal?.sections?.length ? proposal.sections : ["Introduction", "Scope"];
+    const client = proposal?.client_name || "the client";
+
+    const fills: Record<string, string> = {
+      introduction: proposal?.problem || `${client} needs a clear plan for this work.`,
+      scope: `This covers ${sectionList.filter((section) => section !== "Pricing").join(", ").toLowerCase()}.`,
+      timeline: proposal?.timeline_length || "",
+      next_step: "Reply to this link and I will send the contract.",
+    };
+
+    const packages = extra.packages?.length
+      ? extra.packages.map((item) => ({ label: item.name, price: item.price }))
+      : undefined;
+
+    void runDraftPipeline({
+      id,
+      blocks,
+      sections: sectionList,
+      tone: proposal?.tone || "formal",
+      fills,
+      packages,
+      industry: extra.industry,
+    })
+      .then((result) => {
+        if (cancelled) return;
+        setBlocks(result.blocks);
+        setPipeline({ running: false, source: result.source });
+        markPipelineDone(id);
+      })
+      .catch(() => {
+        if (!cancelled) setPipeline({ running: false });
+      });
+
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialised]);
 
   useEffect(() => {
     if (initialised) autosave.markDirty(payload);
@@ -221,6 +323,8 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
           },
         ]}
       />
+      <ResearchPanel research={research} source={pipeline.source} running={pipeline.running} />
+
       <Canvas
         doc={doc}
         blocks={blocks}

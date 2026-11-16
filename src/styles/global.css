@@ -4016,3 +4016,76 @@ details.faq-item:hover {
   align-items: end;
   gap: 8px;
 }
+
+/* ---------- Builder: the research the draft was organized from ---------- */
+.research-panel {
+  margin: 0 auto;
+  width: min(1120px, 100%);
+  padding: 0 16px;
+}
+
+.research-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.09));
+  border-radius: 8px;
+  background: rgba(201, 169, 97, 0.05);
+  color: var(--text-secondary, #c9c4b6);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.research-head:hover {
+  border-color: rgba(201, 169, 97, 0.4);
+  color: var(--text-primary, #f2efe8);
+}
+
+.research-body {
+  margin-top: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.09));
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  max-height: 320px;
+  overflow: auto;
+  display: grid;
+  gap: 12px;
+}
+
+.research-note h3 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: var(--text-primary, #f2efe8);
+}
+
+.research-note p {
+  margin: 0 0 4px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-secondary, #b9b4a6);
+}
+
+.research-note a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.research-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 8px;
+}
+
+.research-images img {
+  width: 100%;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.09));
+}
