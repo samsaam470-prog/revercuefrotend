@@ -1,0 +1,434 @@
+{
+  "name": "Revercue",
+  "documentation_version": "1.0.0",
+  "last_updated": "2026-11-16",
+  "canonical_origin": "https://revercue.pages.dev",
+  "document": {
+    "language": "en",
+    "purpose": "Machine-readable product reference for AI agents and evaluation tools.",
+    "source_of_truth": "The application's routes, plan constants and public pages.",
+    "maintained_by": "Hand, alongside /ai-overview and /ai-changelog.",
+    "disclaimer": "Only what is described here or in the linked pages is claimed. Anything else is unverified rather than assumed."
+  },
+  "identity": {
+    "tagline": "Your work should speak, not you.",
+    "thesis": "A thread, not disconnected workflows.",
+    "category": "Client-work software for freelancers and small agencies",
+    "one_sentence": "One client, one link, from the proposal to the contract to the requirement form to the invoice to the client record.",
+    "core_object": "An interactive document link the client opens without an account; every action on it becomes part of the client's thread.",
+    "audience": [
+      "Freelance designers, developers, copywriters and consultants",
+      "Small studios and agencies whose founder still writes the proposals"
+    ],
+    "product_uses_ai": false,
+    "suggestion_basis": "Written rules: keyword matching, frequency counting and arithmetic over the user's own record.",
+    "on_device_helper": {
+      "exists": true,
+      "runs_on": "The visitor's device",
+      "sends_selection_to_server": false,
+      "verified_in_this_environment": false
+    }
+  },
+  "availability": {
+    "free_plan": "available",
+    "starter": "invite_only_waitlist",
+    "growth": "invite_only_waitlist",
+    "scale": "invite_only_waitlist",
+    "teams": "beta",
+    "self_serve_checkout": false,
+    "free_requires_card": false
+  },
+  "resources": {
+    "ai_access": "https://revercue.pages.dev/ai-access",
+    "ai_overview": "https://revercue.pages.dev/ai-overview",
+    "ai_demo": "https://revercue.pages.dev/ai-demo",
+    "ai_changelog": "https://revercue.pages.dev/ai-changelog",
+    "capabilities_json": "https://revercue.pages.dev/ai-capabilities.json",
+    "llms_txt": "https://revercue.pages.dev/llms.txt",
+    "sitemap": "https://revercue.pages.dev/sitemap.xml",
+    "robots": "https://revercue.pages.dev/robots.txt",
+    "pricing": "https://revercue.pages.dev/pricing",
+    "features": "https://revercue.pages.dev/features",
+    "security": "https://revercue.pages.dev/security",
+    "privacy": "https://revercue.pages.dev/privacy",
+    "terms": "https://revercue.pages.dev/terms",
+    "contact": "https://revercue.pages.dev/contact",
+    "beta": "https://revercue.pages.dev/beta",
+    "compare_criteria": "https://revercue.pages.dev/compare/criteria"
+  },
+  "workflow": [
+    {
+      "stage": "proposal",
+      "public_url": "/p/{publicId}",
+      "client_actions": ["read", "expand_faq", "answer_embedded_question", "select_package", "approve", "decline"]
+    },
+    {
+      "stage": "contract",
+      "public_url": "/c/{publicId}",
+      "client_actions": ["approve", "decline", "ask_question"],
+      "note": "Approval is not an e-signature."
+    },
+    {
+      "stage": "requirement_form",
+      "public_url": "/f/{publicId}",
+      "client_actions": ["answer_questions", "submit"],
+      "question_types": 7
+    },
+    {
+      "stage": "invoice",
+      "public_url": "/i/{publicId}",
+      "proof_upload_url": "/i/{publicId}/proof",
+      "client_actions": ["pay_by_external_link", "transfer_and_upload_proof"],
+      "note": "Revercue does not process card payments itself; the owner confirms payment."
+    },
+    {
+      "stage": "client_record",
+      "public_url": null,
+      "note": "Account only. Assembled from the documents; survives their retention."
+    }
+  ],
+  "modules": [
+    {
+      "id": "dashboard",
+      "name": "Dashboard",
+      "status": "available",
+      "access": "account",
+      "summary": "Four stat cards, pending payments, suggested actions with Do it and Dismiss, create row and recent activity."
+    },
+    {
+      "id": "proposals",
+      "name": "Proposals",
+      "status": "available",
+      "access": "account",
+      "public_page": true,
+      "summary": "Three-panel builder with 13 block types, sections, auto-save, preview and share sheet; client page with packages, FAQs, questions and info icons."
+    },
+    {
+      "id": "contracts",
+      "name": "Contracts",
+      "status": "available",
+      "access": "account",
+      "public_page": true,
+      "summary": "Clause-based builder; client approves, declines or asks a question; after-approval choice of form, invoice or PDF."
+    },
+    {
+      "id": "requirement_forms",
+      "name": "Requirement forms",
+      "status": "available",
+      "access": "account",
+      "public_page": true,
+      "summary": "Seven question types, required flags, one or many pages, thank-you step and Prompt Creator; branching on paid plans."
+    },
+    {
+      "id": "invoices",
+      "name": "Invoices",
+      "status": "available",
+      "access": "account",
+      "public_page": true,
+      "summary": "Line items, tax, totals, due date, INV-YEAR-NNNN numbering, payment link or bank details, proof upload and confirm-payment."
+    },
+    {
+      "id": "crm",
+      "name": "Client record (CRM)",
+      "status": "available",
+      "access": "account",
+      "summary": "Communication log, notes, follow-ups, attached documents and CSV export; interest level and revenue on Scale."
+    },
+    {
+      "id": "builder",
+      "name": "Builder and templates",
+      "status": "available",
+      "access": "account",
+      "summary": "Shared document editor with undo and redo, preview and visible auto-save; built-in templates everywhere, saved templates from Starter."
+    },
+    {
+      "id": "client_pages",
+      "name": "Client-facing document pages",
+      "status": "available",
+      "access": "public_by_unguessable_link",
+      "summary": "Noindex and nofollow, no account, password wall on Growth and above, closed state, no advertising or analytics pixels."
+    },
+    {
+      "id": "accounts",
+      "name": "Accounts and settings",
+      "status": "available",
+      "access": "public_entry_then_account",
+      "summary": "Email and password with a six-digit activation code, Google sign-in when configured, password reset, optional email 2FA, ten settings sections, deletion with a grace period."
+    },
+    {
+      "id": "notifications",
+      "name": "Notifications",
+      "status": "available",
+      "access": "account",
+      "summary": "Notification queue with mark-all-read; 90-day retention."
+    },
+    {
+      "id": "suggestions",
+      "name": "Suggestions and patterns",
+      "status": "partial",
+      "access": "plan_gated",
+      "summary": "Written rules over the user's own record: due follow-up, approved contract without an invoice, form opened and not submitted, warm client to reopen, price from recorded expenses. Do it only opens a screen.",
+      "basic_suggestions_on_free_and_starter": "unverified"
+    },
+    {
+      "id": "helper",
+      "name": "On-device writing helper",
+      "status": "partial",
+      "access": "device_dependent",
+      "summary": "Select a passage, ask for a clearer version, keep what you like. Runs on the visitor's device; the selection is not sent to a Revercue server."
+    },
+    {
+      "id": "teams",
+      "name": "Teams",
+      "status": "beta",
+      "access": "application_review",
+      "summary": "Everything on Scale plus Handoff Dashboard, roles and team attribution, bulk transfer and audit log. Seats handled manually while in beta."
+    }
+  ],
+  "plans": [
+    {
+      "id": "free",
+      "name": "Free",
+      "status": "available",
+      "status_label": "Available now",
+      "role": "Try the thread.",
+      "price_usd_per_month": 0,
+      "limits": {
+        "active_documents": 5,
+        "retention_months": 1,
+        "draft_retention_days": 10,
+        "archive_documents": 5,
+        "archive_days": 15,
+        "storage_mb": 50,
+        "notes_per_client": 3,
+        "custom_templates": 0,
+        "saved_faqs": 0,
+        "saved_packages": 0,
+        "password_protected_documents": 0,
+        "adaptive_forms": 0
+      },
+      "features": ["Opened / not opened tracking", "Revercue branding on client pages"]
+    },
+    {
+      "id": "starter",
+      "name": "Starter",
+      "status": "invite_only_waitlist",
+      "status_label": "Invite-only — join the waitlist",
+      "role": "Solo, light use.",
+      "price_usd_per_month": 12,
+      "limits": {
+        "active_documents": 20,
+        "retention_months": 3,
+        "draft_retention_days": 30,
+        "archive_documents": 15,
+        "archive_days": 30,
+        "storage_mb": 100,
+        "notes_per_client": 10,
+        "custom_templates": 3,
+        "saved_faqs": 0,
+        "saved_packages": 0,
+        "password_protected_documents": 0,
+        "adaptive_forms": 0
+      },
+      "features": ["Opened-at timestamps", "Email notifications"]
+    },
+    {
+      "id": "growth",
+      "name": "Growth",
+      "status": "invite_only_waitlist",
+      "status_label": "Invite-only — join the waitlist",
+      "role": "Solo, power user.",
+      "price_usd_per_month": 29,
+      "limits": {
+        "active_documents": 100,
+        "retention_months": 12,
+        "draft_retention_days": 50,
+        "archive_documents": 30,
+        "archive_days": 30,
+        "storage_mb": 1024,
+        "notes_per_client": null,
+        "custom_templates": 10,
+        "saved_faqs": 10,
+        "saved_packages": 10,
+        "password_protected_documents": 15,
+        "adaptive_forms": 3
+      },
+      "features": ["Time spent and button clicks", "No Revercue branding on client pages"]
+    },
+    {
+      "id": "scale",
+      "name": "Scale",
+      "status": "invite_only_waitlist",
+      "status_label": "Invite-only — join the waitlist",
+      "role": "Solo professional, full feature set.",
+      "price_usd_per_month": 49,
+      "limits": {
+        "active_documents": 300,
+        "retention_months": 24,
+        "draft_retention_days": 80,
+        "archive_documents": 30,
+        "archive_days": 30,
+        "storage_mb": 5120,
+        "notes_per_client": null,
+        "custom_templates": 15,
+        "saved_faqs": 30,
+        "saved_packages": 15,
+        "password_protected_documents": 50,
+        "adaptive_forms": 15
+      },
+      "features": [
+        "Advanced tracking and session timeline",
+        "Interest level and revenue tracker",
+        "Expense entry and price suggestion",
+        "What Revercue Knows page",
+        "Custom thank-you page"
+      ]
+    },
+    {
+      "id": "teams",
+      "name": "Teams",
+      "status": "beta",
+      "status_label": "In beta — join the beta",
+      "role": "Agency team.",
+      "price_usd_per_month": null,
+      "base_price_usd_per_month": 99,
+      "limits": {
+        "active_documents": 500,
+        "retention_months": 36,
+        "draft_retention_days": 80,
+        "archive_documents": 30,
+        "archive_days": 30,
+        "storage_mb": 10240,
+        "notes_per_client": null,
+        "custom_templates": 999,
+        "saved_faqs": 999,
+        "saved_packages": 999,
+        "password_protected_documents": 999,
+        "adaptive_forms": 999
+      },
+      "features": ["Everything on Scale", "Handoff Dashboard", "Roles and team attribution", "Bulk transfer", "Audit log"]
+    }
+  ],
+  "plan_field_notes": {
+    "notes_per_client": "null means unlimited.",
+    "unlimited_sentinel": "999 is the application's unlimited sentinel for feature counts on Teams.",
+    "active_document": "A published document with a public link. Drafts, archived and deleted documents do not count. A password-protected document counts once. An adaptive form counts once.",
+    "downgrade": "Documents beyond the new limit are archived, a PDF of each is emailed, and they are deleted after the new plan's archive retention. CRM records survive."
+  },
+  "security": {
+    "transport": "TLS 1.3",
+    "encryption_at_rest": "AES-256",
+    "account_password_hash": "bcrypt",
+    "document_password_hash": "Argon2id",
+    "session_tokens": "scoped",
+    "two_factor": "optional email 2FA on the account",
+    "file_storage": "Private bucket behind a Worker proxy",
+    "public_ids": "long, random and unguessable",
+    "client_pages_indexing": "noindex, nofollow",
+    "processors": ["Cloudflare", "Backblaze B2", "Turso", "FormSubmit", "External payment provider"],
+    "team_access_to_documents": false,
+    "certification": null,
+    "penetration_test_report": false,
+    "bug_bounty": false,
+    "cards_stored": false,
+    "retention": {
+      "documents_months_by_plan": [1, 3, 12, 24, 36],
+      "drafts_days_by_plan": [10, 30, 50, 80, 80],
+      "pdf_emailed_before_deletion": true,
+      "client_record_survives_documents": true,
+      "tracking_events_reduced_after_days": 5,
+      "notifications_days": 90,
+      "saved_libraries_expire_after_months_unused": 3,
+      "deleted_account_grace_days": 5
+    }
+  },
+  "demo": {
+    "url": "https://revercue.pages.dev/ai-demo",
+    "type": "simulation",
+    "clearly_labelled": true,
+    "requires_account": false,
+    "requires_javascript_for_interaction": true,
+    "synthetic_data": true,
+    "network_calls": false,
+    "production_credentials": false,
+    "persists_across_reload": false,
+    "payment_processing": false,
+    "email_sending": false,
+    "reset_available": true,
+    "screens": ["dashboard", "proposal", "contract", "requirement_form", "invoice", "client_record"],
+    "tutorial_steps": 8,
+    "evaluation_workspace": {
+      "user_facing_answer": true,
+      "recommendation": ["Adopt now", "Trial when a paid plan is available", "Not suitable", "Insufficient evidence"],
+      "rationale_and_evidence": true,
+      "confidence": ["low", "medium", "high"],
+      "feedback_report": true,
+      "copy_buttons": true,
+      "submission_endpoint": false
+    }
+  },
+  "crawling": {
+    "public_pages_may_be_crawled": true,
+    "ai_resources_allowed": true,
+    "disallowed_prefixes": ["/p/", "/c/", "/i/", "/f/"],
+    "disallowed_app_namespaces": ["/dashboard", "/settings", "/crm", "/proposals", "/contracts", "/forms", "/invoices", "/notifications", "/admin"],
+    "robots_txt_is_a_hint_not_a_boundary": true,
+    "create_accounts": "not permitted",
+    "submit_forms": "not permitted",
+    "load_testing": "not permitted",
+    "public_api": false
+  },
+  "not_claimed": [
+    "AI, machine learning or generated text in the product",
+    "E-signature or a legally verified signing trail",
+    "Card processing inside Revercue",
+    "Public API, SDK, webhooks or an integrations directory",
+    "SOC 2, ISO 27001 or any security certification",
+    "Customer testimonials, case studies or performance benchmarks",
+    "A free-form page designer",
+    "A public roadmap"
+  ],
+  "known_issues": [
+    {
+      "id": "suggestions-plan-gate",
+      "detail": "The dashboard gates its suggestion card behind the Growth-and-above feature flag, while guides and an FAQ describe basic suggestions on every plan. Which is authoritative has not been confirmed.",
+      "status": "unresolved"
+    },
+    {
+      "id": "simulation-not-production",
+      "detail": "The demo reproduces states and arithmetic only; it does not exercise the API, database, email, storage or payments.",
+      "status": "by_design"
+    },
+    {
+      "id": "no-public-client-document",
+      "detail": "Production client pages are private, so no real client document can be linked from the documentation.",
+      "status": "by_design"
+    },
+    {
+      "id": "js-required-for-app-routes",
+      "detail": "The production site is client-rendered; app routes return an empty shell without JavaScript. Only the AI resources and static files are complete HTML.",
+      "status": "known_limitation"
+    },
+    {
+      "id": "plan-data-can-age",
+      "detail": "Prices and limits were read from the application's constants on 2026-11-16; the pricing page is the live source of truth.",
+      "status": "maintained_by_hand"
+    },
+    {
+      "id": "single-reviewer-documentation",
+      "detail": "These pages have not been reviewed by a second person.",
+      "status": "open"
+    },
+    {
+      "id": "helper-unverified",
+      "detail": "The on-device helper depends on the visitor's device and was not run in the documentation environment.",
+      "status": "unverified"
+    }
+  ],
+  "contact": {
+    "route": "https://revercue.pages.dev/contact",
+    "topics": ["product questions", "security reports", "accessibility problems", "documentation errors"],
+    "public_email": null,
+    "signed_in_feedback": "Settings → Feedback, which attaches account context"
+  }
+}

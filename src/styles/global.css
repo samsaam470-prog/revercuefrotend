@@ -854,6 +854,32 @@ table.data tbody tr.clickable:hover {
 .foot-col a:hover {
   color: var(--text-primary);
 }
+.foot-ai {
+  max-width: 1120px;
+  margin: var(--space-6) auto 0;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-6);
+  font-size: var(--size-caption);
+  color: var(--text-tertiary);
+}
+.foot-ai-label {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.foot-ai a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+}
+.foot-ai a:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
 .foot-bottom {
   max-width: 1120px;
   margin: var(--space-12) auto 0;

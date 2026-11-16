@@ -79,6 +79,36 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://revercue.pages.dev/ai-access</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://revercue.pages.dev/ai-overview</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://revercue.pages.dev/ai-demo</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://revercue.pages.dev/ai-changelog</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://revercue.pages.dev/ai-capabilities.json</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://revercue.pages.dev/guides/getting-started</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>

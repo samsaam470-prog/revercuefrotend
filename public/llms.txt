@@ -52,6 +52,16 @@ The documents are private: the user and the client they were sent to. The team s
 - Terms: https://revercue.pages.dev/terms
 - Security: https://revercue.pages.dev/security
 
+## For AI agents and evaluators
+
+- Access guide: https://revercue.pages.dev/ai-access — every public page, every module and its status, the demo instructions, the restrictions and the known gaps.
+- Product overview: https://revercue.pages.dev/ai-overview — identity, workflow, modules, customers, positioning, pricing with every limit, security and current availability in one page.
+- Demo: https://revercue.pages.dev/ai-demo — eight tutorial steps, a labelled simulation with synthetic data, and an evaluation workspace. No account, no network calls, no production data.
+- Changelog: https://revercue.pages.dev/ai-changelog — the traceable release record and the known issues.
+- Capabilities JSON: https://revercue.pages.dev/ai-capabilities.json — the same facts as structured data.
+
+Rules for automated access: the public pages may be read and cited. Do not create a production account, do not submit the contact or beta forms, do not probe client document links or password walls, and do not treat the site as a load-test target. There is no public API. The demo is a simulation, not the production application.
+
 ## FAQ highlights
 
 - **What is Revercue?** The thread for freelancer client work: proposal, contract, form, invoice and client record, connected, with interactive links instead of PDFs.

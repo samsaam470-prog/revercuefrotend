@@ -177,6 +177,15 @@ export function PublicFooter() {
           </div>
         </div>
       </div>
+      <div className="foot-ai">
+        <span className="foot-ai-label">For AI agents</span>
+        <a href="/ai-access">Access guide</a>
+        <a href="/ai-overview">Product overview</a>
+        <a href="/ai-demo">Demo and tutorial</a>
+        <a href="/ai-changelog">Changelog</a>
+        <a href="/ai-capabilities.json">Capabilities JSON</a>
+        <a href="/llms.txt">llms.txt</a>
+      </div>
       <div className="foot-bottom">
         <span>© {new Date().getFullYear()} Revercue. Your data is yours.</span>
         <div className="socials">

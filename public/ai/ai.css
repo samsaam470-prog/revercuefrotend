@@ -1003,6 +1003,104 @@ legend {
   accent-color: var(--gold-ink);
 }
 
+/* ---------------- demo: packages, documents, details ---------------- */
+
+.demo-panels {
+  min-width: 0;
+}
+
+.pkg-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  margin: 14px 0 20px;
+}
+
+.pkg {
+  display: grid;
+  gap: 2px;
+  text-align: left;
+  font: inherit;
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  border-radius: 9px;
+  padding: 13px 15px;
+  cursor: pointer;
+  color: var(--ink-soft);
+  transition: border-color 140ms ease, background 140ms ease;
+}
+
+.pkg:hover {
+  border-color: var(--gold);
+}
+
+.pkg[aria-pressed="true"] {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+  box-shadow: inset 0 0 0 1px var(--gold);
+}
+
+.pkg-name {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.pkg-price {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  color: var(--gold-ink);
+}
+
+.pkg-desc {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.doc-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.doc-list li {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px dashed var(--rule);
+  padding-bottom: 6px;
+  font-size: 14px;
+}
+
+.doc-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+details.record > summary {
+  cursor: pointer;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+}
+
+details.record > summary:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+textarea[readonly] {
+  background: var(--paper-deep);
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
 /* ---------------- footer ---------------- */
 
 .site-foot {

@@ -1,6 +1,15 @@
 User-agent: *
 Allow: /
 
+# AI resources are plain, complete HTML and are open to crawlers
+# and language tools. The demo runs entirely in the browser.
+Allow: /ai-access
+Allow: /ai-overview
+Allow: /ai-demo
+Allow: /ai-changelog
+Allow: /ai-capabilities.json
+Allow: /llms.txt
+
 # Client documents are unguessable and are never indexed.
 Disallow: /p/
 Disallow: /c/

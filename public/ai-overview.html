@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI product overview — Revercue</title>
+    <meta
+      name="description"
+      content="A self-contained reference to Revercue for AI agents and evaluation tools: what the product is, how the thread works, every module and its real status, who it is for, positioning, pricing with limits, security, current availability and canonical links."
+    />
+    <link rel="canonical" href="https://revercue.pages.dev/ai-overview" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#faf7f1" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/json" href="/ai-capabilities.json" title="Revercue capabilities" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/ai/ai.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://revercue.pages.dev/#organization",
+            "name": "Revercue",
+            "url": "https://revercue.pages.dev/",
+            "description": "A client-work product for freelancers and small agencies: proposal, contract, requirement form, invoice and client record in one thread.",
+            "logo": "https://revercue.pages.dev/icon-512.png"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://revercue.pages.dev/#website",
+            "url": "https://revercue.pages.dev/",
+            "name": "Revercue",
+            "publisher": { "@id": "https://revercue.pages.dev/#organization" },
+            "inLanguage": "en"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://revercue.pages.dev/ai-overview#webpage",
+            "url": "https://revercue.pages.dev/ai-overview",
+            "name": "AI product overview — Revercue",
+            "isPartOf": { "@id": "https://revercue.pages.dev/#website" },
+            "about": { "@id": "https://revercue.pages.dev/#organization" },
+            "dateModified": "2026-11-16",
+            "inLanguage": "en"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-head">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Revercue home">
+          <img src="/logo-mark.png" alt="" width="26" height="26" />
+          Revercue
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/features">Features</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/guides">Guides</a>
+          <a href="/ai-overview" aria-current="page">AI overview</a>
+          <a href="/ai-demo">Demo</a>
+          <a href="/ai-changelog">Changelog</a>
+          <a href="/ai-access">AI access</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="wrap">
+      <div class="page-head">
+        <p class="eyebrow">AI product overview</p>
+        <h1>One client, one thread, five documents.</h1>
+        <p class="lede">
+          Revercue is a client-work product for freelancers and small agencies. It keeps a proposal, a
+          contract, a requirement form, an invoice and the client record in one connected thread instead
+          of five disconnected tools. This page is the full reference: enough to evaluate the product
+          without opening another page, and honest about what is shipped, what is invite-only and what
+          does not exist.
+        </p>
+        <p class="meta">
+          <span>Last reviewed: 16 November 2026</span>
+          <span>Applies to: revercue.pages.dev</span>
+          <span>Source of truth: the application's own constants and routes</span>
+        </p>
+
+        <div class="note">
+          <p>
+            <strong>The one thing to get right.</strong> Revercue does not use AI in the product. There
+            is no model, no inference endpoint and no generated copy. Suggestions are written rules —
+            keyword matching, frequency counting and arithmetic — over the user's own record, and every
+            suggestion is a prompt the user clicks, never an action taken for them. The optional writing
+            helper runs on the visitor's own device and its text never reaches a Revercue server. This
+            page is written for AI agents; the product is not an AI product.
+          </p>
+        </div>
+
+        <nav class="toc" aria-labelledby="toc-title">
+          <h2 id="toc-title">On this page</h2>
+          <ol>
+            <li><a href="#identity">Identity</a></li>
+            <li><a href="#workflow">The workflow</a></li>
+            <li><a href="#modules">Modules and statuses</a></li>
+            <li><a href="#customers">Who it is for</a></li>
+            <li><a href="#positioning">Positioning</a></li>
+            <li><a href="#pricing">Plans and limits</a></li>
+            <li><a href="#security">Security and data</a></li>
+            <li><a href="#status">Current product status</a></li>
+            <li><a href="#gaps">Known gaps and inconsistencies</a></li>
+            <li><a href="#resources">Canonical resources</a></li>
+          </ol>
+        </nav>
+      </div>
+
+      <section class="section" id="identity">
+        <h2>1. Identity</h2>
+        <div class="table-wrap">
+          <table>
+            <caption>Fixed facts about the product, as stated across the site.</caption>
+            <tbody>
+              <tr>
+                <th scope="row">Name</th>
+                <td>Revercue</td>
+              </tr>
+              <tr>
+                <th scope="row">Tagline</th>
+                <td>Your work should speak, not you.</td>
+              </tr>
+              <tr>
+                <th scope="row">Thesis</th>
+                <td>A thread, not disconnected workflows.</td>
+              </tr>
+              <tr>
+                <th scope="row">Category</th>
+                <td>Client-work software for service businesses: proposals, contracts, requirement forms, invoices and a client record.</td>
+              </tr>
+              <tr>
+                <th scope="row">One sentence</th>
+                <td>
+                  One client, one link, from the proposal to the contract to the form to the invoice to
+                  the client record — and the record builds itself from what happens in those documents.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">The core object</th>
+                <td>
+                  The document is an interactive link, not a PDF. It is a public page with an unguessable
+                  ID that the client opens without an account, and every action on it (opened, package
+                  chosen, question asked, approved, paid) becomes part of the client's thread.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Audience</th>
+                <td>Freelancers and small agencies selling services: designers, developers, copywriters, consultants, small studios.</td>
+              </tr>
+              <tr>
+                <th scope="row">Availability</th>
+                <td>
+                  Free is available now. Starter ($12), Growth ($29) and Scale ($49) are invite-only —
+                  you join a waitlist. Teams is in beta — you apply.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Website</th>
+                <td><a href="https://revercue.pages.dev/">https://revercue.pages.dev/</a></td>
+              </tr>
+              <tr>
+                <th scope="row">Public API</th>
+                <td>None. There is no documented public API, SDK, webhook or agent endpoint.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>What is deliberately not claimed</h3>
+        <ul>
+          <li>No AI, machine learning or generated text in the product.</li>
+          <li>No e-signature and no legally verified signing trail.</li>
+          <li>No card processing inside Revercue; invoices point at the user's own payment provider or use bank transfer.</li>
+          <li>No integrations directory, marketplace, public API, webhooks or Zapier-style automation.</li>
+          <li>No formal security certification (no SOC 2, ISO 27001 or similar) — and none is implied.</li>
+          <li>No customer testimonials, case studies or performance benchmarks published.</li>
+          <li>No free-form page designer; the builder is per document type.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="workflow">
+        <h2>2. The workflow</h2>
+        <p>
+          Five stages, in the order the product expects them. Each stage is its own module, but the
+          value is the join: what the client does at one stage is already known at the next.
+        </p>
+
+        <div class="steps">
+          <article class="step">
+            <h2><span class="step-num">01</span> Proposal</h2>
+            <p>
+              The freelancer builds a proposal in a three-panel builder — sections and blocks on the
+              left, the document in the middle, properties on the right — from a blank page, a built-in
+              template or a saved template. It carries scope, a package table, collapsible FAQs,
+              embedded questions and info icons. Publishing produces a link and a share message; the
+              product never sends the email itself.
+            </p>
+            <p>
+              The client opens the link with no account: reads, expands a FAQ, answers an embedded
+              question, picks one of the package cards, then approves or declines. Opens are recorded;
+              paid plans add opened-at timestamps, time spent and button-level tracking. The chosen
+              package is what carries forward.
+            </p>
+            <dl>
+              <dt>Who acts</dt>
+              <dd>Freelancer builds and shares; the client reads and chooses.</dd>
+              <dt>Recorded</dt>
+              <dd>Published, opened, package selected, question asked, approved or declined, with timestamps.</dd>
+              <dt>Plan gates</dt>
+              <dd>Password-protected links on Growth and above; no Revercue branding on client pages from Growth.</dd>
+            </dl>
+          </article>
+
+          <article class="step">
+            <h2><span class="step-num">02</span> Contract</h2>
+            <p>
+              A contract builder with the usual clause sections — parties, scope, payment, timeline,
+              revisions, cancellation, liability, signatures — and three client actions: Approve,
+              Decline, or I Have Questions. Approval can chain directly into the requirement form, the
+              invoice or a PDF, depending on the after-approval setting on the document.
+            </p>
+            <p>
+              Approval is an in-page action by whoever holds the link. It is recorded in the
+              communication log. It is not an e-signature and the product does not describe it as one.
+            </p>
+            <dl>
+              <dt>Who acts</dt>
+              <dd>Freelancer writes; the client approves, declines or asks a question.</dd>
+              <dt>Recorded</dt>
+              <dd>The action, its timestamp and the next document it triggered.</dd>
+              <dt>Plan gates</dt>
+              <dd>The contract builder is part of the thread on every plan.</dd>
+            </dl>
+          </article>
+
+          <article class="step">
+            <h2><span class="step-num">03</span> Requirement form</h2>
+            <p>
+              The briefing step, as a form instead of an email chain. Seven question types (short text,
+              long text, file upload, single choice, multiple choice, combined, dropdown), required
+              flags, one-page or multi-page layout, a thank-you step and a Prompt Creator that assembles
+              the client's answers into one structured paragraph for the next document.
+            </p>
+            <p>
+              Adaptive forms — where branching shows only the questions that matter — are Growth and
+              above, capped by plan (3 on Growth, 15 on Scale). The custom thank-you page is Scale. The
+              client fills the form at <code>/f/{publicId}</code> without an account.
+            </p>
+            <dl>
+              <dt>Who acts</dt>
+              <dd>Freelancer writes the questions; the client answers them.</dd>
+              <dt>Recorded</dt>
+              <dd>Opened, completed, each answer; a form opened but not submitted after three days becomes a suggestion.</dd>
+              <dt>Plan gates</dt>
+              <dd>Adaptive branching on Growth and above; custom thank-you page on Scale; uploads count against storage.</dd>
+            </dl>
+          </article>
+
+          <article class="step">
+            <h2><span class="step-num">04</span> Invoice</h2>
+            <p>
+              Line items with description, quantity and unit price; tax; totals; a due date; and an
+              invoice number generated as <code>INV-YEAR-NNNN</code>. Payment happens one of two ways: an
+              external payment link supplied by the user, or bank details with an optional
+              proof-of-payment upload that the user reviews.
+            </p>
+            <p>
+              Confirming payment is what records revenue for the tracker. Revercue does not process cards
+              itself and does not verify a transfer; the user confirms it.
+            </p>
+            <dl>
+              <dt>Who acts</dt>
+              <dd>Freelancer raises the invoice; the client pays by link or transfer, then uploads proof if asked.</dd>
+              <dt>Recorded</dt>
+              <dd>Sent, opened, overdue, proof uploaded, payment confirmed, revenue booked.</dd>
+              <dt>Plan gates</dt>
+              <dd>Revenue tracker and expense entry are Scale.</dd>
+            </dl>
+          </article>
+
+          <article class="step">
+            <h2><span class="step-num">05</span> Client record</h2>
+            <p>
+              The CRM is the thread's home and the reason the five documents are one product. It holds
+              the communication log, notes, follow-ups, the documents attached to the client, and — on
+              Scale — interest level, revenue per client, expenses and the 15-day summary.
+            </p>
+            <p>
+              The record is assembled from the documents rather than typed in a second time. Documents
+              expire on the plan's retention; the record, the log and the notes survive them. That
+              asymmetry is deliberate and is repeated on the site: the documents are rented, the
+              relationship is owned.
+            </p>
+            <dl>
+              <dt>Who acts</dt>
+              <dd>The product assembles it; the freelancer annotates it and acts on it.</dd>
+              <dt>Recorded</dt>
+              <dd>Every entry above, in order, with the document that produced it.</dd>
+              <dt>Plan gates</dt>
+              <dd>Notes per client: 3 (Free), 10 (Starter), unlimited from Growth. Interest, revenue and expenses on Scale. CSV export of clients.</dd>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="modules">
+        <h2>3. Modules and statuses</h2>
+        <p>
+          Statuses: <span class="pill pill--available">available</span> — the routes and the API calls
+          exist in the application; <span class="pill pill--partial">partial</span> — exists but is
+          plan-gated, device-dependent or only partly exercised; <span class="pill pill--beta">beta</span>
+          — shipped to a small group and expected to change; <span class="pill pill--waitlist">invite-only</span>
+          — built, but reachable only through the waitlist. "Available" never means a public visitor can
+          exercise it without an account.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <caption>The application as it exists today. No module here is aspirational.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Module</th>
+                <th scope="col">Status</th>
+                <th scope="col">What it does</th>
+                <th scope="col">Access</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Dashboard</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>
+                  Four stat cards (active documents, clients, follow-ups due, revenue this month), the
+                  pending-payments line, suggested actions with Do it and Dismiss, the create row and the
+                  recent activity feed.
+                </td>
+                <td>Account</td>
+              </tr>
+              <tr>
+                <th scope="row">Proposals</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>
+                  Index and three-panel builder with 13 block types, sections, auto-save, preview and a
+                  share sheet; a public client page with packages, FAQs, questions and info icons.
+                </td>
+                <td>Account; client page public by link</td>
+              </tr>
+              <tr>
+                <th scope="row">Contracts</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>
+                  Clause-based builder and a client page with Approve / Decline / I Have Questions, plus
+                  an after-approval choice of form, invoice or PDF.
+                </td>
+                <td>Account; client page public by link</td>
+              </tr>
+              <tr>
+                <th scope="row">Requirement forms</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>
+                  Seven question types, required flags, one or many pages, a thank-you step, the Prompt
+                  Creator, branching on paid plans.
+                </td>
+                <td>Account; form public by link</td>
+              </tr>
+              <tr>
+                <th scope="row">Invoices</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>
+                  Line items, tax, totals, due date, <code>INV-YEAR-NNNN</code> numbering, payment link or
+                  bank details, proof upload, confirm-payment.
+                </td>
+                <td>Account; invoice public by link</td>
+              </tr>
+              <tr>
+                <th scope="row">CRM</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>
+                  Client list and client record: communication log, notes, follow-ups, attached
+                  documents, CSV export; interest level and revenue on Scale.
+                </td>
+                <td>Account</td>
+              </tr>
+              <tr>
+                <th scope="row">Builder and templates</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>
+                  Shared editor with undo/redo, preview and visible auto-save; built-in templates on
+                  every plan, saved templates from Starter.
+                </td>
+                <td>Account</td>
+              </tr>
+              <tr>
+                <th scope="row">Client-facing pages</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>
+                  Public proposal, contract, form and invoice at unguessable URLs; noindex and nofollow;
+                  password wall on Growth and above; closed state; no ad or analytics pixels.
+                </td>
+                <td>Public by link</td>
+              </tr>
+              <tr>
+                <th scope="row">Accounts and settings</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>
+                  Email and password sign-up with a six-digit activation code, Google sign-in when
+                  configured, password reset, optional email 2FA, ten settings sections, account
+                  deletion with a grace period.
+                </td>
+                <td>Public entry; account after</td>
+              </tr>
+              <tr>
+                <th scope="row">Notifications</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>A notification queue with a mark-all-read action; retention on notifications is 90 days.</td>
+                <td>Account</td>
+              </tr>
+              <tr>
+                <th scope="row">Suggestions (patterns)</th>
+                <td><span class="pill pill--partial">Partial</span></td>
+                <td>
+                  Written rules over the user's own data: a due follow-up, an approved contract with no
+                  invoice, a form opened and not submitted, a warm client worth reopening, a price built
+                  from recorded expenses and the last invoice. Do it opens the right screen; it never
+                  creates or sends anything.
+                </td>
+                <td>Plan-gated</td>
+              </tr>
+              <tr>
+                <th scope="row">The helper</th>
+                <td><span class="pill pill--partial">Partial</span></td>
+                <td>
+                  An optional writing helper inside the builders: select a passage, ask for a clearer
+                  version, keep what you like. Runs on the visitor's device; the selection is not sent to
+                  a Revercue server.
+                </td>
+                <td>Device-dependent</td>
+              </tr>
+              <tr>
+                <th scope="row">Teams</th>
+                <td><span class="pill pill--beta">Beta</span></td>
+                <td>
+                  Everything on Scale plus the Handoff Dashboard, roles and team attribution, bulk
+                  transfer and an audit log. Seats handled manually while in beta.
+                </td>
+                <td>Application at <a href="/beta">/beta</a></td>
+              </tr>
+              <tr>
+                <th scope="row">Starter, Growth, Scale</th>
+                <td><span class="pill pill--waitlist">Invite-only</span></td>
+                <td>
+                  Built plans with real limits, reachable by waitlist rather than self-serve checkout.
+                  Free is the only plan available without an invitation.
+                </td>
+                <td>Waitlist</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>What the client sees, by document</h3>
+        <div class="table-wrap">
+          <table>
+            <caption>All four pages are the same product from the client's side: a private link, no account, no app.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Document</th>
+                <th scope="col">URL shape</th>
+                <th scope="col">Client actions</th>
+                <th scope="col">What the freelancer learns</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Proposal</th>
+                <td><code>/p/{publicId}</code></td>
+                <td>Read, expand FAQs, answer embedded questions, choose a package, approve or decline</td>
+                <td>Opened, when, how long, which package, what they asked</td>
+              </tr>
+              <tr>
+                <th scope="row">Contract</th>
+                <td><code>/c/{publicId}</code></td>
+                <td>Approve, decline, or I have questions</td>
+                <td>The decision and its timestamp, in the log</td>
+              </tr>
+              <tr>
+                <th scope="row">Form</th>
+                <td><code>/f/{publicId}</code></td>
+                <td>Answer the questions and submit</td>
+                <td>Opened, completed, every answer</td>
+              </tr>
+              <tr>
+                <th scope="row">Invoice</th>
+                <td><code>/i/{publicId}</code></td>
+                <td>Pay by link, or transfer and upload proof at <code>/i/{publicId}/proof</code></td>
+                <td>Opened, overdue, proof uploaded; payment when the user confirms it</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="customers">
+        <h2>4. Who it is for</h2>
+        <p>
+          People who sell a service and run several documents per client, without a sales team or an
+          operations manager. The product assumes one person is both the author and the follow-up.
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>Fits</h3>
+            <ul>
+              <li>A solo designer, developer, copywriter or consultant sending 1–5 proposals a week.</li>
+              <li>A two-to-ten-person studio where the founder still writes the proposals.</li>
+              <li>Anyone whose current stack is a document tool, a form tool, an invoice tool, a CRM and a spreadsheet.</li>
+              <li>Anyone who wants to see whether a client actually read the scope before the follow-up call.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Does not fit</h3>
+            <ul>
+              <li>E-commerce, retail or subscription billing: there is no cart, no recurring charge and no card processing.</li>
+              <li>Teams needing compliance sign-off: there is no certification and no e-signature.</li>
+              <li>Companies wanting AI drafting, forecasting or lead scoring: the product is deliberately pattern-based.</li>
+              <li>Anyone needing a public API, webhooks or native integrations today.</li>
+              <li>Enterprise procurement: the top plan is a 500-document Teams plan in beta.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Jobs it does</h3>
+            <ul>
+              <li>Turn a scope into a link the client can act on, instead of an attachment they skim.</li>
+              <li>Carry the accepted package into the contract, then into the brief, then into the invoice.</li>
+              <li>Keep the communication history in one place without a second data-entry habit.</li>
+              <li>Surface the next step — a follow-up, an invoice that was never raised — from the record.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="positioning">
+        <h2>5. Positioning</h2>
+        <p>
+          Revercue's category claim is narrow and structural: the thread is the product. The site
+          compares itself directly with seven named alternatives — Bonsai, HoneyBook, Dubsado, Moxie,
+          Plutio, Agiled and the Google/Microsoft document suite — and publishes the criteria it uses at
+          <a href="/compare/criteria">/compare/criteria</a>.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <caption>The distinctions the site itself makes. These are the vendor's published claims, not independent findings.</caption>
+            <thead>
+              <tr>
+                <th scope="col">The usual stack</th>
+                <th scope="col">What Revercue does instead</th>
+                <th scope="col">Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">A PDF proposal attached to an email</th>
+                <td>An interactive link the client acts on without an account</td>
+                <td>The package choice and the questions become data, not a reply you re-type</td>
+              </tr>
+              <tr>
+                <th scope="row">Separate proposal, contract, form and invoice tools</th>
+                <td>One thread per client, each document inheriting the last one's facts</td>
+                <td>No copying the client, the scope or the price between apps</td>
+              </tr>
+              <tr>
+                <th scope="row">A CRM you maintain by hand</th>
+                <td>A record assembled from the documents themselves</td>
+                <td>The record stays current because the work already happened in it</td>
+              </tr>
+              <tr>
+                <th scope="row">"AI writes your proposal"</th>
+                <td>Pattern suggestions that open the right screen and stop</td>
+                <td>The user stays the author; nothing is sent or invented for them</td>
+              </tr>
+              <tr>
+                <th scope="row">Perpetual PDF archives</th>
+                <td>Retention by plan, with a PDF emailed before deletion, and the record kept</td>
+                <td>The document is a snapshot; the relationship is the durable asset</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted">
+          Adjacent products win where Revercue deliberately does not compete: built-in payments and
+          deposits, deep automation, e-signature, and broad all-in-one suites. The comparison pages say
+          so rather than claiming a clean sweep.
+        </p>
+      </section>
+
+      <section class="section" id="pricing">
+        <h2>6. Plans and limits</h2>
+        <p>
+          Prices are per month in US dollars, taken from the application's own plan constants on 16
+          November 2026. An <strong>active document</strong> is a published document with a public link;
+          drafts, archived and deleted documents do not count. A password-protected document counts once.
+          An adaptive form counts once.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Five plans. Only Free is self-serve today; the invitations are the onboarding for the rest.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Plan</th>
+                <th scope="col">Price</th>
+                <th scope="col">Status</th>
+                <th scope="col">Positioning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Free</th>
+                <td>$0</td>
+                <td><span class="pill pill--available">Available now</span></td>
+                <td>Try the thread. The full five-document thread, small room.</td>
+              </tr>
+              <tr>
+                <th scope="row">Starter</th>
+                <td>$12 / month</td>
+                <td><span class="pill pill--waitlist">Invite-only — waitlist</span></td>
+                <td>Solo, light use. Room plus custom templates.</td>
+              </tr>
+              <tr>
+                <th scope="row">Growth</th>
+                <td>$29 / month</td>
+                <td><span class="pill pill--waitlist">Invite-only — waitlist</span></td>
+                <td>Solo, power user. Adaptive forms, password walls, no branding.</td>
+              </tr>
+              <tr>
+                <th scope="row">Scale</th>
+                <td>$49 / month</td>
+                <td><span class="pill pill--waitlist">Invite-only — waitlist</span></td>
+                <td>Solo professional. The numbers: interest, revenue, expenses, price suggestion.</td>
+              </tr>
+              <tr>
+                <th scope="row">Teams</th>
+                <td>Base $99 / month, seats handled manually</td>
+                <td><span class="pill pill--beta">In beta</span></td>
+                <td>An agency team. Everything on Scale plus handoff, roles, bulk transfer, audit log.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Limits</h3>
+        <div class="table-wrap">
+          <table>
+            <caption>Every limit in the plan table, including the ones the marketing pages compress.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Limit</th>
+                <th scope="col">Free</th>
+                <th scope="col">Starter</th>
+                <th scope="col">Growth</th>
+                <th scope="col">Scale</th>
+                <th scope="col">Teams</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Active documents</th>
+                <td>5</td>
+                <td>20</td>
+                <td>100</td>
+                <td>300</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <th scope="row">Document retention</th>
+                <td>1 month</td>
+                <td>3 months</td>
+                <td>12 months</td>
+                <td>24 months</td>
+                <td>36 months</td>
+              </tr>
+              <tr>
+                <th scope="row">Draft retention</th>
+                <td>10 days</td>
+                <td>30 days</td>
+                <td>50 days</td>
+                <td>80 days</td>
+                <td>80 days</td>
+              </tr>
+              <tr>
+                <th scope="row">Archive</th>
+                <td>5 docs / 15 days</td>
+                <td>15 docs / 30 days</td>
+                <td>30 docs / 30 days</td>
+                <td>30 docs / 30 days</td>
+                <td>30 docs / 30 days</td>
+              </tr>
+              <tr>
+                <th scope="row">Storage</th>
+                <td>50 MB</td>
+                <td>100 MB</td>
+                <td>1 GB</td>
+                <td>5 GB</td>
+                <td>10 GB</td>
+              </tr>
+              <tr>
+                <th scope="row">Notes per client</th>
+                <td>3</td>
+                <td>10</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <th scope="row">Custom templates</th>
+                <td>—</td>
+                <td>3</td>
+                <td>10</td>
+                <td>15</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <th scope="row">Saved FAQs</th>
+                <td>—</td>
+                <td>—</td>
+                <td>10</td>
+                <td>30</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <th scope="row">Saved packages</th>
+                <td>—</td>
+                <td>—</td>
+                <td>10</td>
+                <td>15</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <th scope="row">Password-protected documents</th>
+                <td>—</td>
+                <td>—</td>
+                <td>15</td>
+                <td>50</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <th scope="row">Adaptive forms</th>
+                <td>—</td>
+                <td>—</td>
+                <td>3</td>
+                <td>15</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <th scope="row">Tracking depth</th>
+                <td>Opened / not opened</td>
+                <td>Opened-at timestamps</td>
+                <td>Time spent, button clicks</td>
+                <td>Advanced tracking, session timeline</td>
+                <td>Everything on Scale</td>
+              </tr>
+              <tr>
+                <th scope="row">Suggestions</th>
+                <td>Basic set</td>
+                <td>Basic set</td>
+                <td>Basic set + saved FAQs and packages pre-fill</td>
+                <td>Advanced set: follow-up, document, interest, price</td>
+                <td>Everything on Scale + team attribution</td>
+              </tr>
+              <tr>
+                <th scope="row">Branding on client pages</th>
+                <td>Revercue branding</td>
+                <td>Revercue branding</td>
+                <td>None</td>
+                <td>None</td>
+                <td>None</td>
+              </tr>
+              <tr>
+                <th scope="row">Email notifications</th>
+                <td>—</td>
+                <td>—</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <th scope="row">Interest level, revenue tracker, expenses, price suggestion</th>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>Yes</td>
+                <td>Yes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Billing facts</h3>
+        <ul>
+          <li>Free costs nothing and has no card requirement.</li>
+          <li>Paid plans are reached by an invitation from the waitlist, not by checkout; the front end shows plan status, not a live purchase flow.</li>
+          <li>Subscription billing runs through an external payment provider; the product does not store card numbers.</li>
+          <li>Downgrades archive documents beyond the new limit, email a PDF of each, and delete them after the new plan's archive retention. CRM records survive.</li>
+          <li>Deleting an account starts a five-day grace period before removal.</li>
+        </ul>
+        <p class="small muted">
+          Full commercial detail lives at <a href="/pricing">/pricing</a>; the terms are at
+          <a href="/terms">/terms</a>.
+        </p>
+      </section>
+
+      <section class="section" id="security">
+        <h2>7. Security and data</h2>
+        <p>
+          The security page is written to be checkable rather than reassuring. These are its statements,
+          repeated here so an evaluation does not need a second request.
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>In transit and at rest</h3>
+            <ul>
+              <li>TLS 1.3 for connections.</li>
+              <li>AES-256 encryption at rest.</li>
+              <li>Private file storage behind a Worker proxy; files are not served from a public bucket.</li>
+              <li>Client document pages carry noindex and nofollow.</li>
+              <li>Public IDs are long, random and unguessable — the link is a capability.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Credentials and sessions</h3>
+            <ul>
+              <li>Account passwords hashed with bcrypt.</li>
+              <li>Document passwords hashed with Argon2id.</li>
+              <li>Scoped session tokens; email 2FA available on the account.</li>
+              <li>Activation and reset codes are six digits, expire, and are rate-limited.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Processors</h3>
+            <ul>
+              <li>Cloudflare for delivery and the Worker layer.</li>
+              <li>Backblaze B2 for file storage.</li>
+              <li>Turso for the database.</li>
+              <li>FormSubmit for contact and beta form delivery.</li>
+              <li>An external payment provider for subscriptions.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>What the team can see</h3>
+            <ul>
+              <li>Account details — email, name, plan, usage — for support and billing.</li>
+              <li>Not the documents, client records or communication logs, except for a report of illegal use or a legal requirement.</li>
+              <li>Signed-in users can reach Settings → What Revercue Knows on Scale to read their own summary.</li>
+            </ul>
+          </article>
+        </div>
+
+        <h3>Retention</h3>
+        <div class="table-wrap">
+          <table>
+            <caption>Retention is a plan feature, not a penalty: a PDF is emailed before a document is deleted.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Retention</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Published documents</th>
+                <td>By plan: 1, 3, 12, 24 or 36 months, then deleted after a PDF is emailed to the owner</td>
+              </tr>
+              <tr>
+                <th scope="row">Drafts</th>
+                <td>10, 30, 50 or 80 days depending on plan</td>
+              </tr>
+              <tr>
+                <th scope="row">Client record, log and notes</th>
+                <td>Survive the documents</td>
+              </tr>
+              <tr>
+                <th scope="row">Tracking events</th>
+                <td>Reduced after five days</td>
+              </tr>
+              <tr>
+                <th scope="row">Notifications</th>
+                <td>90 days</td>
+              </tr>
+              <tr>
+                <th scope="row">Saved FAQs and saved packages</th>
+                <td>Expire after three months without use; the screen shows the last-used date</td>
+              </tr>
+              <tr>
+                <th scope="row">Deleted account</th>
+                <td>Removed after a five-day grace period</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note note--warn">
+          <p>
+            <strong>No certification.</strong> Revercue holds no SOC 2, ISO 27001 or equivalent
+            certification, publishes no penetration-test report, and offers no security SLA or bug
+            bounty. A suspected vulnerability should go through <a href="/contact">the contact form</a>
+            with the security topic and reproduction steps — not against another account.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="status">
+        <h2>8. Current product status</h2>
+        <div class="table-wrap">
+          <table>
+            <caption>What a visitor without an account can and cannot verify on 16 November 2026.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Area</th>
+                <th scope="col">State</th>
+                <th scope="col">Verifiable publicly</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Public website</th>
+                <td>Live: marketing, guides, blog, compare, legal and trust pages</td>
+                <td>Yes — these are rendered pages, not a demo</td>
+              </tr>
+              <tr>
+                <th scope="row">Free plan sign-up</th>
+                <td>Open</td>
+                <td>Yes, but creating an account is a real commitment and is not part of an evaluation</td>
+              </tr>
+              <tr>
+                <th scope="row">Paid plans</th>
+                <td>Invite-only waitlist</td>
+                <td>No open purchase flow exists to test</td>
+              </tr>
+              <tr>
+                <th scope="row">Teams</th>
+                <td>Beta, manual review</td>
+                <td>Application form only</td>
+              </tr>
+              <tr>
+                <th scope="row">Document workflow</th>
+                <td>Built and in use</td>
+                <td>No — requires an account; simulated at <a href="/ai-demo">/ai-demo</a></td>
+              </tr>
+              <tr>
+                <th scope="row">Billing and subscriptions</th>
+                <td>Handled by an external provider</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <th scope="row">Email delivery</th>
+                <td>Activation codes, notifications, reminders</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <th scope="row">On-device helper</th>
+                <td>Loads silently where the browser supports it</td>
+                <td>No — depends on the device</td>
+              </tr>
+              <tr>
+                <th scope="row">Public API</th>
+                <td>Does not exist</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note note--ok">
+          <p>
+            <strong>How to evaluate without an account.</strong> Read this page and
+            <a href="/ai-access">/ai-access</a>, then use <a href="/ai-demo">/ai-demo</a>: eight tutorial
+            steps, a synthetic simulation of the six main screens, and an evaluation workspace that
+            produces a user-facing answer, a recommendation and a feedback report. The demo is clearly
+            labelled as a simulation and never contacts a Revercue server.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="gaps">
+        <h2>9. Known gaps and inconsistencies</h2>
+        <p>
+          Listed on purpose. An evaluation that finds one of these has found something already
+          acknowledged, not something hidden.
+        </p>
+        <ul>
+          <li>
+            <strong>Where the basic suggestions sit.</strong> The application gates the dashboard's
+            suggestion card behind the Growth-and-above feature flag, while the guides and an FAQ
+            describe the basic suggestions as being on every plan. Which of the two is authoritative has
+            not been confirmed, so treat the suggestions' availability on Free and Starter as
+            <span class="pill pill--unverified">unverified</span>.
+          </li>
+          <li>
+            <strong>The demo is a simulation.</strong> It reproduces the shape of the workflow — states,
+            log entries, arithmetic — not the production implementation. It proves nothing about the
+            API, the database or the client pages.
+          </li>
+          <li>
+            <strong>No public client document exists.</strong> Production client pages are private by
+            design, so no real <code>/p/</code>, <code>/c/</code>, <code>/f/</code> or <code>/i/</code>
+            page can be linked from here.
+          </li>
+          <li>
+            <strong>Plan data ages.</strong> Prices and limits were read from the application's
+            constants on 16 November 2026 and can change. The pricing page is the current source of
+            truth.
+          </li>
+          <li>
+            <strong>The application is client-rendered.</strong> Without JavaScript, the app routes
+            return an empty shell, so a crawler sees no product copy there. The AI resources are the
+            exception: they are complete HTML.
+          </li>
+          <li>
+            <strong>Single-reviewer documentation.</strong> These AI pages have not been reviewed by a
+            second person, and they are new.
+          </li>
+        </ul>
+      </section>
+
+      <section class="section" id="resources">
+        <h2>10. Canonical resources</h2>
+        <div class="table-wrap">
+          <table>
+            <caption>Machine-readable and human-readable entry points. All are plain files or static HTML.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Resource</th>
+                <th scope="col">URL</th>
+                <th scope="col">Format</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">This overview</th>
+                <td><a href="/ai-overview">/ai-overview</a></td>
+                <td>HTML, complete without JavaScript</td>
+              </tr>
+              <tr>
+                <th scope="row">Access guide</th>
+                <td><a href="/ai-access">/ai-access</a></td>
+                <td>HTML — every route, feature, restriction and limitation</td>
+              </tr>
+              <tr>
+                <th scope="row">Demo and tutorial</th>
+                <td><a href="/ai-demo">/ai-demo</a></td>
+                <td>HTML plus an optional in-browser simulation</td>
+              </tr>
+              <tr>
+                <th scope="row">Changelog</th>
+                <td><a href="/ai-changelog">/ai-changelog</a></td>
+                <td>HTML</td>
+              </tr>
+              <tr>
+                <th scope="row">Capabilities</th>
+                <td><a href="/ai-capabilities.json">/ai-capabilities.json</a></td>
+                <td>JSON, <code>application/json</code></td>
+              </tr>
+              <tr>
+                <th scope="row">Language-model summary</th>
+                <td><a href="/llms.txt">/llms.txt</a></td>
+                <td>Plain text</td>
+              </tr>
+              <tr>
+                <th scope="row">Sitemap</th>
+                <td><a href="/sitemap.xml">/sitemap.xml</a></td>
+                <td>XML</td>
+              </tr>
+              <tr>
+                <th scope="row">Crawler rules</th>
+                <td><a href="/robots.txt">/robots.txt</a></td>
+                <td>Plain text</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Product pages worth reading next</h3>
+        <ul>
+          <li><a href="/features">/features</a> — the deepest public description of each module.</li>
+          <li><a href="/pricing">/pricing</a> — the commercial source of truth.</li>
+          <li><a href="/compare/criteria">/compare/criteria</a> — how the comparisons are scored.</li>
+          <li><a href="/guides">/guides</a> — 24 task-level guides, including plans and troubleshooting.</li>
+          <li><a href="/security">/security</a> — the checkable trust page.</li>
+          <li><a href="/blog/patterns-not-magic">/blog/patterns-not-magic</a> — why the product does not use AI.</li>
+        </ul>
+
+        <div class="actions">
+          <a class="btn btn--primary" href="/ai-demo">Open the demo</a>
+          <a class="btn btn--ghost" href="/ai-capabilities.json">Capabilities JSON</a>
+          <a class="btn btn--ghost" href="/ai-access">Access guide</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <div>
+          <a class="brand" href="/" aria-label="Revercue home">
+            <img src="/logo-mark.png" alt="" width="24" height="24" />
+            Revercue
+          </a>
+          <p class="small muted">
+            The thread for client work: proposal, contract, requirement form, invoice and client record.
+            Your work should speak, not you.
+          </p>
+        </div>
+        <div>
+          <h2>Product</h2>
+          <ul>
+            <li><a href="/features">Features</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/guides">Guides</a></li>
+            <li><a href="/compare">Compare</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>For AI agents</h2>
+          <ul>
+            <li><a href="/ai-access">AI access</a></li>
+            <li><a href="/ai-overview">AI overview</a></li>
+            <li><a href="/ai-demo">AI demo</a></li>
+            <li><a href="/ai-changelog">Changelog</a></li>
+            <li><a href="/ai-capabilities.json">Capabilities JSON</a></li>
+            <li><a href="/llms.txt">llms.txt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Trust</h2>
+          <ul>
+            <li><a href="/security">Security</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <p class="fine">
+          © 2026 Revercue. Last reviewed 16 November 2026. Documentation, not marketing: it describes
+          only what the application and its public pages support.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI changelog — Revercue</title>
+    <meta
+      name="description"
+      content="The verified record of Revercue changes relevant to AI agents and evaluation tools: what was added, what changed, what was fixed, the known issues, and how this changelog is maintained."
+    />
+    <link rel="canonical" href="https://revercue.pages.dev/ai-changelog" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#faf7f1" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/json" href="/ai-capabilities.json" title="Revercue capabilities" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/ai/ai.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-head">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Revercue home">
+          <img src="/logo-mark.png" alt="" width="26" height="26" />
+          Revercue
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/features">Features</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/guides">Guides</a>
+          <a href="/ai-overview">AI overview</a>
+          <a href="/ai-demo">Demo</a>
+          <a href="/ai-changelog" aria-current="page">Changelog</a>
+          <a href="/ai-access">AI access</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="wrap">
+      <div class="page-head">
+        <p class="eyebrow">AI changelog</p>
+        <h1>What changed, and what it means for an agent.</h1>
+        <p class="lede">
+          A changelog is only useful if it can be checked. Every entry below corresponds to a change in
+          the project's history, and every entry says why it matters to someone reading this site
+          programmatically. Nothing is listed here that cannot be traced to the repository.
+        </p>
+        <p class="meta">
+          <span>Last reviewed: 16 November 2026</span>
+          <span>Most recent entry: 16 November 2026</span>
+          <span>Feed: none — this page is the record</span>
+        </p>
+
+        <div class="note">
+          <p>
+            <strong>Read this first.</strong> The AI documentation is new. It has been written from the
+            application's own routes, plan constants and public copy, and it has not been reviewed by a
+            second person. Where something could not be confirmed, the entry says so and the
+            <a href="/ai-access">access guide</a> lists it as a known gap rather than smoothing it over.
+          </p>
+        </div>
+
+        <nav class="toc" aria-labelledby="toc-title">
+          <h2 id="toc-title">On this page</h2>
+          <ol>
+            <li><a href="#how">How this changelog works</a></li>
+            <li><a href="#ai-2026-11-16">16 November 2026 — AI resources</a></li>
+            <li><a href="#site-2026-11-16">16 November 2026 — content and covers</a></li>
+            <li><a href="#site-2026-11-15">15 November 2026 — guides and FAQs</a></li>
+            <li><a href="#known">Known issues</a></li>
+            <li><a href="#notifications">Staying current</a></li>
+          </ol>
+        </nav>
+      </div>
+
+      <section class="section" id="how">
+        <h2>1. How this changelog works</h2>
+        <ul>
+          <li>Each release lists the date, the area, what changed and the effect on an agent or evaluator.</li>
+          <li>Only shipped changes are listed. Plans, intentions and roadmaps belong in the product pages, not here.</li>
+          <li>Corrections are recorded as changes rather than silently edited in place, so an old evaluation can be explained.</li>
+          <li>Product facts that did not change — prices, limits, security statements — are not repeated per release; the <a href="/ai-overview">overview</a> holds their current values.</li>
+          <li>There is no RSS, JSON Feed or webhook. Poll this page, or <code>/ai-capabilities.json</code>, whose <code>last_updated</code> field changes with it.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="ai-2026-11-16">
+        <h2>2. 16 November 2026 — AI resources</h2>
+        <p>
+          The AI documentation system was added. It exists so that an agent can find every page, read
+          every module's real status and evaluate the product without an account — and so that the site
+          has one place that says plainly what the product is not.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Added or changed in this release.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Resource</th>
+                <th scope="col">Change</th>
+                <th scope="col">Why it matters to an agent</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><a href="/ai-access">/ai-access</a></th>
+                <td>
+                  Added: the navigation directory of every route, the feature directory with statuses,
+                  demo instructions, access rules, restrictions, limitations and cross-links.
+                </td>
+                <td>
+                  The entry point. It says which pages need JavaScript, which need an account and which
+                  are complete HTML, so a crawl does not mistake an app shell for an empty product.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><a href="/ai-overview">/ai-overview</a></th>
+                <td>
+                  Added: identity, the five-stage workflow, per-module documentation, target customers,
+                  positioning, the full plan and limit tables, security and retention, current status and
+                  known gaps.
+                </td>
+                <td>
+                  The self-contained reference. A single fetch is enough for a first-pass evaluation,
+                  including the negative claims (no AI, no e-signature, no API, no certification).
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><a href="/ai-demo">/ai-demo</a></th>
+                <td>
+                  Added: eight tutorial steps, a labelled simulation of six screens with synthetic data,
+                  and an evaluation workspace producing an answer, a recommendation and a feedback
+                  report.
+                </td>
+                <td>
+                  The only way to see the thread's behaviour without an account. Every action is local;
+                  no request leaves the page, and no result should be read as production behaviour.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><a href="/ai-capabilities.json">/ai-capabilities.json</a></th>
+                <td>Added: the same facts as structured JSON — identity, resources, modules, plans, security, demo policy.</td>
+                <td>
+                  Machine-readable, served as <code>application/json</code>. Plan limits and module
+                  statuses can be parsed instead of scraped from prose.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">This changelog</th>
+                <td>Added: the release record for agents, including the known-issues list.</td>
+                <td>
+                  Lets an evaluation state which version of the documentation it read, and whether a
+                  discrepancy it found was already acknowledged.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Shared stylesheet</th>
+                <td>Added <code>/ai/ai.css</code>, used by every AI page.</td>
+                <td>
+                  The AI pages are static HTML with one stylesheet and no framework, so they render
+                  fully with JavaScript disabled.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><a href="/sitemap.xml">/sitemap.xml</a></th>
+                <td>Added the four AI page URLs and <code>/ai-capabilities.json</code>.</td>
+                <td>The resources are discoverable from the canonical URL list, not only from a link.</td>
+              </tr>
+              <tr>
+                <th scope="row"><a href="/robots.txt">/robots.txt</a></th>
+                <td>
+                  Allowed the AI resources explicitly, kept the app and client-document namespaces
+                  disallowed, and left the sitemap declaration in place.
+                </td>
+                <td>
+                  No change to the crawl rules for private routes. The AI pages are crawlable; nothing
+                  private became reachable.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><a href="/llms.txt">/llms.txt</a></th>
+                <td>Added an AI resources section pointing at the overview, demo, changelog and capabilities file.</td>
+                <td>A language tool that reads only the plain-text summary can still reach the rest.</td>
+              </tr>
+              <tr>
+                <th scope="row">Site footer</th>
+                <td>Added an "AI resources" row linking access, overview, demo, changelog and capabilities.</td>
+                <td>The resources are reachable from every public page, not just from this cluster.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note note--warn">
+          <p>
+            <strong>What this release did not do.</strong> It did not change the application, its API,
+            its pricing, its plan gating or its security posture. It added documentation, a static demo
+            and machine-readable files. Any evaluation of product quality is still limited to what the
+            public pages and the simulation can show.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="site-2026-11-16">
+        <h2>3. 16 November 2026 — content and covers</h2>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Changes to the public site made the same day, before the AI resources.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Change</th>
+                <th scope="col">Detail</th>
+                <th scope="col">Effect</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Guide and blog covers</th>
+                <td>
+                  The abstract cover illustration was replaced with real product screenshots on every
+                  guide and blog card and article header; the old cover component was removed.
+                </td>
+                <td>
+                  The covers now show the interface the article is about. No text changed; only the
+                  visual did.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Research and visuals pipeline</th>
+                <td>
+                  Added the pipeline and template groundwork behind the guides and their visuals, with
+                  placeholder templates.
+                </td>
+                <td>
+                  Internal. Nothing in the public documentation depends on it, and no new capability is
+                  implied by it.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Client-page rendering</th>
+                <td>
+                  Fixed formatting on the client document pages, corrected the toggle toolbar and audited
+                  public claims for accuracy.
+                </td>
+                <td>
+                  Client pages render their rich text correctly. The audit removed or reworded claims the
+                  application did not support.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Helper documentation</th>
+                <td>
+                  Rewrote the inline helper flow, the post-document review and the interface guide.
+                </td>
+                <td>
+                  The helper is described as an on-device tool whose suggestions the user accepts or
+                  ignores — not as an automatic action, and not as AI.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="site-2026-11-15">
+        <h2>4. 15 November 2026 — guides and FAQs</h2>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Documentation work on the public site, one day earlier.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Change</th>
+                <th scope="col">Detail</th>
+                <th scope="col">Effect</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Suggestions guide corrected</th>
+                <td>
+                  Rewrote which plan gets which suggestions, and corrected the claim to say that the
+                  suggestions exist on every plan in some form.
+                </td>
+                <td>
+                  This is the change behind the known inconsistency listed below: the written copy and the
+                  application's feature gate do not yet agree, and the gate has not been re-verified.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Builder and CRM guides</th>
+                <td>
+                  Added the helper and post-document analysis sections, the per-plan suggestions, the CRM
+                  writing area and the communication log.
+                </td>
+                <td>
+                  More of the product is documented in text than before, including the parts that are
+                  plan-gated.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Helper and analysis FAQs</th>
+                <td>
+                  Added FAQs for the helper and the post-document analysis, plus the plans guide, the
+                  sitemap and <code>llms.txt</code>.
+                </td>
+                <td>
+                  The plain-text summary and the crawler map exist from this point, so the site has a
+                  machine-readable surface older than this AI changelog.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Invite-only and active-document guides</th>
+                <td>
+                  Added the explanations of why paid plans are invite-only and what counts as an active
+                  document.
+                </td>
+                <td>
+                  Plan availability and the counting rule are documented rather than inferred, which is
+                  what the pricing tables here repeat.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Storage allowances</th>
+                <td>Set each plan's storage to its real allowance (50 MB, 100 MB, 1 GB, 5 GB, 10 GB).</td>
+                <td>The plan table in the overview matches the application's constants.</td>
+              </tr>
+              <tr>
+                <th scope="row">Saved libraries gated</th>
+                <td>Gated the saved packages and saved FAQs pre-fill to Growth and Scale.</td>
+                <td>
+                  The pre-fill is a paid-plan behaviour. The libraries still exist on lower plans only as
+                  far as the application allows; treat the exact boundary as documented, not tested.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">About page</th>
+                <td>Replaced the roadmap with the founder's story.</td>
+                <td>
+                  There is no public roadmap. Anything not shipped is not promised anywhere on the site.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="known">
+        <h2>5. Known issues</h2>
+        <p>Open as of 16 November 2026. Each is acknowledged, not hidden.</p>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Known issues and their status.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Issue</th>
+                <th scope="col">Detail</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Basic suggestions and the plan gate</th>
+                <td>
+                  The dashboard gates its suggestion card behind the Growth-and-above feature flag, while
+                  the guides and an FAQ describe basic suggestions as available on every plan. Both
+                  statements are in the project; which one is authoritative has not been confirmed.
+                </td>
+                <td><span class="pill pill--unverified">Unresolved</span></td>
+              </tr>
+              <tr>
+                <th scope="row">The demo is a simulation</th>
+                <td>
+                  It reproduces states, log entries and arithmetic. It does not touch the API, the
+                  database, email, storage or a payment processor, and it cannot verify production
+                  behaviour.
+                </td>
+                <td><span class="pill pill--partial">By design</span></td>
+              </tr>
+              <tr>
+                <th scope="row">No public client document</th>
+                <td>
+                  Production client pages are private by design, so no real <code>/p/</code>,
+                  <code>/c/</code>, <code>/f/</code> or <code>/i/</code> example can be linked from the
+                  documentation.
+                </td>
+                <td><span class="pill pill--partial">By design</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Application pages need JavaScript</th>
+                <td>
+                  The production site is a client-rendered React app; without JavaScript, app routes
+                  return an empty shell. Only the AI resources and static files are complete HTML.
+                </td>
+                <td><span class="pill pill--partial">Known limitation</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Plan data can age</th>
+                <td>
+                  Prices and limits were read from the application's constants on 16 November 2026. The
+                  pricing page is the live source of truth.
+                </td>
+                <td><span class="pill pill--partial">Maintained by hand</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Single-reviewer documentation</th>
+                <td>These pages have not been reviewed by a second person, and they are new.</td>
+                <td><span class="pill pill--unverified">Open</span></td>
+              </tr>
+              <tr>
+                <th scope="row">No certification or audit report</th>
+                <td>
+                  No SOC 2, ISO 27001, penetration-test report or bug bounty. The security page describes
+                  practices, not certification.
+                </td>
+                <td><span class="pill pill--unverified">Not claimed</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Helper not exercised</th>
+                <td>
+                  The on-device helper depends on the visitor's browser and device and was not run in this
+                  environment.
+                </td>
+                <td><span class="pill pill--unverified">Unverified</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="notifications">
+        <h2>6. Staying current</h2>
+        <ul>
+          <li>There is no feed and no subscription for agents. Check the <code>last_updated</code> field in <a href="/ai-capabilities.json">/ai-capabilities.json</a>.</li>
+          <li>The page's "Last reviewed" date changes only when the content is re-read against the application, not on every deploy.</li>
+          <li>Changes to prices, plan availability or module status appear here and in the overview in the same release.</li>
+          <li>Errors and discrepancies are welcome through <a href="/contact">the contact form</a>; they are corrected on the page rather than argued with.</li>
+        </ul>
+
+        <div class="actions">
+          <a class="btn btn--primary" href="/ai-overview">Product overview</a>
+          <a class="btn btn--ghost" href="/ai-demo">Demo and tutorial</a>
+          <a class="btn btn--ghost" href="/ai-access">Access guide</a>
+          <a class="btn btn--ghost" href="/ai-capabilities.json">Capabilities JSON</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <div>
+          <a class="brand" href="/" aria-label="Revercue home">
+            <img src="/logo-mark.png" alt="" width="24" height="24" />
+            Revercue
+          </a>
+          <p class="small muted">
+            The thread for client work: proposal, contract, requirement form, invoice and client record.
+            Your work should speak, not you.
+          </p>
+        </div>
+        <div>
+          <h2>Product</h2>
+          <ul>
+            <li><a href="/features">Features</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/guides">Guides</a></li>
+            <li><a href="/compare">Compare</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>For AI agents</h2>
+          <ul>
+            <li><a href="/ai-access">AI access</a></li>
+            <li><a href="/ai-overview">AI overview</a></li>
+            <li><a href="/ai-demo">AI demo</a></li>
+            <li><a href="/ai-changelog">Changelog</a></li>
+            <li><a href="/ai-capabilities.json">Capabilities JSON</a></li>
+            <li><a href="/llms.txt">llms.txt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Trust</h2>
+          <ul>
+            <li><a href="/security">Security</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <p class="fine">
+          © 2026 Revercue. Last reviewed 16 November 2026. Documentation, not marketing.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
