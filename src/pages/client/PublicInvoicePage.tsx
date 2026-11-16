@@ -1,3 +1,4 @@
+import { RichText } from "../../components/builder/RichText";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -133,7 +134,11 @@ export function PublicInvoicePage() {
           <span>{formatCurrency(total, currency)}</span>
         </div>
 
-        {invoice.notes && <p style={{ fontSize: 13, marginTop: 16 }}>{invoice.notes}</p>}
+        {invoice.notes && (
+          <p style={{ fontSize: 13, marginTop: 16 }}>
+            <RichText value={invoice.notes} />
+          </p>
+        )}
 
         {error && <p className="error-text">{error}</p>}
 

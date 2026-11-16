@@ -33,7 +33,7 @@ const SECTIONS: Section[] = [
       "Collapsible FAQs and per-question Ask a Question",
       "Optional password protection on Growth and Scale",
       "The client selects a package; you see the click",
-      "No Accept button — the reply happens in your own inbox",
+      "Approve or decline from the bottom of the page; the record updates and the conversation stays in your own inbox",
     ],
     visual: "ProposalVisual",
   },

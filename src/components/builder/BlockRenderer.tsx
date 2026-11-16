@@ -272,23 +272,28 @@ export function BlockRenderer({
           />
         );
       default:
-        return <p>{block.text}</p>;
+        return (
+          <p>
+            <RichText value={block.text} />
+          </p>
+        );
     }
   })();
 
   if (!editable) return <div className="block" data-type={block.type}>{content}</div>;
 
   return (
-    <div
-      className={`block${selected ? " selected" : ""}`}
-      onClick={onSelect}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(event) => {
-        if (event.key === "Enter") onSelect?.();
-      }}
-      data-type={block.type}
-    >
+    <div className={`block-wrap${selected ? " selected" : ""}`} data-type={block.type}>
+      <div
+        className={`block${selected ? " selected" : ""}`}
+        onClick={onSelect}
+        role="group"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === "Enter") onSelect?.();
+        }}
+        data-type={block.type}
+      >
       <div className="block-tools">
         <button type="button" aria-label="Move up" onClick={(event) => { event.stopPropagation(); onMoveUp?.(); }}>
           <ArrowUp size={11} />
@@ -307,12 +312,9 @@ export function BlockRenderer({
         </button>
       </div>
       {content}
+      </div>
       {onPatch && (
-        <ElementToolbar
-          block={block}
-          onChange={onPatch}
-          onRemove={() => onDelete?.()}
-        />
+        <ElementToolbar block={block} onChange={onPatch} onRemove={() => onDelete?.()} />
       )}
     </div>
   );

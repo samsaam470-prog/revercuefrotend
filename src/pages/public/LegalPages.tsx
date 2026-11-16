@@ -116,8 +116,11 @@ export function PrivacyPage() {
                 <li>To evaluate the suggestion rules against your own activity, so a follow-up fires when it should.</li>
               </ul>
               <p>
-                We do not use your content to train a model, because there is no model. We do not
-                build an advertising profile, and we do not sell or rent data to anyone.
+                We do not use your content to train anything. The helper that rewrites a selected
+                passage in the builders does its work on your device, so that text never reaches our
+                servers and is never stored by us; the suggestions elsewhere are written rules over
+                your own record. We do not build an advertising profile, and we do not sell or rent
+                data to anyone.
               </p>
             </>
           ),

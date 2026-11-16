@@ -867,7 +867,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "What fires, and when",
         paragraphs: [
           "A pattern is evaluated against your log: a proposal sent two days ago with no reply, a client who said yes but has no contract, a client marked not interested whose interest is high again. When the pattern matches, the instruction fires.",
-          "The patterns are written rules with a visible reason. Nothing is inferred from the content of your documents, and there is no model deciding what you should do next. The suggestion shows the signal that produced it, so you can disagree with the signal.",
+          "The patterns are written rules with a visible reason. The suggestions count events — a document sent, opened, answered, paid — and never read the prose of your documents. The post-document review is the one thing that reads the text, and it does so on your device. The suggestion shows the signal that produced it, so you can disagree with the signal.",
         ],
         visual: "SuggestionVisual",
       },

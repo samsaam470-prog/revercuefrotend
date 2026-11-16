@@ -9,6 +9,7 @@ import { ClosedPage } from "./ClosedPage";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
 import type { FormQuestion, ThankYouConfig } from "../../types";
+import { RichText } from "../../components/builder/RichText";
 
 const PER_PAGE = 3;
 
@@ -130,7 +131,11 @@ export function PublicFormPage() {
       <div className="doc-page" style={{ maxWidth: 680 }}>
         <p className="eyebrow">{form.client_name ? `For ${form.client_name}` : "A few questions"}</p>
         <h1>{form.title}</h1>
-        {form.description && <p className="muted">{form.description}</p>}
+        {form.description && (
+          <p className="muted">
+            <RichText value={form.description} />
+          </p>
+        )}
         {form.page_mode === "multi" && totalPages > 1 && (
           <p className="caption">
             Page {page + 1} of {totalPages}

@@ -43,6 +43,7 @@ export function AskHelperTextarea({
 }: AskHelperTextareaProps) {
   const available = isAvailable();
   const areaRef = useRef<HTMLTextAreaElement>(null);
+  const skipSelect = useRef(false);
   const [range, setRange] = useState<{ start: number; end: number } | null>(null);
   const [open, setOpen] = useState(false);
   const [instruction, setInstruction] = useState("");
@@ -57,6 +58,10 @@ export function AskHelperTextarea({
     const element = areaRef.current;
     if (!element) return;
     const read = () => {
+      if (skipSelect.current) {
+        skipSelect.current = false;
+        return;
+      }
       const { selectionStart, selectionEnd } = element;
       if (selectionEnd - selectionStart < 1) {
         setRange(null);
@@ -75,6 +80,7 @@ export function AskHelperTextarea({
   }, []);
 
   const reselect = (start: number, end: number) => {
+    skipSelect.current = true;
     requestAnimationFrame(() => {
       const element = areaRef.current;
       if (!element) return;
@@ -86,9 +92,27 @@ export function AskHelperTextarea({
 
   const wrap = (token: string) => {
     if (!range) return;
-    const wrapped = `{${token}|${value.slice(range.start, range.end)}}`;
-    onChange(value.slice(0, range.start) + wrapped + value.slice(range.end));
-    reselect(range.start, range.start + wrapped.length);
+    const selected = value.slice(range.start, range.end);
+    const open = `{${token}|`;
+    const before = value.slice(0, range.start);
+    const after = value.slice(range.end);
+
+    // Clicking the same control on an already formatted selection removes it.
+    if (selected.startsWith(open) && selected.endsWith("}")) {
+      const inner = selected.slice(open.length, -1);
+      onChange(before + inner + after);
+      reselect(range.start, range.start + inner.length);
+      return;
+    }
+    // The selection is the inside of a token already: drop the markers around it.
+    if (before.endsWith(open) && after.startsWith("}")) {
+      onChange(value.slice(0, range.start - open.length) + selected + value.slice(range.end + 1));
+      reselect(range.start - open.length, range.start - open.length + selected.length);
+      return;
+    }
+
+    onChange(before + open + selected + "}" + after);
+    reselect(range.start + open.length, range.start + open.length + selected.length);
   };
 
   const removeSelection = () => {
