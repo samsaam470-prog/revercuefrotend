@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { CodeVisual } from "../../components/visuals";
-import { CoverArt, coverKindForCategory } from "../../components/visuals/CoverArt";
+import { ProductCover } from "../../components/visuals/ProductCover";
 import { GUIDES, guideBySlug } from "../../lib/guides";
 import { formatDate } from "../../lib/formatters";
 
@@ -42,12 +42,10 @@ export function GuideDetailPage() {
         </p>
 
         <div className="cover-frame cover-frame-hero" style={{ margin: "32px 0" }}>
-          <CoverArt
-            seed={`${guide.slug}-hero`}
-            kind={coverKindForCategory(guide.category)}
+          <ProductCover
+            visual={guide.visual}
             variant="hero"
-            label={`${guide.title} — cover`}
-            monogram={guide.title.slice(0, 1)}
+            label={`${guide.title} — the ${guide.category.toLowerCase()} screen`}
           />
         </div>
 
@@ -93,12 +91,7 @@ export function GuideDetailPage() {
             {related.map((item) => (
               <Link key={item.slug} to={`/guides/${item.slug}`} className="link-card">
                 <div className="cover-frame cover-frame-sm">
-                  <CoverArt
-                    seed={item.slug}
-                    kind={coverKindForCategory(item.category)}
-                    label={`${item.title} — cover`}
-                    monogram={item.title.slice(0, 1)}
-                  />
+                  <ProductCover visual={item.visual} label={`${item.title} — the ${item.category.toLowerCase()} screen`} />
                 </div>
                 <h3>{item.title}</h3>
                 <p>{item.excerpt}</p>

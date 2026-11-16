@@ -4090,7 +4090,7 @@ details.faq-item:hover {
   border: 1px solid var(--border, rgba(255, 255, 255, 0.09));
 }
 
-/* ---------- Public site: cover art on guides and notes ---------- */
+/* ---------- Public site: product shots on guides and notes ---------- */
 .cover-frame {
   position: relative;
   aspect-ratio: 16 / 10;
@@ -4102,7 +4102,8 @@ details.faq-item:hover {
 }
 
 .cover-frame-hero {
-  aspect-ratio: 16 / 9;
+  /* The hero shows the whole screen, so it takes the screenshot's own height. */
+  aspect-ratio: auto;
   border-radius: var(--radius-modal);
 }
 
@@ -4111,24 +4112,149 @@ details.faq-item:hover {
   margin-bottom: var(--space-4);
 }
 
-.cover-art {
-  display: block;
+/* The real screen, photographed in a window on warm paper. */
+.cover-shot {
+  container-type: inline-size;
+  position: relative;
+  display: flex;
   width: 100%;
   height: 100%;
+  padding: 14px 14px 0;
+  background:
+    radial-gradient(120% 120% at 16% -12%, rgba(201, 169, 97, 0.34), transparent 62%),
+    radial-gradient(90% 90% at 102% 104%, rgba(201, 169, 97, 0.14), transparent 58%),
+    linear-gradient(160deg, #f8f2e6 0%, #f1e8d5 52%, #e9dfc9 100%);
+}
+
+.cover-shot-hero {
+  height: auto;
+  padding: 26px;
+}
+
+.cover-shot-sm {
+  padding: 12px 12px 0;
+}
+
+.cover-shot-window {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  border-radius: 9px 9px 0 0;
+  border: 1px solid rgba(35, 29, 21, 0.22);
+  border-bottom: 0;
+  background: #16130f;
+  box-shadow: 0 22px 38px -20px rgba(35, 29, 21, 0.55), 0 -1px 0 rgba(255, 255, 255, 0.32) inset;
+  overflow: hidden;
+  transform-origin: 50% 100%;
   transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.link-card:hover .cover-art {
-  transform: scale(1.035);
+.cover-shot-hero .cover-shot-window {
+  height: auto;
+  border-radius: 12px;
+  border-bottom: 1px solid rgba(35, 29, 21, 0.22);
 }
 
-.link-card:focus-visible .cover-art {
-  transform: scale(1.02);
+.cover-shot-hero .cover-shot-screen {
+  flex: none;
+}
+
+.cover-shot-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.44);
+}
+
+.cover-shot-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.cover-shot-dots i {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.cover-shot-dots i:first-child {
+  background: var(--gold);
+}
+
+.cover-shot-url {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cover-shot-tag {
+  color: rgba(201, 169, 97, 0.9);
+  font-size: 7.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cover-shot-screen {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.cover-shot-screen .cv {
+  border: 0;
+  border-radius: 0;
+  background: var(--bg-card);
+}
+
+/* Narrow cards keep the biggest screen, not every panel. */
+@container (max-width: 400px) {
+  .cover-shot .cv-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cover-shot .cv-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .cover-shot .cv-split {
+    grid-template-columns: 0.9fr 1.6fr;
+  }
+  .cover-shot .cv-split > div:nth-child(3) {
+    display: none;
+  }
+  .cover-shot .cv-body {
+    padding: 10px;
+    gap: 8px;
+  }
+  .cover-shot .cv-bar {
+    font-size: 9px;
+    padding: 6px 9px;
+  }
+}
+
+.link-card:hover .cover-shot-window {
+  transform: translateY(-3px);
+}
+
+.link-card:focus-visible .cover-shot-window {
+  transform: translateY(-1px);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cover-art,
-  .link-card:hover .cover-art {
+  .cover-shot-window,
+  .link-card:hover .cover-shot-window {
     transition: none;
     transform: none;
   }
@@ -4137,9 +4263,12 @@ details.faq-item:hover {
 @media (max-width: 900px) {
   .cover-frame,
   .cover-frame-sm {
-    aspect-ratio: 16 / 8;
-  }
-  .cover-frame-hero {
     aspect-ratio: 16 / 9;
+  }
+  .cover-shot {
+    padding: 10px 10px 0;
+  }
+  .cover-shot-hero {
+    padding: 14px;
   }
 }
