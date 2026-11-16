@@ -102,7 +102,7 @@ export function AboutPage() {
           design is the thread's visual language.
         </p>
         <p className="caption" style={{ lineHeight: 1.8, marginTop: 12 }}>
-          Revercue does not use AI. It uses patterns. Every suggestion is a prompt you click, never an
+          Revercue does not put an assistant between you and the work. It uses patterns. Every suggestion is a prompt you click, never an
           action taken for you. The data is yours. The team sees the account details, not the
           content. The documents are rented; the CRM record is owned.
         </p>

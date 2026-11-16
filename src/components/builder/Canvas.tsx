@@ -124,6 +124,11 @@ export function Canvas({
               }
               onMoveUp={() => move(block.id, -1)}
               onMoveDown={() => move(block.id, 1)}
+              onPatch={(patch) =>
+                onBlocksChange(
+                  blocks.map((item) => (item.id === block.id ? { ...item, ...patch } : item)),
+                )
+              }
               brandPrimary={doc.brand_primary}
             />
           ))}

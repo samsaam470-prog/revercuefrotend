@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Check } from "lucide-react";
+import {
+  Check,
+  FileText,
+  ScrollText,
+  ListChecks,
+  Receipt,
+  Users,
+  LayoutDashboard,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 import { CodeVisual, type VisualName } from "../../components/visuals";
 import { faqsByGroup } from "../../lib/faqs";
 import { FAQItem } from "../../components/shared/FAQItem";
@@ -107,6 +117,54 @@ const SECTIONS: Section[] = [
   },
 ];
 
+const ICONS: Record<string, LucideIcon> = {
+  proposals: FileText,
+  contracts: ScrollText,
+  forms: ListChecks,
+  invoices: Receipt,
+  crm: Users,
+  builder: LayoutDashboard,
+  suggestions: Sparkles,
+};
+
+const SUBS: Record<string, { label: string; copy: string }[]> = {
+  proposals: [
+    { label: "Package selection", copy: "The client picks a package and you see the click." },
+    { label: "Embedded questions", copy: "Ask inside the page, with an info icon on the ones that need it." },
+    { label: "Ask the helper", copy: "Select a sentence, ask for a clearer version, keep what you like." },
+  ],
+  contracts: [
+    { label: "Three honest actions", copy: "Approve, Decline, or I Have Questions — no e-signature claim." },
+    { label: "After approval", copy: "Send the form, the invoice, or the PDF next." },
+    { label: "Ask the helper", copy: "Tighten a clause in the builder without retyping it." },
+  ],
+  forms: [
+    { label: "Seven question types", copy: "From short text to file upload, with branching on Growth and Scale." },
+    { label: "Ask the client instead", copy: "Every question allows a question back, so nothing stalls." },
+    { label: "Ask the helper", copy: "Rewrite a description so the request is understood the first time." },
+  ],
+  invoices: [
+    { label: "Two ways to pay", copy: "A payment link, or your account details with a proof upload." },
+    { label: "Overdue, honestly", copy: "The client sees the state, and so do you." },
+    { label: "Ask the helper", copy: "Clearer notes on the invoice, written in one selection." },
+  ],
+  crm: [
+    { label: "The communication log", copy: "Direction, channel, next step, follow-up date — the memory of the thread." },
+    { label: "The interest level", copy: "Arithmetic over real behaviour, with the working shown." },
+    { label: "The 15-day summary", copy: "What was sent, what came back, what is next." },
+  ],
+  builder: [
+    { label: "Three panels", copy: "Sections and blocks, the page, the properties of the selected block." },
+    { label: "The block library", copy: "Twenty elements that stay readable instead of forty that do not." },
+    { label: "The post-document review", copy: "A score and a short list of what to fix, before you send." },
+  ],
+  suggestions: [
+    { label: "Follow-ups", copy: "Due when the client has gone quiet, timed by your own habit on Scale." },
+    { label: "Document suggestions", copy: "A contract when a proposal is answered, an invoice when work lands." },
+    { label: "You are the actor", copy: "Every card hands you a line and a link. Nothing is sent for you." },
+  ],
+};
+
 export function FeaturesPage() {
   const [active, setActive] = useState(SECTIONS[0].id);
   const featureFaqs = faqsByGroup(["documents", "tracking"]);
@@ -156,9 +214,17 @@ export function FeaturesPage() {
             <div className={`two-up`} style={{ direction: index % 2 ? "rtl" : "ltr" }}>
               <div style={{ direction: "ltr" }}>
                 <p className="eyebrow">0{index + 1}</p>
-                <h2 className="serif" style={{ fontSize: 28, margin: "8px 0 12px" }}>
-                  {section.title}
-                </h2>
+                <div className="feature-title">
+                  <span className="feature-icon">
+                    {(() => {
+                      const Icon = ICONS[section.id] ?? Sparkles;
+                      return <Icon size={20} />;
+                    })()}
+                  </span>
+                  <h2 className="serif" style={{ fontSize: 28, margin: 0 }}>
+                    {section.title}
+                  </h2>
+                </div>
                 <p className="muted" style={{ marginBottom: 16 }}>
                   {section.copy}
                 </p>
@@ -172,6 +238,19 @@ export function FeaturesPage() {
                     </li>
                   ))}
                 </ul>
+                <div className="feature-subs">
+                  {(SUBS[section.id] ?? []).map((sub) => (
+                    <div className="feature-sub" key={sub.label}>
+                      <span className="feature-sub-dot" />
+                      <div>
+                        <p className="feature-sub-label">{sub.label}</p>
+                        <p className="muted" style={{ fontSize: 13 }}>
+                          {sub.copy}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
                 <Link to="/signup" className="btn btn-secondary btn-sm mt-6">
                   Start Free
                 </Link>

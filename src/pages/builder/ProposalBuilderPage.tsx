@@ -9,6 +9,8 @@ import { TopBar } from "../../components/builder/TopBar";
 import { TemplatePicker } from "../../components/builder/TemplatePicker";
 import { PreviewPane } from "../../components/builder/PreviewPane";
 import { ShareModal } from "../../components/builder/ShareModal";
+import { DocumentReview } from "../../components/builder/DocumentReview";
+import { analyzeDocument, type Review } from "../../lib/analysis";
 import { ConfirmDialog } from "../../components/ui/ConfirmDialog";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
@@ -82,6 +84,8 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [preview, setPreview] = useState(false);
   const [share, setShare] = useState<{ url: string; publicId: string } | null>(null);
+  const [review, setReview] = useState<Review | null>(null);
+  const [pendingShare, setPendingShare] = useState<{ url: string; publicId: string } | null>(null);
   const [creating, setCreating] = useState(false);
   const [initialised, setInitialised] = useState(false);
 
@@ -140,7 +144,13 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     try {
       await autosave.save(payload);
       const response = await proposalsApi.publish(id);
-      setShare({ url: response.url, publicId: response.public_id });
+      const nextShare = { url: response.url, publicId: response.public_id };
+      const result = await analyzeDocument({
+        blocks,
+        hasClient: Boolean(proposal?.client_id),
+      });
+      setPendingShare(nextShare);
+      setReview(result);
     } catch (cause) {
       const apiError = cause as ApiError;
       toast.error(errorMessage(apiError.code, apiError.message));
@@ -251,6 +261,15 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
         reference={proposal.public_id?.slice(0, 8) || "draft"}
         blocks={blocks}
         doc={doc}
+      />
+
+      <DocumentReview
+        review={review}
+        onClose={() => setReview(null)}
+        onPublishAnyway={() => {
+          setShare(pendingShare);
+          setReview(null);
+        }}
       />
 
       <ShareModal

@@ -9,6 +9,8 @@ import { TopBar } from "../../components/builder/TopBar";
 import { TemplatePicker } from "../../components/builder/TemplatePicker";
 import { PreviewPane } from "../../components/builder/PreviewPane";
 import { ShareModal } from "../../components/builder/ShareModal";
+import { DocumentReview } from "../../components/builder/DocumentReview";
+import { analyzeDocument, type Review } from "../../lib/analysis";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { Textarea } from "../../components/ui/Textarea";
@@ -312,6 +314,8 @@ function ContractCanvas({ id }: { id: string }) {
   const [preview, setPreview] = useState(false);
   const [share, setShare] = useState<{ url: string } | null>(null);
   const [creating, setCreating] = useState(false);
+  const [review, setReview] = useState<Review | null>(null);
+  const [pendingShare, setPendingShare] = useState<{ url: string } | null>(null);
   const [initialised, setInitialised] = useState(false);
 
   const contract = query.data?.contract;
@@ -376,7 +380,10 @@ function ContractCanvas({ id }: { id: string }) {
     try {
       await autosave.save(payload);
       const response = await contractsApi.publish(id);
-      setShare({ url: response.url });
+      const nextShare = { url: response.url };
+      const result = await analyzeDocument({ blocks, hasClient: Boolean(contract?.client_id) });
+      setPendingShare(nextShare);
+      setReview(result);
     } catch (cause) {
       const apiError = cause as ApiError;
       toast.error(errorMessage(apiError.code, apiError.message));
@@ -451,6 +458,15 @@ function ContractCanvas({ id }: { id: string }) {
         blocks={blocks}
         doc={doc}
         footnote="This contract is not a legally binding e-signature until both parties sign."
+      />
+
+      <DocumentReview
+        review={review}
+        onClose={() => setReview(null)}
+        onPublishAnyway={() => {
+          setShare(pendingShare);
+          setReview(null);
+        }}
       />
 
       <ShareModal

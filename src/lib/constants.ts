@@ -295,7 +295,7 @@ export const CHANNELS = ["Email", "WhatsApp", "Phone", "In-person", "Other"];
 export const FAQ_BATCH_FIRST = 12;
 
 export const FOOTER_ASSISTANT_PROMPT =
-  "Explain Revercue: a freelancer tool for the thread from proposal to contract to invoice to CRM. The tagline is 'Your work should speak, not you.' The thesis is 'a thread, not disconnected workflows.' The Free plan is available now. The paid plans (Starter, Growth, Scale) are invite-only in the fresh state — join the waitlist. Teams is in beta — join the beta. The product does not use AI; it uses patterns. Answer in 2–3 sentences.";
+  "Explain Revercue: a freelancer tool for the thread from proposal to contract to invoice to CRM. The tagline is 'Your work should speak, not you.' The thesis is 'a thread, not disconnected workflows.' The Free plan is available now. The paid plans (Starter, Growth, Scale) are invite-only in the fresh state — join the waitlist. Teams is in beta — join the beta. The product does not put an assistant between you and the work; it uses patterns. Answer in 2–3 sentences.";
 
 export function formatStorage(gb: number | null | undefined): string {
   if (gb == null) return "Unlimited";

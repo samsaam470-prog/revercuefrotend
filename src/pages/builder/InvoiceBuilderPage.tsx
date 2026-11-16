@@ -10,6 +10,7 @@ import { ShareModal } from "../../components/builder/ShareModal";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { Textarea } from "../../components/ui/Textarea";
+import { AskHelperTextarea } from "../../components/builder/AskHelperTextarea";
 import { Select } from "../../components/ui/Select";
 import { Checkbox } from "../../components/ui/Checkbox";
 import { Modal } from "../../components/ui/Modal";
@@ -667,7 +668,7 @@ function InvoiceEditor({ id }: { id: string }) {
             </div>
           </div>
 
-          <Textarea id="edit-notes" label="Notes to client" value={notes} onChange={setNotes} rows={3} />
+          <AskHelperTextarea id="edit-notes" label="Notes to client" value={notes} onChange={setNotes} rows={3} helper="Select a sentence to rewrite it." />
         </div>
       </div>
 

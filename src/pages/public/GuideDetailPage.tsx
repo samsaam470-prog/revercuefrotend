@@ -14,7 +14,7 @@ export function GuideDetailPage() {
         <h1 className="serif" style={{ fontSize: 32, margin: "12px 0" }}>
           This guide doesn't exist.
         </h1>
-        <p className="muted">It may have been renamed. All seventeen guides are listed on the index.</p>
+        <p className="muted">It may have been renamed. Every guide is listed on the index.</p>
         <Link to="/guides" className="btn btn-primary mt-6">
           All guides
         </Link>

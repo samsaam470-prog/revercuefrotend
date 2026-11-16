@@ -14,7 +14,7 @@ export function GuidesPage() {
         <p className="eyebrow">Guides</p>
         <h1>How to run the thread, from proposal to payment.</h1>
         <p>
-          Seventeen guides. Each one is a real workflow, not a feature list: the specific screens,
+          {GUIDES.length} guides. Each one is a real workflow, not a feature list: the specific screens,
           in the specific order, with nothing left as an exercise for the reader.
         </p>
       </div>

@@ -13,7 +13,7 @@ const BASE_POSTS: BlogPost[] = [
     title: "The thread is the product",
     excerpt:
       "A proposal in one app, a contract in another, an invoice in a third. The context is what gets lost.",
-    date: "2026-10-28",
+    date: "2026-11-16",
     readMinutes: 7,
     body: [
       {
@@ -60,7 +60,7 @@ const BASE_POSTS: BlogPost[] = [
     title: "Links, not PDFs",
     excerpt:
       "A PDF is a dead file. A link can tell you whether the client read the scope, which package they picked, and what they asked before saying yes.",
-    date: "2026-10-12",
+    date: "2026-11-16",
     readMinutes: 6,
     body: [
       {
@@ -99,12 +99,12 @@ const BASE_POSTS: BlogPost[] = [
     title: "Patterns, not magic",
     excerpt:
       "The suggestions run on counting and arithmetic, not a model. Here is exactly what that means, and why the honesty is the feature.",
-    date: "2026-09-30",
+    date: "2026-11-16",
     readMinutes: 6,
     body: [
       {
         paragraphs: [
-          "Software has learned to say 'AI' the way shampoo says 'clinical'. It sounds like capability and means nothing in particular. Revercue does not make that claim, because the things it does are countable: keyword matching, frequency counting, and arithmetic.",
+          "Software has learned to say \"assistant\" the way shampoo says \"clinical\". It sounds like capability and means nothing in particular. Revercue does not make that claim, because the things it does are countable: keyword matching, frequency counting, and arithmetic.",
           "That is not a limitation we are apologising for. A suggestion you can explain is a suggestion you can trust, override, and improve.",
         ],
       },
@@ -119,7 +119,7 @@ const BASE_POSTS: BlogPost[] = [
         heading: "How the timing adapts",
         paragraphs: [
           "The first time, the default applies. After a few actions, the system adjusts to your own pattern: if you consistently follow up after five days rather than two, the suggestion moves. That is frequency counting on your own log — not a model trained on someone else's clients.",
-          "The interest level works the same way. Message count, last message direction, documents opened, contract approved, invoice paid, days since the last interaction, and whether you marked the client not interested. The breakdown is visible on the client page, with the line that matters: this is arithmetic, not AI.",
+          "The interest level works the same way. Message count, last message direction, documents opened, contract approved, invoice paid, days since the last interaction, and whether you marked the client not interested. The breakdown is visible on the client page, with the line that matters: this is arithmetic, not an assistant.",
         ],
       },
       {
@@ -136,7 +136,7 @@ const BASE_POSTS: BlogPost[] = [
     title: "The client record builds itself",
     excerpt:
       "The CRM is where the thread lands. You should not have to maintain a second database of things you already sent.",
-    date: "2026-09-18",
+    date: "2026-11-16",
     readMinutes: 6,
     body: [
       {
@@ -173,7 +173,7 @@ const BASE_POSTS: BlogPost[] = [
     title: "What a proposal is actually for",
     excerpt:
       "Not to look professional. To move a decision. Everything else — the cover, the fonts, the length — is in service of that one job.",
-    date: "2026-09-04",
+    date: "2026-11-16",
     readMinutes: 6,
     body: [
       {

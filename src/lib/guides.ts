@@ -25,7 +25,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "Sign up, finish onboarding, and send your first proposal in about five minutes.",
     category: "Proposals",
     readMinutes: 5,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "DashboardVisual",
     sections: [
       {
@@ -61,7 +61,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The four stat cards, the pending line, the suggested actions and the activity feed.",
     category: "Product",
     readMinutes: 4,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "DashboardVisual",
     sections: [
       {
@@ -102,7 +102,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The requirement form, the template selection, the canvas, the auto-save and the share.",
     category: "Proposals",
     readMinutes: 7,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "BuilderVisual",
     sections: [
       {
@@ -138,23 +138,11 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "Ask the helper",
+        heading: "Selecting text, selecting an element",
         paragraphs: [
-          "The builder has a helper. It is the inline assistant that works on the text you select. You are writing the introduction, the scope, the FAQ answer, the invoice note. You select a sentence or a paragraph. A small Ask the helper button appears. You click it. A popover opens with the quick actions: make it formal, make it friendly, make it concise, expand, fix the grammar, simplify, change the wording. You can also type a custom instruction: make it sound more confident. The helper rewrites the selected text. You see the before and after. You click Replace, Insert below, or Cancel. You can also edit the rewrite before you use it.",
-          "The helper is a tool, not an action. It does not change the document on its own. It suggests a rewrite; you decide. The helper is not a separate product; it is the assistant inside the builder you already use.",
-        ],
-      },
-      {
-        heading: "Where the helper runs, and what that means for your data",
-        paragraphs: [
-          "The helper runs in your browser. That means the model and the rewrite happen on your device, not on a Revercue server. The text you select is not sent to Revercue. It is not sent to the team. It is not stored in the database. It does not leave your browser. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it, on your device. If your browser does not support the helper, the Ask the helper button is not shown, and you edit the text manually. The helper is the pen, not the author. You are the author. The content stays on your device.",
-        ],
-      },
-      {
-        heading: "Post-document analysis",
-        paragraphs: [
-          "After you click Create, the document is not just published. It is analyzed. The analysis runs in two layers. The pattern engine checks the structure: the sections you chose, the missing sections, the pricing, the timeline, the tone consistency, the CTA. The helper checks the prose: the readability, the flow, the clarity, the repetition. The two layers produce a quality score (0–100) and a list of issues.",
-          "Each issue is tagged by source: From this client's history (the client's previous documents, the communication log), From your usual method (the saved FAQs, the packages, the previous proposals), From what works (the winning templates of the whole product). You see the score and the issues. You decide whether to fix them or publish anyway. The analysis is not a gate; it is a quality signal. A score of 80+ is ready. A score of 50–79 is good, but a few improvements. A score under 50 is not ready; the issues are blocking. The analysis is the second pair of eyes, not the final word. You are the author. The analysis is the mirror.",
+          "Select words inside any text field and a toolbar appears above it: Ask the helper, bold, italic, underline, a size picker, a colour picker and delete. The formatting is written into the text with the document's small markup, so what you apply in the builder is what the client reads on the page — no separate preview and no export step.",
+          "Select a block on the canvas and its action strip appears under the content: Ask the helper, Upload from device where the element takes a file, and Remove. The helper here reads that element's own words — a heading, a card, a chart caption, an image description, an FAQ answer — and writes the result back through the same update the properties panel uses, so nothing is changed anywhere you cannot see it.",
+          "The icon row on the block still does the structural work: move up, move down, duplicate, delete, select. The action strip is the content work. When the browser cannot run the helper, that one button is not rendered; the formatting toolbar, upload and the rest of the strip are unaffected.",
         ],
       },
     ],
@@ -165,7 +153,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The same canvas, the after-approval chain, and the three client actions.",
     category: "Contracts",
     readMinutes: 6,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "ContractVisual",
     sections: [
       {
@@ -192,23 +180,11 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "Ask the helper",
+        heading: "Selecting text, selecting an element",
         paragraphs: [
-          "The builder has a helper. It is the inline assistant that works on the text you select. You are writing the introduction, the scope, the FAQ answer, the invoice note. You select a sentence or a paragraph. A small Ask the helper button appears. You click it. A popover opens with the quick actions: make it formal, make it friendly, make it concise, expand, fix the grammar, simplify, change the wording. You can also type a custom instruction: make it sound more confident. The helper rewrites the selected text. You see the before and after. You click Replace, Insert below, or Cancel. You can also edit the rewrite before you use it.",
-          "The helper is a tool, not an action. It does not change the document on its own. It suggests a rewrite; you decide. The helper is not a separate product; it is the assistant inside the builder you already use.",
-        ],
-      },
-      {
-        heading: "Where the helper runs, and what that means for your data",
-        paragraphs: [
-          "The helper runs in your browser. That means the model and the rewrite happen on your device, not on a Revercue server. The text you select is not sent to Revercue. It is not sent to the team. It is not stored in the database. It does not leave your browser. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it, on your device. If your browser does not support the helper, the Ask the helper button is not shown, and you edit the text manually. The helper is the pen, not the author. You are the author. The content stays on your device.",
-        ],
-      },
-      {
-        heading: "Post-document analysis",
-        paragraphs: [
-          "After you click Create, the document is not just published. It is analyzed. The analysis runs in two layers. The pattern engine checks the structure: the sections you chose, the missing sections, the pricing, the timeline, the tone consistency, the CTA. The helper checks the prose: the readability, the flow, the clarity, the repetition. The two layers produce a quality score (0–100) and a list of issues.",
-          "Each issue is tagged by source: From this client's history (the client's previous documents, the communication log), From your usual method (the saved FAQs, the packages, the previous proposals), From what works (the winning templates of the whole product). You see the score and the issues. You decide whether to fix them or publish anyway. The analysis is not a gate; it is a quality signal. A score of 80+ is ready. A score of 50–79 is good, but a few improvements. A score under 50 is not ready; the issues are blocking. The analysis is the second pair of eyes, not the final word. You are the author. The analysis is the mirror.",
+          "Select words inside any text field and a toolbar appears above it: Ask the helper, bold, italic, underline, a size picker, a colour picker and delete. The formatting is written into the text with the document's small markup, so what you apply in the builder is what the client reads on the page — no separate preview and no export step.",
+          "Select a block on the canvas and its action strip appears under the content: Ask the helper, Upload from device where the element takes a file, and Remove. The helper here reads that element's own words — a heading, a card, a chart caption, an image description, an FAQ answer — and writes the result back through the same update the properties panel uses, so nothing is changed anywhere you cannot see it.",
+          "The icon row on the block still does the structural work: move up, move down, duplicate, delete, select. The action strip is the content work. When the browser cannot run the helper, that one button is not rendered; the formatting toolbar, upload and the rest of the strip are unaffected.",
         ],
       },
     ],
@@ -219,7 +195,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The question list, the question types, the branching, the test mode and the thank-you page.",
     category: "Proposals",
     readMinutes: 6,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "FormVisual",
     sections: [
       {
@@ -252,26 +228,6 @@ const BASE_GUIDES: Guide[] = [
           "When the client submits, the answers are stored on the form and the client record. The structured paragraph assembled from the answers is a pattern, not a model: you copy it into whichever tool you like, and it is written in your own words, from their answers.",
         ],
       },
-      {
-        heading: "Ask the helper",
-        paragraphs: [
-          "The builder has a helper. It is the inline assistant that works on the text you select. You are writing the introduction, the scope, the FAQ answer, the invoice note. You select a sentence or a paragraph. A small Ask the helper button appears. You click it. A popover opens with the quick actions: make it formal, make it friendly, make it concise, expand, fix the grammar, simplify, change the wording. You can also type a custom instruction: make it sound more confident. The helper rewrites the selected text. You see the before and after. You click Replace, Insert below, or Cancel. You can also edit the rewrite before you use it.",
-          "The helper is a tool, not an action. It does not change the document on its own. It suggests a rewrite; you decide. The helper is not a separate product; it is the assistant inside the builder you already use.",
-        ],
-      },
-      {
-        heading: "Where the helper runs, and what that means for your data",
-        paragraphs: [
-          "The helper runs in your browser. That means the model and the rewrite happen on your device, not on a Revercue server. The text you select is not sent to Revercue. It is not sent to the team. It is not stored in the database. It does not leave your browser. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it, on your device. If your browser does not support the helper, the Ask the helper button is not shown, and you edit the text manually. The helper is the pen, not the author. You are the author. The content stays on your device.",
-        ],
-      },
-      {
-        heading: "Post-document analysis",
-        paragraphs: [
-          "After you click Create, the document is not just published. It is analyzed. The analysis runs in two layers. The pattern engine checks the structure: the sections you chose, the missing sections, the pricing, the timeline, the tone consistency, the CTA. The helper checks the prose: the readability, the flow, the clarity, the repetition. The two layers produce a quality score (0–100) and a list of issues.",
-          "Each issue is tagged by source: From this client's history (the client's previous documents, the communication log), From your usual method (the saved FAQs, the packages, the previous proposals), From what works (the winning templates of the whole product). You see the score and the issues. You decide whether to fix them or publish anyway. The analysis is not a gate; it is a quality signal. A score of 80+ is ready. A score of 50–79 is good, but a few improvements. A score under 50 is not ready; the issues are blocking. The analysis is the second pair of eyes, not the final word. You are the author. The analysis is the mirror.",
-        ],
-      },
     ],
   },
   {
@@ -280,7 +236,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "Line items, the payment arrangement, the proof upload and the confirm payment action.",
     category: "Pricing",
     readMinutes: 5,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "InvoiceVisual",
     sections: [
       {
@@ -307,26 +263,6 @@ const BASE_GUIDES: Guide[] = [
           "Overdue is derived from the due date, not from a reminder you have to set. An invoice past its date shows Overdue in red on your list and on the client's page, and it appears in the pending line on the dashboard.",
         ],
       },
-      {
-        heading: "Ask the helper",
-        paragraphs: [
-          "The builder has a helper. It is the inline assistant that works on the text you select. You are writing the introduction, the scope, the FAQ answer, the invoice note. You select a sentence or a paragraph. A small Ask the helper button appears. You click it. A popover opens with the quick actions: make it formal, make it friendly, make it concise, expand, fix the grammar, simplify, change the wording. You can also type a custom instruction: make it sound more confident. The helper rewrites the selected text. You see the before and after. You click Replace, Insert below, or Cancel. You can also edit the rewrite before you use it.",
-          "The helper is a tool, not an action. It does not change the document on its own. It suggests a rewrite; you decide. The helper is not a separate product; it is the assistant inside the builder you already use.",
-        ],
-      },
-      {
-        heading: "Where the helper runs, and what that means for your data",
-        paragraphs: [
-          "The helper runs in your browser. That means the model and the rewrite happen on your device, not on a Revercue server. The text you select is not sent to Revercue. It is not sent to the team. It is not stored in the database. It does not leave your browser. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it, on your device. If your browser does not support the helper, the Ask the helper button is not shown, and you edit the text manually. The helper is the pen, not the author. You are the author. The content stays on your device.",
-        ],
-      },
-      {
-        heading: "Post-document analysis",
-        paragraphs: [
-          "After you click Create, the document is not just published. It is analyzed. The analysis runs in two layers. The pattern engine checks the structure: the sections you chose, the missing sections, the pricing, the timeline, the tone consistency, the CTA. The helper checks the prose: the readability, the flow, the clarity, the repetition. The two layers produce a quality score (0–100) and a list of issues.",
-          "Each issue is tagged by source: From this client's history (the client's previous documents, the communication log), From your usual method (the saved FAQs, the packages, the previous proposals), From what works (the winning templates of the whole product). You see the score and the issues. You decide whether to fix them or publish anyway. The analysis is not a gate; it is a quality signal. A score of 80+ is ready. A score of 50–79 is good, but a few improvements. A score under 50 is not ready; the issues are blocking. The analysis is the second pair of eyes, not the final word. You are the author. The analysis is the mirror.",
-        ],
-      },
     ],
   },
   {
@@ -335,7 +271,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The list, the client record, the communication log, notes, follow-ups and the interest level.",
     category: "Follow-ups",
     readMinutes: 6,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "CrmVisual",
     sections: [
       {
@@ -345,13 +281,6 @@ const BASE_GUIDES: Guide[] = [
           "You can also add a client by hand, with a name, an email, a company, a phone number and a channel. A duplicate email is caught before the record is created, because two records for the same person is the one CRM problem that is genuinely hard to undo.",
         ],
         visual: "CrmVisual",
-      },
-      {
-        heading: "The writing area",
-        paragraphs: [
-          "Add communication opens the writing area: entry type, direction, channel, message, estimated time, linked document, next step and follow-up date. Save to log writes the entry. Copy message copies the text so you can paste it into your own email or WhatsApp. Revercue does not send.",
-          "The gist is enough. You do not need to paste a whole email: a line about what you sent and what you expect next is more useful in six months than a transcript you will never reread. Estimated time is optional and feeds the effort view, not a timesheet.",
-        ],
       },
       {
         heading: "Notes and follow-ups",
@@ -370,13 +299,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "The writing area",
         paragraphs: [
-          "The writing area is the form in the CRM where you plan the message you are about to send. You open it from the client record. You write the message. The helper (if your browser supports it) suggests improvements: the warmer opening, the clearer ask, the grammar and the typos, the rewrite. The helper runs in your browser; the content is not sent to Revercue, not sent to the team, not stored in the database. The team cannot read the message. You see the suggestions. You accept them, edit them, or ignore them. You click Copy message. The message is copied. You paste it into your own email or WhatsApp. Revercue does not send the message. You send it from your own account. The writing area is the plan, not the send. The thread is the record; the message is the user's.",
-        ],
-      },
-      {
-        heading: "The communication log",
-        paragraphs: [
-          "The communication log is the timeline of the client relationship. It is the main body of the client record. Each entry is a message sent, a reply received, a follow-up, a document created, a document shared. Each entry has the direction (the outgoing, the incoming), the channel (the email, the WhatsApp, the phone), the message, the estimated time, the linked document, the next step, the follow-up date. The log is the memory. The interest level reads the log; the suggestions read the log; the 15-day summary reads the log. The log is the thread's history. You add the entry; the log keeps it. The log is the timeline, not the inbox. The inbox is the message; the log is the record.",
+          "The writing area is the form in the CRM where you plan the message you are about to send. You open it from the client record. You write the message. The helper, where it can run, suggests improvements: the warmer opening, the clearer ask, the grammar and the typos, the rewrite. Every change the helper makes is done on your device, which means it never goes to a Revercue server: not sent to the team, not stored in the database. The team cannot read the message. You see the suggestions. You accept them, edit them, or ignore them. You click Copy message. The message is copied. You paste it into your own email or WhatsApp. Revercue does not send the message. You send it from your own account. The writing area is the plan, not the send. The thread is the record; the message is the user's.",
         ],
       },
     ],
@@ -387,7 +310,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "What the client sees: the four document views, the password wall, the closed page, the proof upload.",
     category: "Product",
     readMinutes: 5,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "ProposalVisual",
     sections: [
       {
@@ -422,31 +345,420 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The blocks you can place in a document and what each one is for.",
     category: "Product",
     readMinutes: 6,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "BuilderVisual",
     sections: [
       {
-        heading: "Text and media",
+        heading: "How this guide is organised",
         paragraphs: [
-          "Heading, paragraph, quote, list, image and graph cover most documents. Headings carry the structure and the table of contents the client page builds from them; paragraphs carry the argument; a graph is for one number, not a dashboard.",
-          "An image block takes a URL or an upload and demands alt text, because an image without alt text is a hole in the page for anyone using a screen reader. A quote block is for the client's own words, not for decoration.",
+          "Every element below follows the same shape: what it is for, where to find it, how to insert it, how to configure it, the properties it exposes, when to use it, how to write for it, what the client sees, what Ask the helper can do with it, the mistakes that cost the most, and what to check on a phone or with a screen reader.",
+          "Two vocabularies run through the whole guide. The element is the block you insert from the left panel. The property is the setting in the right panel once the block is selected. Anything you can change about an element is a property; anything you cannot change is the template's decision, and that is deliberate.",
+          "The helper is available on the elements that carry words — heading, paragraph, quote, card, button, next step, FAQ answer, question text, image description, chart caption. It is not available on the elements that carry no words, like divider, spacer and shape, because there is nothing to rewrite.",
+        ],
+        bullets: [
+          "Ask the helper: select text, choose an action, read the before and after, then Replace, Insert below or Cancel",
+          "The selection toolbar: bold, italic, underline, size, colour and delete, applied to the selected words",
+          "The element action strip: the same helper, Upload from device on image elements, and Remove",
         ],
       },
       {
-        heading: "Layout",
+        heading: "Heading",
         paragraphs: [
-          "Divider, spacer, card, two-column and three-column arrange the page. The columns are for comparison, not decoration: two columns of prose are hard to read, two columns of package features are easy to compare.",
-          "A spacer is the honest way to add breathing room. Padding on a block changes the block; a spacer changes the page, and you can delete it without hunting for the property that caused the gap.",
+          "Purpose — Names a section so the client knows what the next few screens are about, and gives the document its skeleton for scanning.",
+          "Where you find it — Left panel, under Blocks; the first block of every template we generate.",
+          "How to insert it — Open the left panel, choose Heading. It lands at the end of the block stack and is selected, so the properties panel opens on it.",
+          "How to configure it — Pick the level (H1, H2, H3), the alignment and the colour, then write the words. One heading per section; the level is the document's outline.",
+          "Best use cases — Section names in a proposal (Scope, Timeline, Pricing), the title of a contract clause, and the opening line of each part of a long document.",
+          "Writing effective content — Three to six words, a noun rather than a sentence. 'What is included' beats 'Here is a list of everything that is included in this engagement'. If a heading needs a comma, it is probably a paragraph.",
+          "How the client experiences it — The client sees a larger line in the document's serif face, at the colour you chose, and jumps between these lines when scrolling. Headings are what the page's outline is built from.",
+          "How Ask the helper improves it — Select the heading text and ask for concise or formal. The helper is good at turning 'Details about the project and what we will do' into 'Scope'. It only rewrites the selected heading, never the blocks under it.",
+          "Common mistakes — Using a heading for a sentence you want to be big. Skipping a level (H1 straight to H3) so the outline jumps. Repeating the document title as a heading on the first screen.",
+          "Mobile and accessibility — Headings are real heading elements, so a screen reader can list them and navigate by them. Keep one H1 per document, keep the levels in order, and never rely on colour alone to mark a section.",
+        ],
+        bullets: [
+          "Properties: Level: H1, H2 or H3",
+          "Properties: Alignment: left, centre, right",
+          "Properties: Colour: any hex value",
+          "Properties: Text: the heading itself, with the selection toolbar",
         ],
       },
       {
-        heading: "Document-specific blocks",
+        heading: "Paragraph",
         paragraphs: [
-          "Pricing table, packages, timeline, FAQ list, embedded question, file upload, button, signature and the next-step block. Packages default to Basic, Standard and Premium and you can rename, reprice or remove them; the client's selection is recorded with the approval.",
-          "The embedded question block is the one that turns a proposal into a conversation: the client answers inside the page, and the answer lands on the proposal and the client record. The FAQ list is a real details element, so it opens without JavaScript and prints open if the client prints the page.",
-          "The next-step block closes the document with the contact details from your profile and a plain sentence about what happens after approval. It is not a sales pitch; it is the instruction the client needs at the moment they decide.",
+          "Purpose — Carries the prose: the explanation, the scope, the reason, the close. Most of the document is paragraphs.",
+          "Where you find it — Left panel, under Blocks; also the block the pipeline uses for every section that is not pricing, FAQ or a question.",
+          "How to insert it — Choose Paragraph in the left panel. It arrives with a placeholder line and opens in the properties panel.",
+          "How to configure it — Write in the text field, then use the selection toolbar for bold, italic, underline, size and colour, or ask the helper for a rewrite. Alignment and colour apply to the whole block.",
+          "Best use cases — Scope, the problem statement, payment terms, a short story about a similar project, the sentence that explains a number.",
+          "Writing effective content — One idea per paragraph, three to five sentences. Put the fact first and the justification second. If a paragraph reaches six sentences, split it into two paragraphs rather than one long one.",
+          "How the client experiences it — The client reads it as body text at the width you set, with the line height the page uses. Inline formatting — bold for an amount, colour for a warning — carries through to the client page unchanged.",
+          "How Ask the helper improves it — This is where the helper earns its place. Select a rambling scope line and ask for concise; select a blunt close and ask for friendly. Read the before and after, then Replace or Insert below. The helper works on the selection, so the rest of the paragraph keeps your voice.",
+          "Common mistakes — Writing the whole proposal in one paragraph. Using bold for whole sentences. Pasting text with its own line breaks so the paragraph renders with gaps.",
+          "Mobile and accessibility — Body text stays at a readable size and line height on every screen; inline formatting is semantic (strong, emphasis) rather than colour-only. Keep colour contrast in mind when you use a custom colour on white.",
         ],
-        visual: "BuilderVisual",
+        bullets: [
+          "Properties: Text: the prose, with inline formatting from the selection toolbar",
+          "Properties: Alignment: left, centre, right",
+          "Properties: Colour: the block's base colour",
+          "Properties: Rows: how tall the editing field is",
+        ],
+      },
+      {
+        heading: "Quote",
+        paragraphs: [
+          "Purpose — Sets a sentence apart: the client's own words, a line from the brief, or the one promise you want remembered.",
+          "Where you find it — Left panel, under Blocks.",
+          "How to insert it — Choose Quote. It arrives with a left rule in your brand colour and italic text.",
+          "How to configure it — Write the line in the text field. The brand colour of the rule comes from the document's brand primary, so changing the brand changes every quote with it.",
+          "Best use cases — The client's own sentence from their first email. A guarantee. The one line of the brief that shaped the whole proposal.",
+          "Writing effective content — One or two sentences, quoted exactly if it is the client's. Do not add quotation marks in the text; the block already sets it apart. Keep it under twenty-five words or it stops reading as a quote.",
+          "How the client experiences it — The client sees an indented line with a coloured rule on the left, in italic. It reads as evidence rather than argument, which is why it works.",
+          "How Ask the helper improves it — Use it to tighten a long quotation without changing the meaning, or to fix the grammar of your own line. Do not use it to rewrite the client's words into something they did not say — quote the sentence, then answer it in a paragraph.",
+          "Common mistakes — Quoting three paragraphs. Using a quote where a heading belongs. Changing the client's quoted words to sound better.",
+          "Mobile and accessibility — Quotes are marked up as quotations, so assistive technology announces them as such. The rule is decorative; the text still reads on its own without it.",
+        ],
+        bullets: [
+          "Properties: Text: the quoted line",
+          "Properties: Brand rule colour: inherited from the document's brand primary",
+          "Properties: Inline formatting: from the selection toolbar",
+        ],
+      },
+      {
+        heading: "List",
+        paragraphs: [
+          "Purpose — Breaks a set of parallel items into lines the client can scan instead of a paragraph they have to parse.",
+          "Where you find it — Left panel, under Blocks.",
+          "How to insert it — Choose List. It starts with two items; add or remove rows in the properties panel.",
+          "How to configure it — Each row has a label. Keep the items parallel — all nouns, or all verb phrases — and keep the number of items small enough to hold in mind.",
+          "Best use cases — Deliverables, what is included and what is not, the three things you need from the client, the revision limits.",
+          "Writing effective content — Start each item with the same kind of word. Five to seven items is comfortable; ten is a wall. If an item needs a second sentence, it wants to be a card or a paragraph.",
+          "How the client experiences it — The client sees a bulleted list at body size, indented once. On mobile it wraps without losing the bullet alignment.",
+          "How Ask the helper improves it — Select one item at a time and ask for concise, or select a line and ask for formal. Formatting from the toolbar carries into the list item, so a bold amount stays bold.",
+          "Common mistakes — Mixing sentences and fragments. Nested lists in a document that is already long. Using a list for prose that has no parallel structure.",
+          "Mobile and accessibility — Lists are real lists, so a screen reader announces the count and the position of each item. Do not fake bullets with dashes inside a paragraph.",
+        ],
+        bullets: [
+          "Properties: Items: one label per row",
+          "Properties: Add or remove rows in the properties panel",
+          "Properties: Bullets render with the document's list styling",
+        ],
+      },
+      {
+        heading: "Image",
+        paragraphs: [
+          "Purpose — Shows something words cannot: a screenshot, a reference, a photograph of the work, a logo lockup.",
+          "Where you find it — Left panel, under Blocks; the properties panel for an image block.",
+          "How to insert it — Choose Image, then use Upload from device in the element's action strip or in the properties panel. The file is read on your device and stored as the block's source.",
+          "How to configure it — Upload the file, then write the alt text. The alt text is what a client using a screen reader hears, and what shows if the image fails to load.",
+          "Best use cases — A screenshot of the finished work, a mood reference, a photo of the team, a diagram you already made elsewhere.",
+          "Writing effective content — Write alt text as if you were describing the image to someone on the phone: what it shows and why it matters. Skip 'image of'. Compress large photographs before uploading — the storage bar counts files, not layout.",
+          "How the client experiences it — The client sees the image at the document's width, with the alt text available to assistive technology and shown if the file cannot load.",
+          "How Ask the helper improves it — Ask the helper to turn a rough note into a one-line description, or to write clearer alt text from your description. It rewrites the description, not the picture, so the image itself is still yours to choose.",
+          "Common mistakes — Uploading a 6 MB photograph for a 300px slot. Leaving alt text empty. Using an image of text instead of a heading.",
+          "Mobile and accessibility — Always write alt text. Do not put essential information only inside an image. Keep the image readable at mobile width, and avoid text baked into screenshots at small sizes.",
+        ],
+        bullets: [
+          "Properties: Image source: the uploaded file or a URL",
+          "Properties: Alt text: the description",
+          "Properties: Brand primary: used where the block needs a fallback",
+        ],
+      },
+      {
+        heading: "Graph",
+        paragraphs: [
+          "Purpose — Shows a shape in the numbers — growth, split, comparison — as bars rather than a table of digits.",
+          "Where you find it — Left panel, under Blocks; the caption sits under the bars.",
+          "How to insert it — Choose Graph. It arrives with a sample series and a caption explaining that the values should be replaced.",
+          "How to configure it — Write the caption in the text field. The bars use the document's brand primary, so the chart matches the page without a separate colour setting.",
+          "Best use cases — Revenue across three months, the split between two service lines, a before-and-after comparison the client already cares about.",
+          "Writing effective content — The caption should state the finding, not label the axis: 'Two of the three months came from the retainer' beats 'Monthly revenue'. If the chart needs a legend, it is probably a table.",
+          "How the client experiences it — The client sees bars in the brand colour with the caption underneath, at document width. On mobile the bars stay proportional and the caption wraps below.",
+          "How Ask the helper improves it — Ask the helper to sharpen a vague caption into a claim, or to shorten it. It works on the caption text only; it does not invent numbers, and the values stay whatever you set.",
+          "Common mistakes — Decorating with a chart that says nothing. Using a graph for two numbers. Writing a caption that repeats the heading.",
+          "Mobile and accessibility — The caption carries the meaning in words, so the chart is never the only way to read the data. Keep contrast between the bars and the page background strong enough to see the shape.",
+        ],
+        bullets: [
+          "Properties: Caption: one line under the chart",
+          "Properties: Bar values: the sample series, replaced with your own data",
+          "Properties: Colour: inherited from brand primary",
+        ],
+      },
+      {
+        heading: "Divider",
+        paragraphs: [
+          "Purpose — Marks the end of a section with a thin rule, so the document breathes between ideas.",
+          "Where you find it — Left panel, under Blocks.",
+          "How to insert it — Choose Divider. It is a single line with almost no configuration, which is the point.",
+          "How to configure it — Set the rule colour if the default is too loud or too faint for the page background.",
+          "Best use cases — Between the scope and the pricing, before the FAQ, at the end of the document before the signature.",
+          "Writing effective content — Nothing to write. If a divider needs a caption, it wants a heading instead.",
+          "How the client experiences it — The client sees a hairline rule spanning the page width, with the document's spacing above and below it.",
+          "How Ask the helper improves it — Nothing for the helper here — the divider has no words. Adding one is the sign that a heading was what you actually wanted.",
+          "Common mistakes — A divider between every block. A divider directly under a heading. Using two dividers in a row to make a thicker line.",
+          "Mobile and accessibility — The rule is decorative and is not announced. Never use a divider as the only way to signal a new section for a screen reader; the heading does that job.",
+        ],
+        bullets: [
+          "Properties: Colour: the rule's colour, defaulting to the page's hairline",
+        ],
+      },
+      {
+        heading: "Spacer",
+        paragraphs: [
+          "Purpose — Adds vertical room without adding content, so a page does not crowd its own elements.",
+          "Where you find it — Left panel, under Blocks.",
+          "How to insert it — Choose Spacer and set its height in the properties panel.",
+          "How to configure it — Height in pixels. Twenty-four is a breath, forty-eight is a pause, ninety-six is a new page.",
+          "Best use cases — After a pricing block, before a signature, between a quote and the paragraph that answers it.",
+          "Writing effective content — No content. If you are adding spacers everywhere, the document's spacing is doing too little — use fewer, larger gaps.",
+          "How the client experiences it — The client sees empty space, which is the only element they experience without noticing it.",
+          "How Ask the helper improves it — Not applicable: there is no content to rewrite.",
+          "Common mistakes — Stacking three spacers to fake a section break. Using a spacer instead of a heading's own margin. Very tall spacers on mobile, which turn into a blank screen.",
+          "Mobile and accessibility — Spacers add no text and are skipped by assistive technology. Keep the total gap modest on small screens so content stays reachable.",
+        ],
+        bullets: [
+          "Properties: Height: the gap in pixels",
+        ],
+      },
+      {
+        heading: "Card",
+        paragraphs: [
+          "Purpose — Groups a small idea with a label so it reads as one unit: a benefit, a step, a promise.",
+          "Where you find it — Left panel, under Blocks.",
+          "How to insert it — Choose Card. It arrives with a single label line you can rewrite.",
+          "How to configure it — Write the card's line, then ask the helper if it needs tightening. Use several cards where one list would feel flat.",
+          "Best use cases — Three benefits in a row, the steps of the process, the three things included in a package.",
+          "Writing effective content — A short noun phrase, or one short sentence. Cards work in threes; two feels incomplete and four feels like a list that escaped.",
+          "How the client experiences it — The client sees a bordered box with the line inside, in the document's spacing. Cards sit in the page flow, so they read in order.",
+          "How Ask the helper improves it — Select the card line and ask for concise or change the wording, which is useful when three cards should sound like a set rather than three separate thoughts.",
+          "Common mistakes — Putting a paragraph in a card. Making every card bold. Using cards for content that belongs in a list.",
+          "Mobile and accessibility — The card's text is real text. Keep the border contrast visible, and do not let a card's shape be the only way to understand grouping.",
+        ],
+        bullets: [
+          "Properties: Text: the card's title line",
+          "Properties: Inline formatting from the selection toolbar",
+        ],
+      },
+      {
+        heading: "Two and three column",
+        paragraphs: [
+          "Purpose — Puts short parallel content side by side: what is included on the left, the timeline on the right.",
+          "Where you find it — Left panel, under Blocks; the column text lives in the properties panel.",
+          "How to insert it — Choose Two column or Three column. Each column is edited as plain lines, one paragraph per line.",
+          "How to configure it — Write one paragraph per line in the column field. On narrow screens the columns stack, so the reading order matters more than the pairing.",
+          "Best use cases — Deliverables against assumptions, included against excluded, three phases of work.",
+          "Writing effective content — Keep each line under two sentences and make the two sides answer each other. If the columns are not parallel, the layout is doing work the words should do.",
+          "How the client experiences it — The client sees the columns beside each other on desktop and stacked in order on mobile, with the document's gap between them.",
+          "How Ask the helper improves it — Ask the helper on each line separately — it edits one selection at a time. Use it to make both sides the same length and the same tone, which is what makes a two-column block look deliberate.",
+          "Common mistakes — Long paragraphs in a column. Four columns' worth of content split into three. Different volumes on each side.",
+          "Mobile and accessibility — Columns stack in source order on small screens, so write them so the stacked version still makes sense. Do not use columns to place something visually beside text that a screen reader needs in a specific order.",
+        ],
+        bullets: [
+          "Properties: Column one: lines, one paragraph each",
+          "Properties: Column two (and three): the same",
+          "Properties: Gap: the space between columns",
+        ],
+      },
+      {
+        heading: "Pricing table",
+        paragraphs: [
+          "Purpose — Lists what the work includes and what each line costs, as a table the client can add up at a glance.",
+          "Where you find it — Left panel, under Blocks; rows are edited in the properties panel.",
+          "How to insert it — Choose Pricing table. It arrives with two sample rows and an Add line item button in the properties panel.",
+          "How to configure it — Each row has a description, a quantity and a price. Add rows for the work, remove the ones you do not do, and put the biggest item first.",
+          "Best use cases — A breakdown of deliverables with a price per line, a fixed-scope project, or the itemised part of a retainer proposal.",
+          "Writing effective content — Name the deliverable, not the hour. 'Homepage design and build' with one line beats six lines of 'design work'. Keep the number of rows between three and eight; a table longer than that belongs in an appendix.",
+          "How the client experiences it — The client sees a real table with a header row, quantities and right-aligned prices. It scrolls horizontally on a very small screen rather than shrinking the text.",
+          "How Ask the helper improves it — The helper can rewrite a description line — select it in the properties panel and ask for concise — but it never touches the numbers. Prices are yours and stay exactly as typed.",
+          "Common mistakes — Using this table as the plan prices, which it is not. Mixing hourly and fixed lines in one table. Leaving a row with a price and no description.",
+          "Mobile and accessibility — A real table with header cells, so a screen reader can announce the column before each value. Do not use a table for layout, and do not rely on colour to mark a row.",
+        ],
+        bullets: [
+          "Properties: Rows: description, quantity, price",
+          "Properties: Add or remove rows",
+          "Properties: Total: the sum of the rows as the client reads it",
+        ],
+      },
+      {
+        heading: "Packages",
+        paragraphs: [
+          "Purpose — Offers two or three levels the client can choose between, and records the choice when they do.",
+          "Where you find it — Left panel, under Blocks. It is the block the proposal template puts in the pricing section.",
+          "How to insert it — Choose Packages. It arrives with Basic, Standard and Premium, which you can rename, reprice or reduce to two.",
+          "How to configure it — Edit each package's label and price, keep the middle one as the recommendation, and describe what each includes in the paragraphs above it.",
+          "Best use cases — Three levels of the same service, a good-better-best choice, or two options where one is clearly the recommended start.",
+          "Writing effective content — Name the level by what it is for, not by size: 'The single landing page' beats 'Basic'. Keep the labels the same length. Put the difference between the packages in the paragraph above, not inside the card.",
+          "How the client experiences it — The client sees the package cards side by side, with the middle one outlined in the brand colour. On mobile they stack in order, and the client's selection is recorded on the document.",
+          "How Ask the helper improves it — Ask the helper to shorten a package name or to make two labels sound like a set. It edits the words, not the prices, and the selection is always recorded exactly once.",
+          "Common mistakes — Four packages. Prices that do not ladder. Describing a package only in the card, so the difference is invisible.",
+          "Mobile and accessibility — The package cards are buttons with their label and price read in order. Never encode the recommended package in colour alone — say it in the sentence above the cards.",
+        ],
+        bullets: [
+          "Properties: Item label: the package name",
+          "Properties: Price: the amount shown on the card",
+          "Properties: Number of packages: two or three",
+          "Properties: Middle card: highlighted in the brand colour",
+        ],
+      },
+      {
+        heading: "Timeline",
+        paragraphs: [
+          "Purpose — Shows the shape of the work in phases, so the client can see when each part arrives.",
+          "Where you find it — Left panel, under Blocks; the phases are rows in the properties panel.",
+          "How to insert it — Choose Timeline. It starts with Kickoff and Delivery.",
+          "How to configure it — Each row has a label and an optional value — the phase and its week or duration. Add a row per phase and keep the values consistent.",
+          "Best use cases — A four-week engagement, a launch sequence, the order of approvals before work starts.",
+          "Writing effective content — Use a verb for the label and a week for the value: 'Design · week 1'. Keep every value in the same unit. If a phase has no date, say 'after approval' rather than leaving the value blank.",
+          "How the client experiences it — The client sees a vertical list with a marker per phase and the timing beside it. On mobile it stays a single column, which is how it reads best anyway.",
+          "How Ask the helper improves it — Ask the helper to make a phase label consistent with the others, or to shorten a long one. It rewrites the label, never the timing.",
+          "Common mistakes — Two timelines in one document. Values in weeks and days in the same list. A timeline with one phase.",
+          "Mobile and accessibility — The timeline is an ordered list, so the sequence is announced. The marker is decorative; the text carries the timing.",
+        ],
+        bullets: [
+          "Properties: Rows: label and value",
+          "Properties: Order: the sequence the client reads",
+          "Properties: Marker colour: inherited from brand primary",
+        ],
+      },
+      {
+        heading: "FAQ",
+        paragraphs: [
+          "Purpose — Answers the question the client is about to email you, before they send it.",
+          "Where you find it — Left panel, under Blocks; the question and answer are edited in the properties panel.",
+          "How to insert it — Choose FAQ. It arrives with one collapsed question.",
+          "How to configure it — Write the question as the client would ask it, and the answer in the shortest form that is still true. Add one block per question.",
+          "Best use cases — What is not included, how revisions work, who owns the files, what happens if the project pauses.",
+          "Writing effective content — Ask the question in the first person and answer it in the second. Two to four sentences. If the answer needs a list, that is a sign the question was two questions.",
+          "How the client experiences it — The client sees a row they can open, and the answer expands in place. It works without JavaScript and prints open, so a client who prints the proposal still gets the answers.",
+          "How Ask the helper improves it — Select the answer and ask for concise, friendly or formal — the FAQ is where the helper's tone actions matter most, because the answer is written for the client's worry rather than your record.",
+          "Common mistakes — Using the FAQ for marketing copy. Ten questions with the same answer. Answering a question the client never asked.",
+          "Mobile and accessibility — The question is a real expandable control, reachable by keyboard, and the answer is read after it. Do not hide essential terms only inside a collapsed answer.",
+        ],
+        bullets: [
+          "Properties: Question: the client's words",
+          "Properties: Answer: the response, with the selection toolbar",
+          "Properties: Collapsed by default, so the page stays short",
+        ],
+      },
+      {
+        heading: "Embedded question",
+        paragraphs: [
+          "Purpose — Asks the client something inside the document, so the answer is part of the thread instead of a separate form.",
+          "Where you find it — Left panel, under Blocks; the question settings are in the properties panel.",
+          "How to insert it — Choose the question element. It arrives with a short-text question and a type selector.",
+          "How to configure it — Write the question, choose the type, mark it required if the document cannot proceed without it, and allow the client to ask you something instead.",
+          "Best use cases — Two or three decisions you need before you can start: the launch date, the domain owner, which package they picked.",
+          "Writing effective content — Ask one thing. 'Which launch date do you want, and who owns the domain?' is two questions and will get one answer. Put the context in the paragraph above, not inside the field label.",
+          "How the client experiences it — The client sees the question with its input, an optional info icon, and a way to ask you instead of answering. Their answer is stored on the document and on the client record.",
+          "How Ask the helper improves it — Ask the helper to make a question direct, or to rewrite an explanation that sits behind the info icon. It edits the wording only; the question type and the required setting stay as you set them.",
+          "Common mistakes — Six questions in one proposal. Making everything required. Asking for information you already have in the client record.",
+          "Mobile and accessibility — Each question has a visible label tied to its input, and the info icon is a button with an accessible name. Choice options are grouped so a screen reader reads the set, not loose fields.",
+        ],
+        bullets: [
+          "Properties: Question text",
+          "Properties: Type: short text, long text, single choice, multiple choice, dropdown, file upload",
+          "Properties: Required: whether the client must answer",
+          "Properties: Allow a question back: an option on the client side",
+          "Properties: Options: for the choice types",
+        ],
+      },
+      {
+        heading: "File upload",
+        paragraphs: [
+          "Purpose — Lets the client send you a file from inside the document — a brief, a logo, a signed page.",
+          "Where you find it — Left panel, under Blocks; it is also available as a question type.",
+          "How to insert it — Choose File upload, then write the line that tells the client what you want.",
+          "How to configure it — Describe the file you need and any limit. Uploads count against your plan's storage, not against the document count.",
+          "Best use cases — A brand asset pack, a signed contract page, a photograph you need for the work, a spreadsheet of products.",
+          "Writing effective content — Say what the file is for and what format helps: 'The logo as SVG or PNG, please — not a screenshot of the logo.' One file is easier than five.",
+          "How the client experiences it — The client sees a drop target and a chosen-file state, then a confirmation once it uploads. On mobile the file picker opens their own files app.",
+          "How Ask the helper improves it — Ask the helper to make the instruction clearer, or to say why the file is needed. It cannot upload on the client's behalf, and it never reads the file.",
+          "Common mistakes — Asking for files you do not need yet. Not saying which format. Uploading your own file here instead of to the image element — this block is the client's side.",
+          "Mobile and accessibility — The upload is keyboard operable, reports progress and errors in text, and names the file once chosen. Do not require a drag gesture alone.",
+        ],
+        bullets: [
+          "Properties: Text: what to upload",
+          "Properties: Accepted kinds of file, by the question type",
+          "Properties: Required: whether the client can continue without it",
+        ],
+      },
+      {
+        heading: "Button",
+        paragraphs: [
+          "Purpose — A single call to action in the page: book a call, open the form, see the work.",
+          "Where you find it — Left panel, under Blocks.",
+          "How to insert it — Choose Button and write its label.",
+          "How to configure it — Keep the label to two or three words. One gold action per screen — the second button on the page is a secondary style.",
+          "Best use cases — A link to your calendar after the pricing, a link to the requirement form, a link to a case study that supports the proposal.",
+          "Writing effective content — Start with a verb: 'Book a call', 'Open the brief'. Never 'Click here'. If the label needs a sentence, the paragraph above it is missing.",
+          "How the client experiences it — The client sees a filled button in the brand colour and can reach it by keyboard. On mobile it stays at least a finger-width tall.",
+          "How Ask the helper improves it — Select the label and ask for concise or change the wording when two buttons on the page say almost the same thing. Short labels are where the helper is least needed and most useful.",
+          "Common mistakes — Two gold buttons on one page. Buttons that lead nowhere. A button used as a heading.",
+          "Mobile and accessibility — The control is a real button or link with an accessible name, a visible focus ring and a target large enough to tap. Never use colour alone to show it is clickable.",
+        ],
+        bullets: [
+          "Properties: Label text",
+          "Properties: Colour: the brand primary on the primary style",
+          "Properties: Position: the block's place in the flow",
+        ],
+      },
+      {
+        heading: "Signature",
+        paragraphs: [
+          "Purpose — Closes a contract with the two parties and a line for each, without pretending to be an e-signature.",
+          "Where you find it — Left panel, under Blocks; contracts add it automatically at the end.",
+          "How to insert it — Choose Signature. It renders the freelancer and client lines side by side.",
+          "How to configure it — There is almost nothing to configure: the parties come from the document and the profile. Keep it last, after the terms.",
+          "Best use cases — The end of every contract, and the end of a proposal that is being used as a signed agreement.",
+          "Writing effective content — Nothing to write here. The sentence above the signature is where you say plainly that approval on the page is approval of the terms, and that it is not a qualified electronic signature.",
+          "How the client experiences it — The client sees two ruled lines with labels. On mobile they stack, freelancer first.",
+          "How Ask the helper improves it — No content for the helper to rewrite. If the closing sentence needs work, that is a paragraph block above the signature.",
+          "Common mistakes — Claiming legal e-signature status. Putting the signature before the terms. Adding your own name twice.",
+          "Mobile and accessibility — Each line has a text label, so the block is understandable without seeing the rule. The signature itself is not an interactive control.",
+        ],
+        bullets: [
+          "Properties: Parties: freelancer and client",
+          "Properties: Line and label styling from the design system",
+        ],
+      },
+      {
+        heading: "Next step",
+        paragraphs: [
+          "Purpose — Ends the document with the one instruction the client needs at the moment they decide.",
+          "Where you find it — Left panel, under Blocks; the template ends with it.",
+          "How to insert it — Choose Next step and write the line.",
+          "How to configure it — Write what happens next in plain words — reply to this link, book the call, expect the contract within a day. Contact details come from your profile.",
+          "Best use cases — The close of every proposal and contract, and the last screen before an invoice.",
+          "Writing effective content — One sentence, one action. 'Reply here and I will send the contract today' beats 'We look forward to hearing from you at your earliest convenience'.",
+          "How the client experiences it — The client sees a bordered closing block with your line and your contact details. It is the last thing on the page and the first thing they can act on.",
+          "How Ask the helper improves it — Ask the helper to make the close direct, or to remove the hedging. This is the block where a friendly rewrite changes the reply rate most.",
+          "Common mistakes — Ending without one. Using it for a second sales pitch. Repeating the pricing that was two screens above.",
+          "Mobile and accessibility — The closing text is body text at a readable size, and the contact details are selectable rather than images.",
+        ],
+        bullets: [
+          "Properties: Text: the next step",
+          "Properties: Contact details: from your profile",
+          "Properties: Position: last block in the document",
+        ],
+      },
+      {
+        heading: "Shape",
+        paragraphs: [
+          "Purpose — Adds a purely visual mark: a dot, a rule, a background accent that separates ideas.",
+          "Where you find it — Left panel, under Blocks; the shape style is set in the properties panel.",
+          "How to insert it — Choose Shape. It renders small, in the brand colour, at the block's place in the flow.",
+          "How to configure it — Choose the shape style. It carries no text, so there is nothing else to set.",
+          "Best use cases — A small accent beside a heading, a marker between phases, a divider that is softer than a rule.",
+          "Writing effective content — No content. A shape with words in it is a card or a quote.",
+          "How the client experiences it — The client sees a small coloured mark where the block sits, at the document's spacing.",
+          "How Ask the helper improves it — Not applicable: the shape has no words.",
+          "Common mistakes — Using shapes as decoration on every page. Using a shape where a real divider is clearer. Sizing it by uploading an image instead.",
+          "Mobile and accessibility — Decorative and skipped by assistive technology. It must never be the only thing that separates two sections for a screen reader.",
+        ],
+        bullets: [
+          "Properties: Shape style: circle or square",
+          "Properties: Colour: the brand primary",
+          "Properties: Size: the block's default size",
+        ],
       },
     ],
   },
@@ -456,7 +768,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "How the template's zones decide where a visual goes, and how to edit it.",
     category: "Product",
     readMinutes: 4,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "BuilderVisual",
     sections: [
       {
@@ -482,7 +794,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The palette, the type scale, the spacing and the components, and why they look like this.",
     category: "Product",
     readMinutes: 5,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "PricingVisual",
     sections: [
       {
@@ -515,7 +827,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "What is recorded on each plan, how to read the activity, and the five-day reduction.",
     category: "Follow-ups",
     readMinutes: 4,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "DashboardVisual",
     sections: [
       {
@@ -548,7 +860,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "Follow-ups, document suggestions, interest flags and the price suggestion.",
     category: "Follow-ups",
     readMinutes: 4,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "SuggestionVisual",
     sections: [
       {
@@ -590,6 +902,71 @@ const BASE_GUIDES: Guide[] = [
           "The Free and the Starter: the basic suggestions (the admin's default). The Growth: the basic suggestions + the saved FAQs + the saved packages. The Scale: the advanced suggestions (the user's own pattern). The Teams: the Scale's + the team's. The suggestions are on every plan. The plan decides the depth: the default, the reusable, the learned, the team's. Every freelancer gets the suggestions; the plan decides how smart they are.",
         ],
       },
+      {
+        heading: "The follow-up, and how its date is chosen",
+        paragraphs: [
+          "The follow-up is the simplest suggestion and the one people act on most. It appears when a proposal has been sent and the client has not replied in a while. On Growth and below, the wait is the product default: two days. On Scale it is your own median delay, calculated from the follow-ups you have actually made. If you wait four days on average, the card waits four days; if you follow up the next morning, it does too.",
+          "The card carries the client, the document, the days since it was sent, and a line you can send. It does not send the message. You copy it into your own email or WhatsApp, and the log records that you followed up. That is the shape of every suggestion in the product: a card, a line, and a click that starts your own work.",
+        ],
+      },
+      {
+        heading: "The document suggestion",
+        paragraphs: [
+          "A client agrees. In a message, in a call you noted down, or by approving a proposal. The next artifact in the thread is a contract, and the suggestion says so with a link that opens the contract builder with the client already chosen and the scope carried over.",
+          "On Scale the trigger is your own pattern rather than a fixed rule. If your accounts usually move from an answered proposal straight to a contract, that is the shape the suggestion follows. If they usually move through a call first, the suggestion waits for the note that a call happened. The suggestion is reading your method, not a generic funnel.",
+        ],
+      },
+      {
+        heading: "The interest flag",
+        paragraphs: [
+          "The interest level is arithmetic: the number of messages, the last direction, whether the proposal was opened, whether it was answered, whether the contract was approved, whether the invoice was paid, the days since the last interaction, and whether you marked the client not interested. Out of that comes a number, and the flag appears when the number is high and the client has gone quiet, or when you marked them not interested and the activity says otherwise.",
+          "The flag is not a prediction. It is a mirror of behaviour that already happened. A client at eighty per cent who has not replied in nine days is a client worth one more message; that is all the number claims.",
+        ],
+      },
+      {
+        heading: "The form reminder",
+        paragraphs: [
+          "A client opened the requirement form and did not submit it. Three days later, the reminder appears with the form, the date it was opened and the questions that were reached. That last part is the useful one: a client who stopped at the budget question is telling you something different from a client who stopped at the first field.",
+          "The reminder does not resend the form. It gives you the link and the line, and you decide whether to nudge, to shorten the form, or to let it go.",
+        ],
+      },
+      {
+        heading: "The price suggestion",
+        paragraphs: [
+          "On Scale, when you start a new proposal for a client you have invoiced before, the price suggestion reads three things: the expenses recorded against that client's work, the last invoice you raised, and the margin you set. It returns a number and the arithmetic behind it, so you can accept it, adjust it, or ignore it.",
+          "It is the only suggestion that produces a figure, and it is the one that most needs the working shown. A number without its inputs is a guess; a number with the expenses, the last invoice and the margin beside it is a decision you can check.",
+        ],
+      },
+      {
+        heading: "The reopen",
+        paragraphs: [
+          "A client you marked not interested comes back: they open a document, they reply, the interest climbs. The reopen suggestion appears with the date you closed the account and the activity since, and a line that acknowledges the gap without apologising for it.",
+          "This is the suggestion that saves the most value per click, because the relationship already exists and the reason it paused has usually expired. It also shows why the record is the product: nothing here would be possible if the decision had not been written down.",
+        ],
+      },
+      {
+        heading: "What makes a suggestion arrive",
+        paragraphs: [
+          "Signals, not guesses. A proposal sent. A proposal opened. A proposal answered. A contract approved. An invoice paid. A form opened. A message logged in either direction. A note with a next step. The product reads those events, counts them, and compares them with the timing that fits your plan: the default on Growth, your own pattern on Scale.",
+          "That is the whole mechanism. Keyword matching, frequency counting, arithmetic. There is no model deciding what you should do next, and no content leaving the product to decide it. Two freelancers with different histories get different suggestions because the arithmetic is over different histories.",
+        ],
+      },
+      {
+        heading: "What a suggestion never does",
+        paragraphs: [
+          "It never sends anything. There is no queue, no automation, no scheduled message that goes out while you are asleep. The suggestion hands you the line and the link, and you send it from your own account.",
+          "It never creates a document. The contract suggestion opens the contract builder; it does not publish a contract. It never edits a document you have written, never marks a client as interested on its own, and never deletes the record of a conversation.",
+          "It also never hides its reason. Every card names the signal that produced it — the document, the date, the days, the number — so you can disagree with it. A suggestion you cannot audit is a suggestion you stop reading.",
+        ],
+      },
+      {
+        heading: "Reading a suggestion critically",
+        paragraphs: [
+          "The first question is always whether the signal is true. A proposal marked sent that the client never received will produce a follow-up that reads oddly, and the fix is the log, not the card. The second question is whether the timing fits this client: some accounts move in hours, some in weeks, and a card that fires early is not wrong, just early.",
+          "The third question is whether the action is the one you want. A follow-up, a contract, a price change: each is a decision about the relationship, and the product is only ever offering the next step it can count. You are allowed to ignore every suggestion on the page and still have the thread work. The record is the product; the suggestions are the intelligence on top of it.",
+          "The fourth question is whether it is worth the interruption. A card that appears every morning and never needs action teaches you to stop reading cards. The suggestions that survive are the ones you dismiss once and stop seeing: the card respects the dismissal, and the next time it appears, the signal has actually changed.",
+        ],
+      },
     ],
   },
   {
@@ -598,7 +975,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "Built-in templates, your own HTML, a URL, or a blank page.",
     category: "Proposals",
     readMinutes: 4,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "BuilderVisual",
     sections: [
       {
@@ -630,7 +1007,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "Profile, appearance, plan, security, notifications, saved libraries and the transparency page.",
     category: "Product",
     readMinutes: 5,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "SecurityVisual",
     sections: [
       {
@@ -669,7 +1046,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "What is stored, who can see it, how long it stays, and how to export or delete it.",
     category: "Product",
     readMinutes: 5,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "SecurityVisual",
     sections: [
       {
@@ -702,7 +1079,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The activation email, a document that will not open, and a payment proof that was rejected.",
     category: "Product",
     readMinutes: 4,
-    updated: "2026-11-01",
+    updated: "2026-11-16",
     visual: "CodeScreenVisual",
     sections: [
       {
@@ -743,7 +1120,7 @@ const BASE_GUIDES: Guide[] = [
       "Your previous patterns, the search engines, the pattern engine, the UI engines, the old proposals, and the details you add in the form.",
     category: "Product",
     readMinutes: 9,
-    updated: "2026-11-15",
+    updated: "2026-11-16",
     visual: "BuilderVisual",
     sections: [
       {
@@ -804,7 +1181,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "The document is not a template. It is your pattern, your research, your structure, your precedent, your visual language, and your form details, in one document. The six sources are the document. The form is the foundation. The patterns are the memory. The search engines are the research. The pattern engine is the structure. The old proposals are the precedent. The UI engines are the visual language.",
           "The document is editable. You can change anything. The product is the pen; you are the author. The template is the starting point; the document is yours. The next step: the template, the edit, the preview, the link, the share. The client opens the link, reads the document, answers the questions, selects the package. The thread continues.",
-          "The product does not use AI. It uses patterns, search engines, and UI engines. The patterns are your own. The search engines are the research. The UI engines are the visual language. The document is the thread's first artifact. The thread is the product. Your work should speak, not you.",
+          "The product does not lean on an assistant for its suggestions. It uses patterns, search engines, and UI engines. The patterns are your own. The search engines are the research. The UI engines are the visual language. The document is the thread's first artifact. The thread is the product. Your work should speak, not you.",
         ],
       },
     ],
@@ -816,7 +1193,7 @@ const BASE_GUIDES: Guide[] = [
       "Why Revercue's paid plans are invite-only, what the waitlist means, and how the invite works.",
     category: "Pricing",
     readMinutes: 7,
-    updated: "2026-11-15",
+    updated: "2026-11-16",
     visual: "PricingVisual",
     sections: [
       {
@@ -879,7 +1256,7 @@ const BASE_GUIDES: Guide[] = [
       "What an active document is, what counts against the limit, what does not, and how the password-protected and adaptive forms follow the same rule.",
     category: "Pricing",
     readMinutes: 6,
-    updated: "2026-11-15",
+    updated: "2026-11-16",
     visual: "DashboardVisual",
     sections: [
       {
@@ -934,7 +1311,7 @@ const BASE_GUIDES: Guide[] = [
       "The five plans, what each one adds, and the limits that actually change how you work.",
     category: "Pricing",
     readMinutes: 6,
-    updated: "2026-11-15",
+    updated: "2026-11-16",
     visual: "PricingVisual",
     sections: [
       {
@@ -964,6 +1341,280 @@ const BASE_GUIDES: Guide[] = [
         heading: "What happens when a document expires",
         paragraphs: [
           "The documents are rented; the client record is owned. When retention runs out, the document is deleted — but a PDF is emailed to you before the deletion, and the CRM record, the communication log and the notes stay. The thread survives the document. That is the difference between renting a document and owning the relationship.",
+        ],
+      },
+      {
+        heading: "How a limit is actually counted",
+        paragraphs: [
+          "Every plan limit is counted the same way, at the same moment, from the same table. The active documents are the published ones with a live link. The password does not create a second document, so a password-protected proposal counts once. The branching on a form does not create a second form, so an adaptive form counts once. The draft is not published, so it counts against nothing but the draft clock. The archive is not live, so it counts against the archive allowance instead.",
+          "That single rule removes most of the confusion people bring from other products. Here, archiving a proposal is housekeeping that buys you room. There, the same action is a paid feature or a permanent delete. The count goes down the moment the link closes, and the document is still there if the client comes back.",
+          "The counting also explains the sub-limits. Growth allows 100 active documents, of which 15 may carry a password and 3 may be adaptive. The 15 and the 3 are ceilings inside the 100, not additions to it. A plan can be full on passwords and still have room for forty more proposals without one. That is why the settings page shows four bars and not one: documents, storage, archive and password-protected each move on their own.",
+        ],
+      },
+      {
+        heading: "What retention means in practice",
+        paragraphs: [
+          "Retention is the life of the document after it is published, not the life of the account. Free keeps a document for one month; Starter for three; Growth for twelve; Scale for twenty-four; Teams for thirty-six. The clock starts when the document is published, not when the draft was created.",
+          "When the clock runs out the document is deleted, and a PDF of it is emailed to you first. The client record is untouched: the notes, the communication log, the follow-ups and the linked activity stay. This is the sentence worth remembering from the whole pricing page: the documents are rented, the client record is owned. You are not paying to keep a relationship alive; you are paying to keep the artifact live for longer.",
+          "Drafts have their own clock, and it is shorter: ten days on Free, thirty on Starter, fifty on Growth, eighty on Scale and Teams. A draft that is never published is deleted quietly, because an unpublished document costs storage and is not part of the thread yet.",
+        ],
+      },
+      {
+        heading: "Choosing between Starter and Growth",
+        paragraphs: [
+          "The honest answer is that most freelancers choose on one of two things: how many proposals are live at once, or whether the client page carries your brand alone. Starter gives you twenty documents, three custom templates and email notifications. Growth gives you a hundred documents, ten templates, ten saved FAQs, ten saved packages, three adaptive forms, fifteen password-protected documents and no Revercue branding on the client pages.",
+          "If you send two proposals a week and archive the dead ones, Starter is enough room for a long time. If you run a pipeline where a dozen clients are deciding at once, or if the client page is part of how you sell, Growth is the plan that stops the ceiling from being the thing you think about.",
+          "Growth is also where the reusable content starts: the FAQ you answer most often, the package you sell most often, both saved once and pulled into the next document. That saving is not about features; it is about the number of times you type the same paragraph in a month.",
+        ],
+      },
+      {
+        heading: "Choosing Scale",
+        paragraphs: [
+          "Scale is the plan for the freelancer who has stopped asking how many documents fit and started asking what the account knows. Three hundred active documents, twenty-four months of retention, five gigabytes of storage, fifty password-protected documents and fifteen adaptive forms are the room. The interest level, the revenue tracker, the expense entry, the price suggestion and the what-revercue-knows page are the intelligence.",
+          "The price suggestion is the clearest example. It reads the expenses you recorded, the last invoice you raised and the margin you set, and it suggests a number for the next proposal. That suggestion is arithmetic over your own data, and it can only exist if you have been recording the data. Scale is the plan that pays you back for using the record.",
+          "The same is true of the advanced suggestions: the follow-up timing becomes your own median delay instead of the product's default, and the document suggestions follow your own intent-to-document pattern instead of a generic one. Nothing new is invented; the plan changes whose pattern the product reads.",
+        ],
+      },
+      {
+        heading: "Teams, and what beta means",
+        paragraphs: [
+          "Teams carries everything on Scale and adds the handoff: the Handoff Dashboard, the roles, the bulk transfer and the audit log, with five hundred active documents and thirty-six months of retention. It is in beta, which means the team features are being tested with a small group and will change as that group uses them.",
+          "Joining the beta is not joining the waitlist. The waitlist is the queue for the paid solo plans. The beta is the test for the team features. Both are invitations, and neither is a checkout.",
+        ],
+      },
+      {
+        heading: "Upgrading, downgrading, and the waitlist",
+        paragraphs: [
+          "The paid plans are invite-only in this fresh state. You join the waitlist with your email, the plan you want and why; the team reads the entries and invites people when it can support them properly. An invitation is an email that says what happens next, not a payment link.",
+          "Downgrades take effect at the end of the cycle. Documents above the new limit are archived rather than deleted, so the links close but nothing is lost. If you go from a hundred live documents to twenty, eighty of them move to the archive and the archive allowance of the lower plan applies. That is the moment the archive limit matters most, and it is why the archive is counted separately.",
+          "Nothing on the pricing page is a trial. Free is free forever, with limits. The paid plans are the same product with more room and more intelligence, and the invitation is how the team keeps the room honest.",
+        ],
+      },
+      {
+        heading: "What the plan never changes",
+        paragraphs: [
+          "The thread is the same on every plan. The proposal, the contract, the form, the invoice and the client record work identically; the client pages look the same; the interactive link is the interactive link. The free plan is not a demo with the product switched off. The only differences are quantity, retention, storage and the depth of the suggestions.",
+          "That is a deliberate shape. A freelancer on Free can send a proposal to a real client this afternoon and look exactly as professional as a freelancer on Scale. The upgrade is about how much you can keep and how much the product can learn from you, not about whether the work is good enough to send.",
+          "The last thing worth saying about plans is that the limits are honest in both directions. Nothing expires because a timer ran out on a plan you never chose, nothing is charged without an invitation, and nothing you have written is held hostage. If you stop paying, the documents archive and the record stays. The product is trying to be the cheapest part of the relationship, and the pricing page is written to be read once, not re-checked every month.",
+          "If you only remember one line from this guide, remember the order: first the thread, then the room it needs. Start on Free, send a real proposal, watch where the limit actually bites — active documents, storage or retention — and choose the plan that answers that specific bite. Paying for room you do not use is the only genuinely bad plan decision there is.",
+        ],
+      },
+      {
+        heading: "Storage, and what actually fills it",
+        paragraphs: [
+          "Storage is simpler than it looks: it counts the files you upload, not the documents you build. A proposal with forty blocks and three charts is text and layout, and text is close to free. The storage bar moves when you add a logo, a client's brand asset, a photographed page, an uploaded PDF in a form submission, or an image inside a document. Five gigabytes on Scale is a lot of logos and a fair number of photographs.",
+          "The practical advice is to compress before uploading and to delete the file you replaced. A logo that was replaced three times is three files until someone cleans up. The settings page shows the usage; the file itself is deleted when you delete the document that used it, and the draft that was never published takes its files with it.",
+          "If the bar is close to full and you do not want to upgrade, the answer is almost always a replaced asset or an archived document with a large image, not a document you need. Archives still hold their files until the archive window closes.",
+        ],
+      },
+      {
+        heading: "The archive, and why it is separate",
+        paragraphs: [
+          "The archive is a parking space with its own allowance and its own clock: five documents for fifteen days on Free, fifteen for thirty on Starter, thirty for thirty on Growth and above. Archiving closes the public link, keeps the document and its content, and returns the active-document slot immediately. The client who opens an archived link sees a closed page, not a broken one.",
+          "It is separate because the two limits answer different questions. The active limit asks how many conversations are open. The archive limit asks how much closed work you are keeping. A freelancer can be at five of five active with an empty archive, or at two of five active with five archived documents waiting for a decision. The bars tell you which problem you have.",
+          "The archive is also the safe way to handle a downgrade. When a plan change lowers the active limit, the excess is archived rather than deleted, so nothing is destroyed by a billing decision. You can unarchive a document later if a slot opens, and the link comes back with the same address.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ask-the-helper",
+    title: "Ask the helper",
+    excerpt:
+      "Select a sentence, ask for a rewrite, and decide whether to take it. What the helper can do, what it will not do, and where it runs.",
+    category: "Product",
+    readMinutes: 9,
+    updated: "2026-11-16",
+    visual: "BuilderVisual",
+    sections: [
+      {
+        heading: "A tool you point at a sentence",
+        paragraphs: [
+          "The helper is the inline assistant inside the builders. It is not a chat window and it is not a separate product. It works on one thing at a time: the text you have selected. You are writing the introduction of a proposal, the scope of a contract, the notes on an invoice, the description of a form. You write a sentence, you read it back, and something about it is not right. That is when you use the helper.",
+          "The design is deliberate. A writing assistant that can change your whole document is a writing assistant you have to watch. A writing assistant that answers one selected passage, shows you the before and the after, and waits is one you can trust. The helper is the second option.",
+        ],
+      },
+      {
+        heading: "How the flow works",
+        paragraphs: [
+          "Select a sentence or a paragraph in the text field. A small Ask the helper button appears beside the field. Click it and a panel opens with the quick actions and a box for your own instruction.",
+          "Choose an action, or type something specific: make it sound more confident, shorten it to two sentences, remove the jargon. The helper rewrites the passage and shows you both versions, the before above and the after below, so you can read them against each other instead of trusting a result you cannot see.",
+          "Then you choose. Replace puts the rewrite in place of the selection. Insert below keeps your original and adds the rewrite underneath, which is useful when you want both and will edit them together. Cancel closes the panel and changes nothing. You can also click into the original and adjust it yourself, with the panel still open, because the selection only moves when you select something new.",
+        ],
+      },
+      {
+        heading: "The seven quick actions",
+        paragraphs: [
+          "Make it formal removes the contractions and the casual asides without flattening the meaning. Make it friendly warms the opening and the close, which matters on a follow-up and matters less in a liability clause. Make it concise cuts the padding and keeps the facts, and it is the action most people use most.",
+          "Expand adds the detail the sentence implies but does not state; use it when a scope line is too thin to protect you. Fix the grammar repairs the agreement, the tense and the punctuation, and changes nothing else. Simplify breaks a long sentence into shorter ones and replaces the jargon. Change the wording rewrites the same idea in different words, which is what you want when a sentence is correct but reads awkwardly.",
+        ],
+      },
+      {
+        heading: "Where it runs, and what that means for your data",
+        paragraphs: [
+          "The helper runs on your device. The changing work is done on your device, which means it never goes to a Revercue server. The text you select is never sent to Revercue, never sent to the team, and never stored in the database. It does not leave your browser at any point in the flow, not when you select it, not when you ask, not when you accept the rewrite.",
+          "The team cannot read the passage you selected, the rewrite that came back, or the document you are editing. The team sees the account details — your email, your name, your plan and your usage — and nothing of the content. That distinction is the point: the content is yours, and the helper is the tool that works on it, on your device.",
+        ],
+      },
+      {
+        heading: "What it will not do",
+        paragraphs: [
+          "It will not change the document on its own. There is no mode where the helper edits while you are not looking. Every change goes through Replace or Insert below, and both are clicks you make.",
+          "It will not invent facts. It rewrites what is in front of it. If your scope does not mention a revision limit, the helper will not add one, because a number it made up is a number you would have to honour. If the passage is missing something, the post-document review is where you find out, not the helper.",
+          "It will not rewrite the whole document at once. Select a passage, work on it, select the next one. A document written that way still sounds like a person wrote it, because a person chose every line.",
+        ],
+      },
+      {
+        heading: "Where you will find it",
+        paragraphs: [
+          "In the proposal builder, on the text of a heading, a paragraph, a quote, a card, a next step, and on an FAQ answer. In the contract builder, on the same blocks and on the clause text. On an invoice, on the notes to the client. In the form editor, on the description and on a question's explanation. Anywhere the product asks you to write prose, the helper is one selection away.",
+          "It is also the thing behind the writing area in the CRM, where you plan a message before you copy it into your own email or WhatsApp. There the helper suggests a warmer opening or a clearer ask, and you decide what to keep before anything leaves your hands.",
+        ],
+      },
+      {
+        heading: "When the button is not there",
+        paragraphs: [
+          "Some browsers and some devices cannot run the helper. In that case the button is simply not rendered: no warning, no broken control, no message about compatibility. The text fields keep working exactly as before, and you write the passage yourself. Nothing else in the builder depends on the helper, so the product is whole without it.",
+          "This is a quiet choice on purpose. A feature that cannot run should not announce itself in the middle of your work. It should be absent, and the work should continue.",
+        ],
+      },
+      {
+        heading: "The habit worth building",
+        paragraphs: [
+          "Write the sentence badly first. Get the fact down, in whatever words arrive, and then select it and ask for concise or formal. Most of the value of the helper is not in the first draft; it is in the second pass, when you already know what the sentence has to say.",
+          "Keep the rewrite you did not use. Insert below is not a compromise; it is a way to keep two versions of a line and choose later, when you have read the whole document and know which voice fits. The helper is a pen, not the author. You are the author.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "post-document-analysis",
+    title: "The post-document review",
+    excerpt:
+      "The review that runs after Create: a score out of 100, the issues behind it, and what to do with them before you send.",
+    category: "Product",
+    readMinutes: 9,
+    updated: "2026-11-16",
+    visual: "DashboardVisual",
+    sections: [
+      {
+        heading: "What runs after Create",
+        paragraphs: [
+          "You press Create. The document is published to its link, and then the review runs. It reads what you just built and gives you two things: a quality score out of 100, and a list of the issues that produced it. The review appears once, in front of you, before the share modal. You read it, decide, and either go back into the builder or publish anyway.",
+          "The score is not a grade on your work and it is not a gate. Publishing is a button on the same panel. The review exists because most documents are sent within a minute of being written, and a minute is not enough time to notice that the pricing block is missing or that the close is three screens down.",
+        ],
+      },
+      {
+        heading: "The two layers",
+        paragraphs: [
+          "The pattern engine checks the structure. It looks at the sections you said you wanted and the sections that actually exist, the presence of the pricing, the presence of a next step, the length of the document against the length you chose, the tone you set against the words on the page, and the repetition of a line in two places. Those checks are arithmetic and comparison; they do not need to read for meaning.",
+          "The helper checks the prose, when it can run. It reads the text for readability, flow and clarity, and returns one short note rather than a rewrite. That note is attached to the same list. The changing work is done on your device, which means it never goes to a Revercue server; the text is not sent anywhere to produce the note.",
+          "The two layers are separated on purpose. Structure problems are objective: a missing pricing block is missing whether or not the writing is good. Prose problems are judgment, and they come from a different place.",
+        ],
+      },
+      {
+        heading: "The score bands",
+        paragraphs: [
+          "Eighty and above is ready. The sections are there, the pricing is there, the close is there, and nothing in the prose stalled the read. Send it.",
+          "Fifty to seventy-nine is good with a few improvements. Usually one thing is missing: a next step, a pricing block, or a section you chose but never wrote. The list tells you which; fixing it takes a minute and moves the score.",
+          "Under fifty is not ready. More than one structural piece is absent, or the document is far shorter than the shape you chose. That is not a failure, it is an unfinished draft that was published by accident. Keep editing is the right answer.",
+        ],
+      },
+      {
+        heading: "The three tags",
+        paragraphs: [
+          "From this client's history: the issue comes from the shape of this relationship — the document is not linked to a client record, the length is short for a first proposal to this client, the client's previous documents ran longer. These are the issues a colleague who knows the account would raise first.",
+          "From your usual method: the issue comes from how you normally work — a section you usually include is empty, a sentence pattern you usually avoid has crept in, the formal tone has contractions in it. These are the issues you would notice yourself on a second read.",
+          "From what works: the issue comes from the shape of the accepted documents across the product — no pricing block, no clear next step, a paragraph long enough to lose the reader, a repeated line. These are the issues that do not depend on who you are.",
+        ],
+      },
+      {
+        heading: "What it checks, and what it does not",
+        paragraphs: [
+          "It checks the structure, the sections, the pricing, the timeline, the tone consistency, the call to action, the length against the shape you chose, the paragraphs that run long, the sentences that run long, a repeated line, and whether the document is linked to a client.",
+          "It does not check whether the price is right, whether the timeline is achievable, or whether the client will say yes. It does not check the legal sufficiency of a clause, and it does not replace a read. It also does not block: there is no state in which the product refuses to publish because the score is low.",
+        ],
+      },
+      {
+        heading: "How to use it well",
+        paragraphs: [
+          "Read the list twice. The first pass, fix what is missing, because a missing section is the difference between a document and a fragment. The second pass, read the prose notes and decide which ones you agree with. Some will be wrong for this client, and that is fine: the review is a second pair of eyes, not the final word.",
+          "Then publish. A document with a score of seventy-two that goes out today beats a document with a score of ninety that goes out on Friday afternoon. The score measures the document, not the relationship.",
+          "If you publish anyway, nothing is recorded against you and nothing is hidden. The review is a mirror, and a mirror does not keep a record of what it saw.",
+        ],
+      },
+      {
+        heading: "The bands are not the product",
+        paragraphs: [
+          "The number is a summary of the checks, and a summary always loses something. A document at eighty-two can still be the wrong proposal for the wrong client, and a document at fifty-eight can be exactly what the client asked for in three lines. Treat the score as a checklist pressure, not a verdict.",
+          "What you are actually buying from the review is the pause. It is the thirty seconds between writing and sending, in which someone — even a pattern — asks whether the pricing is on the page and whether the client has anywhere to click. Most of the value of a review is that it happens at all.",
+          "The review also leaves a trace you can compare. Publish three proposals in a week and the scores tell you which shape you write well and which one you rush. That is not a ranking of you; it is a pattern in your own work, and the pattern engine is good at exactly that kind of counting.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "communication-log",
+    title: "The communication log",
+    excerpt:
+      "The timeline inside the client record: what an entry holds, what reads it, and why the log is the memory of the thread.",
+    category: "Product",
+    readMinutes: 9,
+    updated: "2026-11-16",
+    visual: "DashboardVisual",
+    sections: [
+      {
+        heading: "The record is the body, the log is its memory",
+        paragraphs: [
+          "Every client record has a communication log. It is the main body of the page, below the summary and beside the documents. Each line is one moment in the relationship: a message you sent, a reply you received, a follow-up you made, a document you created, a document you shared. Put together, those lines are the history of the account.",
+          "The log exists because the thread is not only the documents. A proposal, a contract, an invoice: those are the artifacts. The reason the client said yes, the thing they asked on a call, the day you promised to send the revision — that is the log. Without it the client record is a folder. With it, the record is the account.",
+        ],
+      },
+      {
+        heading: "What an entry holds",
+        paragraphs: [
+          "Direction: outgoing or incoming. It is the difference between what you said and what they said, and it changes how you read a silence.",
+          "Channel: email, WhatsApp, phone, or in person. The channel tells you where to look for the original and how the client prefers to be reached, which is the single most useful fact in an account.",
+          "The message itself, short and in your own words. It is not a copy of the email; it is the note that lets you remember the email a month later.",
+          "The estimated time, so a follow-up due today can be sorted against one due next week. The linked document, so the entry and the proposal are one thought. The next step, because a log without a next step is a diary. The follow-up date, so the record can surface it on the day.",
+        ],
+      },
+      {
+        heading: "Adding an entry takes fifteen seconds",
+        paragraphs: [
+          "Open the client record, add the entry, choose the direction and the channel, write the line, set the next step and the date. If the message went out through your own email, paste nothing: the log is not the inbox, and the line is enough. If the client answered a document, link the document and the entry reads as the response to it.",
+          "The discipline is to add the entry when you send, not later. Fifteen seconds at the send is worth an hour of reconstruction in three weeks, and the reconstruction is always worse: you remember the tone, not the date, and the date is the part that matters.",
+        ],
+      },
+      {
+        heading: "What reads the log",
+        paragraphs: [
+          "The interest level reads it. The message count, the last direction, the days since the last interaction: an account with three unanswered messages is not the same as an account that replied yesterday, and the level says so without you counting.",
+          "The suggestions read it. A proposal sent with no reply becomes a follow-up suggestion; a client who agreed in a message becomes a contract suggestion. The suggestion is late or early depending on what the log knows.",
+          "The fifteen-day summary reads it. Open a client record on Scale and the summary tells you what was sent, what the client did, and what is next — written from the entries, not invented. If the log is thin, the summary is thin, and that is honest.",
+        ],
+      },
+      {
+        heading: "The timeline, not the inbox",
+        paragraphs: [
+          "The log is a record, not a mail client. It does not receive messages, it does not send them, and it does not sync with your inbox. You write the line that matters. That is why it stays readable: an inbox is everything, and a log is the part worth keeping.",
+          "It also means the log survives a deleted document. When retention runs out and the proposal is deleted, the entries that mention it stay. The document is rented; the record — and its log — is owned.",
+        ],
+      },
+      {
+        heading: "Editing, and privacy",
+        paragraphs: [
+          "You can edit an entry and you can delete one. Correcting a date is normal; deleting a mistake is normal. The log is your record of the account, and a record you cannot correct stops being used.",
+          "The log is private to the account. The team does not read it; the team sees the account details for support and billing, not the communication. The client does not see it either: the client sees the documents, never the notes about them.",
+        ],
+      },
+      {
+        heading: "The habit that makes the thread work",
+        paragraphs: [
+          "Write the log for the version of you who will open this record in six weeks and remember nothing. What was sent, what came back, what was promised, and when you said you would speak again. Four facts, one line.",
+          "Do that and the suggestions get sharper, the interest level gets truer, and the summary reads like someone who was there. Skip it and the product still works, but the thread thins into documents with no memory. The documents are the thread's artifacts; the log is the thread's history.",
+          "One more habit: write the next step as an action you will take, not a state you hope for. Waiting for the client is not a next step; sending the revised scope on Thursday is. The record can only surface what you wrote down, and a sentence with a verb in it is the only kind it can act on. When the date arrives, the follow-up is there, the message is half written, and the account moves without you holding it in your head.",
+          "The log also makes the handover possible. If someone else picks up the account, or if you come back from a week away, the entries are the brief. Direction, channel, what was said, what is next: four lines, and the new reader knows where the relationship stands. That is what a client record is for, and it is the part no other tool in the stack holds for you.",
         ],
       },
     ],

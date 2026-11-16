@@ -1,4 +1,6 @@
 import { Pencil, Trash2, ArrowUp, ArrowDown, Copy } from "lucide-react";
+import { ElementToolbar } from "./ElementToolbar";
+import { RichText } from "./RichText";
 import type { Block } from "../../types";
 
 export interface BlockRendererProps {
@@ -10,6 +12,7 @@ export interface BlockRendererProps {
   onDuplicate?: () => void;
   onMoveUp?: () => void;
   onMoveDown?: () => void;
+  onPatch?: (patch: Partial<Block>) => void;
   brandPrimary?: string;
 }
 
@@ -22,6 +25,7 @@ export function BlockRenderer({
   onDuplicate,
   onMoveUp,
   onMoveDown,
+  onPatch,
   brandPrimary = "#c9a961",
 }: BlockRendererProps) {
   const content = (() => {
@@ -30,12 +34,16 @@ export function BlockRenderer({
         const Tag = block.level === "h1" ? "h1" : block.level === "h3" ? "h3" : "h2";
         return (
           <Tag style={{ textAlign: block.align, color: block.color }}>
-            {block.text || "Untitled heading"}
+            <RichText value={block.text || "Untitled heading"} />
           </Tag>
         );
       }
       case "paragraph":
-        return <p style={{ textAlign: block.align, color: block.color }}>{block.text || "Write the paragraph in the properties panel."}</p>;
+        return (
+          <p style={{ textAlign: block.align, color: block.color }}>
+            <RichText value={block.text || "Write the paragraph in the properties panel."} />
+          </p>
+        );
       case "quote":
         return (
           <blockquote
@@ -47,7 +55,7 @@ export function BlockRenderer({
               color: "#3a3a3a",
             }}
           >
-            {block.text || "A quote from the client or the brief."}
+            <RichText value={block.text || "A quote from the client or the brief."} />
           </blockquote>
         );
       case "list":
@@ -56,7 +64,7 @@ export function BlockRenderer({
             {(block.items?.length ? block.items : [{ label: "First item" }, { label: "Second item" }]).map(
               (item, index) => (
                 <li key={index} style={{ marginBottom: 4 }}>
-                  {item.label}
+                  <RichText value={item.label} />
                 </li>
               ),
             )}
@@ -89,7 +97,7 @@ export function BlockRenderer({
               ))}
             </div>
             <p className="caption" style={{ color: "#8a857a", marginTop: 6 }}>
-              {block.text || "Sample chart — replace the values in the properties."}
+              <RichText value={block.text || "Sample chart — replace the values in the properties."} />
             </p>
           </div>
         );
@@ -154,7 +162,7 @@ export function BlockRenderer({
               {block.faqs?.[0]?.question || block.text || "What is included?"}
             </summary>
             <p style={{ color: "#4a4a4a", fontSize: 12 }}>
-              {block.faqs?.[0]?.answer || "The answer the client reads on the page."}
+              <RichText value={block.faqs?.[0]?.answer || "The answer the client reads on the page."} />
             </p>
           </details>
         );
@@ -162,7 +170,7 @@ export function BlockRenderer({
         return (
           <div style={{ border: "1px solid #e5e1d8", borderRadius: 6, padding: 12, background: "#faf8f4" }}>
             <b style={{ fontSize: 12, color: "#1a1a1a" }}>
-              {block.question?.text || "An embedded question"}
+              <RichText value={block.question?.text || "An embedded question"} />
             </b>
             {block.question?.options?.length ? (
               block.question.options.map((option) => (
@@ -178,7 +186,7 @@ export function BlockRenderer({
       case "file_upload":
         return (
           <div style={{ border: "1px dashed #d8d2c4", borderRadius: 6, padding: 16, fontSize: 12, color: "#8a857a" }}>
-            Upload a file — {block.text || "images or PDFs"}
+            Upload a file — <RichText value={block.text || "images or PDFs"} />
           </div>
         );
       case "signature":
@@ -195,7 +203,9 @@ export function BlockRenderer({
       case "next_step":
         return (
           <div style={{ border: "1px solid #e5e1d8", borderRadius: 6, padding: 12, background: "#faf8f4" }}>
-            <b style={{ fontSize: 12, color: "#1a1a1a" }}>{block.text || "Next step"}</b>
+            <b style={{ fontSize: 12, color: "#1a1a1a" }}>
+              <RichText value={block.text || "Next step"} />
+            </b>
             <p style={{ fontSize: 12, color: "#4a4a4a", marginTop: 4 }}>
               Reply to move forward. The contact details come from your profile.
             </p>
@@ -219,7 +229,7 @@ export function BlockRenderer({
               <div key={index} style={{ fontSize: 12, color: "#3a3a3a" }}>
                 {column.map((line) => (
                   <p key={line} style={{ marginBottom: 4 }}>
-                    {line}
+                    <RichText value={line} />
                   </p>
                 ))}
               </div>
@@ -229,7 +239,9 @@ export function BlockRenderer({
       case "card":
         return (
           <div style={{ border: "1px solid #e5e1d8", borderRadius: 6, padding: 12 }}>
-            <b style={{ fontSize: 12, color: "#111" }}>{block.text || "Card title"}</b>
+            <b style={{ fontSize: 12, color: "#111" }}>
+              <RichText value={block.text || "Card title"} />
+            </b>
           </div>
         );
       case "button":
@@ -245,7 +257,7 @@ export function BlockRenderer({
               fontWeight: 600,
             }}
           >
-            {block.text || "Continue"}
+            <RichText value={block.text || "Continue"} />
           </span>
         );
       case "shape":
@@ -295,6 +307,13 @@ export function BlockRenderer({
         </button>
       </div>
       {content}
+      {onPatch && (
+        <ElementToolbar
+          block={block}
+          onChange={onPatch}
+          onRemove={() => onDelete?.()}
+        />
+      )}
     </div>
   );
 }

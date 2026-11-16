@@ -10,6 +10,7 @@ import { Modal } from "../../components/ui/Modal";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { Textarea } from "../../components/ui/Textarea";
+import { AskHelperTextarea } from "../../components/builder/AskHelperTextarea";
 import { Select } from "../../components/ui/Select";
 import { Checkbox } from "../../components/ui/Checkbox";
 import { Fieldset } from "../../components/ui/Fieldset";
@@ -413,7 +414,14 @@ export function FormEditorPage() {
           <div className="props-title">Form settings</div>
           <div className="stack-3">
             <Input id="form-title" label="Form title" value={title} onChange={setTitle} />
-            <Textarea id="form-description" label="Description" value={description} onChange={setDescription} rows={3} />
+            <AskHelperTextarea
+              id="form-description"
+              label="Description"
+              value={description}
+              onChange={setDescription}
+              rows={3}
+              helper="Select a sentence to rewrite it."
+            />
             <Select
               id="form-page-mode"
               label="Page mode"

@@ -51,9 +51,9 @@ export const FAQS: Faq[] = [
   {
     id: 5,
     group: "product",
-    question: "Does Revercue use AI?",
+    question: "Does any of my writing leave my device?",
     answer:
-      "No. The product uses patterns: keyword matching for the suggestions, frequency counting for the learned pattern, arithmetic for the interest level and the price suggestion. No AI model, no content sent to a third party. The footer has four buttons that open your AI tool (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled prompt about Revercue. The answer comes from your tool, not from us.",
+      "No. Every change the helper makes is done on your device, which means it never goes to a Revercue server. The text you select, the rewrite that comes back and the document you are editing stay in your browser; the team cannot read them and they are not stored in the database. The suggestions elsewhere in the product use patterns: keyword matching, frequency counting and arithmetic over your own record. The footer has four buttons that open an outside assistant (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled question about Revercue — the answer comes from that tool, not from us.",
   },
   {
     id: 6,
@@ -274,23 +274,23 @@ export const FAQS: Faq[] = [
   {
     id: 37,
     group: "documents",
-    question: "What are the UI elements?",
+    question: "What can I add to a document?",
     answer:
-      "The building blocks of the document: the heading, the paragraph, the image, the chart, the diagram, the icon, the pricing table, the timeline, the FAQ list, the embedded question, the button, the divider, the two-column layout. They are placed in the template's zones and filled by the pipeline. You can edit, move, or remove them.",
+      "Heading, paragraph, quote, list, image, graph, divider, spacer, card, two and three column rows, pricing table, packages, timeline, FAQ, embedded question, file upload, button, signature, shape and next step. Each one is inserted from the left panel and configured in the right panel; the ones that carry words also accept Ask the helper and the text formatting toolbar.",
   },
   {
     id: 38,
     group: "documents",
-    question: "What is the design system?",
+    question: "Can I change how my documents look?",
     answer:
-      "The set of colours, fonts, spacing, and components that every screen uses. The dark base (#0A0A0A), the gold accent (#C9A961), the serif headlines, the sans body, the mono for copyables. The components: the Button, the Input, the Card, the Badge, the Modal, the Table, the Toast, the Fieldset. Every screen uses them.",
+      "Yes, within the design system. You choose the brand primary and secondary colours, the page width, and per block the alignment, colour and inline formatting (bold, italic, underline, size, colour). You also choose the template you start from. The type scale and spacing stay fixed, so every document you send looks like the same product rather than a different deck each time. Custom font uploads are not part of the product.",
   },
   {
     id: 39,
     group: "documents",
-    question: "What is the code-made visual?",
+    question: "Are the screenshots on this site real?",
     answer:
-      "It is the product's UI rendered as a real component, not a screenshot. The public site shows the actual dashboard, the actual builder, the actual chart, built from the same code as the product. When the product changes, the marketing page changes. The visual is responsive and animated.",
+      "Yes. The visuals on this site are the real product components rendered live in the page — the dashboard, the builder, the chart and the client page — built from the same code as the app, not mocked images. When the product changes, the page changes with it. They are responsive and they animate.",
   },
   {
     id: 40,
@@ -326,7 +326,7 @@ export const FAQS: Faq[] = [
     group: "tracking",
     question: "What is the interest level?",
     answer:
-      "On Scale, it is a 0–100 score calculated from the client's behaviour: the message count, the last message direction, the proposal opened, the proposal answered, the contract approved, the invoice paid, the days since the last interaction, and whether you marked them not interested. It is arithmetic, not AI.",
+      "On Scale, it is a 0–100 score calculated from the client's behaviour: the message count, the last message direction, the proposal opened, the proposal answered, the contract approved, the invoice paid, the days since the last interaction, and whether you marked them not interested. It is arithmetic, not an assistant.",
   },
   {
     id: 45,
@@ -502,7 +502,7 @@ export const FAQS: Faq[] = [
   {
     id: 69,
     group: "crm",
-    question: "What is the writing area?",
+    question: "Where do I plan a message before sending it?",
     answer:
       "It is the form in the CRM where you plan the message you are about to send. You choose the client, write the message, and the helper (if available) suggests improvements and fixes the grammar. You copy the message and send it from your own email or WhatsApp. Revercue does not send.",
   },
@@ -539,7 +539,7 @@ export const FAQS: Faq[] = [
     group: "crm",
     question: "What is the interest breakdown?",
     answer:
-      "On Scale, it is the modal that shows the 0–100 score, the signals (the message count, the last direction, the proposal opened, the contract approved, the invoice paid, the days since), the arithmetic, and the one-line: \"This is arithmetic, not AI.\"",
+      "On Scale, it is the modal that shows the 0–100 score, the signals (the message count, the last direction, the proposal opened, the contract approved, the invoice paid, the days since), the arithmetic, and the one-line: \"This is arithmetic, not an assistant.\"",
   },
   {
     id: 75,
@@ -587,37 +587,37 @@ export const FAQS: Faq[] = [
   {
     id: 81,
     group: "design",
-    question: "What are the six states?",
+    question: "How do buttons respond when I click them?",
     answer:
-      "Every interactive element has six states: default, hover, focus (2px gold ring), active, disabled (50% opacity), loading (spinner), error (1px red border).",
+      "Every control answers in the same order: it lifts on hover, shows a gold focus ring when you reach it with the keyboard, presses in when clicked, sits at half opacity when disabled, shows a spinner while it works, and shows a red border plus a sentence when something fails. The same six answers on every screen, so nothing surprises you mid document.",
   },
   {
     id: 82,
     group: "design",
-    question: "What is the gold rule?",
+    question: "Why is only one button gold?",
     answer:
       "Gold is for one thing per screen: the primary action. If two gold buttons appear, one is wrong. The secondary is a ghost button.",
   },
   {
     id: 83,
     group: "design",
-    question: "Why serif for headlines?",
+    question: "What fonts do my documents use?",
     answer:
-      "The serif gives the product a document feel. The headline is the title of the page. The sans body is readable. The mono is for the copyable values.",
+      "A serif for headlines, a sans for body text, and a mono for values you copy such as invoice numbers and references. They come from the template and stay fixed, which is what makes two documents from the same account look related. What you can change is the weight, size and colour of a selection, from the toolbar that appears when you select text.",
   },
   {
     id: 84,
     group: "design",
-    question: "What is the Fieldset?",
+    question: "How are groups of options laid out?",
     answer:
-      "It is the component that groups related inputs. Every group of checkboxes, radios, or options lives in a Fieldset with a legend. This is the fix for the \"question and options disconnected\" failure.",
+      "The question sits above, then the options in one labelled group, one choice per line. A screen reader reads the question and then the set, never a loose field. Nothing is placed beside its own label, and nothing is spread across two columns on a narrow screen.",
   },
   {
     id: 85,
     group: "design",
-    question: "What is the empty state?",
+    question: "What will I see before I add anything?",
     answer:
-      "Every list, table, and feed has an empty state: a short headline, a description, and a CTA. It is not a placeholder; it is a first-class screen.",
+      "An empty screen that tells you the first action: a short headline, one sentence about what will appear here, and the button that starts it. The dashboard, the client list, the documents list and the builder all do this. Nothing pretends to have data, and nothing shows a fake row to look finished.",
   },
   {
     id: 86,
@@ -674,7 +674,7 @@ export const FAQS: Faq[] = [
     group: "support",
     question: "What browsers are supported?",
     answer:
-      "Recent versions of Chrome, Edge, Safari, and Firefox. The core product works on every modern browser. Some advanced features (the visual intelligence, the dynamic visuals) require a modern browser. If a feature is not available, the page shows a small notice: \"This feature is not available in your browser.\" The pattern engine is the fallback.",
+      "Recent versions of Chrome, Edge, Safari, and Firefox. The core product works on every modern browser: documents, clients, invoices and tracking. The helper inside the builders needs newer graphics support; where it cannot run, its button is not shown and the text fields work normally — there is no notice and nothing else changes. The suggestions are patterns, not the helper, and they work everywhere."
   },
   {
     id: 94,
@@ -700,9 +700,9 @@ export const FAQS: Faq[] = [
   {
     id: 97,
     group: "support",
-    question: "What are the footer buttons?",
+    question: "What do the footer links do?",
     answer:
-      "They open your AI tool (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled question about Revercue. The answer comes from your tool, not from us. The prompt is written by us, so the answer is about the product. If you want the official answer, read the FAQs, the Guides, or the Pricing page.",
+      "They open an outside assistant (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled question about Revercue. The answer comes from that tool, not from us. The prompt is written by us, so the answer is about the product. If you want the official answer, read the FAQs, the Guides, or the Pricing page.",
   },
   {
     id: 98,
@@ -716,14 +716,14 @@ export const FAQS: Faq[] = [
     group: "support",
     question: "Why is a feature not available in my browser?",
     answer:
-      "Revercue uses some modern browser technologies. These features are limited to recent versions of Chrome, Edge, Safari, and Firefox. On older browsers, some features may not be available. The core product works on every modern browser. If a feature is not available, the page shows a small notice. The pattern-based suggestions are the fallback.",
+      "One feature needs a modern browser with graphics support: the helper inside the builders. When your browser cannot run it, the Ask the helper button is not shown at all — no warning, no broken control — and every text field works exactly as before. The rest of the product, including the suggestions, the tracking and the client pages, does not depend on it.",
   },
   {
     id: 100,
     group: "support",
     question: "What makes Revercue different?",
     answer:
-      "Three things. The thread: the client work in one place. The interactive document: the documents are links, not PDFs. The client record builds itself. The design: the product is built to feel like one workspace, not five tools. The honesty: the product does not claim AI where it uses patterns. The data is yours. The trust is earned by the transparency.",
+      "Three things. The thread: the client work in one place. The interactive document: the documents are links, not PDFs. The client record builds itself. The design: the product is built to feel like one workspace, not five tools. The honesty: the product does not claim an assistant where it uses patterns. The data is yours. The trust is earned by the transparency.",
   },
   {
     id: 101,
@@ -737,7 +737,7 @@ export const FAQS: Faq[] = [
     group: "product",
     question: 'What is "Ask the helper"?',
     answer:
-      "Ask the helper is the inline assistant in the builder. You select a piece of text, click Ask the helper, and it can rewrite the text in a different tone, fix the grammar, expand it, simplify it, or change the wording. The helper is a tool, not an action. It suggests a rewrite; you decide whether to replace the text, insert it below, or cancel. Where the helper runs, and what that means for your data. The helper runs in your browser. That means the model and the rewrite happen on your device, not on a Revercue server. The text you select is not sent to Revercue. It is not sent to the team. It is not stored in the database. It does not leave your browser. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it, on your device. If your browser does not support the helper, the Ask the helper button is not shown, and you edit the text manually.",
+      "Ask the helper is the inline assistant in the builder. You select a piece of text, click Ask the helper, and it can rewrite the text in a different tone, fix the grammar, expand it, simplify it, or change the wording. The helper is a tool, not an action. It suggests a rewrite; you decide whether to replace the text, insert it below, or cancel. Where the helper runs, and what that means for your data. The changing work is done on your device, which means it never goes to a Revercue server. The text you select is not sent to Revercue. It is not sent to the team. It is not stored in the database. It does not leave your browser. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it, on your device. If your browser does not support the helper, the Ask the helper button is not shown, and you edit the text manually.",
   },
   {
     id: 103,

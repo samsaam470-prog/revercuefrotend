@@ -1,5 +1,6 @@
 import { Input } from "../ui/Input";
 import { Textarea } from "../ui/Textarea";
+import { AskHelperTextarea } from "./AskHelperTextarea";
 import { Select } from "../ui/Select";
 import { Checkbox } from "../ui/Checkbox";
 import type { Block, DocContent } from "../../types";
@@ -87,7 +88,7 @@ export function PropertyPanel({
       <div className="props-title">{block.type.replace(/_/g, " ")}</div>
 
       {(block.type === "heading" || block.type === "paragraph" || block.type === "quote" || block.type === "button" || block.type === "card" || block.type === "next_step") && (
-        <Textarea
+        <AskHelperTextarea
           id="block-text"
           label="Text"
           value={block.text || ""}
@@ -138,6 +139,21 @@ export function PropertyPanel({
 
       {block.type === "image" && (
         <>
+          <label className="btn btn-secondary btn-sm upload-device">
+            Upload from device
+            <input
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={(event) => {
+                const file = event.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = () => onChange({ url: String(reader.result), alt: block.alt || file.name });
+                reader.readAsDataURL(file);
+              }}
+            />
+          </label>
           <Input
             id="block-url"
             label="Image URL"
@@ -157,7 +173,7 @@ export function PropertyPanel({
             value={block.faqs?.[0]?.question || ""}
             onChange={(value) => onChange({ faqs: [{ question: value, answer: block.faqs?.[0]?.answer || "" }] })}
           />
-          <Textarea
+          <AskHelperTextarea
             id="faq-a"
             label="Answer"
             value={block.faqs?.[0]?.answer || ""}

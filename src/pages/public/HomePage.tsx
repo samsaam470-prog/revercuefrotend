@@ -32,7 +32,7 @@ export function HomePage() {
   const visible = showAll ? FAQS : FAQS.slice(0, 12);
 
   return (
-    <>
+    <div className="home-shell">
       <section className="hero">
         <p className="eyebrow">{THESIS}</p>
         <h1>{TAGLINE}</h1>
@@ -148,6 +148,6 @@ export function HomePage() {
           </div>
         )}
       </section>
-    </>
+    </div>
   );
 }

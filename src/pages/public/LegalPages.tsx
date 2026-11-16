@@ -58,7 +58,7 @@ export function PrivacyPage() {
   return (
     <LegalLayout
       title="Privacy"
-      updated="2026-11-01"
+      updated="2026-11-16"
       intro="This page says exactly what we collect, why, who stores it and how long it stays. If a sentence here is vague, treat it as a bug and tell us."
       sections={[
         {
@@ -283,7 +283,7 @@ export function TermsPage() {
   return (
     <LegalLayout
       title="Terms"
-      updated="2026-11-01"
+      updated="2026-11-16"
       intro="The rules of the service, in plain language. Where these terms and the product disagree, the product's actual behaviour is the bug — tell us."
       sections={[
         {
@@ -492,7 +492,7 @@ export function SecurityPage() {
     <>
     <LegalLayout
       title="Security"
-      updated="2026-11-01"
+      updated="2026-11-16"
       intro="A trust page, not a legal one. What is encrypted, who can see what, and what we deliberately do not do."
       sections={[
         {

@@ -78,8 +78,8 @@ export function PricingPage() {
               </div>
               <div>
                 <div className="price">
-                  {plan.price == null ? `$${plan.price ?? 0}` : `$${plan.price}`}
-                  {plan.price !== 0 && <span className="caption"> /mo</span>}
+                  {plan.price == null ? "On invitation" : `$${plan.price}`}
+                  {plan.price != null && plan.price !== 0 && <span className="caption"> /mo</span>}
                 </div>
                 <div className="role">{plan.role}</div>
               </div>
