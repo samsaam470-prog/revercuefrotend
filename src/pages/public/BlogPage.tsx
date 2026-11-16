@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { BLOG_POSTS } from "../../lib/blog";
 import { formatDate } from "../../lib/formatters";
-import { CodeVisual } from "../../components/visuals";
+import { CoverArt } from "../../components/visuals/CoverArt";
 
 export function BlogPage() {
   const [featured, ...rest] = BLOG_POSTS;
@@ -15,7 +15,9 @@ export function BlogPage() {
       </div>
 
       <Link to={`/blog/${featured.slug}`} className="link-card" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "center", marginBottom: 40 }}>
-        <CodeVisual name="DashboardVisual" />
+        <div className="cover-frame cover-frame-hero">
+          <CoverArt seed={featured.slug} kind="essay" variant="hero" label={`${featured.title} — cover`} monogram={featured.title.slice(0, 1)} />
+        </div>
         <div>
           <span className="badge badge-gold">Featured</span>
           <h2 className="serif" style={{ fontSize: 28, margin: "12px 0" }}>
@@ -31,8 +33,8 @@ export function BlogPage() {
       <div className="card-grid">
         {rest.map((post) => (
           <Link key={post.slug} to={`/blog/${post.slug}`} className="link-card">
-            <div style={{ marginBottom: 16 }}>
-              <CodeVisual name="SuggestionVisual" />
+            <div className="cover-frame cover-frame-sm">
+              <CoverArt seed={post.slug} kind="essay" label={`${post.title} — cover`} monogram={post.title.slice(0, 1)} />
             </div>
             <h3>{post.title}</h3>
             <p>{post.excerpt}</p>

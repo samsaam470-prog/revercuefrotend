@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { GUIDES, GUIDE_CATEGORIES } from "../../lib/guides";
-import { CodeVisual } from "../../components/visuals";
+import { CoverArt, coverKindForCategory } from "../../components/visuals/CoverArt";
 
 export function GuidesPage() {
   const [category, setCategory] = useState<string>("All");
@@ -35,8 +35,13 @@ export function GuidesPage() {
       <div className="card-grid">
         {visible.map((guide) => (
           <Link to={`/guides/${guide.slug}`} className="link-card" key={guide.slug}>
-            <div style={{ marginBottom: 16 }}>
-              <CodeVisual name={guide.visual} />
+            <div className="cover-frame">
+              <CoverArt
+                seed={guide.slug}
+                kind={coverKindForCategory(guide.category)}
+                label={`${guide.title} — cover`}
+                monogram={guide.title.slice(0, 1)}
+              />
             </div>
             <span className="badge badge-muted">{guide.category}</span>
             <h3 style={{ marginTop: 10 }}>{guide.title}</h3>

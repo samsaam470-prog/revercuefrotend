@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { BLOG_POSTS, postBySlug } from "../../lib/blog";
 import { formatDate } from "../../lib/formatters";
+import { CoverArt } from "../../components/visuals/CoverArt";
 
 export function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -56,6 +57,11 @@ export function BlogPostPage() {
           <p className="caption">
             {formatDate(post.date)} · {post.readMinutes} min read
           </p>
+
+          <div className="cover-frame cover-frame-hero" style={{ margin: "28px 0 32px" }}>
+            <CoverArt seed={post.slug} kind="essay" variant="hero" label={`${post.title} — cover`} monogram={post.title.slice(0, 1)} />
+          </div>
+
           {post.body.map((section) => (
             <section key={section.paragraphs[0].slice(0, 20)}>
               {section.heading && <h2>{section.heading}</h2>}
@@ -80,6 +86,9 @@ export function BlogPostPage() {
             <div className="stack-3">
               {related.map((item) => (
                 <Link key={item.slug} to={`/blog/${item.slug}`} className="link-card">
+                  <div className="cover-frame cover-frame-sm">
+                    <CoverArt seed={item.slug} kind="essay" label={`${item.title} — cover`} monogram={item.title.slice(0, 1)} />
+                  </div>
                   <h3>{item.title}</h3>
                   <p>{item.excerpt}</p>
                 </Link>
