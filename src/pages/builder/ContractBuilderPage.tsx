@@ -328,6 +328,9 @@ function ContractCanvas({ id }: { id: string }) {
   const [review, setReview] = useState<Review | null>(null);
   const [pendingShare, setPendingShare] = useState<{ url: string } | null>(null);
   const [initialised, setInitialised] = useState(false);
+  const [signerName, setSignerName] = useState("");
+  const [signConsent, setSignConsent] = useState(false);
+  const [freelancerSigned, setFreelancerSigned] = useState(false);
 
   const contract = query.data?.contract;
 
@@ -441,6 +444,24 @@ function ContractCanvas({ id }: { id: string }) {
     setCreating(true);
     try {
       await autosave.save(payload);
+      if (!freelancerSigned) {
+        if (!signerName.trim()) {
+          toast.error("Enter your name to sign the contract first.");
+          setCreating(false);
+          return;
+        }
+        if (!signConsent) {
+          toast.error("You must consent to sign the contract first.");
+          setCreating(false);
+          return;
+        }
+        await contractsApi.signFreelancer(id, {
+          signature: signerName,
+          consent: signConsent,
+          name: signerName,
+        });
+        setFreelancerSigned(true);
+      }
       const response = await contractsApi.publish(id);
       const nextShare = { url: response.url };
       const result = await analyzeDocument({ blocks, hasClient: Boolean(contract?.client_id) });
@@ -483,6 +504,30 @@ function ContractCanvas({ id }: { id: string }) {
           },
         ]}
       />
+      <div className="settings-card" style={{ margin: "12px 20px" }}>
+        <h2>Freelancer signature</h2>
+        <p className="caption">
+          Sign the exact contract version before publishing. Publishing is blocked until this step completes.
+        </p>
+        <div className="between" style={{ gap: 12, flexWrap: "wrap" }}>
+          <Input
+            id="signer-name"
+            label="Signer name"
+            value={signerName}
+            onChange={(value) => setSignerName(value)}
+            disabled={freelancerSigned}
+          />
+          <Checkbox
+            label="I have reviewed this contract and consent to sign it."
+            checked={signConsent}
+            onChange={setSignConsent}
+            disabled={freelancerSigned}
+          />
+          <span className="caption" style={{ color: freelancerSigned ? "var(--green)" : "var(--muted)" }}>
+            {freelancerSigned ? "Signed. Ready to publish." : "Not signed yet."}
+          </span>
+        </div>
+      </div>
       <Canvas
         doc={doc}
         blocks={blocks}

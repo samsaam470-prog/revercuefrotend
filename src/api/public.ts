@@ -59,6 +59,14 @@ export const publicApi = {
     body: { action: "approve" | "decline" | "question"; question?: string; reason?: string; session_token?: string },
   ) => api.post<{ success: true; next_step?: string }>(`/api/public/c/${publicId}/action`, body, { token: null }),
 
+  signContract: (
+    publicId: string,
+    body: { signature: string; consent: boolean; name: string; email?: string; expected_content_hash?: string },
+  ) => api.post<{ success: true; status?: string }>(`/api/public/c/${publicId}/sign`, body, { token: null }),
+
+  signedContractPdf: (contractId: string, token: string) =>
+    api.get<Blob>(`/api/public/contracts/${contractId}/signed-pdf?token=${encodeURIComponent(token)}`, { raw: true, token: null }),
+
   getInvoice: (publicId: string, token?: string) =>
     api.get<{ invoice: Invoice }>(`/api/public/i/${publicId}`, {
       token: token ?? null,

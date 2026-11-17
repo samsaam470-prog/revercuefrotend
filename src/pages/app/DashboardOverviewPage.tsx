@@ -12,7 +12,6 @@ import {
   X,
 } from "lucide-react";
 import { dashboardApi } from "../../api/dashboard";
-import { settingsApi } from "../../api/settings";
 import { useAuth } from "../../hooks/useAuth";
 import { usePlanGate } from "../../hooks/usePlanGate";
 import { useNotifications } from "../../hooks/useNotifications";
@@ -21,7 +20,6 @@ import { Skeleton, SkeletonLines } from "../../components/ui/Skeleton";
 import { EmptyState } from "../../components/ui/EmptyState";
 import { Button } from "../../components/ui/Button";
 import { TutorialOverlay } from "../../components/shared/TutorialOverlay";
-import { FORMSUBMIT_COPY } from "../../lib/constants";
 import { formatCurrency, formatLongDate, formatRelative, greeting } from "../../lib/formatters";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
@@ -32,7 +30,6 @@ export function DashboardOverviewPage() {
   const { hasFeature } = usePlanGate();
   const { setUnread } = useNotifications();
   const toast = useToast();
-  const [bannerHidden, setBannerHidden] = useState(false);
 
   const summaryQuery = useQuery({
     queryKey: ["dashboard", "summary"],
@@ -62,26 +59,6 @@ export function DashboardOverviewPage() {
   const activity = activityQuery.data?.activity ?? [];
   const isFirstRun = summary && summary.active_documents === 0 && summary.clients === 0;
 
-  const showBanner =
-    !bannerHidden && user?.formsubmit_activated === false && user?.banner_dismissed !== true;
-
-  const activate = async () => {
-    try {
-      await settingsApi.activateFormSubmit();
-      setBannerHidden(true);
-      await refresh();
-      toast.success("Activation confirmed. Transactional email is on.");
-    } catch (cause) {
-      const apiError = cause as ApiError;
-      toast.error(errorMessage(apiError.code, apiError.message));
-    }
-  };
-
-  const dismiss = () => {
-    setBannerHidden(true);
-    toast.info("Banner dismissed. You can activate any time in Settings → Notifications.");
-  };
-
   const dismissSuggestion = async (id: string) => {
     try {
       await dashboardApi.dismissSuggestion(id);
@@ -96,21 +73,6 @@ export function DashboardOverviewPage() {
   return (
     <>
       <TutorialOverlay />
-
-      {showBanner && (
-        <div className="banner" role="status">
-          <Info size={18} />
-          <div className="body">
-            {FORMSUBMIT_COPY} We sent it to {user?.email}.
-          </div>
-          <Button size="sm" onClick={activate}>
-            I clicked the activation link
-          </Button>
-          <button type="button" className="btn-icon" aria-label="Dismiss banner" onClick={dismiss}>
-            <X size={16} />
-          </button>
-        </div>
-      )}
 
       <div className="page-top">
         <div className="greeting">

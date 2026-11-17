@@ -70,7 +70,7 @@ export function PrivacyPage() {
                 <strong>Account data.</strong> Your email address, name, business name, account type,
                 plan, services, brand colours, website and optional Fiverr profile. We also keep
                 coarse usage counts (documents, clients, storage), the time of your last login, the
-                two-factor setting, and whether the FormSubmit activation email has been confirmed.
+                two-factor setting, and your email and notification preferences.
                 This is the minimum needed to sign you in, apply your plan limits and render your
                 brand on client pages.
               </p>
@@ -138,7 +138,7 @@ export function PrivacyPage() {
                 <li><strong>Cloudflare</strong> — delivery, DNS, the Worker proxy and rate limiting.</li>
                 <li><strong>Backblaze B2</strong> — file storage in a private bucket, served through the proxy.</li>
                 <li><strong>Turso</strong> — the database that holds accounts and documents.</li>
-                <li><strong>FormSubmit</strong> — transactional email delivery and the activation step.</li>
+                <li><strong>Revercue email</strong> — transactional email delivery for account, security and document notices.</li>
                 <li><strong>The payment provider</strong> — the subscription charge and its receipt.</li>
               </ul>
               <p>
@@ -228,7 +228,7 @@ export function PrivacyPage() {
               <p>
                 The application runs on Cloudflare's network, the files sit in a private Backblaze B2
                 bucket served through a Worker proxy, and the auth and admin data live in Turso. Email is
-                delivered by FormSubmit. These providers may process data in more than one region; where
+                delivered by Revercue. These providers may process data in more than one region; where
                 a transfer crosses a border, it relies on the safeguards those providers publish, such as
                 standard contractual clauses.
               </p>
@@ -578,7 +578,7 @@ export function SecurityPage() {
           body: (
             <>
               <p>
-                Cloudflare, Backblaze B2, Turso and FormSubmit, plus the payment provider for
+                Cloudflare, Backblaze B2 and Turso, plus the payment provider for
                 subscriptions. They store or deliver; they do not read your documents. Each is bound
                 by its own agreement with us, and we choose processors with a real security record
                 rather than the cheapest option.

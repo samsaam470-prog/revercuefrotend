@@ -28,7 +28,6 @@ export interface User {
   brand_secondary?: string;
   email_verified?: boolean;
   two_factor_enabled?: boolean;
-  formsubmit_activated?: boolean;
   banner_dismissed?: boolean;
   tutorial_completed?: boolean;
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "../../components/ui/Spinner";
-import { FORMSUBMIT_COPY } from "../../lib/constants";
+import { EMAIL_DELIVERY_NOTE } from "../../lib/constants";
 
 export function SignupTransitionPage() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export function SignupTransitionPage() {
       <Spinner size={32} />
       <h1 style={{ marginTop: 20 }}>Setting up your thread.</h1>
       <p className="muted" style={{ fontSize: 14, lineHeight: 1.7 }}>
-        {FORMSUBMIT_COPY}
+        {EMAIL_DELIVERY_NOTE}
       </p>
       <p className="caption mt-6">Continuing in {Math.max(seconds, 1)} seconds…</p>
     </div>

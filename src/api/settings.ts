@@ -74,8 +74,6 @@ export const settingsApi = {
   getNotifications: () => api.get<NotificationSettings>("/api/settings/notifications"),
   updateNotifications: (body: NotificationSettings) =>
     api.patch<{ success: true }>("/api/settings/notifications", body),
-  activateFormSubmit: () => api.post<{ success: true }>("/api/settings/formsubmit-activate"),
-
   savedFaqs: () => api.get<{ data: SavedFaq[] }>("/api/settings/saved-faqs"),
   createSavedFaq: (body: { question: string; answer: string }) =>
     api.post<{ success: true; id: string }>("/api/settings/saved-faqs", body),

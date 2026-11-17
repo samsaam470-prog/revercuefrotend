@@ -7,11 +7,12 @@ export interface Faq {
     | "plans"
     | "documents"
     | "tracking"
-    | "formsubmit"
     | "data"
     | "crm"
     | "design"
-    | "support";
+    | "support"
+    | "email"
+    | "signatures";
 }
 
 /**
@@ -387,31 +388,10 @@ export const FAQS: Faq[] = [
 
   {
     id: 53,
-    group: "formsubmit",
-    question: "What is the FormSubmit activation for?",
+    group: "email",
+    question: "How does Revercue deliver email?",
     answer:
-      "FormSubmit delivers the notification emails: a proposal opened, a contract approved, an invoice paid, and the security alerts. Your sign-up code and your password-reset code are delivered by Cooper Email and OpenMail, so you do not need to activate FormSubmit to finish signing up. Activate it when you want the notification emails.",
-  },
-  {
-    id: 54,
-    group: "formsubmit",
-    question: "Why does FormSubmit send me emails?",
-    answer:
-      "FormSubmit is the service Revercue uses for the notification emails and the security alerts. It asks you to activate once so it knows you accept mail from the app. The activation does not opt you in to the newsletter, and it is not needed for the sign-up or reset codes.",
-  },
-  {
-    id: 55,
-    group: "formsubmit",
-    question: "What happens if I do not activate?",
-    answer:
-      "You still receive your sign-up code and your password-reset code, because those go through Cooper Email and OpenMail. You will not receive the notification emails (proposal opened, contract approved, invoice paid) or the security alerts. The in-app notifications still appear in the bell. The dashboard banner and the Settings → Notifications card remind you.",
-  },
-  {
-    id: 56,
-    group: "formsubmit",
-    question: "Is the activation a newsletter signup?",
-    answer:
-      "No. The activation is for transactional emails, app notifications, and security alerts. It is not the newsletter. The newsletter is a separate opt-in, on the signup screen and in Settings → Notifications.",
+      "Revercue sends its own transactional email for account, security and document notices. No separate activation is required. The newsletter is a separate opt-in, on the signup screen and in Settings → Notifications.",
   },
 
   {
@@ -746,6 +726,79 @@ export const FAQS: Faq[] = [
     answer:
       "Post-document analysis is the review that runs after you click Create. It reads the document and gives you a quality score (0–100) and a list of issues. The score is both the pattern engine's (the structure, the missing sections, the tone consistency) and the helper's (the readability, the flow, the clarity). The issues are tagged by source (From this client's history, From your usual method, From what works). You see the score and the issues, and you decide whether to fix them or publish anyway. The analysis is not a gate; it is a quality signal.",
   },
+  {
+    id: 104,
+    group: "signatures",
+    question: "Is an electronic signature legally binding?",
+    answer: "An electronic signature can be legally binding, but it depends on the law that governs the contract and the jurisdiction in which it is enforced. Different regions have different rules about what counts as a valid signature and what evidence is required. Revercue does not claim that its signatures are enforceable everywhere. Consult qualified legal counsel for high-value or regulated transactions.",
+  },
+  {
+    id: 105,
+    group: "signatures",
+    question: "How does Revercue signing work?",
+    answer: "The freelancer reviews and finalizes the contract, signs that exact version, and then publishes it to the client. The client opens the secure public signing page, reviews the same version, and signs. The backend verifies both signatures and generates a countersigned PDF. No one can sign before the freelancer, and no one can edit a signed version.",
+  },
+  {
+    id: 106,
+    group: "signatures",
+    question: "Why must the freelancer sign first?",
+    answer: "The freelancer is the party who wrote and stands behind the terms. Signing first commits the freelancer to the version being sent. If the client could sign first, a client could accept a draft the freelancer had not finalized, which is not a contract anyone can rely on.",
+  },
+  {
+    id: 107,
+    group: "signatures",
+    question: "Does the client sign the same contract version?",
+    answer: "Yes. The client signs the exact version the freelancer signed. The version is hashed and the hash is stored with each signature. If the contract is edited after signing, the hash no longer matches and the signature is visibly invalid.",
+  },
+  {
+    id: 108,
+    group: "signatures",
+    question: "Can a contract be edited after signing?",
+    answer: "No. A signed version is locked and cannot be edited. If changes are needed, the freelancer creates a new version with its own version number and signing process. The old signed version remains on record, so there is always a clear history of what was agreed.",
+  },
+  {
+    id: 109,
+    group: "signatures",
+    question: "What happens if a client declines?",
+    answer: "A decline records the reason, if one is given, and closes that version of the contract. The freelancer can then revise the terms and create a new version for the client to review. A decline is the process working as intended: no one is forced to sign something they do not agree with.",
+  },
+  {
+    id: 110,
+    group: "signatures",
+    question: "Can both parties access the signed PDF?",
+    answer: "Yes. After both parties sign, the backend generates a countersigned PDF. The freelancer can request a short-lived, authorized download link from the contract page. The client receives access through the signing flow. The download token is required and is validated against the contract and version.",
+  },
+  {
+    id: 111,
+    group: "signatures",
+    question: "What information is recorded?",
+    answer: "Each signature records the signer's name, email where available, the exact version signed, a server timestamp, the IP address, and the browser used. Consent is recorded together with the signature. These fields form a read-only audit record attached to the contract version.",
+  },
+  {
+    id: 112,
+    group: "signatures",
+    question: "Can someone sign on a mobile device?",
+    answer: "Yes. The signing page works in a mobile browser. The signer types their name, ticks the consent checkbox, and submits. No app installation is required.",
+  },
+  {
+    id: 113,
+    group: "signatures",
+    question: "What happens if a signing link expires?",
+    answer: "The freelancer can publish a fresh link. Links are short-lived by design to limit the window in which a stolen link could be used. The old link stops working once it expires.",
+  },
+  {
+    id: 114,
+    group: "signatures",
+    question: "What happens if a signature submission fails?",
+    answer: "The error message states the reason, such as a version conflict, missing consent, an expired link, or a rate limit. The signer should reload the page, review the current version, and try again rather than retrying blindly.",
+  },
+  {
+    id: 115,
+    group: "signatures",
+    question: "How should signed contracts be stored?",
+    answer: "Both parties should save their own copy of the signed PDF. Revercue provides the download link, but the parties are responsible for keeping their own records. Signed contracts are retained according to the retention policy and are not automatically deleted.",
+  },
+
 ];
 
 export const FAQ_TOTAL = FAQS.length;

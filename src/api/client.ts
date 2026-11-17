@@ -18,6 +18,12 @@ const BASE = (
 ).replace(/\/$/, "");
 
 let unauthorizedHandler: (() => void) | null = null;
+let tokenProvider: (() => Promise<string | null>) | null = null;
+
+/** AuthContext registers an async token source (AuthAction access token). */
+export function setTokenProvider(provider: (() => Promise<string | null>) | null): void {
+  tokenProvider = provider;
+}
 
 /** The AuthContext registers the 401 handler once, at mount. */
 export function setUnauthorizedHandler(handler: (() => void) | null): void {
@@ -38,7 +44,18 @@ function buildUrl(path: string, query?: RequestOptions["query"]): string {
 
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { body, token, headers, query, raw, ...rest } = options;
-  const authToken = token === undefined ? tokenStore.get() : token;
+  let authToken: string | null = null;
+  if (token !== undefined) {
+    authToken = token;
+  } else if (tokenProvider) {
+    try {
+      authToken = await tokenProvider();
+    } catch {
+      authToken = tokenStore.get();
+    }
+  } else {
+    authToken = tokenStore.get();
+  }
   const isFormData = typeof FormData !== "undefined" && body instanceof FormData;
 
   const finalHeaders: Record<string, string> = {

@@ -33,6 +33,9 @@ export const contractsApi = {
   update: (id: string, body: Partial<Contract> & { content?: DocContent }) =>
     api.patch<{ success: true; updated_at?: string }>(`/api/contracts/${id}`, body),
 
+  signFreelancer: (id: string, body: { signature: string; consent: boolean; name: string; expected_version_id?: string; expected_content_hash?: string }) =>
+    api.post<{ success: true; status?: string; version_id?: string }>(`/api/contracts/${id}/sign`, body),
+
   publish: (id: string) =>
     api.post<{ success: true; public_id: string; url: string }>(`/api/contracts/${id}/publish`),
 
@@ -48,4 +51,11 @@ export const contractsApi = {
     api.post<{ success: true }>(`/api/contracts/${id}/share`, { channel }),
 
   remove: (id: string) => api.del<{ success: true }>(`/api/contracts/${id}`),
+
+  versions: (id: string) => api.get<{ versions: unknown[] }>(`/api/contracts/${id}/versions`),
+  events: (id: string) => api.get<{ events: unknown[] }>(`/api/contracts/${id}/events`),
+  tracking: (id: string) => api.get<{ tracking: unknown[] }>(`/api/contracts/${id}/tracking`),
+  signedPdfLink: (id: string) =>
+    api.get<{ success: true; token: string; expires_at: string; url: string }>(`/api/contracts/${id}/signed-pdf-link`),
+  pdf: (id: string) => api.get<Blob>(`/api/contracts/${id}/pdf`, { raw: true }),
 };

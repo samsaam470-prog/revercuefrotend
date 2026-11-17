@@ -24,8 +24,10 @@ import {
   TermsPage,
 } from "./pages/public";
 import {
+  CallbackPage,
   CodeScreenPage,
   ForgotPasswordPage,
+  LinkAccountPage,
   LoginPage,
   SignupPage,
   SignupTransitionPage,
@@ -115,6 +117,8 @@ export function App() {
         <Route path="/login/code" element={<CodeScreenPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/forgot-password/code" element={<CodeScreenPage />} />
+        <Route path="/callback" element={<CallbackPage />} />
+        <Route path="/link-account" element={<LinkAccountPage />} />
       </Route>
 
       {/* onboarding */}

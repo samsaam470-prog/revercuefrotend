@@ -8,8 +8,9 @@ import {
   type ReactNode,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthAction } from "@authaction/web-sdk/react";
 import { authApi } from "../api/auth";
-import { setUnauthorizedHandler } from "../api/client";
+import { setUnauthorizedHandler, setTokenProvider } from "../api/client";
 import { tokenStore } from "../lib/storage";
 import type { User } from "../types";
 
@@ -21,66 +22,105 @@ export interface AuthState {
   offline: boolean;
   isAuthenticated: boolean;
   isEmailVerified: boolean;
+  /** True when the AuthAction identity is not yet linked to a Revercue account. */
+  linkingRequired: boolean;
   setSession: (token: string, user?: User) => void;
-  signIn: (token: string, user: User) => void;
+  signIn: () => Promise<void>;
   signOut: () => Promise<void>;
   refresh: () => Promise<User | null>;
+  getAccessToken: () => Promise<string | null>;
 }
 
 export const AuthContext = createContext<AuthState | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [token, setToken] = useState<string | null>(() => tokenStore.get());
+  const sdk = useAuthAction();
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState<boolean>(Boolean(tokenStore.get()));
+  const [loading, setLoading] = useState<boolean>(true);
   const [offline, setOffline] = useState(false);
-  const tokenRef = useRef<string | null>(token);
-  tokenRef.current = token;
+  const [linkingRequired, setLinkingRequired] = useState(false);
+  const [token, setToken] = useState<string | null>(null);
+  const tokenRef = useRef<string | null>(null);
   const navigate = useNavigate();
+
+  const getAccessToken = useCallback(async (): Promise<string | null> => {
+    if (!sdk.isAuthenticated) return null;
+    try {
+      const t = await sdk.getAccessToken();
+      tokenRef.current = t;
+      setToken(t);
+      tokenStore.set(t);
+      return t;
+    } catch {
+      return tokenRef.current;
+    }
+  }, [sdk]);
+
+  // Register the async token source for the API client.
+  useEffect(() => {
+    setTokenProvider(getAccessToken);
+    return () => setTokenProvider(null);
+  }, [getAccessToken]);
 
   const clear = useCallback(() => {
     tokenStore.clear();
     setToken(null);
+    tokenRef.current = null;
     setUser(null);
+    setLinkingRequired(false);
     setLoading(false);
   }, []);
 
   const refresh = useCallback(async (): Promise<User | null> => {
-    const current = tokenRef.current;
+    if (!sdk.isAuthenticated) {
+      clear();
+      return null;
+    }
+    const current = await getAccessToken();
     if (!current) {
-      setUser(null);
       setLoading(false);
       return null;
     }
     try {
       const response = await authApi.me(current);
       setUser(response.user);
+      setLinkingRequired(false);
       setOffline(false);
       return response.user;
     } catch (cause) {
-      // A network failure is not an authentication failure: keep the token and
-      // show the offline state instead of silently signing the user out.
-      if ((cause as { status?: number }).status === 0) {
+      const status = (cause as { status?: number }).status;
+      if (status === 0) {
         setOffline(true);
         return null;
       }
-      clear();
+      if (status === 401) {
+        const code = (cause as { code?: string }).code;
+        if (code === "account_link_required") {
+          setLinkingRequired(true);
+          return null;
+        }
+        clear();
+        return null;
+      }
       return null;
     } finally {
       setLoading(false);
     }
-  }, [clear]);
+  }, [sdk.isAuthenticated, getAccessToken, clear]);
 
   useEffect(() => {
+    if (sdk.isLoading) return;
+    if (!sdk.isAuthenticated) {
+      clear();
+      return;
+    }
     void refresh();
-    // Runs once on mount, then again whenever the token changes.
-  }, [refresh, token]);
+  }, [sdk.isLoading, sdk.isAuthenticated, refresh, clear]);
 
   useEffect(() => {
     setUnauthorizedHandler(() => {
-      const hadSession = Boolean(tokenRef.current);
       clear();
-      if (hadSession) navigate("/session-expired", { replace: true });
+      navigate("/session-expired", { replace: true });
     });
     return () => setUnauthorizedHandler(null);
   }, [clear, navigate]);
@@ -93,32 +133,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setLoading(false);
   }, []);
 
-  const signIn = useCallback((value: string, nextUser: User) => setSession(value, nextUser), [setSession]);
+  const signIn = useCallback(async () => {
+    await sdk.loginWithRedirect();
+  }, [sdk]);
 
   const signOut = useCallback(async () => {
     try {
       await authApi.logout();
     } catch {
-      /* the local session is cleared regardless */
+      /* best effort */
+    }
+    try {
+      await sdk.logout();
+    } catch {
+      /* best effort */
     }
     clear();
     navigate("/login", { replace: true });
-  }, [clear, navigate]);
+  }, [sdk, clear, navigate]);
 
   const value = useMemo<AuthState>(
     () => ({
       user,
       token,
-      loading,
+      loading: loading || sdk.isLoading,
       offline,
-      isAuthenticated: Boolean(token && user),
+      isAuthenticated: Boolean(sdk.isAuthenticated && user && !linkingRequired),
       isEmailVerified: Boolean(user?.email_verified),
+      linkingRequired,
       setSession,
       signIn,
       signOut,
       refresh,
+      getAccessToken,
     }),
-    [user, token, loading, offline, setSession, signIn, signOut, refresh],
+    [user, token, loading, sdk.isLoading, offline, sdk.isAuthenticated, linkingRequired, setSession, signIn, signOut, refresh, getAccessToken],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -1362,23 +1362,6 @@ details.faq-item > p {
   color: var(--text-tertiary);
   text-align: center;
 }
-.formsubmit-card {
-  border: 1px solid rgba(201, 169, 97, 0.5);
-  background: var(--gold-soft);
-  border-radius: var(--radius-card);
-  padding: var(--space-4) var(--space-5);
-  font-size: var(--size-label);
-  line-height: 1.6;
-  color: var(--text-primary);
-}
-.formsubmit-card strong {
-  display: block;
-  color: var(--gold);
-  margin-bottom: var(--space-2);
-  font-size: var(--size-caption);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
 .code-boxes {
   display: flex;
   gap: var(--space-2);

@@ -53,6 +53,26 @@ export function PublicContractPage() {
     }
   };
 
+  const sign = async () => {
+    setBusy(true);
+    setError("");
+    try {
+      await publicApi.signContract(publicId as string, {
+        signature: name,
+        consent: agree,
+        name,
+        email: (contract as { client_email?: string } | undefined)?.client_email || undefined,
+      });
+      setNextStep(undefined);
+      setDone("approve");
+      setApproveOpen(false);
+    } catch (cause) {
+      setError(errorMessage((cause as ApiError).code, (cause as ApiError).message));
+    } finally {
+      setBusy(false);
+    }
+  };
+
   const act = async (action: "approve" | "decline" | "question") => {
     setBusy(true);
     setError("");
@@ -201,8 +221,8 @@ export function PublicContractPage() {
             <Button variant="ghost" onClick={() => setApproveOpen(false)} disabled={busy}>
               Cancel
             </Button>
-            <Button onClick={() => void act("approve")} loading={busy} disabled={!agree || !name.trim()}>
-              Sign and approve
+            <Button onClick={() => void sign()} loading={busy} disabled={!agree || !name.trim()}>
+              Sign contract
             </Button>
           </>
         }

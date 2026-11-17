@@ -20,7 +20,7 @@ import { usePlanGate } from "../../hooks/usePlanGate";
 import { useToast } from "../../hooks/useToast";
 import { useTheme } from "../../hooks/useTheme";
 import type { ThemeMode } from "../../contexts/ThemeContext";
-import { PLANS, PLAN_LIMITS, SERVICE_OPTIONS, FORMSUBMIT_COPY, formatStorage } from "../../lib/constants";
+import { PLANS, PLAN_LIMITS, SERVICE_OPTIONS, EMAIL_DELIVERY_NOTE, formatStorage } from "../../lib/constants";
 import { formatCurrency, formatDate, formatRelative } from "../../lib/formatters";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
@@ -43,7 +43,7 @@ const TITLES: Record<SettingsSection, { title: string; subtitle: string }> = {
   appearance: { title: "Appearance", subtitle: "Dark, light, or follow your system. The choice stays on this device." },
   plan: { title: "Plan & Billing", subtitle: "Your plan, your usage and your payment history." },
   security: { title: "Security", subtitle: "Password, two-factor and the sessions that are open." },
-  notifications: { title: "Notifications", subtitle: "Email events, the newsletter and the FormSubmit status." },
+  notifications: { title: "Notifications", subtitle: "Email events and the newsletter." },
   "saved-faqs": { title: "Saved FAQs", subtitle: "The FAQ library the builder pre-fills from." },
   "saved-packages": { title: "Saved Packages", subtitle: "Reusable packages for the proposal builder." },
   "revision-prices": { title: "Revision Prices", subtitle: "A price per revision category, shown to the client." },
@@ -748,24 +748,8 @@ function NotificationsSection() {
       </div>
 
       <div className="settings-card">
-        <h2>FormSubmit status</h2>
-        <div className="between">
-          <Badge variant={user?.formsubmit_activated ? "green" : "amber"}>
-            {user?.formsubmit_activated ? "Activated" : "Not activated"}
-          </Badge>
-          <Button
-            variant="secondary"
-            onClick={async () => {
-              await settingsApi.activateFormSubmit();
-              await refresh();
-              toast.success("Activation confirmed.");
-            }}
-            disabled={user?.formsubmit_activated}
-          >
-            I clicked the activation link
-          </Button>
-        </div>
-        <p className="caption">{FORMSUBMIT_COPY}</p>
+        <h2>Email delivery</h2>
+        <p className="caption">{EMAIL_DELIVERY_NOTE}</p>
       </div>
     </div>
   );

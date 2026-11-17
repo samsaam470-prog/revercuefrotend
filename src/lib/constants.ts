@@ -232,11 +232,8 @@ export function planHasFeature(plan: PlanName, feature: Feature): boolean {
 export const SUBSCRIPTION_CREDIT = "Revercue";
 export const TOS_VERSION = "2026-01";
 
-export const FORMSUBMIT_COPY =
-  "Check your inbox. FormSubmit will send you an activation email. That activation email lets us know that you are open to transactional emails, app notifications, and security alerts. This activation will not opt you in to the newsletter.";
-
-export const FORMSUBMIT_BANNER =
-  "Activate FormSubmit to receive emails. We sent an activation email to your address. Click the link. One-time step.";
+export const EMAIL_DELIVERY_NOTE =
+  "Revercue sends its own transactional email: proposal opened, contract approved, invoice paid, security alerts and account notices. No separate activation is required. The newsletter is separate and off unless you opt in.";
 
 export const TAGLINE = "Your work should speak, not you.";
 export const THESIS = "A thread, not disconnected workflows.";

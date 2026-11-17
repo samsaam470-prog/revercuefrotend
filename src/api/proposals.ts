@@ -116,7 +116,10 @@ export const pipelineApi = {
     api.post<{ sections: Record<string, string> }>("/api/organize", body),
 
   visuals: (body: { document: unknown; requests: VisualRequest[] }) =>
-    api.post<{ assets: Record<string, unknown> }>("/api/organize/visuals", body),
+    api.post<{ assets: Record<string, unknown>; rejected?: unknown[] }>("/api/organize/visuals", body),
+
+  extractVisuals: (body: { requests: VisualRequest[] }) =>
+    api.post<{ success: true; assets: unknown[] }>("/api/extract/visuals", body),
 };
 
 export type { Contract };
