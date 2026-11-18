@@ -1,6 +1,6 @@
 {
   "name": "Revercue",
-  "documentation_version": "1.0.0",
+  "documentation_version": "1.1.0",
   "last_updated": "2026-11-18",
   "canonical_origin": "https://revercue.pages.dev",
   "document": {
@@ -44,6 +44,8 @@
     "ai_demo": "https://revercue.pages.dev/ai-demo",
     "ai_changelog": "https://revercue.pages.dev/ai-changelog",
     "capabilities_json": "https://revercue.pages.dev/ai-capabilities.json",
+    "faqs_for_ai": "https://revercue.pages.dev/faqs-for-ai",
+    "rules_for_ai": "https://revercue.pages.dev/rules-for-ai",
     "llms_txt": "https://revercue.pages.dev/llms.txt",
     "sitemap": "https://revercue.pages.dev/sitemap.xml",
     "robots": "https://revercue.pages.dev/robots.txt",
@@ -374,7 +376,8 @@
     "disallowed_app_namespaces": ["/dashboard", "/settings", "/crm", "/proposals", "/contracts", "/forms", "/invoices", "/notifications", "/admin"],
     "robots_txt_is_a_hint_not_a_boundary": true,
     "create_accounts": "not permitted",
-    "submit_forms": "not permitted",
+    "submit_forms": "bug_reports_only",
+    "form_submission_rules": "https://revercue.pages.dev/rules-for-ai",
     "load_testing": "not permitted",
     "public_api": false
   },
@@ -428,7 +431,15 @@
   "contact": {
     "route": "https://revercue.pages.dev/contact",
     "topics": ["product questions", "security reports", "accessibility problems", "documentation errors"],
-    "public_email": null,
+    "public_email": {
+      "general": "hello@revercue.co.uk",
+      "support": "support@revercue.co.uk",
+      "billing": "billing@revercue.co.uk",
+      "partnerships": "marketing@revercue.co.uk",
+      "beta": "beta@revercue.co.uk"
+    },
+    "internal_admin_email_published": false,
+    "form_is_email_relay": false,
     "signed_in_feedback": "Settings → Feedback, which attaches account context"
   }
 }

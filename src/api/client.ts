@@ -44,7 +44,7 @@ function buildUrl(path: string, query?: RequestOptions["query"]): string {
 }
 
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
-  const { body, token, headers, query, raw, ...rest } = options;
+  const { body, token, headers, query, raw, suppressUnauthorized, ...rest } = options;
   let authToken: string | null = null;
   if (token !== undefined) {
     authToken = token;
@@ -96,7 +96,12 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
      * here would navigate to /session-expired before the callback can send the
      * user to /link-account.
      */
-    if (response.status === 401 && !isAccountLinkRequired(response.status, error.code) && unauthorizedHandler) {
+    if (
+      response.status === 401 &&
+      !suppressUnauthorized &&
+      !isAccountLinkRequired(response.status, error.code) &&
+      unauthorizedHandler
+    ) {
       unauthorizedHandler();
     }
     throw error;

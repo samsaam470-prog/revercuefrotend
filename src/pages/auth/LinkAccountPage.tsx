@@ -25,7 +25,16 @@ export function LinkAccountPage() {
     setLoading(true);
     try {
       const res = await authApi.linkStart({ email });
-      setMessage(res.message || "A confirmation code was sent.");
+      /*
+       * The API reports delivery honestly (`email_sent`). Advancing to the code
+       * step when nothing was sent would be a fake success: the user would wait
+       * for a code that cannot arrive.
+       */
+      if (res.email_sent === false) {
+        setMessage(res.message || "The code could not be emailed right now. Try again shortly.");
+        return;
+      }
+      setMessage(res.message || `A confirmation code was sent to ${res.email || email}.`);
       setStep("confirm");
     } catch (e) {
       toast.error((e as Error).message);
@@ -42,6 +51,12 @@ export function LinkAccountPage() {
       toast.success("Account linked.");
       navigate(returnTo, { replace: true });
     } catch (e) {
+      /* Already linked (e.g. a double submit): the session is valid, continue. */
+      if ((e as { code?: string }).code === "already_linked") {
+        await refresh();
+        navigate(returnTo, { replace: true });
+        return;
+      }
       toast.error((e as Error).message);
       setLoading(false);
     }

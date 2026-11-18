@@ -13,6 +13,7 @@ import { authApi } from "../api/auth";
 import { setUnauthorizedHandler, setTokenProvider } from "../api/client";
 import { tokenStore } from "../lib/storage";
 import { clearReturnTo } from "../lib/authaction";
+import { logAuthFailure, logAuthStep } from "../lib/auth-diagnostics";
 import type { User } from "../types";
 
 export interface AuthState {
@@ -93,9 +94,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       clear();
       return null;
     }
+    /*
+     * Stay in the loading state while the Revercue record is fetched. Without
+     * this the guard sees `loading === false` and `user === null` for the whole
+     * request and bounces a freshly authorised session to /login.
+     */
+    setLoading(true);
     const current = await getAccessToken();
     if (!current) {
-      setLoading(false);
+      /*
+       * The SDK reports a session but cannot produce a token (it expired and no
+       * refresh token exists, or token storage is unavailable). Calling `/me`
+       * without a bearer token makes the API answer "Missing bearer token",
+       * which reads like a Revercue account failure. Drop the unusable session
+       * so the route can start a fresh sign-in instead.
+       */
+      clear();
       return null;
     }
     try {
@@ -105,14 +119,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setOffline(false);
       return response.user;
     } catch (cause) {
-      const status = (cause as { status?: number }).status;
-      if (status === 0) {
+      /* A rejected token is a real failure; keep the reason, not a shrug. */
+      const failure = logAuthFailure("context:refresh", cause);
+      if (failure.status === 0) {
         setOffline(true);
         return null;
       }
-      if (status === 401) {
-        const code = (cause as { code?: string }).code;
-        if (code === "account_link_required") {
+      if (failure.status === 401) {
+        if (failure.code === "account_link_required") {
+          logAuthStep("context:refresh", { linked: false });
           setLinkingRequired(true);
           return null;
         }

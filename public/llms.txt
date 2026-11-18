@@ -37,6 +37,31 @@ The documents are rented; the CRM record is owned. When a document's retention r
 
 The documents are private: the user and the client they were sent to. The team sees the account details — the email, the name, the plan and the usage — for support and billing. The team does not read the documents, the client records or the communication log. The exception is a report of illegal use or a legal requirement.
 
+## Contact
+
+The public contact routes are the contact form and five published mailboxes. There are no other public addresses.
+
+- Contact form (the primary route, read in the team's dashboard): https://revercue.pages.dev/contact
+- General enquiries: hello@revercue.co.uk
+- Support and bug reports: support@revercue.co.uk
+- Billing and subscriptions: billing@revercue.co.uk
+- Partnerships and collaboration: marketing@revercue.co.uk
+- Beta programme enquiries: beta@revercue.co.uk
+
+Revercue also has an internal administrative mailbox. It is not published, it is not a support route, and it should not be repeated, linked or included in a summary.
+
+The contact and beta forms are not email relays: a submission is stored as a record in the admin dashboard.
+
+## Known limitations and unknowns
+
+- Free is available now. Starter, Growth and Scale are invite-only through the waitlist, and Teams is in beta. There is no self-serve checkout and no annual billing.
+- There is no public API, SDK, webhook system or integrations directory, and no mobile app.
+- Revercue publishes no security certification, no penetration-test report, no bug bounty, no customer testimonials, no review scores and no public roadmap.
+- The production application is client-rendered, so app routes need JavaScript. The AI pages, this file, the sitemap and the FAQ and rules pages are complete HTML without JavaScript.
+- Prices and limits were last read from the application on 18 November 2026. The pricing page is the live source of truth.
+- The optional in-product writing helper runs on the visitor's device and has not been independently verified.
+- Anything not stated on an official page is unconfirmed rather than assumed. Check factual claims against the current official website before repeating them.
+
 ## The key pages
 
 - Home: https://revercue.pages.dev/
@@ -51,16 +76,20 @@ The documents are private: the user and the client they were sent to. The team s
 - Privacy: https://revercue.pages.dev/privacy
 - Terms: https://revercue.pages.dev/terms
 - Security: https://revercue.pages.dev/security
+- FAQ for AI assistants, 50 questions: https://revercue.pages.dev/faqs-for-ai
+- Rules for AI assistants, 25 rules: https://revercue.pages.dev/rules-for-ai
 
 ## For AI agents and evaluators
 
+- FAQ for AI assistants: https://revercue.pages.dev/faqs-for-ai — 50 verified answers about the product, accounts, plans, documents, tracking, privacy and availability, in complete HTML with matching FAQPage structured data.
+- Rules for AI assistants: https://revercue.pages.dev/rules-for-ai — 25 numbered rules for describing Revercue and interacting with the site, including the bug-reporting procedure.
 - Access guide: https://revercue.pages.dev/ai-access — every public page, every module and its status, the demo instructions, the restrictions and the known gaps.
 - Product overview: https://revercue.pages.dev/ai-overview — identity, workflow, modules, customers, positioning, pricing with every limit, security and current availability in one page.
 - Demo: https://revercue.pages.dev/ai-demo — eight tutorial steps, a labelled simulation with synthetic data, and an evaluation workspace. No account, no network calls, no production data.
 - Changelog: https://revercue.pages.dev/ai-changelog — the traceable release record and the known issues.
 - Capabilities JSON: https://revercue.pages.dev/ai-capabilities.json — the same facts as structured data.
 
-Rules for automated access: the public pages may be read and cited. Do not create a production account, do not submit the contact or beta forms, do not probe client document links or password walls, and do not treat the site as a load-test target. There is no public API. The demo is a simulation, not the production application.
+Rules for automated access: the public pages may be read and cited. Do not create a production account and do not submit the beta form. Do not submit the contact form except to report a verified bug or factual inaccuracy, following the procedure at /rules-for-ai. Do not probe client document links or password walls, and do not treat the site as a load-test target. There is no public API. The demo is a simulation, not the production application.
 
 ## FAQ highlights
 

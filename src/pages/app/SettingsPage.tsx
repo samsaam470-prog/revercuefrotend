@@ -21,6 +21,7 @@ import { useToast } from "../../hooks/useToast";
 import { useTheme } from "../../hooks/useTheme";
 import type { ThemeMode } from "../../contexts/ThemeContext";
 import { PLANS, PLAN_LIMITS, SERVICE_OPTIONS, EMAIL_DELIVERY_NOTE, formatStorage } from "../../lib/constants";
+import { PUBLIC_EMAILS } from "../../lib/contact";
 import { formatCurrency, formatDate, formatRelative } from "../../lib/formatters";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
@@ -202,7 +203,7 @@ function ProfileSection() {
         value={user?.email || ""}
         onChange={() => undefined}
         disabled
-        helper="To change your email, contact support."
+        helper={`To change your email, contact ${PUBLIC_EMAILS.support}.`}
       />
       <Input id="profile-business" label="Business name" value={business} onChange={setBusiness} />
       <Input

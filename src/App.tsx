@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { ScrollToTop } from "./components/shared/ScrollToTop";
+import { applyRouteMetadata } from "./lib/seo";
 import { Reveal } from "./components/shared/Reveal";
 import { PublicLayout } from "./components/layout/PublicLayout";
 import { AuthLayout } from "./components/layout/AuthLayout";
@@ -24,6 +25,7 @@ import {
   TermsPage,
 } from "./pages/public";
 import {
+  CallbackPage,
   ForgotPasswordPage,
   LinkAccountPage,
   LoginPage,
@@ -66,18 +68,13 @@ import {
   SessionExpiredPage,
 } from "./pages/utility";
 
-/**
- * The AuthAction redirect URI is `/dashboard`. This keeps the old `/callback`
- * link working by forwarding the authorization response — query string intact —
- * to the dashboard, where the completion screen lives.
- */
-function CallbackAlias() {
-  const { search } = useLocation();
-  return <Navigate to={`/dashboard${search}`} replace />;
-}
-
 export function App() {
   const { pathname } = useLocation();
+
+  /* One shell serves every route, so the title and description follow the path. */
+  useEffect(() => {
+    applyRouteMetadata(pathname);
+  }, [pathname]);
 
   /* The helper downloads silently in the background. No panel, no progress. */
   useEffect(() => {
@@ -120,7 +117,8 @@ export function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/callback" element={<CallbackAlias />} />
+        {/* The authorization response is completed here, never on a guarded route. */}
+        <Route path="/callback" element={<CallbackPage />} />
         <Route path="/link-account" element={<LinkAccountPage />} />
       </Route>
 

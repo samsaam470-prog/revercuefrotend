@@ -29,4 +29,8 @@ Disallow: /notifications
 # The admin is not public.
 Disallow: /admin
 
+# Complete HTML pages written for people and for language models.
+Allow: /faqs-for-ai
+Allow: /rules-for-ai
+
 Sitemap: https://revercue.pages.dev/sitemap.xml

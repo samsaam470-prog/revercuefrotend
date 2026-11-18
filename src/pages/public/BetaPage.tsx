@@ -9,6 +9,7 @@ import { Button } from "../../components/ui/Button";
 import { marketingApi } from "../../api/public";
 import { emailSchema } from "../../lib/validators";
 import { SERVICE_OPTIONS } from "../../lib/constants";
+import { PUBLIC_EMAILS, mailto } from "../../lib/contact";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
 
@@ -151,6 +152,17 @@ export function BetaPage() {
         )}
 
         <div className="stack-4">
+          <div className="card card-md stack-3">
+            <h3>Beta enquiries</h3>
+            <p className="muted" style={{ fontSize: 14 }}>
+              Questions about the beta programme before you apply? Email{" "}
+              <a href={mailto(PUBLIC_EMAILS.beta)}>{PUBLIC_EMAILS.beta}</a>.
+            </p>
+            <p className="caption">
+              The email is for questions only. Applications are still submitted with the form on
+              this page, and they are reviewed from the beta queue in the admin dashboard.
+            </p>
+          </div>
           <div className="card card-md stack-3">
             <h3>What the beta is</h3>
             <p className="muted" style={{ fontSize: 14 }}>

@@ -38,4 +38,11 @@ export interface RequestOptions extends Omit<RequestInit, "body"> {
   token?: string | null;
   query?: Record<string, string | number | boolean | undefined | null>;
   raw?: boolean;
+  /**
+   * Leave 401 handling to the caller instead of running the global sign-out
+   * handler. The sign-in completion and account-link requests use this: they
+   * run before a session exists, so a 401 is information ("not linked yet",
+   * "token rejected") rather than an expired session.
+   */
+  suppressUnauthorized?: boolean;
 }

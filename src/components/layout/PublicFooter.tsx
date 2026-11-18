@@ -15,6 +15,7 @@ import {
 import { marketingApi } from "../../api/public";
 import { emailSchema } from "../../lib/validators";
 import { errorMessage } from "../../lib/errors";
+import { PUBLIC_EMAILS, mailto } from "../../lib/contact";
 import { ApiError } from "../../types/api";
 
 type EnvKey =
@@ -89,6 +90,12 @@ export function PublicFooter() {
           <p style={{ maxWidth: 250 }}>
             Your work should speak, not you. A thread, not disconnected workflows.
           </p>
+          <a
+            href={mailto(PUBLIC_EMAILS.hello)}
+            style={{ display: "inline-block", marginTop: 14, fontSize: 14 }}
+          >
+            {PUBLIC_EMAILS.hello}
+          </a>
         </div>
         <div className="foot-col">
           <h4>Product</h4>
@@ -187,6 +194,8 @@ export function PublicFooter() {
       </div>
       <div className="foot-ai">
         <span className="foot-ai-label">For AI agents</span>
+        <a href="/faqs-for-ai">AI FAQs</a>
+        <a href="/rules-for-ai">Rules for AI</a>
         <a href="/ai-access">Access guide</a>
         <a href="/ai-overview">Product overview</a>
         <a href="/ai-demo">Demo and tutorial</a>

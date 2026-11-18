@@ -640,7 +640,7 @@ export const FAQS: Faq[] = [
     group: "support",
     question: "How do I contact support?",
     answer:
-      "The Contact page has a form. We reply within one business day. For bug reports, use Settings → Feedback. The direct email is hello@revercue.com.",
+      "The Contact page has a form. We reply within one business day. For bug reports, use Settings → Feedback. The direct email is support@revercue.co.uk.",
   },
   {
     id: 92,

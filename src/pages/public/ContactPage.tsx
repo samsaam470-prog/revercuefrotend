@@ -7,6 +7,7 @@ import { Button } from "../../components/ui/Button";
 import { marketingApi } from "../../api/public";
 import { emailSchema } from "../../lib/validators";
 import { errorMessage } from "../../lib/errors";
+import { PUBLIC_EMAILS, mailto } from "../../lib/contact";
 import { ApiError } from "../../types/api";
 
 const TOPICS = [
@@ -119,10 +120,28 @@ export function ContactPage() {
 
         <div className="stack-4">
           <div>
-            <p className="eyebrow">How to reach us</p>
-            <p className="muted" style={{ fontSize: 14 }}>
-              This form is the way in. It reaches the same inbox as everything else, and it gives us
-              the context to answer properly. There is no public email address to copy.
+            <p className="eyebrow">Email us directly</p>
+            <ul className="contact-channels">
+              <li>
+                <span className="contact-channel-role">General enquiries</span>
+                <a href={mailto(PUBLIC_EMAILS.hello)}>{PUBLIC_EMAILS.hello}</a>
+              </li>
+              <li>
+                <span className="contact-channel-role">Customer support</span>
+                <a href={mailto(PUBLIC_EMAILS.support)}>{PUBLIC_EMAILS.support}</a>
+              </li>
+              <li>
+                <span className="contact-channel-role">Business and collaboration</span>
+                <a href={mailto(PUBLIC_EMAILS.marketing)}>{PUBLIC_EMAILS.marketing}</a>
+              </li>
+              <li>
+                <span className="contact-channel-role">Billing enquiries</span>
+                <a href={mailto(PUBLIC_EMAILS.billing)}>{PUBLIC_EMAILS.billing}</a>
+              </li>
+            </ul>
+            <p className="caption" style={{ marginTop: 12 }}>
+              The form is still the fastest route: it reaches the team with the context to answer
+              properly, and it is the only route into the support dashboard.
             </p>
           </div>
           <div>
@@ -134,8 +153,8 @@ export function ContactPage() {
           <div>
             <p className="eyebrow">Bug reports</p>
             <p className="muted" style={{ fontSize: 14 }}>
-              Use the feedback form in Settings → Feedback, so we get the account details with the
-              report.
+              Use this form for a bug report, or the feedback form in Settings → Feedback if you are
+              signed in, so we get the account details with the report.
             </p>
           </div>
         </div>

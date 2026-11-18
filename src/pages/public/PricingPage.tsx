@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, Minus, X } from "lucide-react";
 import { PLANS, formatStorage } from "../../lib/constants";
+import { PUBLIC_EMAILS, mailto } from "../../lib/contact";
 import { faqsByGroup } from "../../lib/faqs";
 import { FAQItem } from "../../components/shared/FAQItem";
 import { WaitlistModal } from "../../components/shared/WaitlistModal";
@@ -185,6 +186,11 @@ export function PricingPage() {
         <p className="caption text-center mt-6">
           <X size={12} style={{ display: "inline", verticalAlign: "-2px" }} /> No refunds. Downgrades
           take effect at the end of the cycle and archive the documents above the new limit.
+        </p>
+        <p className="caption text-center">
+          Billing and subscription questions:{" "}
+          <a href={mailto(PUBLIC_EMAILS.billing)}>{PUBLIC_EMAILS.billing}</a>. Include the email on
+          your account so we can find it.
         </p>
       </section>
 

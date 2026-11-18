@@ -34,11 +34,18 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <ThemeProvider>
         <BrowserRouter>
           <ToastProvider>
+            {/*
+              `offline_access` is what makes AuthAction issue a refresh token.
+              Without it the SDK's refresh path can never run (it throws "No
+              refresh token available"), so every session became a hard 401 one
+              hour after sign-in instead of renewing silently.
+            */}
             <AuthActionProvider
               domain={AUTHACTION_DOMAIN}
               clientId={AUTHACTION_CLIENT_ID}
               redirectUri={`${window.location.origin}/dashboard`}
               postLogoutRedirectUri={`${window.location.origin}/`}
+              scope="openid profile email offline_access"
               authorizationParams={{
                 audience: AUTHACTION_AUDIENCE,
               }}

@@ -4369,3 +4369,38 @@ details.faq-item:hover {
     padding: 14px;
   }
 }
+
+/* ============================================================
+   PUBLIC CONTACT CHANNELS
+   The public email addresses, shown beside the contact and beta
+   forms. The forms remain the submission route.
+   ============================================================ */
+.contact-channels {
+  border-top: 1px solid var(--border);
+}
+.contact-channels li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.contact-channel-role {
+  color: var(--text-secondary);
+}
+.contact-channels a {
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--transition-fast);
+}
+.contact-channels a:hover {
+  text-decoration-color: currentColor;
+}

@@ -1,47 +1,27 @@
-import { useEffect } from "react";
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { AppHeader } from "./AppHeader";
 import { AppSidebar } from "./AppSidebar";
 import { Spinner } from "../ui/Spinner";
 import { useAuth } from "../../hooks/useAuth";
 import { OfflinePage } from "../../pages/utility";
-import { CallbackPage } from "../../pages/auth";
 
 /**
  * AuthAction returns to `/dashboard`, so the authorization response arrives on
- * an authenticated route. Until it has been exchanged the layout must show the
- * completion screen instead of redirecting to /login, which would throw the
- * one-time code away.
+ * an app route. It is forwarded to `/callback` before anything else in this
+ * layout runs — the spinner, the sign-out handler, the linking redirect and the
+ * onboarding gate must never see a one-time code, or the sign-in is consumed
+ * without ever being exchanged.
  */
-const AUTH_RESPONSE_PARAMS = [
-  "code",
-  "state",
-  "error",
-  "error_description",
-  "session_state",
-  "iss",
-] as const;
-
 export function AppLayout() {
   const { user, loading, offline, linkingRequired } = useAuth();
   const location = useLocation();
-  const navigate = useNavigate();
 
   const searchParams = new URLSearchParams(location.search);
   const hasAuthResponse = searchParams.has("code") || searchParams.has("error");
 
-  /* Drop the spent response from the URL once the session exists, so a refresh
-   * or a shared link cannot replay a code that has already been used. */
-  useEffect(() => {
-    if (!user || !hasAuthResponse) return;
-    const params = new URLSearchParams(location.search);
-    AUTH_RESPONSE_PARAMS.forEach((key) => params.delete(key));
-    const search = params.toString();
-    navigate(
-      { pathname: location.pathname, search: search ? `?${search}` : "", hash: location.hash },
-      { replace: true },
-    );
-  }, [user, hasAuthResponse, location.pathname, location.search, location.hash, navigate]);
+  if (hasAuthResponse) {
+    return <Navigate to={`/callback${location.search}`} replace />;
+  }
 
   if (loading) {
     return (
@@ -61,7 +41,6 @@ export function AppLayout() {
   }
 
   if (!user) {
-    if (hasAuthResponse) return <CallbackPage />;
     return <Navigate to={`/login?returnTo=${encodeURIComponent(location.pathname)}`} replace />;
   }
 
