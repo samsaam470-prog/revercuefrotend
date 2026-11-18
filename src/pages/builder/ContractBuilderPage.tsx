@@ -564,7 +564,7 @@ function ContractCanvas({ id }: { id: string }) {
         reference={contract.public_id?.slice(0, 8) || "draft"}
         blocks={blocks}
         doc={doc}
-        footnote="This contract is not a legally binding e-signature until both parties sign."
+        footnote="Signed with a typed full name and explicit consent, recorded with the date and version. Not a certificate-based qualified signature."
       />
 
       <DocumentReview

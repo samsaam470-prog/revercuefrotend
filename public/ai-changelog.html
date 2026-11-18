@@ -53,8 +53,8 @@
           programmatically. Nothing is listed here that cannot be traced to the repository.
         </p>
         <p class="meta">
-          <span>Last reviewed: 16 November 2026</span>
-          <span>Most recent entry: 16 November 2026</span>
+          <span>Last reviewed: 18 November 2026</span>
+          <span>Most recent entry: 18 November 2026</span>
           <span>Feed: none — this page is the record</span>
         </p>
 
@@ -71,6 +71,7 @@
           <h2 id="toc-title">On this page</h2>
           <ol>
             <li><a href="#how">How this changelog works</a></li>
+            <li><a href="#pricing-2026-11-18">18 November 2026 — prices and signature wording</a></li>
             <li><a href="#ai-2026-11-16">16 November 2026 — AI resources</a></li>
             <li><a href="#site-2026-11-16">16 November 2026 — content and covers</a></li>
             <li><a href="#site-2026-11-15">15 November 2026 — guides and FAQs</a></li>
@@ -91,8 +92,70 @@
         </ul>
       </section>
 
+      <section class="section" id="pricing-2026-11-18">
+        <h2>2. 18 November 2026 — prices and signature wording</h2>
+        <p>
+          The public pages now describe prices, plan availability and contract signing the same way
+          everywhere. The change is copy and one plan visual; no application behaviour changed.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <caption>What was corrected on 18 November 2026.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Area</th>
+                <th scope="col">Before</th>
+                <th scope="col">Now</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">/pricing and the home page</th>
+                <td>Invite-only plans showed a bare monthly price, and Teams rendered as $0 in the home-page chips.</td>
+                <td>Free shows free forever; Starter, Growth and Scale show their monthly price with "invited accounts only — no checkout today"; Teams shows its $99 base with beta and manual seats.</td>
+              </tr>
+              <tr>
+                <th scope="row">/features and the contract pages</th>
+                <td>Contracts were described as "not an e-signature".</td>
+                <td>Contracts are described as a typed-name electronic signature: full name plus explicit consent, recorded with the date and version, freelancer signs first. The limits are stated too: no certificate, no identity verification, no audit certificate.</td>
+              </tr>
+              <tr>
+                <th scope="row">Plan comparison visual</th>
+                <td>Starter showed 25 active documents and Scale showed Unlimited.</td>
+                <td>Starter shows 20 and Scale shows 300, matching the application's constants.</td>
+              </tr>
+              <tr>
+                <th scope="row">Guide count</th>
+                <td>Two pages said 24 task-level guides.</td>
+                <td>25, which is the number on /guides.</td>
+              </tr>
+              <tr>
+                <th scope="row">/blog</th>
+                <td>No article about electronic signatures.</td>
+                <td>
+                  Added <a href="/blog/how-to-get-a-contract-signed-online">How to get a contract signed online</a>:
+                  six workflows, five of them non-Revercue products, with their trade-offs.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note note--warn">
+          <p>
+            <strong>Correcting a negative claim.</strong> Earlier documentation said the product had no
+            e-signature. That was wrong. The contract flow captures a typed full name, an explicit
+            consent tick, a timestamp and the signed version, and it produces a countersigned PDF. What
+            the product still does not provide is a qualified or certificate-based signature, identity
+            verification, notarisation or an audit certificate. Evaluations that relied on the old
+            wording should be read against this entry.
+          </p>
+        </div>
+      </section>
+
       <section class="section" id="ai-2026-11-16">
-        <h2>2. 16 November 2026 — AI resources</h2>
+        <h2>3. 16 November 2026 — AI resources</h2>
         <p>
           The AI documentation system was added. It exists so that an agent can find every page, read
           every module's real status and evaluate the product without an account — and so that the site
@@ -130,7 +193,7 @@
                 </td>
                 <td>
                   The self-contained reference. A single fetch is enough for a first-pass evaluation,
-                  including the negative claims (no AI, no e-signature, no API, no certification).
+                  including the negative claims (no AI, no API, no certification).
                 </td>
               </tr>
               <tr>
@@ -210,7 +273,7 @@
       </section>
 
       <section class="section" id="site-2026-11-16">
-        <h2>3. 16 November 2026 — content and covers</h2>
+        <h2>4. 16 November 2026 — content and covers</h2>
 
         <div class="table-wrap">
           <table>
@@ -272,7 +335,7 @@
       </section>
 
       <section class="section" id="site-2026-11-15">
-        <h2>4. 15 November 2026 — guides and FAQs</h2>
+        <h2>5. 15 November 2026 — guides and FAQs</h2>
 
         <div class="table-wrap">
           <table>
@@ -355,8 +418,8 @@
       </section>
 
       <section class="section" id="known">
-        <h2>5. Known issues</h2>
-        <p>Open as of 16 November 2026. Each is acknowledged, not hidden.</p>
+        <h2>6. Known issues</h2>
+        <p>Open as of 18 November 2026. Each is acknowledged, not hidden.</p>
 
         <div class="table-wrap">
           <table>
@@ -407,7 +470,7 @@
               <tr>
                 <th scope="row">Plan data can age</th>
                 <td>
-                  Prices and limits were read from the application's constants on 16 November 2026. The
+                  Prices and limits were read from the application's constants on 18 November 2026. The
                   pricing page is the live source of truth.
                 </td>
                 <td><span class="pill pill--partial">Maintained by hand</span></td>
@@ -439,7 +502,7 @@
       </section>
 
       <section class="section" id="notifications">
-        <h2>6. Staying current</h2>
+        <h2>7. Staying current</h2>
         <ul>
           <li>There is no feed and no subscription for agents. Check the <code>last_updated</code> field in <a href="/ai-capabilities.json">/ai-capabilities.json</a>.</li>
           <li>The page's "Last reviewed" date changes only when the content is re-read against the application, not on every deploy.</li>
@@ -498,7 +561,7 @@
           </ul>
         </div>
         <p class="fine">
-          © 2026 Revercue. Last reviewed 16 November 2026. Documentation, not marketing.
+          © 2026 Revercue. Last reviewed 18 November 2026. Documentation, not marketing.
         </p>
       </div>
     </footer>

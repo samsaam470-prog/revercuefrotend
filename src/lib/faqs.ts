@@ -102,7 +102,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What is the difference between the plans?",
     answer:
-      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and the basic suggestions. Starter adds custom templates and email notifications on the same basic suggestions. Growth adds the saved FAQs and the saved packages on top of the basic suggestions, plus adaptive forms and no Revercue branding on the public pages. Scale adds advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, and the custom thank-you page. Teams adds the team features (in beta).",
+      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and the basic suggestions. Starter adds custom templates and more room on the same basic suggestions; email notifications start on Growth. Growth adds the saved FAQs and the saved packages on top of the basic suggestions, plus adaptive forms and no Revercue branding on the public pages. Scale adds advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, and the custom thank-you page. Teams adds the team features (in beta).",
   },
   {
     id: 13,

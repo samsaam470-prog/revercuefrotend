@@ -110,7 +110,7 @@ export function HomePage() {
         <div className="pricing-chips">
           {PLANS.map((plan) => (
             <Link to="/pricing" className="chip" key={plan.id}>
-              <b>{plan.price == null ? `$${plan.price ?? 0}` : `$${plan.price}`}</b>
+              <b>{plan.price == null ? `$${plan.base ?? 0}+` : `$${plan.price}`}</b>
               <span>
                 {plan.name}
                 {plan.price != null ? " (monthly)" : ""} ·{" "}
@@ -118,7 +118,7 @@ export function HomePage() {
                   ? "available now"
                   : plan.status === "beta"
                     ? "in beta"
-                    : "waitlist"}
+                    : "invite-only"}
               </span>
             </Link>
           ))}

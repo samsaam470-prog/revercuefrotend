@@ -54,7 +54,7 @@
           the machine-readable capabilities file.
         </p>
         <p class="meta">
-          <span>Last reviewed: 16 November 2026</span>
+          <span>Last reviewed: 18 November 2026</span>
           <span>Applies to: revercue.pages.dev</span>
           <span>Demo data: synthetic</span>
         </p>
@@ -106,7 +106,7 @@
           <li>Product pages that describe the document workflow and the module set, with rendered product UI.</li>
           <li>Real plan limits, a comparison table and the billing terms.</li>
           <li>A comparison section written against seven named tools, with a published criteria page.</li>
-          <li>24 task-level guides and a five-post blog about client work.</li>
+          <li>25 task-level guides and a six-post blog about client work.</li>
           <li>Legal and trust pages: privacy, terms and a security page written to be checkable.</li>
           <li>Account routes: sign-up, login, password reset and a five-step onboarding.</li>
           <li>The application itself, behind authentication.</li>
@@ -197,7 +197,7 @@
               <tr>
                 <th scope="row">Guides<br /><code>/guides</code></th>
                 <td>
-                  The index of 24 task-level guides across Proposals, Contracts, Pricing, Follow-ups and
+                  The index of 25 task-level guides across Proposals, Contracts, Pricing, Follow-ups and
                   Product. Each guide (<code>/guides/{slug}</code>) walks through the actual screens,
                   with product visuals, and ends with related guides.
                 </td>
@@ -435,7 +435,7 @@
               </tr>
               <tr>
                 <th scope="row">Public contract<br /><code>/c/{publicId}</code></th>
-                <td>Approve, Decline, or I Have Questions. Explicitly not an e-signature; the action is recorded.</td>
+                <td>Sign, Decline, or I Have Questions. The signature is a typed full name plus consent, recorded with the date and version; it is not a qualified signature.</td>
               </tr>
               <tr>
                 <th scope="row">Public invoice<br /><code>/i/{publicId}</code></th>
@@ -584,14 +584,16 @@
             <p class="meta"><span class="pill pill--available">Available</span><span>Account required</span></p>
             <h3>Contracts</h3>
             <p>
-              A contract builder with the usual clause sections and three client actions: Approve,
-              Decline, or I Have Questions. Approval can continue the thread to the requirement form,
-              the invoice or a PDF, depending on the after-approval setting. Every action is written to
-              the communication log.
+              A contract builder with the usual clause sections and three client actions: Sign, Decline,
+              or I Have Questions. The freelancer signs the exact version before publishing; signing
+              can continue the thread to the requirement form, the invoice or a PDF, depending on the
+              after-approval setting. Every action is written to the communication log.
             </p>
             <p class="small muted">
-              This is not an e-signature and the product does not claim to be one. There is no legally
-              verified signature trail. Approval is an in-page action by whoever holds the link.
+              Signing is a typed full name plus an explicit consent tick, recorded with the timestamp
+              and the signed version; the freelancer signs first and the pair produces a countersigned
+              PDF. It is a simple electronic signature: no certificate, no identity verification and no
+              audit certificate, so a deal that needs a qualified signature belongs elsewhere.
             </p>
           </article>
 
@@ -629,7 +631,7 @@
             <h3>Builder and templates</h3>
             <p>
               The shared document editor: sections and blocks on the left, a white page in the canvas,
-              properties on the right, undo and redo, preview, and auto-save with a visible state.
+              properties on the right, preview, and auto-save with a visible state.
               Built-in templates ship with the product; saved templates are a Starter-and-above feature.
             </p>
             <p class="small muted">
@@ -720,9 +722,10 @@
         <div class="note note--warn">
           <p>
             <strong>What is not claimed.</strong> No public API, no integrations directory, no
-            e-signature, no card processing inside Revercue, no formal security certification, no
-            customer testimonials and no published performance benchmarks. If a capability is not
-            described here or in the overview, treat it as unverified rather than assumed.
+            qualified or certificate-based e-signature, no card processing inside Revercue, no formal
+            security certification, no customer testimonials and no published performance benchmarks.
+            If a capability is not described here or in the overview, treat it as unverified rather
+            than assumed.
           </p>
         </div>
       </section>
@@ -898,7 +901,7 @@
         <ul>
           <li>The AI pages are new and their content has not been reviewed by a second person.</li>
           <li>The demo is a simulation, so it verifies the workflow's shape, not the production implementation.</li>
-          <li>Plan status, limits and prices are copied from the application's constants on 16 November 2026; they can change.</li>
+          <li>Plan status, limits and prices are copied from the application's constants on 18 November 2026; they can change.</li>
           <li>No formal security certification exists, and none is claimed.</li>
         </ul>
       </section>
@@ -982,7 +985,7 @@
           </ul>
         </div>
         <p class="fine">
-          © 2026 Revercue. Last reviewed 16 November 2026. This page is documentation, not marketing:
+          © 2026 Revercue. Last reviewed 18 November 2026. This page is documentation, not marketing:
           it describes only what the application and its public pages support.
         </p>
       </div>

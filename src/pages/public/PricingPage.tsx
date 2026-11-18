@@ -78,10 +78,26 @@ export function PricingPage() {
               </div>
               <div>
                 <div className="price">
-                  {plan.price == null ? "On invitation" : `$${plan.price}`}
-                  {plan.price != null && plan.price !== 0 && <span className="caption"> /mo</span>}
+                  {plan.price == null ? (
+                    <>
+                      Base ${plan.base ?? 0}
+                      <span className="caption"> /mo</span>
+                    </>
+                  ) : (
+                    <>
+                      ${plan.price}
+                      <span className="caption">{plan.price === 0 ? " free forever" : " /mo"}</span>
+                    </>
+                  )}
                 </div>
                 <div className="role">{plan.role}</div>
+                <p className="caption" style={{ marginTop: 6 }}>
+                  {plan.status === "available"
+                    ? "Available now — no card, no trial clock"
+                    : plan.status === "beta"
+                      ? "In beta — billed per team, only after an invitation"
+                      : "Invited accounts only — no checkout today"}
+                </p>
               </div>
               <ul>
                 {plan.features.slice(0, 5).map((feature) => (
@@ -110,6 +126,12 @@ export function PricingPage() {
           );
         })}
       </div>
+
+      <p className="caption text-center" style={{ marginTop: 16 }}>
+        Prices are in US dollars, per month. Starter, Growth and Scale start only after an invitation:
+        the waitlist is the queue, not a purchase. Teams is in beta, priced per team with seats handled
+        manually. There is no automated checkout and no refunds.
+      </p>
 
       <section className="section">
         <div className="section-head">

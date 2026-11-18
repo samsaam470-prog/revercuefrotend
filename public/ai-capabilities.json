@@ -1,7 +1,7 @@
 {
   "name": "Revercue",
   "documentation_version": "1.0.0",
-  "last_updated": "2026-11-16",
+  "last_updated": "2026-11-18",
   "canonical_origin": "https://revercue.pages.dev",
   "document": {
     "language": "en",
@@ -65,8 +65,8 @@
     {
       "stage": "contract",
       "public_url": "/c/{publicId}",
-      "client_actions": ["approve", "decline", "ask_question"],
-      "note": "Approval is not an e-signature."
+      "client_actions": ["sign_and_approve", "decline", "ask_question"],
+      "note": "A simple electronic signature: typed full name plus explicit consent, recorded with the date and version. The freelancer signs first. No certificate, identity verification or audit certificate."
     },
     {
       "stage": "requirement_form",
@@ -109,7 +109,7 @@
       "status": "available",
       "access": "account",
       "public_page": true,
-      "summary": "Clause-based builder; client approves, declines or asks a question; after-approval choice of form, invoice or PDF."
+      "summary": "Clause-based builder; freelancer signs first, then the client signs or declines or asks a question; after-approval choice of form, invoice or PDF."
     },
     {
       "id": "requirement_forms",
@@ -230,7 +230,7 @@
         "password_protected_documents": 0,
         "adaptive_forms": 0
       },
-      "features": ["Opened-at timestamps", "Email notifications"]
+      "features": ["Opened-at timestamps", "Custom templates (3)"]
     },
     {
       "id": "growth",
@@ -380,7 +380,7 @@
   },
   "not_claimed": [
     "AI, machine learning or generated text in the product",
-    "E-signature or a legally verified signing trail",
+    "A qualified or certificate-based signature, identity verification, notarisation or an audit certificate",
     "Card processing inside Revercue",
     "Public API, SDK, webhooks or an integrations directory",
     "SOC 2, ISO 27001 or any security certification",
@@ -411,7 +411,7 @@
     },
     {
       "id": "plan-data-can-age",
-      "detail": "Prices and limits were read from the application's constants on 2026-11-16; the pricing page is the live source of truth.",
+      "detail": "Prices and limits were read from the application's constants on 2026-11-18; the pricing page is the live source of truth.",
       "status": "maintained_by_hand"
     },
     {

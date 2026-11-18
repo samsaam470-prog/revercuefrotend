@@ -11,7 +11,7 @@ Site: https://revercue.pages.dev
 
 - **Proposal** — an interactive link with packages, FAQs, embedded questions and info icons. The client selects a package and asks a question without an account. A password can gate the page.
 - **Contract** — the client approves, declines, or asks a question. Approval can chain into the requirement form, the invoice, or a PDF, depending on the setting.
-- **Form** — the requirement form. Adaptive on Growth and above: the branching shows only the questions that matter. The Prompt Creator writes the question set from a short brief.
+- **Form** — the requirement form. Adaptive on Growth and above: the branching shows only the questions that matter. The Prompt Creator assembles the answers into one structured paragraph.
 - **Invoice** — pay by link, or bank details with a proof-of-payment upload. The line items, the tax, the currency and the due date are on the page the client already has.
 - **CRM** — the client record, the communication log, the notes and the follow-ups. On Scale it adds the interest level, the revenue tracker and a writing area. The record builds itself from the documents.
 
@@ -20,7 +20,7 @@ Site: https://revercue.pages.dev
 - **Free** — available now. 5 active documents, 1-month retention, 50 MB storage, 3 notes per client, the full thread.
 - **Starter** — invite-only, join the waitlist. 20 active documents, 3-month retention, 100 MB storage, 10 notes per client, 3 custom templates, email notifications.
 - **Growth** — invite-only, join the waitlist. 100 active documents, 12-month retention, 1 GB storage, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, no Revercue branding, 10 saved FAQs, 10 saved packages, 10 custom templates.
-- **Scale** — invite-only, join the waitlist. 300 active documents, 24-month retention, 5 GB storage, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, the custom thank-you page, the pattern learning, 30 saved FAQs, 15 saved packages, 15 custom templates.
+- **Scale** — invite-only, join the waitlist. 300 active documents, 24-month retention, 5 GB storage, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, the custom thank-you page, follow-up timing from your own history, 30 saved FAQs, 15 saved packages, 15 custom templates.
 - **Teams** — in beta, join the beta. 500 active documents, 36-month retention, 10 GB storage, everything on Scale, plus the team features: the Handoff Dashboard, the roles, the bulk transfer and the audit log.
 
 An active document is a published document with a public link. Drafts, archived documents and deleted documents do not count. A password-protected document counts once: the password is a gate, not a second document. An adaptive form counts once: the branching is a feature, not a second form.

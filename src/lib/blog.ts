@@ -9,6 +9,84 @@ export interface BlogPost {
 
 const BASE_POSTS: BlogPost[] = [
   {
+    slug: "how-to-get-a-contract-signed-online",
+    title: "How to get a contract signed online: six workflows, compared",
+    excerpt:
+      "Typed name, DocuSign, Dropbox Sign, Adobe, PandaDoc, SignWell — what each workflow actually asks of you and the client, and when a plain link is enough.",
+    date: "2026-11-18",
+    readMinutes: 9,
+    body: [
+      {
+        paragraphs: [
+          "Most freelancers do not need an e-signature platform. They need one contract signed by one client, without printing, scanning or chasing. That is a smaller job than the category suggests, which is why six different products can all be the right answer depending on who you are.",
+          "An electronic signature is not one technology. At its core it is evidence: the signer saw the terms, intended to agree, and the record shows who signed what and when. ESIGN in the US, eIDAS in the EU and similar laws build validity around intent and a reliable record rather than a picture of handwriting. This is not legal advice: for a regulated or high-value deal, ask a lawyer whether the law expects a qualified signature.",
+        ],
+      },
+      {
+        heading: "1. A typed name inside the document (Revercue)",
+        paragraphs: [
+          "Workflow: you write the contract in the builder, then sign it first with your full name and an explicit consent tick; publishing stays blocked until you do. The client opens one link, reads the same version without an account, types a full name, ticks consent and signs. The record keeps both signatures, the date and the version, and the contract produces a countersigned PDF.",
+          "Best when the contract sits beside the proposal and the invoice, there are one or two signers, and the client should do nothing but open a link. Approval can chain straight into the requirement form or the invoice, so nobody re-types the scope.",
+          "Where it stops: this is a simple electronic signature, with no certificate, no identity verification and no audit certificate. If the deal needs a qualified or notarised signature, or a vendor the counterparty recognises, use one of the platforms below. The two coexist easily: heavy contracts elsewhere, everyday ones in the thread.",
+        ],
+      },
+      {
+        heading: "2. DocuSign",
+        paragraphs: [
+          "Workflow: upload a PDF or use a template, drag signature, initials, date and text fields onto the page, add recipients and a signing order, then send. The signer opens the email, adopts a signature and signs; identity checks and access codes exist on higher plans. When everyone has signed, DocuSign stores a completion certificate with timestamps, IP addresses, signer emails and a document hash.",
+          "Best when a counterparty expects the name, several stakeholders sign in sequence, or procurement wants a formal audit trail. It is the safest enterprise default and the heaviest option for a two-page agreement; pricing is seat-based and climbs quickly.",
+        ],
+      },
+      {
+        heading: "3. Dropbox Sign (formerly HelloSign)",
+        paragraphs: [
+          "Workflow: upload the PDF, drag the fields, add signers and a message, send from your own address or the API, and let reminders run. The audit trail records views, signatures, timestamps and IP addresses, and signed copies return to Dropbox or your inbox.",
+          "Best when you want most of DocuSign's evidence with less configuration and a lower price, especially if files already live in Dropbox or Drive. The free tier is small; treat it as a trial.",
+        ],
+      },
+      {
+        heading: "4. Adobe Acrobat Sign",
+        paragraphs: [
+          "Workflow: work from Acrobat or Reader, add fields to a PDF, send for signature, and track the agreement. Recipients can sign in the browser or on mobile, and the completed file returns as a certified PDF with an audit report.",
+          "Best when your documents already live in Adobe, you handle PDF forms and government paperwork, or an organisation has an Adobe agreement. If you never open Acrobat otherwise, the interface assumes a vocabulary you may not need.",
+        ],
+      },
+      {
+        heading: "5. PandaDoc",
+        paragraphs: [
+          "Workflow: build a proposal, quote or contract from blocks, add a pricing table, send it as one document, and let the client review and sign in the same page. It can collect payment after signature and keeps a content library and audit trail.",
+          "Best when the proposal and contract are one sales motion and the signature belongs at the end of the pitch. It is a sales-document tool first; for a single contract with no proposal attached, it is more software than the job needs, at per-seat pricing.",
+        ],
+      },
+      {
+        heading: "6. SignWell",
+        paragraphs: [
+          "Workflow: upload a document, place the fields, add signers, send, and let automatic reminders and expiry do the chasing. It keeps templates, an audit trail and an API, and signed PDFs are stored for you.",
+          "Best when you sign often but do not need identity verification, notarisation or enterprise controls. It is the closest to a no-frills utility, and the price reflects that; what you give up is depth.",
+        ],
+      },
+      {
+        heading: "What to check before you choose",
+        paragraphs: [
+          "Signing order. Can you sign first, and is publishing blocked until you do? A contract the client can sign before you is not agreed yet.",
+          "The evidence. Does the record keep the signer's name and email, the timestamp, the version or hash, and ideally the IP address?",
+          "Identity. Is there anything beyond an email address? Most freelance contracts do not need it; regulated work might.",
+          "The client's cost. Does the signer need an account, an app or a download? Every extra step delays the return.",
+          "The billing model. Per user, per envelope or per month changes which tool is cheap at your volume.",
+          "Afterwards. Where does the signed PDF live, for how long, and can you export it?",
+        ],
+      },
+      {
+        heading: "The workflow matters more than the tool",
+        paragraphs: [
+          "Every product above can produce a signed contract. What decides whether it gets signed is the sequence around it: one link instead of four attachments, a stated next step instead of 'let me know', and a request that arrives while the decision is warm. The common failure is not a weak signature; it is a PDF sent with the instruction to sign, scan and email it back.",
+          "Keep the signed copy with the client record, not in a downloads folder, and note the date and version beside the proposal and the invoice. Six months later the question is what was agreed, not which tool produced the file.",
+          "If your contracts already live next to the proposal and the invoice, the smallest workflow is inside the document: you sign, the client clicks and types a name, and the record keeps the rest. If you need certificates, notarisation or a vendor your client recognises, pick one of the dedicated platforms and keep Revercue for the everyday thread. The right answer is the one the client actually completes.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "the-thread-is-the-product",
     title: "The thread is the product",
     excerpt:

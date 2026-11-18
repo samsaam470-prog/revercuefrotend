@@ -24,7 +24,7 @@ export function ContractVisual() {
           </div>
         ))}
         <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
-          <span className="cv-btn">Approve</span>
+          <span className="cv-btn">Sign and approve</span>
           <span
             className="cv-btn ghost"
             style={{ borderColor: "#e0a0a0", color: "#a03030" }}
@@ -34,8 +34,8 @@ export function ContractVisual() {
           <span className="cv-btn ghost">I Have Questions</span>
         </div>
         <small>
-          This contract is not a legally binding e-signature until both parties sign. The Approve
-          action is a confirmation, not a signature.
+          Signing is a typed full name plus an explicit consent tick, recorded with the date and the
+          version. It is a simple electronic signature, not a certificate-based qualified one.
         </small>
       </div>
     </div>

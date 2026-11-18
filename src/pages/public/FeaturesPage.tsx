@@ -31,7 +31,8 @@ const SECTIONS: Section[] = [
     bullets: [
       "Packages: Basic, Standard, Premium — rename or remove them",
       "Collapsible FAQs and per-question Ask a Question",
-      "Optional password protection on Growth and Scale",
+      "No watermark over the document: the credit is one footer line, removed on Growth and above",
+      "Unguessable, noindex links; an optional password wall on Growth and Scale",
       "The client selects a package; you see the click",
       "Approve or decline from the bottom of the page; the record updates and the conversation stays in your own inbox",
     ],
@@ -40,12 +41,15 @@ const SECTIONS: Section[] = [
   {
     id: "contracts",
     title: "Contracts",
-    copy: "Approve, Decline, or I Have Questions. After approval the thread continues to the form or the invoice.",
+    copy: "Sign, decline, or ask a question. The signature is a typed full name plus an explicit consent tick, recorded with the date.",
     bullets: [
-      "Three client actions, stated honestly as not an e-signature",
-      "Choose the after-approval step: form, invoice or PDF",
+      "Typed-name e-signature: full name and an explicit consent tick",
+      "You sign the exact version first; publishing is blocked until you do",
+      "The client signs the same version; the record keeps the date",
+      "Not a qualified signature: no certificate, no identity check, no audit certificate",
       "Scope, payment terms, revisions and cancellation in one page",
-      "Every action lands in the communication log",
+      "Choose the after-approval step: form, invoice or PDF",
+      "Every signature, decline and question lands in the communication log",
       "Decline takes an optional reason",
     ],
     visual: "ContractVisual",
@@ -96,7 +100,7 @@ const SECTIONS: Section[] = [
     bullets: [
       "Three panels: sections and blocks, the canvas, the properties",
       "The canvas is a white page inside the dark app",
-      "Undo, redo, preview and a live auto-save indicator",
+      "Preview and a live auto-save indicator",
       "60-second interval, session-end beacon, explicit save",
       "The share sheet never sends for you",
     ],
@@ -134,8 +138,8 @@ const SUBS: Record<string, { label: string; copy: string }[]> = {
     { label: "Ask the helper", copy: "Select a sentence, ask for a clearer version, keep what you like." },
   ],
   contracts: [
-    { label: "Three honest actions", copy: "Approve, Decline, or I Have Questions — no e-signature claim." },
-    { label: "After approval", copy: "Send the form, the invoice, or the PDF next." },
+    { label: "The signature, spelled out", copy: "A typed name and an explicit consent tick, recorded with the date and the version." },
+    { label: "After signing", copy: "Send the form, the invoice, or the PDF next." },
     { label: "Ask the helper", copy: "Tighten a clause in the builder without retyping it." },
   ],
   forms: [
@@ -155,7 +159,7 @@ const SUBS: Record<string, { label: string; copy: string }[]> = {
   ],
   builder: [
     { label: "Three panels", copy: "Sections and blocks, the page, the properties of the selected block." },
-    { label: "The block library", copy: "Twenty elements that stay readable instead of forty that do not." },
+    { label: "The block library", copy: "Sixteen blocks in a proposal, seventeen in a contract — each one readable, none hidden." },
     { label: "The post-document review", copy: "A score and a short list of what to fix, before you send." },
   ],
   suggestions: [

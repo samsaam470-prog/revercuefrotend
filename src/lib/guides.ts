@@ -150,10 +150,10 @@ const BASE_GUIDES: Guide[] = [
   {
     slug: "contract-builder",
     title: "The contract builder",
-    excerpt: "The same canvas, the after-approval chain, and the three client actions.",
+    excerpt: "The same canvas, the freelancer-first signing flow, and the after-approval chain.",
     category: "Contracts",
     readMinutes: 6,
-    updated: "2026-11-16",
+    updated: "2026-11-18",
     visual: "ContractVisual",
     sections: [
       {
@@ -168,14 +168,15 @@ const BASE_GUIDES: Guide[] = [
         heading: "No FAQs, no per-question prompts",
         paragraphs: [
           "A contract does not carry FAQs or embedded questions. Questions happen at the document level through I Have Questions, which you can switch off in the document properties if the contract should be a read-and-sign page.",
-          "The signature block is two lines, one for you and one for the client. It is a visual anchor for the approval, not a cryptographic signature, and the page says so plainly below the buttons.",
+          "The signature block is two lines, one for you and one for the client. The lines are the visual anchor; the signature itself is the typed full name and the consent tick captured on each side, recorded with the date and the version that was signed.",
         ],
         visual: "ContractVisual",
       },
       {
         heading: "What the client can do",
         paragraphs: [
-          "Approve, Decline, or I Have Questions. Approve opens a confirmation that asks for the client's name and an explicit tick, and says plainly that it is not a legally binding e-signature. Decline asks once and takes an optional reason so you can revise and resend.",
+          "Sign, Decline, or I Have Questions. You sign the exact version first and publishing stays blocked until you do. The client then opens the link, reads the same version, types a full name, ticks the consent box and signs; the record keeps the date and the version. Decline asks once and takes an optional reason so you can revise and resend.",
+          "The page says plainly what the signature is: a simple electronic signature made of a typed name, an explicit consent tick and a timestamp. There is no certificate, no identity check and no audit certificate, so a deal that needs a qualified signature belongs with a dedicated signing service.",
           "A question goes to your dashboard and the client can still approve afterwards, because a question is not a refusal. When the client uses the after-approval chain, the next step is created only after you confirm it; nothing is auto-issued on their approval.",
         ],
       },
@@ -345,7 +346,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The blocks you can place in a document and what each one is for.",
     category: "Product",
     readMinutes: 6,
-    updated: "2026-11-16",
+    updated: "2026-11-18",
     visual: "BuilderVisual",
     sections: [
       {
@@ -704,15 +705,15 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Signature",
         paragraphs: [
-          "Purpose — Closes a contract with the two parties and a line for each, without pretending to be an e-signature.",
+          "Purpose — Closes a contract with a line for each party. The lines hold the typed signatures once both sides sign.",
           "Where you find it — Left panel, under Blocks; contracts add it automatically at the end.",
           "How to insert it — Choose Signature. It renders the freelancer and client lines side by side.",
           "How to configure it — There is almost nothing to configure: the parties come from the document and the profile. Keep it last, after the terms.",
           "Best use cases — The end of every contract, and the end of a proposal that is being used as a signed agreement.",
-          "Writing effective content — Nothing to write here. The sentence above the signature is where you say plainly that approval on the page is approval of the terms, and that it is not a qualified electronic signature.",
+          "Writing effective content — Nothing to write here. The sentence above the signature is where you say plainly that signing is a typed name plus consent, recorded with the date, and that it is a simple electronic signature rather than a qualified one.",
           "How the client experiences it — The client sees two ruled lines with labels. On mobile they stack, freelancer first.",
           "How Ask the helper improves it — No content for the helper to rewrite. If the closing sentence needs work, that is a paragraph block above the signature.",
-          "Common mistakes — Claiming legal e-signature status. Putting the signature before the terms. Adding your own name twice.",
+          "Common mistakes — Claiming a qualified, notarised or identity-verified signature. Putting the signature before the terms. Adding your own name twice.",
           "Mobile and accessibility — Each line has a text label, so the block is understandable without seeing the rule. The signature itself is not an interactive control.",
         ],
         bullets: [
@@ -860,7 +861,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "Follow-ups, document suggestions, interest flags and the price suggestion.",
     category: "Follow-ups",
     readMinutes: 4,
-    updated: "2026-11-16",
+    updated: "2026-11-18",
     visual: "SuggestionVisual",
     sections: [
       {
@@ -890,7 +891,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "The suggestions are on every plan. The plan shapes the depth, not the existence. Every freelancer gets the suggestions; the plan decides how smart they are.",
           "The Free plan has the basic suggestions. The follow-up (the proposal sent, the no response after X days). The document suggestion (the client agreed — create a contract). The pattern is the admin's default: the default follow-up timing (the 2 days), the default keyword list. The Free plan is the first suggestions; it is the product's starting intelligence.",
-          "The Starter plan has the basic suggestions, the same as the Free plan. The follow-up, the document suggestion, the admin's default. The Starter is the room; the suggestions are the same basic intelligence. The Starter adds the custom templates and the email notifications, but the suggestions are the same basic patterns.",
+          "The Starter plan has the basic suggestions, the same as the Free plan. The follow-up, the document suggestion, the admin's default. The Starter is the room; the suggestions are the same basic intelligence. The Starter adds the custom templates and more room; email notifications start on Growth. The suggestions are the same basic patterns.",
           "The Growth plan has the basic suggestions, plus the saved FAQs and the saved packages. The follow-up, the document suggestion, the admin's default. The Growth adds the reusable content: the FAQ the user uses most, the package the user uses most. The suggestions are still the admin's default; the reusable content is the user's own.",
           "The Scale plan has the advanced suggestions. The follow-up (the user's own median delay, not the default). The document suggestion (the user's own intent to document pattern, not the default). The interest flag (the client marked not interested, the interest 80%+). The form reminder (the client opened the form, not submitted after 3 days). The price suggestion (the expenses + the last invoice + the margin). The reopen (the not-interested client, the high interest). The Scale suggestions use the user's own pattern: the user's own data, the user's own history. The Scale is the learning; the Growth is the default.",
           "The Teams plan has the Scale's suggestions, plus the team's suggestions (the Handoff Dashboard, the roles, the team's pattern). The Teams is in beta. The suggestions are the intelligence; the plan shapes the depth.",
@@ -1311,7 +1312,7 @@ const BASE_GUIDES: Guide[] = [
       "The five plans, what each one adds, and the limits that actually change how you work.",
     category: "Pricing",
     readMinutes: 6,
-    updated: "2026-11-16",
+    updated: "2026-11-18",
     visual: "PricingVisual",
     sections: [
       {
@@ -1324,7 +1325,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "What each tier adds",
         paragraphs: [
           "Free gives you 5 active documents, 1-month retention, 50 MB of storage, 3 notes per client, and the full thread. It is the product, not a demo.",
-          "Starter adds room and a voice: 20 active documents, 3-month retention, 100 MB, 10 notes per client, 3 custom templates, and email notifications.",
+          "Starter adds room: 20 active documents, 3-month retention, 100 MB, 10 notes per client, and 3 custom templates. Email notifications start on Growth, not Starter.",
           "Growth adds the features that change how a document is made: 100 active documents, 12-month retention, 1 GB, 10 custom templates, 10 saved FAQs, 10 saved packages, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, and no Revercue branding on the client pages.",
           "Scale adds the numbers: 300 active documents, 24-month retention, 5 GB, 15 custom templates, 30 saved FAQs, 15 saved packages, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, the custom thank-you page, and the full set of suggestions.",
           "Teams adds the people: 500 active documents, 36-month retention, 10 GB, everything on Scale, and the team features — the Handoff Dashboard, the roles, the bulk transfer and the audit log. Teams is in beta.",
@@ -1362,7 +1363,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Choosing between Starter and Growth",
         paragraphs: [
-          "The honest answer is that most freelancers choose on one of two things: how many proposals are live at once, or whether the client page carries your brand alone. Starter gives you twenty documents, three custom templates and email notifications. Growth gives you a hundred documents, ten templates, ten saved FAQs, ten saved packages, three adaptive forms, fifteen password-protected documents and no Revercue branding on the client pages.",
+          "The honest answer is that most freelancers choose on one of two things: how many proposals are live at once, or whether the client page carries your brand alone. Starter gives you twenty documents and three custom templates. Growth gives you a hundred documents, ten templates, ten saved FAQs, ten saved packages, three adaptive forms, fifteen password-protected documents and no Revercue branding on the client pages.",
           "If you send two proposals a week and archive the dead ones, Starter is enough room for a long time. If you run a pipeline where a dozen clients are deciding at once, or if the client page is part of how you sell, Growth is the plan that stops the ceiling from being the thing you think about.",
           "Growth is also where the reusable content starts: the FAQ you answer most often, the package you sell most often, both saved once and pulled into the next document. That saving is not about features; it is about the number of times you type the same paragraph in a month.",
         ],

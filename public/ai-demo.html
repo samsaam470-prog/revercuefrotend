@@ -58,7 +58,7 @@
           <span>Data: synthetic</span>
           <span>Account required: none</span>
           <span>Network calls: none</span>
-          <span>Last reviewed: 16 November 2026</span>
+          <span>Last reviewed: 18 November 2026</span>
         </p>
 
         <div class="note note--warn">
@@ -262,14 +262,15 @@
                     <p class="meta"><span>Northlight Studio</span><span>Signature package</span><span>$7,200</span></p>
                     <p>
                       Scope, payment schedule, timeline, revision rounds, cancellation and liability
-                      sections are on the page above the buttons. Approval is an in-page action by
-                      whoever holds the link; it is not an e-signature and the product does not describe
-                      it as one.
+                      sections are on the page above the buttons. In the production flow the freelancer
+                      signs this version first, then the client types a full name and ticks consent; both
+                      signatures are recorded with the date. The demo stops at the decision and does not
+                      reproduce the signature step.
                     </p>
                   </div>
 
                   <div class="actions">
-                    <button class="btn btn--primary" type="button" data-contract="approved">Approve</button>
+                    <button class="btn btn--primary" type="button" data-contract="approved">Sign and approve</button>
                     <button class="btn btn--ghost" type="button" data-contract="declined">Decline</button>
                     <button class="btn btn--ghost" type="button" data-contract="question">I have questions</button>
                   </div>
@@ -283,8 +284,8 @@
                     <summary><strong>What this screen proves</strong></summary>
                     <p style="margin-top: 10px">
                       That a decision stops being a reply in an inbox and becomes a state on the thread,
-                      with a next document attached. It does not prove legal sufficiency, and there is no
-                      signature trail.
+                      with a next document attached. It does not reproduce the signature step or prove
+                      legal sufficiency.
                     </p>
                   </details>
                 </section>
@@ -586,8 +587,8 @@
               </dd>
               <dt>Proves / does not prove</dt>
               <dd>
-                Proves the decision is recorded and the thread advances. Does not prove legal validity,
-                and it is explicitly not an e-signature.
+                Proves the decision is recorded and the thread advances. Does not reproduce the
+                signature step or prove legal validity.
               </dd>
             </dl>
             <p><a class="btn btn--ghost" href="#workspace" data-goto="contract">Open the contract</a></p>
@@ -787,7 +788,7 @@
             </label>
             <label>
               <input type="radio" name="recommendation" value="Not suitable" />
-              <span><strong>Not suitable</strong> — the missing capabilities (payments, e-signature, API, certification) are disqualifying for this user.</span>
+              <span><strong>Not suitable</strong> — the missing capabilities (payments, qualified e-signature, API, certification) are disqualifying for this user.</span>
             </label>
             <label>
               <input type="radio" name="recommendation" value="Insufficient evidence" />
@@ -852,8 +853,8 @@
           </li>
           <li>
             <strong>Quote plan names, prices and limits exactly.</strong> Free is available now. Starter,
-            Growth and Scale are invite-only waitlists. Teams is in beta with a base price of $99. Do not
-            describe a paid plan as purchasable.
+            Growth and Scale are invite-only: join the waitlist and there is no checkout. Teams is in
+            beta with a base price of $99. Do not describe a paid plan as purchasable.
           </li>
           <li>
             <strong>Do not call this page the product.</strong> The demo is a simulation with synthetic
@@ -897,7 +898,8 @@
           <article class="card">
             <h3>Not simulated</h3>
             <ul>
-              <li>The three-panel builder, block types, undo and redo, auto-save and templates.</li>
+              <li>The three-panel builder, block types, auto-save and templates.</li>
+              <li>The freelancer-first signing step, typed signatures and the countersigned PDF.</li>
               <li>Publishing, share messages and email delivery of any kind.</li>
               <li>Password walls, the closed state and retention.</li>
               <li>Tracking depth: open timestamps, time spent, button clicks, session timeline.</li>
@@ -992,7 +994,7 @@
           </ul>
         </div>
         <p class="fine">
-          © 2026 Revercue. Demo data is synthetic. Last reviewed 16 November 2026. Documentation, not
+          © 2026 Revercue. Demo data is synthetic. Last reviewed 18 November 2026. Documentation, not
           marketing.
         </p>
       </div>

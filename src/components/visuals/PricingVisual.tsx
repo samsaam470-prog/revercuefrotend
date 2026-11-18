@@ -1,7 +1,7 @@
 /** The pricing comparison table. */
 export function PricingVisual() {
   const rows = [
-    { label: "Active documents", values: ["5", "25", "100", "Unlimited"] },
+    { label: "Active documents", values: ["5", "20", "100", "300"] },
     { label: "Document retention", values: ["1 month", "3 months", "12 months", "24 months"] },
     { label: "Draft retention", values: ["10 days", "30 days", "50 days", "80 days"] },
     { label: "Archive", values: ["5 / 15d", "15 / 30d", "30 / 30d", "30 / 30d"] },
@@ -15,7 +15,7 @@ export function PricingVisual() {
     <div className="cv" aria-label="The pricing comparison table">
       <div className="cv-bar">
         <span>Compare the plans</span>
-        <span>Available now · waitlist</span>
+        <span>Only Free is self-serve</span>
       </div>
       <div className="cv-body">
         <table className="cv-table">

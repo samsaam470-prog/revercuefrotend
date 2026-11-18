@@ -37,6 +37,7 @@ const TAG: Record<VisualName, string> = {
 
 /** Notes get the screen that carries their argument. */
 const BLOG_VISUALS: Record<string, VisualName> = {
+  "how-to-get-a-contract-signed-online": "ContractVisual",
   "the-thread-is-the-product": "DashboardVisual",
   "links-not-pdfs": "ProposalVisual",
   "patterns-not-magic": "SuggestionVisual",
