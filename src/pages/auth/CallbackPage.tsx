@@ -1,51 +1,68 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthAction } from "@authaction/web-sdk/react";
 import { authApi } from "../../api/auth";
 import { Spinner } from "../../components/ui/Spinner";
+import { consumeReturnTo, isAccountLinkRequired } from "../../lib/authaction";
 
+/**
+ * The AuthActionProvider already exchanges the authorization code when the
+ * callback URL contains `code` and `state`, so this page waits for that to
+ * finish instead of calling `handleRedirectCallback()` a second time.
+ */
 export function CallbackPage() {
   const sdk = useAuthAction();
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
+  const handled = useRef(false);
 
   useEffect(() => {
+    if (sdk.isLoading || handled.current) return;
+
+    if (!sdk.isAuthenticated) {
+      setError(sdk.error?.message || "Sign-in did not complete. Start again from the login page.");
+      return;
+    }
+
+    handled.current = true;
     let cancelled = false;
+
     (async () => {
       try {
-        await sdk.handleRedirectCallback();
         const token = await sdk.getAccessToken();
-        try {
-          await authApi.me(token);
-          if (!cancelled) navigate("/app", { replace: true });
-        } catch (cause) {
-          const code = (cause as { code?: string }).code;
-          if (code === "account_link_required") {
-            if (!cancelled) navigate("/link-account", { replace: true });
-          } else {
-            if (!cancelled) setError((cause as Error).message || "Sign-in failed.");
-          }
-        }
+        await authApi.me(token);
+        if (!cancelled) navigate(consumeReturnTo(), { replace: true });
       } catch (cause) {
-        if (!cancelled) setError((cause as Error).message || "Sign-in failed.");
+        if (cancelled) return;
+        const status = (cause as { status?: number }).status ?? 0;
+        const code = (cause as { code?: string }).code;
+        if (isAccountLinkRequired(status, code)) {
+          navigate("/link-account", { replace: true, state: { returnTo: consumeReturnTo() } });
+          return;
+        }
+        setError((cause as Error).message || "Sign-in failed.");
       }
     })();
+
     return () => {
       cancelled = true;
     };
-  }, [sdk, navigate]);
+  }, [sdk.isLoading, sdk.isAuthenticated, sdk.error, sdk, navigate]);
 
   if (error) {
     return (
       <div className="auth-card" style={{ textAlign: "center" }}>
         <h1>Sign-in failed</h1>
         <p className="muted">{error}</p>
-        <a href="/login">Back to sign in</a>
+        <p className="auth-alt">
+          <Link to="/login">Back to log in</Link>
+        </p>
       </div>
     );
   }
+
   return (
-    <div className="auth-card" style={{ textAlign: "center" }}>
+    <div className="auth-card" style={{ textAlign: "center" }} aria-live="polite">
       <Spinner size={32} />
       <p className="muted mt-4">Completing sign-in…</p>
     </div>

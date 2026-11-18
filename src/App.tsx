@@ -25,12 +25,10 @@ import {
 } from "./pages/public";
 import {
   CallbackPage,
-  CodeScreenPage,
   ForgotPasswordPage,
   LinkAccountPage,
   LoginPage,
   SignupPage,
-  SignupTransitionPage,
 } from "./pages/auth";
 import {
   OnboardingStep1Page,
@@ -111,12 +109,8 @@ export function App() {
       {/* auth */}
       <Route element={<AuthLayout />}>
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/signup/transition" element={<SignupTransitionPage />} />
-        <Route path="/signup/code" element={<CodeScreenPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/login/code" element={<CodeScreenPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/forgot-password/code" element={<CodeScreenPage />} />
         <Route path="/callback" element={<CallbackPage />} />
         <Route path="/link-account" element={<LinkAccountPage />} />
       </Route>

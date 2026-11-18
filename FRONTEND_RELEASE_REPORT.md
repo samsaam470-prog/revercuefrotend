@@ -23,7 +23,7 @@ This release migrates authentication to AuthAction, removes retired FormSubmit r
 
 ## Authentication changes
 - Replaced password login/signup with AuthAction PKCE redirect (`@authaction/web-sdk`).
-- Tenant `revercue.in.authaction.com`, client id `6afa55be765d68ab52b7acee`, audience `revercue-api.samsaam470.workers.dev`.
+- Tenant `revercue.in.authaction.com`, client id `OXJC1YmE3BwYU03xKfrMblC2F8hr9AC4`, audience `revercue-api.samsaam470.workers.dev`.
 - Callback route `/callback` and account-linking route `/link-account` implement `/auth/link/start` and `/auth/link/confirm`.
 - Legacy endpoints retained on the backend; frontend no longer sends passwords.
 

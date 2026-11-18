@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "./App";
 import { AuthActionProvider } from "@authaction/web-sdk/react";
 import { AuthProvider } from "./contexts/AuthContext";
+import { AUTHACTION_AUDIENCE, AUTHACTION_CLIENT_ID, AUTHACTION_DOMAIN } from "./lib/authaction";
 import { ToastProvider } from "./contexts/ToastContext";
 import { PlanProvider } from "./contexts/PlanContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
@@ -34,12 +35,12 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <BrowserRouter>
           <ToastProvider>
             <AuthActionProvider
-              domain={import.meta.env.VITE_AUTHACTION_DOMAIN || "revercue.in.authaction.com"}
-              clientId={import.meta.env.VITE_AUTHACTION_CLIENT_ID || "6afa55be765d68ab52b7acee"}
+              domain={AUTHACTION_DOMAIN}
+              clientId={AUTHACTION_CLIENT_ID}
               redirectUri={`${window.location.origin}/callback`}
               postLogoutRedirectUri={`${window.location.origin}/`}
               authorizationParams={{
-                audience: import.meta.env.VITE_AUTHACTION_AUDIENCE || "revercue-api.samsaam470.workers.dev",
+                audience: AUTHACTION_AUDIENCE,
               }}
             >
             <AuthProvider>

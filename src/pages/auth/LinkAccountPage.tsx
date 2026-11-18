@@ -1,14 +1,20 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthAction } from "@authaction/web-sdk/react";
 import { authApi } from "../../api/auth";
 import { Button } from "../../components/ui/Button";
+import { useAuth } from "../../hooks/useAuth";
 import { useToast } from "../../hooks/useToast";
+import { safeReturnPath } from "../../lib/authaction";
 
 export function LinkAccountPage() {
   const sdk = useAuthAction();
+  const { refresh } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const toast = useToast();
+  const returnTo = safeReturnPath((location.state as { returnTo?: string } | null)?.returnTo) || "/dashboard";
+
   const [email, setEmail] = useState(sdk.user?.email || "");
   const [code, setCode] = useState("");
   const [step, setStep] = useState<"start" | "confirm">("start");
@@ -18,19 +24,8 @@ export function LinkAccountPage() {
   const start = async () => {
     setLoading(true);
     try {
-      const token = await sdk.getAccessToken();
-      const res = await fetch(
-        (import.meta.env.DEV ? "" : (import.meta.env.VITE_API_BASE_URL || "")) +
-          "/api/auth/link/start",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-          body: JSON.stringify({ email }),
-        },
-      );
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || data.error || "Failed to send code.");
-      setMessage(data.message || "A confirmation code was sent.");
+      const res = await authApi.linkStart({ email });
+      setMessage(res.message || "A confirmation code was sent.");
       setStep("confirm");
     } catch (e) {
       toast.error((e as Error).message);
@@ -42,23 +37,12 @@ export function LinkAccountPage() {
   const confirm = async () => {
     setLoading(true);
     try {
-      const token = await sdk.getAccessToken();
-      const res = await fetch(
-        (import.meta.env.DEV ? "" : (import.meta.env.VITE_API_BASE_URL || "")) +
-          "/api/auth/link/confirm",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-          body: JSON.stringify({ email, code }),
-        },
-      );
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || data.error || "Verification failed.");
+      await authApi.linkConfirm({ email, code });
+      await refresh();
       toast.success("Account linked.");
-      navigate("/app", { replace: true });
+      navigate(returnTo, { replace: true });
     } catch (e) {
       toast.error((e as Error).message);
-    } finally {
       setLoading(false);
     }
   };
@@ -75,13 +59,14 @@ export function LinkAccountPage() {
             <span>Email</span>
             <input
               type="email"
+              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              disabled={sdk.user?.email ? true : false}
+              disabled={Boolean(sdk.user?.email)}
             />
           </label>
           {message && <p className="caption">{message}</p>}
-          <Button onClick={start} loading={loading}>
+          <Button onClick={start} loading={loading} disabled={!email}>
             Send confirmation code
           </Button>
         </>
@@ -92,12 +77,13 @@ export function LinkAccountPage() {
             <input
               type="text"
               inputMode="numeric"
+              autoComplete="one-time-code"
               maxLength={6}
               value={code}
               onChange={(e) => setCode(e.target.value)}
             />
           </label>
-          <Button onClick={confirm} loading={loading}>
+          <Button onClick={confirm} loading={loading} disabled={code.length !== 6}>
             Verify and link
           </Button>
           <button type="button" className="btn-link" onClick={() => setStep("start")}>

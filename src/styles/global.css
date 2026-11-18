@@ -3043,11 +3043,82 @@ details.faq-item:hover {
   color: var(--text-tertiary);
 }
 .auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   text-align: center;
   font-size: var(--size-caption);
   color: var(--text-tertiary);
-  margin: 14px 0 4px;
-  letter-spacing: 0.04em;
+  margin: 22px 0 4px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.auth-card-wide {
+  width: min(100%, 460px);
+}
+.auth-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: var(--size-caption);
+  line-height: 1.6;
+  color: var(--text-tertiary);
+}
+.auth-hint-tight {
+  margin-top: 10px;
+}
+.auth-hint svg {
+  flex: none;
+  margin-top: 2px;
+}
+.auth-form-error {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(214, 92, 92, 0.35);
+  border-radius: var(--radius-input);
+  background: rgba(214, 92, 92, 0.08);
+  color: #e08b8b;
+  font-size: var(--size-label);
+}
+.auth-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.auth-inline-link {
+  font-size: var(--size-label);
+  color: var(--gold);
+  font-weight: var(--weight-semibold);
+}
+.auth-inline-link:hover {
+  color: var(--gold-hover);
+}
+.auth-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.auth-provider-note {
+  margin: 4px 0 0;
+  font-size: var(--size-caption);
+  line-height: 1.6;
+  color: var(--text-tertiary);
+}
+@media (max-width: 520px) {
+  .auth-card-wide {
+    padding: var(--space-5);
+  }
+  .auth-divider {
+    margin: 18px 0 2px;
+  }
 }
 
 /* The visual's primary chip must beat the generic ".cv-box span" rule. */

@@ -51,6 +51,7 @@ const SOCIALS: { name: string; key: EnvKey; Icon: typeof XIcon }[] = [
 export function PublicFooter() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "loading" | "done">("idle");
+  const [doneMessage, setDoneMessage] = useState("You're subscribed.");
   const [error, setError] = useState("");
 
   const subscribe = async (event: React.FormEvent) => {
@@ -62,7 +63,12 @@ export function PublicFooter() {
     setError("");
     setState("loading");
     try {
-      await marketingApi.newsletter(email);
+      const response = await marketingApi.newsletter(email);
+      setDoneMessage(
+        response.already_subscribed
+          ? "You're already subscribed. Nothing else to do."
+          : "You're subscribed. No confirmation email is needed.",
+      );
       setState("done");
     } catch (cause) {
       const apiError = cause as ApiError;
@@ -107,7 +113,9 @@ export function PublicFooter() {
         <div className="foot-col">
           <h4>Stay in the loop</h4>
           {state === "done" ? (
-            <p className="caption">Thanks. You're in.</p>
+            <p className="caption" role="status">
+              {doneMessage}
+            </p>
           ) : (
             <form className="subscribe" onSubmit={subscribe} noValidate>
               <label htmlFor="footer-email" className="sr-only">

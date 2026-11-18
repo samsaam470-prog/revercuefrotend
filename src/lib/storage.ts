@@ -1,5 +1,4 @@
 const TOKEN_KEY = "revercue_token";
-const PRE_AUTH_KEY = "revercue_pre_auth_token";
 const DRAFT_PREFIX = "revercue_draft:";
 
 export const tokenStore = {
@@ -20,30 +19,6 @@ export const tokenStore = {
   clear(): void {
     try {
       localStorage.removeItem(TOKEN_KEY);
-    } catch {
-      /* storage unavailable */
-    }
-  },
-};
-
-export const preAuthStore = {
-  get(): string | null {
-    try {
-      return sessionStorage.getItem(PRE_AUTH_KEY);
-    } catch {
-      return null;
-    }
-  },
-  set(token: string): void {
-    try {
-      sessionStorage.setItem(PRE_AUTH_KEY, token);
-    } catch {
-      /* storage unavailable */
-    }
-  },
-  clear(): void {
-    try {
-      sessionStorage.removeItem(PRE_AUTH_KEY);
     } catch {
       /* storage unavailable */
     }

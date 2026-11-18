@@ -1,38 +1,27 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Input } from "../../components/ui/Input";
+import { Link } from "react-router-dom";
+import { KeyRound } from "lucide-react";
+import { useAuthAction } from "@authaction/web-sdk/react";
 import { Button } from "../../components/ui/Button";
-import { authApi } from "../../api/auth";
-import { emailSchema } from "../../lib/validators";
-import { errorMessage } from "../../lib/errors";
-import { ApiError } from "../../types/api";
 
+/**
+ * AuthAction owns password recovery. Its hosted sign-in page exposes the
+ * "Forgot password?" flow, so this page starts the hosted flow rather than
+ * calling the retired Revercue reset-code endpoints.
+ */
 export function ForgotPasswordPage() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [formError, setFormError] = useState("");
+  const sdk = useAuthAction();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const submit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    const parsed = emailSchema.safeParse(email);
-    if (!parsed.success) {
-      setError(parsed.error.issues[0].message);
-      return;
-    }
+  const start = async () => {
     setError("");
-    setFormError("");
     setLoading(true);
     try {
-      await authApi.requestPasswordReset(email);
-      sessionStorage.setItem("revercue_reset", JSON.stringify({ email, step: "code" }));
-      navigate("/forgot-password/code");
+      await sdk.loginWithRedirect({ authorizationParams: { prompt: "login" } });
     } catch (cause) {
-      const apiError = cause as ApiError;
-      setFormError(errorMessage(apiError.code, apiError.message));
-    } finally {
       setLoading(false);
+      setError((cause as Error)?.message || "Could not open the password reset flow.");
     }
   };
 
@@ -41,25 +30,24 @@ export function ForgotPasswordPage() {
       <p className="eyebrow">Password reset</p>
       <h1>Reset your password.</h1>
       <p className="lede">
-        Enter your email. If the account exists, we send a reset code by email. We answer the same way
-        whether or not the address is registered.
+        Password resets are handled by Revercue&apos;s authentication provider. Open the
+        secure sign-in page and choose &ldquo;Forgot password?&rdquo; to receive a reset link.
       </p>
-      <form className="auth-form" onSubmit={submit} noValidate>
-        <Input
-          id="forgot-email"
-          label="Email address"
-          type="email"
-          value={email}
-          onChange={setEmail}
-          error={error}
-          autoComplete="email"
-          required
-        />
-        {formError && <p className="notice notice-red">{formError}</p>}
-        <Button type="submit" loading={loading} disabled={!email} fullWidth>
-          Send reset code
+      <div className="auth-form">
+        {error && (
+          <p className="auth-form-error" role="alert">
+            {error}
+          </p>
+        )}
+        <Button onClick={start} loading={loading} fullWidth>
+          <KeyRound size={16} aria-hidden="true" />
+          Open secure password reset
         </Button>
-      </form>
+      </div>
+      <p className="caption mt-4">
+        Revercue never sees your password, and a reset is not complete until AuthAction
+        confirms it.
+      </p>
       <p className="auth-alt">
         <Link to="/login">Back to log in</Link>
       </p>

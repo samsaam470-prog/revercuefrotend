@@ -12,6 +12,7 @@ import { useAuthAction } from "@authaction/web-sdk/react";
 import { authApi } from "../api/auth";
 import { setUnauthorizedHandler, setTokenProvider } from "../api/client";
 import { tokenStore } from "../lib/storage";
+import { clearReturnTo } from "../lib/authaction";
 import type { User } from "../types";
 
 export interface AuthState {
@@ -149,7 +150,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       /* best effort */
     }
     clear();
-    navigate("/login", { replace: true });
+    clearReturnTo();
+    navigate("/", { replace: true });
   }, [sdk, clear, navigate]);
 
   const value = useMemo<AuthState>(

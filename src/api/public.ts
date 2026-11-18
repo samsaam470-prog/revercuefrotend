@@ -135,6 +135,16 @@ export const marketingApi = {
   waitlist: (body: { email: string; plan?: string }) =>
     api.post<{ success: true }>("/api/waitlist", body, { token: null }),
 
+  /*
+   * Single opt-in: the subscriber is saved as active immediately. The backend
+   * sends no confirmation email and no admin notification, so the UI must not
+   * ask the user to check their inbox.
+   */
   newsletter: (email: string) =>
-    api.post<{ success: true }>("/api/newsletter", { email }, { token: null }),
+    api.post<{
+      success: true;
+      status: "active" | "pending" | "unsubscribed";
+      email_sent: false;
+      already_subscribed?: boolean;
+    }>("/api/newsletter", { email }, { token: null }),
 };
