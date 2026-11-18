@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { KeyRound } from "lucide-react";
 import { useAuthAction } from "@authaction/web-sdk/react";
 import { Button } from "../../components/ui/Button";
+import { AUTHACTION_DOMAIN } from "../../lib/authaction";
 
 /**
- * AuthAction owns password recovery. Its hosted sign-in page exposes the
- * "Forgot password?" flow, so this page starts the hosted flow rather than
- * calling the retired Revercue reset-code endpoints.
+ * AuthAction owns password recovery. Its hosted form exposes the
+ * "Forgot password?" flow, and it publishes no public reset-code endpoint for
+ * a custom frontend, so this page opens that flow instead of calling one.
  */
 export function ForgotPasswordPage() {
   const sdk = useAuthAction();
@@ -28,10 +29,11 @@ export function ForgotPasswordPage() {
   return (
     <div className="auth-card">
       <p className="eyebrow">Password reset</p>
-      <h1>Reset your password.</h1>
+      <h1>Reset your Revercue password.</h1>
       <p className="lede">
-        Password resets are handled by Revercue&apos;s authentication provider. Open the
-        secure sign-in page and choose &ldquo;Forgot password?&rdquo; to receive a reset link.
+        Revercue doesn&apos;t hold passwords, so the reset starts with AuthAction at{" "}
+        <span className="auth-host">{AUTHACTION_DOMAIN}</span>. Open the secure form, choose
+        &ldquo;Forgot password?&rdquo;, and AuthAction emails you a reset link.
       </p>
       <div className="auth-form">
         {error && (
@@ -44,9 +46,9 @@ export function ForgotPasswordPage() {
           Open secure password reset
         </Button>
       </div>
-      <p className="caption mt-4">
-        Revercue never sees your password, and a reset is not complete until AuthAction
-        confirms it.
+      <p className="auth-hint mt-4">
+        Your new password is set with AuthAction. Nothing changes in Revercue until AuthAction
+        confirms the reset.
       </p>
       <p className="auth-alt">
         <Link to="/login">Back to log in</Link>

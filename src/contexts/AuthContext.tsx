@@ -34,8 +34,24 @@ export interface AuthState {
 
 export const AuthContext = createContext<AuthState | null>(null);
 
+/**
+ * `useAuthAction()` returns a new object on every render, so its fields — not
+ * the object — must be the effect dependencies. Depending on `sdk` itself
+ * recreated `getAccessToken` and `refresh` on every render, which made the
+ * bootstrap effect call `/api/auth/me` in a loop: each response set `user`,
+ * which re-rendered, which re-ran the effect. On the callback this fought the
+ * post-sign-in navigation and could bounce the user to /login or
+ * /session-expired instead of the dashboard.
+ */
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const sdk = useAuthAction();
+  const {
+    isAuthenticated: sdkIsAuthenticated,
+    isLoading: sdkIsLoading,
+    getAccessToken: sdkGetAccessToken,
+    loginWithRedirect,
+    logout: sdkLogout,
+  } = useAuthAction();
+
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [offline, setOffline] = useState(false);
@@ -45,17 +61,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
 
   const getAccessToken = useCallback(async (): Promise<string | null> => {
-    if (!sdk.isAuthenticated) return null;
+    if (!sdkIsAuthenticated) return null;
     try {
-      const t = await sdk.getAccessToken();
+      const t = await sdkGetAccessToken();
       tokenRef.current = t;
-      setToken(t);
+      setToken((current) => (current === t ? current : t));
       tokenStore.set(t);
       return t;
     } catch {
       return tokenRef.current;
     }
-  }, [sdk]);
+  }, [sdkGetAccessToken, sdkIsAuthenticated]);
 
   // Register the async token source for the API client.
   useEffect(() => {
@@ -73,7 +89,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const refresh = useCallback(async (): Promise<User | null> => {
-    if (!sdk.isAuthenticated) {
+    if (!sdkIsAuthenticated) {
       clear();
       return null;
     }
@@ -107,16 +123,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  }, [sdk.isAuthenticated, getAccessToken, clear]);
+  }, [sdkIsAuthenticated, getAccessToken, clear]);
 
+  /*
+   * Load the Revercue record once per authentication transition, not on every
+   * render. `lastAuth` also stops a failed `/me` from retrying forever.
+   */
+  const lastAuth = useRef<boolean | null>(null);
   useEffect(() => {
-    if (sdk.isLoading) return;
-    if (!sdk.isAuthenticated) {
+    if (sdkIsLoading) return;
+    if (lastAuth.current === sdkIsAuthenticated) return;
+    lastAuth.current = sdkIsAuthenticated;
+    if (!sdkIsAuthenticated) {
       clear();
       return;
     }
     void refresh();
-  }, [sdk.isLoading, sdk.isAuthenticated, refresh, clear]);
+  }, [sdkIsLoading, sdkIsAuthenticated, refresh, clear]);
 
   useEffect(() => {
     setUnauthorizedHandler(() => {
@@ -135,8 +158,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signIn = useCallback(async () => {
-    await sdk.loginWithRedirect();
-  }, [sdk]);
+    await loginWithRedirect();
+  }, [loginWithRedirect]);
 
   const signOut = useCallback(async () => {
     try {
@@ -145,22 +168,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       /* best effort */
     }
     try {
-      await sdk.logout();
+      await sdkLogout();
     } catch {
       /* best effort */
     }
     clear();
+    lastAuth.current = false;
     clearReturnTo();
     navigate("/", { replace: true });
-  }, [sdk, clear, navigate]);
+  }, [sdkLogout, clear, navigate]);
 
   const value = useMemo<AuthState>(
     () => ({
       user,
       token,
-      loading: loading || sdk.isLoading,
+      loading: loading || sdkIsLoading,
       offline,
-      isAuthenticated: Boolean(sdk.isAuthenticated && user && !linkingRequired),
+      isAuthenticated: Boolean(sdkIsAuthenticated && user && !linkingRequired),
       isEmailVerified: Boolean(user?.email_verified),
       linkingRequired,
       setSession,
@@ -169,7 +193,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       refresh,
       getAccessToken,
     }),
-    [user, token, loading, sdk.isLoading, offline, sdk.isAuthenticated, linkingRequired, setSession, signIn, signOut, refresh, getAccessToken],
+    [
+      user,
+      token,
+      loading,
+      sdkIsLoading,
+      offline,
+      sdkIsAuthenticated,
+      linkingRequired,
+      setSession,
+      signIn,
+      signOut,
+      refresh,
+      getAccessToken,
+    ],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -40,15 +40,16 @@ export function LoginPage() {
 
   return (
     <div className="auth-card">
-      <p className="eyebrow">Sign in</p>
-      <h1>Welcome back.</h1>
+      <p className="eyebrow">Log in</p>
+      <h1>Log in to Revercue.</h1>
       <p className="lede">
-        Your Revercue account is secured by AuthAction. Sign in on its secure page and
-        you&apos;ll land back here.
+        One Revercue account for your proposals, contracts, forms and invoices. Sign in with
+        the email and password you use for Revercue — AuthAction checks them and sends you
+        back here.
       </p>
 
       <HostedAuthHandoff
-        actionLabel="Continue to secure sign-in"
+        actionLabel="Continue to secure login"
         methods={["Email and password", "A passkey", "Google, GitHub or Microsoft"]}
         busy={busy}
         error={formError}

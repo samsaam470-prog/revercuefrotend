@@ -41,10 +41,11 @@ export function SignupPage() {
   return (
     <div className="auth-card">
       <p className="eyebrow">Create account</p>
-      <h1>Create your account.</h1>
+      <h1>Create your Revercue account.</h1>
       <p className="lede">
-        Revercue accounts are created on AuthAction&apos;s secure page, which also confirms
-        your email address.
+        Pick your email and password once, then use them for every Revercue document you send.
+        AuthAction stores the credentials and confirms your email address, then brings you
+        back here.
       </p>
 
       <HostedAuthHandoff

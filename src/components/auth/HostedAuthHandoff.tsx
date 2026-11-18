@@ -1,15 +1,35 @@
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "../ui/Button";
+import { AUTHACTION_DOMAIN } from "../../lib/authaction";
 
 /**
- * AuthAction owns every credential form. Email + password, passkey and the
- * social providers all live on its hosted page, and the documented authorize
- * parameters are limited to `prompt=login|signup`, `ui_locales` and the standard
- * OIDC values. There is no documented `login_hint`, `connection` or embedded
- * password API, so an email typed here could not be carried across the redirect.
+ * Why this page does not render its own email + password fields
+ * ------------------------------------------------------------
+ * AuthAction is the identity provider and the only credential store, and it
+ * exposes no supported way for our React code to submit a password:
  *
- * This component therefore collects nothing. It states which methods the secure
- * page offers and hands the user over in one step.
+ * - `@authaction/web-sdk@0.1.8` exports only the OIDC redirect/popup surface:
+ *   `loginWithRedirect`, `loginWithPopup`, `handleRedirectCallback`,
+ *   `getAccessToken`, `logout`, `removeUser` (see dist/index.d.ts). The built
+ *   bundle contains no password, signup or database-connection code at all.
+ * - The tenant discovery document
+ *   (`https://revercue.in.authaction.com/.well-known/openid-configuration`)
+ *   advertises `authorization_code`, `client_credentials`, `refresh_token`,
+ *   token-exchange and WhatsApp grants. There is no `password` grant, so the
+ *   Resource Owner Password flow cannot be used from the browser.
+ * - `/dbconnections/signup` and `/dbconnections/change_password` (the Auth0
+ *   style public signup/reset endpoints) return 404 on the tenant, and the
+ *   documented API reference lists no equivalent. The Management API's
+ *   "create user" endpoint needs an M2M token and client secret, so it must
+ *   never be called from the SPA.
+ * - The documented `/oauth2/authorize` parameters are `prompt=login|signup`,
+ *   `ui_locales` and the standard OIDC values. There is no `login_hint` or
+ *   `password`, so an email typed here could not be carried across.
+ *
+ * Collecting a password here without one of the above would mean either
+ * proxying it through the Revercue backend or faking authentication, both of
+ * which are ruled out. The form therefore stays on AuthAction's hosted page,
+ * and this panel states that plainly instead of pretending to be a login form.
  */
 export function HostedAuthHandoff({
   actionLabel,
@@ -39,7 +59,17 @@ export function HostedAuthHandoff({
       </div>
 
       <div className="auth-handoff">
-        <p className="auth-handoff-label">On AuthAction&apos;s secure page you can use:</p>
+        <p className="auth-handoff-label">
+          The email and password form opens on{" "}
+          <span className="auth-host">{AUTHACTION_DOMAIN}</span>, the identity provider that
+          stores Revercue sign-ins.
+        </p>
+        <ol className="auth-step-list">
+          <li>You enter your Revercue email and password on AuthAction&apos;s secure form.</li>
+          <li>AuthAction checks them and confirms the details it holds for you.</li>
+          <li>You come straight back to Revercue, signed in to your workspace.</li>
+        </ol>
+        <p className="auth-handoff-label auth-handoff-methods">You can sign in with:</p>
         <ul className="auth-method-list">
           {methods.map((method) => (
             <li key={method}>{method}</li>
@@ -47,8 +77,8 @@ export function HostedAuthHandoff({
         </ul>
         <p className="auth-hint">
           <ShieldCheck size={14} aria-hidden="true" />
-          Revercue never sees or stores your password, passkey or provider password, and
-          you come straight back here when AuthAction finishes.
+          Revercue never sees or stores your password, so there is no password field on this
+          page. Your credentials are only ever handled by AuthAction.
         </p>
       </div>
     </>
