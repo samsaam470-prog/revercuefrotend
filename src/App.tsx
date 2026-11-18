@@ -24,7 +24,6 @@ import {
   TermsPage,
 } from "./pages/public";
 import {
-  CallbackPage,
   ForgotPasswordPage,
   LinkAccountPage,
   LoginPage,
@@ -66,6 +65,16 @@ import {
   ServerErrorPage,
   SessionExpiredPage,
 } from "./pages/utility";
+
+/**
+ * The AuthAction redirect URI is `/dashboard`. This keeps the old `/callback`
+ * link working by forwarding the authorization response — query string intact —
+ * to the dashboard, where the completion screen lives.
+ */
+function CallbackAlias() {
+  const { search } = useLocation();
+  return <Navigate to={`/dashboard${search}`} replace />;
+}
 
 export function App() {
   const { pathname } = useLocation();
@@ -111,7 +120,7 @@ export function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/callback" element={<CallbackPage />} />
+        <Route path="/callback" element={<CallbackAlias />} />
         <Route path="/link-account" element={<LinkAccountPage />} />
       </Route>
 

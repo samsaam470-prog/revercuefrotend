@@ -37,7 +37,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <AuthActionProvider
               domain={AUTHACTION_DOMAIN}
               clientId={AUTHACTION_CLIENT_ID}
-              redirectUri={`${window.location.origin}/callback`}
+              redirectUri={`${window.location.origin}/dashboard`}
               postLogoutRedirectUri={`${window.location.origin}/`}
               authorizationParams={{
                 audience: AUTHACTION_AUDIENCE,
