@@ -3060,9 +3060,6 @@ details.faq-item:hover {
   height: 1px;
   background: var(--border);
 }
-.auth-card-wide {
-  width: min(100%, 460px);
-}
 .auth-hint {
   display: flex;
   align-items: flex-start;
@@ -3101,21 +3098,23 @@ details.faq-item:hover {
 .auth-inline-link:hover {
   color: var(--gold-hover);
 }
-.auth-socials {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.auth-handoff {
+  margin-top: 18px;
 }
-.auth-provider-note {
-  margin: 4px 0 0;
+.auth-handoff-label {
+  margin: 0;
   font-size: var(--size-caption);
-  line-height: 1.6;
   color: var(--text-tertiary);
 }
+.auth-method-list {
+  display: grid;
+  gap: 4px;
+  margin: 6px 0 0;
+  padding-left: 18px;
+  font-size: var(--size-label);
+  color: var(--text-secondary);
+}
 @media (max-width: 520px) {
-  .auth-card-wide {
-    padding: var(--space-5);
-  }
   .auth-divider {
     margin: 18px 0 2px;
   }

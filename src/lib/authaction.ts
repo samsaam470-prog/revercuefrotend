@@ -17,8 +17,13 @@ export const AUTHACTION_AUDIENCE =
   (import.meta.env.VITE_AUTHACTION_AUDIENCE as string | undefined)?.trim() ||
   "revercue-api.samsaam470.workers.dev";
 
+/**
+ * `/oauth2/authorize` documents one control over the hosted page's starting
+ * screen: `prompt=login|signup`. It documents no `login_hint`, no `connection`
+ * selector and no embedded password API, so our pages cannot collect an email
+ * address or password and carry it across the redirect.
+ */
 export type AuthPrompt = "login" | "signup";
-export type AuthMethod = "email" | "passkey" | "google" | "github" | "microsoft";
 
 const RETURN_TO_KEY = "revercue_return_to";
 
