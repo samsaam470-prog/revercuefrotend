@@ -16,9 +16,11 @@ export interface Faq {
 }
 
 /**
- * The FAQ copy. Source: faqs.txt (the 100 FAQs) with rules.txt applied:
- * no "AI" claims (Rule 1), no MVP / version names (Rule 2), no Payoneer (Rule 3),
- * Teams is in beta (Rule 4), the count is 100 (Rule 6).
+ * The FAQ copy. Source: faqs.txt with rules.txt applied:
+ * no "AI" claims in the marketing voice (Rule 1), no MVP / version names
+ * (Rule 2), no Payoneer (Rule 3), Teams is in beta (Rule 4). The dataset is the
+ * single source of truth for the page-specific FAQ sections and for /faqs; the
+ * counts are derived from `FAQS.length`, never written by hand.
  */
 export const FAQS: Faq[] = [
   {
@@ -54,7 +56,7 @@ export const FAQS: Faq[] = [
     group: "product",
     question: "Does any of my writing leave my device?",
     answer:
-      "No. Every change the helper makes is done on your device, which means it never goes to a Revercue server. The text you select, the rewrite that comes back and the document you are editing stay in your browser; the team cannot read them and they are not stored in the database. The suggestions elsewhere in the product use patterns: keyword matching, frequency counting and arithmetic over your own record. The footer has four buttons that open an outside assistant (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled question about Revercue — the answer comes from that tool, not from us.",
+      "No. Every change the helper makes is done on your device, which means it never goes to a Revercue server. The text you select, the rewrite that comes back and the document you are editing stay in your browser; the team cannot read them and they are not stored in the database. The suggestions elsewhere in the product use patterns: keyword matching, frequency counting and arithmetic over your own record. Nothing is applied without you: you review each suggestion and choose what to change, and Revercue does not make that change on your behalf. The footer has four buttons that open an outside assistant (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled question about Revercue — the answer comes from that tool, not from us.",
   },
   {
     id: 6,
@@ -334,7 +336,7 @@ export const FAQS: Faq[] = [
     group: "tracking",
     question: "How does the suggestion engine work?",
     answer:
-      "The admin writes instructions (the \"what to suggest\") and patterns (the \"when to suggest\") and pairs them. The system evaluates the pattern; when it matches, the instruction fires. The default applies the first time. After 3–5 actions, the system adjusts to your own pattern.",
+      "The admin writes instructions (the \"what to suggest\") and patterns (the \"when to suggest\") and pairs them. The system evaluates the pattern; when it matches, the instruction fires. The default applies the first time. After 3–5 actions, the system adjusts to your own pattern. A suggestion never changes your work by itself: you review it and choose whether to act, and Revercue does not make the change on your behalf.",
   },
   {
     id: 46,

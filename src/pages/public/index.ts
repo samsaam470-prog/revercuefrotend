@@ -4,6 +4,7 @@ export { PricingPage } from "./PricingPage";
 export { ComparePage } from "./ComparePage";
 export { CompareCriteriaPage } from "./CompareCriteriaPage";
 export { CompareDetailPage } from "./CompareDetailPage";
+export { FaqsPage } from "./FaqsPage";
 export { GuidesPage } from "./GuidesPage";
 export { GuideDetailPage } from "./GuideDetailPage";
 export { AboutPage } from "./AboutPage";

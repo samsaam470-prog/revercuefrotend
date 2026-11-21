@@ -33,4 +33,4 @@ Disallow: /admin
 Allow: /faqs-for-ai
 Allow: /rules-for-ai
 
-Sitemap: https://revercue.pages.dev/sitemap.xml
+Sitemap: https://revercue.co.uk/sitemap.xml

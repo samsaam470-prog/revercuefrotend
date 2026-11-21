@@ -6,6 +6,7 @@ import { Reveal } from "./components/shared/Reveal";
 import { PublicLayout } from "./components/layout/PublicLayout";
 import { AuthLayout } from "./components/layout/AuthLayout";
 import { AppLayout } from "./components/layout/AppLayout";
+import { OnboardingGate } from "./components/auth/OnboardingGate";
 import {
   AboutPage,
   BetaPage,
@@ -16,6 +17,7 @@ import {
   CompareCriteriaPage,
   ContactPage,
   FeaturesPage,
+  FaqsPage,
   GuideDetailPage,
   GuidesPage,
   HomePage,
@@ -27,7 +29,6 @@ import {
 import {
   CallbackPage,
   ForgotPasswordPage,
-  LinkAccountPage,
   LoginPage,
   SignupPage,
 } from "./pages/auth";
@@ -110,6 +111,7 @@ export function App() {
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/security" element={<SecurityPage />} />
+        <Route path="/faqs" element={<FaqsPage />} />
       </Route>
 
       {/* auth */}
@@ -119,15 +121,16 @@ export function App() {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         {/* The authorization response is completed here, never on a guarded route. */}
         <Route path="/callback" element={<CallbackPage />} />
-        <Route path="/link-account" element={<LinkAccountPage />} />
       </Route>
 
-      {/* onboarding */}
-      <Route path="/onboarding/step-1" element={<OnboardingStep1Page />} />
-      <Route path="/onboarding/step-2" element={<OnboardingStep2Page />} />
-      <Route path="/onboarding/step-3" element={<Navigate to="/onboarding/step-4" replace />} />
-      <Route path="/onboarding/step-4" element={<OnboardingStep4Page />} />
-      <Route path="/onboarding/step-5" element={<OnboardingStep5Page />} />
+      {/* onboarding, protected: sign-in required, completed users go to the app */}
+      <Route element={<OnboardingGate />}>
+        <Route path="/onboarding/step-1" element={<OnboardingStep1Page />} />
+        <Route path="/onboarding/step-2" element={<OnboardingStep2Page />} />
+        <Route path="/onboarding/step-3" element={<Navigate to="/onboarding/step-4" replace />} />
+        <Route path="/onboarding/step-4" element={<OnboardingStep4Page />} />
+        <Route path="/onboarding/step-5" element={<OnboardingStep5Page />} />
+      </Route>
 
       {/* the app */}
       <Route element={<AppLayout />}>

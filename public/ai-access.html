@@ -8,7 +8,7 @@
       name="description"
       content="Where to find everything in Revercue: a directory of every public page, each product module and its real status, the AI resources, demo instructions, access rules and known limitations."
     />
-    <link rel="canonical" href="https://revercue.pages.dev/ai-access" />
+    <link rel="canonical" href="https://revercue.co.uk/ai-access" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#faf7f1" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -55,7 +55,7 @@
         </p>
         <p class="meta">
           <span>Last reviewed: 18 November 2026</span>
-          <span>Applies to: revercue.pages.dev</span>
+          <span>Applies to: revercue.co.uk</span>
           <span>Demo data: synthetic</span>
         </p>
 
@@ -648,7 +648,9 @@
               Suggested next actions derived from the account's own activity: a follow-up that is due,
               a contract that should follow an accepted proposal, a client warm enough to reopen. Each
               suggestion offers Do it or Dismiss, and Do it only opens the right screen — it never
-              creates or sends anything.
+              creates or sends anything. Any change is the user's decision: the user reviews the
+              suggestion and chooses what to change, and Revercue does not make that change on their
+              behalf.
             </p>
             <p class="small muted">
               The application gates the dashboard's suggestion card behind the Growth-and-above flag,
@@ -664,9 +666,10 @@
             <h3>The helper</h3>
             <p>
               An optional writing helper inside the builders: select a passage, ask for a clearer
-              version, keep what you like. Its work happens on the visitor's own device, so the selected
-              text is not sent to a Revercue server. Suggestions elsewhere in the product are written
-              rules over the user's record, not generated text.
+              version, then keep it, insert it below or cancel. Its work happens on the visitor's own
+              device, so the selected text and the rewrite are not sent to a Revercue server, and
+              nothing changes in the document until the user chooses. Suggestions elsewhere in the
+              product are written rules over the user's record, not generated text.
             </p>
             <p class="small muted">
               The helper depends on the browser and device capability and loads silently in the
@@ -693,9 +696,10 @@
             <p class="meta"><span class="pill pill--available">Available</span><span>Server features</span></p>
             <h3>Accounts, plans and settings</h3>
             <p>
-              Email and password sign-up with a six-digit activation code, Google sign-in when
-              configured, password reset, optional email 2FA, ten settings sections, plan status and
-              account deletion with a grace period.
+              Sign-up and sign-in on AuthAction's hosted page, which handles email and password,
+              passkeys and social providers where the tenant enables them. The Revercue API provisions
+              the application user on the first authenticated callback. Optional email 2FA, ten
+              settings sections, plan status and account deletion with a grace period.
             </p>
             <p class="small muted">
               Plan changes and subscription billing run through the payment provider; the frontend shows

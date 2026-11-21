@@ -300,11 +300,14 @@ export function TermsPage() {
                 same client on the contract, the form, the invoice and the record.
               </p>
               <p>
-                Revercue is not a law firm, not an accountant and not a payment processor. Contracts
-                created here are not a legally binding e-signature; the client's approval is a
-                confirmation recorded with a name and a timestamp, nothing more. Invoice payment
-                instructions are yours: Option A redirects to a link you supply, Option B displays the
-                account details you enter. We do not hold, move or guarantee the money.
+                Revercue is not a law firm, not an accountant and not a payment processor. A contract
+                can be signed here with a simple electronic signature: the signer types their full name
+                and ticks explicit consent, and the signature is recorded against that document version
+                with a timestamp. It is not a qualified or certificate-based signature, there is no
+                identity verification beyond the email address and the browser session, and there is no
+                audit certificate. Invoice payment instructions are yours: Option A redirects to a link
+                you supply, Option B displays the account details you enter. We do not hold, move or
+                guarantee the money.
               </p>
             </>
           ),
@@ -673,7 +676,11 @@ export function SecurityPage() {
           body: (
             <>
               <ul>
-                <li>No model reads or analyses your content. The suggestions are rules, not inference.</li>
+                <li>
+                  No Revercue server reads or analyses your content. The pattern suggestions are
+                  rules, not inference. The optional writing helper runs in your own browser, on your
+                  device, only when you invoke it.
+                </li>
                 <li>No cross-site tracking, no advertising pixels, no third-party analytics on client pages.</li>
                 <li>No selling or renting data, ever.</li>
                 <li>No hidden admin view of your documents; support asks you to share the link.</li>

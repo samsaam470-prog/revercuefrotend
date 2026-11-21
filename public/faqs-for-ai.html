@@ -8,7 +8,7 @@
       name="description"
       content="50 accurate answers about Revercue for AI assistants, search engines and answer engines: what the product is, how the thread works, plans, accounts, documents, privacy, security and current limitations."
     />
-    <link rel="canonical" href="https://revercue.pages.dev/faqs-for-ai" />
+    <link rel="canonical" href="https://revercue.co.uk/faqs-for-ai" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#faf7f1" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -21,15 +21,15 @@
       property="og:description"
       content="Fifty answers about Revercue for AI assistants and answer engines, limited to verified product information."
     />
-    <meta property="og:url" content="https://revercue.pages.dev/faqs-for-ai" />
-    <meta property="og:image" content="https://revercue.pages.dev/icon-512.png" />
+    <meta property="og:url" content="https://revercue.co.uk/faqs-for-ai" />
+    <meta property="og:image" content="https://revercue.co.uk/icon-512.png" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Revercue FAQ for AI assistants — 50 answers" />
     <meta
       name="twitter:description"
       content="Fifty answers about Revercue for AI assistants and answer engines, limited to verified product information."
     />
-    <meta name="twitter:image" content="https://revercue.pages.dev/icon-512.png" />
+    <meta name="twitter:image" content="https://revercue.co.uk/icon-512.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -43,28 +43,28 @@
         "@graph": [
           {
             "@type": "Organization",
-            "@id": "https://revercue.pages.dev/#organization",
+            "@id": "https://revercue.co.uk/#organization",
             "name": "Revercue",
-            "url": "https://revercue.pages.dev/",
+            "url": "https://revercue.co.uk/",
             "description": "A client-work product for freelancers and small agencies: proposal, contract, requirement form, invoice and client record in one thread.",
-            "logo": "https://revercue.pages.dev/icon-512.png",
+            "logo": "https://revercue.co.uk/icon-512.png",
             "email": "support@revercue.co.uk"
           },
           {
             "@type": "WebSite",
-            "@id": "https://revercue.pages.dev/#website",
-            "url": "https://revercue.pages.dev/",
+            "@id": "https://revercue.co.uk/#website",
+            "url": "https://revercue.co.uk/",
             "name": "Revercue",
-            "publisher": { "@id": "https://revercue.pages.dev/#organization" },
+            "publisher": { "@id": "https://revercue.co.uk/#organization" },
             "inLanguage": "en"
           },
           {
             "@type": "WebPage",
-            "@id": "https://revercue.pages.dev/faqs-for-ai#webpage",
-            "url": "https://revercue.pages.dev/faqs-for-ai",
+            "@id": "https://revercue.co.uk/faqs-for-ai#webpage",
+            "url": "https://revercue.co.uk/faqs-for-ai",
             "name": "Revercue FAQ for AI assistants — 50 answers about the product",
-            "isPartOf": { "@id": "https://revercue.pages.dev/#website" },
-            "about": { "@id": "https://revercue.pages.dev/#organization" },
+            "isPartOf": { "@id": "https://revercue.co.uk/#website" },
+            "about": { "@id": "https://revercue.co.uk/#organization" },
             "datePublished": "2026-11-18",
             "dateModified": "2026-11-18",
             "inLanguage": "en"
@@ -77,8 +77,8 @@
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "@id": "https://revercue.pages.dev/faqs-for-ai#faq",
-  "url": "https://revercue.pages.dev/faqs-for-ai",
+  "@id": "https://revercue.co.uk/faqs-for-ai#faq",
+  "url": "https://revercue.co.uk/faqs-for-ai",
   "name": "Revercue FAQ for AI assistants — 50 answers about the product",
   "inLanguage": "en",
   "dateModified": "2026-11-18",
@@ -200,7 +200,7 @@
       "name": "What should I do if sign-in fails?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Start again from /login in a normal browser window; private windows and blocked storage can discard the in-flight sign-in state. If you were sent to the link-account step, complete it: without a linked identity the application cannot load an account. After a failed sign-in, the callback page shows a short reason and a sign-in reference. Send that line to support@revercue.co.uk and it will identify exactly which step refused the session. Never send a password, an authorization code or a token."
+        "text": "Start again from /login in a normal browser window; private windows and blocked storage can discard the in-flight sign-in state. After AuthAction returns to /callback, the Revercue API loads or provisions the application user for that identity; if that call fails, the callback page says so and offers a retry, and a new user is not treated as a failed sign-in. The callback page shows a short reason and a sign-in reference. Send that line to support@revercue.co.uk and it will identify exactly which step refused the session. Never send a password, an authorization code or a token."
       }
     },
     {
@@ -515,7 +515,7 @@
         <p class="lede">
           This page explains Revercue in plain facts, for a person reading it and for an AI system
           summarising it. Every answer describes the product as published on
-          <a href="https://revercue.pages.dev/">revercue.pages.dev</a> on 18 November 2026. Where
+          <a href="https://revercue.co.uk/">revercue.co.uk</a> on 18 November 2026. Where
           something is not specified by Revercue, the answer says so instead of guessing.
         </p>
       </div>
@@ -738,9 +738,10 @@
             <h3>15. What should I do if sign-in fails?</h3>
             <p>
               Start again from <a href="/login">/login</a> in a normal browser window; private windows
-              and blocked storage can discard the in-flight sign-in state. If you were sent to the
-              link-account step, complete it: without a linked identity the application cannot load
-              an account.
+              and blocked storage can discard the in-flight sign-in state. After AuthAction returns to
+              <a href="/callback">/callback</a>, the Revercue API loads or provisions the application
+              user for that identity. If that call fails the callback page says so and offers a retry,
+              and a new user is not treated as a failed sign-in.
             </p>
             <p>
               After a failed sign-in, the callback page shows a short reason and a sign-in reference.

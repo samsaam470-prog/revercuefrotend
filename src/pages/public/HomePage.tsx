@@ -145,6 +145,9 @@ export function HomePage() {
             <button type="button" className="btn btn-ghost" onClick={() => setShowAll(true)}>
               Show all {FAQS.length}
             </button>
+            <p className="caption mt-4">
+              Or <Link to="/faqs">search every question on the FAQs page</Link>.
+            </p>
           </div>
         )}
       </section>

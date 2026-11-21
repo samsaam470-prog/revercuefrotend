@@ -5,7 +5,8 @@ import { authApi } from "../../api/auth";
 import { Button } from "../../components/ui/Button";
 import { Spinner } from "../../components/ui/Spinner";
 import { useAuth } from "../../hooks/useAuth";
-import { consumeReturnTo, isAccountLinkRequired, readReturnTo } from "../../lib/authaction";
+import { consumeReturnTo, readReturnTo } from "../../lib/authaction";
+import { isOnboardingComplete, onboardingResumePath } from "../../lib/onboarding";
 import {
   describeApiFailure,
   inspectAccessToken,
@@ -53,14 +54,16 @@ const REASON_COPY: Record<string, string> = {
 /**
  * The single place a sign-in is completed.
  *
- * AuthAction redirects to `/dashboard` (the only URI registered on the tenant),
- * and `AppLayout` forwards that response here immediately. Keeping completion
- * off the guarded app routes is what stops a one-time authorization code from
- * being consumed by a spinner, an onboarding redirect or an expired-session
- * jump before it is exchanged.
+ * AuthAction redirects to `/callback`; a tenant still registered on
+ * `/dashboard` keeps working because `AppLayout` forwards that response here
+ * immediately. Keeping completion off the guarded app routes is what stops a
+ * one-time authorization code from being consumed by a spinner, an onboarding
+ * redirect or an expired-session jump before it is exchanged.
  *
  * Order of operations: wait for the SDK's code exchange → read the access
- * token → load the Revercue record → only then navigate to the destination.
+ * token → load or provision the Revercue record → only then navigate: the next
+ * onboarding step for a new or incomplete user, the intended destination for a
+ * completed one.
  */
 export function CallbackPage() {
   const { isAuthenticated, isLoading, getAccessToken, loginWithRedirect } = useAuthAction();
@@ -129,7 +132,6 @@ export function CallbackPage() {
             status: null,
             code: "no_access_token",
             reason: "no_access_token",
-            linkRequired: false,
             message: REASON_COPY.no_access_token,
           });
         }
@@ -144,7 +146,8 @@ export function CallbackPage() {
       const user = await refresh();
       if (user) {
         logAuthStep("callback:complete", { onboardingStep: user.onboarding_step });
-        if (mounted.current) navigate(target, { replace: true });
+        const destination = isOnboardingComplete(user) ? target : onboardingResumePath(user);
+        if (mounted.current) navigate(destination, { replace: true });
         return;
       }
 
@@ -153,9 +156,12 @@ export function CallbackPage() {
       let lastFailure: ApiFailure | null = null;
       for (let attempt = 0; attempt < 2; attempt += 1) {
         try {
-          await authApi.me(token);
+          const response = await authApi.me(token);
           logAuthStep("callback:profile", { ok: true });
-          if (mounted.current) navigate(target, { replace: true });
+          const destination = isOnboardingComplete(response.user)
+            ? target
+            : onboardingResumePath(response.user);
+          if (mounted.current) navigate(destination, { replace: true });
           return;
         } catch (cause) {
           lastError = cause;
@@ -167,17 +173,6 @@ export function CallbackPage() {
           }
           break;
         }
-      }
-
-      if (
-        lastFailure &&
-        isAccountLinkRequired(lastFailure.status ?? 0, lastFailure.code ?? undefined)
-      ) {
-        logAuthStep("callback:complete", { linked: false });
-        if (mounted.current) {
-          navigate("/link-account", { replace: true, state: { returnTo: target } });
-        }
-        return;
       }
 
       const described = logAuthFailure("callback:fail", lastError, { claims });
@@ -232,8 +227,9 @@ export function CallbackPage() {
         <p className="muted">{detail}</p>
         {reference && <p className="caption mt-4">Sign-in reference: {reference}</p>}
         <p className="caption mt-4">
-          You were authorised by AuthAction, but Revercue could not load your account. Your
-          credentials were not affected.
+          You were authorised by AuthAction, but Revercue could not load or create your account.
+          Your credentials were not affected. The Revercue API provisions the application user on
+          this first call; if it is unavailable, try again in a moment.
         </p>
         <div className="auth-form mt-4">
           <Button onClick={() => void restart()}>Try signing in again</Button>

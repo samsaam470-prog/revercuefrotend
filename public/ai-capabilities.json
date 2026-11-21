@@ -2,7 +2,7 @@
   "name": "Revercue",
   "documentation_version": "1.1.0",
   "last_updated": "2026-11-18",
-  "canonical_origin": "https://revercue.pages.dev",
+  "canonical_origin": "https://revercue.co.uk",
   "document": {
     "language": "en",
     "purpose": "Machine-readable product reference for AI agents and evaluation tools.",
@@ -39,24 +39,24 @@
     "free_requires_card": false
   },
   "resources": {
-    "ai_access": "https://revercue.pages.dev/ai-access",
-    "ai_overview": "https://revercue.pages.dev/ai-overview",
-    "ai_demo": "https://revercue.pages.dev/ai-demo",
-    "ai_changelog": "https://revercue.pages.dev/ai-changelog",
-    "capabilities_json": "https://revercue.pages.dev/ai-capabilities.json",
-    "faqs_for_ai": "https://revercue.pages.dev/faqs-for-ai",
-    "rules_for_ai": "https://revercue.pages.dev/rules-for-ai",
-    "llms_txt": "https://revercue.pages.dev/llms.txt",
-    "sitemap": "https://revercue.pages.dev/sitemap.xml",
-    "robots": "https://revercue.pages.dev/robots.txt",
-    "pricing": "https://revercue.pages.dev/pricing",
-    "features": "https://revercue.pages.dev/features",
-    "security": "https://revercue.pages.dev/security",
-    "privacy": "https://revercue.pages.dev/privacy",
-    "terms": "https://revercue.pages.dev/terms",
-    "contact": "https://revercue.pages.dev/contact",
-    "beta": "https://revercue.pages.dev/beta",
-    "compare_criteria": "https://revercue.pages.dev/compare/criteria"
+    "ai_access": "https://revercue.co.uk/ai-access",
+    "ai_overview": "https://revercue.co.uk/ai-overview",
+    "ai_demo": "https://revercue.co.uk/ai-demo",
+    "ai_changelog": "https://revercue.co.uk/ai-changelog",
+    "capabilities_json": "https://revercue.co.uk/ai-capabilities.json",
+    "faqs_for_ai": "https://revercue.co.uk/faqs-for-ai",
+    "rules_for_ai": "https://revercue.co.uk/rules-for-ai",
+    "llms_txt": "https://revercue.co.uk/llms.txt",
+    "sitemap": "https://revercue.co.uk/sitemap.xml",
+    "robots": "https://revercue.co.uk/robots.txt",
+    "pricing": "https://revercue.co.uk/pricing",
+    "features": "https://revercue.co.uk/features",
+    "security": "https://revercue.co.uk/security",
+    "privacy": "https://revercue.co.uk/privacy",
+    "terms": "https://revercue.co.uk/terms",
+    "contact": "https://revercue.co.uk/contact",
+    "beta": "https://revercue.co.uk/beta",
+    "compare_criteria": "https://revercue.co.uk/compare/criteria"
   },
   "workflow": [
     {
@@ -345,7 +345,7 @@
     }
   },
   "demo": {
-    "url": "https://revercue.pages.dev/ai-demo",
+    "url": "https://revercue.co.uk/ai-demo",
     "type": "simulation",
     "clearly_labelled": true,
     "requires_account": false,
@@ -377,12 +377,12 @@
     "robots_txt_is_a_hint_not_a_boundary": true,
     "create_accounts": "not permitted",
     "submit_forms": "bug_reports_only",
-    "form_submission_rules": "https://revercue.pages.dev/rules-for-ai",
+    "form_submission_rules": "https://revercue.co.uk/rules-for-ai",
     "load_testing": "not permitted",
     "public_api": false
   },
   "not_claimed": [
-    "AI, machine learning or generated text in the product",
+    "A server-side AI model, an inference endpoint or AI-written document content (the optional writing helper runs only in the visitor's browser, on the visitor's device, and only when the user invokes it)",
     "A qualified or certificate-based signature, identity verification, notarisation or an audit certificate",
     "Card processing inside Revercue",
     "Public API, SDK, webhooks or an integrations directory",
@@ -429,7 +429,7 @@
     }
   ],
   "contact": {
-    "route": "https://revercue.pages.dev/contact",
+    "route": "https://revercue.co.uk/contact",
     "topics": ["product questions", "security reports", "accessibility problems", "documentation errors"],
     "public_email": {
       "general": "hello@revercue.co.uk",

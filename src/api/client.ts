@@ -2,7 +2,6 @@ import { ApiError } from "../types/api";
 import type { RequestOptions } from "../types/api";
 import { tokenStore } from "../lib/storage";
 import { NETWORK_MESSAGE } from "../lib/errors";
-import { isAccountLinkRequired } from "../lib/authaction";
 
 const configuredBase = ((import.meta.env.VITE_API_BASE_URL as string | undefined) || "").trim();
 
@@ -13,9 +12,7 @@ const configuredBase = ((import.meta.env.VITE_API_BASE_URL as string | undefined
  * absolute base URL from VITE_API_BASE_URL.
  */
 const BASE = (
-  import.meta.env.DEV
-    ? ""
-    : configuredBase || "https://revercue-api.samsaam470.workers.dev"
+  import.meta.env.DEV ? "" : configuredBase || "https://api.revercue.co.uk"
 ).replace(/\/$/, "");
 
 let unauthorizedHandler: (() => void) | null = null;
@@ -90,18 +87,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
       payload.message || `Request failed (${response.status}).`,
       payload.details || {},
     );
-    /*
-     * `account_link_required` is a special 401: the token is valid, the
-     * Revercue record simply is not linked yet. Running the global sign-out
-     * here would navigate to /session-expired before the callback can send the
-     * user to /link-account.
-     */
-    if (
-      response.status === 401 &&
-      !suppressUnauthorized &&
-      !isAccountLinkRequired(response.status, error.code) &&
-      unauthorizedHandler
-    ) {
+    if (response.status === 401 && !suppressUnauthorized && unauthorizedHandler) {
       unauthorizedHandler();
     }
     throw error;

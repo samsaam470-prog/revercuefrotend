@@ -25,6 +25,11 @@ export const AUTHACTION_AUDIENCE =
  */
 export type AuthPrompt = "login" | "signup";
 
+/** The absolute redirect URI handed to AuthAction. */
+export function callbackUri(): string {
+  return `${window.location.origin}${AUTHACTION_CALLBACK_PATH}`;
+}
+
 const RETURN_TO_KEY = "revercue_return_to";
 
 /** Only same-origin absolute paths are accepted as return destinations. */
@@ -73,10 +78,11 @@ export function clearReturnTo(): void {
 }
 
 /**
- * `account_link_required` is a first-class authentication state, not an
- * expired session. The API client must not run its global sign-out handler
- * for it, or the callback can never reach the linking flow.
+ * The frontend callback path. AuthAction must have this exact URI registered
+ * for the deployment origin (`https://revercue.co.uk/callback` and
+ * `https://revercue.pages.dev/callback`). It is build-time configuration, so a
+ * preview can point somewhere else without a code change.
  */
-export function isAccountLinkRequired(status: number, code: string | undefined): boolean {
-  return status === 401 && code === "account_link_required";
-}
+export const AUTHACTION_CALLBACK_PATH =
+  (import.meta.env.VITE_AUTHACTION_CALLBACK_PATH as string | undefined)?.trim() ||
+  "/callback";

@@ -588,7 +588,7 @@
     var report = [
       "Revercue — agent evaluation report",
       "Generated: 16 November 2026, in the browser (not submitted)",
-      "Source: https://revercue.pages.dev/ai-demo — a labelled simulation with synthetic data",
+      "Source: https://revercue.co.uk/ai-demo — a labelled simulation with synthetic data",
       "Demo session: " + session + ", clock " + fmtTime(state.clock),
       "",
       "RECOMMENDATION",

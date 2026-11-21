@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-const API_TARGET = "https://revercue-api.samsaam470.workers.dev";
+const API_TARGET = "https://api.revercue.co.uk";
 
 export default defineConfig({
   plugins: [react()],

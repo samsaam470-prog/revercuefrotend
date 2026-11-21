@@ -8,7 +8,7 @@
       name="description"
       content="A self-contained reference to Revercue for AI agents and evaluation tools: what the product is, how the thread works, every module and its real status, who it is for, positioning, pricing with limits, security, current availability and canonical links."
     />
-    <link rel="canonical" href="https://revercue.pages.dev/ai-overview" />
+    <link rel="canonical" href="https://revercue.co.uk/ai-overview" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#faf7f1" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -27,27 +27,27 @@
         "@graph": [
           {
             "@type": "Organization",
-            "@id": "https://revercue.pages.dev/#organization",
+            "@id": "https://revercue.co.uk/#organization",
             "name": "Revercue",
-            "url": "https://revercue.pages.dev/",
+            "url": "https://revercue.co.uk/",
             "description": "A client-work product for freelancers and small agencies: proposal, contract, requirement form, invoice and client record in one thread.",
-            "logo": "https://revercue.pages.dev/icon-512.png"
+            "logo": "https://revercue.co.uk/icon-512.png"
           },
           {
             "@type": "WebSite",
-            "@id": "https://revercue.pages.dev/#website",
-            "url": "https://revercue.pages.dev/",
+            "@id": "https://revercue.co.uk/#website",
+            "url": "https://revercue.co.uk/",
             "name": "Revercue",
-            "publisher": { "@id": "https://revercue.pages.dev/#organization" },
+            "publisher": { "@id": "https://revercue.co.uk/#organization" },
             "inLanguage": "en"
           },
           {
             "@type": "WebPage",
-            "@id": "https://revercue.pages.dev/ai-overview#webpage",
-            "url": "https://revercue.pages.dev/ai-overview",
+            "@id": "https://revercue.co.uk/ai-overview#webpage",
+            "url": "https://revercue.co.uk/ai-overview",
             "name": "AI product overview — Revercue",
-            "isPartOf": { "@id": "https://revercue.pages.dev/#website" },
-            "about": { "@id": "https://revercue.pages.dev/#organization" },
+            "isPartOf": { "@id": "https://revercue.co.uk/#website" },
+            "about": { "@id": "https://revercue.co.uk/#organization" },
             "dateModified": "2026-11-18",
             "inLanguage": "en"
           }
@@ -89,18 +89,22 @@
         </p>
         <p class="meta">
           <span>Last reviewed: 18 November 2026</span>
-          <span>Applies to: revercue.pages.dev</span>
+          <span>Applies to: revercue.co.uk</span>
           <span>Source of truth: the application's own constants and routes</span>
         </p>
 
         <div class="note">
           <p>
-            <strong>The one thing to get right.</strong> Revercue does not use AI in the product. There
-            is no model, no inference endpoint and no generated copy. Suggestions are written rules —
-            keyword matching, frequency counting and arithmetic — over the user's own record, and every
-            suggestion is a prompt the user clicks, never an action taken for them. The optional writing
-            helper runs on the visitor's own device and its text never reaches a Revercue server. This
-            page is written for AI agents; the product is not an AI product.
+            <strong>The one thing to get right.</strong> Revercue's product suggestions are not a chat
+            assistant. They are written rules — keyword matching, frequency counting and arithmetic —
+            over the user's own record, and every suggestion is a prompt the user clicks, never an
+            action taken for them. The only generative component is an optional writing helper that
+            runs a small open model in the visitor's own browser, on the visitor's device; the selected
+            passage and the rewrite stay in that browser and are not sent to a Revercue server. There is
+            no Revercue inference endpoint, no server-side model and no copy written into a document
+            without the user's action. Any change is the user's decision: the user reviews each
+            suggestion and chooses what to change, and Revercue does not make that change on their
+            behalf. This page is written for AI agents; the product is not a general AI platform.
           </p>
         </div>
 
@@ -171,7 +175,7 @@
               </tr>
               <tr>
                 <th scope="row">Website</th>
-                <td><a href="https://revercue.pages.dev/">https://revercue.pages.dev/</a></td>
+                <td><a href="https://revercue.co.uk/">https://revercue.co.uk/</a></td>
               </tr>
               <tr>
                 <th scope="row">Public API</th>
@@ -183,7 +187,7 @@
 
         <h3>What is deliberately not claimed</h3>
         <ul>
-          <li>No AI, machine learning or generated text in the product.</li>
+          <li>No server-side AI model, no inference endpoint and no automatically applied generated text: the optional writing helper is on-device and the user decides what to keep.</li>
           <li>No qualified or certificate-based signature, no identity verification, no notarisation and no audit certificate.</li>
           <li>No card processing inside Revercue; invoices point at the user's own payment provider or use bank transfer.</li>
           <li>No integrations directory, marketplace, public API, webhooks or Zapier-style automation.</li>
@@ -420,9 +424,10 @@
                 <th scope="row">Accounts and settings</th>
                 <td><span class="pill pill--available">Available</span></td>
                 <td>
-                  Email and password sign-up with a six-digit activation code, Google sign-in when
-                  configured, password reset, optional email 2FA, ten settings sections, account
-                  deletion with a grace period.
+                  Sign-up and sign-in on AuthAction's hosted page (email and password, passkeys and
+                  social providers where the tenant enables them); the Revercue API provisions the
+                  application user on the first authenticated callback. Optional email 2FA, ten
+                  settings sections, plan status and account deletion with a grace period.
                 </td>
                 <td>Public entry; account after</td>
               </tr>
@@ -448,8 +453,9 @@
                 <td><span class="pill pill--partial">Partial</span></td>
                 <td>
                   An optional writing helper inside the builders: select a passage, ask for a clearer
-                  version, keep what you like. Runs on the visitor's device; the selection is not sent to
-                  a Revercue server.
+                  version, then keep it, insert it below or cancel. Runs on the visitor's device; the
+                  selection is not sent to a Revercue server, and nothing changes in the document until
+                  the user chooses.
                 </td>
                 <td>Device-dependent</td>
               </tr>
@@ -845,10 +851,10 @@
           <article class="card">
             <h3>Credentials and sessions</h3>
             <ul>
-              <li>Account passwords hashed with bcrypt.</li>
+              <li>Account sign-in is handled by AuthAction; Revercue does not store account passwords.</li>
               <li>Document passwords hashed with Argon2id.</li>
               <li>Scoped session tokens; email 2FA available on the account.</li>
-              <li>Activation and reset codes are six digits, expire, and are rate-limited.</li>
+              <li>Email verification and password reset happen on AuthAction's hosted pages.</li>
             </ul>
           </article>
           <article class="card">
@@ -857,7 +863,7 @@
               <li>Cloudflare for delivery and the Worker layer.</li>
               <li>Backblaze B2 for file storage.</li>
               <li>Turso for the database.</li>
-              <li>FormSubmit for contact and beta form delivery.</li>
+              <li>The contact and beta forms are stored as records in the team's dashboard, not relayed through a third-party form service.</li>
               <li>An external payment provider for subscriptions.</li>
             </ul>
           </article>
@@ -1102,7 +1108,7 @@
           <li><a href="/compare/criteria">/compare/criteria</a> — how the comparisons are scored.</li>
           <li><a href="/guides">/guides</a> — 25 task-level guides, including plans and troubleshooting.</li>
           <li><a href="/security">/security</a> — the checkable trust page.</li>
-          <li><a href="/blog/patterns-not-magic">/blog/patterns-not-magic</a> — why the product does not use AI.</li>
+          <li><a href="/blog/patterns-not-magic">/blog/patterns-not-magic</a> — why the product's suggestions are patterns, not magic.</li>
         </ul>
 
         <div class="actions">

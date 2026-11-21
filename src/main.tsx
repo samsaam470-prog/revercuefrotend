@@ -5,7 +5,12 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "./App";
 import { AuthActionProvider } from "@authaction/web-sdk/react";
 import { AuthProvider } from "./contexts/AuthContext";
-import { AUTHACTION_AUDIENCE, AUTHACTION_CLIENT_ID, AUTHACTION_DOMAIN } from "./lib/authaction";
+import {
+  AUTHACTION_AUDIENCE,
+  AUTHACTION_CLIENT_ID,
+  AUTHACTION_DOMAIN,
+  callbackUri,
+} from "./lib/authaction";
 import { ToastProvider } from "./contexts/ToastContext";
 import { PlanProvider } from "./contexts/PlanContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
@@ -43,7 +48,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <AuthActionProvider
               domain={AUTHACTION_DOMAIN}
               clientId={AUTHACTION_CLIENT_ID}
-              redirectUri={`${window.location.origin}/dashboard`}
+              redirectUri={callbackUri()}
               postLogoutRedirectUri={`${window.location.origin}/`}
               scope="openid profile email offline_access"
               authorizationParams={{

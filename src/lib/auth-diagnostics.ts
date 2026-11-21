@@ -29,7 +29,6 @@ export interface ApiFailure {
   code: string | null;
   message: string;
   reason: string | null;
-  linkRequired: boolean;
 }
 
 /** Reduces an unknown thrown value to the parts that are safe to log. */
@@ -50,7 +49,6 @@ export function describeApiFailure(error: unknown): ApiFailure {
           ? error.message
           : String(error ?? "Unknown error"),
     reason: typeof details.reason === "string" ? details.reason : null,
-    linkRequired: details.link_required === true,
   };
 }
 

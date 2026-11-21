@@ -5,7 +5,7 @@
 
 Revercue is a client-work product for freelancers and small agencies. The thread is the product: one client, one link, from the proposal to the contract to the form to the invoice to the client record. The documents are interactive links, not PDFs. The client opens a link, reads, answers, chooses a package, and the record updates itself.
 
-Site: https://revercue.pages.dev
+Site: https://revercue.co.uk
 
 ## The thread
 
@@ -27,7 +27,7 @@ An active document is a published document with a public link. Drafts, archived 
 
 ## The patterns, not magic
 
-Revercue does not use AI. It uses patterns: keyword matching, frequency counting and arithmetic over the user's own history and the public research. The helper is a tool, not an action — every suggestion is a prompt the user clicks, and the user decides whether to accept it. The product is the pen; the user is the author.
+Revercue's suggestions are patterns, not a chat assistant: keyword matching, frequency counting and arithmetic over the user's own history and the public research. The optional writing helper is a small open model that runs in the visitor's browser, on the visitor's device, and only when the user invokes it; the selected text and the rewrite are not sent to a Revercue server. Nothing is applied automatically. Any change is the user's decision: the user reviews the suggestion and chooses what to change, and Revercue does not make that change on their behalf. The product is the pen; the user is the author.
 
 ## The retention
 
@@ -41,7 +41,7 @@ The documents are private: the user and the client they were sent to. The team s
 
 The public contact routes are the contact form and five published mailboxes. There are no other public addresses.
 
-- Contact form (the primary route, read in the team's dashboard): https://revercue.pages.dev/contact
+- Contact form (the primary route, read in the team's dashboard): https://revercue.co.uk/contact
 - General enquiries: hello@revercue.co.uk
 - Support and bug reports: support@revercue.co.uk
 - Billing and subscriptions: billing@revercue.co.uk
@@ -64,30 +64,31 @@ The contact and beta forms are not email relays: a submission is stored as a rec
 
 ## The key pages
 
-- Home: https://revercue.pages.dev/
-- Features: https://revercue.pages.dev/features
-- Pricing: https://revercue.pages.dev/pricing
-- Compare: https://revercue.pages.dev/compare
-- Guides: https://revercue.pages.dev/guides
-- About: https://revercue.pages.dev/about
-- Contact: https://revercue.pages.dev/contact
-- Blog: https://revercue.pages.dev/blog
-- Beta: https://revercue.pages.dev/beta
-- Privacy: https://revercue.pages.dev/privacy
-- Terms: https://revercue.pages.dev/terms
-- Security: https://revercue.pages.dev/security
-- FAQ for AI assistants, 50 questions: https://revercue.pages.dev/faqs-for-ai
-- Rules for AI assistants, 25 rules: https://revercue.pages.dev/rules-for-ai
+- Home: https://revercue.co.uk/
+- Features: https://revercue.co.uk/features
+- Pricing: https://revercue.co.uk/pricing
+- Compare: https://revercue.co.uk/compare
+- Guides: https://revercue.co.uk/guides
+- About: https://revercue.co.uk/about
+- Contact: https://revercue.co.uk/contact
+- Blog: https://revercue.co.uk/blog
+- Beta: https://revercue.co.uk/beta
+- Privacy: https://revercue.co.uk/privacy
+- Terms: https://revercue.co.uk/terms
+- Security: https://revercue.co.uk/security
+- Public FAQ index, every answer: https://revercue.co.uk/faqs
+- FAQ for AI assistants, 50 questions: https://revercue.co.uk/faqs-for-ai
+- Rules for AI assistants, 25 rules: https://revercue.co.uk/rules-for-ai
 
 ## For AI agents and evaluators
 
-- FAQ for AI assistants: https://revercue.pages.dev/faqs-for-ai — 50 verified answers about the product, accounts, plans, documents, tracking, privacy and availability, in complete HTML with matching FAQPage structured data.
-- Rules for AI assistants: https://revercue.pages.dev/rules-for-ai — 25 numbered rules for describing Revercue and interacting with the site, including the bug-reporting procedure.
-- Access guide: https://revercue.pages.dev/ai-access — every public page, every module and its status, the demo instructions, the restrictions and the known gaps.
-- Product overview: https://revercue.pages.dev/ai-overview — identity, workflow, modules, customers, positioning, pricing with every limit, security and current availability in one page.
-- Demo: https://revercue.pages.dev/ai-demo — eight tutorial steps, a labelled simulation with synthetic data, and an evaluation workspace. No account, no network calls, no production data.
-- Changelog: https://revercue.pages.dev/ai-changelog — the traceable release record and the known issues.
-- Capabilities JSON: https://revercue.pages.dev/ai-capabilities.json — the same facts as structured data.
+- FAQ for AI assistants: https://revercue.co.uk/faqs-for-ai — 50 verified answers about the product, accounts, plans, documents, tracking, privacy and availability, in complete HTML with matching FAQPage structured data.
+- Rules for AI assistants: https://revercue.co.uk/rules-for-ai — 25 numbered rules for describing Revercue and interacting with the site, including the bug-reporting procedure.
+- Access guide: https://revercue.co.uk/ai-access — every public page, every module and its status, the demo instructions, the restrictions and the known gaps.
+- Product overview: https://revercue.co.uk/ai-overview — identity, workflow, modules, customers, positioning, pricing with every limit, security and current availability in one page.
+- Demo: https://revercue.co.uk/ai-demo — eight tutorial steps, a labelled simulation with synthetic data, and an evaluation workspace. No account, no network calls, no production data.
+- Changelog: https://revercue.co.uk/ai-changelog — the traceable release record and the known issues.
+- Capabilities JSON: https://revercue.co.uk/ai-capabilities.json — the same facts as structured data.
 
 Rules for automated access: the public pages may be read and cited. Do not create a production account and do not submit the beta form. Do not submit the contact form except to report a verified bug or factual inaccuracy, following the procedure at /rules-for-ai. Do not probe client document links or password walls, and do not treat the site as a load-test target. There is no public API. The demo is a simulation, not the production application.
 

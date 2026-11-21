@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Building2, User } from "lucide-react";
 import { Button } from "../../components/ui/Button";
@@ -6,6 +6,7 @@ import { onboardingApi } from "../../api/onboarding";
 import { useAuth } from "../../hooks/useAuth";
 import { useToast } from "../../hooks/useToast";
 import { errorMessage } from "../../lib/errors";
+import { onboardingResumePath } from "../../lib/onboarding";
 import { ApiError } from "../../types/api";
 import type { AccountType } from "../../types";
 
@@ -14,8 +15,15 @@ export function OnboardingStep1Page() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { refresh } = useAuth();
+  const { refresh, user } = useAuth();
   const toast = useToast();
+
+  /* A returning user must resume where the backend says, not redo step 1. */
+  useEffect(() => {
+    if ((user?.onboarding_step ?? 0) > 1) {
+      navigate(onboardingResumePath(user), { replace: true });
+    }
+  }, [user, navigate]);
 
   const submit = async () => {
     if (!choice) return;

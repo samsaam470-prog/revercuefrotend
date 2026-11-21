@@ -12,6 +12,54 @@ interface RouteMeta {
   description: string;
 }
 
+/** The canonical public website. The API host is never a public page host. */
+export const PUBLIC_ORIGIN = "https://revercue.co.uk";
+
+/**
+ * Application, auth, onboarding and client-document routes are never public
+ * pages: they must not publish a canonical URL, and they are absent from the
+ * sitemap. Everything else is a marketing page.
+ */
+const PRIVATE_ROUTES = [
+  "/dashboard",
+  "/settings",
+  "/crm",
+  "/proposals",
+  "/contracts",
+  "/forms",
+  "/invoices",
+  "/notifications",
+  "/onboarding",
+  "/callback",
+  "/login",
+  "/signup",
+  "/forgot-password",
+  "/p",
+  "/c",
+  "/i",
+  "/f",
+  "/offline",
+  "/session-expired",
+  "/403",
+  "/500",
+];
+
+function isUnder(pathname: string, prefix: string): boolean {
+  return pathname === prefix || pathname.startsWith(`${prefix}/`);
+}
+
+export function canonicalUrl(pathname: string): string | null {
+  if (PRIVATE_ROUTES.some((prefix) => isUnder(pathname, prefix))) return null;
+  return `${PUBLIC_ORIGIN}${pathname === "/" ? "/" : pathname.replace(/\/$/, "")}`;
+}
+
+/** True for the routes that have their own public metadata (or a section). */
+function isPublicPage(pathname: string): boolean {
+  if (ROUTES[pathname]) return true;
+  const section = "/" + pathname.split("/").filter(Boolean)[0];
+  return Boolean(FALLBACK_BY_SECTION[section]);
+}
+
 export const DEFAULT_META: RouteMeta = {
   title: "Revercue — Your work should speak, not you.",
   description:
@@ -92,9 +140,10 @@ const ROUTES: Record<string, RouteMeta> = {
     title: "Reset your password — Revercue",
     description: "Reset the password for your Revercue account.",
   },
-  "/link-account": {
-    title: "Link your account — Revercue",
-    description: "Connect the sign-in method you used to an existing Revercue account.",
+  "/faqs": {
+    title: "Frequently asked questions — Revercue",
+    description:
+      "Every Revercue FAQ in one place: the product, plans, documents, tracking, data, the CRM, email, design and signatures. Search the questions or browse by category.",
   },
   "/dashboard": {
     title: "Dashboard — Revercue",
@@ -133,4 +182,25 @@ export function applyRouteMetadata(pathname: string) {
   setMeta("property", "og:description", meta.description);
   setMeta("name", "twitter:title", meta.title);
   setMeta("name", "twitter:description", meta.description);
+
+  /*
+   * One canonical tag in the shared shell, pointed at the public domain. It is
+   * set for public pages only: an app route, a client document or an unknown
+   * URL must not claim to be a canonical marketing page.
+   */
+  const canonical = isPublicPage(pathname) ? canonicalUrl(pathname) : null;
+  const existing = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!canonical) {
+    if (existing) existing.remove();
+    const ogUrl = document.head.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.remove();
+    return;
+  }
+  setMeta("property", "og:url", canonical);
+  const link = existing ?? document.createElement("link");
+  if (!existing) {
+    link.setAttribute("rel", "canonical");
+    document.head.appendChild(link);
+  }
+  link.setAttribute("href", canonical);
 }

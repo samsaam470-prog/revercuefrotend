@@ -13,7 +13,7 @@ import { authApi } from "../api/auth";
 import { setUnauthorizedHandler, setTokenProvider } from "../api/client";
 import { tokenStore } from "../lib/storage";
 import { clearReturnTo } from "../lib/authaction";
-import { logAuthFailure, logAuthStep } from "../lib/auth-diagnostics";
+import { logAuthFailure } from "../lib/auth-diagnostics";
 import type { User } from "../types";
 
 export interface AuthState {
@@ -24,8 +24,6 @@ export interface AuthState {
   offline: boolean;
   isAuthenticated: boolean;
   isEmailVerified: boolean;
-  /** True when the AuthAction identity is not yet linked to a Revercue account. */
-  linkingRequired: boolean;
   setSession: (token: string, user?: User) => void;
   signIn: () => Promise<void>;
   signOut: () => Promise<void>;
@@ -56,7 +54,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [offline, setOffline] = useState(false);
-  const [linkingRequired, setLinkingRequired] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const tokenRef = useRef<string | null>(null);
   const navigate = useNavigate();
@@ -85,7 +82,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setToken(null);
     tokenRef.current = null;
     setUser(null);
-    setLinkingRequired(false);
     setLoading(false);
   }, []);
 
@@ -115,7 +111,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const response = await authApi.me(current);
       setUser(response.user);
-      setLinkingRequired(false);
       setOffline(false);
       return response.user;
     } catch (cause) {
@@ -126,11 +121,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return null;
       }
       if (failure.status === 401) {
-        if (failure.code === "account_link_required") {
-          logAuthStep("context:refresh", { linked: false });
-          setLinkingRequired(true);
-          return null;
-        }
         clear();
         return null;
       }
@@ -199,9 +189,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       token,
       loading: loading || sdkIsLoading,
       offline,
-      isAuthenticated: Boolean(sdkIsAuthenticated && user && !linkingRequired),
+      isAuthenticated: Boolean(sdkIsAuthenticated && user),
       isEmailVerified: Boolean(user?.email_verified),
-      linkingRequired,
       setSession,
       signIn,
       signOut,
@@ -215,7 +204,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       sdkIsLoading,
       offline,
       sdkIsAuthenticated,
-      linkingRequired,
       setSession,
       signIn,
       signOut,
