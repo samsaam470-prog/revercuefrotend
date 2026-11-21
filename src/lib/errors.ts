@@ -18,6 +18,8 @@ const MESSAGES: Record<string, string> = {
   invalid_google_token: "Google sign-in failed. Try again.",
   archive_limit_reached: "You reached your archive limit.",
   network_error: "You appear to be offline. Check your connection.",
+  email_verification_required:
+    "Verify your email address with AuthAction, then sign in again.",
 };
 
 export function errorMessage(code: string | undefined, fallback?: string): string {

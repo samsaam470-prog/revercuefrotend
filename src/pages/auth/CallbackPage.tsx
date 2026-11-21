@@ -49,7 +49,24 @@ const REASON_COPY: Record<string, string> = {
   verification_failed: "Revercue could not verify AuthAction's sign-in token.",
   config_error: "Revercue's authentication is misconfigured on the server.",
   no_access_token: "AuthAction authorised the sign-in but returned no access token.",
+  email_verification_required:
+    "AuthAction signed you in, but it has not confirmed this email address yet, so Revercue will not open an account on it.",
 };
+
+/**
+ * `email_verification_required` is not a failed sign-in and not an outage: the
+ * token is valid and the identity is genuine, but AuthAction has not marked the
+ * address verified, and the Revercue API refuses to provision an application
+ * user for an unverified address. Retrying immediately cannot succeed, so the
+ * callback explains the one step that can.
+ */
+function isEmailVerificationRequired(failure: ApiFailure | null): boolean {
+  if (!failure) return false;
+  return (
+    failure.code === "email_verification_required" ||
+    failure.reason === "email_verification_required"
+  );
+}
 
 /**
  * The single place a sign-in is completed.
@@ -216,6 +233,47 @@ export function CallbackPage() {
     );
   }
 
+  if (isEmailVerificationRequired(failure)) {
+    const reference = [
+      failure?.status ? `HTTP ${failure.status}` : null,
+      failure?.reason || failure?.code,
+    ]
+      .filter(Boolean)
+      .join(" · ");
+    return (
+      <div className="auth-card" style={{ textAlign: "center" }}>
+        <h1>Verify your email address</h1>
+        <p className="muted">
+          AuthAction signed you in, but it has not confirmed that this email address belongs to
+          you. Revercue only creates or loads a workspace for a verified address, so the account
+          setup stops here until that is done.
+        </p>
+        <ol className="auth-step-list">
+          <li>Open the verification email AuthAction sent to your address.</li>
+          <li>Click the verification link in that email.</li>
+          <li>Come back and sign in again. AuthAction will then return a verified identity and Revercue will finish setting up your workspace.</li>
+        </ol>
+        <p className="caption mt-4">
+          No verification email? Sign in again and use the resend option on AuthAction&apos;s own
+          page; Revercue cannot send or resend it. Check the spam folder before assuming it never
+          arrived.
+        </p>
+        {reference && <p className="caption mt-4">Sign-in reference: {reference}</p>}
+        <p className="caption mt-4">
+          Your credentials were not affected and no Revercue account was created. If the address
+          stays unverified, contact{" "}
+          <a href="mailto:support@revercue.co.uk">support@revercue.co.uk</a>.
+        </p>
+        <div className="auth-form mt-4">
+          <Button onClick={() => void restart()}>Sign in again</Button>
+        </div>
+        <p className="auth-alt">
+          <Link to={loginHref}>Back to log in</Link>
+        </p>
+      </div>
+    );
+  }
+
   if (failure) {
     const detail = (failure.reason && REASON_COPY[failure.reason]) || failure.message;
     const reference = [failure.status ? `HTTP ${failure.status}` : null, failure.reason || failure.code]
@@ -228,8 +286,8 @@ export function CallbackPage() {
         {reference && <p className="caption mt-4">Sign-in reference: {reference}</p>}
         <p className="caption mt-4">
           You were authorised by AuthAction, but Revercue could not load or create your account.
-          Your credentials were not affected. The Revercue API provisions the application user on
-          this first call; if it is unavailable, try again in a moment.
+          Your credentials were not affected. The reference above names the reason; send it to
+          support@revercue.co.uk if it keeps happening.
         </p>
         <div className="auth-form mt-4">
           <Button onClick={() => void restart()}>Try signing in again</Button>
