@@ -460,9 +460,16 @@ export function skeletonForBrief(brief: Brief, kind: "proposal" | "contract"): B
   return blocks;
 }
 
-/** True when a block still carries a template token. */
+/** Wording older drafts were generated with, before the brief was readable. */
+const LEGACY_FILLER = /write the .{1,40} section here|summarize the client's problem|a new heading/i;
+
+/** True when a block still carries a template token or old filler prose. */
 export function hasPlaceholders(blocks: Block[]): boolean {
   return blocks.some(
+    (block) =>
+      (typeof block.text === "string" && LEGACY_FILLER.test(block.text)) ||
+      (block.items ?? []).some((item) => LEGACY_FILLER.test(item.label || "")),
+  ) || blocks.some(
     (block) =>
       (typeof block.text === "string" && /\{\{/.test(block.text)) ||
       (typeof block.alt === "string" && /\{\{/.test(block.alt)) ||
