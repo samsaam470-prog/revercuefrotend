@@ -9,7 +9,7 @@ import { WaitlistModal } from "../../components/shared/WaitlistModal";
 import type { PlanName } from "../../types";
 import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
-const ROWS: { label: string; key: keyof (typeof PLANS)[0]["limits"] | "password" | "interest" | "suggestions" | "brand" | "thankyou" }[] = [
+const ROWS: { label: string; key: keyof (typeof PLANS)[0]["limits"] | "password" | "interest" | "suggestions" | "brand" | "thankyou" | "revenue" | "expenses" | "expense_categories" }[] = [
   { label: "Active documents", key: "active_documents" },
   { label: "Document retention (months)", key: "retention_months" },
   { label: "Draft retention (days)", key: "draft_retention_days" },
@@ -21,7 +21,10 @@ const ROWS: { label: string; key: keyof (typeof PLANS)[0]["limits"] | "password"
   { label: "Saved packages", key: "saved_packages" },
   { label: "Password-protected documents", key: "password" },
   { label: "Adaptive forms", key: "adaptive_forms" },
-  { label: "Interest level and revenue tracker", key: "interest" },
+  { label: "Revenue overview", key: "revenue" },
+  { label: "Interest level", key: "interest" },
+  { label: "Project expenses", key: "expenses" },
+  { label: "Expense categorisation", key: "expense_categories" },
   { label: "Document suggestions", key: "suggestions" },
   { label: "No Revercue branding", key: "brand" },
   { label: "Custom thank-you page", key: "thankyou" },
@@ -33,7 +36,13 @@ function cell(plan: PlanName, key: (typeof ROWS)[0]["key"]): string {
   switch (key) {
     case "password":
       return plan === "free" || plan === "starter" ? "—" : `${definition.limits.password_protected}`;
+    case "revenue":
+      return "Yes";
     case "interest":
+      return plan === "scale" || plan === "teams" ? "Yes" : "—";
+    case "expenses":
+      return plan === "growth" || plan === "scale" || plan === "teams" ? "Yes" : "—";
+    case "expense_categories":
       return plan === "scale" || plan === "teams" ? "Yes" : "—";
     case "suggestions":
       if (plan === "free" || plan === "starter") return "Basic";

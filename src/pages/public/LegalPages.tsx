@@ -138,8 +138,9 @@ export function PrivacyPage() {
                 <li><strong>Cloudflare</strong> — delivery, DNS, the Worker proxy and rate limiting.</li>
                 <li><strong>Backblaze B2</strong> — file storage in a private bucket, served through the proxy.</li>
                 <li><strong>Turso</strong> — the database that holds accounts and documents.</li>
-                <li><strong>Revercue email</strong> — transactional email delivery for account, security and document notices.</li>
-                <li><strong>The payment provider</strong> — the subscription charge and its receipt.</li>
+                <li><strong>AuthAction</strong> — authentication, OIDC and passkeys.</li>
+                <li><strong>Coopermail</strong> — primary transactional email delivery for account, security and document notices.</li>
+                <li><strong>Openmail</strong> — fallback transactional email delivery.</li>
               </ul>
               <p>
                 We may disclose data if the law requires it, or to investigate a credible report of
@@ -227,10 +228,11 @@ export function PrivacyPage() {
             <>
               <p>
                 The application runs on Cloudflare's network, the files sit in a private Backblaze B2
-                bucket served through a Worker proxy, and the auth and admin data live in Turso. Email is
-                delivered by Revercue. These providers may process data in more than one region; where
-                a transfer crosses a border, it relies on the safeguards those providers publish, such as
-                standard contractual clauses.
+                bucket served through a Worker proxy, and the application data lives in Turso.
+                Authentication is handled by AuthAction. Transactional email is delivered by Coopermail,
+                with Openmail as fallback. These providers may process data in more than one region;
+                where a transfer crosses a border, it relies on the safeguards those providers publish,
+                such as standard contractual clauses.
               </p>
               <p>
                 Your documents are not sent to any other party. There is no analytics vendor, no data
@@ -581,10 +583,9 @@ export function SecurityPage() {
           body: (
             <>
               <p>
-                Cloudflare, Backblaze B2 and Turso, plus the payment provider for
-                subscriptions. They store or deliver; they do not read your documents. Each is bound
-                by its own agreement with us, and we choose processors with a real security record
-                rather than the cheapest option.
+                Cloudflare, Backblaze B2, Turso, AuthAction, Coopermail and Openmail. They store or
+                deliver; they do not read your documents. Each is bound by its own agreement with us,
+                and we choose processors with a real security record rather than the cheapest option.
               </p>
               <p>
                 The external tools in the footer are not processors. If you click one, you leave

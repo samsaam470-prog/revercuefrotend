@@ -291,35 +291,18 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Sign up<br /><code>/signup</code></th>
+                <th scope="row">Sign in<br /><code>/login</code></th>
                 <td>
-                  Email, password, terms acceptance and an optional newsletter checkbox. Offers Google
-                  sign-in only when that client is configured; otherwise the button says so. Submitting
-                  triggers a six-digit email activation code.
-                </td>
-                <td>Public form</td>
-              </tr>
-              <tr>
-                <th scope="row">Activation code<br /><code>/signup/code</code></th>
-                <td>
-                  The six-digit code screen used after sign-up. The code expires and the resend button
-                  is rate-limited.
+                  Sign-in is handled by AuthAction (OIDC and passkeys). Revercue does not run its own
+                  email activation codes, password login or password reset flow.
                 </td>
                 <td>Public</td>
               </tr>
               <tr>
-                <th scope="row">Login<br /><code>/login</code></th>
-                <td>Email and password, plus Google sign-in when configured and a link to password reset.</td>
-                <td>Public</td>
-              </tr>
-              <tr>
-                <th scope="row">Login code<br /><code>/login/code</code></th>
-                <td>Authentication via AuthAction (OIDC and passkeys); legacy password login remains during transition.</td>
-                <td>Public</td>
-              </tr>
-              <tr>
-                <th scope="row">Password reset<br /><code>/forgot-password</code>, <code>/forgot-password/code</code></th>
-                <td>Request a reset code by email, then enter the code and choose a new password.</td>
+                <th scope="row">Callback<br /><code>/callback</code></th>
+                <td>
+                  Returns from AuthAction and establishes the Revercue session.
+                </td>
                 <td>Public</td>
               </tr>
               <tr>

@@ -104,7 +104,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What is the difference between the plans?",
     answer:
-      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and the basic suggestions. Starter adds custom templates and more room on the same basic suggestions; email notifications start on Growth. Growth adds the saved FAQs and the saved packages on top of the basic suggestions, plus adaptive forms and no Revercue branding on the public pages. Scale adds advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, and the custom thank-you page. Teams adds the team features (in beta).",
+      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and basic CRM suggestions. Starter adds custom templates, previous outreach patterns and follow-up strategy. Growth adds saved FAQs, saved packages, adaptive forms, no Revercue branding, in-context paragraph suggestions, detailed prompts using previous data and project expense recording. Scale adds advanced tracking, the interest level, the revenue overview, expense categories, the what-revercue-knows page, the custom thank-you page and broader client-history context. Teams adds the team features (in beta). The price suggestion is not available.",
   },
   {
     id: 13,
@@ -181,7 +181,7 @@ export const FAQS: Faq[] = [
     group: "documents",
     question: "Can I add a custom template?",
     answer:
-      "Yes, on Growth, Scale, and Teams. You can upload your own HTML template as a file, or paste a URL. Revercue fetches it, sanitizes it, caches it, and renders it in your builder. Your custom template appears in your template selection screen.",
+      "Yes, on Starter, Growth, Scale and Teams. Free uses suggested templates. You can upload your own HTML template as a file, or paste a URL. Revercue fetches it, sanitizes it, caches it, and renders it in your builder. Your custom template appears in your template selection screen.",
   },
   {
     id: 24,
@@ -357,14 +357,14 @@ export const FAQS: Faq[] = [
     group: "tracking",
     question: "What is the revenue tracker?",
     answer:
-      "On Scale, it shows the earned, the spent on clients, and the profit. You add an expense per client, with a category and a platform. The tracker shows the profit and a price-triggered suggestion in the builders.",
+      "On every plan, it shows the earned revenue and pending payments. On Growth and above, project expense recording and totals are included. On Scale, expense categories, platform and provider records and spending breakdowns are included. The price suggestion is not available.",
   },
   {
     id: 49,
     group: "tracking",
     question: "What is the price suggestion?",
     answer:
-      "On Scale, the builders show: \"You spent $1,200 on Acme Co. At a 30% margin, charge $5,200.\" It reads the expenses, the last invoice, and your target margin. The suggestion is not a gate; you can ignore it.",
+      "The price suggestion is not available. It is not a current feature and no release date is promised.",
   },
   {
     id: 50,

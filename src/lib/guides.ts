@@ -226,7 +226,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "Test, preview, publish",
         paragraphs: [
           "Test runs the branching with no data saved. Preview is the read-only client view. Create validates the title, the questions and the options, then publishes and opens the share sheet.",
-          "When the client submits, the answers are stored on the form and the client record. The structured paragraph assembled from the answers is a pattern, not a model: you copy it into whichever tool you like, and it is written in your own words, from their answers.",
+          "When the client submits, the answers are stored on the form and the client record. The structured paragraph assembled from the answers is a pattern, not a model: you copy it into whichever tool you like, and it is written in your own words, from their answers. Requirement form downloads are available in Markdown, and client-submitted questions and answers can be downloaded together in Markdown.",
         ],
       },
     ],
@@ -279,7 +279,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "The record is the thread's home",
         paragraphs: [
           "The client record is a vertical page. The communication log is the main body, the documents are grouped below it, and the notes and follow-ups sit beside them. Creating a document for an existing client links it automatically, so the record fills itself as you work.",
-          "You can also add a client by hand, with a name, an email, a company, a phone number and a channel. A duplicate email is caught before the record is created, because two records for the same person is the one CRM problem that is genuinely hard to undo.",
+          "You can also add a client by hand, with a name, an email, a company, a phone number and a channel. A duplicate email is caught before the record is created, because two records for the same person is the one CRM problem that is genuinely hard to undo. Copyable prompts and CRM client profile details are available from the client record.",
         ],
         visual: "CrmVisual",
       },
@@ -294,13 +294,14 @@ const BASE_GUIDES: Guide[] = [
         heading: "The interest level and revenue",
         paragraphs: [
           "On Scale the interest badge opens the arithmetic: base fifty, plus and minus per signal, clamped to zero and one hundred. Opens, time spent, questions and replies move it; what the client says does not. It is arithmetic, not a model, and the breakdown is always visible.",
-          "The revenue tab shows earned, spent and profit per client, plus the price suggestion built from your own expenses. If the plan does not include it, the tab is replaced by a card that says which plan does, rather than a broken table.",
+          "Revenue overview (earned revenue, pending payments and totals) is available on every plan. Project expense recording and project expense totals are available on Growth and above. Expense categories, platform and provider records and spending breakdowns are available on Scale and above. The price suggestion is not available.",
         ],
       },
       {
         heading: "The writing area",
         paragraphs: [
-          "The writing area is the form in the CRM where you plan the message you are about to send. You open it from the client record. You write the message. The helper, where it can run, suggests improvements: the warmer opening, the clearer ask, the grammar and the typos, the rewrite. Every change the helper makes is done on your device, which means it never goes to a Revercue server: not sent to the team, not stored in the database. The team cannot read the message. You see the suggestions. You accept them, edit them, or ignore them. You click Copy message. The message is copied. You paste it into your own email or WhatsApp. Revercue does not send the message. You send it from your own account. The writing area is the plan, not the send. The thread is the record; the message is the user's.",
+          "The writing area is the form in the CRM where you plan the message you are about to send. You open it from the client record. You write the message. You can add a prompt or instruction describing what you want. Suggestions are returned separately, alongside the message, so you can review them and choose what to use. You copy the message and send it from your own email or WhatsApp. Revercue does not send the message. The thread is the record; the message is yours.",
+          "The context available to the writing area follows the suggestion progression: basic CRM suggestions on every plan, previous outreach patterns and follow-up strategy from Starter, in-context paragraph suggestions, detailed prompts from previous data and project expense suggestions from Growth, and broader client-history context from Scale.",
         ],
       },
     ],
@@ -327,7 +328,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "A proposal has sections, FAQs, embedded questions and packages, and the client can approve or decline from the bottom of the page. A contract adds Approve, Decline and I Have Questions, and asks for a typed name before it accepts an approval.",
           "An invoice has the line items, the total and either Buy Now or the account details with a proof upload. A form has the questions, the branching and, on Scale, a custom thank-you page with your own heading, body and button.",
-          "All four share the same rules: the freelancer's colours, the serif headline, the sans body, one gold action, and no login. If a client has to create an account to read a proposal, the page has failed at its only job.",
+          "All four share the same rules: the freelancer's colours, the serif headline, the sans body, one gold action, and no login. If a client has to create an account to read a proposal, the page has failed at its only job. PDF export is limited: package selection remains interactive only in the client link and is not preserved in a PDF.",
         ],
       },
       {
@@ -858,7 +859,7 @@ const BASE_GUIDES: Guide[] = [
   {
     slug: "suggestions",
     title: "The suggestions",
-    excerpt: "Follow-ups, document suggestions, interest flags and the price suggestion.",
+    excerpt: "Follow-ups, document suggestions, interest flags and plan-specific context.",
     category: "Follow-ups",
     readMinutes: 4,
     updated: "2026-11-18",
@@ -880,27 +881,26 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "The price suggestion",
+        heading: "Price suggestion (not available)",
         paragraphs: [
-          "On Scale the price suggestion is built from your own expenses and your own past invoices. It shows the arithmetic, not just a number: what you spent, what you charged, what margin you kept. If you have not entered expenses, it says so instead of guessing.",
-          "Use it as a second opinion, not an oracle. You know what the work is worth to this client; the suggestion only knows what it has cost you before.",
+          "The price suggestion is not available. It is not a current feature and no release date is promised.",
         ],
       },
       {
         heading: "What each plan gets",
         paragraphs: [
           "The suggestions are on every plan. The plan shapes the depth, not the existence. Every freelancer gets the suggestions; the plan decides how smart they are.",
-          "The Free plan has the basic suggestions. The follow-up (the proposal sent, the no response after X days). The document suggestion (the client agreed — create a contract). The pattern is the admin's default: the default follow-up timing (the 2 days), the default keyword list. The Free plan is the first suggestions; it is the product's starting intelligence.",
-          "The Starter plan has the basic suggestions, the same as the Free plan. The follow-up, the document suggestion, the admin's default. The Starter is the room; the suggestions are the same basic intelligence. The Starter adds the custom templates and more room; email notifications start on Growth. The suggestions are the same basic patterns.",
-          "The Growth plan has the basic suggestions, plus the saved FAQs and the saved packages. The follow-up, the document suggestion, the admin's default. The Growth adds the reusable content: the FAQ the user uses most, the package the user uses most. The suggestions are still the admin's default; the reusable content is the user's own.",
-          "The Scale plan has the advanced suggestions. The follow-up (the user's own median delay, not the default). The document suggestion (the user's own intent to document pattern, not the default). The interest flag (the client marked not interested, the interest 80%+). The form reminder (the client opened the form, not submitted after 3 days). The price suggestion (the expenses + the last invoice + the margin). The reopen (the not-interested client, the high interest). The Scale suggestions use the user's own pattern: the user's own data, the user's own history. The Scale is the learning; the Growth is the default.",
-          "The Teams plan has the Scale's suggestions, plus the team's suggestions (the Handoff Dashboard, the roles, the team's pattern). The Teams is in beta. The suggestions are the intelligence; the plan shapes the depth.",
+          "Every plan includes basic CRM suggestions. Free includes basic CRM suggestions only.",
+          "Starter adds previous outreach patterns and follow-up strategy on top of the basic CRM suggestions.",
+          "Growth adds in-context paragraph suggestions, detailed prompts using previous data and project expense suggestions on top of the Starter capabilities.",
+          "The Scale plan has the advanced suggestions. The follow-up (the user's own median delay, not the default). The document suggestion (the user's own intent to document pattern, not the default). The interest flag (the client marked not interested, the interest 80%+). The form reminder (the client opened the form, not submitted after 3 days). The reopen (the not-interested client, the high interest). Broader client-history context is available on Scale. The price suggestion is not available.",
+          "Teams includes the Scale capabilities. Teams is in beta.",
         ],
       },
       {
         heading: "The summary",
         paragraphs: [
-          "The Free and the Starter: the basic suggestions (the admin's default). The Growth: the basic suggestions + the saved FAQs + the saved packages. The Scale: the advanced suggestions (the user's own pattern). The Teams: the Scale's + the team's. The suggestions are on every plan. The plan decides the depth: the default, the reusable, the learned, the team's. Every freelancer gets the suggestions; the plan decides how smart they are.",
+          "Capability progression: basic CRM suggestions on every plan; previous outreach patterns and follow-up strategy from Starter; in-context paragraph suggestions, detailed prompts using previous data and project expense suggestions from Growth; broader client-history context from Scale.",
         ],
       },
       {
@@ -932,10 +932,9 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "The price suggestion",
+        heading: "Price suggestion (not available)",
         paragraphs: [
-          "On Scale, when you start a new proposal for a client you have invoiced before, the price suggestion reads three things: the expenses recorded against that client's work, the last invoice you raised, and the margin you set. It returns a number and the arithmetic behind it, so you can accept it, adjust it, or ignore it.",
-          "It is the only suggestion that produces a figure, and it is the one that most needs the working shown. A number without its inputs is a guess; a number with the expenses, the last invoice and the margin beside it is a decision you can check.",
+          "The price suggestion is not available. It is not a current feature and no release date is promised.",
         ],
       },
       {
@@ -1028,7 +1027,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "Security and notifications",
         paragraphs: [
           "Review the active sessions. Passwords and any second factor are managed by AuthAction; Revercue does not run its own 2FA.",
-          "Notification settings are per event on Growth and Scale. Revercue sends its own transactional email for account, security and document notices. The newsletter is separate and off unless you ticked it.",
+          "Notification settings are per event on Growth and Scale. Follow-up reminders are available in-app on every plan; email reminders to the freelancer are available on Growth and above. Revercue sends its own transactional email for account, security and document notices. The newsletter is separate and off unless you ticked it.",
         ],
         visual: "SecurityVisual",
       },
@@ -1327,7 +1326,7 @@ const BASE_GUIDES: Guide[] = [
           "Free gives you 5 active documents, 1-month retention, 50 MB of storage, 3 notes per client, and the full thread. It is the product, not a demo.",
           "Starter adds room: 20 active documents, 3-month retention, 100 MB, 10 notes per client, and 3 custom templates. Email notifications start on Growth, not Starter.",
           "Growth adds the features that change how a document is made: 100 active documents, 12-month retention, 1 GB, 10 custom templates, 10 saved FAQs, 10 saved packages, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, and no Revercue branding on the client pages.",
-          "Scale adds the numbers: 300 active documents, 24-month retention, 5 GB, 15 custom templates, 30 saved FAQs, 15 saved packages, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, the custom thank-you page, and the full set of suggestions.",
+          "Scale adds the numbers: 300 active documents, 24-month retention, 5 GB, 15 custom templates, 30 saved FAQs, 15 saved packages, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue overview, project expense recording, expense categories, the what-revercue-knows page, the custom thank-you page, and the full set of suggestions. The price suggestion is not available.",
           "Teams adds the people: 500 active documents, 36-month retention, 10 GB, unlimited custom templates, saved FAQs, saved packages, password-protected documents and adaptive forms, everything on Scale, and the team features — the Handoff Dashboard, the roles, the bulk transfer and the audit log. Teams is in beta.",
         ],
       },
@@ -1371,8 +1370,8 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Choosing Scale",
         paragraphs: [
-          "Scale is the plan for the freelancer who has stopped asking how many documents fit and started asking what the account knows. Three hundred active documents, twenty-four months of retention, five gigabytes of storage, fifty password-protected documents and fifteen adaptive forms are the room. The interest level, the revenue tracker, the expense entry, the price suggestion and the what-revercue-knows page are the intelligence.",
-          "The price suggestion is the clearest example. It reads the expenses you recorded, the last invoice you raised and the margin you set, and it suggests a number for the next proposal. That suggestion is arithmetic over your own data, and it can only exist if you have been recording the data. Scale is the plan that pays you back for using the record.",
+          "Scale is the plan for the freelancer who has stopped asking how many documents fit and started asking what the account knows. Three hundred active documents, twenty-four months of retention, five gigabytes of storage, fifty password-protected documents and fifteen adaptive forms are the room. The interest level, the revenue overview, project expense recording, expense categories and the what-revercue-knows page are the intelligence. The price suggestion is not available.",
+          "The revenue overview is available on every plan. Project expense recording and totals are available on Growth. Expense categories, platform and provider records and spending breakdowns are available on Scale. The price suggestion is not available.",
           "The same is true of the advanced suggestions: the follow-up timing becomes your own median delay instead of the product's default, and the document suggestions follow your own intent-to-document pattern instead of a generic one. Nothing new is invented; the plan changes whose pattern the product reads.",
         ],
       },
@@ -1844,7 +1843,7 @@ const PRACTICE: Record<string, GuideSection[]> = {
       heading: "Dismissing well",
       paragraphs: [
         "A suggestion is only useful if dismissing it teaches the product something. When you dismiss the follow-up because the client asked for two weeks, dismiss it — that answer adjusts the timing. Ignoring it is the one response that teaches nothing and still leaves the card in the way tomorrow.",
-        "Accept suggestions in the same spirit: they are shortcuts to the next action, not instructions. The price suggestion reads your expenses and your margin; if the margin is wrong, the number is wrong, and the fix is the input rather than the card.",
+        "Accept suggestions in the same spirit: they are shortcuts to the next action, not instructions. The price suggestion is not available.",
       ],
       bullets: [
         "Dismiss with a reason in your head; the product learns from the action, you learn from the reason.",

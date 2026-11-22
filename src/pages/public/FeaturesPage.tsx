@@ -112,8 +112,10 @@ const SECTIONS: Section[] = [
     title: "Suggestions",
     copy: "Patterns from your own log, not a model. A follow-up that is due, a contract that should exist, a client worth reopening.",
     bullets: [
-      "Growth: follow-up suggestions",
-      "Scale: document suggestions, interest flags, form reminders",
+      "Suggestions on every plan, starting with basic CRM suggestions",
+      "Starter adds previous outreach patterns and follow-up strategy",
+      "Growth adds in-context paragraph suggestions, detailed prompts and project expense suggestions",
+      "Scale adds broader client-history context",
       "Do it opens the right screen with the client filled in",
       "Dismiss removes it for that client or document",
       "You are always the actor",
