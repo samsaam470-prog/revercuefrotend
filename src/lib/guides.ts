@@ -1287,7 +1287,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "The password-protected and the adaptive: the same rule",
         paragraphs: [
           "The password-protected document and the adaptive form follow the same rule as the published document: they count. The password is not a second document; it is the gate on the published document. The branching is not a second form; it is the logic on the published form. The active document is the published document, with or without the password, with or without the branching. The limit is the published document. The password and the branching are the features, not the count.",
-          "The password-protected limit (Growth 15, Scale 50) and the adaptive-form limit (Growth 3, Scale 15, Teams unlimited) are sub-limits. They are the number of the active documents that can have the feature. The active-document limit is the total. The sub-limit is the part. The two are the same rule: the published document counts, the feature is the gate. The Growth plan can have 100 active documents, of which 15 can have a password and 3 can be adaptive. The Scale plan can have 300 active documents, of which 50 can have a password and 15 can be adaptive. The Teams plan can have 500 active documents, of which 50 can have a password and unlimited can be adaptive.",
+          "The password-protected limit (Growth 15, Scale 50) and the adaptive-form limit (Growth 3, Scale 15, Teams unlimited) are sub-limits. They are the number of the active documents that can have the feature. The active-document limit is the total. The sub-limit is the part. The two are the same rule: the published document counts, the feature is the gate. The Growth plan can have 100 active documents, of which 15 can have a password and 3 can be adaptive. The Scale plan can have 300 active documents, of which 50 can have a password and 15 can be adaptive. The Teams plan can have 500 active documents, of which an unlimited number can have a password and an unlimited number can be adaptive.",
         ],
       },
       {
@@ -1328,7 +1328,7 @@ const BASE_GUIDES: Guide[] = [
           "Starter adds room: 20 active documents, 3-month retention, 100 MB, 10 notes per client, and 3 custom templates. Email notifications start on Growth, not Starter.",
           "Growth adds the features that change how a document is made: 100 active documents, 12-month retention, 1 GB, 10 custom templates, 10 saved FAQs, 10 saved packages, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, and no Revercue branding on the client pages.",
           "Scale adds the numbers: 300 active documents, 24-month retention, 5 GB, 15 custom templates, 30 saved FAQs, 15 saved packages, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, the custom thank-you page, and the full set of suggestions.",
-          "Teams adds the people: 500 active documents, 36-month retention, 10 GB, everything on Scale, and the team features — the Handoff Dashboard, the roles, the bulk transfer and the audit log. Teams is in beta.",
+          "Teams adds the people: 500 active documents, 36-month retention, 10 GB, unlimited custom templates, saved FAQs, saved packages, password-protected documents and adaptive forms, everything on Scale, and the team features — the Handoff Dashboard, the roles, the bulk transfer and the audit log. Teams is in beta.",
         ],
       },
       {
