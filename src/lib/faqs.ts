@@ -668,9 +668,9 @@ export const FAQS: Faq[] = [
   {
     id: 95,
     group: "support",
-    question: "How do I enable 2FA?",
+    question: "Does Revercue support two-factor authentication?",
     answer:
-      "Two-factor authentication and any second factor are handled by AuthAction, not by Revercue. Manage them from your AuthAction account settings.",
+      "No. Revercue does not offer two-factor authentication, email OTP, or authenticator codes. Sign-in uses AuthAction with passkeys and passwords. Passkeys are a passwordless sign-in method, not a second factor.",
   },
   {
     id: 96,

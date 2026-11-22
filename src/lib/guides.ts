@@ -1026,7 +1026,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Security and notifications",
         paragraphs: [
-          "Review the active sessions. Passwords and any second factor are managed by AuthAction; Revercue does not run its own 2FA.",
+          "Review the active sessions. Passwords are managed by AuthAction. Revercue does not offer two-factor authentication; passkeys are a passwordless sign-in method, not a second factor.",
           "Notification settings are per event on Growth and Scale. Follow-up reminders are available in-app on every plan; email reminders to the freelancer are available on Growth and above. Revercue sends its own transactional email for account, security and document notices. The newsletter is separate and off unless you ticked it.",
         ],
         visual: "SecurityVisual",
@@ -1870,7 +1870,7 @@ const PRACTICE: Record<string, GuideSection[]> = {
     {
       heading: "The settings worth visiting once",
       paragraphs: [
-        "Four settings repay a single visit. Profile: your logo, colours and contact details, because every client page inherits them. Notifications: per-event email toggles, so a busy week does not train you to ignore the inbox. Security: active sessions and password change; passwords and any second factor are managed by AuthAction. Appearance: dark, light or system, stored on the device rather than the account.",
+        "Four settings repay a single visit. Profile: your logo, colours and contact details, because every client page inherits them. Notifications: per-event email toggles, so a busy week does not train you to ignore the inbox. Security: active sessions and password change; passwords are managed by AuthAction. Revercue does not offer two-factor authentication. Appearance: dark, light or system, stored on the device rather than the account.",
         "The rest can wait until they are relevant. Saved FAQs and saved packages become useful once you have sent ten proposals, not before. The what-revercue-knows page is a read-only statement of what is stored about you, and it is worth reading once so the privacy claim stops being abstract.",
       ],
       bullets: [
