@@ -41,8 +41,9 @@ export function OnboardingStep1Page() {
       navigate("/onboarding/step-2");
     } catch (cause) {
       const apiError = cause as ApiError;
-      setError(errorMessage(apiError.code, apiError.message));
-      toast.error(errorMessage(apiError.code, apiError.message));
+      const message = apiError.message || errorMessage(apiError.code, apiError.message);
+      setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
