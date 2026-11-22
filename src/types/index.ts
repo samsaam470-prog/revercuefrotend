@@ -197,6 +197,16 @@ export interface Note {
   created_at: string;
 }
 
+export interface ClientRequirement {
+  id: string;
+  form_id: string;
+  form_title?: string;
+  answers: Record<string, unknown>;
+  service_type?: string;
+  status: string;
+  created_at: string;
+}
+
 export interface ClientDetail extends Client {
   communication: CommunicationEntry[];
   notes: Note[];
@@ -206,6 +216,7 @@ export interface ClientDetail extends Client {
     invoices: DocumentSummary[];
     forms: DocumentSummary[];
   };
+  requirements?: ClientRequirement[];
 }
 
 export interface Notification {

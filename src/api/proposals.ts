@@ -109,6 +109,8 @@ export const proposalsApi = {
     ),
 
   remove: (id: string) => api.del<{ success: true }>(`/api/proposals/${id}`),
+
+  pdf: (id: string) => api.get<Blob>(`/api/proposals/${id}/pdf`, { raw: true }),
 };
 
 /* Layer 1 (the research), Layer 3 (the pattern fix) and Layer 4 (the assets). */

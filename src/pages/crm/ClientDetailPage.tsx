@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft, ArrowUpRight, Mail, MessageSquare, Phone, Plus } from "lucide-react";
 import { crmApi } from "../../api/crm";
+import { formsApi } from "../../api/forms";
 import { StatusBadge } from "../../components/shared/StatusBadge";
 import { Badge } from "../../components/ui/Badge";
 import { Button } from "../../components/ui/Button";
@@ -17,12 +18,20 @@ import { ConfirmDialog } from "../../components/ui/ConfirmDialog";
 import { usePlanGate } from "../../hooks/usePlanGate";
 import { useToast } from "../../hooks/useToast";
 import { CHANNELS, PLAN_LIMITS } from "../../lib/constants";
+import { downloadBlob, documentFilename } from "../../lib/download";
 import { formatCurrency, formatDate, formatDateTime, formatRelative } from "../../lib/formatters";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
 import type { CommunicationEntry, DocumentSummary } from "../../types";
 
-const TABS = ["Overview", "Documents", "Notes", "Follow-ups", "Revenue"];
+const TABS = ["Overview", "Documents", "Notes", "Follow-ups", "Requirements", "Revenue"];
+
+function answerText(value: unknown): string {
+  if (value === null || value === undefined || value === "") return "Not answered";
+  if (Array.isArray(value)) return value.map((item) => answerText(item)).join(", ");
+  if (typeof value === "object") return JSON.stringify(value);
+  return String(value);
+}
 
 export function ClientDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -444,6 +453,70 @@ export function ClientDetailPage() {
                     </div>
                   </div>
                 ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {tab === "Requirements" && (
+        <div className="card card-lg">
+          <h2 className="serif" style={{ fontSize: 20 }}>
+            Requirements
+          </h2>
+          <p className="caption" style={{ marginBottom: 16 }}>
+            What this client answered on your requirement forms. The answers are the source for every
+            later document.
+          </p>
+          {(client.requirements ?? []).length === 0 ? (
+            <EmptyState
+              title="No requirement answers yet."
+              description="Share a form with this client. When they submit it, the answers appear here."
+              action={{ label: "Create a form", onClick: () => navigate(`/forms/new?client=${client.id}`) }}
+            />
+          ) : (
+            <div className="stack-4">
+              {client.requirements?.map((requirement) => (
+                <div key={requirement.id} className="card card-md">
+                  <div className="between" style={{ marginBottom: 8 }}>
+                    <div>
+                      <strong style={{ fontSize: 14 }}>{requirement.form_title || "Requirement form"}</strong>
+                      <p className="caption">
+                        {formatDateTime(requirement.created_at)}
+                        {requirement.service_type ? ` · ${requirement.service_type}` : ""}
+                      </p>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={async () => {
+                        try {
+                          const blob = await formsApi.submissionMarkdown(
+                            requirement.form_id,
+                            requirement.id,
+                          );
+                          downloadBlob(
+                            blob,
+                            documentFilename(requirement.form_title, requirement.id, "md"),
+                          );
+                        } catch (cause) {
+                          const apiError = cause as ApiError;
+                          toast.error(errorMessage(apiError.code, apiError.message));
+                        }
+                      }}
+                    >
+                      Download
+                    </Button>
+                  </div>
+                  <div className="stack-2">
+                    {Object.entries(requirement.answers ?? {}).map(([label, value]) => (
+                      <div key={label} className="between" style={{ fontSize: 13, gap: 16 }}>
+                        <span className="muted">{label}</span>
+                        <span style={{ textAlign: "right" }}>{answerText(value)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>

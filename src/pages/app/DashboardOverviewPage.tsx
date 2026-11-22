@@ -12,6 +12,7 @@ import {
   X,
 } from "lucide-react";
 import { dashboardApi } from "../../api/dashboard";
+import { announcementsApi } from "../../api/announcements";
 import { useAuth } from "../../hooks/useAuth";
 import { usePlanGate } from "../../hooks/usePlanGate";
 import { useNotifications } from "../../hooks/useNotifications";
@@ -30,6 +31,7 @@ export function DashboardOverviewPage() {
   const { hasFeature } = usePlanGate();
   const { setUnread } = useNotifications();
   const toast = useToast();
+  const [dismissedAnnouncements, setDismissedAnnouncements] = useState<string[]>([]);
 
   const summaryQuery = useQuery({
     queryKey: ["dashboard", "summary"],
@@ -50,9 +52,27 @@ export function DashboardOverviewPage() {
     staleTime: 20_000,
   });
 
+  const announcementsQuery = useQuery({
+    queryKey: ["announcements"],
+    queryFn: () => announcementsApi.list(),
+    staleTime: 60_000,
+  });
+
   useEffect(() => {
     if (summaryQuery.data) setUnread(summaryQuery.data.unread_notifications || 0);
   }, [summaryQuery.data, setUnread]);
+
+  /* Seeing the banner is enough to mark it read; dismissing is the explicit "no more". */
+  const announcements = (announcementsQuery.data?.data ?? []).filter(
+    (announcement) => !dismissedAnnouncements.includes(announcement.id),
+  );
+  const announcement = announcements[0];
+
+  useEffect(() => {
+    for (const item of announcements) {
+      if (!item.seen) void announcementsApi.seen(item.id).catch(() => undefined);
+    }
+  }, [announcements]);
 
   const summary = summaryQuery.data;
   const suggestions = suggestionsQuery.data?.suggestions ?? [];
@@ -73,6 +93,35 @@ export function DashboardOverviewPage() {
   return (
     <>
       <TutorialOverlay />
+
+      {announcement && (
+        <div
+          className={`notice ${announcement.type === "maintenance" ? "notice-red" : "notice-gold"}`}
+          style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 16 }}
+        >
+          <Info size={16} style={{ flexShrink: 0, marginTop: 2 }} />
+          <div style={{ flex: 1 }}>
+            <strong style={{ display: "block", fontSize: 13 }}>{announcement.title}</strong>
+            <p style={{ fontSize: 13, marginTop: 4, whiteSpace: "pre-wrap" }}>{announcement.body}</p>
+            {announcement.link_url && (
+              <a href={announcement.link_url} target="_blank" rel="noreferrer" style={{ fontSize: 13 }}>
+                Read more
+              </a>
+            )}
+          </div>
+          <button
+            type="button"
+            className="btn-icon"
+            aria-label="Dismiss announcement"
+            onClick={() => {
+              setDismissedAnnouncements((current) => [...current, announcement.id]);
+              void announcementsApi.dismiss(announcement.id).catch(() => undefined);
+            }}
+          >
+            <X size={15} />
+          </button>
+        </div>
+      )}
 
       <div className="page-top">
         <div className="greeting">

@@ -35,4 +35,12 @@ export const formsApi = {
   unarchive: (id: string) => api.post<{ success: true; status: string }>(`/api/forms/${id}/unarchive`),
   share: (id: string, channel: string) => api.post<{ success: true }>(`/api/forms/${id}/share`, { channel }),
   remove: (id: string) => api.del<{ success: true }>(`/api/forms/${id}`),
+
+  pdf: (id: string) => api.get<Blob>(`/api/forms/${id}/pdf`, { raw: true }),
+
+  submissionsMarkdown: (id: string) =>
+    api.get<Blob>(`/api/forms/${id}/submissions/export.md`, { raw: true }),
+
+  submissionMarkdown: (id: string, submissionId: string) =>
+    api.get<Blob>(`/api/forms/${id}/submissions/${submissionId}.md`, { raw: true }),
 };

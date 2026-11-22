@@ -48,4 +48,6 @@ export const invoicesApi = {
     api.post<{ success: true; status: string }>(`/api/invoices/${id}/confirm-payment`),
 
   remove: (id: string) => api.del<{ success: true }>(`/api/invoices/${id}`),
+
+  pdf: (id: string) => api.get<Blob>(`/api/invoices/${id}/pdf`, { raw: true }),
 };

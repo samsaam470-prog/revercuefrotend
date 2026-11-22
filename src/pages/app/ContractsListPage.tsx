@@ -11,6 +11,7 @@ import { Button } from "../../components/ui/Button";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useToast } from "../../hooks/useToast";
 import { formatRelative } from "../../lib/formatters";
+import { downloadBlob, documentFilename } from "../../lib/download";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
 import type { DocumentSummary } from "../../types";
@@ -53,6 +54,16 @@ export function ContractsListPage() {
     }
   };
 
+  const downloadPdf = async (row: DocumentSummary) => {
+    try {
+      const blob = await contractsApi.pdf(row.id);
+      downloadBlob(blob, documentFilename(row.title, row.id, "pdf"));
+    } catch (cause) {
+      const apiError = cause as ApiError;
+      toast.error(errorMessage(apiError.code, apiError.message));
+    }
+  };
+
   const rows = (query.data?.data ?? []).filter((row) =>
     debounced ? `${row.title} ${row.client_name ?? ""}`.toLowerCase().includes(debounced.toLowerCase()) : true,
   );
@@ -75,6 +86,7 @@ export function ContractsListPage() {
         <RowMenu
           items={[
             { label: "Open builder", onClick: () => navigate(`/contracts/${row.id}/edit`) },
+            { label: "Download PDF", onClick: () => void downloadPdf(row) },
             { label: "Duplicate", onClick: () => duplicate.mutate(row.id) },
             { label: "Archive", onClick: () => setPending({ kind: "archive", row }) },
             { label: "Delete", danger: true, onClick: () => setPending({ kind: "delete", row }) },

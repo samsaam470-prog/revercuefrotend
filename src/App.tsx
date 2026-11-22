@@ -151,6 +151,7 @@ export function App() {
             "notifications",
             "saved-faqs",
             "saved-packages",
+            "templates",
             "revision-prices",
             "revenue",
             "what-revercue-knows",

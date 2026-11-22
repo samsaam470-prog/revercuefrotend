@@ -11,6 +11,7 @@ import { Button } from "../../components/ui/Button";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useToast } from "../../hooks/useToast";
 import { formatCurrency, formatDate, formatRelative } from "../../lib/formatters";
+import { downloadBlob, documentFilename } from "../../lib/download";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
 import type { DocumentSummary } from "../../types";
@@ -61,6 +62,16 @@ export function InvoicesListPage() {
     },
   });
 
+  const downloadPdf = async (row: DocumentSummary) => {
+    try {
+      const blob = await invoicesApi.pdf(row.id);
+      downloadBlob(blob, documentFilename(row.invoice_number || row.title, row.id, "pdf"));
+    } catch (cause) {
+      const apiError = cause as ApiError;
+      toast.error(errorMessage(apiError.code, apiError.message));
+    }
+  };
+
   const rows = (query.data?.data ?? []).filter((row) =>
     debounced
       ? `${row.title} ${row.client_name ?? ""} ${row.invoice_number ?? ""}`
@@ -96,6 +107,7 @@ export function InvoicesListPage() {
         <RowMenu
           items={[
             { label: "Open builder", onClick: () => navigate(`/invoices/${row.id}/edit`) },
+            { label: "Download PDF", onClick: () => void downloadPdf(row) },
             {
               label: "Confirm payment",
               hidden: row.status !== "proof_submitted" && row.status !== "published",

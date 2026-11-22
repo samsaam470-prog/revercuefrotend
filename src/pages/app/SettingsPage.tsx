@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Check, Download, Lock, Trash2 } from "lucide-react";
 import { settingsApi } from "../../api/settings";
+import { templatesApi } from "../../api/templates";
 import { Input } from "../../components/ui/Input";
 import { Textarea } from "../../components/ui/Textarea";
 import { Select } from "../../components/ui/Select";
@@ -35,6 +36,7 @@ export type SettingsSection =
   | "notifications"
   | "saved-faqs"
   | "saved-packages"
+  | "templates"
   | "revision-prices"
   | "revenue"
   | "what-revercue-knows"
@@ -48,6 +50,7 @@ const TITLES: Record<SettingsSection, { title: string; subtitle: string }> = {
   notifications: { title: "Notifications", subtitle: "Email events and the newsletter." },
   "saved-faqs": { title: "Saved FAQs", subtitle: "The FAQ library the builder pre-fills from." },
   "saved-packages": { title: "Saved Packages", subtitle: "Reusable packages for the proposal builder." },
+  templates: { title: "Custom Templates", subtitle: "The layouts your builder can start from." },
   "revision-prices": { title: "Revision Prices", subtitle: "A price per revision category, shown to the client." },
   revenue: { title: "Revenue & Expenses", subtitle: "Earned revenue, pending invoices and recorded expenses." },
   "what-revercue-knows": { title: "What Revercue Knows", subtitle: "The read-only transparency page." },
@@ -71,6 +74,7 @@ export function SettingsPage({ section }: { section: SettingsSection }) {
       {section === "notifications" && <NotificationsSection />}
       {section === "saved-faqs" && <SavedFaqsSection />}
       {section === "saved-packages" && <SavedPackagesSection />}
+      {section === "templates" && <TemplatesSection />}
       {section === "revision-prices" && <RevisionPricesSection />}
       {section === "revenue" && <RevenueSection />}
       {section === "what-revercue-knows" && <WhatRevercueKnowsSection />}
@@ -881,6 +885,126 @@ function SavedPackagesSection() {
           </Button>
         </div>
       </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------- templates */
+
+function TemplatesSection() {
+  const { hasFeature, limits } = usePlanGate();
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const query = useQuery({ queryKey: ["settings", "templates"], queryFn: () => templatesApi.list() });
+  const [name, setName] = useState("");
+  const [type, setType] = useState<"proposal" | "contract">("proposal");
+  const [file, setFile] = useState<File | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [pending, setPending] = useState<string | null>(null);
+
+  if (!hasFeature("custom_templates")) return <UpgradeCard feature="Custom Templates" />;
+
+  const custom = query.data?.custom ?? [];
+
+  const upload = async () => {
+    if (!name.trim() || !file) return;
+    setBusy(true);
+    try {
+      await templatesApi.upload({ file, name: name.trim(), type });
+      setName("");
+      setFile(null);
+      await queryClient.invalidateQueries({ queryKey: ["settings", "templates"] });
+      toast.success("Template uploaded.");
+    } catch (cause) {
+      const apiError = cause as ApiError;
+      toast.error(errorMessage(apiError.code, apiError.message));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="stack-4">
+      <div className="settings-card">
+        <div className="between">
+          <h2>Your templates</h2>
+          <span className="caption">
+            {custom.length} of {limits.custom_templates}
+          </span>
+        </div>
+        {query.isLoading && <SkeletonLines count={3} />}
+        {!query.isLoading && custom.length === 0 && (
+          <p className="muted" style={{ fontSize: 14 }}>
+            No custom templates yet. Upload the layout you reuse most and the builder offers it first.
+          </p>
+        )}
+        {custom.map((template) => (
+          <div className="activity-row" key={template.id}>
+            <div className="meta">
+              <div>{template.name}</div>
+              <small>
+                {template.type === "contract" ? "Contract" : "Proposal"}
+                {template.tags?.length ? ` · ${template.tags.join(", ")}` : ""}
+              </small>
+            </div>
+            <Button variant="ghost" size="sm" onClick={() => setPending(template.id)}>
+              Delete
+            </Button>
+          </div>
+        ))}
+      </div>
+
+      <div className="settings-card">
+        <h2>Upload a template</h2>
+        <p className="muted" style={{ fontSize: 14 }}>
+          An HTML file with the layout you want to reuse. The builder keeps your structure and fills in the
+          content.
+        </p>
+        <Input id="template-name" label="Name" value={name} onChange={setName} />
+        <Select
+          id="template-type"
+          label="Used for"
+          value={type}
+          onChange={(value) => setType(value as "proposal" | "contract")}
+          options={[
+            { value: "proposal", label: "Proposals" },
+            { value: "contract", label: "Contracts" },
+          ]}
+        />
+        <label className="field" htmlFor="template-file">
+          <span className="label">HTML file</span>
+          <input
+            id="template-file"
+            type="file"
+            accept=".html,text/html"
+            onChange={(event) => setFile(event.target.files?.[0] ?? null)}
+          />
+        </label>
+        <div className="settings-actions">
+          <Button onClick={upload} loading={busy} disabled={!name.trim() || !file}>
+            Upload template
+          </Button>
+        </div>
+      </div>
+
+      <ConfirmDialog
+        open={Boolean(pending)}
+        onClose={() => setPending(null)}
+        onConfirm={async () => {
+          if (!pending) return;
+          try {
+            await templatesApi.remove(pending);
+            await queryClient.invalidateQueries({ queryKey: ["settings", "templates"] });
+            toast.success("Template removed.");
+          } catch (cause) {
+            const apiError = cause as ApiError;
+            toast.error(errorMessage(apiError.code, apiError.message));
+          }
+        }}
+        title="Delete this template?"
+        description="It stops appearing in the builder. Documents already built from it are unchanged."
+        confirmLabel="Delete template"
+      />
     </div>
   );
 }
