@@ -69,8 +69,8 @@ export function PrivacyPage() {
               <p>
                 <strong>Account data.</strong> Your email address, name, business name, account type,
                 plan, services, brand colours, website and optional Fiverr profile. We also keep
-                coarse usage counts (documents, clients, storage), the time of your last login, the
-                two-factor setting, and your email and notification preferences.
+                coarse usage counts (documents, clients, storage), the time of your last login, and
+                your email and notification preferences.
                 This is the minimum needed to sign you in, apply your plan limits and render your
                 brand on client pages.
               </p>
@@ -626,9 +626,7 @@ export function SecurityPage() {
               </p>
               <p>
                 Sessions can be revoked from Settings → Security, and a password reset revokes every other
-                session immediately. Two-factor authentication is a six-digit code by email, and turning
-                it on or off requires your current password, so a stolen session cannot quietly disable
-                it.
+                session immediately. Authentication is handled by AuthAction (OIDC and passkeys).
               </p>
             </>
           ),

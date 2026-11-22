@@ -155,7 +155,7 @@
       "name": "Accounts and settings",
       "status": "available",
       "access": "public_entry_then_account",
-      "summary": "Email and password with a six-digit activation code, Google sign-in when configured, password reset, optional email 2FA, ten settings sections, deletion with a grace period."
+      "summary": "Authentication via AuthAction (OIDC and passkeys), Google sign-in when configured, password reset, ten settings sections, deletion with a grace period."
     },
     {
       "id": "notifications",
@@ -323,11 +323,11 @@
     "account_password_hash": "bcrypt",
     "document_password_hash": "Argon2id",
     "session_tokens": "scoped",
-    "two_factor": "optional email 2FA on the account",
+    "two_factor": "Authentication via AuthAction (OIDC and passkeys); no Revercue-side email 2FA.",
     "file_storage": "Private bucket behind a Worker proxy",
     "public_ids": "long, random and unguessable",
     "client_pages_indexing": "noindex, nofollow",
-    "processors": ["Cloudflare", "Backblaze B2", "Turso", "FormSubmit", "External payment provider"],
+    "processors": ["Cloudflare", "Cloudflare D1", "Backblaze B2", "Turso", "AuthAction", "Coopermail", "Openmail"],
     "team_access_to_documents": false,
     "certification": null,
     "penetration_test_report": false,

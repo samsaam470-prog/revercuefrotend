@@ -247,8 +247,8 @@
                 <th scope="row">Privacy<br /><code>/privacy</code></th>
                 <td>
                   What is collected (account, product, tracking, payment and support data), how it is
-                  used, the processors (Cloudflare, Backblaze B2, Turso, FormSubmit, the payment
-                  provider), retention by plan, user rights, cookies and account deletion.
+                  used, the processors (Cloudflare, Cloudflare D1, Backblaze B2, Turso, AuthAction,
+                  Coopermail, Openmail), retention by plan, user rights, cookies and account deletion.
                 </td>
                 <td>Required</td>
                 <td>App shell only</td>
@@ -314,7 +314,7 @@
               </tr>
               <tr>
                 <th scope="row">Login code<br /><code>/login/code</code></th>
-                <td>The two-factor step for accounts that have 2FA switched on: a six-digit email code.</td>
+                <td>Authentication via AuthAction (OIDC and passkeys); legacy password login remains during transition.</td>
                 <td>Public</td>
               </tr>
               <tr>
@@ -405,7 +405,7 @@
               <tr>
                 <th scope="row">Settings<br /><code>/settings/{section}</code></th>
                 <td>
-                  Ten sections: profile, appearance (dark, light, system), plan, security (2FA, sessions),
+                  Ten sections: profile, appearance (dark, light, system), plan, security (passkeys, sessions),
                   notifications, saved FAQs, saved packages, revision prices, what-revercue-knows and
                   delete account. <code>/settings</code> redirects to <code>/settings/profile</code>.
                 </td>
@@ -698,7 +698,7 @@
             <p>
               Sign-up and sign-in on AuthAction's hosted page, which handles email and password,
               passkeys and social providers where the tenant enables them. The Revercue API provisions
-              the application user on the first authenticated callback. Optional email 2FA, ten
+              the application user on the first authenticated callback. Ten
               settings sections, plan status and account deletion with a grace period.
             </p>
             <p class="small muted">

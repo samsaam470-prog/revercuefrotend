@@ -426,7 +426,7 @@
                 <td>
                   Sign-up and sign-in on AuthAction's hosted page (email and password, passkeys and
                   social providers where the tenant enables them); the Revercue API provisions the
-                  application user on the first authenticated callback. Optional email 2FA, ten
+                  application user on the first authenticated callback. Ten
                   settings sections, plan status and account deletion with a grace period.
                 </td>
                 <td>Public entry; account after</td>
@@ -853,7 +853,7 @@
             <ul>
               <li>Account sign-in is handled by AuthAction; Revercue does not store account passwords.</li>
               <li>Document passwords hashed with Argon2id.</li>
-              <li>Scoped session tokens; email 2FA available on the account.</li>
+              <li>Scoped session tokens; authentication via AuthAction (OIDC and passkeys).</li>
               <li>Email verification and password reset happen on AuthAction's hosted pages.</li>
             </ul>
           </article>
@@ -864,7 +864,7 @@
               <li>Backblaze B2 for file storage.</li>
               <li>Turso for the database.</li>
               <li>The contact and beta forms are stored as records in the team's dashboard, not relayed through a third-party form service.</li>
-              <li>An external payment provider for subscriptions.</li>
+              <li>Coopermail and Openmail for transactional email.</li>
             </ul>
           </article>
           <article class="card">
