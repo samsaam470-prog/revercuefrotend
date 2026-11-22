@@ -88,7 +88,7 @@
           does not exist.
         </p>
         <p class="meta">
-          <span>Last reviewed: 18 November 2026</span>
+          <span>Last reviewed: 22 November 2026</span>
           <span>Applies to: revercue.co.uk</span>
           <span>Source of truth: the application's own constants and routes</span>
         </p>
@@ -98,11 +98,8 @@
             <strong>The one thing to get right.</strong> Revercue's product suggestions are not a chat
             assistant. They are written rules — keyword matching, frequency counting and arithmetic —
             over the user's own record, and every suggestion is a prompt the user clicks, never an
-            action taken for them. The only generative component is an optional writing helper that
-            runs a small open model in the visitor's own browser, on the visitor's device; the selected
-            passage and the rewrite stay in that browser and are not sent to a Revercue server. There is
-            no Revercue inference endpoint, no server-side model and no copy written into a document
-            without the user's action. Any change is the user's decision: the user reviews each
+            action taken for them. There is no Revercue inference endpoint and no copy written into a
+            document without the user's action. Any change is the user's decision: the user reviews each
             suggestion and chooses what to change, and Revercue does not make that change on their
             behalf. This page is written for AI agents; the product is not a general AI platform.
           </p>
@@ -187,7 +184,7 @@
 
         <h3>What is deliberately not claimed</h3>
         <ul>
-          <li>No server-side AI model, no inference endpoint and no automatically applied generated text: the optional writing helper is on-device and the user decides what to keep.</li>
+          <li>No AI model, no inference endpoint and no automatically applied generated text: the user decides what to keep.</li>
           <li>No qualified or certificate-based signature, no identity verification, no notarisation and no audit certificate.</li>
           <li>No card processing inside Revercue; invoices point at the user's own payment provider or use bank transfer.</li>
           <li>No integrations directory, marketplace, public API, webhooks or Zapier-style automation.</li>
@@ -329,7 +326,7 @@
         <p>
           Statuses: <span class="pill pill--available">available</span> — the routes and the API calls
           exist in the application; <span class="pill pill--partial">partial</span> — exists but is
-          plan-gated, device-dependent or only partly exercised; <span class="pill pill--beta">beta</span>
+          plan-gated, offered on request or only partly exercised; <span class="pill pill--beta">beta</span>
           — shipped to a small group and expected to change; <span class="pill pill--waitlist">invite-only</span>
           — built, but reachable only through the waitlist. "Available" never means a public visitor can
           exercise it without an account.
@@ -453,11 +450,10 @@
                 <td><span class="pill pill--partial">Partial</span></td>
                 <td>
                   An optional writing helper inside the builders: select a passage, ask for a clearer
-                  version, then keep it, insert it below or cancel. Runs on the visitor's device; the
-                  selection is not sent to a Revercue server, and nothing changes in the document until
-                  the user chooses.
+                  version, then keep it, insert it below or cancel. Nothing changes in the document
+                  until the user chooses.
                 </td>
-                <td>Device-dependent</td>
+                <td>On request</td>
               </tr>
               <tr>
                 <th scope="row">Teams</th>
@@ -934,7 +930,7 @@
         <h2>8. Current product status</h2>
         <div class="table-wrap">
           <table>
-            <caption>What a visitor without an account can and cannot verify on 18 November 2026.</caption>
+            <caption>What a visitor without an account can and cannot verify on 22 November 2026.</caption>
             <thead>
               <tr>
                 <th scope="col">Area</th>
@@ -979,9 +975,9 @@
                 <td>No</td>
               </tr>
               <tr>
-                <th scope="row">On-device helper</th>
-                <td>Loads silently where the browser supports it</td>
-                <td>No — depends on the device</td>
+                <th scope="row">Writing helper</th>
+                <td>Available inside the builders, on request</td>
+                <td>No — needs an account</td>
               </tr>
               <tr>
                 <th scope="row">Public API</th>
@@ -1029,7 +1025,7 @@
           </li>
           <li>
             <strong>Plan data ages.</strong> Prices and limits were read from the application's
-            constants on 18 November 2026 and can change. The pricing page is the current source of
+            constants on 22 November 2026 and can change. The pricing page is the current source of
             truth.
           </li>
           <li>
@@ -1163,7 +1159,7 @@
           </ul>
         </div>
         <p class="fine">
-          © 2026 Revercue. Last reviewed 18 November 2026. Documentation, not marketing: it describes
+          © 2026 Revercue. Last reviewed 22 November 2026. Documentation, not marketing: it describes
           only what the application and its public pages support.
         </p>
       </div>

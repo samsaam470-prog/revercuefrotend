@@ -54,9 +54,9 @@ export const FAQS: Faq[] = [
   {
     id: 5,
     group: "product",
-    question: "Does any of my writing leave my device?",
+    question: "Does Revercue send my writing to a server?",
     answer:
-      "No. Every change the helper makes is done on your device, which means it never goes to a Revercue server. The text you select, the rewrite that comes back and the document you are editing stay in your browser; the team cannot read them and they are not stored in the database. The suggestions elsewhere in the product use patterns: keyword matching, frequency counting and arithmetic over your own record. Nothing is applied without you: you review each suggestion and choose what to change, and Revercue does not make that change on your behalf. The footer has four buttons that open an outside assistant (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled question about Revercue — the answer comes from that tool, not from us.",
+      "No. The helper's work never reaches a Revercue server: the text you select, the rewrite that comes back and the document you are editing are not sent to us and are not stored in the database; the team cannot read them. The suggestions elsewhere in the product use patterns: keyword matching, frequency counting and arithmetic over your own record. Nothing is applied without you: you review each suggestion and choose what to change, and Revercue does not make that change on your behalf. The footer has four buttons that open an outside assistant (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled question about Revercue — the answer comes from that tool, not from us.",
   },
   {
     id: 6,
@@ -719,7 +719,7 @@ export const FAQS: Faq[] = [
     group: "product",
     question: 'What is "Ask the helper"?',
     answer:
-      "Ask the helper is the inline assistant in the builder. You select a piece of text, click Ask the helper, and it can rewrite the text in a different tone, fix the grammar, expand it, simplify it, or change the wording. The helper is a tool, not an action. It suggests a rewrite; you decide whether to replace the text, insert it below, or cancel. Where the helper runs, and what that means for your data. The changing work is done on your device, which means it never goes to a Revercue server. The text you select is not sent to Revercue. It is not sent to the team. It is not stored in the database. It does not leave your browser. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it, on your device. If your browser does not support the helper, the Ask the helper button is not shown, and you edit the text manually.",
+      "Ask the helper is the inline assistant in the builder. You select a piece of text, click Ask the helper, and it can rewrite the text in a different tone, fix the grammar, expand it, simplify it, or change the wording. The helper is a tool, not an action. It suggests a rewrite; you decide whether to replace the text, insert it below, or cancel. The text you select is not sent to Revercue, not sent to the team, and not stored in the database. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it. If the helper is unavailable in your browser, the Ask the helper button is not shown, and you edit the text manually.",
   },
   {
     id: 103,

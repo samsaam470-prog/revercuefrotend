@@ -1,7 +1,7 @@
 {
   "name": "Revercue",
   "documentation_version": "1.1.0",
-  "last_updated": "2026-11-18",
+  "last_updated": "2026-11-22",
   "canonical_origin": "https://revercue.co.uk",
   "document": {
     "language": "en",
@@ -22,10 +22,9 @@
     ],
     "product_uses_ai": false,
     "suggestion_basis": "Written rules: keyword matching, frequency counting and arithmetic over the user's own record.",
-    "on_device_helper": {
+    "writing_helper": {
       "exists": true,
-      "runs_on": "The visitor's device",
-      "sends_selection_to_server": false,
+      "access": "inside_the_builders",
       "verified_in_this_environment": false
     }
   },
@@ -174,10 +173,10 @@
     },
     {
       "id": "helper",
-      "name": "On-device writing helper",
+      "name": "Writing helper",
       "status": "partial",
-      "access": "device_dependent",
-      "summary": "Select a passage, ask for a clearer version, keep what you like. Runs on the visitor's device; the selection is not sent to a Revercue server."
+      "access": "on_request",
+      "summary": "Select a passage, ask for a clearer version, keep what you like. Nothing changes in the document until the user chooses."
     },
     {
       "id": "teams",
@@ -382,7 +381,7 @@
     "public_api": false
   },
   "not_claimed": [
-    "A server-side AI model, an inference endpoint or AI-written document content (the optional writing helper runs only in the visitor's browser, on the visitor's device, and only when the user invokes it)",
+    "A server-side AI model, an inference endpoint or AI-written document content applied automatically",
     "A qualified or certificate-based signature, identity verification, notarisation or an audit certificate",
     "Card processing inside Revercue",
     "Public API, SDK, webhooks or an integrations directory",
@@ -414,7 +413,7 @@
     },
     {
       "id": "plan-data-can-age",
-      "detail": "Prices and limits were read from the application's constants on 2026-11-18; the pricing page is the live source of truth.",
+      "detail": "Prices and limits were read from the application's constants on 2026-11-22; the pricing page is the live source of truth.",
       "status": "maintained_by_hand"
     },
     {
@@ -424,7 +423,7 @@
     },
     {
       "id": "helper-unverified",
-      "detail": "The on-device helper depends on the visitor's device and was not run in the documentation environment.",
+      "detail": "The writing helper was not run in the documentation environment.",
       "status": "unverified"
     }
   ],

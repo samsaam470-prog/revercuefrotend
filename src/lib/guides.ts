@@ -25,7 +25,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "Sign up, finish onboarding, and send your first proposal in about five minutes.",
     category: "Proposals",
     readMinutes: 5,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "DashboardVisual",
     sections: [
       {
@@ -61,7 +61,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The four stat cards, the pending line, the suggested actions and the activity feed.",
     category: "Product",
     readMinutes: 4,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "DashboardVisual",
     sections: [
       {
@@ -102,7 +102,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The requirement form, the template selection, the canvas, the auto-save and the share.",
     category: "Proposals",
     readMinutes: 7,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "BuilderVisual",
     sections: [
       {
@@ -153,7 +153,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The same canvas, the freelancer-first signing flow, and the after-approval chain.",
     category: "Contracts",
     readMinutes: 6,
-    updated: "2026-11-18",
+    updated: "2026-11-22",
     visual: "ContractVisual",
     sections: [
       {
@@ -196,7 +196,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The question list, the question types, the branching, the test mode and the thank-you page.",
     category: "Proposals",
     readMinutes: 6,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "FormVisual",
     sections: [
       {
@@ -237,7 +237,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "Line items, the payment arrangement, the proof upload and the confirm payment action.",
     category: "Pricing",
     readMinutes: 5,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "InvoiceVisual",
     sections: [
       {
@@ -272,7 +272,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The list, the client record, the communication log, notes, follow-ups and the interest level.",
     category: "Follow-ups",
     readMinutes: 6,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "CrmVisual",
     sections: [
       {
@@ -312,7 +312,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "What the client sees: the four document views, the password wall, the closed page, the proof upload.",
     category: "Product",
     readMinutes: 5,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "ProposalVisual",
     sections: [
       {
@@ -347,7 +347,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The blocks you can place in a document and what each one is for.",
     category: "Product",
     readMinutes: 6,
-    updated: "2026-11-18",
+    updated: "2026-11-22",
     visual: "BuilderVisual",
     sections: [
       {
@@ -770,7 +770,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "How the template's zones decide where a visual goes, and how to edit it.",
     category: "Product",
     readMinutes: 4,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "BuilderVisual",
     sections: [
       {
@@ -796,7 +796,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The palette, the type scale, the spacing and the components, and why they look like this.",
     category: "Product",
     readMinutes: 5,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "PricingVisual",
     sections: [
       {
@@ -829,7 +829,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "What is recorded on each plan, how to read the activity, and the five-day reduction.",
     category: "Follow-ups",
     readMinutes: 4,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "DashboardVisual",
     sections: [
       {
@@ -862,14 +862,14 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "Follow-ups, document suggestions, interest flags and plan-specific context.",
     category: "Follow-ups",
     readMinutes: 4,
-    updated: "2026-11-18",
+    updated: "2026-11-22",
     visual: "SuggestionVisual",
     sections: [
       {
         heading: "What fires, and when",
         paragraphs: [
           "A pattern is evaluated against your log: a proposal sent two days ago with no reply, a client who said yes but has no contract, a client marked not interested whose interest is high again. When the pattern matches, the instruction fires.",
-          "The patterns are written rules with a visible reason. The suggestions count events — a document sent, opened, answered, paid — and never read the prose of your documents. The post-document review is the one thing that reads the text, and it does so on your device. The suggestion shows the signal that produced it, so you can disagree with the signal.",
+          "The patterns are written rules with a visible reason. The suggestions count events — a document sent, opened, answered, paid — and never read the prose of your documents. The post-document review is the one thing that reads the text, and the text is never sent to a Revercue server for it. The suggestion shows the signal that produced it, so you can disagree with the signal.",
         ],
         visual: "SuggestionVisual",
       },
@@ -975,7 +975,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "Built-in templates, your own HTML, a URL, or a blank page.",
     category: "Proposals",
     readMinutes: 4,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "BuilderVisual",
     sections: [
       {
@@ -1007,7 +1007,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "Profile, appearance, plan, security, notifications, saved libraries and the transparency page.",
     category: "Product",
     readMinutes: 5,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "SecurityVisual",
     sections: [
       {
@@ -1046,7 +1046,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "What is stored, who can see it, how long it stays, and how to export or delete it.",
     category: "Product",
     readMinutes: 5,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "SecurityVisual",
     sections: [
       {
@@ -1079,7 +1079,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "The activation email, a document that will not open, and a payment proof that was rejected.",
     category: "Product",
     readMinutes: 4,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "CodeScreenVisual",
     sections: [
       {
@@ -1120,7 +1120,7 @@ const BASE_GUIDES: Guide[] = [
       "Your previous patterns, the search engines, the pattern engine, the UI engines, the old proposals, and the details you add in the form.",
     category: "Product",
     readMinutes: 9,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "BuilderVisual",
     sections: [
       {
@@ -1193,7 +1193,7 @@ const BASE_GUIDES: Guide[] = [
       "Why Revercue's paid plans are invite-only, what the waitlist means, and how the invite works.",
     category: "Pricing",
     readMinutes: 7,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "PricingVisual",
     sections: [
       {
@@ -1256,7 +1256,7 @@ const BASE_GUIDES: Guide[] = [
       "What an active document is, what counts against the limit, what does not, and how the password-protected and adaptive forms follow the same rule.",
     category: "Pricing",
     readMinutes: 6,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "DashboardVisual",
     sections: [
       {
@@ -1311,7 +1311,7 @@ const BASE_GUIDES: Guide[] = [
       "The five plans, what each one adds, and the limits that actually change how you work.",
     category: "Pricing",
     readMinutes: 6,
-    updated: "2026-11-18",
+    updated: "2026-11-22",
     visual: "PricingVisual",
     sections: [
       {
@@ -1424,7 +1424,7 @@ const BASE_GUIDES: Guide[] = [
       "Select a sentence, ask for a rewrite, and decide whether to take it. What the helper can do, what it will not do, and where it runs.",
     category: "Product",
     readMinutes: 9,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "BuilderVisual",
     sections: [
       {
@@ -1450,10 +1450,10 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "Where it runs, and what that means for your data",
+        heading: "What happens to your data",
         paragraphs: [
-          "The helper runs on your device. The changing work is done on your device, which means it never goes to a Revercue server. The text you select is never sent to Revercue, never sent to the team, and never stored in the database. It does not leave your browser at any point in the flow, not when you select it, not when you ask, not when you accept the rewrite.",
-          "The team cannot read the passage you selected, the rewrite that came back, or the document you are editing. The team sees the account details — your email, your name, your plan and your usage — and nothing of the content. That distinction is the point: the content is yours, and the helper is the tool that works on it, on your device.",
+          "The text you select is never sent to a Revercue server, never sent to the team, and never stored in the database. Nothing about the passage or the rewrite reaches us at any point in the flow, not when you select it, not when you ask, not when you accept the rewrite.",
+          "The team cannot read the passage you selected, the rewrite that came back, or the document you are editing. The team sees the account details — your email, your name, your plan and your usage — and nothing of the content. That distinction is the point: the content is yours, and the helper is the tool that works on it.",
         ],
       },
       {
@@ -1494,7 +1494,7 @@ const BASE_GUIDES: Guide[] = [
       "The review that runs after Create: a score out of 100, the issues behind it, and what to do with them before you send.",
     category: "Product",
     readMinutes: 9,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "DashboardVisual",
     sections: [
       {
@@ -1508,7 +1508,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "The two layers",
         paragraphs: [
           "The pattern engine checks the structure. It looks at the sections you said you wanted and the sections that actually exist, the presence of the pricing, the presence of a next step, the length of the document against the length you chose, the tone you set against the words on the page, and the repetition of a line in two places. Those checks are arithmetic and comparison; they do not need to read for meaning.",
-          "The helper checks the prose, when it can run. It reads the text for readability, flow and clarity, and returns one short note rather than a rewrite. That note is attached to the same list. The changing work is done on your device, which means it never goes to a Revercue server; the text is not sent anywhere to produce the note.",
+          "The helper checks the prose, when it is available. It reads the text for readability, flow and clarity, and returns one short note rather than a rewrite. That note is attached to the same list. The text is not sent to a Revercue server to produce the note.",
           "The two layers are separated on purpose. Structure problems are objective: a missing pricing block is missing whether or not the writing is good. Prose problems are judgment, and they come from a different place.",
         ],
       },
@@ -1560,7 +1560,7 @@ const BASE_GUIDES: Guide[] = [
       "The timeline inside the client record: what an entry holds, what reads it, and why the log is the memory of the thread.",
     category: "Product",
     readMinutes: 9,
-    updated: "2026-11-16",
+    updated: "2026-11-22",
     visual: "DashboardVisual",
     sections: [
       {
@@ -1625,7 +1625,7 @@ const BASE_GUIDES: Guide[] = [
     excerpt: "How Revercue records a real signature from you and then from your client, locks the version, and produces a countersigned PDF.",
     category: "Contracts",
     readMinutes: 9,
-    updated: "2026-11-17",
+    updated: "2026-11-22",
     visual: "ContractVisual",
     sections: [
       { heading: "What an electronic signature is", paragraphs: ["An electronic signature is a record that a person intended to sign a document and did so on a specific version of that document at a specific time. It is not the same as a typed name in a chat message, and it is not the same as clicking an 'I agree' button without reading. The signature is evidence of intent, identity and consent, captured in a way that can be stored, replayed and verified later.", "Revercue does not treat a button click as a signature. A real signature requires a name, an explicit consent statement, a version of the contract, and a timestamp. All four are recorded together so that, months later, anyone can see who signed what, when, and on which version."] },

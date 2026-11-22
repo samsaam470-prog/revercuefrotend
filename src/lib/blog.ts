@@ -13,7 +13,7 @@ const BASE_POSTS: BlogPost[] = [
     title: "How to get a contract signed online: six workflows, compared",
     excerpt:
       "Typed name, DocuSign, Dropbox Sign, Adobe, PandaDoc, SignWell — what each workflow actually asks of you and the client, and when a plain link is enough.",
-    date: "2026-11-18",
+    date: "2026-11-22",
     readMinutes: 9,
     body: [
       {
@@ -91,7 +91,7 @@ const BASE_POSTS: BlogPost[] = [
     title: "The thread is the product",
     excerpt:
       "A proposal in one app, a contract in another, an invoice in a third. The context is what gets lost.",
-    date: "2026-11-16",
+    date: "2026-11-22",
     readMinutes: 7,
     body: [
       {
@@ -138,7 +138,7 @@ const BASE_POSTS: BlogPost[] = [
     title: "Links, not PDFs",
     excerpt:
       "A PDF is a dead file. A link can tell you whether the client read the scope, which package they picked, and what they asked before saying yes.",
-    date: "2026-11-16",
+    date: "2026-11-22",
     readMinutes: 6,
     body: [
       {
@@ -177,7 +177,7 @@ const BASE_POSTS: BlogPost[] = [
     title: "Patterns, not magic",
     excerpt:
       "The suggestions run on counting and arithmetic, not a model. Here is exactly what that means, and why the honesty is the feature.",
-    date: "2026-11-16",
+    date: "2026-11-22",
     readMinutes: 6,
     body: [
       {
@@ -214,7 +214,7 @@ const BASE_POSTS: BlogPost[] = [
     title: "The client record builds itself",
     excerpt:
       "The CRM is where the thread lands. You should not have to maintain a second database of things you already sent.",
-    date: "2026-11-16",
+    date: "2026-11-22",
     readMinutes: 6,
     body: [
       {
@@ -251,7 +251,7 @@ const BASE_POSTS: BlogPost[] = [
     title: "What a proposal is actually for",
     excerpt:
       "Not to look professional. To move a decision. Everything else — the cover, the fonts, the length — is in service of that one job.",
-    date: "2026-11-16",
+    date: "2026-11-22",
     readMinutes: 6,
     body: [
       {

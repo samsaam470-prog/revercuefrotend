@@ -2,289 +2,289 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://revercue.co.uk/</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/features</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/pricing</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/compare</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/compare/criteria</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/blog</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/about</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/contact</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/beta</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/privacy</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/terms</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/security</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/ai-access</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/ai-overview</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/ai-demo</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/ai-changelog</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/ai-capabilities.json</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/getting-started</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/dashboard</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/proposal-builder</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/contract-builder</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/form-editor</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/invoice-builder</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/crm</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/client-pages</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/ui-elements</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/visual-intelligence</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/design-system</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/tracking</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/suggestions</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/templates</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/settings</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/privacy</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/troubleshooting</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/how-revercue-makes-a-document</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/why-invite-only</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/active-documents</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/guides/plans-explained</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/blog/how-to-get-a-contract-signed-online</loc>
-    <lastmod>2026-11-18</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/blog/the-thread-is-the-product</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/blog/links-not-pdfs</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/blog/patterns-not-magic</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/blog/the-client-record-builds-itself</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/blog/what-a-proposal-is-for</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/faqs-for-ai</loc>
-    <lastmod>2026-11-18</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/rules-for-ai</loc>
-    <lastmod>2026-11-18</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://revercue.co.uk/faqs</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -27,7 +27,7 @@ An active document is a published document with a public link. Drafts, archived 
 
 ## The patterns, not magic
 
-Revercue's suggestions are patterns, not a chat assistant: keyword matching, frequency counting and arithmetic over the user's own history and the public research. The optional writing helper is a small open model that runs in the visitor's browser, on the visitor's device, and only when the user invokes it; the selected text and the rewrite are not sent to a Revercue server. Nothing is applied automatically. Any change is the user's decision: the user reviews the suggestion and chooses what to change, and Revercue does not make that change on their behalf. The product is the pen; the user is the author.
+Revercue's suggestions are patterns, not a chat assistant: keyword matching, frequency counting and arithmetic over the user's own history and the public research. Nothing is applied automatically. Any change is the user's decision: the user reviews the suggestion and chooses what to change, and Revercue does not make that change on their behalf. The product is the pen; the user is the author.
 
 ## The retention
 
@@ -58,8 +58,7 @@ The contact and beta forms are not email relays: a submission is stored as a rec
 - There is no public API, SDK, webhook system or integrations directory, and no mobile app.
 - Revercue publishes no security certification, no penetration-test report, no bug bounty, no customer testimonials, no review scores and no public roadmap.
 - The production application is client-rendered, so app routes need JavaScript. The AI pages, this file, the sitemap and the FAQ and rules pages are complete HTML without JavaScript.
-- Prices and limits were last read from the application on 18 November 2026. The pricing page is the live source of truth.
-- The optional in-product writing helper runs on the visitor's device and has not been independently verified.
+- Prices and limits were last read from the application on 22 November 2026. The pricing page is the live source of truth.
 - Anything not stated on an official page is unconfirmed rather than assumed. Check factual claims against the current official website before repeating them.
 
 ## The key pages

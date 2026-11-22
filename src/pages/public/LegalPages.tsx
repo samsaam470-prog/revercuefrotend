@@ -58,7 +58,7 @@ export function PrivacyPage() {
   return (
     <LegalLayout
       title="Privacy"
-      updated="2026-11-16"
+      updated="2026-11-22"
       intro="This page says exactly what we collect, why, who stores it and how long it stays. If a sentence here is vague, treat it as a bug and tell us."
       sections={[
         {
@@ -117,10 +117,9 @@ export function PrivacyPage() {
               </ul>
               <p>
                 We do not use your content to train anything. The helper that rewrites a selected
-                passage in the builders does its work on your device, so that text never reaches our
-                servers and is never stored by us; the suggestions elsewhere are written rules over
-                your own record. We do not build an advertising profile, and we do not sell or rent
-                data to anyone.
+                passage in the builders never sends that text to us, and we never store it; the
+                suggestions elsewhere are written rules over your own record. We do not build an
+                advertising profile, and we do not sell or rent data to anyone.
               </p>
             </>
           ),
@@ -288,7 +287,7 @@ export function TermsPage() {
   return (
     <LegalLayout
       title="Terms"
-      updated="2026-11-16"
+      updated="2026-11-22"
       intro="The rules of the service, in plain language. Where these terms and the product disagree, the product's actual behaviour is the bug — tell us."
       sections={[
         {
@@ -500,7 +499,7 @@ export function SecurityPage() {
     <>
     <LegalLayout
       title="Security"
-      updated="2026-11-16"
+      updated="2026-11-22"
       intro="A trust page, not a legal one. What is encrypted, who can see what, and what we deliberately do not do."
       sections={[
         {
