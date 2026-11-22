@@ -249,8 +249,8 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
         note: "A branded portal where clients see files, invoices and messages.",
       },
       "time-tracking": {
-        rating: "no",
-        note: "No real billable-hours tracking; the product is not built for hourly work.",
+        rating: "partial",
+        note: "A project time tracker with manual entries and billable flags that can be converted into an invoice; no desktop stopwatch.",
       },
       "team-collaboration": {
         rating: "yes",
@@ -528,7 +528,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "proposals-contracts": {
         rating: "partial",
-        note: "Docs or Word plus an e-signature add-on; the signature is a separate purchase.",
+        note: "Google Docs includes e-signature on supported plans; Microsoft 365 eSignature is a metered add-on at about $2 per request.",
       },
       "client-portal": {
         rating: "no",

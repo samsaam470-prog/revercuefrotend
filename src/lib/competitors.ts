@@ -21,7 +21,7 @@ const BASE_COMPETITORS: Competitor[] = [
     name: "Bonsai",
     kind: "Freelancer suite",
     summary:
-      "Proposals, contracts, invoices, accounting and a light CRM for freelancers. The thread is mostly there; the documents are still documents.",
+      "Proposals, contracts, invoices, expense tracking and a light CRM for freelancers. The thread is mostly there; the documents are still documents.",
     website: "https://www.hellobonsai.com",
     intro:
       "Bonsai is one of the closest products to Revercue on paper: a freelancer suite that covers proposals, contracts, invoices and a client list. The difference is not the list of features. It is what happens between them.",
@@ -266,7 +266,7 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The money and the paperwork",
       paragraphs: [
-        "Bonsai follows the invoice further than Revercue does. It adds accounting, expense tracking and tax-oriented features, so the same subscription can hold the money side of a freelance business, and an accountant can be handed a report instead of a folder of PDFs. That is a genuine advantage, and it is the reason many freelancers choose a suite in the first place.",
+        "Bonsai follows the invoice further than Revercue does. It adds expense and income tracking, a Bonsai Tax add-on for US filers, and sync to QuickBooks or Xero, so an accountant can be handed a report instead of a folder of PDFs. It is not a full double-entry ledger. That is a genuine advantage for some freelancers, and the reason many choose a suite in the first place.",
         "Revercue stops at the invoice and is explicit about it. The invoice has a payment arrangement, a proof upload and a confirmed state, and then the money lives in whichever tool you already use for money. If you want the accounting inside the same app, Bonsai is the better fit; if you already have an accountant and a bank feed, the extra module is weight you pay for monthly.",
       ],
     },
