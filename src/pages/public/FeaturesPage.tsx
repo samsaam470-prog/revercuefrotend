@@ -14,6 +14,7 @@ import {
 import { CodeVisual, type VisualName } from "../../components/visuals";
 import { faqsByGroup } from "../../lib/faqs";
 import { FAQItem } from "../../components/shared/FAQItem";
+import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 interface Section {
   id: string;
@@ -255,9 +256,9 @@ export function FeaturesPage() {
                     </div>
                   ))}
                 </div>
-                <Link to="/signup" className="btn btn-secondary btn-sm mt-6">
+                <AuthActionStart className="btn btn-secondary btn-sm mt-6">
                   Start Free
-                </Link>
+                </AuthActionStart>
               </div>
               <div style={{ direction: "ltr" }}>
                 <CodeVisual name={section.visual} />

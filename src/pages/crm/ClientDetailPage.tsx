@@ -546,6 +546,40 @@ export function ClientDetailPage() {
             rows={5}
             helper="The gist is enough. You don't need to paste the whole message."
           />
+          <div className="inline">
+            {client.phone && (
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={() =>
+                  window.open(
+                    `https://wa.me/${client.phone!.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(message)}`,
+                    "_blank",
+                    "noopener,noreferrer",
+                  )
+                }
+                disabled={!message.trim()}
+              >
+                Open in WhatsApp
+              </button>
+            )}
+            {client.email && (
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={() =>
+                  window.open(
+                    `mailto:${encodeURIComponent(client.email)}?body=${encodeURIComponent(message)}`,
+                    "_blank",
+                    "noopener,noreferrer",
+                  )
+                }
+                disabled={!message.trim()}
+              >
+                Open in Email
+              </button>
+            )}
+          </div>
           <Input
             id="comm-time"
             label="Estimated time spent"

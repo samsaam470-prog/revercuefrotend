@@ -15,8 +15,11 @@ export interface OnboardingProfile {
 }
 
 export const onboardingApi = {
-  step1: (account_type: AccountType) =>
-    api.patch<{ success: true; onboarding_step: number }>("/api/onboarding/step-1", { account_type }),
+  step1: (account_type: AccountType, email?: string) =>
+    api.patch<{ success: true; onboarding_step: number }>("/api/onboarding/step-1", {
+      account_type,
+      ...(email ? { email } : {}),
+    }),
 
   step2: (profile: OnboardingProfile) =>
     api.patch<{ success: true; onboarding_step: number }>("/api/onboarding/step-2", profile),

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Logo } from "../shared/Logo";
+import { AuthActionStart } from "../auth/AuthActionStart";
 
 const LINKS = [
   { to: "/features", label: "Features" },
@@ -56,9 +57,9 @@ export function PublicHeader() {
           <Link to="/login" className="btn btn-ghost btn-sm">
             Log in
           </Link>
-          <Link to="/signup" className={`btn btn-sm ${isHome ? "btn-secondary" : "btn-primary"}`}>
+          <AuthActionStart className={`btn btn-sm ${isHome ? "btn-secondary" : "btn-primary"}`}>
             Start Free
-          </Link>
+          </AuthActionStart>
           <button
             type="button"
             className="btn-icon menu-btn"
@@ -81,9 +82,9 @@ export function PublicHeader() {
             <Link to="/login" className="btn btn-secondary" onClick={() => setOpen(false)}>
               Log in
             </Link>
-            <Link to="/signup" className="btn btn-primary" onClick={() => setOpen(false)}>
+            <AuthActionStart className="btn btn-primary" onClick={() => setOpen(false)}>
               Start Free
-            </Link>
+            </AuthActionStart>
           </div>
         </div>
       )}

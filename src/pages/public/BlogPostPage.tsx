@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { BLOG_POSTS, postBySlug } from "../../lib/blog";
 import { formatDate } from "../../lib/formatters";
 import { ProductCover, blogVisual } from "../../components/visuals/ProductCover";
+import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 export function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -76,9 +77,9 @@ export function BlogPostPage() {
             <p className="muted" style={{ fontSize: 14, marginBottom: 16 }}>
               Start on the Free plan and see whether the thread fits how you already work.
             </p>
-            <Link to="/signup" className="btn btn-primary">
+            <AuthActionStart className="btn btn-primary">
               Start Free
-            </Link>
+            </AuthActionStart>
           </div>
 
           <section className="section" style={{ marginTop: 48 }}>

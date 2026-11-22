@@ -3,6 +3,7 @@ import { CodeVisual } from "../../components/visuals";
 import { ProductCover } from "../../components/visuals/ProductCover";
 import { GUIDES, guideBySlug } from "../../lib/guides";
 import { formatDate } from "../../lib/formatters";
+import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 export function GuideDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -76,9 +77,9 @@ export function GuideDetailPage() {
             Free plan. No credit card. Two minutes to set up.
           </p>
           <div className="inline">
-            <Link to="/signup" className="btn btn-primary">
+            <AuthActionStart className="btn btn-primary">
               Start Free
-            </Link>
+            </AuthActionStart>
             <Link to="/pricing" className="btn btn-secondary">
               See Pricing
             </Link>

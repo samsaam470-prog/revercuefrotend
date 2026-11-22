@@ -546,6 +546,8 @@ export function FormEditorPage() {
         title="Your form is ready."
         url={share?.url || ""}
         defaultMessage={`Hi ${form?.client_name || "there"}, I need a few details before we start. It takes about 5 minutes.`}
+        clientEmail={form?.client_email}
+        clientPhone={form?.client_phone}
         onDone={async () => {
           if (id) await formsApi.share(id, "manual");
           setShare(null);

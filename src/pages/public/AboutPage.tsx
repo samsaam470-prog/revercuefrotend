@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 const BELIEFS = [
   "The thread matters more than any single document.",
@@ -113,9 +114,9 @@ export function AboutPage() {
         <p className="muted" style={{ fontSize: 14, marginBottom: 16 }}>
           Five active documents, one-month retention, the whole thread. No credit card.
         </p>
-        <Link to="/signup" className="btn btn-primary">
+        <AuthActionStart className="btn btn-primary">
           Start Free
-        </Link>
+        </AuthActionStart>
       </div>
     </div>
   );

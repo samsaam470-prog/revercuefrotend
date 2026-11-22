@@ -383,6 +383,8 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
         url={share?.url || ""}
         defaultMessage={`Hi ${proposal.client_name || "there"}, here is the proposal we discussed. Let me know if you have any questions.`}
         password={proposal.password_protected ? "The password you set" : undefined}
+        clientEmail={proposal?.client_email}
+        clientPhone={proposal?.client_phone}
         onDone={async () => {
           await proposalsApi.share(id, "manual");
           setShare(null);

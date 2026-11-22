@@ -35,6 +35,7 @@ function InvoiceRequirementForm() {
   const [clientId, setClientId] = useState("");
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
+  const [clientPhone, setClientPhone] = useState("");
   const [contractId, setContractId] = useState("");
   const [items, setItems] = useState<LineItem[]>([{ description: "", quantity: 1, unit_price: 0 }]);
   const [currency, setCurrency] = useState("USD");
@@ -65,7 +66,7 @@ function InvoiceRequirementForm() {
 
   const valid =
     (mode === "existing" ? Boolean(clientId) : Boolean(clientName.trim())) &&
-    Boolean(clientEmail.trim()) &&
+    (Boolean(clientEmail.trim()) || Boolean(clientPhone.trim())) &&
     items.some((item) => item.description && item.unit_price >= 0) &&
     dueDate &&
     (arrangement === "link" ? Boolean(link) : Boolean(details.bank_name || details.iban || details.account_number));
@@ -74,7 +75,7 @@ function InvoiceRequirementForm() {
     const next: Record<string, string> = {};
     if (mode === "existing" && !clientId) next.client = "Choose a client.";
     if (mode === "new" && !clientName.trim()) next.clientName = "Enter the client's name.";
-    if (!clientEmail.trim()) next.clientEmail = "Enter the client's email.";
+    if (!clientEmail.trim() && !clientPhone.trim()) next.clientEmail = "Enter the client's email or phone.";
     if (!items.some((item) => item.description)) next.items = "Add at least one line item.";
     if (!dueDate) next.due = "Pick a due date.";
     if (arrangement === "link" && !link) next.arrangement = "Add the payment link.";
@@ -91,7 +92,8 @@ function InvoiceRequirementForm() {
       const response = await invoicesApi.draft({
         client_id: mode === "existing" ? clientId : undefined,
         client_name: mode === "new" ? clientName.trim() : undefined,
-        client_email: clientEmail.trim(),
+        client_email: clientEmail.trim() || undefined,
+        client_phone: clientPhone.trim() || undefined,
         linked_contract_id: contractId || undefined,
         line_items: items.filter((item) => item.description),
         currency,
@@ -146,7 +148,7 @@ function InvoiceRequirementForm() {
               onChange={(value) => {
                 setClientId(value);
                 const found = clients.data?.data.find((client) => client.id === value);
-                if (found) setClientEmail(found.email);
+                if (found) { setClientEmail(found.email); setClientPhone(found.phone || ""); }
               }}
               error={errors.client}
               required
@@ -169,7 +171,14 @@ function InvoiceRequirementForm() {
             onChange={setClientEmail}
             error={errors.clientEmail}
             helper="Where the invoice is delivered."
-            required
+          />
+          <Input
+            id="invoice-client-phone"
+            label="Client phone (optional)"
+            type="tel"
+            value={clientPhone}
+            onChange={setClientPhone}
+            helper="WhatsApp number, with country code. Used to share the document."
           />
           <Select
             id="invoice-contract"
@@ -716,6 +725,8 @@ function InvoiceEditor({ id }: { id: string }) {
         title="Your invoice is ready."
         url={share?.url || ""}
         defaultMessage={`Hi ${invoice.client_name || "there"}, here is the invoice for the project. You can pay via the link inside.`}
+        clientEmail={invoice?.client_email}
+        clientPhone={invoice?.client_phone}
         onDone={async () => {
           await invoicesApi.share(id, "manual");
           setShare(null);

@@ -23,7 +23,7 @@ export interface AuthState {
   /** The API could not be reached. The session is kept, not cleared. */
   offline: boolean;
   isAuthenticated: boolean;
-  isEmailVerified: boolean;
+  onboardingDestination: string | null;
   setSession: (token: string, user?: User) => void;
   signIn: () => Promise<void>;
   signOut: () => Promise<void>;
@@ -54,6 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [offline, setOffline] = useState(false);
+  const [onboardingDestination, setOnboardingDestination] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const tokenRef = useRef<string | null>(null);
   const navigate = useNavigate();
@@ -82,6 +83,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setToken(null);
     tokenRef.current = null;
     setUser(null);
+    setOnboardingDestination(null);
     setLoading(false);
   }, []);
 
@@ -111,6 +113,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const response = await authApi.me(current);
       setUser(response.user);
+      setOnboardingDestination(response.onboarding?.destination ?? null);
       setOffline(false);
       return response.user;
     } catch (cause) {
@@ -189,8 +192,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       token,
       loading: loading || sdkIsLoading,
       offline,
+      onboardingDestination,
       isAuthenticated: Boolean(sdkIsAuthenticated && user),
-      isEmailVerified: Boolean(user?.email_verified),
       setSession,
       signIn,
       signOut,
@@ -204,6 +207,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       sdkIsLoading,
       offline,
       sdkIsAuthenticated,
+      onboardingDestination,
       setSession,
       signIn,
       signOut,

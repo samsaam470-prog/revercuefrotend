@@ -13,7 +13,7 @@ import { isOnboardingComplete, onboardingResumePath } from "../../lib/onboarding
  * one-time code is never consumed by a spinner or a redirect.
  */
 export function AppLayout() {
-  const { user, loading, offline } = useAuth();
+  const { user, loading, offline, onboardingDestination } = useAuth();
   const location = useLocation();
 
   const searchParams = new URLSearchParams(location.search);
@@ -44,7 +44,7 @@ export function AppLayout() {
    * backend reports, so a refresh, a new tab or a manual URL cannot skip it.
    */
   if (!isOnboardingComplete(user) && !location.pathname.startsWith("/onboarding")) {
-    return <Navigate to={onboardingResumePath(user)} replace />;
+    return <Navigate to={onboardingDestination || onboardingResumePath(user)} replace />;
   }
 
   return (

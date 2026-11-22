@@ -6,6 +6,7 @@ import {
   RATING_LABEL,
   type Rating,
 } from "../../lib/criteria";
+import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 function RatingChip({ rating }: { rating: Rating }) {
   return (
@@ -102,9 +103,9 @@ export function CompareCriteriaPage() {
             the contract, the requirements, the invoice and the record that remembers all four.
           </p>
           <div className="inline mt-6">
-            <Link to="/signup" className="btn btn-primary">
+            <AuthActionStart className="btn btn-primary">
               Start Free
-            </Link>
+            </AuthActionStart>
             <Link to="/pricing" className="btn btn-secondary">
               See Pricing
             </Link>

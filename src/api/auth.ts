@@ -5,10 +5,6 @@ export interface AuthResponse {
   success: boolean;
   token?: string;
   user?: User;
-  requires_2fa?: boolean;
-  pre_2fa_token?: string;
-  email_verified?: boolean;
-  cooldown_seconds?: number;
 }
 
 /**
@@ -23,7 +19,10 @@ export interface AuthResponse {
  */
 export const authApi = {
   me: (token?: string | null) =>
-    api.get<{ user: User }>("/api/auth/me", { token, suppressUnauthorized: true }),
+    api.get<{
+      user: User;
+      onboarding?: { step: number; required: boolean; complete: boolean; next_step: number; destination: string };
+    }>("/api/auth/me", { token, suppressUnauthorized: true }),
 
   logout: () => api.post<{ success: true }>("/api/auth/logout", undefined, {
     suppressUnauthorized: true,

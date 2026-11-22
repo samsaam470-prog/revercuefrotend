@@ -32,8 +32,6 @@ const PRIVATE_ROUTES = [
   "/onboarding",
   "/callback",
   "/login",
-  "/signup",
-  "/forgot-password",
   "/p",
   "/c",
   "/i",
@@ -131,14 +129,6 @@ const ROUTES: Record<string, RouteMeta> = {
   "/login": {
     title: "Log in — Revercue",
     description: "Log in to your Revercue account.",
-  },
-  "/signup": {
-    title: "Create your account — Revercue",
-    description: "Create a free Revercue account. No credit card required.",
-  },
-  "/forgot-password": {
-    title: "Reset your password — Revercue",
-    description: "Reset the password for your Revercue account.",
   },
   "/faqs": {
     title: "Frequently asked questions — Revercue",

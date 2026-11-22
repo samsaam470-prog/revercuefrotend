@@ -9,9 +9,7 @@ const NO_BAND = [
   "/security",
   "/contact",
   "/beta",
-  "/signup",
   "/login",
-  "/forgot-password",
 ];
 
 export function PublicLayout() {

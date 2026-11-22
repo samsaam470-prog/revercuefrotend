@@ -6,6 +6,7 @@ export interface ContractDraftPayload {
   client_id?: string;
   client_name?: string;
   client_email?: string;
+  client_phone?: string;
   linked_proposal_id?: string;
   title: string;
   scope: string;

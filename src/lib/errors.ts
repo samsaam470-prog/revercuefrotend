@@ -18,8 +18,10 @@ const MESSAGES: Record<string, string> = {
   invalid_google_token: "Google sign-in failed. Try again.",
   archive_limit_reached: "You reached your archive limit.",
   network_error: "You appear to be offline. Check your connection.",
-  email_verification_required:
-    "Verify your email address with AuthAction, then sign in again.",
+  email_in_use: "That email is already used by another Revercue account. Try another.",
+  account_conflict: "That account conflicts with an existing one. Contact support.",
+  identity_orphaned: "Your identity is no longer linked to a Revercue account. Contact support.",
+  identity_store_unavailable: "Revercue is temporarily unavailable. Try again shortly.",
 };
 
 export function errorMessage(code: string | undefined, fallback?: string): string {

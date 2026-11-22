@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { AuthActionStart } from "../auth/AuthActionStart";
 
 export interface StartFreeBandProps {
   headline?: string;
@@ -15,9 +16,9 @@ export function StartFreeBand({
         <h2 id="start-band-title">{headline}</h2>
         <p>{subtext}</p>
         <div className="band-actions">
-          <Link to="/signup" className="btn btn-primary">
+          <AuthActionStart className="btn btn-primary">
             Start Free
-          </Link>
+          </AuthActionStart>
           <Link to="/pricing" className="btn btn-secondary">
             See Pricing
           </Link>

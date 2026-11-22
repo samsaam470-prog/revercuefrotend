@@ -393,7 +393,7 @@ export const FAQS: Faq[] = [
     group: "email",
     question: "How does Revercue deliver email?",
     answer:
-      "Revercue sends its own transactional email for account, security and document notices. No separate activation is required. The newsletter is a separate opt-in, on the signup screen and in Settings → Notifications.",
+      "Revercue sends its own transactional email for account, security and document notices. Authentication, email verification and password resets are handled by AuthAction. The newsletter is a separate opt-in, in Settings → Notifications.",
   },
 
   {
@@ -663,14 +663,14 @@ export const FAQS: Faq[] = [
     group: "support",
     question: "How do I reset my password?",
     answer:
-      "On the Log In screen, click \"Forgot password?\" Enter your email. You will receive a reset code. Enter the code and set a new password. All other sessions are revoked.",
+      "Password resets are handled by AuthAction. Open the Log In screen, start the secure sign-in, then choose \"Forgot password?\" on AuthAction's page. If the address has an account, AuthAction sends the reset link itself. The email comes from AuthAction, not from Revercue. Your new password is set with AuthAction.",
   },
   {
     id: 95,
     group: "support",
     question: "How do I enable 2FA?",
     answer:
-      "Settings → Security → Two-factor authentication. Toggle it on. You will enter a 6-digit code from your email at every login. Turning it on or off requires your current password.",
+      "Two-factor authentication and any second factor are handled by AuthAction, not by Revercue. Manage them from your AuthAction account settings.",
   },
   {
     id: 96,

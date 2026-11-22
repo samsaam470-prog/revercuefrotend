@@ -7,6 +7,7 @@ import { faqsByGroup } from "../../lib/faqs";
 import { FAQItem } from "../../components/shared/FAQItem";
 import { WaitlistModal } from "../../components/shared/WaitlistModal";
 import type { PlanName } from "../../types";
+import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 const ROWS: { label: string; key: keyof (typeof PLANS)[0]["limits"] | "password" | "interest" | "suggestions" | "brand" | "thankyou" }[] = [
   { label: "Active documents", key: "active_documents" },
@@ -110,9 +111,9 @@ export function PricingPage() {
               <div className="stack-2">
                 <span className="badge badge-muted">{plan.statusLabel}</span>
                 {plan.id === "free" ? (
-                  <Link to="/signup" className="btn btn-primary btn-sm btn-full">
+                  <AuthActionStart className="btn btn-primary btn-sm btn-full">
                     Start free
-                  </Link>
+                  </AuthActionStart>
                 ) : (
                   <button
                     type="button"

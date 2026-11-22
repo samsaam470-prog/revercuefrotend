@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Building2, User } from "lucide-react";
 import { Button } from "../../components/ui/Button";
+import { Input } from "../../components/ui/Input";
 import { onboardingApi } from "../../api/onboarding";
 import { useAuth } from "../../hooks/useAuth";
 import { useToast } from "../../hooks/useToast";
@@ -12,6 +13,7 @@ import type { AccountType } from "../../types";
 
 export function OnboardingStep1Page() {
   const [choice, setChoice] = useState<AccountType | null>(null);
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -27,10 +29,14 @@ export function OnboardingStep1Page() {
 
   const submit = async () => {
     if (!choice) return;
+    if (user?.email_missing && !email.trim()) {
+      setError("Enter the email address for this account.");
+      return;
+    }
     setLoading(true);
     setError("");
     try {
-      await onboardingApi.step1(choice);
+      await onboardingApi.step1(choice, user?.email_missing ? email.trim() || undefined : undefined);
       await refresh();
       navigate("/onboarding/step-2");
     } catch (cause) {
@@ -55,6 +61,20 @@ export function OnboardingStep1Page() {
       <p className="muted" style={{ marginBottom: 24 }}>
         It changes the profile fields and the plan recommendation. You can change it later.
       </p>
+
+      {user?.email_missing && (
+        <div style={{ marginBottom: 24 }}>
+          <Input
+            id="onboarding-email"
+            label="Email address"
+            type="email"
+            value={email}
+            onChange={setEmail}
+            required
+            helper="AuthAction did not provide an email for this account. Add one so we can send documents and receipts."
+          />
+        </div>
+      )}
 
       <div className="choice-grid">
         <button

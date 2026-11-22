@@ -12,12 +12,14 @@ export interface ShareModalProps {
   url: string;
   defaultMessage: string;
   password?: string;
+  clientEmail?: string;
+  clientPhone?: string;
   onDone: () => void;
 }
 
 const CHANNELS = ["WhatsApp", "Email", "Instagram", "Facebook", "X", "Threads", "Copy Link"];
 
-export function ShareModal({ open, onClose, title, url, defaultMessage, password, onDone }: ShareModalProps) {
+export function ShareModal({ open, onClose, title, url, defaultMessage, password, clientEmail, clientPhone, onDone }: ShareModalProps) {
   const [message, setMessage] = useState(defaultMessage);
   const [copied, setCopied] = useState("");
   const toast = useToast();
@@ -47,9 +49,12 @@ export function ShareModal({ open, onClose, title, url, defaultMessage, password
       return;
     }
     const text = `${message}\n${url}`;
+    const phoneDigits = (clientPhone || "").replace(/[^0-9]/g, "");
+    const waBase = phoneDigits ? `https://wa.me/${phoneDigits}` : "https://wa.me/";
+    const emailBase = clientEmail ? `mailto:${encodeURIComponent(clientEmail)}` : "mailto:";
     const targets: Record<string, string> = {
-      WhatsApp: `https://wa.me/?text=${encodeURIComponent(text)}`,
-      Email: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`,
+      WhatsApp: `${waBase}?text=${encodeURIComponent(text)}`,
+      Email: `${emailBase}?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`,
       Facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
       X: `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}&url=${encodeURIComponent(url)}`,
       Threads: `https://www.threads.net/intent/post?text=${encodeURIComponent(text)}`,

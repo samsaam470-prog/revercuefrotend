@@ -38,6 +38,7 @@ export function ProposalRequirementForm() {
   const [clientId, setClientId] = useState("");
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
+  const [clientPhone, setClientPhone] = useState("");
   const [industry, setIndustry] = useState("");
   const [otherIndustry, setOtherIndustry] = useState("");
   const [service, setService] = useState(SERVICE_OPTIONS[0]);
@@ -111,7 +112,7 @@ export function ProposalRequirementForm() {
     const next: Record<string, string> = {};
     if (mode === "existing" && !clientId) next.client = "Choose a client.";
     if (mode === "new" && !clientName.trim()) next.clientName = "Enter the client's name.";
-    if (!clientEmail.trim()) next.clientEmail = "Enter the client's email.";
+    if (!clientEmail.trim() && !clientPhone.trim()) next.clientEmail = "Enter the client's email or phone.";
     if (!industry.trim()) next.industry = "Pick an industry, or type your own.";
     if (!service.trim()) next.service = "Pick the service you are selling.";
     if (problem.trim().length < 10) next.problem = "One or two sentences, at least 10 characters.";
@@ -129,7 +130,8 @@ export function ProposalRequirementForm() {
       const response = await proposalsApi.draft({
         client_id: mode === "existing" ? clientId : undefined,
         client_name: mode === "new" ? clientName.trim() : undefined,
-        client_email: clientEmail.trim(),
+        client_email: clientEmail.trim() || undefined,
+        client_phone: clientPhone.trim() || undefined,
         title: `${clientLabel} — Proposal`,
         industry: industry === "Other" && otherIndustry.trim() ? otherIndustry.trim() : industry,
         service,
@@ -256,7 +258,17 @@ export function ProposalRequirementForm() {
                 ? "The CRM record is created from it."
                 : "Confirm the address this proposal is sent to."
             }
-            required
+          />
+          <Input
+            id="req-client-phone"
+            label="Client phone (optional)"
+            type="tel"
+            value={clientPhone}
+            onChange={(value) => {
+              setClientPhone(value);
+              setErrors((current) => ({ ...current, clientEmail: "" }));
+            }}
+            helper="WhatsApp number, with country code. Used to share the document."
           />
         </div>
 

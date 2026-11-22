@@ -1,6 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { COMPETITORS, competitorBySlug } from "../../lib/competitors";
+import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 export function CompareDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -87,9 +88,9 @@ export function CompareDetailPage() {
       </article>
 
       <div className="inline mt-8">
-        <Link to="/signup" className="btn btn-primary">
+        <AuthActionStart className="btn btn-primary">
           Start Free
-        </Link>
+        </AuthActionStart>
         <Link to="/pricing" className="btn btn-secondary">
           See Pricing
         </Link>

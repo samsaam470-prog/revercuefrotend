@@ -72,6 +72,7 @@ function ContractRequirementForm() {
   const [clientId, setClientId] = useState("");
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
+  const [clientPhone, setClientPhone] = useState("");
   const [proposalId, setProposalId] = useState("");
   const [scope, setScope] = useState("");
   const [amount, setAmount] = useState("");
@@ -95,7 +96,7 @@ function ContractRequirementForm() {
 
   const valid =
     (mode === "existing" ? Boolean(clientId) : Boolean(clientName.trim())) &&
-    Boolean(clientEmail.trim()) &&
+    (Boolean(clientEmail.trim()) || Boolean(clientPhone.trim())) &&
     scope.trim() &&
     amount &&
     revisions.trim() &&
@@ -106,7 +107,7 @@ function ContractRequirementForm() {
     const next: Record<string, string> = {};
     if (mode === "existing" && !clientId) next.client = "Choose a client.";
     if (mode === "new" && !clientName.trim()) next.clientName = "Enter the client's name.";
-    if (!clientEmail.trim()) next.clientEmail = "Enter the client's email.";
+    if (!clientEmail.trim() && !clientPhone.trim()) next.clientEmail = "Enter the client's email or phone.";
     if (!scope.trim()) next.scope = "Describe the scope.";
     if (!amount) next.amount = "Enter the amount.";
     if (!revisions.trim()) next.revisions = "State the revision policy.";
@@ -123,7 +124,8 @@ function ContractRequirementForm() {
       const response = await contractsApi.draft({
         client_id: mode === "existing" ? clientId : undefined,
         client_name: mode === "new" ? clientName.trim() : undefined,
-        client_email: clientEmail.trim(),
+        client_email: clientEmail.trim() || undefined,
+        client_phone: clientPhone.trim() || undefined,
         linked_proposal_id: proposalId || undefined,
         title: `Contract — ${clientLabel}`,
         scope,
@@ -178,7 +180,7 @@ function ContractRequirementForm() {
               onChange={(value) => {
                 setClientId(value);
                 const found = clients.data?.data.find((client) => client.id === value);
-                if (found) setClientEmail(found.email);
+                if (found) { setClientEmail(found.email); setClientPhone(found.phone || ""); }
               }}
               error={errors.client}
               required
@@ -201,7 +203,14 @@ function ContractRequirementForm() {
             onChange={setClientEmail}
             error={errors.clientEmail}
             helper="Where the contract is sent for signature."
-            required
+          />
+          <Input
+            id="contract-client-phone"
+            label="Client phone (optional)"
+            type="tel"
+            value={clientPhone}
+            onChange={setClientPhone}
+            helper="WhatsApp number, with country code. Used to share the document."
           />
           <Select
             id="contract-proposal"
@@ -582,6 +591,8 @@ function ContractCanvas({ id }: { id: string }) {
         title="Your contract is ready."
         url={share?.url || ""}
         defaultMessage={`Hi ${contract.client_name || "there"}, here is the contract for the project. Review it and let me know if you have any questions.`}
+        clientEmail={contract?.client_email}
+        clientPhone={contract?.client_phone}
         onDone={async () => {
           await contractsApi.share(id, "manual");
           setShare(null);

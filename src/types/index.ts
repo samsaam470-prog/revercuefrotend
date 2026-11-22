@@ -17,6 +17,7 @@ export type DocStatus =
 export interface User {
   id: string;
   email: string;
+  email_missing?: boolean;
   name?: string;
   plan: PlanName;
   onboarding_step: number;
@@ -51,6 +52,8 @@ export interface DocumentSummary {
   title: string;
   client_id?: string;
   client_name?: string;
+  client_email?: string;
+  client_phone?: string;
   status: DocStatus;
   public_id?: string;
   total_time_spent_seconds?: number;

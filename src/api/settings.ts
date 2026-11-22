@@ -64,8 +64,6 @@ export const settingsApi = {
 
   changePassword: (body: { current_password: string; new_password: string }) =>
     api.post<{ success: true }>("/api/settings/security/change-password", body),
-  toggle2fa: (body: { enabled: boolean; current_password: string }) =>
-    api.post<{ success: true }>("/api/settings/security/2fa", body),
   sessions: () => api.get<{ data: SessionRow[] }>("/api/settings/security/sessions"),
   logoutSession: (id: string) =>
     api.post<{ success: true }>(`/api/settings/security/sessions/${id}/logout`),

@@ -28,9 +28,7 @@ import {
 } from "./pages/public";
 import {
   CallbackPage,
-  ForgotPasswordPage,
   LoginPage,
-  SignupPage,
 } from "./pages/auth";
 import {
   OnboardingStep1Page,
@@ -116,9 +114,7 @@ export function App() {
 
       {/* auth */}
       <Route element={<AuthLayout />}>
-        <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         {/* The authorization response is completed here, never on a guarded route. */}
         <Route path="/callback" element={<CallbackPage />} />
       </Route>

@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { COMPETITORS } from "../../lib/competitors";
+import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 export function ComparePage() {
   return (
@@ -50,9 +51,9 @@ export function ComparePage() {
             already have an accounting tool, Revercue can sit next to it. The thread is the gap; the
             other tools are the rest.
           </p>
-          <Link to="/signup" className="btn btn-primary mt-6">
+          <AuthActionStart className="btn btn-primary mt-6">
             Start Free
-          </Link>
+          </AuthActionStart>
         </div>
       </section>
     </div>

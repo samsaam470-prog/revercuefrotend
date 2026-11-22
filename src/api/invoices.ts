@@ -6,6 +6,7 @@ export interface InvoiceDraftPayload {
   client_id?: string;
   client_name?: string;
   client_email?: string;
+  client_phone?: string;
   linked_contract_id?: string;
   line_items: LineItem[];
   currency: string;

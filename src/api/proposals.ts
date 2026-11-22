@@ -18,6 +18,7 @@ export interface RequirementPayload {
   client_id?: string;
   client_name?: string;
   client_email?: string;
+  client_phone?: string;
   title?: string;
   industry?: string;
   service?: string;

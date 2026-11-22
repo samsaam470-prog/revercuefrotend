@@ -5,6 +5,7 @@ import { Button } from "../../components/ui/Button";
 import { errorMessage } from "../../lib/errors";
 import { useAuth } from "../../hooks/useAuth";
 import { readReturnTo, rememberReturnTo } from "../../lib/authaction";
+import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 /**
  * Log in starts the AuthAction redirect on mount.
@@ -83,9 +84,9 @@ export function LoginPage() {
 
       <p className="auth-alt">
         New to Revercue?{" "}
-        <Link to={`/signup${returnTo ? `?returnTo=${encodeURIComponent(returnTo)}` : ""}`}>
+        <AuthActionStart className="btn btn-text">
           Create an account
-        </Link>
+        </AuthActionStart>
       </p>
     </div>
   );

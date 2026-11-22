@@ -12,6 +12,7 @@ import { CodeVisual } from "../../components/visuals";
 import { FAQItem } from "../../components/shared/FAQItem";
 import { FAQS } from "../../lib/faqs";
 import { PLANS, TAGLINE, THESIS } from "../../lib/constants";
+import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 const MODULES = [
   { icon: FileText, title: "Proposals", body: "Interactive links with packages, FAQs and questions." },
@@ -40,9 +41,9 @@ export function HomePage() {
           {"Proposal. Contract. Form. Invoice. Client. In one place, not five.\nInteractive links, not PDFs. The client record builds itself."}
         </p>
         <div className="hero-ctas">
-          <Link to="/signup" className="btn btn-primary btn-lg">
+          <AuthActionStart className="btn btn-primary btn-lg">
             Start Free
-          </Link>
+          </AuthActionStart>
           <Link to="/pricing" className="btn btn-secondary btn-lg">
             See Pricing
           </Link>

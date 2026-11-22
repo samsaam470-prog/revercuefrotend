@@ -472,8 +472,6 @@ function SecuritySection() {
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
-  const [twoFaPassword, setTwoFaPassword] = useState("");
-  const [twoFaModal, setTwoFaModal] = useState(false);
 
   const sessions = useQuery({ queryKey: ["settings", "sessions"], queryFn: () => settingsApi.sessions() });
 
@@ -496,23 +494,11 @@ function SecuritySection() {
       setConfirm("");
     } catch (cause) {
       const apiError = cause as ApiError;
-      setError(errorMessage(apiError.code, apiError.message));
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const toggle2fa = async () => {
-    setSaving(true);
-    try {
-      await settingsApi.toggle2fa({ enabled: !user?.two_factor_enabled, current_password: twoFaPassword });
-      await refresh();
-      setTwoFaModal(false);
-      setTwoFaPassword("");
-      toast.success(user?.two_factor_enabled ? "Two-factor turned off." : "Two-factor turned on.");
-    } catch (cause) {
-      const apiError = cause as ApiError;
-      toast.error(errorMessage(apiError.code, apiError.message));
+      if (apiError.code === "password_managed_by_authaction") {
+        setError("Your password is managed by AuthAction. Change it from your AuthAction account settings.");
+      } else {
+        setError(errorMessage(apiError.code, apiError.message));
+      }
     } finally {
       setSaving(false);
     }
@@ -568,26 +554,6 @@ function SecuritySection() {
 
       <div className="settings-card">
         <div className="between">
-          <div>
-            <h2>Two-factor authentication</h2>
-            <p className="muted" style={{ fontSize: 14 }}>
-              A six-digit code from your email at every login. Turning it on or off requires your
-              current password.
-            </p>
-          </div>
-          <Badge variant={user?.two_factor_enabled ? "green" : "muted"}>
-            {user?.two_factor_enabled ? "On" : "Off"}
-          </Badge>
-        </div>
-        <div>
-          <Button variant="secondary" onClick={() => setTwoFaModal(true)}>
-            {user?.two_factor_enabled ? "Turn off" : "Turn on"}
-          </Button>
-        </div>
-      </div>
-
-      <div className="settings-card">
-        <div className="between">
           <h2>Active sessions</h2>
           <Button
             variant="secondary"
@@ -630,33 +596,6 @@ function SecuritySection() {
           </div>
         ))}
       </div>
-
-      <Modal
-        open={twoFaModal}
-        onClose={() => setTwoFaModal(false)}
-        title={user?.two_factor_enabled ? "Turn off two-factor?" : "Turn on two-factor?"}
-        size="sm"
-        footer={
-          <>
-            <Button variant="ghost" onClick={() => setTwoFaModal(false)}>
-              Cancel
-            </Button>
-            <Button onClick={toggle2fa} loading={saving} disabled={!twoFaPassword}>
-              {user?.two_factor_enabled ? "Turn off" : "Turn on"}
-            </Button>
-          </>
-        }
-      >
-        <Input
-          id="twofa-password"
-          label="Current password"
-          type="password"
-          value={twoFaPassword}
-          onChange={setTwoFaPassword}
-          helper="Confirms it is you."
-          autoComplete="current-password"
-        />
-      </Modal>
     </div>
   );
 }
