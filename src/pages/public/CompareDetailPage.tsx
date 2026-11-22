@@ -38,6 +38,11 @@ export function CompareDetailPage() {
           {competitor.name} vs. Revercue
         </h1>
         <p className="lede">{competitor.summary}</p>
+        {competitor.website && (
+          <p className="caption">
+            Source: <a href={competitor.website} target="_blank" rel="noopener noreferrer">{competitor.website}</a>
+          </p>
+        )}
         <p className="caption">
           On the 13-point breakdown: {" "}
           <Link to="/compare/criteria">the same questions, answered for all eight platforms</Link>.

@@ -65,6 +65,11 @@ export function CompareCriteriaPage() {
             <p className="compare-kind">{platform.kind}</p>
             <h2>{platform.name}</h2>
             <p>{platform.summary}</p>
+            {platform.website && (
+              <p className="caption">
+                Source: <a href={platform.website} target="_blank" rel="noopener noreferrer">{platform.website}</a>
+              </p>
+            )}
             {platform.slug !== "revercue" && (
               <Link to={`/compare/${platform.slug}`} className="criteria-deep-link">
                 Read the full comparison <ArrowRight size={14} />

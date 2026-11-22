@@ -3,6 +3,7 @@ export interface Competitor {
   name: string;
   kind: string;
   summary: string;
+  website?: string;
   intro: string;
   sections: { heading: string; paragraphs: string[] }[];
   differences: string[];
@@ -21,6 +22,7 @@ const BASE_COMPETITORS: Competitor[] = [
     kind: "Freelancer suite",
     summary:
       "Proposals, contracts, invoices, accounting and a light CRM for freelancers. The thread is mostly there; the documents are still documents.",
+    website: "https://www.hellobonsai.com",
     intro:
       "Bonsai is one of the closest products to Revercue on paper: a freelancer suite that covers proposals, contracts, invoices and a client list. The difference is not the list of features. It is what happens between them.",
     sections: [
@@ -54,6 +56,7 @@ const BASE_COMPETITORS: Competitor[] = [
     kind: "Client flow for service businesses",
     summary:
       "Inquiry to booking to contract to payment, built for service businesses. Strong on the client experience, lighter on the requirement and the record.",
+    website: "https://www.honeybook.com",
     intro:
       "HoneyBook is built around the client journey: an inquiry form, a call, a proposal, a contract, an invoice, a payment. For service businesses with a repeatable sales motion, that flow is the product.",
     sections: [
@@ -87,6 +90,7 @@ const BASE_COMPETITORS: Competitor[] = [
     kind: "Client management with automation",
     summary:
       "Forms, proposals, contracts, invoices and workflow automation. Powerful if you enjoy building the machine; the thread is assembled by you.",
+    website: "https://www.dubsado.com",
     intro:
       "Dubsado is a client-management system for small service businesses. Its defining feature is automation: you build workflows that move a client from inquiry to contract to invoice with triggers and templates.",
     sections: [
@@ -120,6 +124,7 @@ const BASE_COMPETITORS: Competitor[] = [
     kind: "Freelancer workspace",
     summary:
       "Proposals, contracts, invoices, forms and a client portal for freelancers, with a writing helper. Close to the thread, with a different centre of gravity.",
+    website: "https://www.withmoxie.com",
     intro:
       "Moxie is a freelancer workspace: projects, proposals, contracts, invoices, forms and a client portal, with a helper that drafts and improves text. It is one of the few products that tries to cover the same span as Revercue.",
     sections: [
@@ -153,6 +158,7 @@ const BASE_COMPETITORS: Competitor[] = [
     kind: "All-in-one business workspace",
     summary:
       "Projects, tasks, proposals, invoices, forms and a CRM in one workspace. Broad by design; the thread is one module among many.",
+    website: "https://www.plutio.com",
     intro:
       "Plutio is an all-in-one workspace: projects and tasks, proposals, invoices, forms, a CRM, and a client portal. It is built for small teams that want one subscription instead of six.",
     sections: [
@@ -186,6 +192,7 @@ const BASE_COMPETITORS: Competitor[] = [
     kind: "All-in-one CRM and operations",
     summary:
       "CRM, projects, proposals, contracts, invoices and automation for small businesses. Built around the pipeline; the documents follow the deal.",
+    website: "https://www.agiled.app",
     intro:
       "Agiled is an all-in-one business platform: a CRM pipeline, projects and tasks, proposals, contracts, invoices, forms and automation. It is aimed at small businesses that want a single system for sales and delivery.",
     sections: [
@@ -219,6 +226,7 @@ const BASE_COMPETITORS: Competitor[] = [
     kind: "Documents and email",
     summary:
       "Docs or Word, Drive or OneDrive, Gmail or Outlook, Forms, Calendar. Free or near-free, universal, and completely manual between the pieces.",
+    website: "https://workspace.google.com",
     intro:
       "Most freelancers already have the thread — spread across Google Workspace or Microsoft 365. A proposal in Docs or Word, a contract in a PDF, a form in Google Forms or Microsoft Forms, an invoice in a template, and the client history in an inbox.",
     sections: [

@@ -43,7 +43,7 @@ const TITLES: Record<SettingsSection, { title: string; subtitle: string }> = {
   profile: { title: "Profile", subtitle: "Your details and the brand that appears on client pages." },
   appearance: { title: "Appearance", subtitle: "Dark, light, or follow your system. The choice stays on this device." },
   plan: { title: "Plan & Billing", subtitle: "Your plan, your usage and your payment history." },
-  security: { title: "Security", subtitle: "Password, two-factor and the sessions that are open." },
+  security: { title: "Security", subtitle: "Password change, active sessions and account security." },
   notifications: { title: "Notifications", subtitle: "Email events and the newsletter." },
   "saved-faqs": { title: "Saved FAQs", subtitle: "The FAQ library the builder pre-fills from." },
   "saved-packages": { title: "Saved Packages", subtitle: "Reusable packages for the proposal builder." },

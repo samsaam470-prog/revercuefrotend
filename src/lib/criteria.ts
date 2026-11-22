@@ -92,6 +92,7 @@ export interface PlatformRow {
   name: string;
   kind: string;
   summary: string;
+  website?: string;
   ratings: Record<string, { rating: Rating; note: string }>;
 }
 
@@ -102,6 +103,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
     kind: "The thread",
     summary:
       "One path from proposal to contract to requirement form to invoice, with the client record assembling itself along the way.",
+    website: "https://revercue.co.uk",
     ratings: {
       "all-in-one": {
         rating: "partial",
@@ -145,7 +147,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       integrations: {
         rating: "partial",
-        note: "A documented API and clean CSV/PDF export rather than a marketplace of native connectors.",
+        note: "CSV and PDF export; no public API or native connector marketplace.",
       },
       "pricing-scalability": {
         rating: "yes",
@@ -163,6 +165,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
     kind: "Freelancer suite",
     summary:
       "A close neighbour on paper: proposals, contracts, invoices, accounting and a light CRM under one subscription.",
+    website: "https://www.hellobonsai.com",
     ratings: {
       "all-in-one": {
         rating: "yes",
@@ -218,6 +221,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
     kind: "Clientflow suite",
     summary:
       "Built around booking: inquiry, proposal, contract, deposit and payment schedule, with a polished client experience.",
+    website: "https://www.honeybook.com",
     ratings: {
       "all-in-one": {
         rating: "yes",
@@ -276,6 +280,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
     kind: "Workflow suite",
     summary:
       "The automation-first suite: forms, contracts, invoices and a portal, wired together by workflows you build.",
+    website: "https://www.dubsado.com",
     ratings: {
       "all-in-one": {
         rating: "yes",
@@ -331,6 +336,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
     kind: "Freelancer workspace",
     summary:
       "A friendly workspace with a writing helper, so proposals and projects feel less like admin.",
+    website: "https://www.withmoxie.com",
     ratings: {
       "all-in-one": {
         rating: "yes",
@@ -383,6 +389,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
     kind: "All-in-one workspace",
     summary:
       "Projects and tasks at the centre, with proposals, invoices, time and a portal attached to them.",
+    website: "https://www.plutio.com",
     ratings: {
       "all-in-one": {
         rating: "yes",
@@ -438,6 +445,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
     kind: "Business suite",
     summary:
       "Pipeline-first: leads and deals at the top, projects and invoices downstream, all in one subscription.",
+    website: "https://www.agiled.app",
     ratings: {
       "all-in-one": {
         rating: "yes",
@@ -496,6 +504,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
     kind: "Office suites",
     summary:
       "The default stack most freelancers already pay for: documents, email, calendar and storage, with no thread between them.",
+    website: "https://workspace.google.com",
     ratings: {
       "all-in-one": {
         rating: "no",

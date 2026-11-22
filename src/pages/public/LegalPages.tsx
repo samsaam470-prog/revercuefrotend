@@ -111,7 +111,7 @@ export function PrivacyPage() {
                 <li>To render your documents, apply your brand and enforce the plan limits.</li>
                 <li>To build the client record from the documents you send, so you do not re-type it.</li>
                 <li>To calculate the tracking summaries and, on Scale, the interest arithmetic.</li>
-                <li>To send transactional email: activation, verification codes, security alerts, document reminders.</li>
+                <li>To send transactional email: account notices, security alerts and document reminders.</li>
                 <li>To bill you, keep the records tax law requires, and answer your support requests.</li>
                 <li>To evaluate the suggestion rules against your own activity, so a follow-up fires when it should.</li>
               </ul>
@@ -318,8 +318,8 @@ export function TermsPage() {
           body: (
             <>
               <p>
-                One person per account. You are responsible for keeping your password, your
-                two-factor codes and any document passwords secure, and for the content you publish
+                One person per account. You are responsible for keeping your AuthAction credentials and any
+                document passwords secure, and for the content you publish
                 under your links. Tell us promptly if you believe an account or a link has been
                 compromised so we can help you rotate it.
               </p>

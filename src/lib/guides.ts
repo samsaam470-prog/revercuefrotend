@@ -1027,7 +1027,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Security and notifications",
         paragraphs: [
-          "Change the password, turn 2FA on or off, and review the active sessions. Turning 2FA off requires your password again, because the person most likely to turn it off is someone who should not.",
+          "Review the active sessions. Passwords and any second factor are managed by AuthAction; Revercue does not run its own 2FA.",
           "Notification settings are per event on Growth and Scale. Revercue sends its own transactional email for account, security and document notices. The newsletter is separate and off unless you ticked it.",
         ],
         visual: "SecurityVisual",
@@ -1871,7 +1871,7 @@ const PRACTICE: Record<string, GuideSection[]> = {
     {
       heading: "The settings worth visiting once",
       paragraphs: [
-        "Four settings repay a single visit. Profile: your logo, colours and contact details, because every client page inherits them. Notifications: per-event email toggles, so a busy week does not train you to ignore the inbox. Security: two-factor authentication, which needs your current password to change. Appearance: dark, light or system, stored on the device rather than the account.",
+        "Four settings repay a single visit. Profile: your logo, colours and contact details, because every client page inherits them. Notifications: per-event email toggles, so a busy week does not train you to ignore the inbox. Security: active sessions and password change; passwords and any second factor are managed by AuthAction. Appearance: dark, light or system, stored on the device rather than the account.",
         "The rest can wait until they are relevant. Saved FAQs and saved packages become useful once you have sent ten proposals, not before. The what-revercue-knows page is a read-only statement of what is stored about you, and it is worth reading once so the privacy claim stops being abstract.",
       ],
       bullets: [
