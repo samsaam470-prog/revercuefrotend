@@ -139,12 +139,19 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
               questions: proposal.questions,
             }),
       );
+      // Only apply brand defaults when no saved content exists.
+      setDoc((current) => ({
+        ...current,
+        brand_primary: proposal.brand_primary || current.brand_primary || "#c9a961",
+        brand_secondary: proposal.brand_secondary || current.brand_secondary || "#1a1a1a",
+      }));
+    } else {
+      setDoc((current) => ({
+        ...current,
+        brand_primary: proposal.brand_primary || current.brand_primary || "#c9a961",
+        brand_secondary: proposal.brand_secondary || current.brand_secondary || "#1a1a1a",
+      }));
     }
-    setDoc({
-      ...EMPTY_DOC,
-      brand_primary: proposal.brand_primary || "#c9a961",
-      brand_secondary: proposal.brand_secondary || "#1a1a1a",
-    });
     setInitialised(true);
   }, [proposal, blank, initialised]);
 
@@ -327,6 +334,7 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
 
       <Canvas
         doc={doc}
+        documentType="proposal"
         blocks={blocks}
         selectedId={selectedId}
         onSelect={setSelectedId}

@@ -5,6 +5,7 @@ import type { Block } from "../../types";
 
 export interface BlockRendererProps {
   block: Block;
+  documentType?: "proposal" | "contract" | "form" | "invoice" | "other";
   selected?: boolean;
   editable?: boolean;
   onSelect?: () => void;
@@ -18,6 +19,7 @@ export interface BlockRendererProps {
 
 export function BlockRenderer({
   block,
+  documentType = "other",
   selected,
   editable,
   onSelect,
@@ -190,6 +192,13 @@ export function BlockRenderer({
           </div>
         );
       case "signature":
+        if (documentType === "proposal") {
+          return (
+            <div style={{ border: "1px dashed #d8d2c4", borderRadius: 6, padding: 12, fontSize: 12, color: "#8a857a" }}>
+              Signature blocks are not available in proposals.
+            </div>
+          );
+        }
         return (
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 16 }}>
             {["Freelancer", "Client"].map((party) => (

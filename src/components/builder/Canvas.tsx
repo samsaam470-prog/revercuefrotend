@@ -6,6 +6,7 @@ import type { Block, BlockType, DocContent } from "../../types";
 
 export interface CanvasProps {
   doc: DocContent;
+  documentType?: "proposal" | "contract" | "form" | "invoice" | "other";
   blocks: Block[];
   selectedId: string | null;
   onSelect: (id: string | null) => void;
@@ -24,6 +25,7 @@ export interface CanvasProps {
 
 export function Canvas({
   doc,
+  documentType = "other",
   blocks,
   selectedId,
   onSelect,
@@ -111,6 +113,7 @@ export function Canvas({
           {blocks.map((block) => (
             <BlockRenderer
               key={block.id}
+              documentType={documentType}
               block={block}
               editable
               selected={selectedId === block.id}

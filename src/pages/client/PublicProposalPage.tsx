@@ -20,14 +20,7 @@ export function PublicProposalPage() {
   const { publicId } = useParams<{ publicId: string }>();
   const [token, setToken] = useState(sessionStorage.getItem(`rc_public_${publicId}`) || undefined);
   const [wallError, setWallError] = useState("");
-  const [approved, setApproved] = useState(false);
-  const [declined, setDeclined] = useState(false);
-  const [approveOpen, setApproveOpen] = useState(false);
-  const [declineOpen, setDeclineOpen] = useState(false);
   const [questionOpen, setQuestionOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [agree, setAgree] = useState(false);
-  const [reason, setReason] = useState("");
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [pickedPackage, setPickedPackage] = useState<string | null>(null);
@@ -85,37 +78,9 @@ export function PublicProposalPage() {
     return <ClosedPage reason="expired" />;
   }
 
-  if (approved || proposal.status === "approved") return <ClosedPage reason="approved" />;
-  if (declined || proposal.status === "declined") return <ClosedPage reason="declined" />;
-
   const content = proposal.content;
   const blocks = content?.blocks ?? [];
   const brand = content?.brand_primary || proposal.brand_primary || "#c9a961";
-
-  const act = async (action: "approve" | "decline") => {
-    setBusy(true);
-    setError("");
-    try {
-      await publicApi.proposalAction(publicId as string, {
-        action,
-        name: action === "approve" ? name : undefined,
-        reason: action === "decline" ? reason : undefined,
-        session_token: token,
-        package: pickedPackage || undefined,
-      });
-      void publicApi.proposalEvent(publicId as string, {
-        session_token: token,
-        event_type: action === "approve" ? "approved" : "declined",
-      });
-      if (action === "approve") setApproved(true);
-      else setDeclined(true);
-    } catch (cause) {
-      const apiError = cause as ApiError;
-      setError(errorMessage(apiError.code, apiError.message));
-    } finally {
-      setBusy(false);
-    }
-  };
 
   return (
     <div className="doc-shell">
@@ -201,25 +166,19 @@ export function PublicProposalPage() {
               </div>
             );
           }
-          return <BlockRenderer key={block.id} block={block} brandPrimary={brand} />;
+          return <BlockRenderer key={block.id} documentType="proposal" block={block} brandPrimary={brand} />;
         })}
 
         {error && <p className="error-text">{error}</p>}
 
         <div className="doc-actions">
-          <Button size="lg" onClick={() => setApproveOpen(true)}>
-            Approve proposal
-          </Button>
-          <Button variant="ghost" onClick={() => setDeclineOpen(true)}>
-            Decline
-          </Button>
           <button type="button" className="btn btn-text btn-sm" onClick={() => setQuestionOpen(true)}>
             Ask a question
           </button>
         </div>
 
         <p className="doc-foot">
-          This is an offer, not a contract. Approving it tells the freelancer you want to proceed.
+          This is a proposal, not a contract. Reply to the freelancer to move forward.
         </p>
         <div className="doc-foot">
           Powered by{" "}
@@ -228,61 +187,6 @@ export function PublicProposalPage() {
           </Link>
         </div>
       </div>
-
-      <Modal
-        open={approveOpen}
-        onClose={() => setApproveOpen(false)}
-        title="Approve this proposal"
-        size="sm"
-        footer={
-          <>
-            <Button variant="ghost" onClick={() => setApproveOpen(false)} disabled={busy}>
-              Not yet
-            </Button>
-            <Button onClick={() => void act("approve")} loading={busy} disabled={!agree || !name.trim()}>
-              Approve
-            </Button>
-          </>
-        }
-      >
-        <div className="stack-3">
-          {pickedPackage && <p className="caption">Package: {pickedPackage}</p>}
-          <Input id="approve-name" label="Your name" value={name} onChange={setName} helper="This acts as your signature." required />
-          <Checkbox
-            id="approve-agree"
-            label="I approve this proposal and understand the freelancer will send the next step."
-            checked={agree}
-            onChange={setAgree}
-          />
-          <p className="caption">Approving is not a payment. Nothing is charged here.</p>
-        </div>
-      </Modal>
-
-      <Modal
-        open={declineOpen}
-        onClose={() => setDeclineOpen(false)}
-        title="Decline this proposal"
-        size="sm"
-        footer={
-          <>
-            <Button variant="ghost" onClick={() => setDeclineOpen(false)}>
-              Keep reading
-            </Button>
-            <Button variant="danger" onClick={() => void act("decline")} loading={busy} disabled={!reason.trim()}>
-              Decline
-            </Button>
-          </>
-        }
-      >
-        <Textarea
-          id="decline-reason"
-          label="What made you decide against it?"
-          value={reason}
-          onChange={setReason}
-          rows={4}
-          helper="Optional context helps the freelancer, but you can keep it short."
-        />
-      </Modal>
 
       <Modal
         open={questionOpen}

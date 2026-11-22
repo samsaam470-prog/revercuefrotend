@@ -157,6 +157,7 @@ export function ProposalRequirementForm() {
       /* The research runs alongside the template choice; a failure there never blocks the builder. */
       void pipelineApi
         .extract({
+          client_name: clientName.trim() || undefined,
           client_website: clientWebsite.trim() || undefined,
           own_website: ownWebsite.trim() || undefined,
           industry,
@@ -164,10 +165,11 @@ export function ProposalRequirementForm() {
           problem: problem.trim(),
           target_audience: audience.trim() || undefined,
         })
-        .then((result) => {
+        .then((result: any) => {
+          const data = result?.result ?? result ?? {};
           saveResearch(response.id, {
-            notes: result.notes ?? [],
-            images: result.images ?? [],
+            notes: data.notes ?? result?.notes ?? [],
+            images: data.images ?? result?.images ?? [],
           });
         })
         .catch(() => undefined);

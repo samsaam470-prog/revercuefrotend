@@ -170,14 +170,14 @@ function applyFills(blocks: Block[], fills: Record<string, string>, packages?: {
 
 /** A deterministic visual plan, used when the helper cannot decide. */
 function patternRequests(blocks: Block[], industry?: string) {
-  const requests: { afterBlockId: string; kind: string; query: string }[] = [];
+  const requests: { afterBlockId: string; kind: string; type?: string; query: string; section_id?: string }[] = [];
   const intro = blocks.find((block) => block.type === "paragraph");
   const pricing = blocks.find((block) => block.type === "packages" || block.type === "pricing_table");
   const timeline = blocks.find((block) => block.type === "timeline");
 
-  if (intro) requests.push({ afterBlockId: intro.id, kind: "image", query: industry || "the work" });
-  if (pricing) requests.push({ afterBlockId: pricing.id, kind: "chart", query: "the price breakdown" });
-  if (timeline) requests.push({ afterBlockId: timeline.id, kind: "diagram", query: "the delivery process" });
+  if (intro) requests.push({ afterBlockId: intro.id, type: "image", kind: "image", query: industry || "the work", section_id: intro.id });
+  if (pricing) requests.push({ afterBlockId: pricing.id, type: "chart", kind: "chart", query: "the price breakdown", section_id: pricing.id });
+  if (timeline) requests.push({ afterBlockId: timeline.id, type: "diagram", kind: "diagram", query: "the delivery process", section_id: timeline.id });
 
   return requests.slice(0, 3);
 }
@@ -199,9 +199,16 @@ async function placeVisuals(id: string, blocks: Block[], sections: string[], ind
   if (!requests.length) requests = patternRequests(blocks, industry);
   if (!requests.length) return blocks;
 
+  const normalized: any[] = requests.map((r: any) => ({
+    afterBlockId: r.afterBlockId,
+    type: r.type || r.kind,
+    kind: r.kind || r.type,
+    query: r.query,
+    section_id: r.afterBlockId,
+  }));
   let assets: Record<string, unknown> = {};
   try {
-    const response = await pipelineApi.visuals({ document: { blocks }, requests });
+    const response = await pipelineApi.visuals({ document: { blocks }, requests: normalized });
     assets = response.assets ?? {};
   } catch {
     /* the requests still place a labelled element the author can fill */
@@ -210,27 +217,28 @@ async function placeVisuals(id: string, blocks: Block[], sections: string[], ind
   const stamp = Date.now().toString(36);
   const next = [...blocks];
 
-  requests.forEach((request, index) => {
+  normalized.forEach((request, index) => {
     if (!request.afterBlockId) return;
     const at = next.findIndex((block) => block.id === request.afterBlockId);
     if (at < 0) return;
     if (next.some((block) => block.meta?.fromPipeline === request.query)) return;
 
     const url = assetUrl(assets[request.afterBlockId]);
+    const kind = request.kind || request.type;
     const visual: Block =
-      request.kind === "chart"
+      kind === "chart"
         ? {
             id: `${stamp}_v${index}`,
             type: "graph",
             text: request.query,
-            meta: { fromPipeline: request.query, visual: request.kind },
+            meta: { fromPipeline: request.query, visual: kind },
           }
         : {
             id: `${stamp}_v${index}`,
             type: "image",
             url: url ?? "",
             alt: request.query,
-            meta: { fromPipeline: request.query, visual: request.kind },
+            meta: { fromPipeline: request.query, visual: kind },
           };
 
     next.splice(at + 1, 0, visual);

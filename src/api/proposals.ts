@@ -38,6 +38,7 @@ export interface RequirementPayload {
 }
 
 export interface ExtractPayload {
+  client_name?: string;
   client_website?: string;
   own_website?: string;
   industry?: string;
@@ -61,8 +62,10 @@ export interface OrganizePayload {
 
 export interface VisualRequest {
   afterBlockId: string;
-  kind: string;
+  type: string;
+  kind?: string;
   query: string;
+  section_id?: string;
 }
 
 export const proposalsApi = {
