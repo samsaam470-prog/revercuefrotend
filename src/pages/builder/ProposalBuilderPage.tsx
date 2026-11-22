@@ -1,52 +1,33 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ProposalRequirementForm } from "../../components/builder/ProposalRequirementForm";
 import { proposalsApi } from "../../api/proposals";
-import { crmApi } from "../../api/crm";
-import { Canvas, blocksFromProposal } from "../../components/builder/Canvas";
+import { Canvas } from "../../components/builder/Canvas";
 import { TopBar } from "../../components/builder/TopBar";
 import { TemplatePicker } from "../../components/builder/TemplatePicker";
 import { PreviewPane } from "../../components/builder/PreviewPane";
 import { ShareModal } from "../../components/builder/ShareModal";
 import { DocumentReview } from "../../components/builder/DocumentReview";
+import { DraftProgress } from "../../components/builder/DraftProgress";
 import { analyzeDocument, type Review } from "../../lib/analysis";
 import { ResearchPanel } from "../../components/builder/ResearchPanel";
+import { briefOf, contentOf, hasPlaceholders, skeletonForBrief, type Brief } from "../../lib/brief";
 import {
   markPipelineDone,
-  pipelineDone,
   readResearch,
   runDraftPipeline,
+  type DraftStage,
   type Research,
 } from "../../lib/pipeline";
 import { isBuiltIn } from "../../lib/templates";
-import { ConfirmDialog } from "../../components/ui/ConfirmDialog";
 import { Button } from "../../components/ui/Button";
-import { Input } from "../../components/ui/Input";
-import { Textarea } from "../../components/ui/Textarea";
-import { Select } from "../../components/ui/Select";
-import { Checkbox } from "../../components/ui/Checkbox";
-import { Fieldset } from "../../components/ui/Fieldset";
 import { Spinner } from "../../components/ui/Spinner";
 import { useAutoSave } from "../../hooks/useAutoSave";
 import { useToast } from "../../hooks/useToast";
-import { CURRENCIES } from "../../lib/constants";
-import { usePlanGate } from "../../hooks/usePlanGate";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
 import type { Block, DocContent } from "../../types";
-
-const SECTION_OPTIONS = [
-  "Introduction",
-  "Scope",
-  "Timeline",
-  "Pricing",
-  "Terms",
-  "FAQs",
-  "Embedded Questions",
-  "About You",
-  "Next Step",
-];
 
 const EMPTY_DOC: DocContent = {
   blocks: [],
@@ -56,6 +37,11 @@ const EMPTY_DOC: DocContent = {
   max_width: 720,
 };
 
+/** Each draft line is held on screen for at least this long. */
+const STAGE_DWELL_MS = 550;
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export function ProposalBuilderPage() {
   const { id } = useParams<{ id: string }>();
   const [params] = useSearchParams();
@@ -63,9 +49,7 @@ export function ProposalBuilderPage() {
 
   if (!id) return <ProposalRequirementForm />;
 
-  const step = params.get("step");
-
-  return step === "template" ? (
+  return params.get("step") === "template" ? (
     <TemplatePicker
       type="proposal"
       onBack={() => navigate("/proposals/new")}
@@ -88,10 +72,6 @@ export function ProposalBuilderPage() {
   );
 }
 
-/* ------------------------------------------------------------ stage 1 */
-
-/* ------------------------------------------------------------ stage 3 */
-
 function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
   const navigate = useNavigate();
   const toast = useToast();
@@ -107,53 +87,57 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
   const [creating, setCreating] = useState(false);
   const [initialised, setInitialised] = useState(false);
   const [research, setResearch] = useState<Research>(() => readResearch(id));
-  const [pipeline, setPipeline] = useState<{
-    running: boolean;
-    source?: "helper" | "backend" | "pattern";
-  }>({ running: false });
+  const [stage, setStage] = useState<DraftStage | null>(null);
+  const briefRef = useRef<Brief | null>(null);
 
   const proposal = query.data?.proposal;
 
   useEffect(() => {
     if (!proposal || initialised) return;
     setTitle(proposal.title);
-    const content = proposal.content;
-    if (content && content.blocks?.length) {
-      setDoc({ ...EMPTY_DOC, ...content });
-      setBlocks(content.blocks);
-    } else if (!blank) {
-      let templateBlocks: Block[] | null = null;
-      try {
-        const stored = sessionStorage.getItem(`revercue_template_${id}`);
-        if (stored) templateBlocks = JSON.parse(stored) as Block[];
-      } catch {
-        templateBlocks = null;
-      }
-      setBlocks(
-        templateBlocks?.length
-          ? templateBlocks
-          : blocksFromProposal({
-              problem: proposal.problem,
-              sections: proposal.sections,
-              faqs: proposal.faqs,
-              questions: proposal.questions,
-            }),
-      );
-      // Only apply brand defaults when no saved content exists.
-      setDoc((current) => ({
-        ...current,
-        brand_primary: proposal.brand_primary || current.brand_primary || "#c9a961",
-        brand_secondary: proposal.brand_secondary || current.brand_secondary || "#1a1a1a",
-      }));
-    } else {
-      setDoc((current) => ({
-        ...current,
-        brand_primary: proposal.brand_primary || current.brand_primary || "#c9a961",
-        brand_secondary: proposal.brand_secondary || current.brand_secondary || "#1a1a1a",
-      }));
+    const content = contentOf(proposal);
+    const savedBlocks = Array.isArray(content.blocks) ? (content.blocks as Block[]) : [];
+    const images = readResearch(id).images;
+    const brief = briefOf(proposal, images);
+    briefRef.current = brief;
+
+    setDoc({ ...EMPTY_DOC, ...(content as Partial<DocContent>), blocks: [] });
+
+    let templateBlocks: Block[] | null = null;
+    try {
+      const stored = sessionStorage.getItem(`revercue_template_${id}`);
+      if (stored) templateBlocks = JSON.parse(stored) as Block[];
+    } catch {
+      templateBlocks = null;
     }
+
+    const initial = savedBlocks.length
+      ? savedBlocks
+      : blank
+        ? []
+        : templateBlocks?.length
+          ? templateBlocks
+          : skeletonForBrief(brief, "proposal");
+
+    setBlocks(initial);
+
+    const wantsDraft = !blank && !content.drafted && (savedBlocks.length === 0 || hasPlaceholders(savedBlocks));
+    setStage(wantsDraft ? "brief" : null);
     setInitialised(true);
-  }, [proposal, blank, initialised]);
+  }, [proposal, blank, id, initialised]);
+
+  /* The research lands a moment after the draft is created; pick it up here. */
+  useEffect(() => {
+    if (research.notes.length || research.images.length) return;
+    const timer = setInterval(() => {
+      const next = readResearch(id);
+      if (next.notes.length || next.images.length) {
+        setResearch(next);
+        clearInterval(timer);
+      }
+    }, 1500);
+    return () => clearInterval(timer);
+  }, [id, research.notes.length, research.images.length]);
 
   const payload = useMemo(() => ({ title, content: { ...doc, blocks } }), [title, doc, blocks]);
 
@@ -165,68 +149,50 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     enabled: initialised,
   });
 
-  /* The research lands a moment after the draft is created; pick it up here. */
-  useEffect(() => {
-    if (research.notes.length) return;
-    const timer = setInterval(() => {
-      const next = readResearch(id);
-      if (next.notes.length || next.images.length) {
-        setResearch(next);
-        clearInterval(timer);
-      }
-    }, 1500);
-    return () => clearInterval(timer);
-  }, [id, research.notes.length]);
+  const persistDraft = async (nextBlocks: Block[]) => {
+    const base = proposal ? contentOf(proposal) : {};
+    const content = { ...base, ...doc, blocks: nextBlocks, drafted: true };
+    await proposalsApi.update(id, { content: content as DocContent }).catch(() => undefined);
+  };
 
+  /* The staged first draft. */
   useEffect(() => {
-    if (!initialised || blocks.length === 0 || pipeline.running) return;
-    if (pipelineDone(id)) return;
-    const hasPlaceholders = blocks.some(
-      (block) =>
-        Boolean(block.meta?.placeholder) ||
-        (block.items ?? []).some((item) => /\{\{/.test(item.label || "")) ||
-        Boolean(block.text && /\{\{/.test(block.text)),
-    );
-    if (!hasPlaceholders && !readResearch(id).notes.length) return;
+    if (!initialised || !proposal || !stage || stage !== "brief") return;
+    if (!briefRef.current) return;
+    if (blocks.length === 0) {
+      setStage(null);
+      return;
+    }
 
     let cancelled = false;
-    setPipeline({ running: true });
+    let last = Date.now();
 
-    const extra = proposal as typeof proposal & {
-      industry?: string;
-      packages?: { name: string; price: number; deliverables?: string }[];
+    const step = async (next: DraftStage) => {
+      const wait = Math.max(0, STAGE_DWELL_MS - (Date.now() - last));
+      if (wait) await sleep(wait);
+      last = Date.now();
+      if (!cancelled) setStage(next);
     };
-    const sectionList = proposal?.sections?.length ? proposal.sections : ["Introduction", "Scope"];
-    const client = proposal?.client_name || "the client";
-
-    const fills: Record<string, string> = {
-      introduction: proposal?.problem || `${client} needs a clear plan for this work.`,
-      scope: `This covers ${sectionList.filter((section) => section !== "Pricing").join(", ").toLowerCase()}.`,
-      timeline: proposal?.timeline_length || "",
-      next_step: "Reply to this link and I will send the contract.",
-    };
-
-    const packages = extra.packages?.length
-      ? extra.packages.map((item) => ({ label: item.name, price: item.price }))
-      : undefined;
 
     void runDraftPipeline({
       id,
       blocks,
-      sections: sectionList,
-      tone: proposal?.tone || "formal",
-      fills,
-      packages,
-      industry: extra.industry,
+      brief: briefRef.current,
+      kind: "proposal",
+      onStage: step,
     })
-      .then((result) => {
+      .then(async (result) => {
+        if (cancelled) return;
+        await sleep(STAGE_DWELL_MS);
         if (cancelled) return;
         setBlocks(result.blocks);
-        setPipeline({ running: false, source: result.source });
+        setResearch(readResearch(id));
+        await persistDraft(result.blocks);
         markPipelineDone(id);
       })
-      .catch(() => {
-        if (!cancelled) setPipeline({ running: false });
+      .catch(() => undefined)
+      .finally(() => {
+        if (!cancelled) setStage(null);
       });
 
     return () => {
@@ -288,8 +254,16 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     );
   }
 
-  const sections = proposal.sections?.length
-    ? proposal.sections
+  if (stage) {
+    return (
+      <div className="builder">
+        <DraftProgress stage={stage} clientName={proposal.client_name || "your client"} />
+      </div>
+    );
+  }
+
+  const sections = briefOf(proposal).sections.length
+    ? briefOf(proposal).sections
     : ["Introduction", "Scope", "Timeline", "Pricing", "Next Step"];
 
   return (
@@ -330,7 +304,7 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
           },
         ]}
       />
-      <ResearchPanel research={research} source={pipeline.source} running={pipeline.running} />
+      <ResearchPanel research={research} source={undefined} running={false} />
 
       <Canvas
         doc={doc}
@@ -402,5 +376,3 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     </div>
   );
 }
-
-

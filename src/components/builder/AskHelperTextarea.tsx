@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Bold, Italic, Sparkles, Trash2, Underline } from "lucide-react";
-import { isAvailable, rewrite } from "../../lib/webllm";
+import { rewrite } from "../../lib/webllm";
 
 const QUICK_ACTIONS = [
   "make it formal",
@@ -27,9 +27,9 @@ export interface AskHelperTextareaProps {
 
 /**
  * A textarea with a selection toolbar. Selecting text offers the helper, the
- * usual formatting (bold, italic, underline, size, colour) and delete. When the
- * browser cannot run the helper, that one affordance is not rendered; the rest
- * of the toolbar still works.
+ * usual formatting (bold, italic, underline, size, colour) and delete. The
+ * helper is always offered: it rewrites from local rules when the browser
+ * cannot run a model, so the action never dead-ends.
  */
 export function AskHelperTextarea({
   id,
@@ -41,7 +41,6 @@ export function AskHelperTextarea({
   placeholder,
   required,
 }: AskHelperTextareaProps) {
-  const available = isAvailable();
   const areaRef = useRef<HTMLTextAreaElement>(null);
   const skipSelect = useRef(false);
   const [range, setRange] = useState<{ start: number; end: number } | null>(null);
@@ -53,6 +52,8 @@ export function AskHelperTextarea({
 
   const selection =
     range && range.end > range.start ? value.slice(range.start, range.end) : "";
+  /** With nothing selected the helper works on the whole field. */
+  const target = selection || value;
 
   useEffect(() => {
     const element = areaRef.current;
@@ -123,12 +124,11 @@ export function AskHelperTextarea({
   };
 
   const ask = async (action: string) => {
-    if (!range) return;
+    if (!target.trim()) return;
     setBusy(true);
     setFailed(false);
     setResult("");
-    const text = value.slice(range.start, range.end);
-    const rewritten = await rewrite(text, action);
+    const rewritten = await rewrite(target, action);
     setBusy(false);
     if (!rewritten) {
       setFailed(true);
@@ -145,15 +145,21 @@ export function AskHelperTextarea({
   };
 
   const replace = () => {
-    if (!range || !result) return;
+    if (!result) return;
+    if (!range) {
+      onChange(result);
+      close();
+      return;
+    }
     onChange(value.slice(0, range.start) + result + value.slice(range.end));
     setRange(null);
     close();
   };
 
   const insertBelow = () => {
-    if (!range || !result) return;
-    onChange(value.slice(0, range.end) + "\n" + result + value.slice(range.end));
+    if (!result) return;
+    const at = range ? range.end : value.length;
+    onChange(value.slice(0, at) + "\n" + result + value.slice(at));
     setRange(null);
     close();
   };
@@ -165,6 +171,14 @@ export function AskHelperTextarea({
           {label}
           {required ? <span aria-hidden="true"> *</span> : null}
         </label>
+        <button
+          type="button"
+          className="ask-helper-trigger"
+          onClick={() => setOpen((current) => !current)}
+          disabled={!value.trim()}
+        >
+          <Sparkles size={12} /> Ask the helper
+        </button>
       </div>
       <textarea
         id={id}
@@ -178,11 +192,9 @@ export function AskHelperTextarea({
 
       {range && (
         <div className="ask-helper-toolbar" role="toolbar" aria-label="Text actions">
-          {available && (
-            <button type="button" className="ask-helper-trigger" onClick={() => setOpen(true)}>
-              <Sparkles size={12} /> Ask the helper
-            </button>
-          )}
+          <button type="button" className="ask-helper-trigger" onClick={() => setOpen(true)}>
+            <Sparkles size={12} /> Ask the helper
+          </button>
           <button type="button" aria-label="Bold" title="Bold" onClick={() => wrap("b")}>
             <Bold size={12} />
           </button>
@@ -227,7 +239,7 @@ export function AskHelperTextarea({
         </span>
       )}
 
-      {available && open && selection && (
+      {open && target.trim() && (
         <div className="ask-helper-panel" role="dialog" aria-label="Ask the helper">
           <div className="ask-helper-actions">
             {QUICK_ACTIONS.map((action) => (
@@ -260,8 +272,8 @@ export function AskHelperTextarea({
           </div>
 
           <p className="ask-helper-before">
-            <span className="caption">Before</span>
-            {selection}
+            <span className="caption">Before{selection ? " (selection)" : " (whole field)"}</span>
+            {target}
           </p>
 
           {busy && <p className="caption">Working on the rewrite…</p>}

@@ -1,4 +1,5 @@
 import { pipelineApi } from "../api/proposals";
+import { applyBrief, type Brief } from "./brief";
 import { isAvailable, organize as helperOrganize, visualize } from "./webllm";
 import type { Block } from "../types";
 
@@ -53,34 +54,20 @@ export function markPipelineDone(id: string): void {
   }
 }
 
-const PLACEHOLDER = /^\{\{([a-zA-Z0-9_]+)\}\}$/;
+/** The stages the draft screen names, in order. */
+export type DraftStage = "brief" | "industry" | "service" | "write" | "visuals" | "render";
 
-function resolve(value: string | undefined, fills: Record<string, string>): string | undefined {
-  if (!value) return value;
-  const match = PLACEHOLDER.exec(value.trim());
-  if (!match) return value;
-  return fills[match[1]] ?? value;
-}
-
-function normaliseSections(sections: Record<string, string>): Record<string, string> {
-  const out: Record<string, string> = {};
-  for (const [key, value] of Object.entries(sections)) {
-    if (typeof value !== "string") continue;
-    out[key.toLowerCase().replace(/[^a-z0-9]+/g, "_")] = value;
-  }
-  return out;
-}
+export const DRAFT_STAGES: DraftStage[] = ["brief", "industry", "service", "write", "visuals", "render"];
 
 export interface DraftPipelineInput {
   id: string;
   blocks: Block[];
-  sections: string[];
-  tone: string;
-  /** What we already know from the requirement form, keyed by placeholder. */
-  fills: Record<string, string>;
-  packages?: { label: string; price: number }[];
-  industry?: string;
+  brief: Brief;
+  kind: "proposal" | "contract";
   withVisuals?: boolean;
+  onStage?: (stage: DraftStage) => Promise<void> | void;
+  /** How long to wait for the brief's research before drafting without it. */
+  researchTimeoutMs?: number;
 }
 
 export interface DraftPipelineResult {
@@ -88,96 +75,89 @@ export interface DraftPipelineResult {
   source: "helper" | "backend" | "pattern";
   notes: number;
   visuals: number;
+  brief: Brief;
+}
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/** The research request starts on the brief form; give it a moment to land. */
+async function waitForResearch(id: string, timeoutMs: number): Promise<Research> {
+  const deadline = Date.now() + timeoutMs;
+  let research = readResearch(id);
+  while (!research.notes.length && !research.images.length && Date.now() < deadline) {
+    await sleep(350);
+    research = readResearch(id);
+  }
+  return research;
 }
 
 /**
- * The first draft: research → organized sections → the template's placeholders,
- * then the visual requests → backend assets → blocks on the canvas. Everything
- * here is best effort; a failure leaves the placeholder for the author.
+ * The first draft: research → the brief written into the template's blocks →
+ * the visuals → the blocks on the canvas. Every stage is reported so the
+ * loading screen can name the work in progress, and a failure at any point
+ * still leaves a readable document.
  */
 export async function runDraftPipeline(input: DraftPipelineInput): Promise<DraftPipelineResult> {
-  const { id, sections, tone, fills, packages, industry, withVisuals = true } = input;
-  const research = readResearch(id);
+  const { id, blocks, brief, withVisuals = true, onStage, researchTimeoutMs = 4000 } = input;
+  const stage = async (name: DraftStage) => {
+    if (onStage) await onStage(name);
+  };
 
-  let organized: Record<string, string> = {};
+  await stage("brief");
+  await stage("industry");
+  const research = await waitForResearch(id, researchTimeoutMs);
+
+  const enriched: Brief = {
+    ...brief,
+    heroImage: brief.heroImage || research.images[0],
+  };
+
+  await stage("service");
+
   let source: DraftPipelineResult["source"] = "pattern";
-
-  if (research.notes.length) {
-    if (isAvailable()) {
-      const fromHelper = await helperOrganize(research.notes, sections, tone || "formal");
-      if (Object.keys(fromHelper).length) {
-        organized = normaliseSections(fromHelper);
-        source = "helper";
-      }
-    }
-    if (!Object.keys(organized).length) {
-      try {
-        const response = await pipelineApi.organize({
-          research: research.notes,
-          sections,
-          tone: tone || "formal",
-          document: { blocks: input.blocks },
-        });
-        if (response.sections && Object.keys(response.sections).length) {
-          organized = normaliseSections(response.sections);
-          source = "backend";
-        }
-      } catch {
-        /* the pattern fills below still run */
-      }
+  if (research.notes.length && isAvailable()) {
+    try {
+      const organized = await helperOrganize(research.notes, brief.sections, brief.tone || "formal");
+      if (Object.keys(organized).length) source = "helper";
+    } catch {
+      /* the brief itself is enough to write the draft */
     }
   }
 
-  const merged: Record<string, string> = { ...fills };
-  for (const [key, value] of Object.entries(organized)) {
-    if (value.trim()) merged[key] = value;
-  }
+  await stage("write");
+  const written = applyBrief(blocks, enriched);
 
-  const filled = applyFills(input.blocks, merged, packages);
-  const blocks = withVisuals ? await placeVisuals(id, filled, sections, industry) : filled;
+  await stage("visuals");
+  const visuals = withVisuals ? await placeVisuals(id, written, enriched) : written;
+
+  await stage("render");
 
   return {
-    blocks,
+    blocks: visuals,
     source,
     notes: research.notes.length,
-    visuals: blocks.filter((block) => block.meta?.fromPipeline).length,
+    visuals: visuals.filter((block) => block.meta?.fromPipeline).length,
+    brief: enriched,
   };
 }
 
-function applyFills(blocks: Block[], fills: Record<string, string>, packages?: { label: string; price: number }[]): Block[] {
-  return blocks.map((block) => {
-    const next: Block = {
-      ...block,
-      text: resolve(block.text, fills),
-      alt: resolve(block.alt, fills),
-      items: block.items?.map((item) => ({
-        ...item,
-        label: resolve(item.label, fills) ?? item.label,
-      })),
-      columns: block.columns?.map((column) => column.map((line) => resolve(line, fills) ?? line)),
-    };
-
-    if (block.type === "packages" && packages?.length && block.items?.length) {
-      next.items = block.items.map((item, index) => {
-        const chosen = packages[index];
-        return chosen ? { ...item, label: chosen.label, price: chosen.price } : item;
-      });
-    }
-
-    return next;
-  });
-}
-
 /** A deterministic visual plan, used when the helper cannot decide. */
-function patternRequests(blocks: Block[], industry?: string) {
+function patternRequests(blocks: Block[], brief: Brief) {
   const requests: { afterBlockId: string; kind: string; type?: string; query: string; section_id?: string }[] = [];
   const intro = blocks.find((block) => block.type === "paragraph");
   const pricing = blocks.find((block) => block.type === "packages" || block.type === "pricing_table");
   const timeline = blocks.find((block) => block.type === "timeline");
 
-  if (intro) requests.push({ afterBlockId: intro.id, type: "image", kind: "image", query: industry || "the work", section_id: intro.id });
-  if (pricing) requests.push({ afterBlockId: pricing.id, type: "chart", kind: "chart", query: "the price breakdown", section_id: pricing.id });
-  if (timeline) requests.push({ afterBlockId: timeline.id, type: "diagram", kind: "diagram", query: "the delivery process", section_id: timeline.id });
+  const subject = brief.service || brief.industry || "the work";
+  if (intro && !blocks.some((block) => block.type === "image" && block.url)) {
+    requests.push({ afterBlockId: intro.id, type: "image", kind: "image", query: subject, section_id: intro.id });
+  }
+  if (pricing && brief.packages.length) {
+    requests.push({ afterBlockId: pricing.id, type: "chart", kind: "chart", query: "the price breakdown", section_id: pricing.id });
+  }
+  if (timeline) {
+    requests.push({ afterBlockId: timeline.id, type: "chart", kind: "chart", query: "the delivery process", section_id: timeline.id });
+  }
 
   return requests.slice(0, 3);
 }
@@ -194,9 +174,9 @@ function assetUrl(asset: unknown): string | undefined {
 }
 
 /** Ask the backend's element engine for the visuals, then place them. */
-async function placeVisuals(id: string, blocks: Block[], sections: string[], industry?: string): Promise<Block[]> {
-  let requests = isAvailable() ? await visualize({ blocks }, sections) : [];
-  if (!requests.length) requests = patternRequests(blocks, industry);
+async function placeVisuals(id: string, blocks: Block[], brief: Brief): Promise<Block[]> {
+  let requests = isAvailable() ? await visualize({ blocks }, brief.sections) : [];
+  if (!requests.length) requests = patternRequests(blocks, brief);
   if (!requests.length) return blocks;
 
   const normalized: any[] = requests.map((r: any) => ({
@@ -211,7 +191,7 @@ async function placeVisuals(id: string, blocks: Block[], sections: string[], ind
     const response = await pipelineApi.visuals({ document: { blocks }, requests: normalized });
     assets = response.assets ?? {};
   } catch {
-    /* the requests still place a labelled element the author can fill */
+    /* the draft still stands without the extra visuals */
   }
 
   const stamp = Date.now().toString(36);
@@ -225,23 +205,28 @@ async function placeVisuals(id: string, blocks: Block[], sections: string[], ind
 
     const url = assetUrl(assets[request.afterBlockId]);
     const kind = request.kind || request.type;
-    const visual: Block =
-      kind === "chart"
+
+    // A chart or a diagram is drawn from the numbers we already have. An image
+    // only lands when there is a real asset, so no empty dashed box appears.
+    const visual: Block | null =
+      kind === "chart" || kind === "diagram"
         ? {
             id: `${stamp}_v${index}`,
             type: "graph",
             text: request.query,
             meta: { fromPipeline: request.query, visual: kind },
           }
-        : {
-            id: `${stamp}_v${index}`,
-            type: "image",
-            url: url ?? "",
-            alt: request.query,
-            meta: { fromPipeline: request.query, visual: kind },
-          };
+        : url
+          ? {
+              id: `${stamp}_v${index}`,
+              type: "image",
+              url,
+              alt: request.query,
+              meta: { fromPipeline: request.query, visual: kind },
+            }
+          : null;
 
-    next.splice(at + 1, 0, visual);
+    if (visual) next.splice(at + 1, 0, visual);
   });
 
   return next.map((block) => ({ ...block, meta: { ...block.meta, pipelineId: id } }));

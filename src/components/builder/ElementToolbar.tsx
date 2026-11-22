@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { ImageUp, Sparkles, Trash2 } from "lucide-react";
 import type { Block } from "../../types";
-import { isAvailable, rewrite } from "../../lib/webllm";
+import { rewrite } from "../../lib/webllm";
+import { imageToDataUrl } from "../../lib/images";
 
 export interface ElementToolbarProps {
   block: Block;
@@ -25,26 +26,34 @@ function editableText(block: Block): { value: string; write: (next: string) => P
   if (block.type === "image" || block.type === "graph" || block.type === "file_upload") {
     return { value: block.alt || block.text || "", write: (value) => ({ alt: value }) };
   }
-  if (block.type === "next_step" || block.type === "question") {
-    return block.type === "question"
-      ? { value: block.question?.text || "", write: (text) => ({ question: { ...block.question, id: block.question?.id || "q1", type: block.question?.type || "short_text", text } }) }
-      : null;
+  if (block.type === "question") {
+    return {
+      value: block.question?.text || "",
+      write: (text) => ({
+        question: {
+          ...block.question,
+          id: block.question?.id || "q1",
+          type: block.question?.type || "short_text",
+          text,
+        },
+      }),
+    };
   }
   return null;
 }
 
 /**
- * The action strip for a selected element: Ask the helper (which writes its
- * result back through the same block update the properties panel uses), Upload
- * from device for image elements, and Remove.
+ * The action strip for a selected element: the writing helper, Upload from
+ * device for image elements, and Remove. Every action writes through the same
+ * block update the properties panel uses.
  */
 export function ElementToolbar({ block, onChange, onRemove }: ElementToolbarProps) {
-  const available = isAvailable();
   const fileRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
   const [instruction, setInstruction] = useState("");
   const [busy, setBusy] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [uploadError, setUploadError] = useState("");
   const target = editableText(block);
   const canUpload = block.type === "image" || block.type === "file_upload";
 
@@ -63,16 +72,20 @@ export function ElementToolbar({ block, onChange, onRemove }: ElementToolbarProp
     setInstruction("");
   };
 
-  const upload = (file?: File | null) => {
+  const upload = async (file?: File | null) => {
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => onChange({ url: String(reader.result), alt: block.alt || file.name });
-    reader.readAsDataURL(file);
+    setUploadError("");
+    try {
+      const url = await imageToDataUrl(file);
+      onChange({ url, alt: block.alt || file.name.replace(/\.[a-z0-9]+$/i, "") });
+    } catch (cause) {
+      setUploadError(cause instanceof Error ? cause.message : "That image could not be used.");
+    }
   };
 
   return (
     <div className="element-tools" onClick={(event) => event.stopPropagation()}>
-      {available && target && (
+      {target && (
         <button type="button" onClick={() => setOpen((value) => !value)}>
           <Sparkles size={11} /> Ask the helper
         </button>
@@ -87,7 +100,10 @@ export function ElementToolbar({ block, onChange, onRemove }: ElementToolbarProp
             type="file"
             accept="image/*"
             hidden
-            onChange={(event) => upload(event.target.files?.[0])}
+            onChange={(event) => {
+              void upload(event.target.files?.[0]);
+              event.target.value = "";
+            }}
           />
         </>
       )}
@@ -95,7 +111,7 @@ export function ElementToolbar({ block, onChange, onRemove }: ElementToolbarProp
         <Trash2 size={11} /> Remove
       </button>
 
-      {available && open && target && (
+      {open && target && (
         <div className="element-tools-panel">
           <input
             autoFocus
@@ -110,6 +126,7 @@ export function ElementToolbar({ block, onChange, onRemove }: ElementToolbarProp
           {failed && <span className="caption">No change came back. Try again, or edit it in the panel.</span>}
         </div>
       )}
+      {uploadError ? <span className="caption" style={{ color: "var(--red)" }}>{uploadError}</span> : null}
     </div>
   );
 }

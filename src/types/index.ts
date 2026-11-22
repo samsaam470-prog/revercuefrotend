@@ -75,6 +75,16 @@ export interface Proposal extends DocumentSummary {
   currency?: string;
   timeline_length?: string;
   tone?: string;
+  industry?: string;
+  service?: string;
+  cta?: string;
+  packages?: { name?: string; price?: number; description?: string }[];
+  client_name?: string;
+  client_email?: string;
+  client_phone?: string;
+  client_website?: string;
+  target_audience?: string;
+  drafted?: boolean;
   content?: DocContent;
   expiry_date?: string;
   brand_primary?: string;
@@ -91,6 +101,13 @@ export interface Contract extends DocumentSummary {
   revisions?: string;
   cancellation?: string;
   after_approval?: "form" | "invoice" | "pdf_only";
+  client_name?: string;
+  client_email?: string;
+  client_phone?: string;
+  industry?: string;
+  currency?: string;
+  sections?: string[];
+  drafted?: boolean;
   content?: DocContent;
 }
 
@@ -353,6 +370,22 @@ export interface Block {
 
 export interface DocContent {
   blocks: Block[];
+  /** The brief fields and settings travel inside the document content. */
+  drafted?: boolean;
+  problem?: string;
+  sections?: string[];
+  packages?: { name?: string; price?: number; description?: string }[];
+  currency?: string;
+  timeline?: string;
+  tone?: string;
+  faqs?: { question: string; answer: string }[];
+  questions?: publicQuestion[];
+  call_to_action?: string;
+  target_audience?: string;
+  scope?: string;
+  payment_terms?: string;
+  revisions?: string;
+  cancellation?: string;
   brand_primary?: string;
   brand_secondary?: string;
   page_background?: string;

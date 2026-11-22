@@ -4508,3 +4508,135 @@ details.faq-item:hover {
 .contact-channels a:hover {
   text-decoration-color: currentColor;
 }
+
+/* ---------- Builder: staged first draft, inline typing, image intake ---------- */
+.draft-progress {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: var(--space-12) var(--space-6);
+  background: #0d0d0d;
+  min-height: calc(100vh - 64px);
+}
+.draft-progress-card {
+  width: min(560px, 100%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-8);
+}
+.draft-progress-card h2 {
+  font-size: 26px;
+  margin: var(--space-2) 0;
+}
+.draft-progress-card .muted {
+  margin-bottom: var(--space-6);
+}
+.draft-progress-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+.draft-progress-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--size-body);
+  color: var(--text-tertiary);
+  animation: draft-line 0.28s ease both;
+}
+.draft-progress-list li.active {
+  color: var(--text-primary);
+}
+.draft-progress-list li.done {
+  color: var(--text-secondary);
+}
+.draft-progress-mark {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-strong);
+  flex: none;
+}
+.draft-progress-list li.active .draft-progress-mark,
+.draft-progress-list li.done .draft-progress-mark {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.draft-progress-list li.done .draft-progress-mark {
+  background: rgba(201, 169, 97, 0.16);
+}
+@keyframes draft-line {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+.inline-text {
+  display: inline;
+  min-width: 1ch;
+  border-radius: 3px;
+  outline: none;
+  cursor: text;
+  white-space: pre-wrap;
+}
+.inline-text:focus {
+  box-shadow: 0 0 0 2px rgba(201, 169, 97, 0.35);
+  background: rgba(201, 169, 97, 0.06);
+}
+.inline-text:empty::before {
+  content: attr(data-placeholder);
+  color: #b3ada0;
+  font-style: italic;
+}
+
+.canvas-hint {
+  font-size: 11px;
+  color: #8a857a;
+  margin-bottom: var(--space-4);
+}
+
+.block-wrap {
+  position: relative;
+}
+
+.doc-image-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.doc-image-drop {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-6);
+  border: 1px dashed #d8d2c4;
+  border-radius: 6px;
+  background: #faf8f4;
+  color: #7a7568;
+  font-size: 12px;
+  text-align: center;
+}
+.doc-image-drop:hover {
+  border-color: var(--gold);
+  color: #1a1a1a;
+}
+.doc-image-drop b {
+  font-size: 13px;
+  color: #1a1a1a;
+}

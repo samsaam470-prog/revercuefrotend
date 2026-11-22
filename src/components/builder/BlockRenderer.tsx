@@ -1,6 +1,9 @@
-import { Pencil, Trash2, ArrowUp, ArrowDown, Copy } from "lucide-react";
+import { useRef, useState } from "react";
+import { ImageUp, Pencil, Trash2, ArrowUp, ArrowDown, Copy } from "lucide-react";
 import { ElementToolbar } from "./ElementToolbar";
+import { InlineText } from "./InlineText";
 import { RichText } from "./RichText";
+import { imageToDataUrl } from "../../lib/images";
 import type { Block } from "../../types";
 
 export interface BlockRendererProps {
@@ -30,22 +33,59 @@ export function BlockRenderer({
   onPatch,
   brandPrimary = "#c9a961",
 }: BlockRendererProps) {
+  const canType = Boolean(editable && onPatch);
+
+  /** Text that is typed in place, with the formatted view when it is not editable. */
+  const typeable = (
+    value: string | undefined,
+    placeholder: string,
+    options: { multiline?: boolean; write?: (next: string) => void } = {},
+  ) => {
+    const write = options.write ?? ((next: string) => onPatch?.({ text: next }));
+    if (canType) {
+      return (
+        <InlineText
+          value={value ?? ""}
+          onChange={write}
+          placeholder={placeholder}
+          multiline={options.multiline ?? true}
+        />
+      );
+    }
+    return <RichText value={value || placeholder} />;
+  };
+
+  const typeableItem = (index: number, label: string, field: "items" | "columns") => {
+    if (!canType || !onPatch) return <RichText value={label} />;
+    if (field === "items") {
+      return (
+        <InlineText
+          value={label}
+          onChange={(next) =>
+            onPatch({
+              items: (block.items ?? []).map((row, i) => (i === index ? { ...row, label: next } : row)),
+            })
+          }
+          placeholder="Item"
+          multiline={false}
+        />
+      );
+    }
+    return <RichText value={label} />;
+  };
+
   const content = (() => {
     switch (block.type) {
       case "heading": {
         const Tag = block.level === "h1" ? "h1" : block.level === "h3" ? "h3" : "h2";
         return (
           <Tag style={{ textAlign: block.align, color: block.color }}>
-            <RichText value={block.text || "Untitled heading"} />
+            {typeable(block.text, "Section heading", { multiline: false })}
           </Tag>
         );
       }
       case "paragraph":
-        return (
-          <p style={{ textAlign: block.align, color: block.color }}>
-            <RichText value={block.text || "Write the paragraph in the properties panel."} />
-          </p>
-        );
+        return <p style={{ textAlign: block.align, color: block.color }}>{typeable(block.text, "Write here…")}</p>;
       case "quote":
         return (
           <blockquote
@@ -57,7 +97,7 @@ export function BlockRenderer({
               color: "#3a3a3a",
             }}
           >
-            <RichText value={block.text || "A quote from the client or the brief."} />
+            {typeable(block.text, "A quote from the client or the brief.")}
           </blockquote>
         );
       case "list":
@@ -66,7 +106,7 @@ export function BlockRenderer({
             {(block.items?.length ? block.items : [{ label: "First item" }, { label: "Second item" }]).map(
               (item, index) => (
                 <li key={index} style={{ marginBottom: 4 }}>
-                  <RichText value={item.label} />
+                  {block.items?.length ? typeableItem(index, item.label, "items") : <RichText value={item.label} />}
                 </li>
               ),
             )}
@@ -74,18 +114,11 @@ export function BlockRenderer({
         );
       case "image":
         return (
-          <div
-            style={{
-              border: "1px dashed #d8d2c4",
-              borderRadius: 6,
-              padding: 24,
-              textAlign: "center",
-              color: "#8a857a",
-              fontSize: 12,
-            }}
-          >
-            {block.url ? block.alt || "Image" : "Image block — add a URL or upload in the properties"}
-          </div>
+          <ImageBlock
+            block={block}
+            canEdit={canType}
+            onChange={(patch) => onPatch?.(patch)}
+          />
         );
       case "graph":
         return (
@@ -99,7 +132,7 @@ export function BlockRenderer({
               ))}
             </div>
             <p className="caption" style={{ color: "#8a857a", marginTop: 6 }}>
-              <RichText value={block.text || "Sample chart — replace the values in the properties."} />
+              {typeable(block.text, "Chart caption", { multiline: false })}
             </p>
           </div>
         );
@@ -117,7 +150,9 @@ export function BlockRenderer({
               {(block.items?.length ? block.items : [{ label: "Design", price: 700 }, { label: "Build", price: 500 }]).map(
                 (item, index) => (
                   <tr key={index}>
-                    <td>{item.label}</td>
+                    <td>
+                      {block.items?.length ? typeableItem(index, item.label, "items") : <RichText value={item.label} />}
+                    </td>
                     <td>{item.quantity ?? 1}</td>
                     <td style={{ textAlign: "right" }}>${item.price ?? 0}</td>
                   </tr>
@@ -138,7 +173,7 @@ export function BlockRenderer({
                 ]
             ).map((item, index) => (
               <div className="canvas-package" key={index} style={index === 1 ? { borderColor: brandPrimary } : undefined}>
-                <b>{item.label}</b>
+                <b>{block.items?.length ? typeableItem(index, item.label, "items") : <RichText value={item.label} />}</b>
                 <span className="amount">${item.price ?? 0}</span>
               </div>
             ))}
@@ -151,7 +186,8 @@ export function BlockRenderer({
               <li key={index} style={{ display: "flex", gap: 10, marginBottom: 6, fontSize: 12, color: "#3a3a3a" }}>
                 <span style={{ color: brandPrimary }}>●</span>
                 <span>
-                  {item.label} {item.value ? <span style={{ color: "#8a857a" }}>· {item.value}</span> : null}
+                  {block.items?.length ? typeableItem(index, item.label, "items") : <RichText value={item.label} />}{" "}
+                  {item.value ? <span style={{ color: "#8a857a" }}>· {item.value}</span> : null}
                 </span>
               </li>
             ))}
@@ -161,7 +197,7 @@ export function BlockRenderer({
         return (
           <details className="faq-item" style={{ background: "#faf8f4", borderColor: "#e5e1d8" }}>
             <summary style={{ color: "#1a1a1a", padding: "10px 0" }}>
-              {block.faqs?.[0]?.question || block.text || "What is included?"}
+              <RichText value={block.faqs?.[0]?.question || block.text || "What is included?"} />
             </summary>
             <p style={{ color: "#4a4a4a", fontSize: 12 }}>
               <RichText value={block.faqs?.[0]?.answer || "The answer the client reads on the page."} />
@@ -188,7 +224,7 @@ export function BlockRenderer({
       case "file_upload":
         return (
           <div style={{ border: "1px dashed #d8d2c4", borderRadius: 6, padding: 16, fontSize: 12, color: "#8a857a" }}>
-            Upload a file — <RichText value={block.text || "images or PDFs"} />
+            Upload a file — {typeable(block.text, "images or PDFs", { multiline: false })}
           </div>
         );
       case "signature":
@@ -212,9 +248,7 @@ export function BlockRenderer({
       case "next_step":
         return (
           <div style={{ border: "1px solid #e5e1d8", borderRadius: 6, padding: 12, background: "#faf8f4" }}>
-            <b style={{ fontSize: 12, color: "#1a1a1a" }}>
-              <RichText value={block.text || "Next step"} />
-            </b>
+            <b style={{ fontSize: 12, color: "#1a1a1a" }}>{typeable(block.text, "Next step", { multiline: false })}</b>
             <p style={{ fontSize: 12, color: "#4a4a4a", marginTop: 4 }}>
               Reply to move forward. The contact details come from your profile.
             </p>
@@ -236,9 +270,25 @@ export function BlockRenderer({
           >
             {(block.columns ?? [["Column one"], ["Column two"]]).map((column, index) => (
               <div key={index} style={{ fontSize: 12, color: "#3a3a3a" }}>
-                {column.map((line) => (
-                  <p key={line} style={{ marginBottom: 4 }}>
-                    <RichText value={line} />
+                {column.map((line, lineIndex) => (
+                  <p key={lineIndex} style={{ marginBottom: 4 }}>
+                    {canType && onPatch ? (
+                      <InlineText
+                        value={line}
+                        onChange={(next) =>
+                          onPatch({
+                            columns: (block.columns ?? []).map((current, columnIndex) =>
+                              columnIndex === index
+                                ? current.map((entry, entryIndex) => (entryIndex === lineIndex ? next : entry))
+                                : current,
+                            ),
+                          })
+                        }
+                        placeholder="Write here…"
+                      />
+                    ) : (
+                      <RichText value={line} />
+                    )}
                   </p>
                 ))}
               </div>
@@ -248,9 +298,7 @@ export function BlockRenderer({
       case "card":
         return (
           <div style={{ border: "1px solid #e5e1d8", borderRadius: 6, padding: 12 }}>
-            <b style={{ fontSize: 12, color: "#111" }}>
-              <RichText value={block.text || "Card title"} />
-            </b>
+            <b style={{ fontSize: 12, color: "#111" }}>{typeable(block.text, "Card title", { multiline: false })}</b>
           </div>
         );
       case "button":
@@ -266,7 +314,7 @@ export function BlockRenderer({
               fontWeight: 600,
             }}
           >
-            <RichText value={block.text || "Continue"} />
+            {typeable(block.text, "Continue", { multiline: false })}
           </span>
         );
       case "shape":
@@ -281,11 +329,7 @@ export function BlockRenderer({
           />
         );
       default:
-        return (
-          <p>
-            <RichText value={block.text} />
-          </p>
-        );
+        return <p>{typeable(block.text, "Write here…")}</p>;
     }
   })();
 
@@ -299,32 +343,105 @@ export function BlockRenderer({
         role="group"
         tabIndex={0}
         onKeyDown={(event) => {
-          if (event.key === "Enter") onSelect?.();
+          if (event.key === "Enter" && event.target === event.currentTarget) onSelect?.();
         }}
         data-type={block.type}
       >
-      <div className="block-tools">
-        <button type="button" aria-label="Move up" onClick={(event) => { event.stopPropagation(); onMoveUp?.(); }}>
-          <ArrowUp size={11} />
-        </button>
-        <button type="button" aria-label="Move down" onClick={(event) => { event.stopPropagation(); onMoveDown?.(); }}>
-          <ArrowDown size={11} />
-        </button>
-        <button type="button" aria-label="Duplicate" onClick={(event) => { event.stopPropagation(); onDuplicate?.(); }}>
-          <Copy size={11} />
-        </button>
-        <button type="button" aria-label="Delete" onClick={(event) => { event.stopPropagation(); onDelete?.(); }}>
-          <Trash2 size={11} />
-        </button>
-        <button type="button" aria-label="Select" onClick={(event) => { event.stopPropagation(); onSelect?.(); }}>
-          <Pencil size={11} />
-        </button>
+        <div className="block-tools">
+          <button type="button" aria-label="Move up" onClick={(event) => { event.stopPropagation(); onMoveUp?.(); }}>
+            <ArrowUp size={11} />
+          </button>
+          <button type="button" aria-label="Move down" onClick={(event) => { event.stopPropagation(); onMoveDown?.(); }}>
+            <ArrowDown size={11} />
+          </button>
+          <button type="button" aria-label="Duplicate" onClick={(event) => { event.stopPropagation(); onDuplicate?.(); }}>
+            <Copy size={11} />
+          </button>
+          <button type="button" aria-label="Delete" onClick={(event) => { event.stopPropagation(); onDelete?.(); }}>
+            <Trash2 size={11} />
+          </button>
+          <button type="button" aria-label="Select" onClick={(event) => { event.stopPropagation(); onSelect?.(); }}>
+            <Pencil size={11} />
+          </button>
+        </div>
+        {content}
       </div>
-      {content}
-      </div>
-      {onPatch && (
+      {onPatch && selected && (
         <ElementToolbar block={block} onChange={onPatch} onRemove={() => onDelete?.()} />
       )}
+    </div>
+  );
+}
+
+function ImageBlock({
+  block,
+  canEdit,
+  onChange,
+}: {
+  block: Block;
+  canEdit: boolean;
+  onChange: (patch: Partial<Block>) => void;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+
+  const pick = async (file?: File | null) => {
+    if (!file) return;
+    setBusy(true);
+    setError("");
+    try {
+      const url = await imageToDataUrl(file);
+      onChange({ url, alt: block.alt || file.name.replace(/\.[a-z0-9]+$/i, "") });
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "That image could not be used.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  if (block.url) {
+    return (
+      <figure style={{ margin: "12px 0" }}>
+        <img
+          src={block.url}
+          alt={block.alt || "Document image"}
+          style={{ width: "100%", borderRadius: 6, display: "block" }}
+          loading="lazy"
+        />
+        {block.alt ? (
+          <figcaption style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>{block.alt}</figcaption>
+        ) : null}
+      </figure>
+    );
+  }
+
+  if (!canEdit) {
+    return (
+      <div style={{ border: "1px dashed #d8d2c4", borderRadius: 6, padding: 24, textAlign: "center", color: "#8a857a", fontSize: 12 }}>
+        Image
+      </div>
+    );
+  }
+
+  return (
+    <div className="doc-image-upload">
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        hidden
+        onChange={(event) => {
+          void pick(event.target.files?.[0]);
+          event.target.value = "";
+        }}
+      />
+      <button type="button" className="doc-image-drop" onClick={() => inputRef.current?.click()} disabled={busy}>
+        <ImageUp size={18} />
+        <b>{busy ? "Adding the image…" : "Upload an image"}</b>
+        <span>PNG, JPEG, WebP or GIF. Resized in your browser, never sent anywhere.</span>
+      </button>
+      {error ? <span className="caption" style={{ color: "var(--red)" }}>{error}</span> : null}
     </div>
   );
 }

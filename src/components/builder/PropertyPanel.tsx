@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Input } from "../ui/Input";
 import { Textarea } from "../ui/Textarea";
 import { AskHelperTextarea } from "./AskHelperTextarea";
+import { imageToDataUrl } from "../../lib/images";
 import { Select } from "../ui/Select";
 import { Checkbox } from "../ui/Checkbox";
 import type { Block, DocContent } from "../../types";
@@ -24,6 +26,10 @@ export function PropertyPanel({
   afterApproval,
   onAfterApprovalChange,
 }: PropertyPanelProps) {
+  const [uploadError, setUploadError] = useState("");
+
+  const setItems = (items: Block["items"]) => onChange({ items });
+
   if (!block) {
     return (
       <div className="props-empty">
@@ -139,21 +145,33 @@ export function PropertyPanel({
 
       {block.type === "image" && (
         <>
+          {block.url ? (
+            <img
+              src={block.url}
+              alt={block.alt || "Image"}
+              style={{ width: "100%", borderRadius: 6, border: "1px solid var(--border)" }}
+            />
+          ) : null}
           <label className="btn btn-secondary btn-sm upload-device">
-            Upload from device
+            {block.url ? "Replace image" : "Upload from device"}
             <input
               type="file"
               accept="image/*"
               hidden
               onChange={(event) => {
                 const file = event.target.files?.[0];
+                event.target.value = "";
                 if (!file) return;
-                const reader = new FileReader();
-                reader.onload = () => onChange({ url: String(reader.result), alt: block.alt || file.name });
-                reader.readAsDataURL(file);
+                setUploadError("");
+                void imageToDataUrl(file)
+                  .then((url) => onChange({ url, alt: block.alt || file.name.replace(/\.[a-z0-9]+$/i, "") }))
+                  .catch((cause) =>
+                    setUploadError(cause instanceof Error ? cause.message : "That image could not be used."),
+                  );
               }}
             />
           </label>
+          {uploadError ? <span className="caption" style={{ color: "var(--red)" }}>{uploadError}</span> : null}
           <Input
             id="block-url"
             label="Image URL"
@@ -295,6 +313,94 @@ export function PropertyPanel({
             }
           >
             + Add line item
+          </button>
+        </>
+      )}
+
+      {block.type === "packages" && (
+        <>
+          {(block.items ?? []).map((item, index) => (
+            <div className="two-up" key={index} style={{ gap: 8 }}>
+              <Input
+                id={`package-label-${index}`}
+                label={`Package ${index + 1}`}
+                value={item.label}
+                onChange={(value) =>
+                  setItems((block.items ?? []).map((row, i) => (i === index ? { ...row, label: value } : row)))
+                }
+              />
+              <Input
+                id={`package-price-${index}`}
+                label="Price"
+                type="number"
+                value={String(item.price ?? 0)}
+                onChange={(value) =>
+                  setItems((block.items ?? []).map((row, i) => (i === index ? { ...row, price: Number(value) } : row)))
+                }
+              />
+            </div>
+          ))}
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => setItems([...(block.items ?? []), { label: "New package", price: 0 }])}
+          >
+            + Add package
+          </button>
+        </>
+      )}
+
+      {block.type === "list" && (
+        <>
+          {(block.items ?? []).map((item, index) => (
+            <Input
+              key={index}
+              id={`list-item-${index}`}
+              label={`Item ${index + 1}`}
+              value={item.label}
+              onChange={(value) =>
+                setItems((block.items ?? []).map((row, i) => (i === index ? { ...row, label: value } : row)))
+              }
+            />
+          ))}
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => setItems([...(block.items ?? []), { label: "New item" }])}
+          >
+            + Add item
+          </button>
+        </>
+      )}
+
+      {block.type === "timeline" && (
+        <>
+          {(block.items ?? []).map((item, index) => (
+            <div className="two-up" key={index} style={{ gap: 8 }}>
+              <Input
+                id={`timeline-label-${index}`}
+                label={`Step ${index + 1}`}
+                value={item.label}
+                onChange={(value) =>
+                  setItems((block.items ?? []).map((row, i) => (i === index ? { ...row, label: value } : row)))
+                }
+              />
+              <Input
+                id={`timeline-value-${index}`}
+                label="When"
+                value={item.value || ""}
+                onChange={(value) =>
+                  setItems((block.items ?? []).map((row, i) => (i === index ? { ...row, value } : row)))
+                }
+              />
+            </div>
+          ))}
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => setItems([...(block.items ?? []), { label: "New milestone" }])}
+          >
+            + Add milestone
           </button>
         </>
       )}

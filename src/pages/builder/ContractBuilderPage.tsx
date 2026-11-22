@@ -1,17 +1,19 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { contractsApi } from "../../api/contracts";
 import { proposalsApi } from "../../api/proposals";
 import { crmApi } from "../../api/crm";
-import { Canvas, blocksFromProposal } from "../../components/builder/Canvas";
+import { Canvas } from "../../components/builder/Canvas";
 import { TopBar } from "../../components/builder/TopBar";
 import { TemplatePicker } from "../../components/builder/TemplatePicker";
 import { PreviewPane } from "../../components/builder/PreviewPane";
 import { ShareModal } from "../../components/builder/ShareModal";
 import { DocumentReview } from "../../components/builder/DocumentReview";
 import { analyzeDocument, type Review } from "../../lib/analysis";
-import { markPipelineDone, pipelineDone, runDraftPipeline } from "../../lib/pipeline";
+import { markPipelineDone, runDraftPipeline, type DraftStage } from "../../lib/pipeline";
+import { DraftProgress } from "../../components/builder/DraftProgress";
+import { briefOf, contentOf, hasPlaceholders, skeletonForBrief, type Brief } from "../../lib/brief";
 import { isBuiltIn } from "../../lib/templates";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
@@ -337,6 +339,8 @@ function ContractCanvas({ id }: { id: string }) {
   const [review, setReview] = useState<Review | null>(null);
   const [pendingShare, setPendingShare] = useState<{ url: string } | null>(null);
   const [initialised, setInitialised] = useState(false);
+  const [stage, setStage] = useState<DraftStage | null>(null);
+  const briefRef = useRef<Brief | null>(null);
   const [signerName, setSignerName] = useState("");
   const [signConsent, setSignConsent] = useState(false);
   const [freelancerSigned, setFreelancerSigned] = useState(false);
@@ -346,34 +350,31 @@ function ContractCanvas({ id }: { id: string }) {
   useEffect(() => {
     if (!contract || initialised) return;
     setTitle(contract.title);
-    if (contract.content?.blocks?.length) {
-      setDoc({ ...EMPTY_DOC, ...contract.content });
-      setBlocks(contract.content.blocks);
-    } else {
-      let templateBlocks: Block[] | null = null;
-      try {
-        const stored = sessionStorage.getItem(`revercue_template_${id}`);
-        if (stored) templateBlocks = JSON.parse(stored) as Block[];
-      } catch {
-        templateBlocks = null;
-      }
-      if (templateBlocks?.length) {
-        setBlocks(templateBlocks);
-      } else {
-        setBlocks(
-          blocksFromProposal({
-            problem: contract.scope,
-            sections: ["Parties", "Scope", "Payment", "Timeline", "Revisions", "Cancellation", "Signatures"],
-          }),
-        );
-        setBlocks((current) => [
-          ...current.filter((block) => block.type !== "next_step"),
-          { id: "signature", type: "signature" },
-        ]);
-      }
+    const content = contentOf(contract);
+    const savedBlocks = Array.isArray(content.blocks) ? (content.blocks as Block[]) : [];
+    const brief = briefOf(contract);
+    briefRef.current = brief;
+    setDoc({ ...EMPTY_DOC, ...(content as Partial<DocContent>), blocks: [] });
+
+    let templateBlocks: Block[] | null = null;
+    try {
+      const stored = sessionStorage.getItem(`revercue_template_${id}`);
+      if (stored) templateBlocks = JSON.parse(stored) as Block[];
+    } catch {
+      templateBlocks = null;
     }
+
+    const initial = savedBlocks.length
+      ? savedBlocks
+      : templateBlocks?.length
+        ? templateBlocks
+        : skeletonForBrief(brief, "contract");
+    setBlocks(initial);
+
+    const wantsDraft = !content.drafted && (savedBlocks.length === 0 || hasPlaceholders(savedBlocks));
+    setStage(wantsDraft ? "brief" : null);
     setInitialised(true);
-  }, [contract, initialised]);
+  }, [contract, initialised, id]);
 
   const payload = useMemo(() => ({ title, content: { ...doc, blocks } }), [title, doc, blocks]);
 
@@ -385,39 +386,51 @@ function ContractCanvas({ id }: { id: string }) {
     enabled: initialised,
   });
 
+  const persistDraft = async (nextBlocks: Block[]) => {
+    const base = contract ? contentOf(contract) : {};
+    const content = { ...base, ...doc, blocks: nextBlocks, drafted: true };
+    await contractsApi.update(id, { content: content as DocContent }).catch(() => undefined);
+  };
+
   /* The first draft fills the template's clauses from the contract itself. */
   useEffect(() => {
-    if (!initialised || blocks.length === 0) return;
-    if (pipelineDone(id)) return;
-    const hasPlaceholders = blocks.some(
-      (block) =>
-        Boolean(block.meta?.placeholder) ||
-        Boolean(block.text && /\{\{/.test(block.text)),
-    );
-    if (!hasPlaceholders) return;
+    if (!initialised || !contract || !stage || stage !== "brief") return;
+    if (!briefRef.current) return;
+    if (blocks.length === 0) {
+      setStage(null);
+      return;
+    }
 
     let cancelled = false;
+    let last = Date.now();
+
+    const step = async (next: DraftStage) => {
+      const wait = Math.max(0, 550 - (Date.now() - last));
+      if (wait) await new Promise((resolve) => setTimeout(resolve, wait));
+      last = Date.now();
+      if (!cancelled) setStage(next);
+    };
+
     void runDraftPipeline({
       id,
       blocks,
-      sections: SECTIONS,
-      tone: "formal",
+      brief: briefRef.current,
+      kind: "contract",
       withVisuals: false,
-      fills: {
-        parties: `${contract?.client_name || "The client"} and the freelancer.`,
-        scope: contract?.scope || "",
-        payment_terms: contract?.payment_terms || "",
-        timeline: contract?.timeline || "",
-        revisions: contract?.revisions || "",
-        cancellation: contract?.cancellation || "",
-      },
+      onStage: step,
     })
-      .then((result) => {
+      .then(async (result) => {
+        if (cancelled) return;
+        await new Promise((resolve) => setTimeout(resolve, 550));
         if (cancelled) return;
         setBlocks(result.blocks);
+        await persistDraft(result.blocks);
         markPipelineDone(id);
       })
-      .catch(() => undefined);
+      .catch(() => undefined)
+      .finally(() => {
+        if (!cancelled) setStage(null);
+      });
 
     return () => {
       cancelled = true;
@@ -483,6 +496,14 @@ function ContractCanvas({ id }: { id: string }) {
       setCreating(false);
     }
   };
+
+  if (stage) {
+    return (
+      <div className="builder">
+        <DraftProgress stage={stage} clientName={contract.client_name || "your client"} />
+      </div>
+    );
+  }
 
   return (
     <div className="builder">

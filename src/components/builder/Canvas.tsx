@@ -48,12 +48,7 @@ export function Canvas({
     const block: Block = {
       id: `b_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
       type,
-      text:
-        type === "heading"
-          ? "A new heading"
-          : type === "paragraph"
-            ? "Write the paragraph in the properties panel."
-            : undefined,
+      text: type === "heading" ? "Section heading" : type === "paragraph" ? "" : undefined,
       level: type === "heading" ? "h2" : undefined,
     };
     const next = [...blocks, block];
@@ -105,6 +100,9 @@ export function Canvas({
             <span className="mono">ref {reference}</span>
           </div>
           <h1>{title || "Untitled document"}</h1>
+          <div className="canvas-hint">
+            Click any line to type. Select a block for its colours, images and uploads.
+          </div>
           {blocks.length === 0 && (
             <p style={{ color: "#8a857a", fontSize: 13 }}>
               The canvas is empty. Insert a block from the left panel, or start from a template.
