@@ -39,6 +39,7 @@ const SETTINGS_NAV = [
   { to: "/settings/saved-faqs", label: "Saved FAQs" },
   { to: "/settings/saved-packages", label: "Saved Packages" },
   { to: "/settings/revision-prices", label: "Revision Prices" },
+  { to: "/settings/revenue", label: "Revenue & Expenses" },
   { to: "/settings/what-revercue-knows", label: "What Revercue Knows" },
   { to: "/settings/delete-account", label: "Delete Account" },
 ];

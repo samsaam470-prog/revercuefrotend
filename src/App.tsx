@@ -152,6 +152,7 @@ export function App() {
             "saved-faqs",
             "saved-packages",
             "revision-prices",
+            "revenue",
             "what-revercue-knows",
             "delete-account",
           ] as SettingsSection[]

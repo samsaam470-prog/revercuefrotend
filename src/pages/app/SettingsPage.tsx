@@ -36,6 +36,7 @@ export type SettingsSection =
   | "saved-faqs"
   | "saved-packages"
   | "revision-prices"
+  | "revenue"
   | "what-revercue-knows"
   | "delete-account";
 
@@ -48,6 +49,7 @@ const TITLES: Record<SettingsSection, { title: string; subtitle: string }> = {
   "saved-faqs": { title: "Saved FAQs", subtitle: "The FAQ library the builder pre-fills from." },
   "saved-packages": { title: "Saved Packages", subtitle: "Reusable packages for the proposal builder." },
   "revision-prices": { title: "Revision Prices", subtitle: "A price per revision category, shown to the client." },
+  revenue: { title: "Revenue & Expenses", subtitle: "Earned revenue, pending invoices and recorded expenses." },
   "what-revercue-knows": { title: "What Revercue Knows", subtitle: "The read-only transparency page." },
   "delete-account": { title: "Delete Account", subtitle: "The danger card, with a five-day grace period." },
 };
@@ -70,6 +72,7 @@ export function SettingsPage({ section }: { section: SettingsSection }) {
       {section === "saved-faqs" && <SavedFaqsSection />}
       {section === "saved-packages" && <SavedPackagesSection />}
       {section === "revision-prices" && <RevisionPricesSection />}
+      {section === "revenue" && <RevenueSection />}
       {section === "what-revercue-knows" && <WhatRevercueKnowsSection />}
       {section === "delete-account" && <DeleteAccountSection />}
     </>
@@ -1111,6 +1114,111 @@ function DeleteAccountSection() {
           />
         </div>
       </Modal>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------- revenue */
+
+function RevenueSection() {
+  const { hasFeature } = usePlanGate();
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const query = useQuery({ queryKey: ["settings", "revenue"], queryFn: () => settingsApi.revenue() });
+
+  const [amount, setAmount] = useState("");
+  const [category, setCategory] = useState("Software");
+  const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
+  const [note, setNote] = useState("");
+  const [saving, setSaving] = useState(false);
+
+  if (!hasFeature("revenue_tracker")) return <UpgradeCard feature="Revenue tracking" />;
+
+  const data = query.data;
+  return (
+    <div className="settings-card">
+      <h2>Revenue overview</h2>
+      {query.isLoading && <SkeletonLines count={3} />}
+      {data && (
+        <div className="two-up" style={{ marginBottom: 16 }}>
+          <div>
+            <div className="muted" style={{ fontSize: 12 }}>Earned</div>
+            <div style={{ fontSize: 20, fontWeight: 600 }}>{formatCurrency(data.earned)}</div>
+          </div>
+          <div>
+            <div className="muted" style={{ fontSize: 12 }}>Spent</div>
+            <div style={{ fontSize: 20, fontWeight: 600 }}>{formatCurrency(data.spent)}</div>
+          </div>
+          <div>
+            <div className="muted" style={{ fontSize: 12 }}>Profit</div>
+            <div style={{ fontSize: 20, fontWeight: 600 }}>{formatCurrency(data.profit)}</div>
+          </div>
+          <div>
+            <div className="muted" style={{ fontSize: 12 }}>Pending</div>
+            <div style={{ fontSize: 20, fontWeight: 600 }}>
+              {formatCurrency(data.pending_total)} ({data.pending_count})
+            </div>
+          </div>
+        </div>
+      )}
+
+      <h3 style={{ marginTop: 8 }}>Record an expense</h3>
+      <div className="two-up">
+        <Input id="exp-amount" label="Amount" type="number" value={amount} onChange={setAmount} />
+        <Input id="exp-category" label="Category" value={category} onChange={setCategory} />
+      </div>
+      <div className="two-up" style={{ marginTop: 8 }}>
+        <Input id="exp-date" label="Date" type="date" value={date} onChange={setDate} />
+        <Input id="exp-note" label="Note" value={note} onChange={setNote} />
+      </div>
+      <div className="settings-actions" style={{ marginTop: 8 }}>
+        <Button
+          disabled={saving || !amount || !category}
+          onClick={async () => {
+            setSaving(true);
+            try {
+              await settingsApi.addExpense({
+                amount: Number(amount),
+                category,
+                date,
+                note: note || undefined,
+              });
+              toast.success("Expense recorded.");
+              setAmount("");
+              setNote("");
+              await queryClient.invalidateQueries({ queryKey: ["settings", "revenue"] });
+            } catch (cause) {
+              const apiError = cause as ApiError;
+              toast.error(errorMessage(apiError.code, apiError.message));
+            } finally {
+              setSaving(false);
+            }
+          }}
+        >
+          {saving ? "Saving…" : "Add expense"}
+        </Button>
+      </div>
+
+      {data?.expenses?.length ? (
+        <>
+          <h3 style={{ marginTop: 16 }}>Recent expenses</h3>
+          <ul style={{ listStyle: "none", padding: 0 }}>
+            {data.expenses.map((expense) => (
+              <li
+                key={expense.id}
+                style={{ display: "flex", justifyContent: "space-between", padding: "6px 0", borderBottom: "1px solid var(--border, #eee)" }}
+              >
+                <span>
+                  {expense.category} {expense.note ? `— ${expense.note}` : ""}
+                </span>
+                <span>
+                  {formatCurrency(expense.amount)} <span className="muted">{expense.date}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null}
     </div>
   );
 }

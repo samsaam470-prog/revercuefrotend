@@ -100,6 +100,8 @@ export const settingsApi = {
       earned: number;
       spent: number;
       profit: number;
+      pending_total: number;
+      pending_count: number;
       expenses: { id: string; date: string; category: string; platform?: string; amount: number; note?: string }[];
       price_suggestion?: string;
     }>("/api/settings/revenue"),
