@@ -1,40 +1,61 @@
-import { Check, Loader2 } from "lucide-react";
-import { DRAFT_STAGES, type DraftStage } from "../../lib/pipeline";
+import { DRAFT_STAGES, type DraftStage, type DraftStageStatus } from "../../lib/pipeline";
 
 const LABELS: Record<DraftStage, string> = {
-  brief: "Reading your brief",
-  industry: "Searching industries",
-  service: "Taking a look at your service",
-  write: "Making the draft",
-  visuals: "Adding visuals",
-  render: "Rendering the page",
+  context: "Client and profile context",
+  research: "Client and industry research",
+  structure: "Document structure",
+  writing: "Draft content",
+  visuals: "Visual assets",
+  checks: "Accuracy and editability checks",
 };
 
-/**
- * The staged screen between the template choice and the canvas. Each line
- * appears when that stage actually starts, and stays marked until the next
- * one does; the canvas replaces this only once the last stage is done.
- */
-export function DraftProgress({ stage, clientName }: { stage: DraftStage; clientName: string }) {
-  const currentIndex = Math.max(0, DRAFT_STAGES.indexOf(stage));
+const DEFAULT_DETAILS: Record<DraftStage, string> = {
+  context: "Loading the brief and selected template",
+  research: "Looking for relevant public sources",
+  structure: "Organising sections for this document",
+  writing: "Writing from the information provided",
+  visuals: "Finding suitable real assets",
+  checks: "Checking the draft before opening the editor",
+};
 
+export type DraftProgressState = Partial<Record<DraftStage, { status: DraftStageStatus; detail?: string }>>;
+
+export function DraftProgress({
+  stage,
+  clientName,
+  statuses,
+  documentLabel = "document",
+}: {
+  stage: DraftStage;
+  clientName: string;
+  statuses?: DraftProgressState;
+  documentLabel?: string;
+}) {
   return (
     <div className="draft-progress" role="status" aria-live="polite">
       <div className="draft-progress-card">
-        <p className="eyebrow">First draft</p>
-        <h2 className="serif">Writing the first draft for {clientName}.</h2>
-        <p className="muted">This takes a few seconds. Everything it writes stays editable.</p>
-
+        <p className="eyebrow">Preparing your draft</p>
+        <h2 className="serif">Putting the {documentLabel} together for {clientName}.</h2>
+        <p className="muted">These are the actual preparation steps. Your draft stays editable and is not shared or published.</p>
         <ol className="draft-progress-list">
-          {DRAFT_STAGES.map((item, index) => {
-            if (index > currentIndex) return null;
-            const done = index < currentIndex;
+          {DRAFT_STAGES.map((item) => {
+            const status = statuses?.[item]?.status ?? (item === stage ? "running" : "pending");
+            const detail = statuses?.[item]?.detail || DEFAULT_DETAILS[item];
             return (
-              <li key={item} className={done ? "done" : "active"}>
+              <li key={item} className={"draft-progress-item " + status}>
                 <span className="draft-progress-mark" aria-hidden="true">
-                  {done ? <Check size={12} /> : <Loader2 size={12} className="spin" />}
+                  {status === "done" ? <Check size={13} />
+                    : status === "running" ? <Loader2 size={13} className="spin" />
+                      : status === "skipped" ? <Minus size={13} />
+                        : <Circle size={8} />}
                 </span>
-                {LABELS[item]}
+                <span className="draft-progress-copy">
+                  <strong>{LABELS[item]}</strong>
+                  <small>{detail}</small>
+                </span>
+                <span className="draft-progress-state">
+                  {status === "done" ? "Done" : status === "running" ? "Working" : status === "skipped" ? "Skipped" : "Waiting"}
+                </span>
               </li>
             );
           })}

@@ -1,4 +1,3 @@
-import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowDown, ArrowUp, Plus, Trash2 } from "lucide-react";
@@ -6,6 +5,8 @@ import { formsApi } from "../../api/forms";
 import { crmApi } from "../../api/crm";
 import { TopBar } from "../../components/builder/TopBar";
 import { ShareModal } from "../../components/builder/ShareModal";
+import { DraftProgress, type DraftProgressState } from "../../components/builder/DraftProgress";
+import type { DraftStage, DraftStageStatus } from "../../lib/pipeline";
 import { Modal } from "../../components/ui/Modal";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
@@ -67,6 +68,8 @@ export function FormEditorPage() {
   const [share, setShare] = useState<{ url: string } | null>(null);
   const [creating, setCreating] = useState(false);
   const [initialised, setInitialised] = useState(false);
+  const [stage, setStage] = useState<DraftStage | null>(null);
+  const [stageStatuses, setStageStatuses] = useState<DraftProgressState>({});
 
   const form = query.data?.form;
   const clients = useQuery({
@@ -147,6 +150,74 @@ export function FormEditorPage() {
     setQuestions(next);
   };
 
+  const generateStarterQuestions = async () => {
+    const selectedClient = clients.data?.data.find((client) => client.id === clientId);
+    const clientName = selectedClient?.name || "your client";
+    const paint = () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    const mark = async (name: DraftStage, status: DraftStageStatus, detail: string) => {
+      setStage(name);
+      setStageStatuses((current) => ({ ...current, [name]: { status, detail } }));
+      await paint();
+    };
+
+    setStageStatuses({});
+    await mark("context", "running", "Reading the form title, description, and selected client.");
+    const context = [title.trim(), description.trim(), selectedClient?.name || ""].filter(Boolean).join(" — ");
+    await mark("context", "done", context ? `Using the details supplied for ${clientName}.` : "No extra client details supplied; using a neutral intake structure.");
+    await mark("research", "skipped", "Public web research is not appropriate for a client intake form; questions should come from your brief.");
+    await mark("structure", "running", "Choosing an intake sequence for goals, context, scope, timing, and references.");
+    const prompts = [
+      { text: "What outcome are you hoping to achieve with this project?", type: "long_text" as const, required: true },
+      { text: "What is happening today, and what would you like to change?", type: "long_text" as const, required: true },
+      { text: "Which deliverables, features, or services are essential?", type: "long_text" as const, required: true },
+      { text: "Who will use the work or approve the final result?", type: "short_text" as const, required: false },
+      { text: "Is there a target date or timing we should plan around?", type: "short_text" as const, required: false },
+      { text: "Do you have examples, references, or constraints we should know about?", type: "long_text" as const, required: false },
+    ];
+    await mark("structure", "done", `${prompts.length} questions arranged in a practical discovery flow.`);
+    await mark("writing", "running", "Creating editable questions with required fields clearly marked.");
+    const generated: FormQuestion[] = prompts.map((prompt, index) => ({
+      id: `q_${Date.now()}_${index}`,
+      text: prompt.text,
+      type: prompt.type,
+      required: prompt.required,
+    }));
+    await mark("writing", "done", "Starter question copy is ready to edit.");
+    await mark("visuals", "skipped", "Forms are built from questions and response controls, not decorative visuals.");
+    await mark("checks", "running", "Checking that every generated question has a unique ID and non-empty label.");
+    const uniqueIds = new Set(generated.map((question) => question.id));
+    const validQuestions = generated.length === prompts.length && uniqueIds.size === generated.length && generated.every((question) => question.text.trim());
+    if (validQuestions) {
+      setQuestions(generated);
+      setSelected(generated[0].id);
+      await mark("checks", "done", `${generated.length} editable questions passed the structure check.`);
+    } else {
+      await mark("checks", "skipped", "The generated questions did not pass validation; no changes were applied.");
+      toast.error("The starter questions could not be prepared. Try again.");
+    }
+    setStage(null);
+  };
+
+  const saveDraft = async () => {
+    if (!title.trim()) {
+      toast.error("Give the form a title before saving the draft.");
+      return;
+    }
+    try {
+      if (id) {
+        await autosave.save(payload);
+        toast.success("Draft saved.");
+      } else {
+        const created = await formsApi.draft(payload);
+        navigate(`/forms/${created.id}/edit`, { replace: true });
+        toast.success("Draft saved. You can keep editing it here.");
+      }
+    } catch (cause) {
+      const apiError = cause as ApiError;
+      toast.error(errorMessage(apiError.code, apiError.message));
+    }
+  };
+
   const publish = async () => {
     if (!title.trim()) {
       toast.error("The form needs a title.");
@@ -156,7 +227,7 @@ export function FormEditorPage() {
       toast.error("Every question needs text.");
       return;
     }
-    if (questions.some((question) => question.type.includes("choice") && (question.options?.length ?? 0) < 2)) {
+    if (questions.some((question) => (question.type.includes("choice") || question.type === "dropdown") && (question.options?.filter((option) => option.label.trim()).length ?? 0) < 2)) {
       toast.error("Choice questions need at least two options.");
       return;
     }
@@ -188,6 +259,11 @@ export function FormEditorPage() {
     );
   }
 
+  if (stage) {
+    const selectedClient = clients.data?.data.find((client) => client.id === clientId);
+    return <div className="builder"><DraftProgress stage={stage} clientName={selectedClient?.name || "your client"} statuses={stageStatuses} documentLabel="requirement form" /></div>;
+  }
+
   const required = questions.filter((question) => question.required).length;
 
   return (
@@ -198,7 +274,7 @@ export function FormEditorPage() {
         saveState={autosave.state}
         onBack={() => navigate("/forms")}
         onPreview={() => setTestOpen(true)}
-        onSave={() => void autosave.save(payload)}
+        onSave={() => void saveDraft()}
         onCreate={publish}
         creating={creating}
         moreItems={[
@@ -242,6 +318,11 @@ export function FormEditorPage() {
             </button>
           ))}
           <div className="stack-2 mt-4">
+            {questions.length === 0 && (
+              <Button variant="secondary" size="sm" onClick={() => void generateStarterQuestions()}>
+                Generate starter questions
+              </Button>
+            )}
             <Button
               variant="secondary"
               size="sm"

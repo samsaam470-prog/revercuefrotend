@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { proposalsApi, pipelineApi, type PackageInput } from "../../api/proposals";
@@ -26,7 +25,7 @@ import { Select } from "../ui/Select";
 import { Textarea } from "../ui/Textarea";
 import type { FormQuestion } from "../../types";
 
-const blankPackages = (): PackageInput[] => [{ name: "", price: 0, deliverables: "" }];
+const blankPackages = (): PackageInput[] => [{ name: "", price: undefined, deliverables: "" }];
 
 export function ProposalRequirementForm() {
   const navigate = useNavigate();
@@ -74,6 +73,12 @@ export function ProposalRequirementForm() {
     queryKey: ["crm", "clients", "picker"],
     queryFn: () => crmApi.list({ limit: 100 }),
   });
+  const profile = useQuery({ queryKey: ["settings", "profile"], queryFn: settingsApi.getProfile });
+
+  useEffect(() => {
+    const website = profile.data?.profile.website;
+    if (!ownWebsite.trim() && website) setOwnWebsite(website);
+  }, [profile.data, ownWebsite]);
 
   const prefilled = useRef({ packages: false, faqs: false });
 
@@ -120,10 +125,9 @@ export function ProposalRequirementForm() {
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    const clientLabel =
-      mode === "existing"
-        ? clients.data?.data.find((client) => client.id === clientId)?.name || "Client"
-        : clientName;
+    const selectedClient = mode === "existing" ? clients.data?.data.find((client) => client.id === clientId) : undefined;
+    const clientLabel = selectedClient?.name || clientName.trim() || "Client";
+    const resolvedClientWebsite = clientWebsite.trim() || (selectedClient as unknown as { website_url?: string } | undefined)?.website_url || "";
 
     setLoading(true);
     try {
@@ -137,6 +141,7 @@ export function ProposalRequirementForm() {
         service,
         client_website: clientWebsite.trim() || undefined,
         own_website: ownWebsite.trim() || undefined,
+        business_name: profile.data?.profile.business_name || undefined,
         problem: problem.trim(),
         target_audience: audience.trim() || undefined,
         cta: cta.trim() || undefined,
@@ -157,9 +162,10 @@ export function ProposalRequirementForm() {
       /* The research runs alongside the template choice; a failure there never blocks the builder. */
       void pipelineApi
         .extract({
-          client_name: clientName.trim() || undefined,
-          client_website: clientWebsite.trim() || undefined,
-          own_website: ownWebsite.trim() || undefined,
+          client_name: clientLabel !== "Client" ? clientLabel : undefined,
+          client_website: resolvedClientWebsite || undefined,
+          user_website: ownWebsite.trim() || undefined,
+          business_name: profile.data?.profile.business_name || undefined,
           industry,
           service,
           problem: problem.trim(),
@@ -175,6 +181,9 @@ export function ProposalRequirementForm() {
               value_prop: data.value_prop,
               key_points: data.key_points,
               location: data.location ?? undefined,
+              author_business_name: data.author_business_name ?? undefined,
+              author_description: data.author_description ?? undefined,
+              author_website: data.author_website ?? undefined,
             },
           });
         })
@@ -408,11 +417,11 @@ export function ProposalRequirementForm() {
                       id={`pkg-price-${index}`}
                       label="Price"
                       type="number"
-                      value={String(item.price)}
+                      value={item.price === undefined ? "" : String(item.price)}
                       onChange={(value) =>
                         setPackages((current) =>
                           current.map((row, i) =>
-                            i === index ? { ...row, price: Number(value) || 0 } : row,
+                            i === index ? { ...row, price: value.trim() ? Number(value) : undefined } : row,
                           ),
                         )
                       }
@@ -437,7 +446,7 @@ export function ProposalRequirementForm() {
                   variant="secondary"
                   size="sm"
                   onClick={() =>
-                    setPackages((current) => [...current, { name: "", price: 0, deliverables: "" }])
+                    setPackages((current) => [...current, { name: "", price: undefined, deliverables: "" }])
                   }
                 >
                   + Add a package

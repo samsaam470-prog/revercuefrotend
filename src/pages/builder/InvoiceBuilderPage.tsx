@@ -1,4 +1,3 @@
-import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
@@ -7,6 +6,8 @@ import { contractsApi } from "../../api/contracts";
 import { crmApi } from "../../api/crm";
 import { TopBar } from "../../components/builder/TopBar";
 import { ShareModal } from "../../components/builder/ShareModal";
+import { DraftProgress, type DraftProgressState } from "../../components/builder/DraftProgress";
+import type { DraftStage, DraftStageStatus } from "../../lib/pipeline";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { Textarea } from "../../components/ui/Textarea";
@@ -56,19 +57,39 @@ function InvoiceRequirementForm() {
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [stage, setStage] = useState<DraftStage | null>(null);
+  const [stageStatuses, setStageStatuses] = useState<DraftProgressState>({});
 
   const clients = useQuery({ queryKey: ["crm", "clients", "picker"], queryFn: () => crmApi.list({ limit: 100 }) });
   const contracts = useQuery({
     queryKey: ["contracts", "picker"],
-    queryFn: () => contractsApi.list({ status: "signed", limit: 100 }),
+    queryFn: () => contractsApi.list({ status: "fully_signed", limit: 100 }),
   });
+  const linkedContract = useQuery({
+    queryKey: ["contracts", "detail", contractId],
+    queryFn: () => contractsApi.get(contractId),
+    enabled: Boolean(contractId),
+  });
+
+  useEffect(() => {
+    const contract = linkedContract.data?.contract;
+    if (!contract) return;
+    if (contract.currency) setCurrency(contract.currency);
+    const scope = contract.scope || contract.content?.scope || "";
+    if (scope.trim()) {
+      setItems((current) => current.length === 1 && !current[0].description.trim()
+        ? [{ ...current[0], description: scope.trim() }]
+        : current);
+    }
+  }, [linkedContract.data, contractId]);
   const subtotal = items.reduce((sum, item) => sum + (Number(item.quantity) || 0) * (Number(item.unit_price) || 0), 0);
   const total = subtotal + (Number(tax) || 0);
 
   const valid =
     (mode === "existing" ? Boolean(clientId) : Boolean(clientName.trim())) &&
     (Boolean(clientEmail.trim()) || Boolean(clientPhone.trim())) &&
-    items.some((item) => item.description && item.unit_price >= 0) &&
+    items.some((item) => item.description.trim() && Number.isFinite(item.quantity) && item.quantity > 0 && Number.isFinite(item.unit_price) && item.unit_price >= 0) &&
+    Number.isFinite(Number(tax)) && Number(tax) >= 0 &&
     dueDate &&
     (arrangement === "link" ? Boolean(link) : Boolean(details.bank_name || details.iban || details.account_number));
 
@@ -77,7 +98,9 @@ function InvoiceRequirementForm() {
     if (mode === "existing" && !clientId) next.client = "Choose a client.";
     if (mode === "new" && !clientName.trim()) next.clientName = "Enter the client's name.";
     if (!clientEmail.trim() && !clientPhone.trim()) next.clientEmail = "Enter the client's email or phone.";
-    if (!items.some((item) => item.description)) next.items = "Add at least one line item.";
+    if (!items.some((item) => item.description.trim())) next.items = "Add at least one line item.";
+    if (items.some((item) => item.description.trim() && (!Number.isFinite(item.quantity) || item.quantity <= 0 || !Number.isFinite(item.unit_price) || item.unit_price < 0))) next.items = "Each line needs a positive quantity and a non-negative unit price.";
+    if (!Number.isFinite(Number(tax)) || Number(tax) < 0) next.tax = "Enter a valid non-negative tax amount.";
     if (!dueDate) next.due = "Pick a due date.";
     if (arrangement === "link" && !link) next.arrangement = "Add the payment link.";
     if (arrangement === "account" && !details.bank_name && !details.iban) next.arrangement = "Add the account details.";
@@ -85,34 +108,72 @@ function InvoiceRequirementForm() {
     if (Object.keys(next).length > 0) return;
 
     setLoading(true);
+    setStageStatuses({});
+    const paint = () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    const mark = async (name: DraftStage, status: DraftStageStatus, detail: string) => {
+      setStage(name);
+      setStageStatuses((current) => ({ ...current, [name]: { status, detail } }));
+      await paint();
+    };
     try {
+      const selectedClient = mode === "existing" ? clients.data?.data.find((client) => client.id === clientId) : undefined;
+      await mark("context", "running", "Resolving the selected client and the details entered for this invoice.");
+      const resolvedClientName = selectedClient?.name || clientName.trim() || "your client";
+      const linked = linkedContract.data?.contract;
+      await mark("context", "done", linked
+        ? `Using ${resolvedClientName} and linked contract “${linked.title}”; invoice amounts remain subject to your confirmation.`
+        : `Using ${resolvedClientName} and the contact details you supplied.`);
+
+      await mark("research", "skipped", "Invoices use confirmed client and contract details, not public web research.");
+      await mark("structure", "running", "Preparing the line-item table and calculating the subtotal.");
+      const lineItems = items.filter((item) => item.description.trim());
+      const calculatedSubtotal = lineItems.reduce((sum, item) => sum + (Number(item.quantity) || 0) * (Number(item.unit_price) || 0), 0);
+      const calculatedTax = Number(tax) || 0;
+      const calculatedTotal = calculatedSubtotal + calculatedTax;
+      await mark("structure", "done", `${lineItems.length} line items prepared in ${currency}.`);
+
+      await mark("writing", "running", "Assembling invoice details, due date, and your chosen payment instructions.");
       const payment_arrangement: PaymentArrangement =
         arrangement === "link"
           ? { type: "link", url: link }
           : { type: "account", details, allow_proof: allowProof };
-      const response = await invoicesApi.draft({
+      const draftPayload = {
         client_id: mode === "existing" ? clientId : undefined,
         client_name: mode === "new" ? clientName.trim() : undefined,
         client_email: clientEmail.trim() || undefined,
         client_phone: clientPhone.trim() || undefined,
         linked_contract_id: contractId || undefined,
-        line_items: items.filter((item) => item.description),
+        line_items: lineItems,
         currency,
-        tax: Number(tax) || 0,
+        tax: calculatedTax,
         tax_label: taxLabel,
-        total,
+        total: calculatedTotal,
         payment_arrangement,
         due_date: dueDate,
         notes: notes || undefined,
-      });
+      };
+      await mark("writing", "done", "Invoice content and payment arrangement are ready for the editor.");
+      await mark("visuals", "skipped", "Invoices use a structured financial table; no decorative assets are added.");
+      await mark("checks", "running", "Verifying the calculated total before saving the draft.");
+      if (!Number.isFinite(calculatedTotal) || Math.abs(calculatedTotal - (calculatedSubtotal + calculatedTax)) > 0.000001) {
+        throw new Error("The invoice total could not be verified. Check the line items and tax amount.");
+      }
+      const response = await invoicesApi.draft(draftPayload);
+      await mark("checks", "done", "The server saved the invoice draft. No payment was processed and nothing was sent to the client.");
       navigate(`/invoices/${response.id}/edit`);
     } catch (cause) {
+      setStage(null);
       const apiError = cause as ApiError;
-      toast.error(errorMessage(apiError.code, apiError.message));
+      toast.error(cause instanceof Error && !apiError.code ? cause.message : errorMessage(apiError.code, apiError.message));
     } finally {
       setLoading(false);
     }
   };
+
+  if (stage) {
+    const selectedClient = clients.data?.data.find((client) => client.id === clientId);
+    return <div className="builder"><DraftProgress stage={stage} clientName={selectedClient?.name || clientName || "your client"} statuses={stageStatuses} documentLabel="invoice" /></div>;
+  }
 
   return (
     <div className="onboarding-wrap">
@@ -191,7 +252,7 @@ function InvoiceRequirementForm() {
               label: contract.title,
             }))}
             onChange={setContractId}
-            helper="Optional. The currency and the terms come from it."
+            helper="Optional. Its currency and scope can prefill; confirm every amount and due date yourself."
           />
 
           <fieldset className="fieldset">
@@ -270,6 +331,7 @@ function InvoiceRequirementForm() {
               type="number"
               value={tax}
               onChange={setTax}
+              error={errors.tax}
               helper="Set 0 for no tax."
             />
           </div>

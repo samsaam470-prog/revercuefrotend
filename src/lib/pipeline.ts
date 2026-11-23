@@ -1,4 +1,3 @@
-import { pipelineApi, type ExtractNote } from "../api/proposals";
 import {
   applyBrief,
   applyOrganized,
@@ -13,6 +12,7 @@ export interface ResearchNote {
   title: string;
   body: string;
   source?: string;
+  kind?: "client" | "web" | "background";
 }
 
 export interface Research {
@@ -62,9 +62,9 @@ export function markPipelineDone(id: string): void {
 }
 
 /** The stages the draft screen names, in order. */
-export type DraftStage = "brief" | "industry" | "service" | "write" | "visuals" | "render";
-
-export const DRAFT_STAGES: DraftStage[] = ["brief", "industry", "service", "write", "visuals", "render"];
+export type DraftStage = "context" | "research" | "structure" | "writing" | "visuals" | "checks";
+export type DraftStageStatus = "pending" | "running" | "done" | "skipped";
+export const DRAFT_STAGES: DraftStage[] = ["context", "research", "structure", "writing", "visuals", "checks"];
 
 export interface DraftPipelineInput {
   id: string;
@@ -72,7 +72,7 @@ export interface DraftPipelineInput {
   brief: Brief;
   kind: "proposal" | "contract";
   withVisuals?: boolean;
-  onStage?: (stage: DraftStage) => Promise<void> | void;
+  onStage?: (stage: DraftStage, status: DraftStageStatus, detail?: string) => Promise<void> | void;
   /** How long to wait for the brief's research before drafting without it. */
   researchTimeoutMs?: number;
 }
@@ -117,10 +117,11 @@ function packagesFromPatterns(value: unknown): BriefPackage[] {
     const record = item as Record<string, unknown>;
     const name = typeof record.name === "string" ? record.name.trim() : "";
     if (!name) continue;
-    const price = Number(record.price ?? 0);
+    const rawPrice = record.price;
+    const price = rawPrice === undefined || rawPrice === null || rawPrice === "" ? undefined : Number(rawPrice);
     packages.push({
       name,
-      price: Number.isFinite(price) ? price : 0,
+      price: price !== undefined && Number.isFinite(price) ? price : undefined,
       deliverables:
         typeof record.deliverables === "string"
           ? record.deliverables
@@ -135,6 +136,9 @@ function packagesFromPatterns(value: unknown): BriefPackage[] {
 async function extractResearch(brief: Brief): Promise<Research> {
   const response = await pipelineApi.extract({
     client_name: brief.clientName && brief.clientName !== "the client" ? brief.clientName : undefined,
+    client_website: brief.clientWebsite,
+    user_website: brief.businessWebsite,
+    business_name: brief.businessName,
     industry: brief.industry || undefined,
     service: brief.service || undefined,
   });
@@ -145,6 +149,9 @@ async function extractResearch(brief: Brief): Promise<Research> {
     value_prop?: string;
     key_points?: string[];
     location?: string | null;
+    author_business_name?: string;
+    author_description?: string;
+    author_website?: string;
   };
   const notes: ExtractNote[] = data.notes ?? response.notes ?? [];
   const images: string[] = data.images ?? response.images ?? [];
@@ -156,6 +163,9 @@ async function extractResearch(brief: Brief): Promise<Research> {
       value_prop: data.value_prop,
       key_points: data.key_points,
       location: data.location ?? undefined,
+      author_business_name: data.author_business_name ?? undefined,
+      author_description: data.author_description ?? undefined,
+      author_website: data.author_website ?? undefined,
     },
   };
 }
@@ -168,12 +178,15 @@ async function extractResearch(brief: Brief): Promise<Research> {
  */
 export async function runDraftPipeline(input: DraftPipelineInput): Promise<DraftPipelineResult> {
   const { id, blocks, brief, withVisuals = true, onStage, researchTimeoutMs = 4000 } = input;
-  const stage = async (name: DraftStage) => {
-    if (onStage) await onStage(name);
+  const stage = async (name: DraftStage, status: DraftStageStatus, detail?: string) => {
+    if (onStage) await onStage(name, status, detail);
   };
 
-  await stage("brief");
-  await stage("industry");
+  await stage("context", "running", "Using the brief and selected template.");
+  const enriched: Brief = { ...brief };
+  await stage("context", "done", "Brief and template loaded.");
+
+  await stage("research", "running", "Checking client, industry, and business-profile sources.");
   let research = await waitForResearch(id, researchTimeoutMs);
 
   // When the brief form's research has not arrived (slow network, a reopened
@@ -183,31 +196,42 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
       research = await extractResearch(brief);
       saveResearch(id, research);
     } catch {
-      /* the brief still produces a readable document */
+      research = { notes: [], images: [] };
     }
   }
 
-  const enriched: Brief = {
-    ...brief,
-    heroImage: brief.heroImage || research.images[0],
-    research: research.notes,
-    facts: research.facts,
-  };
+  const hasResearch = research.notes.length > 0 || research.images.length > 0 || Boolean(research.facts?.value_prop || research.facts?.author_business_name || research.facts?.author_description);
+  const clientNoteCount = research.notes.filter((note) => note.kind === "client").length;
+  const backgroundNoteCount = research.notes.filter((note) => note.kind === "background" || note.kind === "web").length;
+  enriched.heroImage = enriched.heroImage || research.images[0];
+  enriched.research = research.notes;
+  enriched.facts = research.facts;
+  enriched.businessName = enriched.businessName || research.facts?.author_business_name;
+  enriched.businessWebsite = enriched.businessWebsite || research.facts?.author_website;
+  await stage("research", hasResearch ? "done" : "skipped", hasResearch
+    ? `Found ${clientNoteCount} client-source notes, ${backgroundNoteCount} background notes, and ${research.images.length} image candidates.`
+    : "No usable public research was found; the draft will use only the supplied brief.");
 
-  await stage("service");
+  await stage("structure", "running", "Organising sections for this document type.");
   const sections = brief.sections.length
     ? brief.sections
     : ["Introduction", "Scope", "What is included", "Timeline", "Pricing", "Next Step"];
   enriched.sections = sections;
+  await stage("structure", "done", `${sections.length} editable sections prepared.`);
 
+  await stage("writing", "running", "Building section copy from the brief and verified context.");
   let source: DraftPipelineResult["source"] = "pattern";
   let organized: Record<string, string> = {};
+  let organizeWarnings: string[] = [];
 
   // Layer 2 on the server: patterns, learned structure, and research-grounded
   // section copy. This is the copy the document actually uses.
   try {
     const response = await pipelineApi.organize({
       client_name: brief.clientName,
+      business_name: brief.businessName || research.facts?.author_business_name,
+      business_website: brief.businessWebsite || research.facts?.author_website,
+      business_description: research.facts?.author_description,
       industry: brief.industry,
       service: brief.service,
       tone: brief.tone || "formal",
@@ -224,6 +248,7 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
       },
     });
     organized = response.sections ?? {};
+    organizeWarnings = response.provenance?.warnings ?? [];
     const result = response.result ?? {};
     if (!enriched.faqs.length) enriched.faqs = faqsFromPatterns(result.suggested_faqs);
     if (!enriched.packages.length) enriched.packages = packagesFromPatterns(result.suggested_packages);
@@ -247,19 +272,32 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
   }
   if (Object.keys(organized).length) enriched.organized = organized;
 
-  await stage("write");
   const written = applyOrganized(applyBrief(blocks, enriched), enriched);
+  const writingDetail = source === "helper"
+    ? "Draft copy organised with on-device assistance and local patterns."
+    : source === "backend"
+      ? "Draft copy organised with backend patterns and supplied facts."
+      : "Draft copy assembled locally with deterministic patterns.";
+  await stage("writing", "done", organizeWarnings.length ? `${writingDetail} ${organizeWarnings.join(" ")}` : writingDetail);
 
-  await stage("visuals");
+  await stage("visuals", "running", "Resolving real image assets; no synthetic charts or placeholder images.");
   const visuals = withVisuals ? await placeVisuals(id, written, enriched) : written;
+  const visualCount = visuals.filter((block) => block.meta?.fromPipeline).length;
+  await stage("visuals", visualCount > 0 ? "done" : "skipped", visualCount > 0
+    ? `${visualCount} real visual asset(s) added.`
+    : "No suitable visual asset was available; the document remains text-first.");
 
-  await stage("render");
+  await stage("checks", "running", "Checking editable blocks and preserving missing facts as prompts.");
+  const finalBlocks = visuals.length ? visuals : written;
+  const validBlocks = finalBlocks.filter((block) => Boolean(block.id && block.type));
+  await stage("checks", validBlocks.length === finalBlocks.length && finalBlocks.length > 0 ? "done" : "skipped",
+    `${validBlocks.length} editable blocks checked. Review missing client-specific details before sharing.`);
 
   return {
-    blocks: visuals,
+    blocks: finalBlocks.map((block) => ({ ...block, meta: { ...block.meta, pipelineId: id } })),
     source,
     notes: research.notes.length,
-    visuals: visuals.filter((block) => block.meta?.fromPipeline).length,
+    visuals: visualCount,
     brief: enriched,
   };
 }
@@ -290,7 +328,14 @@ function assetUrl(asset: unknown): string | undefined {
 
 /** Ask the backend's element engine for the visuals, then place them. */
 async function placeVisuals(id: string, blocks: Block[], brief: Brief): Promise<Block[]> {
-  let requests = isAvailable() ? await visualize({ blocks }, brief.sections) : [];
+  let requests: any[] = [];
+  if (isAvailable()) {
+    try {
+      requests = await visualize({ blocks }, brief.sections);
+    } catch {
+      // Fall back to deterministic image requests when on-device suggestions fail.
+    }
+  }
   if (!requests.length) requests = patternRequests(blocks, brief);
   if (!requests.length) return blocks;
 
@@ -318,8 +363,13 @@ async function placeVisuals(id: string, blocks: Block[], brief: Brief): Promise<
     if (at < 0) return;
     if (next.some((block) => block.meta?.fromPipeline === request.query)) return;
 
-    const url = assetUrl(assets[request.afterBlockId]);
+    const rawAsset = assets[request.afterBlockId];
+    const url = assetUrl(rawAsset);
+    const asset = rawAsset && typeof rawAsset === "object" ? rawAsset as Record<string, unknown> : {};
     const kind = request.kind || request.type;
+    const attribution = typeof asset.attribution === "string"
+      ? asset.attribution
+      : [asset.creator, asset.license, asset.source].filter((value): value is string => typeof value === "string" && Boolean(value)).join(" · ");
 
     // Only a real asset becomes a visual. A chart drawn from invented bars is
     // worse than no chart: it looks like data when it is decoration.
@@ -329,7 +379,8 @@ async function placeVisuals(id: string, blocks: Block[], brief: Brief): Promise<
           type: "image",
           url,
           alt: request.query,
-          meta: { fromPipeline: request.query, visual: kind },
+          caption: attribution || undefined,
+          meta: { fromPipeline: request.query, visual: kind, ...(typeof asset.license === "string" ? { license: asset.license } : {}), ...(typeof asset.source === "string" ? { source: asset.source } : {}) },
         }
       : null;
 

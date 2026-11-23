@@ -1,8 +1,7 @@
-import type { Block, Contract, DocContent, Proposal } from "../types";
 
 export interface BriefPackage {
   name: string;
-  price: number;
+  price?: number;
   deliverables?: string;
 }
 
@@ -17,6 +16,9 @@ export interface ResearchFacts {
   value_prop?: string;
   key_points?: string[];
   location?: string;
+  author_business_name?: string;
+  author_description?: string;
+  author_website?: string;
 }
 
 export interface Brief {
@@ -29,6 +31,9 @@ export interface Brief {
   cta: string;
   industry: string;
   service: string;
+  clientWebsite?: string;
+  businessWebsite?: string;
+  businessName?: string;
   targetAudience?: string;
   packages: BriefPackage[];
   faqs: { question: string; answer: string }[];
@@ -41,7 +46,7 @@ export interface Brief {
   cancellation: string;
   heroImage?: string;
   /** Research from the extract call, so prose can quote what was found. */
-  research?: { title: string; body: string; source?: string }[];
+  research?: { title: string; body: string; source?: string; kind?: "client" | "web" | "background" }[];
   facts?: ResearchFacts;
   /** Section-ready copy from the organize call, keyed by section name. */
   organized?: Record<string, string>;
@@ -87,11 +92,12 @@ function packagesFrom(value: unknown): BriefPackage[] {
     const record = item as Record<string, unknown>;
     const name = text(record.name, record.label);
     if (!name) continue;
-    const price = Number(record.price ?? 0);
+    const rawPrice = record.price;
+    const price = rawPrice === undefined || rawPrice === null || rawPrice === "" ? undefined : Number(rawPrice);
     const deliverables = text(record.deliverables, record.detail, record.description);
     packages.push({
       name,
-      price: Number.isFinite(price) ? price : 0,
+      price: price !== undefined && Number.isFinite(price) ? price : undefined,
       deliverables: deliverables || undefined,
     });
   }
@@ -158,6 +164,9 @@ export function briefOf(doc: AnyDoc, researchImages: string[] = []): Brief {
     cta: text(proposal.cta, content.call_to_action),
     industry,
     service,
+    clientWebsite: text(proposal.client_website, content.client_website, flat.client_website) || undefined,
+    businessWebsite: text(content.user_website, content.own_website, flat.user_website) || undefined,
+    businessName: text(content.business_name, flat.business_name) || undefined,
     targetAudience:
       text(proposal.target_audience, content.target_audience as string | undefined) || undefined,
     packages: packagesFrom(proposal.packages ?? content.packages),
@@ -180,10 +189,6 @@ function sentence(value: string): string {
   return /[.!?]$/.test(trimmed) ? trimmed : `${trimmed}.`;
 }
 
-function lowerFirst(value: string): string {
-  return value.charAt(0).toLowerCase() + value.slice(1);
-}
-
 function subject(brief: Brief): string {
   return brief.service || brief.industry || "the work";
 }
@@ -199,25 +204,25 @@ function phrase(value: string): string {
   return value.trim().replace(/[.]+$/, "");
 }
 
-/** A sentence the extract actually found, never an invented fact. */
+/** Only client-classified research can be used as a statement about the client. */
 function researchLine(brief: Brief): string {
   const valueProp = brief.facts?.value_prop?.trim();
-  if (valueProp) return ` ${sentence(valueProp)}`;
-  const note = brief.research?.find((item) => item.body && item.body.trim().length > 40);
+  if (valueProp) return ` The client's public materials describe the business as: ${sentence(valueProp)}`;
+  const note = brief.research?.find((item) => item.kind === "client" && item.body && item.body.trim().length > 40);
   if (!note) return "";
-  const body = note.body.replace(/https?:\/\/\S+/g, "").replace(/\s+/g, " ").trim();
+  const body = note.body.replace(/https?:\\/\\/\\S+/g, "").replace(/\\s+/g, " ").trim();
   const first = body.match(/[^.!?]+[.!?]/)?.[0]?.trim() ?? body.slice(0, 220);
-  return first ? ` ${first.replace(/[.!?]+$/, "")}.` : "";
+  return first ? ` The client's public materials state: ${first.replace(/[.!?]+$/, "")}.` : "";
 }
 
 export function introductionFor(brief: Brief): string {
-  const who = brief.clientName && brief.clientName !== "the client" ? brief.clientName : "The client";
-  const context =
-    brief.industry && brief.industry.toLowerCase() !== subject(brief).toLowerCase()
-      ? ` in ${brief.industry}`
-      : "";
+  const who = brief.clientName && brief.clientName !== "the client" ? brief.clientName : "the client";
+  const topic = brief.service || brief.industry;
+  const opening = topic ? `This proposal outlines ${topic} for ${who}.` : `This proposal is prepared for ${who}.`;
+  const author = brief.businessName ? ` Prepared by ${brief.businessName}${brief.businessWebsite ? ` (${brief.businessWebsite})` : ""}.` : "";
+  const authorDescription = brief.facts?.author_description ? ` The business website describes its work as: ${sentence(brief.facts.author_description)}` : "";
   const problem = brief.problem ? ` ${sentence(brief.problem)}` : "";
-  return `${who} asked for help with ${subject(brief)}${context}.${problem}${researchLine(brief)} This document sets out the scope, the price and the order the work happens in, so the whole decision can be made in one place instead of across a chain of emails.`;
+  return `${opening}${author}${authorDescription}${problem}${researchLine(brief)} Add or confirm the agreed scope, deliverables, and commercial details before sharing.`;
 }
 
 /** The organized copy for a heading, if the organize call returned any. */
@@ -234,56 +239,32 @@ export function organizedFor(section: string, brief: Brief): string {
 }
 
 export function scopeFor(brief: Brief): string {
-  const sections = brief.sections.filter(
-    (section) => !["Pricing", "Next Step", "FAQs", "Embedded Questions", "About You"].includes(section),
-  );
+  if (brief.scope.trim()) return sentence(brief.scope);
   const deliverables = deliverablesFor(brief);
-  const covered = deliverables.length
-    ? `The work covers ${list(deliverables.slice(0, 6).map(phrase))}.`
-    : "The exact scope is agreed in writing before anything starts.";
-  const order = sections.length
-    ? ` It is delivered in this order: ${list(sections.map((section) => section.toLowerCase()))}.`
-    : "";
-  return `${covered}${order} Nothing outside this scope is billed, and any addition is quoted and approved by you before it begins.`;
+  return deliverables.length
+    ? `The scope details supplied so far are: ${list(deliverables.slice(0, 6).map(phrase))}. Confirm the complete scope before sharing.`
+    : "Add the agreed scope of work and deliverables before sharing this document.";
 }
 
 export function deliverablesFor(brief: Brief): string[] {
-  const fromPackages = brief.packages
+  return brief.packages
     .map((item) => item.deliverables)
-    .flatMap((value) => (value ? value.split(/\r?\n|;|•/).map((line) => line.trim()) : []))
-    .filter(Boolean);
-
-  if (fromPackages.length) return fromPackages.slice(0, 6);
-
-  const sections = brief.sections.filter(
-    (section) => !["Pricing", "Next Step", "FAQs", "Embedded Questions", "About You"].includes(section),
-  );
-  if (sections.length) {
-    return sections
-      .slice(0, 6)
-      .map((section) => `${section} prepared, reviewed with you and handed over ready to use`);
-  }
-  return [
-    `${subject(brief)} planned and agreed before anything is built`,
-    "Every deliverable reviewed with you before it ships",
-    "One point of contact from kickoff to handover",
-  ];
+    .flatMap((value) => (value ? value.split(/\\r?\\n|;|•/).map((line) => line.trim()) : []))
+    .filter(Boolean)
+    .slice(0, 6);
 }
 
 export function timelineFor(brief: Brief): string {
-  if (brief.timeline) {
-    return `The work runs over ${phrase(sentence(brief.timeline))}. You see the dates and checkpoints before the first payment, and any change to them is agreed in writing.`;
-  }
-  return "The schedule is agreed at kickoff: you see the plan, the dates and the checkpoints before the first payment, and the work does not start until you approve them.";
+  if (brief.timeline) return `The timeline provided for this project is ${phrase(sentence(brief.timeline))}. Confirm any dates and milestones before sharing.`;
+  return "Add the agreed start date, milestones, and delivery date before sharing.";
 }
 
 export function nextStepFor(brief: Brief): string {
   if (brief.cta) return sentence(brief.cta);
-  const who = brief.clientName && brief.clientName !== "the client" ? brief.clientName : "you";
-  return `If this looks right, reply on this link or choose a package above and I will send the contract to ${who} the same day. Nothing is billed until the proposal is approved.`;
+  return "Add the specific next step and approval action you want the client to take.";
 }
 
-/** Prose for any section, so no section inherits another section's paragraph. */
+/** Prose for any section/** Prose for any section, so no section inherits another section's paragraph. */
 export function sectionCopy(section: string, brief: Brief): string {
   const organized = organizedFor(section, brief);
   if (organized) return organized;
@@ -291,24 +272,23 @@ export function sectionCopy(section: string, brief: Brief): string {
   if (key === "introduction") return introductionFor(brief);
   if (key === "scope") return scopeFor(brief);
   if (key === "what_is_included" || key === "deliverables" || key === "included") {
-    return `The work includes ${list(deliverablesFor(brief).slice(0, 6).map(phrase))}. Each item is reviewed with you before it is handed over, and anything not listed here is quoted separately.`;
+    const deliverables = deliverablesFor(brief);
+    return deliverables.length
+      ? `The deliverables supplied are ${list(deliverables.map(phrase))}. Confirm the final list before sharing.`
+      : "Add the agreed deliverables before sharing.";
   }
   if (key === "timeline" || key === "schedule") return timelineFor(brief);
-  if (key === "process" || key === "how_it_works") {
-    return `We start with a short kickoff to confirm the scope and the dates. The work then moves in stages: ${list(
-      (brief.sections.length ? brief.sections : ["plan", "build", "review", "handover"]).map((item) => item.toLowerCase()),
-    )}. At each checkpoint you see what has been produced, and the next stage starts only when you are happy with it.`;
-  }
+  if (key === "process" || key === "how_it_works") return "Describe the delivery process, review points, and approval steps agreed for this project.";
   if (key === "about_you" || key === "about") {
-    return `This proposal is prepared for ${brief.clientName}${brief.industry ? `, who works in ${brief.industry}` : ""}.${brief.problem ? ` ${sentence(brief.problem)}` : ""}${researchLine(brief)} The aim is to make the next step clear and easy to approve.`;
+    return `This proposal is prepared for ${brief.clientName}${brief.industry ? `, in the ${brief.industry} industry` : ""}.${brief.businessName ? ` Prepared by ${brief.businessName}${brief.businessWebsite ? ` (${brief.businessWebsite})` : ""}.` : ""}${brief.facts?.author_description ? ` The business website describes its work as: ${sentence(brief.facts.author_description)}` : ""}${brief.problem ? ` ${sentence(brief.problem)}` : ""}${researchLine(brief)}`;
   }
   if (key === "next_step") return nextStepFor(brief);
-  return `${section} is covered in this proposal for ${brief.clientName}.${brief.problem ? ` ${sentence(brief.problem)}` : ""} The details are written to be agreed as they stand, and anything you want changed can be discussed before the work starts.`;
+  return `Add the agreed details for ${section.toLowerCase()} before sharing this document.`;
 }
 
 export function partiesFor(brief: Brief): string {
   if (brief.parties) return sentence(brief.parties);
-  return `${brief.clientName} (the client) and the freelancer signing below.`;
+  return "Add the full legal names and required details of every contracting party before signing.";
 }
 
 /* -------------------------------------------------------------- fills */
@@ -340,15 +320,15 @@ export function fillsFor(brief: Brief): Record<string, string> {
     parties: partiesFor(brief),
     payment_terms: brief.paymentTerms
       ? sentence(brief.paymentTerms)
-      : "The fee and schedule are agreed in writing before work starts.",
+      : "Add the agreed fee, payment schedule, due dates, and payment method.",
     revisions: brief.revisions
       ? sentence(brief.revisions)
-      : "Two rounds of revisions are included. Further rounds are quoted separately.",
+      : "Add the agreed revision allowance and any charges for additional revisions.",
     cancellation: brief.cancellation
       ? sentence(brief.cancellation)
-      : "Either party may cancel with 14 days' written notice; work already delivered is billed.",
+      : "Add the agreed cancellation, notice, and payment-on-termination terms.",
     hero_image: brief.heroImage || "",
-    pricing: "Pricing",
+    pricing: "Add confirmed pricing before sharing.",
   };
 
   deliverables.slice(0, 4).forEach((value, index) => {
@@ -381,12 +361,12 @@ function resolveToken(value: string | undefined, fills: Record<string, string>):
 /** Last resort so a raw {{token}} is never shown to the author or the client. */
 function fallbackForKey(key: string, rawKey: string): string {
   const deliverable = /^deliverable_(\d+)$/.exec(key);
-  if (deliverable) return `Deliverable ${deliverable[1]} of the work, reviewed with you before it ships.`;
+  if (deliverable) return `Add confirmed details for deliverable ${deliverable[1]}.`;
   const packageKey = /^(package|tier|line_item)_(\d+)$/.exec(key);
   if (packageKey) return `Option ${packageKey[2]}`;
   if (key === "hero_image") return "";
-  if (key === "pricing") return "Pricing";
-  if (key === "next_step") return "Next step";
+  if (key === "pricing") return "Add confirmed pricing";
+  if (key === "next_step") return "Add the next step";
   const words = rawKey.replace(/_/g, " ").replace(/\s+/g, " ").trim();
   return words ? words.charAt(0).toUpperCase() + words.slice(1) : "";
 }
@@ -441,14 +421,13 @@ export function applyBrief(blocks: Block[], brief: Brief): Block[] {
       if (brief.packages.length) {
         patched.items = brief.packages.slice(0, 4).map((item) => ({
           label: item.name,
-          price: item.price,
-          quantity: 1,
+          ...(item.price !== undefined ? { price: item.price } : {}),
         }));
       } else {
         next.push({
           id: `${block.id}_pricing`,
           type: "paragraph",
-          text: "The fee is agreed with you before anything is billed, and it is written into the contract we both sign.",
+          text: "Add confirmed package names, prices, and deliverables before sharing this proposal.",
         });
         continue;
       }
@@ -476,15 +455,15 @@ export function skeletonForBrief(brief: Brief, kind: "proposal" | "contract"): B
     heading("h2", "Scope");
     para("scope", brief.scope ? sentence(brief.scope) : scopeFor(brief));
     heading("h3", "Payment");
-    para("payment", brief.paymentTerms ? sentence(brief.paymentTerms) : "The fee and schedule are agreed in writing before work starts.");
+    para("payment", brief.paymentTerms ? sentence(brief.paymentTerms) : "Add the agreed fee, payment schedule, due dates, and payment method.");
     if (brief.timeline) {
       heading("h4", "Timeline");
       para("timeline", timelineFor(brief));
     }
     heading("h5", "Revisions");
-    para("revisions", brief.revisions ? sentence(brief.revisions) : "Two rounds of revisions are included. Further rounds are quoted separately.");
+    para("revisions", brief.revisions ? sentence(brief.revisions) : "Add the agreed revision allowance and any charges for additional revisions.");
     heading("h6", "Cancellation");
-    para("cancellation", brief.cancellation ? sentence(brief.cancellation) : "Either party may cancel with 14 days' written notice; work already delivered is billed.");
+    para("cancellation", brief.cancellation ? sentence(brief.cancellation) : "Add the agreed cancellation, notice, and payment-on-termination terms.");
     blocks.push({ id: id("sign"), type: "signature" });
     return blocks;
   }
@@ -513,17 +492,15 @@ export function skeletonForBrief(brief: Brief, kind: "proposal" | "contract"): B
           items: brief.packages.slice(0, 4).map((item) => ({ label: item.name, price: item.price, quantity: 1 })),
         });
       } else {
-        para(`p_${index}`, "The fee is agreed with you before anything is billed, and it is written into the contract we both sign.");
+        para(`p_${index}`, "Add confirmed package names, prices, and deliverables before sharing this proposal.");
       }
       return;
     }
     if (key === "faqs" || key === "faq") {
-      const faqs = brief.faqs.length
-        ? brief.faqs
-        : [{ question: "What is included?", answer: deliverablesFor(brief)[0] }];
-      faqs.slice(0, 5).forEach((faq, faqIndex) => {
+      brief.faqs.slice(0, 5).forEach((faq, faqIndex) => {
         blocks.push({ id: id(`faq_${index}_${faqIndex}`), type: "faq", faqs: [faq] });
       });
+      if (!brief.faqs.length) para(`faq_${index}`, "Add approved client questions and answers here.");
       return;
     }
     if (key === "embedded_questions" || key === "questions") {
@@ -533,7 +510,7 @@ export function skeletonForBrief(brief: Brief, kind: "proposal" | "contract"): B
           type: "question",
           question: {
             id: question.id || `q${questionIndex + 1}`,
-            text: question.text || "A question for the client",
+            text: question.text || "Add the question you want the client to answer.",
             type: (question.type as NonNullable<Block["question"]>["type"]) || "short_text",
           },
         });
@@ -546,15 +523,6 @@ export function skeletonForBrief(brief: Brief, kind: "proposal" | "contract"): B
     }
     if (key === "timeline" || key === "schedule") {
       para(`t_${index}`, organizedFor(section, brief) || timelineFor(brief));
-      blocks.push({
-        id: id(`tl_${index}`),
-        type: "timeline",
-        items: [
-          { label: "Kickoff", value: "scope and dates confirmed" },
-          { label: "Review", value: "first version shared with you" },
-          { label: "Handover", value: "final files and walkthrough" },
-        ],
-      });
       return;
     }
     if (key === "what_is_included" || key === "deliverables" || key === "included") {
