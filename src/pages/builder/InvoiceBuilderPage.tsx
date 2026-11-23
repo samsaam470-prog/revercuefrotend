@@ -407,7 +407,7 @@ function InvoiceEditor({ id }: { id: string }) {
   useEffect(() => {
     if (!invoice || initialised) return;
     setTitle(invoice.title || `Invoice for ${invoice.client_name || "the client"}`);
-    setItems(invoice.line_items?.length ? invoice.line_items : []);
+    setItems(Array.isArray(invoice.line_items) && invoice.line_items.length ? invoice.line_items : []);
     setCurrency(invoice.currency || "USD");
     setTax(invoice.tax || 0);
     setTaxLabel(invoice.tax_label || "Tax");

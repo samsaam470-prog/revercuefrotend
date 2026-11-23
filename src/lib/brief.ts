@@ -29,6 +29,7 @@ export interface Brief {
   cta: string;
   industry: string;
   service: string;
+  targetAudience?: string;
   packages: BriefPackage[];
   faqs: { question: string; answer: string }[];
   questions: BriefQuestion[];
@@ -157,6 +158,8 @@ export function briefOf(doc: AnyDoc, researchImages: string[] = []): Brief {
     cta: text(proposal.cta, content.call_to_action),
     industry,
     service,
+    targetAudience:
+      text(proposal.target_audience, content.target_audience as string | undefined) || undefined,
     packages: packagesFrom(proposal.packages ?? content.packages),
     faqs: faqsFrom(proposal.faqs ?? content.faqs),
     questions: questionsFrom(proposal.questions ?? content.questions),

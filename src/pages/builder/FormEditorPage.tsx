@@ -77,7 +77,11 @@ export function FormEditorPage() {
     if (!form || initialised) return;
     setTitle(form.title);
     setDescription(form.description || "");
-    setQuestions(form.questions?.length ? form.questions : [newQuestion(0), newQuestion(1)]);
+    setQuestions(
+      Array.isArray(form.questions) && form.questions.length
+        ? form.questions
+        : [newQuestion(0), newQuestion(1)],
+    );
     setPageMode(form.page_mode || "single");
     setThankYou({
       heading: form.thank_you_config?.heading || "",

@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { COMPETITORS } from "../../lib/competitors";
+import { COMPETITOR_RESEARCH, PRICING_CHECKED } from "../../lib/competitorResearch";
 import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 export function ComparePage() {
@@ -15,6 +16,10 @@ export function ComparePage() {
           published pricing with the date it was checked, and a summary of what independent
           reviewers say, with links to each article. No competitor bashing — each tool is good at
           what it does, and the question is what happens between the pieces.
+        </p>
+        <p className="caption">
+          Competitor pricing was checked on {PRICING_CHECKED}. Every page lists the plans, the six
+          sources behind the comparison and ten independent reviews.
         </p>
       </div>
 
@@ -34,6 +39,12 @@ export function ComparePage() {
             <span className="compare-kind">{competitor.kind}</span>
             <h2>{competitor.name}</h2>
             <p>{competitor.summary}</p>
+            {COMPETITOR_RESEARCH[competitor.slug] ? (
+              <span className="caption">
+                From {COMPETITOR_RESEARCH[competitor.slug].pricing[0]?.price.split(",")[0]} · pricing
+                checked {PRICING_CHECKED}
+              </span>
+            ) : null}
             <span className="compare-more">
               Read the comparison <ArrowRight size={14} />
             </span>

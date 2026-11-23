@@ -214,6 +214,14 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
       sections,
       research: { notes: research.notes, facts: research.facts },
       document: { blocks },
+      brief: {
+        problem: brief.problem || undefined,
+        target_audience: brief.targetAudience || undefined,
+        timeline: brief.timeline || undefined,
+        cta: brief.cta || undefined,
+        scope: brief.scope || undefined,
+        packages: brief.packages.length ? brief.packages : undefined,
+      },
     });
     organized = response.sections ?? {};
     const result = response.result ?? {};

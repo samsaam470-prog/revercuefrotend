@@ -51,6 +51,8 @@ export interface ExtractNote {
   title: string;
   body: string;
   source?: string;
+  /** `client` is first-hand research; `web`/`background` is context only. */
+  kind?: "client" | "web" | "background";
 }
 
 export interface ResearchFacts {
@@ -68,6 +70,16 @@ export interface OrganizePayload {
   sections: string[];
   tone: string;
   document: { blocks: unknown[] };
+  /** The brief's first-hand content: preferred over generic research. */
+  brief?: {
+    problem?: string;
+    target_audience?: string;
+    timeline?: string;
+    cta?: string;
+    /** A contract's own scope clause. */
+    scope?: string;
+    packages?: { name: string; price: number; deliverables?: string }[];
+  };
 }
 
 export interface VisualRequest {
