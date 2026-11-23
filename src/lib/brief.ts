@@ -245,9 +245,15 @@ export function fillsFor(brief: Brief): Record<string, string> {
     timeline: timelineFor(brief),
     next_step: nextStepFor(brief),
     parties: partiesFor(brief),
-    payment_terms: brief.paymentTerms ? sentence(brief.paymentTerms) : "",
-    revisions: brief.revisions ? sentence(brief.revisions) : "",
-    cancellation: brief.cancellation ? sentence(brief.cancellation) : "",
+    payment_terms: brief.paymentTerms
+      ? sentence(brief.paymentTerms)
+      : "The fee and schedule are agreed in writing before work starts.",
+    revisions: brief.revisions
+      ? sentence(brief.revisions)
+      : "Two rounds of revisions are included. Further rounds are quoted separately.",
+    cancellation: brief.cancellation
+      ? sentence(brief.cancellation)
+      : "Either party may cancel with 14 days' written notice; work already delivered is billed.",
     hero_image: brief.heroImage || "",
     pricing: "Pricing",
   };

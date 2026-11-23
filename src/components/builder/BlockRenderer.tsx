@@ -439,7 +439,7 @@ function ImageBlock({
       <button type="button" className="doc-image-drop" onClick={() => inputRef.current?.click()} disabled={busy}>
         <ImageUp size={18} />
         <b>{busy ? "Adding the image…" : "Upload an image"}</b>
-        <span>PNG, JPEG, WebP or GIF. Resized in your browser, never sent anywhere.</span>
+        <span>PNG, JPEG, WebP or GIF. Resized and stored with your document.</span>
       </button>
       {error ? <span className="caption" style={{ color: "var(--red)" }}>{error}</span> : null}
     </div>

@@ -1,15 +1,19 @@
+import { filesApi } from "../api/files";
+import { API_BASE_URL } from "../api/client";
+
 /**
  * Image intake for the builders.
  *
- * The file is resized and re-encoded in the browser before it is written into
- * the document, so an upload stays small enough to travel inside the document
- * JSON and render on the public page, in the preview and in the PDF without a
- * second storage hop. Nothing leaves the browser.
+ * The file is resized in the browser, then uploaded to Revercue storage, so the
+ * document stores a short URL instead of a base64 blob. The stored URL is
+ * stable (no expiry) because document images live under a public key.
  */
 const MAX_EDGE = 1400;
 const MAX_BYTES = 12 * 1024 * 1024;
 
-export async function imageToDataUrl(file: File): Promise<string> {
+const API_BASE = ((import.meta.env.VITE_API_BASE_URL as string | undefined) || "").trim() || "https://api.revercue.co.uk";
+
+export async function uploadImage(file: File): Promise<string> {
   if (!file.type.startsWith("image/")) {
     throw new Error("Choose an image file (PNG, JPEG, WebP or GIF).");
   }
@@ -17,9 +21,17 @@ export async function imageToDataUrl(file: File): Promise<string> {
     throw new Error("That image is larger than 12 MB. Use a smaller file.");
   }
 
-  const raw = await readFile(file);
-  if (file.type === "image/gif" && file.size < 900 * 1024) return raw;
+  const prepared = await prepareFile(file);
+  const result = await filesApi.upload(prepared, "document-image");
+  if (!result?.key) throw new Error("The image could not be uploaded.");
+  const relative = result.url && result.url.startsWith("/") ? result.url : `/api/files/${result.key}`;
+  return relative.startsWith("http") ? relative : `${API_BASE.replace(/\/$/, "")}${relative}`;
+}
 
+async function prepareFile(file: File): Promise<File> {
+  if (file.type === "image/gif" && file.size < 900 * 1024) return file;
+
+  const raw = await readFile(file);
   const image = await loadImage(raw);
   const scale = Math.min(1, MAX_EDGE / Math.max(image.width, image.height));
   const width = Math.max(1, Math.round(image.width * scale));
@@ -29,9 +41,14 @@ export async function imageToDataUrl(file: File): Promise<string> {
   canvas.width = width;
   canvas.height = height;
   const context = canvas.getContext("2d");
-  if (!context) return raw;
+  if (!context) return file;
   context.drawImage(image, 0, 0, width, height);
-  return canvas.toDataURL("image/jpeg", 0.85);
+
+  const blob = await new Promise<Blob | null>((resolve) => {
+    canvas.toBlob((value) => resolve(value), "image/jpeg", 0.85);
+  });
+  if (!blob) return file;
+  return new File([blob], file.name.replace(/\.[a-z0-9]+$/i, ".jpg"), { type: "image/jpeg" });
 }
 
 function readFile(file: File): Promise<string> {
@@ -51,3 +68,6 @@ function loadImage(src: string): Promise<HTMLImageElement> {
     image.src = src;
   });
 }
+
+/** Backwards-compatible alias for callers that still expect the old name. */
+export const imageToDataUrl = uploadImage;
