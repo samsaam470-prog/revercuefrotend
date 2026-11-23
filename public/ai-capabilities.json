@@ -30,9 +30,9 @@
   },
   "availability": {
     "free_plan": "available",
-    "starter": "invite_only_waitlist",
-    "growth": "invite_only_waitlist",
-    "scale": "invite_only_waitlist",
+    "starter": "available_via_checkout",
+    "growth": "available_via_checkout",
+    "scale": "available_via_checkout",
     "teams": "beta",
     "self_serve_checkout": true,
     "free_requires_card": false
