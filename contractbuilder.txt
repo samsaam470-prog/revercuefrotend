@@ -19,10 +19,10 @@ Stage 3: The canvas (/contracts/:id/edit). The same three panels, with the contr
 The same layout as the proposal requirement form (centered card, header, footer). The fields differ:
 
 1. Client (required). Same segmented control (Existing | New).
-2. Which proposal is this contract for? (optional). A dropdown of the client's accepted/approved proposals. If selected, the scope, the pricing, and the timeline pre-fill from the proposal.
-3. Scope of work (required). A textarea. Pre-filled from the linked proposal if selected.
-4. Payment terms (required). A structured input: the amount, the schedule (e.g., "50% upfront, 50% on delivery"), the currency.
-5. Revision policy (required). A textarea (e.g., "2 rounds of revisions included. Additional rounds at $50/hour.").
+2. Which proposal is this contract for? (optional). A dropdown of the client's accepted/approved proposals. The linked proposal provides context and remains linked to the contract. Confirm the contract scope, amount, payment schedule, revision policy, and cancellation policy in this form; do not assume commercial or legal terms.
+3. Scope of work (required). A textarea. Enter or confirm the exact scope before continuing.
+4. Payment terms (required). A structured input: the amount, the agreed schedule, and the currency. No payment split is pre-selected.
+5. Revision policy (required). A textarea for the revision allowance and any additional revision charges agreed with the client. No default number of rounds or fee is inserted.
 6. Cancellation policy (required). A textarea.
 7. Which sections do you want? (required, at least one). A checkbox group: Parties, Scope, Payment, Timeline, Revisions, Cancellation, Liability, Signatures. (NO FAQs, NO Embedded Questions.)
 8. After approval, what next? (required). A dropdown: "Show the requirement form" | "Show the invoice" | "Download PDF only". Helper: "This is what the client sees after they approve. The form/invoice options are available on Growth and Scale. On Free and Starter, the client sees the PDF only."

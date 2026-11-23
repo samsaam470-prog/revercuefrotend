@@ -20,7 +20,7 @@ The invoice does NOT use the template selection screen. An invoice is a table, n
 The same layout as the proposal requirement form (centered card, header, footer). The fields:
 
 1. Client (required). Same segmented control (Existing | New).
-2. Which contract is this invoice for? (optional). A dropdown of the client's approved contracts. If selected, the line items, the currency, and the total pre-fill from the contract.
+2. Which contract is this invoice for? (optional). A dropdown of the client's fully signed contracts. If selected, the contract scope can seed a line-item description and the currency can prefill. The freelancer must confirm every line item, quantity, unit price, tax, and due date; no amount is inferred from contract prose.
 3. Line items (required, at least one). A small table: description (input), quantity (number), unit price (number), total (computed). "+ Add line item". The subtotal, the tax, the total are shown below.
 4. Currency (required, default USD). A dropdown.
 5. Tax (optional, default 0). A number + a label (e.g., "VAT 20%").
@@ -28,7 +28,7 @@ The same layout as the proposal requirement form (centered card, header, footer)
    Option A — "External payment link." A URL input (e.g., a Stripe, PayPal, or Wise link). The client is redirected to the link to pay.
    Option B — "Your account details." The fields: bank name, account number, IBAN, SWIFT, account holder. A toggle "Allow the client to upload a payment proof." If on, the client sees an upload field after paying.
 7. Due date (required). A date picker. Not in the past.
-8. Notes to client (optional). A textarea (e.g., "Payment due within 14 days. Late payments incur a 5% fee.").
+8. Notes to client (optional). A textarea for payment instructions or late-fee terms the freelancer has actually agreed with the client.
 
 The footer: "Continue to builder" (gold, disabled until client, at least one line item, payment arrangement, due date).
 "Cancel" (ghost).

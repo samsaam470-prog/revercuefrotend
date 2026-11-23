@@ -23,6 +23,24 @@ export function ComparePage() {
         </p>
       </div>
 
+      <section className="card card-lg stack-3" style={{ marginBottom: 24 }}>
+        <p className="eyebrow">A message from the founder</p>
+        <h2 className="serif" style={{ fontSize: 26 }}>Why I built this comparison</h2>
+        <p className="muted" style={{ lineHeight: 1.8 }}>
+          When I was freelancing, I compared tools to find a better way to run client work. Most
+          tools solved one part well, but the proposal, contract, invoice, and answers about a client
+          still ended up scattered across different places.
+        </p>
+        <p className="muted" style={{ lineHeight: 1.8 }}>
+          Revercue is built around connecting those pieces: the proposal, contract, requirement
+          form, invoice, and client record. I am not claiming it is better than every tool. The
+          right choice depends on your workflow, your team, and what you need a product to do. This
+          page is here to explain what Revercue does, what it costs, and what is still developing so
+          you can make an informed comparison.
+        </p>
+        <p className="caption">— Founder, Revercue</p>
+      </section>
+
       <Link to="/compare/criteria" className="compare-criteria-banner">
         <span>
           <strong>Thirteen questions, eight platforms.</strong> The same breakdown for every tool —

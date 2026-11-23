@@ -79,6 +79,30 @@ export function BetaPage() {
         </p>
       </div>
 
+      <section className="card card-lg stack-3" style={{ marginBottom: 24 }}>
+        <p className="eyebrow">A message from the founder</p>
+        <h2 className="serif" style={{ fontSize: 26 }}>Why Teams is in beta</h2>
+        <p className="muted" style={{ lineHeight: 1.8 }}>
+          I spent 21 months freelancing and saw how quickly client work becomes difficult when a
+          small team has to hand work over, approve decisions, and keep context in sync. I do not
+          want to guess what teams need from a distance. I want to learn from real teams using the
+          workflow.
+        </p>
+        <p className="muted" style={{ lineHeight: 1.8 }}>
+          This beta is where we test the practical details: joining a team, roles and permissions,
+          shared proposals and contracts, and the points where a handoff slows work down. Teams is
+          not finished. Some capabilities are being tested; others are still being shaped by what
+          we learn.
+        </p>
+        <p className="muted" style={{ lineHeight: 1.8 }}>
+          Applying does not automatically start a paid subscription, and your account will not be
+          changed without hearing from us first. If you join, tell us how your team works, what gets
+          stuck, and what would make the workflow genuinely useful. Your feedback will help decide
+          what we build next.
+        </p>
+        <p className="caption">— Founder, Revercue</p>
+      </section>
+
       <div className="two-up" style={{ alignItems: "start" }}>
         {sent ? (
           <div className="card card-lg stack-3">
