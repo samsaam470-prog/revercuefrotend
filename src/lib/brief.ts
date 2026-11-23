@@ -1,3 +1,4 @@
+import type { Block, Contract, DocContent, Proposal } from "../types";
 
 export interface BriefPackage {
   name: string;

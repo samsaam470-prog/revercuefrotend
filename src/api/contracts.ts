@@ -1,3 +1,4 @@
+import { api } from "./client";
 import type { Paginated } from "../types/api";
 import type { Contract, DocContent, DocumentSummary } from "../types";
 

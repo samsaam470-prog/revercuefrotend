@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { COMPETITORS } from "../../lib/competitors";
 import { COMPETITOR_RESEARCH, PRICING_CHECKED } from "../../lib/competitorResearch";

@@ -1,3 +1,4 @@
+import { pipelineApi, type ExtractNote } from "../api/proposals";
 import {
   applyBrief,
   applyOrganized,

@@ -1,3 +1,4 @@
+import { Check, Circle, Loader2, Minus } from "lucide-react";
 import { DRAFT_STAGES, type DraftStage, type DraftStageStatus } from "../../lib/pipeline";
 
 const LABELS: Record<DraftStage, string> = {
