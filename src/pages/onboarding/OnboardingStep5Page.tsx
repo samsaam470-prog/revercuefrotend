@@ -65,8 +65,8 @@ export function OnboardingStep5Page() {
       <p className="eyebrow">Step 4 of 4</p>
       <h1>Pick a plan to start on.</h1>
       <p className="muted" style={{ marginBottom: 24 }}>
-        Free is available now, no invitation needed. Starter, Growth and Scale are invite-only: join
-        the waitlist and the team reaches out when a spot opens. Teams is in beta.
+        Free is available now. Starter, Growth and Scale are publicly available via checkout. Teams is
+        in beta.
       </p>
 
       <div className="plan-mini-grid">

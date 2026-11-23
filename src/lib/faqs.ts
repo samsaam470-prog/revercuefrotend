@@ -97,7 +97,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What are the plans?",
     answer:
-      "Free (available now), Starter, Growth, Scale (invite-only), and Teams (in beta). The paid plans are invite-only in the fresh state. You join the waitlist, and the team reaches out when a spot opens. Teams is in beta. You join the beta.",
+      "Free (available now), Starter, Growth and Scale (publicly available via checkout), and Teams (in beta). Growth includes a limited-time 14-day free trial. Teams uses a waitlist while in beta.",
   },
   {
     id: 12,
@@ -111,7 +111,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "How do I pay?",
     answer:
-      "The paid plans are invite-only in the fresh state. Join the waitlist. The team will contact you with the next steps when a spot opens. The Free plan is available now, no invitation needed.",
+      "Starter, Growth and Scale are publicly available via checkout. Growth includes a limited-time 14-day free trial. Teams is in beta and uses a waitlist. The Free plan is available now, no payment needed.",
   },
   {
     id: 14,
@@ -152,7 +152,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What is the difference between the waitlist and the beta?",
     answer:
-      "The waitlist is for the paid plans (Starter, Growth, Scale). The paid plans are invite-only in the fresh state. You join the waitlist, and the team reaches out when a spot opens. The beta is for Teams. Teams is in beta. You join the beta, and the team will reach out to include you in the test. The Free plan is available now.",
+      "Starter, Growth and Scale are publicly available via checkout (Growth has a limited-time 14-day trial). The waitlist is now only for the Teams beta. Teams is in beta; you join the beta and the team reaches out. The Free plan is available now.",
   },
   {
     id: 20,

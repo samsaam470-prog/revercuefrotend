@@ -14,7 +14,7 @@ const STEPS = [
   { title: "Follow-ups due", body: "Follow-ups come from the communication log. Mark one done and it disappears from this count." },
   { title: "CRM", body: "The client record builds itself from the documents. There is nothing to type twice." },
   { title: "Settings", body: "Profile, plan, security, notifications, saved libraries and the transparency page." },
-  { title: "Done", body: "That is the whole product. The Free plan is available now; the paid plans are invite-only." },
+  { title: "Done", body: "That is the whole product. The Free plan is available now; Starter, Growth and Scale are publicly available; Teams is in beta." },
 ];
 
 export function TutorialOverlay({ onFinish }: { onFinish?: () => void }) {

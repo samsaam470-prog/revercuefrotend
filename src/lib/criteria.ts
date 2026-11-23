@@ -151,7 +151,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "pricing-scalability": {
         rating: "yes",
-        note: "Free to start, paid solo plans in the low tens per month, Teams priced separately. Invite-only above Free.",
+        note: "Free to start, paid solo plans in the low tens per month, Teams priced separately. Public checkout above Free.",
       },
       "ease-of-use-support": {
         rating: "yes",

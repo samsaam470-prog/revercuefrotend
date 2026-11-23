@@ -106,7 +106,7 @@ export function HomePage() {
       <section className="page" data-reveal>
         <div className="section-head">
           <h2>Simple, honest pricing.</h2>
-          <p>Free is available now. The paid plans are invite-only. Teams is in beta.</p>
+          <p>Free is available now. Starter, Growth and Scale are publicly available. Teams is in beta.</p>
         </div>
         <div className="pricing-chips">
           {PLANS.map((plan) => (
@@ -119,7 +119,7 @@ export function HomePage() {
                   ? "available now"
                   : plan.status === "beta"
                     ? "in beta"
-                    : "invite-only"}
+                    : "publicly available"}
               </span>
             </Link>
           ))}

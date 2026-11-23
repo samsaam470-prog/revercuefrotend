@@ -60,8 +60,8 @@ export const PLANS: PlanDefinition[] = [
     name: "Starter",
     price: 12,
     role: "Solo, light use.",
-    status: "waitlist",
-    statusLabel: "Invite-only — join the waitlist",
+    status: "available",
+    statusLabel: "Available now",
     features: [
       "20 active documents",
       "3-month document retention",
@@ -89,8 +89,8 @@ export const PLANS: PlanDefinition[] = [
     name: "Growth",
     price: 29,
     role: "Solo, power user.",
-    status: "waitlist",
-    statusLabel: "Invite-only — join the waitlist",
+    status: "available",
+    statusLabel: "Available now — 14-day trial (limited time)",
     features: [
       "100 active documents",
       "12-month document retention",
@@ -119,8 +119,8 @@ export const PLANS: PlanDefinition[] = [
     name: "Scale",
     price: 49,
     role: "Solo professional, full feature set.",
-    status: "waitlist",
-    statusLabel: "Invite-only — join the waitlist",
+    status: "available",
+    statusLabel: "Available now",
     features: [
       "300 active documents",
       "24-month document retention",
@@ -292,7 +292,7 @@ export const CHANNELS = ["Email", "WhatsApp", "Phone", "In-person", "Other"];
 export const FAQ_BATCH_FIRST = 12;
 
 export const FOOTER_ASSISTANT_PROMPT =
-  "Explain Revercue: a freelancer tool for the thread from proposal to contract to invoice to CRM. The tagline is 'Your work should speak, not you.' The thesis is 'a thread, not disconnected workflows.' The Free plan is available now. The paid plans (Starter, Growth, Scale) are invite-only in the fresh state — join the waitlist. Teams is in beta — join the beta. The product does not put an assistant between you and the work; it uses patterns. Answer in 2–3 sentences.";
+  "Explain Revercue: a freelancer tool for the thread from proposal to contract to invoice to CRM. The tagline is 'Your work should speak, not you.' The thesis is 'a thread, not disconnected workflows.' The Free plan is available now. Starter, Growth and Scale are publicly available via checkout; Teams is in beta. Teams is in beta — join the beta. The product does not put an assistant between you and the work; it uses patterns. Answer in 2–3 sentences.";
 
 export function formatStorage(gb: number | null | undefined): string {
   if (gb == null) return "Unlimited";

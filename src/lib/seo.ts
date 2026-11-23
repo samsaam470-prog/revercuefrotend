@@ -74,7 +74,7 @@ const ROUTES: Record<string, RouteMeta> = {
   "/pricing": {
     title: "Pricing — Revercue",
     description:
-      "Free is available now. Starter, Growth and Scale are invite-only — join the waitlist. Teams is in beta. Every limit is listed, not summarised.",
+      "Free is available now. Starter, Growth and Scale are publicly available via checkout. Teams is in beta. Every limit is listed, not summarised.",
   },
   "/compare": {
     title: "Compare — Revercue",

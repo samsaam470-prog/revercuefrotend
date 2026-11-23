@@ -39,7 +39,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Finish the five onboarding steps",
         paragraphs: [
-          "Choose freelancer or agency, fill in your profile and services, confirm the legal consent, then pick a plan. Free is available now. The paid plans are invite-only, so you join the waitlist and the team reaches out when a spot opens; Teams is in beta and you join the beta the same way.",
+          "Choose freelancer or agency, fill in your profile and services, confirm the legal consent, then pick a plan. Free is available now. Starter, Growth and Scale are publicly available via checkout; Teams is in beta and you join the beta.",
           "The profile step asks for your business name, your website, your Fiverr profile if you take work there, and the services you sell. The website and the Fiverr profile are optional and labelled that way. The services are not decoration: they decide which built-in templates are marked Suggested when you open a proposal.",
           "The tutorial overlay walks through the ten places you will use most. It is a single modal with numbered steps, not a chain of popovers that trap the pointer. You can skip it at any step and find every screen again in the Guides.",
         ],
@@ -1187,64 +1187,49 @@ const BASE_GUIDES: Guide[] = [
     ],
   },
   {
-    slug: "why-invite-only",
-    title: "Why the paid plans are invite-only",
+    slug: "why-teams-is-in-beta",
+    title: "Why Teams Is in Beta",
     excerpt:
-      "Why Revercue's paid plans are invite-only, what the waitlist means, and how the invite works.",
-    category: "Pricing",
-    readMinutes: 7,
-    updated: "2026-11-22",
-    visual: "PricingVisual",
+      "Why Revercue's Teams experience is available gradually, what is being tested, and how to become a Teams beta partner.",
+    category: "Product",
+    readMinutes: 8,
+    updated: "2026-11-23",
+    visual: "DashboardVisual",
     sections: [
       {
-        heading: "Why can't I just pay and start?",
+        heading: "Why Teams is in beta",
         paragraphs: [
-          "You land on the pricing page. You see the plans. The Free plan is available now. The paid plans — Starter, Growth, Scale — say Join the waitlist. Teams says Join the beta. You may wonder: why can't I just pay and start?",
-          "Here is the honest answer. Revercue is in a fresh state. The product is built, the thread works, the Free plan is live. But the paid plans are not a checkout. They are an invitation. The waitlist is the invitation. The team reaches out when a spot opens. This is not a marketing trick. It is a deliberate choice, and here is why.",
+          "Revercue is making its Teams experience available gradually so the product can be tested with real teams, workflows and collaboration requirements before a wider release.",
+          "The beta period helps Revercue validate team onboarding and collaboration workflows, understand how teams manage shared proposals, contracts and invoices, test member invitations, roles and permissions, improve shared workspace management, gather feedback from early beta partners, identify usability issues and improve reliability, and prioritize the features teams need most before general availability.",
+          "Revercue is not claiming that every Teams feature is already complete or available. The beta exists precisely so the team can learn what real teams need before committing to a final shape.",
         ],
       },
       {
-        heading: "1. The product is new, and the support is real",
+        heading: "Features being planned for Teams",
         paragraphs: [
-          "Revercue is not a large company with a support team of fifty. It is a small team, and the support is personal. When a paid user has a problem, the team answers. When a paid user has a question, the team replies. When a paid user wants a feature, the team reads it. The invitation is how the team keeps the support real. If the paid plans were open, the team could not answer every user. The waitlist is the queue. The team invites the next user when it can support them well.",
+          "The following capabilities are planned or being evaluated for the Teams experience, subject to development and validation. They are not all available today.",
+          "Planned or under evaluation: a shared team workspace; multiple team members; member invitations and onboarding; role-based permissions and access management; shared proposal and document workflows; team-level visibility and collaboration; centralized management of team activity; better oversight of team documents and workflows; and additional team administration and management controls.",
+          "Some of these may ship during the beta, some after general availability, and some may change shape based on feedback. No specific release dates are promised and no planned feature is guaranteed to ship.",
         ],
       },
       {
-        heading: "2. The paid plans carry more, and the more needs care",
+        heading: "Become a Teams beta partner",
         paragraphs: [
-          "The Free plan is 5 active documents, 1-month retention, 50 MB storage, 3 notes per client. The paid plans carry more: 20, 100, or 300 active documents; 3, 12, or 24 months of retention; 100 MB, 1 GB, or 5 GB of storage; the advanced tracking, the interest level, the revenue tracker, the pattern learning, the saved FAQs, the saved packages. The more is not a switch. It is a relationship. The team wants to onboard each paid user, not just charge them. The invitation is the onboarding. The team shows the user what the paid plan does, and why it matters. The user is not alone with a new tier; the team is there.",
+          "If your team wants to help shape the Teams experience, apply to become a Teams beta partner.",
+          "Beta partners can share feedback and help prioritize the features teams need most. Applying does not automatically activate a paid Teams subscription; the team reviews applications and reaches out when a spot opens.",
+        ],
+        bullets: [
+          "Shared feedback on real team workflows.",
+          "Early access to team features as they are tested.",
+          "Direct contact with the Revercue team.",
         ],
       },
       {
-        heading: "3. The paid plans shape the product",
+        heading: "Future invoice payment processing (beta)",
         paragraphs: [
-          "The first paid users are not just customers. They are the product's test. They find the bugs, they ask for the features, they tell the team what works and what does not. The invitation is how the team keeps the first paid users close. If the paid plans were open, the first 100 users would be anonymous. The team would not know them, and the product would not learn from them. The waitlist is the feedback loop. The team invites the users who will shape the product, not the users who will just pay.",
-        ],
-      },
-      {
-        heading: "4. The fresh state is honest",
-        paragraphs: [
-          "The product is in a fresh state. It is not hiding behind a coming soon page. The Free plan is live. The thread works. The paid plans are the next tier, and the team is inviting the users one at a time. This is the honest version of launching. The team is not pretending the paid plans are open when they are not. The waitlist is the truth: the paid plans are coming, and the team is inviting the users when the product is ready for them.",
-        ],
-      },
-      {
-        heading: "What the waitlist means",
-        paragraphs: [
-          "The waitlist is a form. You add your email, the plan you want, and why. The team reads every entry. The team invites the users when a spot opens. The invitation is an email: You are invited to the plan. Here is what happens next. The invitation includes the onboarding, the support, and the plan's details. The invitation is not a payment link. It is the start of the relationship.",
-          "If you are on the waitlist and you do not hear back, it is not a rejection. It is the queue. The team invites the users as the product grows. The Free plan is still there. You can use the thread today, with the Free plan, while you wait. The Free plan is not a trial; it is the product, with the limits. The paid plans are the next step, when the team can support them.",
-        ],
-      },
-      {
-        heading: "What the beta means",
-        paragraphs: [
-          "Teams is in beta. The team features — the Handoff Dashboard, the roles, the bulk transfer, the audit log — are being tested with a small group. The beta is the co-creation. The team invites the beta users, the beta users use the features, the team learns, the features improve. The beta is not the same as the waitlist. The waitlist is the queue for the paid plans. The beta is the test for the team features. Both are the invitation. Both are the honest version of launching.",
-        ],
-      },
-      {
-        heading: "The invitation is the product's promise",
-        paragraphs: [
-          "The paid plans are invite-only because the product is new, the support is real, the more needs care, the first users shape the product, and the fresh state is honest. The invitation is not a limitation. It is the product's promise: the team is there, the onboarding is real, the feedback matters, the users are known. The waitlist is the queue. The Free plan is available now. The paid plans are the next step, when the team can support them.",
-          "If you are a freelancer with a real client, the Free plan is enough to start. The thread is there. The proposal, the contract, the form, the invoice, the client record. The paid plans are the next tier, when the team invites you. The Free plan is the product; the paid plans are the product with more. The invitation is the honest bridge between the two. Your work should speak, not you.",
+          "Revercue is also testing a separate future capability: invoice payment processing. This is unrelated to Revercue's own SaaS subscription billing.",
+          "Revercue is exploring a future workflow that could allow freelancers to collect payments from their clients through invoice payment links, make it easier for clients to pay outstanding invoices, track payment progress and payment status, improve invoice payment visibility, and support payment processing and payout handling as the capability develops.",
+          "This capability is currently in testing / beta development. It is not a generally available production feature. No payment methods, payout timing, countries, fees or availability are promised. It is separate from the Whop subscription billing that powers Revercue's own plans.",
         ],
       },
     ],
@@ -1317,7 +1302,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Five plans, two states",
         paragraphs: [
-          "Free is available now. Starter, Growth and Scale are invite-only: join the waitlist and the team reaches out when a spot opens. Teams is in beta: join the beta and the team tests the team features with you. Nothing about the thread changes between the plans. The proposal, the contract, the form, the invoice and the client record are the same product on every tier. What changes is how much of it you can keep at once, and how long you keep it.",
+          "Free is available now. Starter, Growth and Scale are publicly available via checkout. Teams is in beta: join the beta and the team tests the team features with you. Nothing about the thread changes between the plans. The proposal, the contract, the form, the invoice and the client record are the same product on every tier. What changes is how much of it you can keep at once, and how long you keep it.",
         ],
       },
       {
@@ -1385,7 +1370,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Upgrading, downgrading, and the waitlist",
         paragraphs: [
-          "The paid plans are invite-only in this fresh state. You join the waitlist with your email, the plan you want and why; the team reads the entries and invites people when it can support them properly. An invitation is an email that says what happens next, not a payment link.",
+          "Starter, Growth and Scale are now publicly available via checkout. The waitlist remains only for the Teams beta: you join with your email and the team reaches out when a spot opens.",
           "Downgrades take effect at the end of the cycle. Documents above the new limit are archived rather than deleted, so the links close but nothing is lost. If you go from a hundred live documents to twenty, eighty of them move to the archive and the archive allowance of the lower plan applies. That is the moment the archive limit matters most, and it is why the archive is counted separately.",
           "Nothing on the pricing page is a trial. Free is free forever, with limits. The paid plans are the same product with more room and more intelligence, and the invitation is how the team keeps the room honest.",
         ],

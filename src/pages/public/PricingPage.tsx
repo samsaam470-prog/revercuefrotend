@@ -72,8 +72,8 @@ export function PricingPage() {
         <p className="eyebrow">Pricing</p>
         <h1>Start free. Upgrade when the thread pays for itself.</h1>
         <p>
-          Free is available now. Starter, Growth and Scale are invite-only in the fresh state. Teams
-          is in beta.
+          Free is available now. Starter, Growth and Scale are publicly available. Growth includes a
+          limited-time 14-day free trial. Teams is in beta.
         </p>
       </div>
 
@@ -103,11 +103,11 @@ export function PricingPage() {
                 </div>
                 <div className="role">{plan.role}</div>
                 <p className="caption" style={{ marginTop: 6 }}>
-                  {plan.status === "available"
-                    ? "Available now — no card, no trial clock"
-                    : plan.status === "beta"
-                      ? "In beta — billed per team, only after an invitation"
-                      : "Invited accounts only — no checkout today"}
+                  {plan.id === "growth"
+                    ? "14-day free trial — available for a limited time"
+                    : plan.status === "available"
+                      ? "Available now — public checkout"
+                      : "In beta — join the beta waitlist"}
                 </p>
               </div>
               <ul>
@@ -123,14 +123,18 @@ export function PricingPage() {
                   <AuthActionStart className="btn btn-primary btn-sm btn-full">
                     Start free
                   </AuthActionStart>
-                ) : (
+                ) : plan.id === "teams" ? (
                   <button
                     type="button"
                     className="btn btn-secondary btn-sm btn-full"
                     onClick={() => setWaitlist({ plan: plan.id })}
                   >
-                    {plan.id === "teams" ? "Join the beta" : "Join waitlist"}
+                    Join the beta
                   </button>
+                ) : (
+                  <AuthActionStart className="btn btn-primary btn-sm btn-full">
+                    Choose {plan.name}
+                  </AuthActionStart>
                 )}
               </div>
             </div>
@@ -139,9 +143,9 @@ export function PricingPage() {
       </div>
 
       <p className="caption text-center" style={{ marginTop: 16 }}>
-        Prices are in US dollars, per month. Starter, Growth and Scale start only after an invitation:
-        the waitlist is the queue, not a purchase. Teams is in beta, priced per team with seats handled
-        manually. There is no automated checkout and no refunds.
+        Prices are in US dollars, per month. Starter, Growth and Scale are publicly available via checkout.
+        Growth includes a limited-time 14-day free trial. Teams is in beta and uses a waitlist; no charge
+        applies while it remains in beta.
       </p>
 
       <section className="section">

@@ -356,9 +356,8 @@ export function TermsPage() {
           body: (
             <>
               <p>
-                Free is available now. Starter, Growth and Scale are invite-only: you join the
-                waitlist and the team reaches out when a spot opens. Teams is in beta; join the beta
-                and the team will reach out when a spot opens.
+                Free is available now. Starter, Growth and Scale are publicly available via checkout.
+                Teams is in beta; join the beta waitlist and the team will reach out when a spot opens.
               </p>
               <p>
                 There is no automated checkout in the fresh state and no refunds. A plan change takes
@@ -459,7 +458,7 @@ export function TermsPage() {
                 Features can change. When a change removes something you rely on, we say so in the
                 product before it happens and, where the plan allows, keep a path to export what the
                 feature produced. The plans themselves are described on the Pricing page; the Free plan
-                stays free, the paid plans stay invite-only while the product is in its fresh state.
+                stays free, and Starter, Growth and Scale are publicly available via checkout.
               </p>
               <p>
                 These terms can be updated. The date at the top of this page always identifies the

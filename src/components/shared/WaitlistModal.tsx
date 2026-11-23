@@ -87,7 +87,7 @@ export function WaitlistModal({
             You're on the list. We'll be in touch.
             {plan === "teams"
               ? " Teams is in beta. The team is testing the team features with a small group and will reach out when a spot opens."
-              : " Paid plans are invite-only. The team will reach out when a spot opens."}
+              : " Starter, Growth and Scale are now publicly available via checkout. This waitlist is only for Teams beta."}
           </p>
           <p className="caption">The Free plan is available now, no invitation needed.</p>
         </div>
@@ -95,7 +95,7 @@ export function WaitlistModal({
         <div className="stack-4">
           <p className="muted">
             {description ||
-              "Paid plans are invite-only. Leave your email and the team will reach out when a spot opens. The Free plan is available now, no invitation needed."}
+              "Teams is in beta. Leave your email to join the Teams beta waitlist. Starter, Growth and Scale are publicly available via checkout."}
           </p>
           <Input
             id="waitlist-email"
