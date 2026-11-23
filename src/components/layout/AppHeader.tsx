@@ -35,7 +35,7 @@ export function AppHeader() {
   return (
     <header className="app-header">
       <Link to="/dashboard" className="logo" aria-label="Revercue dashboard">
-        <span className="bracket">[R]</span>
+        <img src="/logo-mark.png" alt="" className="logo-mark-img" width={51} height={28} />
         <span>Revercue</span>
       </Link>
       <nav className="app-nav" aria-label="Application">
