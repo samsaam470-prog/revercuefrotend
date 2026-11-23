@@ -8,6 +8,9 @@ export interface ContractDraftPayload {
   client_email?: string;
   client_phone?: string;
   linked_proposal_id?: string;
+  client_website?: string;
+  user_website?: string;
+  business_name?: string;
   title: string;
   scope: string;
   payment_terms: string;
