@@ -316,8 +316,11 @@ function ProfileSection() {
 function PlanSection() {
   const { user } = useAuth();
   const { plan, limits } = usePlanGate();
+  const toast = useToast();
+  const queryClient = useQueryClient();
   const [waitlist, setWaitlist] = useState<PlanName | null>(null);
   const query = useQuery({ queryKey: ["settings", "plan"], queryFn: () => settingsApi.getPlan() });
+  const subQuery = useQuery({ queryKey: ["settings", "billing-sub"], queryFn: () => settingsApi.billingSubscription() });
   const definition = PLANS.find((item) => item.id === plan)!;
 
   const usage = [
@@ -352,10 +355,8 @@ function PlanSection() {
             </p>
           </div>
           <div className="inline">
-            {plan !== "teams" && (
-              <Button variant="secondary" onClick={() => setWaitlist(plan === "free" ? "starter" : "scale")}>
-                Request a paid plan
-              </Button>
+            {subQuery.data?.subscription?.status && (
+              <Badge variant="green">{subQuery.data.subscription.status}</Badge>
             )}
           </div>
         </div>
@@ -364,6 +365,32 @@ function PlanSection() {
             ? "Free is available now. Starter, Growth and Scale are publicly available via checkout. Teams is in beta."
             : "Your plan was set by the team. Changes are handled through the waitlist."}
         </p>
+      </div>
+
+      <div className="settings-card">
+        <h2>Subscription</h2>
+        {subQuery.isLoading && <SkeletonLines count={2} />}
+        {subQuery.data?.subscription ? (
+          <div className="stack-2">
+            <p className="muted" style={{ fontSize: 14 }}>
+              Plan: {subQuery.data.subscription.plan_key} · Status: {subQuery.data.subscription.status}
+              {subQuery.data.subscription.cancel_at_period_end ? " · Cancels at period end" : ""}
+            </p>
+            <div className="inline">
+              {subQuery.data.subscription.cancel_at_period_end ? (
+                <Button variant="secondary" onClick={async () => { await settingsApi.billingReactivate(); await queryClient.invalidateQueries({ queryKey: ["settings", "billing-sub"] }); toast.success("Reactivated."); }}>
+                  Reactivate
+                </Button>
+              ) : (
+                <Button variant="secondary" onClick={async () => { await settingsApi.billingCancel(); await queryClient.invalidateQueries({ queryKey: ["settings", "billing-sub"] }); toast.success("Cancellation scheduled."); }}>
+                  Cancel at period end
+                </Button>
+              )}
+            </div>
+          </div>
+        ) : (
+          <p className="muted" style={{ fontSize: 14 }}>No subscription yet. Choose a plan on the pricing page.</p>
+        )}
       </div>
 
       <div className="settings-card">

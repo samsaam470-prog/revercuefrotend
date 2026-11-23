@@ -8,6 +8,8 @@ import { FAQItem } from "../../components/shared/FAQItem";
 import { WaitlistModal } from "../../components/shared/WaitlistModal";
 import type { PlanName } from "../../types";
 import { AuthActionStart } from "../../components/auth/AuthActionStart";
+import { useAuth } from "../../hooks/useAuth";
+import { settingsApi } from "../../api/settings";
 
 const ROWS: { label: string; key: keyof (typeof PLANS)[0]["limits"] | "password" | "interest" | "suggestions" | "brand" | "thankyou" | "revenue" | "expenses" | "expense_categories" }[] = [
   { label: "Active documents", key: "active_documents" },
@@ -63,8 +65,23 @@ function cell(plan: PlanName, key: (typeof ROWS)[0]["key"]): string {
 }
 
 export function PricingPage() {
+  const { isAuthenticated } = useAuth();
   const [waitlist, setWaitlist] = useState<{ plan: PlanName } | null>(null);
+  const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
+  const [checkingOut, setCheckingOut] = useState(false);
   const billingFaqs = faqsByGroup(["plans"]);
+
+  const startCheckout = async (planId: PlanName) => {
+    setCheckingOut(true);
+    try {
+      const res = await settingsApi.billingCheckout(planId);
+      setCheckoutUrl(res.checkout_url);
+    } catch (e) {
+      alert("Could not start checkout. Please sign in and try again.");
+    } finally {
+      setCheckingOut(false);
+    }
+  };
 
   return (
     <div className="page page-wide">
@@ -130,6 +147,15 @@ export function PricingPage() {
                     onClick={() => setWaitlist({ plan: plan.id })}
                   >
                     Join the beta
+                  </button>
+                ) : isAuthenticated ? (
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-sm btn-full"
+                    disabled={checkingOut}
+                    onClick={() => void startCheckout(plan.id)}
+                  >
+                    {checkingOut ? "Starting..." : `Choose ${plan.name}`}
                   </button>
                 ) : (
                   <AuthActionStart className="btn btn-primary btn-sm btn-full">
@@ -207,6 +233,28 @@ export function PricingPage() {
           your account so we can find it.
         </p>
       </section>
+
+      {checkoutUrl && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,.6)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+          }}
+          onClick={() => setCheckoutUrl(null)}
+        >
+          <div
+            style={{ width: "90%", maxWidth: 520, height: "80vh", background: "#fff", borderRadius: 12, overflow: "hidden" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <iframe src={checkoutUrl} title="Checkout" style={{ width: "100%", height: "100%", border: 0 }} />
+          </div>
+        </div>
+      )}
 
       <WaitlistModal
         open={Boolean(waitlist)}

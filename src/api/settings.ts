@@ -62,6 +62,13 @@ export const settingsApi = {
     api.post<{ success: true }>("/api/settings/plan/downgrade", { keep_document_ids }),
   receipt: (paymentId: string) => api.get<Blob>(`/api/settings/plan/receipt/${paymentId}`, { raw: true }),
 
+  billingSubscription: () => api.get<any>("/api/settings/billing/subscription"),
+  billingCheckout: (plan: string) => api.post<{ checkout_id: string; checkout_url: string; trial: boolean }>("/api/settings/billing/checkout", { plan }),
+  billingCancel: () => api.post<{ success: true }>("/api/settings/billing/cancel", {}),
+  billingReactivate: () => api.post<{ success: true }>("/api/settings/billing/reactivate", {}),
+  billingChangePlan: (plan: string) => api.post<{ success: true; scheduled: boolean }>("/api/settings/billing/change-plan", { plan }),
+  billingPayments: () => api.get<{ payments: any[] }>("/api/settings/billing/payments"),
+
   changePassword: (body: { current_password: string; new_password: string }) =>
     api.post<{ success: true }>("/api/settings/security/change-password", body),
   sessions: () => api.get<{ data: SessionRow[] }>("/api/settings/security/sessions"),
