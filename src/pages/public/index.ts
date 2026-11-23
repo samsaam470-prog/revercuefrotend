@@ -1,5 +1,6 @@
 export { HomePage } from "./HomePage";
 export { FeaturesPage } from "./FeaturesPage";
+export { SolutionLandingPage } from "./SolutionLandingPage";
 export { PricingPage } from "./PricingPage";
 export { ComparePage } from "./ComparePage";
 export { CompareCriteriaPage } from "./CompareCriteriaPage";
