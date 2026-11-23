@@ -91,7 +91,7 @@ export function BetaPage() {
           I want to be precise about what the beta is and what it is not. Teams is not yet a finished product, and not every capability you might expect is available today. Some features are working in the beta, and others are still being designed, tested, and refined. Joining the beta does not start a paid subscription automatically. You will see the pricing and the terms before you commit to anything, and you will hear from us before any change affects your account. We will say plainly what is ready, what is still in development, and what we have not yet decided.
         </p>
         <p className="muted" style={{ lineHeight: 1.8 }}>
-          If your team works together on client projects and you are willing to give us honest, specific feedback, I would welcome your application. It helps us most when you tell us how your team actually works: who approves what, where documents get stuck, what you have tried in other tools, and what you wish worked differently. You do not need to describe an ideal workflow. The real one is more useful to us.
+          If your team works together on client projects and you are willing to give us honest, specific feedback, I would welcome your application. Applying does not guarantee acceptance: beta places are limited, and we cannot accept every applicant. We review applications and contact teams we can accommodate as the programme develops. It helps us most when you tell us how your team actually works: who approves what, where documents get stuck, what you have tried in other tools, and what you wish worked differently. You do not need to describe an ideal workflow. The real one is more useful to us.
         </p>
         <p className="muted" style={{ lineHeight: 1.8 }}>
           Thank you for being part of this early stage. Your time and your candour are what will make Teams worth using.
@@ -191,8 +191,9 @@ export function BetaPage() {
               group before they open the plan.
             </p>
             <p className="muted" style={{ fontSize: 14 }}>
-              You can join from this page. If a spot is free, the team reaches out with the next
-              steps. Free is available now, no invitation needed.
+              You can apply from this page, but applying does not guarantee acceptance. Beta places are
+              limited, and the team will contact applicants it can accommodate. Free is available now,
+              no invitation needed.
             </p>
           </div>
           <p className="caption">
