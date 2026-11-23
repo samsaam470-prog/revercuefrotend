@@ -23,6 +23,7 @@ import {
 import { isBuiltIn } from "../../lib/templates";
 import { Button } from "../../components/ui/Button";
 import { Spinner } from "../../components/ui/Spinner";
+import { SkeletonLines } from "../../components/ui/Skeleton";
 import { useAutoSave } from "../../hooks/useAutoSave";
 import { useToast } from "../../hooks/useToast";
 import { errorMessage } from "../../lib/errors";
@@ -237,7 +238,7 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
   if (query.isLoading) {
     return (
       <div className="auth-split">
-        <Spinner size={32} />
+        <SkeletonLines count={6} />
       </div>
     );
   }

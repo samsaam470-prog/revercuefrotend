@@ -10,6 +10,7 @@ import { Textarea } from "../../components/ui/Textarea";
 import { Checkbox } from "../../components/ui/Checkbox";
 import { Modal } from "../../components/ui/Modal";
 import { Spinner } from "../../components/ui/Spinner";
+import { SkeletonLines } from "../../components/ui/Skeleton";
 import { PasswordWall } from "./PasswordWall";
 import { ClosedPage } from "./ClosedPage";
 import { errorMessage } from "../../lib/errors";
@@ -98,7 +99,7 @@ export function PublicProposalPage() {
   if (query.isLoading) {
     return (
       <div className="client-wrap">
-        <Spinner size={32} />
+        <SkeletonLines count={6} />
       </div>
     );
   }

@@ -7,6 +7,7 @@ import { publicApi } from "../../api/public";
 import { Button } from "../../components/ui/Button";
 import { Badge } from "../../components/ui/Badge";
 import { Spinner } from "../../components/ui/Spinner";
+import { SkeletonLines } from "../../components/ui/Skeleton";
 import { PasswordWall } from "./PasswordWall";
 import { ClosedPage } from "./ClosedPage";
 import { useToast } from "../../hooks/useToast";
@@ -49,7 +50,7 @@ export function PublicInvoicePage() {
   if (query.isLoading) {
     return (
       <div className="client-wrap">
-        <Spinner size={32} />
+        <SkeletonLines count={6} />
       </div>
     );
   }

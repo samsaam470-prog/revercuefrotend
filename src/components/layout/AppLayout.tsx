@@ -2,6 +2,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { AppHeader } from "./AppHeader";
 import { AppSidebar } from "./AppSidebar";
 import { Spinner } from "../ui/Spinner";
+import { SkeletonLines } from "../ui/Skeleton";
 import { useAuth } from "../../hooks/useAuth";
 import { OfflinePage } from "../../pages/utility";
 import { isOnboardingComplete, onboardingResumePath } from "../../lib/onboarding";
@@ -26,7 +27,7 @@ export function AppLayout() {
   if (loading) {
     return (
       <div className="auth-split">
-        <Spinner size={32} />
+        <SkeletonLines count={6} />
       </div>
     );
   }

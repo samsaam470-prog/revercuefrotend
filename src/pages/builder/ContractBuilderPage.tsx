@@ -22,6 +22,7 @@ import { Select } from "../../components/ui/Select";
 import { Checkbox } from "../../components/ui/Checkbox";
 import { Fieldset } from "../../components/ui/Fieldset";
 import { Spinner } from "../../components/ui/Spinner";
+import { SkeletonLines } from "../../components/ui/Skeleton";
 import { useAutoSave } from "../../hooks/useAutoSave";
 import { useToast } from "../../hooks/useToast";
 import { usePlanGate } from "../../hooks/usePlanGate";
@@ -446,7 +447,7 @@ function ContractCanvas({ id }: { id: string }) {
   if (query.isLoading) {
     return (
       <div className="auth-split">
-        <Spinner size={32} />
+        <SkeletonLines count={6} />
       </div>
     );
   }

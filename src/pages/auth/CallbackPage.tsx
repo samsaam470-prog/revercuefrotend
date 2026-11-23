@@ -4,6 +4,7 @@ import { useAuthAction } from "@authaction/web-sdk/react";
 import { authApi } from "../../api/auth";
 import { Button } from "../../components/ui/Button";
 import { Spinner } from "../../components/ui/Spinner";
+import { SkeletonLines } from "../../components/ui/Skeleton";
 import { useAuth } from "../../hooks/useAuth";
 import { consumeReturnTo, readReturnTo } from "../../lib/authaction";
 import { isOnboardingComplete, onboardingResumePath } from "../../lib/onboarding";
@@ -263,7 +264,7 @@ export function CallbackPage() {
 
   return (
     <div className="auth-card" style={{ textAlign: "center" }} aria-live="polite">
-      <Spinner size={32} />
+      <SkeletonLines count={6} />
       <p className="muted mt-4">Completing sign-in…</p>
     </div>
   );

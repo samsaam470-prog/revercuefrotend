@@ -1,5 +1,6 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { Spinner } from "../ui/Spinner";
+import { SkeletonLines } from "../ui/Skeleton";
 import { useAuth } from "../../hooks/useAuth";
 import { OfflinePage } from "../../pages/utility";
 import { isOnboardingComplete } from "../../lib/onboarding";
@@ -19,7 +20,7 @@ export function OnboardingGate() {
   if (loading) {
     return (
       <div className="auth-split">
-        <Spinner size={32} />
+        <SkeletonLines count={6} />
       </div>
     );
   }

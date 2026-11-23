@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { publicApi } from "../../api/public";
 import { Button } from "../../components/ui/Button";
 import { Spinner } from "../../components/ui/Spinner";
+import { SkeletonLines } from "../../components/ui/Skeleton";
 import { ClosedPage } from "./ClosedPage";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
@@ -26,7 +27,7 @@ export function ProofUploadPage() {
   if (query.isLoading) {
     return (
       <div className="client-wrap">
-        <Spinner size={32} />
+        <SkeletonLines count={6} />
       </div>
     );
   }

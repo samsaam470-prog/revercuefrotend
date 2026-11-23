@@ -15,6 +15,7 @@ import { Select } from "../../components/ui/Select";
 import { Checkbox } from "../../components/ui/Checkbox";
 import { Modal } from "../../components/ui/Modal";
 import { Spinner } from "../../components/ui/Spinner";
+import { SkeletonLines } from "../../components/ui/Skeleton";
 import { useAutoSave } from "../../hooks/useAutoSave";
 import { useToast } from "../../hooks/useToast";
 import { CURRENCIES } from "../../lib/constants";
@@ -463,7 +464,7 @@ function InvoiceEditor({ id }: { id: string }) {
   if (query.isLoading) {
     return (
       <div className="auth-split">
-        <Spinner size={32} />
+        <SkeletonLines count={6} />
       </div>
     );
   }
