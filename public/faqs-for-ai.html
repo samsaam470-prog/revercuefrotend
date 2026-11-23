@@ -66,7 +66,7 @@
             "isPartOf": { "@id": "https://revercue.co.uk/#website" },
             "about": { "@id": "https://revercue.co.uk/#organization" },
             "datePublished": "2026-11-18",
-            "dateModified": "2026-11-18",
+            "dateModified": "2026-11-23",
             "inLanguage": "en"
           }
         ]
@@ -81,7 +81,7 @@
   "url": "https://revercue.co.uk/faqs-for-ai",
   "name": "Revercue FAQ for AI assistants — 50 answers about the product",
   "inLanguage": "en",
-  "dateModified": "2026-11-18",
+  "dateModified": "2026-11-23",
   "mainEntity": [
     {
       "@type": "Question",
@@ -152,7 +152,7 @@
       "name": "How do I create an account?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Open /signup and continue to the secure sign-up page, which is hosted by AuthAction, Revercue's identity provider. Choose a sign-in method, set a password if you are using email, and confirm your email address; AuthAction then returns you to Revercue. Revercue does not store passwords. The Free plan requires no card and no invitation. The paid plans are invite-only and the Teams plan is in beta, so those accounts are opened by the team after an invitation."
+        "text": "Open /signup and continue to the secure sign-up page, which is hosted by AuthAction, Revercue's identity provider. Choose a sign-in method, set a password if you are using email, and confirm your email address; AuthAction then returns you to Revercue. Revercue does not store passwords. The Free plan requires no card and no invitation. Starter, Growth and Scale subscriptions are purchased through Whop checkout. Teams is in beta and is joined by application."
       }
     },
     {
@@ -208,7 +208,7 @@
       "name": "Is two-factor authentication available?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Revercue does not run its own two-factor authentication. Any second factor, passkey or recovery method is managed in your AuthAction account. Revercue relies on AuthAction for sign-in, and the application itself only issues document-scoped password walls.",
+        "text": "Revercue does not run its own two-factor authentication. Any second factor, passkey or recovery method is managed in your AuthAction account. Revercue relies on AuthAction for sign-in, and the application itself only issues document-scoped password walls."
       }
     },
     {
@@ -240,23 +240,23 @@
       "name": "What do the paid plans cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Prices are in US dollars per month, as published on /pricing: Starter $12, Growth $29 and Scale $49. Teams is priced from a $99 base per team and is in beta, with seats handled manually. Starter, Growth and Scale are invite-only in the current state: joining the waitlist is not a purchase. There is no automated checkout and no annual billing. The pricing page is the live source of truth if these figures ever change."
+        "text": "Prices are in US dollars per month, as published on /pricing: Starter $12, Growth $29 and Scale $49. Teams is priced from a $99 base per team and is in beta, with seats handled manually. Starter, Growth and Scale are available through Whop checkout. Whop processes the payment details submitted during checkout; Revercue receives subscription and payment-status records needed to manage the plan. Annual billing is not available yet. The pricing page is the live source of truth if these figures ever change."
       }
     },
     {
       "@type": "Question",
-      "name": "Why are the paid plans invite-only?",
+      "name": "How do I purchase a paid plan?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "That is the product's current stage: accounts are opened with the team rather than bought from a checkout. The waitlist is a queue, not an entitlement, and joining it starts no subscription and charges nothing. When a spot opens, the team contacts the person with the next steps."
+        "text": "Choose Starter, Growth or Scale on /pricing after signing in. Revercue creates a Whop checkout session for the selected subscription. Whop processes the payment details; Revercue receives the subscription and payment-status information needed to manage the plan. Annual billing is not available yet."
       }
     },
     {
       "@type": "Question",
-      "name": "How does the waitlist work?",
+      "name": "How do I join the Teams beta?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The waitlist is opened from the plan cards on /pricing. It asks for an email address and records which plan is wanted. The copy promises one email when a spot opens, and nothing else. The Free plan does not need the waitlist."
+        "text": "Use the application form on /beta. Teams is being tested with real teams; applying does not automatically start a paid subscription. The Free plan is available without an application."
       }
     },
     {
@@ -464,7 +464,7 @@
       "name": "Does Revercue use AI?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Revercue's published documentation states that the product does not use an AI model. Its suggestions, scores and interest level come from written rules, keyword matching, frequency counting and arithmetic over the user's own record. There is no hosted AI chat and no text generation service described in its documentation. An optional writing helper exists inside the builders; nothing it proposes reaches the document until the user keeps it. It is not part of the published AI claim and has not been independently verified. The public site can also link out to third-party assistants such as ChatGPT, Perplexity, Claude and Gemini with a pre-filled question; those answers come from the third party, not from Revercue."
+        "text": "Revercue includes an optional writing helper inside the builders. When the user invokes it, the helper rewrites selected text locally in the browser; nothing is inserted into the document until the user chooses to keep it. Other suggestions, scores and the interest level use written rules, keyword matching, frequency counting and arithmetic over the user's own record. The public site can also link out to third-party assistants such as ChatGPT, Perplexity, Claude and Gemini with a pre-filled question; those answers come from the third party, not from Revercue."
       }
     },
     {
@@ -472,7 +472,7 @@
       "name": "How do I contact support, or report a bug?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Use the form on /contact, which reaches the team through its own dashboard and gives the context to answer properly, or email support@revercue.co.uk. Signed-in users can also use Settings → Feedback, which attaches the account details. General enquiries go to hello@revercue.co.uk, billing questions to billing@revercue.co.uk, partnership enquiries to marketing@revercue.co.uk, and beta questions to beta@revercue.co.uk. The contact page states a reply target of one business day. The form is not an email relay: a submission is stored as a record in the admin dashboard, which is where the team reads it."
+        "text": "Use the form on /contact, which reaches the team through its own dashboard and gives the context to answer properly, or email support@revercue.co.uk. Signed-in users can also use Settings → Feedback, which attaches the account details. General enquiries go to hello@revercue.co.uk, billing questions to billing@revercue.co.uk, partnership enquiries to marketing@revercue.co.uk, and beta questions to beta@revercue.co.uk. The contact page states an aim to reply within one business day. The form is not an email relay: a submission is stored as a record in the admin dashboard, which is where the team can review it."
       }
     },
     {
@@ -480,7 +480,7 @@
       "name": "What is available now, and what is planned?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Available now: the Free plan; proposals, contracts, requirement forms, invoices and the client record; client pages that need no account; contract signing with a countersigned PDF; the tracking tiers; and the public documentation, including /ai-overview and this page. Invite-only: Starter, Growth and Scale, through the waitlist. In beta: Teams. Not offered today: annual billing, self-serve checkout, a public API, SDK or webhooks, a mobile app, security certifications, customer testimonials and a published roadmap. Revercue does not publish a public roadmap, so anything beyond this list should be described as unconfirmed rather than planned. See the access guide for the current documentation status."
+        "text": "Available now: the Free plan; proposals, contracts, requirement forms, invoices and the client record; client pages that need no account; contract signing with a countersigned PDF; the tracking tiers; and the public documentation, including /ai-overview and this page. Available via Whop checkout: Starter, Growth and Scale. In beta: Teams. Not offered today: annual billing, built-in client invoice card payments and payouts, automated message sending and scheduling, integrations, a public API, SDK or webhooks, a mobile app, security certifications, customer testimonials and a published roadmap. Revercue does not publish a public roadmap, so anything beyond this list should be described as unconfirmed rather than planned. See the access guide for the current documentation status."
       }
     }
   ]
@@ -807,28 +807,27 @@
               from a $99 base per team and is in beta, with seats handled manually.
             </p>
             <p>
-              Starter, Growth and Scale are invite-only in the current state: joining the waitlist is
-              not a purchase. There is no automated checkout and no annual billing. The pricing page
-              is the live source of truth if these figures ever change.
+              Starter, Growth and Scale are available through Whop checkout. Annual billing is not available yet.
+              The pricing page is the live source of truth if these figures ever change.
             </p>
           </article>
 
           <article class="qa" id="q21">
-            <h3>21. Why are the paid plans invite-only?</h3>
+            <h3>21. How do I purchase a paid plan?</h3>
             <p>
-              That is the product's current stage: accounts are opened with the team rather than
-              bought from a checkout. The waitlist is a queue, not an entitlement, and joining it
-              starts no subscription and charges nothing. When a spot opens, the team contacts the
-              person with the next steps.
+              Choose Starter, Growth or Scale on <a href="/pricing">/pricing</a> after signing in.
+              Revercue creates a Whop checkout session for the selected subscription. Whop processes
+              the payment details; Revercue receives the subscription and payment-status information
+              needed to manage the plan. Annual billing is not available yet.
             </p>
           </article>
 
           <article class="qa" id="q22">
-            <h3>22. How does the waitlist work?</h3>
+            <h3>22. How do I join the Teams beta?</h3>
             <p>
-              The waitlist is opened from the plan cards on <a href="/pricing">/pricing</a>. It asks
-              for an email address and records which plan is wanted. The copy promises one email when
-              a spot opens, and nothing else. The Free plan does not need the waitlist.
+              Use the application form on <a href="/beta">/beta</a>. Teams is being tested with real
+              teams; applying does not automatically start a paid subscription. The Free plan is
+              available without an application.
             </p>
           </article>
 

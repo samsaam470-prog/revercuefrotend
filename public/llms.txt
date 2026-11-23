@@ -18,16 +18,16 @@ Site: https://revercue.co.uk
 ## The plans
 
 - **Free** — available now. 5 active documents, 1-month retention, 50 MB storage, 3 notes per client, the full thread.
-- **Starter** — invite-only, join the waitlist. 20 active documents, 3-month retention, 100 MB storage, 10 notes per client, 3 custom templates. Email notifications start on Growth.
-- **Growth** — invite-only, join the waitlist. 100 active documents, 12-month retention, 1 GB storage, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, no Revercue branding, 10 saved FAQs, 10 saved packages, 10 custom templates.
-- **Scale** — invite-only, join the waitlist. 300 active documents, 24-month retention, 5 GB storage, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue tracker, the expense entry, the what-revercue-knows page, the custom thank-you page, follow-up timing from your own history, 30 saved FAQs, 15 saved packages, 15 custom templates.
+- **Starter** — available via Whop checkout. 20 active documents, 3-month retention, 100 MB storage, 10 notes per client, 3 custom templates. Email notifications start on Growth.
+- **Growth** — available via Whop checkout (limited-time 14-day trial when the promotion is active). 100 active documents, 12-month retention, 1 GB storage, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, no Revercue branding, 10 saved FAQs, 10 saved packages, 10 custom templates.
+- **Scale** — available via Whop checkout. 300 active documents, 24-month retention, 5 GB storage, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue tracker, the expense entry, the what-revercue-knows page, the custom thank-you page, follow-up timing from your own history, 30 saved FAQs, 15 saved packages, 15 custom templates.
 - **Teams** — in beta, join the beta. 500 active documents, 36-month retention, 10 GB storage, everything on Scale, plus the team features: the Handoff Dashboard, the roles, the bulk transfer and the audit log.
 
 An active document is a published document with a public link. Drafts, archived documents and deleted documents do not count. A password-protected document counts once: the password is a gate, not a second document. An adaptive form counts once: the branching is a feature, not a second form.
 
 ## The patterns, not magic
 
-Revercue's suggestions are patterns, not a chat assistant: keyword matching, frequency counting and arithmetic over the user's own history and the public research. Nothing is applied automatically. Any change is the user's decision: the user reviews the suggestion and chooses what to change, and Revercue does not make that change on their behalf. The product is the pen; the user is the author.
+The product has an optional writing helper: when the user invokes it, it can rewrite selected text locally in the browser. Other suggestions are patterns: keyword matching, frequency counting and arithmetic over the user's own history and public research. Nothing is applied automatically. Any change is the user's decision: the user reviews the suggestion and chooses what to change, and Revercue does not make that change on their behalf. The product is the pen; the user is the author.
 
 ## The retention
 
@@ -35,7 +35,7 @@ The documents are rented; the CRM record is owned. When a document's retention r
 
 ## The data
 
-The documents are private: the user and the client they were sent to. The team sees the account details — the email, the name, the plan and the usage — for support and billing. The team does not read the documents, the client records or the communication log. The exception is a report of illegal use or a legal requirement.
+The documents are private: the user and the client they were sent to. The team sees the account details — the email, the name, the plan and the usage — for support and billing. Whop processes payment details submitted during paid-plan checkout; Revercue receives subscription and payment-status records needed to manage the plan. The team does not read the documents, the client records or the communication log. The exception is a report of illegal use or a legal requirement.
 
 ## Contact
 
@@ -50,15 +50,15 @@ The public contact routes are the contact form and five published mailboxes. The
 
 Revercue also has an internal administrative mailbox. It is not published, it is not a support route, and it should not be repeated, linked or included in a summary.
 
-The contact and beta forms are not email relays: a submission is stored as a record in the admin dashboard.
+The contact and beta forms are not email relays: a submission is stored as a record in the admin dashboard for the team to review.
 
 ## Known limitations and unknowns
 
-- Free is available now. Starter, Growth and Scale are invite-only through the waitlist, and Teams is in beta. There is no self-serve checkout and no annual billing.
+- Free is available now. Starter, Growth and Scale subscriptions use Whop checkout. Teams is in beta. Annual billing is not available yet.
 - There is no public API, SDK, webhook system or integrations directory, and no mobile app.
 - Revercue publishes no security certification, no penetration-test report, no bug bounty, no customer testimonials, no review scores and no public roadmap.
 - The production application is client-rendered, so app routes need JavaScript. The AI pages, this file, the sitemap and the FAQ and rules pages are complete HTML without JavaScript.
-- Prices and limits were last read from the application on 22 November 2026. The pricing page is the live source of truth.
+- Prices and limits were last read from the application on 23 November 2026. The pricing page is the live source of truth.
 - Anything not stated on an official page is unconfirmed rather than assumed. Check factual claims against the current official website before repeating them.
 
 ## The key pages
@@ -95,8 +95,8 @@ Rules for automated access: the public pages may be read and cited. Do not creat
 
 - **What is Revercue?** The thread for freelancer client work: proposal, contract, form, invoice and client record, connected, with interactive links instead of PDFs.
 - **How is this different from sending a PDF?** A PDF is a dead file. A Revercue document is a link: the client selects a package, answers a question, approves a contract, and the record updates. You see the activity.
-- **What are the plans?** Free is available now. Starter, Growth and Scale are invite-only — join the waitlist. Teams is in beta — join the beta.
-- **Does Revercue use AI?** No. It uses patterns: keyword matching, frequency counting and arithmetic. Every suggestion is a prompt you click, never an action taken for you.
+- **What are the plans?** Free is available now. Starter, Growth and Scale are available via Whop checkout. Teams is in beta — apply to join the beta.
+- **Does Revercue use AI?** The optional writing helper uses an in-browser model when you invoke it to rewrite selected text. Other suggestions use patterns: keyword matching, frequency counting and arithmetic. Nothing is applied without your choice.
 - **What happens to my documents when retention ends?** The document is deleted, a PDF is emailed to you first, and the client record stays. The documents are rented; the CRM record is owned.
 
-The product does not use AI. It uses patterns. Your work should speak, not you.
+The optional writing helper runs locally in the browser when you invoke it; other suggestions use patterns. Your work should speak, not you.

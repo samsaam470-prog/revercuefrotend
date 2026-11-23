@@ -34,7 +34,7 @@
     "growth": "invite_only_waitlist",
     "scale": "invite_only_waitlist",
     "teams": "beta",
-    "self_serve_checkout": false,
+    "self_serve_checkout": true,
     "free_requires_card": false
   },
   "resources": {
@@ -213,8 +213,8 @@
     {
       "id": "starter",
       "name": "Starter",
-      "status": "invite_only_waitlist",
-      "status_label": "Invite-only — join the waitlist",
+      "status": "available_via_checkout",
+      "status_label": "Available now — Whop checkout",
       "role": "Solo, light use.",
       "price_usd_per_month": 12,
       "limits": {
@@ -236,8 +236,8 @@
     {
       "id": "growth",
       "name": "Growth",
-      "status": "invite_only_waitlist",
-      "status_label": "Invite-only — join the waitlist",
+      "status": "available_via_checkout",
+      "status_label": "Available now — Whop checkout",
       "role": "Solo, power user.",
       "price_usd_per_month": 29,
       "limits": {
@@ -259,8 +259,8 @@
     {
       "id": "scale",
       "name": "Scale",
-      "status": "invite_only_waitlist",
-      "status_label": "Invite-only — join the waitlist",
+      "status": "available_via_checkout",
+      "status_label": "Available now — Whop checkout",
       "role": "Solo professional, full feature set.",
       "price_usd_per_month": 49,
       "limits": {

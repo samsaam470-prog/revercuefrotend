@@ -96,7 +96,7 @@
         <p>
           The public website is the product's shop window: what the thread is, what each document does,
           what each plan costs and what is available today. The Free plan is available now. Starter,
-          Growth and Scale are invite-only while the product is in its fresh state: you join a waitlist.
+          Starter, Growth and Scale are available through Whop checkout. Teams is in beta.
           Teams is in beta: you apply to the beta. Those statuses are repeated on
           <a href="/pricing">the pricing page</a> and in the demo, and they are the source of truth.
         </p>
@@ -176,9 +176,9 @@
                 <th scope="row">Pricing<br /><code>/pricing</code></th>
                 <td>
                   Five plans with real limits: Free (available now), Starter $12, Growth $29 and Scale
-                  $49 per month (invite-only, waitlist), Teams (beta, on invitation, base $99). A full
+                  $49 per month (available via Whop checkout), Teams (beta, base $99). A full
                   comparison table and billing FAQ. The only working call to action is Start free;
-                  paid plans open a waitlist form.
+                  paid plans open the Whop checkout flow after sign-in.
                 </td>
                 <td>Required</td>
                 <td>App shell only</td>
@@ -309,7 +309,7 @@
                 <th scope="row">Onboarding<br /><code>/onboarding/step-1</code> … <code>/onboarding/step-5</code></th>
                 <td>
                   Five steps after sign-up: account type (freelancer or agency), profile and services,
-                  legal consent, plan selection (Free is available; paid plans join a waitlist) and a
+                  legal consent, plan selection (Free is available; paid plans use Whop checkout) and a
                   tutorial overlay. Step 3 redirects to step 4.
                 </td>
                 <td>Authenticated, incomplete onboarding</td>
@@ -510,7 +510,7 @@
           <span class="pill pill--available">available</span>,
           <span class="pill pill--partial">partial</span>,
           <span class="pill pill--beta">beta</span>,
-          <span class="pill pill--waitlist">invite-only</span> and
+          <span class="pill pill--available">available via checkout</span> and
           <span class="pill pill--unverified">unverified</span>. "Available" means the route and the
           API calls exist; it does not mean a public visitor can exercise it without an account.
         </p>
@@ -684,8 +684,7 @@
             </p>
             <p class="small muted">
               Plan changes and subscription billing run through the payment provider; the frontend shows
-              plan status but this environment cannot verify a live checkout. Paid plans are invite-only,
-              so there is no open purchase flow to test.
+              the production configuration points to Whop checkout for Starter, Growth and Scale. A live paid transaction has not been tested as part of this documentation update.
             </p>
           </article>
 
@@ -858,7 +857,7 @@
         <ul>
           <li>Anything that writes to an account: creating or editing documents, sharing, tracking, uploading files.</li>
           <li>The dashboard's real figures, suggestions and revenue arithmetic.</li>
-          <li>Plan billing and subscription changes; paid plans are invite-only.</li>
+          <li>Plan billing and subscription changes; paid-plan checkout is handled by Whop.</li>
           <li>Team features while Teams is in beta.</li>
           <li>Email delivery: activation codes, notifications and document reminders.</li>
           <li>Password walls on client documents, and every production client page.</li>

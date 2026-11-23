@@ -84,7 +84,7 @@
           Revercue is a client-work product for freelancers and small agencies. It keeps a proposal, a
           contract, a requirement form, an invoice and the client record in one connected thread instead
           of five disconnected tools. This page is the full reference: enough to evaluate the product
-          without opening another page, and honest about what is shipped, what is invite-only and what
+          without opening another page, and honest about what is shipped, what is available via checkout and what
           does not exist.
         </p>
         <p class="meta">
@@ -166,8 +166,7 @@
               <tr>
                 <th scope="row">Availability</th>
                 <td>
-                  Free is available now. Starter ($12), Growth ($29) and Scale ($49) are invite-only —
-                  you join a waitlist. Teams is in beta — you apply.
+                  Free is available now. Starter ($12), Growth ($29) and Scale ($49) are available via Whop checkout. Teams is in beta — you apply.
                 </td>
               </tr>
               <tr>
@@ -184,7 +183,7 @@
 
         <h3>What is deliberately not claimed</h3>
         <ul>
-          <li>No AI model, no inference endpoint and no automatically applied generated text: the user decides what to keep.</li>
+          <li>The optional writing helper uses an in-browser model when the user invokes it; selected text is not changed unless the user chooses to keep the rewrite. Other suggestions use written rules and patterns.</li>
           <li>No qualified or certificate-based signature, no identity verification, no notarisation and no audit certificate.</li>
           <li>No card processing inside Revercue; invoices point at the user's own payment provider or use bank transfer.</li>
           <li>No integrations directory, marketplace, public API, webhooks or Zapier-style automation.</li>
@@ -327,8 +326,8 @@
           Statuses: <span class="pill pill--available">available</span> — the routes and the API calls
           exist in the application; <span class="pill pill--partial">partial</span> — exists but is
           plan-gated, offered on request or only partly exercised; <span class="pill pill--beta">beta</span>
-          — shipped to a small group and expected to change; <span class="pill pill--waitlist">invite-only</span>
-          — built, but reachable only through the waitlist. "Available" never means a public visitor can
+          — shipped to a small group and expected to change; <span class="pill pill--available">available via checkout</span>
+          — built and available through checkout. "Available" never means a public visitor can
           exercise it without an account.
         </p>
 
@@ -466,10 +465,9 @@
               </tr>
               <tr>
                 <th scope="row">Starter, Growth, Scale</th>
-                <td><span class="pill pill--waitlist">Invite-only</span></td>
+                <td><span class="pill pill--available">Available via checkout</span></td>
                 <td>
-                  Built plans with real limits, reachable by waitlist rather than self-serve checkout.
-                  Free is the only plan available without an invitation.
+                  Paid plans with published limits, purchasable through Whop checkout. Free remains available without payment.
                 </td>
                 <td>Waitlist</td>
               </tr>
@@ -641,7 +639,7 @@
               <tr>
                 <th scope="row">Starter</th>
                 <td>$12 / month</td>
-                <td><span class="pill pill--waitlist">Invite-only — waitlist</span></td>
+                <td><span class="pill pill--available">Available via checkout</span></td>
                 <td>Solo, light use. Room plus custom templates.</td>
               </tr>
               <tr>
@@ -658,7 +656,7 @@
               </tr>
               <tr>
                 <th scope="row">Teams</th>
-                <td>Base $99 / month, invite-only, seats handled manually</td>
+                <td>Base $99 / month, in beta; seats handled manually</td>
                 <td><span class="pill pill--beta">In beta</span></td>
                 <td>An agency team. Everything on Scale plus handoff, roles, bulk transfer, audit log.</td>
               </tr>
@@ -816,7 +814,7 @@
         <h3>Billing facts</h3>
         <ul>
           <li>Free costs nothing and has no card requirement.</li>
-          <li>Paid plans are reached by an invitation from the waitlist, not by checkout; the front end shows plan status, not a live purchase flow.</li>
+          <li>Starter, Growth and Scale subscriptions use Whop checkout. Whop processes the payment details submitted during checkout; Revercue receives subscription and payment-status records. This is separate from client invoice payments.</li>
           <li>Subscription billing runs through an external payment provider; the product does not store card numbers.</li>
           <li>Downgrades archive documents beyond the new limit, email a PDF of each, and delete them after the new plan's archive retention. CRM records survive.</li>
           <li>Deleting an account starts a five-day grace period before removal.</li>
@@ -951,7 +949,7 @@
               </tr>
               <tr>
                 <th scope="row">Paid plans</th>
-                <td>Invite-only waitlist</td>
+                <td>Available via Whop checkout</td>
                 <td>No open purchase flow exists to test</td>
               </tr>
               <tr>
