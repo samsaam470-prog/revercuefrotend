@@ -10,7 +10,7 @@ import type {
 
 export interface PackageInput {
   name: string;
-  price: number;
+  price?: number;
   deliverables: string;
 }
 
@@ -24,6 +24,7 @@ export interface RequirementPayload {
   service?: string;
   client_website?: string;
   own_website?: string;
+  business_name?: string;
   problem?: string;
   target_audience?: string;
   cta?: string;
@@ -40,7 +41,8 @@ export interface RequirementPayload {
 export interface ExtractPayload {
   client_name?: string;
   client_website?: string;
-  own_website?: string;
+  user_website?: string;
+  business_name?: string;
   industry?: string;
   service?: string;
   problem?: string;
@@ -60,10 +62,16 @@ export interface ResearchFacts {
   value_prop?: string;
   key_points?: string[];
   location?: string;
+  author_business_name?: string;
+  author_description?: string;
+  author_website?: string;
 }
 
 export interface OrganizePayload {
   client_name?: string;
+  business_name?: string;
+  business_website?: string;
+  business_description?: string;
   industry?: string;
   service?: string;
   research: { notes: ExtractNote[]; facts?: ResearchFacts };
@@ -149,6 +157,9 @@ export const pipelineApi = {
         value_prop?: string;
         key_points?: string[];
         location?: string | null;
+        author_business_name?: string;
+        author_description?: string;
+        author_website?: string;
       };
     }>("/api/extract", body),
 
@@ -160,7 +171,15 @@ export const pipelineApi = {
         suggested_faqs?: { question?: string; answer?: string }[];
         suggested_packages?: { name?: string; price?: number; deliverables?: string; description?: string }[];
         learned_structure?: { sections?: string[] };
+        organized_sections?: Record<string, string>;
         tone?: string;
+      };
+      provenance?: {
+        source: "deterministic_patterns";
+        client_specific_notes: number;
+        background_notes: number;
+        warnings: string[];
+        missing_information: string[];
       };
     }>("/api/organize", body),
 
