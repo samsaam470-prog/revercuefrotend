@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { contractsApi } from "../../api/contracts";
 import { proposalsApi } from "../../api/proposals";
 import { crmApi } from "../../api/crm";
+import { settingsApi } from "../../api/settings";
 import { Canvas } from "../../components/builder/Canvas";
 import { TopBar } from "../../components/builder/TopBar";
 import { TemplatePicker } from "../../components/builder/TemplatePicker";
@@ -12,7 +13,7 @@ import { ShareModal } from "../../components/builder/ShareModal";
 import { DocumentReview } from "../../components/builder/DocumentReview";
 import { analyzeDocument, type Review } from "../../lib/analysis";
 import { markPipelineDone, runDraftPipeline, type DraftStage } from "../../lib/pipeline";
-import { DraftProgress } from "../../components/builder/DraftProgress";
+import { DraftProgress, type DraftProgressState } from "../../components/builder/DraftProgress";
 import { briefOf, contentOf, hasPlaceholders, skeletonForBrief, type Brief } from "../../lib/brief";
 import { isBuiltIn } from "../../lib/templates";
 import { Button } from "../../components/ui/Button";
@@ -79,11 +80,11 @@ function ContractRequirementForm() {
   const [proposalId, setProposalId] = useState("");
   const [scope, setScope] = useState("");
   const [amount, setAmount] = useState("");
-  const [schedule, setSchedule] = useState("50% upfront, 50% on delivery");
+  const [schedule, setSchedule] = useState("");
   const [currency, setCurrency] = useState("USD");
   const [timeline, setTimeline] = useState("");
-  const [revisions, setRevisions] = useState("Two rounds of revisions included. Additional rounds billed separately.");
-  const [cancellation, setCancellation] = useState("Either party may cancel with 14 days' written notice.");
+  const [revisions, setRevisions] = useState("");
+  const [cancellation, setCancellation] = useState("");
   const [sections, setSections] = useState<string[]>(["Parties", "Scope", "Payment", "Revisions", "Signatures"]);
   const [afterApproval, setAfterApproval] = useState<"form" | "invoice" | "pdf_only">(
     hasFeature("adaptive_forms") ? "form" : "pdf_only",
@@ -96,12 +97,14 @@ function ContractRequirementForm() {
     queryKey: ["proposals", "accepted", "picker"],
     queryFn: () => proposalsApi.list({ status: "accepted", limit: 100 }),
   });
+  const profile = useQuery({ queryKey: ["settings", "profile"], queryFn: settingsApi.getProfile });
 
   const valid =
     (mode === "existing" ? Boolean(clientId) : Boolean(clientName.trim())) &&
     (Boolean(clientEmail.trim()) || Boolean(clientPhone.trim())) &&
     scope.trim() &&
     amount &&
+    schedule.trim() &&
     revisions.trim() &&
     cancellation.trim() &&
     sections.length > 0;
@@ -112,7 +115,8 @@ function ContractRequirementForm() {
     if (mode === "new" && !clientName.trim()) next.clientName = "Enter the client's name.";
     if (!clientEmail.trim() && !clientPhone.trim()) next.clientEmail = "Enter the client's email or phone.";
     if (!scope.trim()) next.scope = "Describe the scope.";
-    if (!amount) next.amount = "Enter the amount.";
+    if (!amount || !Number.isFinite(Number(amount)) || Number(amount) < 0) next.amount = "Enter a valid non-negative amount.";
+    if (!schedule.trim()) next.schedule = "Enter the agreed payment schedule.";
     if (!revisions.trim()) next.revisions = "State the revision policy.";
     if (!cancellation.trim()) next.cancellation = "State the cancellation policy.";
     setErrors(next);
@@ -120,16 +124,17 @@ function ContractRequirementForm() {
 
     setLoading(true);
     try {
-      const clientLabel =
-        mode === "existing"
-          ? clients.data?.data.find((client) => client.id === clientId)?.name || "Client"
-          : clientName.trim();
+      const selectedClient = mode === "existing" ? clients.data?.data.find((client) => client.id === clientId) : undefined;
+      const clientLabel = selectedClient?.name || clientName.trim() || "Client";
       const response = await contractsApi.draft({
         client_id: mode === "existing" ? clientId : undefined,
         client_name: mode === "new" ? clientName.trim() : undefined,
         client_email: clientEmail.trim() || undefined,
         client_phone: clientPhone.trim() || undefined,
         linked_proposal_id: proposalId || undefined,
+        client_website: (selectedClient as unknown as { website_url?: string } | undefined)?.website_url,
+        user_website: profile.data?.profile.website || undefined,
+        business_name: profile.data?.profile.business_name || undefined,
         title: `Contract — ${clientLabel}`,
         scope,
         payment_terms: `${currency} ${amount} — ${schedule}`,
@@ -225,7 +230,7 @@ function ContractRequirementForm() {
               label: proposal.title,
             }))}
             onChange={setProposalId}
-            helper="Optional. The scope and the payment terms come from it."
+            helper="Optional. Link the accepted proposal for reference; confirm the scope and payment terms below."
           />
           <Textarea
             id="contract-scope"
@@ -259,7 +264,9 @@ function ContractRequirementForm() {
             label="Payment schedule"
             value={schedule}
             onChange={setSchedule}
-            helper="For example: 50% upfront, 50% on delivery."
+            error={errors.schedule}
+            helper="Enter the schedule agreed with this client; no default terms are assumed."
+            required
           />
           <Input id="contract-timeline" label="Timeline" value={timeline} onChange={setTimeline} helper="Optional." />
           <Textarea
@@ -269,6 +276,7 @@ function ContractRequirementForm() {
             onChange={setRevisions}
             error={errors.revisions}
             rows={3}
+            helper="Enter the revision allowance and any charges you have agreed."
             required
           />
           <Textarea
@@ -278,6 +286,7 @@ function ContractRequirementForm() {
             onChange={setCancellation}
             error={errors.cancellation}
             rows={3}
+            helper="Enter the cancellation and notice terms agreed by both parties."
             required
           />
           <Fieldset legend="Which sections do you want?">
@@ -341,6 +350,7 @@ function ContractCanvas({ id }: { id: string }) {
   const [pendingShare, setPendingShare] = useState<{ url: string } | null>(null);
   const [initialised, setInitialised] = useState(false);
   const [stage, setStage] = useState<DraftStage | null>(null);
+  const [stageStatuses, setStageStatuses] = useState<DraftProgressState>({});
   const briefRef = useRef<Brief | null>(null);
   const [signerName, setSignerName] = useState("");
   const [signConsent, setSignConsent] = useState(false);
@@ -373,7 +383,8 @@ function ContractCanvas({ id }: { id: string }) {
     setBlocks(initial);
 
     const wantsDraft = !content.drafted && (savedBlocks.length === 0 || hasPlaceholders(savedBlocks));
-    setStage(wantsDraft ? "brief" : null);
+    setStage(wantsDraft ? "context" : null);
+    setStageStatuses({});
     setInitialised(true);
   }, [contract, initialised, id]);
 
@@ -395,7 +406,7 @@ function ContractCanvas({ id }: { id: string }) {
 
   /* The first draft fills the template's clauses from the contract itself. */
   useEffect(() => {
-    if (!initialised || !contract || !stage || stage !== "brief") return;
+    if (!initialised || !contract || !stage || stage !== "context") return;
     if (!briefRef.current) return;
     if (blocks.length === 0) {
       setStage(null);
@@ -403,13 +414,10 @@ function ContractCanvas({ id }: { id: string }) {
     }
 
     let cancelled = false;
-    let last = Date.now();
-
-    const step = async (next: DraftStage) => {
-      const wait = Math.max(0, 550 - (Date.now() - last));
-      if (wait) await new Promise((resolve) => setTimeout(resolve, wait));
-      last = Date.now();
-      if (!cancelled) setStage(next);
+    const step = (next: DraftStage, status: "pending" | "running" | "done" | "skipped", detail?: string) => {
+      if (cancelled) return;
+      setStage(next);
+      setStageStatuses((current) => ({ ...current, [next]: { status, detail } }));
     };
 
     void runDraftPipeline({
@@ -422,7 +430,6 @@ function ContractCanvas({ id }: { id: string }) {
     })
       .then(async (result) => {
         if (cancelled) return;
-        await new Promise((resolve) => setTimeout(resolve, 550));
         if (cancelled) return;
         setBlocks(result.blocks);
         await persistDraft(result.blocks);
@@ -501,7 +508,7 @@ function ContractCanvas({ id }: { id: string }) {
   if (stage) {
     return (
       <div className="builder">
-        <DraftProgress stage={stage} clientName={contract.client_name || "your client"} />
+        <DraftProgress stage={stage} clientName={contract.client_name || "your client"} statuses={stageStatuses} documentLabel="contract" />
       </div>
     );
   }

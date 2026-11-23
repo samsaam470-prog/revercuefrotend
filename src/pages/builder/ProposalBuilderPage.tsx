@@ -9,7 +9,7 @@ import { TemplatePicker } from "../../components/builder/TemplatePicker";
 import { PreviewPane } from "../../components/builder/PreviewPane";
 import { ShareModal } from "../../components/builder/ShareModal";
 import { DocumentReview } from "../../components/builder/DocumentReview";
-import { DraftProgress } from "../../components/builder/DraftProgress";
+import { DraftProgress, type DraftProgressState } from "../../components/builder/DraftProgress";
 import { analyzeDocument, type Review } from "../../lib/analysis";
 import { ResearchPanel } from "../../components/builder/ResearchPanel";
 import { briefOf, contentOf, hasPlaceholders, skeletonForBrief, type Brief } from "../../lib/brief";
@@ -37,11 +37,6 @@ const EMPTY_DOC: DocContent = {
   page_background: "#ffffff",
   max_width: 720,
 };
-
-/** Each draft line is held on screen for at least this long. */
-const STAGE_DWELL_MS = 550;
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export function ProposalBuilderPage() {
   const { id } = useParams<{ id: string }>();
@@ -89,6 +84,7 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
   const [initialised, setInitialised] = useState(false);
   const [research, setResearch] = useState<Research>(() => readResearch(id));
   const [stage, setStage] = useState<DraftStage | null>(null);
+  const [stageStatuses, setStageStatuses] = useState<DraftProgressState>({});
   const briefRef = useRef<Brief | null>(null);
 
   const proposal = query.data?.proposal;
@@ -123,7 +119,8 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     setBlocks(initial);
 
     const wantsDraft = !blank && !content.drafted && (savedBlocks.length === 0 || hasPlaceholders(savedBlocks));
-    setStage(wantsDraft ? "brief" : null);
+    setStage(wantsDraft ? "context" : null);
+    setStageStatuses({});
     setInitialised(true);
   }, [proposal, blank, id, initialised]);
 
@@ -158,7 +155,7 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
 
   /* The staged first draft. */
   useEffect(() => {
-    if (!initialised || !proposal || !stage || stage !== "brief") return;
+    if (!initialised || !proposal || !stage || stage !== "context") return;
     if (!briefRef.current) return;
     if (blocks.length === 0) {
       setStage(null);
@@ -166,13 +163,11 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     }
 
     let cancelled = false;
-    let last = Date.now();
 
-    const step = async (next: DraftStage) => {
-      const wait = Math.max(0, STAGE_DWELL_MS - (Date.now() - last));
-      if (wait) await sleep(wait);
-      last = Date.now();
-      if (!cancelled) setStage(next);
+    const step = (next: DraftStage, status: "pending" | "running" | "done" | "skipped", detail?: string) => {
+      if (cancelled) return;
+      setStage(next);
+      setStageStatuses((current) => ({ ...current, [next]: { status, detail } }));
     };
 
     void runDraftPipeline({
@@ -184,7 +179,6 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     })
       .then(async (result) => {
         if (cancelled) return;
-        await sleep(STAGE_DWELL_MS);
         if (cancelled) return;
         setBlocks(result.blocks);
         setResearch(readResearch(id));
@@ -258,7 +252,7 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
   if (stage) {
     return (
       <div className="builder">
-        <DraftProgress stage={stage} clientName={proposal.client_name || "your client"} />
+        <DraftProgress stage={stage} clientName={proposal.client_name || "your client"} statuses={stageStatuses} documentLabel="proposal" />
       </div>
     );
   }
