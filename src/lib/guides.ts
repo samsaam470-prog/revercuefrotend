@@ -1026,7 +1026,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Security and notifications",
         paragraphs: [
-          "Review the active sessions. Passwords are managed by AuthAction. Revercue does not offer two-factor authentication; passkeys are a passwordless sign-in method, not a second factor.",
+          "Review the active sessions. Passwords and sign-in are managed by AuthAction. Revercue does not offer two-factor authentication, email OTP or authenticator codes of its own.",
           "Notification settings are per event on Growth and Scale. Follow-up reminders are available in-app on every plan; email reminders to the freelancer are available on Growth and above. Revercue sends its own transactional email for account, security and document notices. The newsletter is separate and off unless you ticked it.",
         ],
         visual: "SecurityVisual",

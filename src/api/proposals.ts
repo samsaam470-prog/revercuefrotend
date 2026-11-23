@@ -53,8 +53,18 @@ export interface ExtractNote {
   source?: string;
 }
 
+export interface ResearchFacts {
+  business_name?: string;
+  value_prop?: string;
+  key_points?: string[];
+  location?: string;
+}
+
 export interface OrganizePayload {
-  research: ExtractNote[];
+  client_name?: string;
+  industry?: string;
+  service?: string;
+  research: { notes: ExtractNote[]; facts?: ResearchFacts };
   sections: string[];
   tone: string;
   document: { blocks: unknown[] };
@@ -116,10 +126,31 @@ export const proposalsApi = {
 /* Layer 1 (the research), Layer 3 (the pattern fix) and Layer 4 (the assets). */
 export const pipelineApi = {
   extract: (body: ExtractPayload) =>
-    api.post<{ notes: ExtractNote[]; images?: string[] }>("/api/extract", body),
+    api.post<{
+      success?: boolean;
+      notes?: ExtractNote[];
+      images?: string[];
+      result?: {
+        notes?: ExtractNote[];
+        images?: string[];
+        business_name?: string;
+        value_prop?: string;
+        key_points?: string[];
+        location?: string | null;
+      };
+    }>("/api/extract", body),
 
   organize: (body: OrganizePayload) =>
-    api.post<{ sections: Record<string, string> }>("/api/organize", body),
+    api.post<{
+      success?: boolean;
+      sections?: Record<string, string>;
+      result?: {
+        suggested_faqs?: { question?: string; answer?: string }[];
+        suggested_packages?: { name?: string; price?: number; deliverables?: string; description?: string }[];
+        learned_structure?: { sections?: string[] };
+        tone?: string;
+      };
+    }>("/api/organize", body),
 
   visuals: (body: { document: unknown; requests: VisualRequest[] }) =>
     api.post<{ assets: Record<string, unknown>; rejected?: unknown[] }>("/api/organize/visuals", body),

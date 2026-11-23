@@ -115,12 +115,14 @@ export function PublicFormPage() {
               {thankYou.button_text || "Continue"}
             </a>
           )}
-          <div className="doc-foot">
-            Powered by{" "}
-            <Link to="/" style={{ textDecoration: "underline" }}>
-              Revercue
-            </Link>
-          </div>
+          {(form as any).show_credit !== false && (
+            <div className="doc-foot">
+              Powered by{" "}
+              <Link to="/" style={{ textDecoration: "underline" }}>
+                Revercue
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     );

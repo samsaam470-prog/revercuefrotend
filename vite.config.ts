@@ -8,6 +8,9 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: 3000,
+    // A cloud preview reaches the server through its own hostname. Set this in
+    // the preview process only; it is never written into the file.
+    allowedHosts: process.env.PREVIEW_ALLOWED_HOST ? [process.env.PREVIEW_ALLOWED_HOST] : undefined,
     // The API does not send Access-Control-Allow-Origin, so the browser blocks
     // cross-origin calls. In dev the request is proxied through this server and
     // arrives same-origin. Production needs the API to allow the app origin.

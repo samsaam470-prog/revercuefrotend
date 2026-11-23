@@ -233,12 +233,14 @@ export function PublicInvoicePage() {
         </div>
 
         <p className="doc-foot">This is not a receipt until the freelancer confirms the payment.</p>
-        <div className="doc-foot">
-          Powered by{" "}
-          <Link to="/" style={{ textDecoration: "underline" }}>
-            Revercue
-          </Link>
-        </div>
+        {(invoice as any).show_credit !== false && (
+          <div className="doc-foot">
+            Powered by{" "}
+            <Link to="/" style={{ textDecoration: "underline" }}>
+              Revercue
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,11 @@
-import { pipelineApi } from "../api/proposals";
-import { applyBrief, type Brief } from "./brief";
+import { pipelineApi, type ExtractNote } from "../api/proposals";
+import {
+  applyBrief,
+  applyOrganized,
+  type Brief,
+  type BriefPackage,
+  type ResearchFacts,
+} from "./brief";
 import { isAvailable, organize as helperOrganize, visualize } from "./webllm";
 import type { Block } from "../types";
 
@@ -12,6 +18,7 @@ export interface ResearchNote {
 export interface Research {
   notes: ResearchNote[];
   images: string[];
+  facts?: ResearchFacts;
 }
 
 const researchKey = (id: string) => `revercue_research_${id}`;
@@ -24,7 +31,7 @@ export function readResearch(id: string): Research {
     if (!raw) return { notes: [], images: [] };
     const parsed = JSON.parse(raw) as Research | ResearchNote[];
     if (Array.isArray(parsed)) return { notes: parsed, images: [] };
-    return { notes: parsed.notes ?? [], images: parsed.images ?? [] };
+    return { notes: parsed.notes ?? [], images: parsed.images ?? [], facts: parsed.facts };
   } catch {
     return { notes: [], images: [] };
   }
@@ -91,6 +98,68 @@ async function waitForResearch(id: string, timeoutMs: number): Promise<Research>
   return research;
 }
 
+function faqsFromPatterns(value: unknown): { question: string; answer: string }[] {
+  if (!Array.isArray(value)) return [];
+  const faqs: { question: string; answer: string }[] = [];
+  for (const item of value) {
+    const record = item as Record<string, unknown>;
+    const question = typeof record.question === "string" ? record.question.trim() : "";
+    const answer = typeof record.answer === "string" ? record.answer.trim() : "";
+    if (question && answer) faqs.push({ question, answer });
+  }
+  return faqs;
+}
+
+function packagesFromPatterns(value: unknown): BriefPackage[] {
+  if (!Array.isArray(value)) return [];
+  const packages: BriefPackage[] = [];
+  for (const item of value) {
+    const record = item as Record<string, unknown>;
+    const name = typeof record.name === "string" ? record.name.trim() : "";
+    if (!name) continue;
+    const price = Number(record.price ?? 0);
+    packages.push({
+      name,
+      price: Number.isFinite(price) ? price : 0,
+      deliverables:
+        typeof record.deliverables === "string"
+          ? record.deliverables
+          : typeof record.description === "string"
+            ? record.description
+            : undefined,
+    });
+  }
+  return packages;
+}
+
+async function extractResearch(brief: Brief): Promise<Research> {
+  const response = await pipelineApi.extract({
+    client_name: brief.clientName && brief.clientName !== "the client" ? brief.clientName : undefined,
+    industry: brief.industry || undefined,
+    service: brief.service || undefined,
+  });
+  const data = (response.result ?? {}) as {
+    notes?: ExtractNote[];
+    images?: string[];
+    business_name?: string;
+    value_prop?: string;
+    key_points?: string[];
+    location?: string | null;
+  };
+  const notes: ExtractNote[] = data.notes ?? response.notes ?? [];
+  const images: string[] = data.images ?? response.images ?? [];
+  return {
+    notes,
+    images,
+    facts: {
+      business_name: data.business_name,
+      value_prop: data.value_prop,
+      key_points: data.key_points,
+      location: data.location ?? undefined,
+    },
+  };
+}
+
 /**
  * The first draft: research → the brief written into the template's blocks →
  * the visuals → the blocks on the canvas. Every stage is reported so the
@@ -105,27 +174,73 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
 
   await stage("brief");
   await stage("industry");
-  const research = await waitForResearch(id, researchTimeoutMs);
+  let research = await waitForResearch(id, researchTimeoutMs);
+
+  // When the brief form's research has not arrived (slow network, a reopened
+  // draft), the draft asks the extract route itself instead of writing blind.
+  if (!research.notes.length && !research.images.length) {
+    try {
+      research = await extractResearch(brief);
+      saveResearch(id, research);
+    } catch {
+      /* the brief still produces a readable document */
+    }
+  }
 
   const enriched: Brief = {
     ...brief,
     heroImage: brief.heroImage || research.images[0],
+    research: research.notes,
+    facts: research.facts,
   };
 
   await stage("service");
+  const sections = brief.sections.length
+    ? brief.sections
+    : ["Introduction", "Scope", "What is included", "Timeline", "Pricing", "Next Step"];
+  enriched.sections = sections;
 
   let source: DraftPipelineResult["source"] = "pattern";
-  if (research.notes.length && isAvailable()) {
-    try {
-      const organized = await helperOrganize(research.notes, brief.sections, brief.tone || "formal");
-      if (Object.keys(organized).length) source = "helper";
-    } catch {
-      /* the brief itself is enough to write the draft */
-    }
+  let organized: Record<string, string> = {};
+
+  // Layer 2 on the server: patterns, learned structure, and research-grounded
+  // section copy. This is the copy the document actually uses.
+  try {
+    const response = await pipelineApi.organize({
+      client_name: brief.clientName,
+      industry: brief.industry,
+      service: brief.service,
+      tone: brief.tone || "formal",
+      sections,
+      research: { notes: research.notes, facts: research.facts },
+      document: { blocks },
+    });
+    organized = response.sections ?? {};
+    const result = response.result ?? {};
+    if (!enriched.faqs.length) enriched.faqs = faqsFromPatterns(result.suggested_faqs);
+    if (!enriched.packages.length) enriched.packages = packagesFromPatterns(result.suggested_packages);
+    if (Object.keys(organized).length) source = "backend";
+  } catch {
+    /* patterns are optional; the brief's own prose still applies */
   }
 
+  // The in-browser helper can rewrite the same sections in the chosen voice.
+  // It wins where it returns copy, and the backend copy fills the rest.
+  if (research.notes.length && isAvailable()) {
+    try {
+      const helper = await helperOrganize(research.notes, sections, brief.tone || "formal");
+      if (Object.keys(helper).length) {
+        organized = { ...organized, ...helper };
+        source = "helper";
+      }
+    } catch {
+      /* the backend copy is enough */
+    }
+  }
+  if (Object.keys(organized).length) enriched.organized = organized;
+
   await stage("write");
-  const written = applyBrief(blocks, enriched);
+  const written = applyOrganized(applyBrief(blocks, enriched), enriched);
 
   await stage("visuals");
   const visuals = withVisuals ? await placeVisuals(id, written, enriched) : written;
@@ -145,21 +260,13 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
 function patternRequests(blocks: Block[], brief: Brief) {
   const requests: { afterBlockId: string; kind: string; type?: string; query: string; section_id?: string }[] = [];
   const intro = blocks.find((block) => block.type === "paragraph");
-  const pricing = blocks.find((block) => block.type === "packages" || block.type === "pricing_table");
-  const timeline = blocks.find((block) => block.type === "timeline");
 
   const subject = brief.service || brief.industry || "the work";
   if (intro && !blocks.some((block) => block.type === "image" && block.url)) {
     requests.push({ afterBlockId: intro.id, type: "image", kind: "image", query: subject, section_id: intro.id });
   }
-  if (pricing && brief.packages.length) {
-    requests.push({ afterBlockId: pricing.id, type: "chart", kind: "chart", query: "the price breakdown", section_id: pricing.id });
-  }
-  if (timeline) {
-    requests.push({ afterBlockId: timeline.id, type: "chart", kind: "chart", query: "the delivery process", section_id: timeline.id });
-  }
 
-  return requests.slice(0, 3);
+  return requests;
 }
 
 function assetUrl(asset: unknown): string | undefined {
@@ -206,25 +313,17 @@ async function placeVisuals(id: string, blocks: Block[], brief: Brief): Promise<
     const url = assetUrl(assets[request.afterBlockId]);
     const kind = request.kind || request.type;
 
-    // A chart or a diagram is drawn from the numbers we already have. An image
-    // only lands when there is a real asset, so no empty dashed box appears.
-    const visual: Block | null =
-      kind === "chart" || kind === "diagram"
-        ? {
-            id: `${stamp}_v${index}`,
-            type: "graph",
-            text: request.query,
-            meta: { fromPipeline: request.query, visual: kind },
-          }
-        : url
-          ? {
-              id: `${stamp}_v${index}`,
-              type: "image",
-              url,
-              alt: request.query,
-              meta: { fromPipeline: request.query, visual: kind },
-            }
-          : null;
+    // Only a real asset becomes a visual. A chart drawn from invented bars is
+    // worse than no chart: it looks like data when it is decoration.
+    const visual: Block | null = url
+      ? {
+          id: `${stamp}_v${index}`,
+          type: "image",
+          url,
+          alt: request.query,
+          meta: { fromPipeline: request.query, visual: kind },
+        }
+      : null;
 
     if (visual) next.splice(at + 1, 0, visual);
   });

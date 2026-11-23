@@ -12,6 +12,7 @@ import { Spinner } from "../../components/ui/Spinner";
 import { PasswordWall } from "./PasswordWall";
 import { ClosedPage } from "./ClosedPage";
 import { errorMessage } from "../../lib/errors";
+import { parseDocContent } from "../../lib/brief";
 import { ApiError } from "../../types/api";
 
 export function PublicContractPage() {
@@ -124,12 +125,14 @@ export function PublicContractPage() {
                 ? "The next step is an invoice. It appears once the freelancer shares it."
                 : "The freelancer has your signature and will send the next step."}
           </p>
-          <div className="doc-foot">
-            Powered by{" "}
-            <Link to="/" style={{ textDecoration: "underline" }}>
-              Revercue
-            </Link>
-          </div>
+          {(contract as any).show_credit !== false && (
+            <div className="doc-foot">
+              Powered by{" "}
+              <Link to="/" style={{ textDecoration: "underline" }}>
+                Revercue
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -137,8 +140,8 @@ export function PublicContractPage() {
 
   if (done === "decline" || contract.status === "declined") return <ClosedPage reason="declined" />;
 
-  const content = contract.content;
-  const blocks = content?.blocks ?? [];
+  const content = parseDocContent(contract.content);
+  const blocks = Array.isArray(content.blocks) ? content.blocks : [];
   const brand = content?.brand_primary || "#c9a961";
 
   return (
@@ -203,12 +206,14 @@ export function PublicContractPage() {
         <p className="doc-foot">
           Typing your name is your signature on this document. It is recorded with the date.
         </p>
-        <div className="doc-foot">
-          Powered by{" "}
-          <Link to="/" style={{ textDecoration: "underline" }}>
-            Revercue
-          </Link>
-        </div>
+        {(contract as any).show_credit !== false && (
+          <div className="doc-foot">
+            Powered by{" "}
+            <Link to="/" style={{ textDecoration: "underline" }}>
+              Revercue
+            </Link>
+          </div>
+        )}
       </div>
 
       <Modal

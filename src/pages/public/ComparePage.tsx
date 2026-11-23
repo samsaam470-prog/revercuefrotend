@@ -11,7 +11,9 @@ export function ComparePage() {
         <h1>Revercue, next to the tools you already know.</h1>
         <p>
           Seven comparisons, one job: the proposal, the contract, the requirement form, the invoice
-          and the client record, kept on one thread. No competitor bashing — each tool is good at
+          and the client record, kept on one thread. Every page carries the competitor's current
+          published pricing with the date it was checked, and a summary of what independent
+          reviewers say, with links to each article. No competitor bashing — each tool is good at
           what it does, and the question is what happens between the pieces.
         </p>
       </div>

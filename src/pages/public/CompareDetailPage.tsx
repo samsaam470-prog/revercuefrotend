@@ -1,11 +1,13 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { COMPETITORS, competitorBySlug } from "../../lib/competitors";
+import { COMPETITOR_RESEARCH, PRICING_CHECKED } from "../../lib/competitorResearch";
 import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 export function CompareDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const competitor = slug ? competitorBySlug(slug) : undefined;
+  const research = slug ? COMPETITOR_RESEARCH[slug] : undefined;
 
   if (!competitor) {
     return (
@@ -58,6 +60,13 @@ export function CompareDetailPage() {
               <a href={`#section-${index + 1}`}>{section.heading}</a>
             </li>
           ))}
+          {research && (
+            <>
+              <li><a href="#pricing">Current pricing, checked {research.checkedOn}</a></li>
+              <li><a href="#what-others-say">What others say about {competitor.name}</a></li>
+              <li><a href="#sources">Sources</a></li>
+            </>
+          )}
         </ol>
 
         {competitor.sections.map((section, index) => (
@@ -90,6 +99,98 @@ export function CompareDetailPage() {
           </h2>
           <p>{competitor.fits}</p>
         </section>
+
+        {research && (
+          <section id="pricing">
+            <h2>
+              <span className="section-index">{String(competitor.sections.length + 2).padStart(2, "0")}</span>
+              Current pricing, checked {research.checkedOn}
+            </h2>
+            <p>
+              These are the list prices published by {competitor.name} on the day we checked, not a
+              quote or a promotional offer. Plans and prices change; the vendor's pricing page is
+              always the source of truth, and this table is dated so a later change does not turn a
+              past fact into a false claim.
+            </p>
+            <div className="table-wrap">
+              <table className="data">
+                <thead>
+                  <tr>
+                    <th>Plan</th>
+                    <th>Price</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {research.pricing.map((row) => (
+                    <tr key={row.plan}>
+                      <td>{row.plan}</td>
+                      <td>{row.price}</td>
+                      <td>{row.note ?? "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="caption">
+              Source:{" "}
+              <a href={research.pricingSource.url} target="_blank" rel="noopener noreferrer">
+                {research.pricingSource.label}
+              </a>{" "}
+              — read on {research.checkedOn}. {research.pricingNote}
+            </p>
+          </section>
+        )}
+
+        {research && (
+          <section id="what-others-say">
+            <h2>
+              <span className="section-index">{String(competitor.sections.length + 3).padStart(2, "0")}</span>
+              What others say about {competitor.name}
+            </h2>
+            <p>{research.othersSay.intro}</p>
+            <p>{research.othersSay.summary}</p>
+            <p className="caption">
+              The summaries below are written by Revercue from the linked articles. They describe what
+              each article says, not what we think of {competitor.name}. Every link opens the original.
+            </p>
+            <div className="stack-3">
+              {research.othersSay.articles.map((article) => (
+                <div className="card card-md" key={article.url}>
+                  <h3 style={{ fontSize: 18, marginBottom: 4 }}>
+                    <a href={article.url} target="_blank" rel="noopener noreferrer">
+                      {article.title} <ArrowUpRight size={14} />
+                    </a>
+                  </h3>
+                  <p className="caption" style={{ marginTop: 0 }}>{article.source}</p>
+                  <p>{article.summary}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {research && (
+          <section id="sources">
+            <h2>
+              <span className="section-index">{String(competitor.sections.length + 4).padStart(2, "0")}</span>
+              Sources
+            </h2>
+            <p>
+              The pricing table and the comparison above were checked against these sources on{" "}
+              {research.checkedOn}. They include the vendor's own pricing and documentation, its
+              product pages, independent review-site profiles and a third-party editorial review.
+            </p>
+            <ul className="stack-2">
+              {research.sources.map((source) => (
+                <li key={source.url}>
+                  <a href={source.url} target="_blank" rel="noopener noreferrer">{source.label}</a>
+                </li>
+              ))}
+            </ul>
+            <p className="caption">Pricing last verified: {PRICING_CHECKED}.</p>
+          </section>
+        )}
       </article>
 
       <div className="inline mt-8">

@@ -137,7 +137,7 @@ export function PrivacyPage() {
                 <li><strong>Cloudflare</strong> — delivery, DNS, the Worker proxy and rate limiting.</li>
                 <li><strong>Backblaze B2</strong> — file storage in a private bucket, served through the proxy.</li>
                 <li><strong>Turso</strong> — the database that holds accounts and documents.</li>
-                <li><strong>AuthAction</strong> — authentication, OIDC and passkeys.</li>
+                <li><strong>AuthAction</strong> — authentication and OIDC.</li>
                 <li><strong>Coopermail</strong> — primary transactional email delivery for account, security and document notices.</li>
                 <li><strong>Openmail</strong> — fallback transactional email delivery.</li>
               </ul>
@@ -626,7 +626,7 @@ export function SecurityPage() {
               </p>
               <p>
                 Sessions can be revoked from Settings → Security, and a password reset revokes every other
-                session immediately. Authentication is handled by AuthAction (OIDC and passkeys).
+                session immediately. Authentication is handled by AuthAction (OIDC).
               </p>
             </>
           ),

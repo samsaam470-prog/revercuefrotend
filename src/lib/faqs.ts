@@ -670,7 +670,7 @@ export const FAQS: Faq[] = [
     group: "support",
     question: "Does Revercue support two-factor authentication?",
     answer:
-      "No. Revercue does not offer two-factor authentication, email OTP, or authenticator codes. Sign-in uses AuthAction with passkeys and passwords. Passkeys are a passwordless sign-in method, not a second factor.",
+      "No. Revercue does not offer two-factor authentication, email OTP, or authenticator codes. Sign-in itself is handled by AuthAction; Revercue does not add a second factor of its own.",
   },
   {
     id: 96,

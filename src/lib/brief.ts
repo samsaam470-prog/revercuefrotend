@@ -12,6 +12,13 @@ export interface BriefQuestion {
   type?: string;
 }
 
+export interface ResearchFacts {
+  business_name?: string;
+  value_prop?: string;
+  key_points?: string[];
+  location?: string;
+}
+
 export interface Brief {
   clientName: string;
   currency: string;
@@ -32,14 +39,36 @@ export interface Brief {
   revisions: string;
   cancellation: string;
   heroImage?: string;
+  /** Research from the extract call, so prose can quote what was found. */
+  research?: { title: string; body: string; source?: string }[];
+  facts?: ResearchFacts;
+  /** Section-ready copy from the organize call, keyed by section name. */
+  organized?: Record<string, string>;
 }
 
 type AnyDoc = Proposal | Contract;
 
+/**
+ * Reads a document's `content`. The API sends an object, but older rows and a
+ * raw database read can hand back the JSON text, and a string has no `blocks`
+ * — that is what made published documents render empty.
+ */
+export function parseDocContent(value: unknown): Partial<DocContent> & Record<string, unknown> {
+  if (!value) return {};
+  if (typeof value === "string") {
+    try {
+      const parsed = JSON.parse(value);
+      return parsed && typeof parsed === "object" ? (parsed as Partial<DocContent> & Record<string, unknown>) : {};
+    } catch {
+      return {};
+    }
+  }
+  return typeof value === "object" ? (value as Partial<DocContent> & Record<string, unknown>) : {};
+}
+
 /** The saved `content` object, which is where the brief is actually stored. */
 export function contentOf(doc: AnyDoc | undefined | null): Partial<DocContent> & Record<string, unknown> {
-  const content = doc?.content as (Partial<DocContent> & Record<string, unknown>) | undefined;
-  return content && typeof content === "object" ? content : {};
+  return parseDocContent(doc?.content);
 }
 
 function text(...candidates: unknown[]): string {
@@ -163,24 +192,56 @@ function list(values: string[]): string {
   return `${clean.slice(0, -1).join(", ")} and ${clean[clean.length - 1]}`;
 }
 
+function phrase(value: string): string {
+  return value.trim().replace(/[.]+$/, "");
+}
+
+/** A sentence the extract actually found, never an invented fact. */
+function researchLine(brief: Brief): string {
+  const valueProp = brief.facts?.value_prop?.trim();
+  if (valueProp) return ` ${sentence(valueProp)}`;
+  const note = brief.research?.find((item) => item.body && item.body.trim().length > 40);
+  if (!note) return "";
+  const body = note.body.replace(/https?:\/\/\S+/g, "").replace(/\s+/g, " ").trim();
+  const first = body.match(/[^.!?]+[.!?]/)?.[0]?.trim() ?? body.slice(0, 220);
+  return first ? ` ${first.replace(/[.!?]+$/, "")}.` : "";
+}
+
 export function introductionFor(brief: Brief): string {
-  if (brief.problem) {
-    return `${sentence(brief.problem)} This document sets out what I will do, what it costs and when it lands.`;
+  const who = brief.clientName && brief.clientName !== "the client" ? brief.clientName : "The client";
+  const context =
+    brief.industry && brief.industry.toLowerCase() !== subject(brief).toLowerCase()
+      ? ` in ${brief.industry}`
+      : "";
+  const problem = brief.problem ? ` ${sentence(brief.problem)}` : "";
+  return `${who} asked for help with ${subject(brief)}${context}.${problem}${researchLine(brief)} This document sets out the scope, the price and the order the work happens in, so the whole decision can be made in one place instead of across a chain of emails.`;
+}
+
+/** The organized copy for a heading, if the organize call returned any. */
+export function organizedFor(section: string, brief: Brief): string {
+  const map = brief.organized;
+  if (!map) return "";
+  const key = normaliseKey(section);
+  const direct = map[key] ?? map[section];
+  if (typeof direct === "string" && direct.trim()) return direct.trim();
+  for (const [name, value] of Object.entries(map)) {
+    if (normaliseKey(name) === key && typeof value === "string" && value.trim()) return value.trim();
   }
-  return `${brief.clientName} asked about ${subject(brief)}. This document sets out what the work covers, what it costs and when it lands.`;
+  return "";
 }
 
 export function scopeFor(brief: Brief): string {
   const sections = brief.sections.filter(
     (section) => !["Pricing", "Next Step", "FAQs", "Embedded Questions", "About You"].includes(section),
   );
-  const first = sections.length
-    ? `We will work through ${list(sections.map((section) => section.toLowerCase()))}, in this order, and nothing is billed until you approve this proposal.`
-    : `We will agree the exact scope before any work starts, and nothing is billed until you approve this proposal.`;
-  const context = [brief.clientName !== "the client" ? `for ${brief.clientName}` : "", brief.industry]
-    .filter(Boolean)
-    .join(" in ");
-  return context ? `The work is ${context}. ${first}` : first;
+  const deliverables = deliverablesFor(brief);
+  const covered = deliverables.length
+    ? `The work covers ${list(deliverables.slice(0, 6).map(phrase))}.`
+    : "The exact scope is agreed in writing before anything starts.";
+  const order = sections.length
+    ? ` It is delivered in this order: ${list(sections.map((section) => section.toLowerCase()))}.`
+    : "";
+  return `${covered}${order} Nothing outside this scope is billed, and any addition is quoted and approved by you before it begins.`;
 }
 
 export function deliverablesFor(brief: Brief): string[] {
@@ -189,28 +250,57 @@ export function deliverablesFor(brief: Brief): string[] {
     .flatMap((value) => (value ? value.split(/\r?\n|;|•/).map((line) => line.trim()) : []))
     .filter(Boolean);
 
-  if (fromPackages.length) return fromPackages.slice(0, 4);
+  if (fromPackages.length) return fromPackages.slice(0, 6);
 
   const sections = brief.sections.filter(
     (section) => !["Pricing", "Next Step", "FAQs", "Embedded Questions", "About You"].includes(section),
   );
   if (sections.length) {
-    return sections.slice(0, 4).map((section) => `${section}: planned, written and delivered.`);
+    return sections
+      .slice(0, 6)
+      .map((section) => `${section} prepared, reviewed with you and handed over ready to use`);
   }
   return [
-    `${subject(brief)} planned before anything is built.`,
-    "Every deliverable reviewed with you before it ships.",
-    "One point of contact from kickoff to handover.",
+    `${subject(brief)} planned and agreed before anything is built`,
+    "Every deliverable reviewed with you before it ships",
+    "One point of contact from kickoff to handover",
   ];
 }
 
 export function timelineFor(brief: Brief): string {
-  if (brief.timeline) return sentence(brief.timeline);
-  return "The schedule is agreed at kickoff: you see the plan, the dates and the checkpoints before the first payment.";
+  if (brief.timeline) {
+    return `The work runs over ${phrase(sentence(brief.timeline))}. You see the dates and checkpoints before the first payment, and any change to them is agreed in writing.`;
+  }
+  return "The schedule is agreed at kickoff: you see the plan, the dates and the checkpoints before the first payment, and the work does not start until you approve them.";
 }
 
 export function nextStepFor(brief: Brief): string {
-  return brief.cta || "Reply on this link with a yes, and I will send the contract the same day.";
+  if (brief.cta) return sentence(brief.cta);
+  const who = brief.clientName && brief.clientName !== "the client" ? brief.clientName : "you";
+  return `If this looks right, reply on this link or choose a package above and I will send the contract to ${who} the same day. Nothing is billed until the proposal is approved.`;
+}
+
+/** Prose for any section, so no section inherits another section's paragraph. */
+export function sectionCopy(section: string, brief: Brief): string {
+  const organized = organizedFor(section, brief);
+  if (organized) return organized;
+  const key = normaliseKey(section);
+  if (key === "introduction") return introductionFor(brief);
+  if (key === "scope") return scopeFor(brief);
+  if (key === "what_is_included" || key === "deliverables" || key === "included") {
+    return `The work includes ${list(deliverablesFor(brief).slice(0, 6).map(phrase))}. Each item is reviewed with you before it is handed over, and anything not listed here is quoted separately.`;
+  }
+  if (key === "timeline" || key === "schedule") return timelineFor(brief);
+  if (key === "process" || key === "how_it_works") {
+    return `We start with a short kickoff to confirm the scope and the dates. The work then moves in stages: ${list(
+      (brief.sections.length ? brief.sections : ["plan", "build", "review", "handover"]).map((item) => item.toLowerCase()),
+    )}. At each checkpoint you see what has been produced, and the next stage starts only when you are happy with it.`;
+  }
+  if (key === "about_you" || key === "about") {
+    return `This proposal is prepared for ${brief.clientName}${brief.industry ? `, who works in ${brief.industry}` : ""}.${brief.problem ? ` ${sentence(brief.problem)}` : ""}${researchLine(brief)} The aim is to make the next step clear and easy to approve.`;
+  }
+  if (key === "next_step") return nextStepFor(brief);
+  return `${section} is covered in this proposal for ${brief.clientName}.${brief.problem ? ` ${sentence(brief.problem)}` : ""} The details are written to be agreed as they stand, and anything you want changed can be discussed before the work starts.`;
 }
 
 export function partiesFor(brief: Brief): string {
@@ -336,6 +426,10 @@ export function applyBrief(blocks: Block[], brief: Brief): Block[] {
       })),
     };
 
+    const placeholder = typeof block.meta?.placeholder === "string" ? block.meta.placeholder : "";
+    const organized = placeholder ? organizedFor(placeholder, brief) : "";
+    if (organized && patched.type === "paragraph") patched.text = organized;
+
     if (patched.type === "image" && brief.heroImage && !patched.url) {
       patched.url = brief.heroImage;
     }
@@ -394,7 +488,7 @@ export function skeletonForBrief(brief: Brief, kind: "proposal" | "contract"): B
 
   const sections = brief.sections.length
     ? brief.sections
-    : ["Introduction", "Scope", "Timeline", "Pricing", "Next Step"];
+    : ["Introduction", "Scope", "What is included", "Timeline", "Pricing", "Next Step"];
 
   if (brief.heroImage) {
     blocks.push({
@@ -447,16 +541,27 @@ export function skeletonForBrief(brief: Brief, kind: "proposal" | "contract"): B
       blocks.push({ id: id(`n_${index}`), type: "next_step", text: nextStepFor(brief) });
       return;
     }
-    if (key === "about_you") {
-      para(`a_${index}`, `${brief.clientName} works with a freelancer who plans, writes and delivers the work end to end.`);
+    if (key === "timeline" || key === "schedule") {
+      para(`t_${index}`, organizedFor(section, brief) || timelineFor(brief));
+      blocks.push({
+        id: id(`tl_${index}`),
+        type: "timeline",
+        items: [
+          { label: "Kickoff", value: "scope and dates confirmed" },
+          { label: "Review", value: "first version shared with you" },
+          { label: "Handover", value: "final files and walkthrough" },
+        ],
+      });
       return;
     }
-    const intro = key === "introduction";
-    const scope = key === "scope";
-    para(
-      `b_${index}`,
-      intro ? introductionFor(brief) : scope ? scopeFor(brief) : timelineFor(brief),
-    );
+    if (key === "what_is_included" || key === "deliverables" || key === "included") {
+      const values = deliverablesFor(brief).slice(0, 6);
+      if (values.length) {
+        blocks.push({ id: id(`d_${index}`), type: "list", items: values.map((label) => ({ label })) });
+        return;
+      }
+    }
+    para(`b_${index}`, sectionCopy(section, brief));
   });
 
   if (!blocks.some((block) => block.type === "next_step")) {
@@ -464,6 +569,30 @@ export function skeletonForBrief(brief: Brief, kind: "proposal" | "contract"): B
   }
 
   return blocks;
+}
+
+/**
+ * Writes the organized copy under each heading. Only the first paragraph of a
+ * section is replaced: later paragraphs (a caveat, a list note) stay as they
+ * were written.
+ */
+export function applyOrganized(blocks: Block[], brief: Brief): Block[] {
+  if (!brief.organized || Object.keys(brief.organized).length === 0) return blocks;
+  const seen = new Set<string>();
+  let section = "";
+  return blocks.map((block) => {
+    if (block.type === "heading") {
+      section = block.text ?? "";
+      return block;
+    }
+    if (!section || block.type !== "paragraph") return block;
+    const key = normaliseKey(section);
+    if (seen.has(key)) return block;
+    const copy = organizedFor(section, brief);
+    if (!copy) return block;
+    seen.add(key);
+    return { ...block, text: copy };
+  });
 }
 
 /** Wording older drafts were generated with, before the brief was readable. */

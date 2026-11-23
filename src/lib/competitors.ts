@@ -178,7 +178,7 @@ const BASE_COMPETITORS: Competitor[] = [
       },
     ],
     differences: [
-      "The whole product is the thread: five documents and the record, nothing else.",
+      "The whole product is the thread: five modules, one client record, nothing else.",
       "The proposal carries the decision, the questions and the tracking.",
       "Follow-ups and suggestions are first-class, not a task you create by hand.",
       "The design is deliberately narrow, so the client experience stays simple.",

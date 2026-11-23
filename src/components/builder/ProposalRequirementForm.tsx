@@ -170,6 +170,12 @@ export function ProposalRequirementForm() {
           saveResearch(response.id, {
             notes: data.notes ?? result?.notes ?? [],
             images: data.images ?? result?.images ?? [],
+            facts: {
+              business_name: data.business_name,
+              value_prop: data.value_prop,
+              key_points: data.key_points,
+              location: data.location ?? undefined,
+            },
           });
         })
         .catch(() => undefined);

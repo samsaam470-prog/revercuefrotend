@@ -162,7 +162,7 @@ const SUBS: Record<string, { label: string; copy: string }[]> = {
   ],
   builder: [
     { label: "Three panels", copy: "Sections and blocks, the page, the properties of the selected block." },
-    { label: "The block library", copy: "Sixteen blocks in a proposal, seventeen in a contract — each one readable, none hidden." },
+    { label: "The block library", copy: "Twelve blocks in a proposal, seven in a contract — each one readable, none hidden." },
     { label: "The post-document review", copy: "A score and a short list of what to fix, before you send." },
   ],
   suggestions: [

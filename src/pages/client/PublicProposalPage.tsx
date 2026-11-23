@@ -13,6 +13,7 @@ import { Spinner } from "../../components/ui/Spinner";
 import { PasswordWall } from "./PasswordWall";
 import { ClosedPage } from "./ClosedPage";
 import { errorMessage } from "../../lib/errors";
+import { parseDocContent } from "../../lib/brief";
 import { formatCurrency } from "../../lib/formatters";
 import { ApiError } from "../../types/api";
 
@@ -26,6 +27,12 @@ export function PublicProposalPage() {
   const [pickedPackage, setPickedPackage] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [approved, setApproved] = useState(false);
+  const [declined, setDeclined] = useState(false);
+  const [approveOpen, setApproveOpen] = useState(false);
+  const [declineOpen, setDeclineOpen] = useState(false);
+  const [signerName, setSignerName] = useState("");
+  const [declineReason, setDeclineReason] = useState("");
 
   const query = useQuery({
     queryKey: ["public", "proposal", publicId, token],
@@ -62,6 +69,32 @@ export function PublicProposalPage() {
     }
   };
 
+  const act = async (action: "approve" | "decline") => {
+    setBusy(true);
+    setError("");
+    try {
+      await publicApi.proposalAction(publicId as string, {
+        action,
+        name: signerName || proposal?.client_name || undefined,
+        reason: action === "decline" ? declineReason || undefined : undefined,
+        package: action === "approve" ? pickedPackage ?? undefined : undefined,
+        session_token: token,
+      });
+      if (action === "approve") {
+        setApproved(true);
+        setApproveOpen(false);
+      } else {
+        setDeclined(true);
+        setDeclineOpen(false);
+      }
+    } catch (cause) {
+      const apiError = cause as ApiError;
+      setError(errorMessage(apiError.code, apiError.message));
+    } finally {
+      setBusy(false);
+    }
+  };
+
   if (query.isLoading) {
     return (
       <div className="client-wrap">
@@ -78,8 +111,8 @@ export function PublicProposalPage() {
     return <ClosedPage reason="expired" />;
   }
 
-  const content = proposal.content;
-  const blocks = content?.blocks ?? [];
+  const content = parseDocContent(proposal.content);
+  const blocks = Array.isArray(content.blocks) ? content.blocks : [];
   const brand = content?.brand_primary || proposal.brand_primary || "#c9a961";
 
   return (
@@ -171,6 +204,20 @@ export function PublicProposalPage() {
 
         {error && <p className="error-text">{error}</p>}
 
+        {proposal.status === "published" && !approved && !declined && (
+          <div className="doc-actions" style={{ justifyContent: "flex-start", gap: 10 }}>
+            <Button onClick={() => setApproveOpen(true)}>Accept this proposal</Button>
+            <Button variant="ghost" onClick={() => setDeclineOpen(true)}>Decline</Button>
+          </div>
+        )}
+
+        {(approved || String(proposal.status) === "accepted") && (
+          <p className="doc-foot">Accepted. The freelancer has been notified and will send the next step.</p>
+        )}
+        {(declined || proposal.status === "declined") && (
+          <p className="doc-foot">This proposal was declined. The freelancer has been notified.</p>
+        )}
+
         <div className="doc-actions">
           <button type="button" className="btn btn-text btn-sm" onClick={() => setQuestionOpen(true)}>
             Ask a question
@@ -178,14 +225,16 @@ export function PublicProposalPage() {
         </div>
 
         <p className="doc-foot">
-          This is a proposal, not a contract. Reply to the freelancer to move forward.
+          This is a proposal, not a contract. Accepting tells the freelancer to send the contract.
         </p>
-        <div className="doc-foot">
-          Powered by{" "}
-          <Link to="/" style={{ textDecoration: "underline" }}>
-            Revercue
-          </Link>
-        </div>
+        {(proposal as any).show_credit !== false && (
+          <div className="doc-foot">
+            Powered by{" "}
+            <Link to="/" style={{ textDecoration: "underline" }}>
+              Revercue
+            </Link>
+          </div>
+        )}
       </div>
 
       <Modal
@@ -230,6 +279,56 @@ export function PublicProposalPage() {
           onChange={setQuestion}
           rows={4}
           helper="The freelancer answers by email or in the document."
+        />
+      </Modal>
+
+      <Modal
+        open={approveOpen}
+        onClose={() => setApproveOpen(false)}
+        title="Accept this proposal"
+        size="sm"
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => setApproveOpen(false)}>Cancel</Button>
+            <Button loading={busy} onClick={() => void act("approve")}>Accept</Button>
+          </>
+        }
+      >
+        <div className="stack-3">
+          <p className="muted">
+            This records your acceptance and tells the freelancer to send the next step. It is not a
+            contract signature.
+          </p>
+          <Input
+            id="approve-name"
+            label="Your name"
+            value={signerName}
+            onChange={setSignerName}
+            helper="Optional. The freelancer sees who accepted."
+          />
+          {pickedPackage && <p className="caption">Selected package: {pickedPackage}</p>}
+        </div>
+      </Modal>
+
+      <Modal
+        open={declineOpen}
+        onClose={() => setDeclineOpen(false)}
+        title="Decline this proposal"
+        size="sm"
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => setDeclineOpen(false)}>Cancel</Button>
+            <Button loading={busy} onClick={() => void act("decline")}>Decline</Button>
+          </>
+        }
+      >
+        <Textarea
+          id="decline-reason"
+          label="Reason (optional)"
+          value={declineReason}
+          onChange={setDeclineReason}
+          rows={3}
+          helper="A reason helps the freelancer fix what did not fit."
         />
       </Modal>
     </div>
