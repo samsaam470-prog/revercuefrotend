@@ -89,7 +89,7 @@ export function PricingPage() {
         <p className="eyebrow">Pricing</p>
         <h1>Start free. Upgrade when the thread pays for itself.</h1>
         <p>
-          Free is available now. Starter, Growth and Scale are publicly available. Growth includes a
+          Free is available now. Starter, Growth and Scale are available through Whop checkout. Growth includes a
           limited-time 14-day free trial. Teams is in beta.
         </p>
       </div>
@@ -123,7 +123,7 @@ export function PricingPage() {
                   {plan.id === "growth"
                     ? "14-day free trial — available for a limited time"
                     : plan.status === "available"
-                      ? "Available now — public checkout"
+                      ? "Available now — Whop checkout"
                       : "In beta — join the beta"}
                 </p>
               </div>
@@ -169,7 +169,7 @@ export function PricingPage() {
       </div>
 
       <p className="caption text-center" style={{ marginTop: 16 }}>
-        Prices are in US dollars, per month. Starter, Growth and Scale are publicly available via checkout.
+        Prices are in US dollars, per month. Starter, Growth and Scale are available via Whop checkout.
         Growth includes a limited-time 14-day free trial. Teams is in beta; no charge applies while it remains in beta.
       </p>
 

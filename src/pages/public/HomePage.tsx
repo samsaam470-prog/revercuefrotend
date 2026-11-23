@@ -106,7 +106,7 @@ export function HomePage() {
       <section className="page" data-reveal>
         <div className="section-head">
           <h2>Simple, honest pricing.</h2>
-          <p>Free is available now. Starter, Growth and Scale are publicly available. Teams is in beta.</p>
+          <p>Free is available now. Starter, Growth and Scale are available through Whop checkout. Teams is in beta.</p>
         </div>
         <div className="pricing-chips">
           {PLANS.map((plan) => (

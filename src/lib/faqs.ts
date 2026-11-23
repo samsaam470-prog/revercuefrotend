@@ -97,7 +97,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What are the plans?",
     answer:
-      "Free (available now), Starter, Growth and Scale (publicly available via checkout), and Teams (in beta). Growth includes a limited-time 14-day free trial. Teams is in beta; join the beta and the team reaches out.",
+      "Free (available now), Starter, Growth and Scale (available via Whop checkout), and Teams (in beta). Growth includes a limited-time 14-day free trial. Teams is in beta; join the beta and the team reaches out.",
   },
   {
     id: 12,
@@ -152,7 +152,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What does it mean that Teams is in beta?",
     answer:
-      "Starter, Growth and Scale are publicly available via checkout (Growth has a limited-time 14-day trial). Teams is in beta; you join the beta and the team reaches out. The Free plan is available now.",
+      "Starter, Growth and Scale are available via Whop checkout (Growth has a limited-time 14-day trial). Teams is in beta; you join the beta and the team reaches out. The Free plan is available now.",
   },
   {
     id: 20,
@@ -202,7 +202,7 @@ export const FAQS: Faq[] = [
     group: "documents",
     question: "Can I request a feature or a specific colour or font?",
     answer:
-      "Yes. Use the feedback prompt after a milestone, or Settings → Feedback, which is always available. Every request goes to the feedback inbox. We read every message. We do not promise to build everything, but we do read everything.",
+      "Yes. Use the feedback prompt after a milestone, or Settings → Feedback, which is always available. You can tell us what slowed you down, what confused your clients, and what you wish Revercue could do. Feedback helps us understand what to improve next; we cannot promise to build every request.",
   },
   {
     id: 27,
@@ -642,7 +642,7 @@ export const FAQS: Faq[] = [
     group: "support",
     question: "How do I contact support?",
     answer:
-      "The Contact page has a form. We reply within one business day. For bug reports, use Settings → Feedback. The direct email is support@revercue.co.uk.",
+      "The Contact page has a form. We aim to reply within one business day. For bug reports, use Settings → Feedback. The direct email is support@revercue.co.uk.",
   },
   {
     id: 92,

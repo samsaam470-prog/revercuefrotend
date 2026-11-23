@@ -55,7 +55,7 @@ export function ContactPage() {
     <div className="page page-narrow">
       <div className="page-head">
         <p className="eyebrow">Contact</p>
-        <h1>We read every message.</h1>
+        <h1>Tell us what would make Revercue better.</h1>
       </div>
 
       <div className="two-up" style={{ alignItems: "start" }}>
@@ -63,9 +63,9 @@ export function ContactPage() {
           <div className="card card-lg stack-3">
             <CheckCircle2 size={28} color="var(--green)" />
             <h2 className="serif" style={{ fontSize: 24 }}>
-              Thanks. We read every message.
+              Thanks. Your message has been sent.
             </h2>
-            <p className="muted">We'll reply to {email} within 1 business day.</p>
+            <p className="muted">We aim to follow up at {email} within 1 business day if a response is needed.</p>
             <div>
               <Button variant="ghost" onClick={() => setSent(false)}>
                 Send another
@@ -90,7 +90,7 @@ export function ContactPage() {
               value={email}
               onChange={setEmail}
               error={errors.email}
-              helper="We reply to this address."
+              helper="We will use this address if a response is needed."
               required
               autoComplete="email"
             />
@@ -147,7 +147,7 @@ export function ContactPage() {
           <div>
             <p className="eyebrow">Response time</p>
             <p className="muted" style={{ fontSize: 14 }}>
-              Within 1 business day.
+              We aim to reply within 1 business day.
             </p>
           </div>
           <div>

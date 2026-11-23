@@ -190,8 +190,8 @@ export function PrivacyPage() {
                 offers, use the <ContactLink /> or Settings → Feedback so the request arrives with
                 your account attached. Where GDPR or CCPA applies, we honour the rights those laws
                 provide, including the right to object to processing and the right to a copy of your
-                data in a portable format. We answer within one business day and complete the request
-                within the period the law allows.
+                data in a portable format. We aim to respond promptly and complete the request within
+                the period the law allows.
               </p>
             </>
           ),
@@ -229,7 +229,10 @@ export function PrivacyPage() {
                 The application runs on Cloudflare's network, the files sit in a private Backblaze B2
                 bucket served through a Worker proxy, and the application data lives in Turso.
                 Authentication is handled by AuthAction. Transactional email is delivered by Coopermail,
-                with Openmail as fallback. These providers may process data in more than one region;
+                with Openmail as fallback. Whop processes payment details when you check out for a paid
+                Revercue subscription; Revercue receives the subscription and payment-status records
+                needed to manage your plan. Whop subscription billing is separate from payments your
+                clients make against your invoices. These providers may process data in more than one region;
                 where a transfer crosses a border, it relies on the safeguards those providers publish,
                 such as standard contractual clauses.
               </p>
@@ -269,7 +272,7 @@ export function PrivacyPage() {
               <p>
                 Use the <ContactLink /> for a privacy question. If the question involves your account
                 or your data, Settings → Feedback is faster because it carries the account context.
-                We read every message and reply within one business day.
+                We use the information you provide to assess and respond to your request, within the time limits that apply under the relevant data-protection law.
               </p>
               <p>
                 There is no public email address, by design. A form gives us the account, the plan and
@@ -356,7 +359,7 @@ export function TermsPage() {
           body: (
             <>
               <p>
-                Free is available now. Starter, Growth and Scale are publicly available via checkout.
+                Free is available now. Starter, Growth and Scale are available via Whop checkout.
                 Teams is in beta; join the beta and the team will reach out when a spot opens.
               </p>
               <p>
@@ -476,7 +479,7 @@ export function TermsPage() {
               <p>
                 These terms are governed by the laws of the jurisdiction stated on your invoice. If a
                 dispute arises, we will try to resolve it with you directly first: write through the{" "}
-                <ContactLink /> and we will answer within one business day.
+                <ContactLink /> and we will aim to respond within one business day.
               </p>
               <p>
                 If any part of these terms is found unenforceable, the rest stays in force. We may
@@ -581,8 +584,11 @@ export function SecurityPage() {
           body: (
             <>
               <p>
-                Cloudflare, Backblaze B2, Turso, AuthAction, Coopermail and Openmail. They store or
-                deliver; they do not read your documents. Each is bound by its own agreement with us,
+                Cloudflare, Backblaze B2, Turso, AuthAction, Coopermail, Openmail and Whop. They
+                provide infrastructure, authentication, email delivery or paid-plan checkout; they
+                do not read your client documents as part of those services. Whop processes the
+                payment details you submit during Revercue subscription checkout. Each provider is
+                bound by its own agreement with us,
                 and we choose processors with a real security record rather than the cheapest option.
               </p>
               <p>
