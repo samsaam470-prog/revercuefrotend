@@ -86,7 +86,7 @@ export interface OrganizePayload {
     cta?: string;
     /** A contract's own scope clause. */
     scope?: string;
-    packages?: { name: string; price: number; deliverables?: string }[];
+    packages?: { name: string; price?: number; deliverables?: string }[];
   };
 }
 
