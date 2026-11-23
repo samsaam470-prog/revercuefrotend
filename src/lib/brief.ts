@@ -210,7 +210,7 @@ function researchLine(brief: Brief): string {
   if (valueProp) return ` The client's public materials describe the business as: ${sentence(valueProp)}`;
   const note = brief.research?.find((item) => item.kind === "client" && item.body && item.body.trim().length > 40);
   if (!note) return "";
-  const body = note.body.replace(/https?:\\/\\/\\S+/g, "").replace(/\\s+/g, " ").trim();
+  const body = note.body.replace(/https?:\/\/\S+/g, "").replace(/\s+/g, " ").trim();
   const first = body.match(/[^.!?]+[.!?]/)?.[0]?.trim() ?? body.slice(0, 220);
   return first ? ` The client's public materials state: ${first.replace(/[.!?]+$/, "")}.` : "";
 }
