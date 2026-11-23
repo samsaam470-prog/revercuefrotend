@@ -26,16 +26,19 @@ export function ComparePage() {
         <p className="eyebrow">A message from the founder</p>
         <h2 className="serif" style={{ fontSize: 26 }}>Why I built this comparison</h2>
         <p className="muted" style={{ lineHeight: 1.8 }}>
-          When I was freelancing, I compared tools to find a better way to run client work. Most
-          tools solved one part well, but the proposal, contract, invoice, and answers about a client
-          still ended up scattered across different places.
+          When I was working as a freelancer, I compared tools constantly. I was looking for something that would make my work look professional, keep clients informed, and help me get paid without spending my evenings on administration. Most of the tools I tried solved one part of the problem and left me to connect the rest myself. The proposal lived in one application, the contract in another, the invoice in a third, and the client's replies in my inbox. I never had a clear picture of a client relationship as a whole, and I spent more time searching for information than doing the work the client had hired me for.
         </p>
         <p className="muted" style={{ lineHeight: 1.8 }}>
-          Revercue is built around connecting those pieces: the proposal, contract, requirement
-          form, invoice, and client record. I am not claiming it is better than every tool. The
-          right choice depends on your workflow, your team, and what you need a product to do. This
-          page is here to explain what Revercue does, what it costs, and what is still developing so
-          you can make an informed comparison.
+          That experience is why I built Revercue the way I did. The proposal, the contract, the requirement form, the invoice, and the client record stay together in one thread for each client. You can see what was sent, what was opened, and what the client has said, without reconstructing the story from several sources. I also wanted clients to receive something better than a PDF attachment. A PDF is difficult to follow up on, and you rarely know whether it was read. A clear link gives your client a simple way to read, respond, and act, and it gives you a clearer view of what happens next.
+        </p>
+        <p className="muted" style={{ lineHeight: 1.8 }}>
+          I want to be fair to the other tools on this page, and to you as you make your decision. Many of them have been built by talented people who have solved real problems for a long time. Some are better suited to large organisations, some to accounting, and some to highly specialised work. I am not writing this page to claim that Revercue is better than every alternative. The right choice depends on how many clients you manage, how your work is structured, whether you work alone or with a team, and what matters most to you in your day-to-day tools.
+        </p>
+        <p className="muted" style={{ lineHeight: 1.8 }}>
+          What I can offer is an honest account of what Revercue does, what it costs, and what is still in development. The comparison below describes the plans and features that are available today, and it identifies the capabilities that are still in beta or not yet available. I would rather you know exactly what you are choosing than discover a gap after you have already moved your client work. If a feature you need is not listed as available, please assume it is not available until we say otherwise.
+        </p>
+        <p className="muted" style={{ lineHeight: 1.8 }}>
+          Every comparison you read should help you make a decision that fits your business. I would rather you compare us carefully and choose what suits you than choose Revercue without understanding what it does. If you try Revercue and it does not fit your work, I want to hear why. That feedback is one of the most useful things we receive, and it guides what we build next.
         </p>
         <p className="caption">— Founder, Revercue</p>
       </section>

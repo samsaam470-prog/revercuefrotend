@@ -82,22 +82,19 @@ export function BetaPage() {
         <p className="eyebrow">A message from the founder</p>
         <h2 className="serif" style={{ fontSize: 26 }}>Why Teams is in beta</h2>
         <p className="muted" style={{ lineHeight: 1.8 }}>
-          I spent 21 months freelancing and saw how quickly client work becomes difficult when a
-          small team has to hand work over, approve decisions, and keep context in sync. I do not
-          want to guess what teams need from a distance. I want to learn from real teams using the
-          workflow.
+          I spent 21 months working as a freelancer. Most of what I learned came from working alone, but many of the hardest problems I encountered involved other people: waiting for a colleague to review a proposal, losing track of which version a client had approved, and handing a project to someone else without the context they needed. Those problems are harder to solve than the individual ones, and I do not want to guess at the answers. A team's workflow depends on how people actually divide work, make decisions, and hold each other accountable, and those patterns vary a great deal from one team to the next. For that reason, we decided to build Teams with the teams who will use it, rather than designing it in isolation and releasing it all at once.
         </p>
         <p className="muted" style={{ lineHeight: 1.8 }}>
-          This beta is where we test the practical details: joining a team, roles and permissions,
-          shared proposals and contracts, and the points where a handoff slows work down. Teams is
-          not finished. Some capabilities are being tested; others are still being shaped by what
-          we learn.
+          The beta is where that learning happens. We are testing how new members join a shared workspace, what roles and permissions a team needs in practice, how proposals and contracts move between people, and where the current workflow creates friction. Each week, the teams testing Teams show us things we did not anticipate, and we change the product in response. Some changes are small, such as clearer labels or a simpler invitation step. Others are larger, and they can alter the direction of a feature entirely. We would rather make those changes now, while the cost of change is low, than discover later that a feature does not match how teams work.
         </p>
         <p className="muted" style={{ lineHeight: 1.8 }}>
-          Applying does not automatically start a paid subscription, and your account will not be
-          changed without hearing from us first. If you join, tell us how your team works, what gets
-          stuck, and what would make the workflow genuinely useful. Your feedback will help decide
-          what we build next.
+          I want to be precise about what the beta is and what it is not. Teams is not yet a finished product, and not every capability you might expect is available today. Some features are working in the beta, and others are still being designed, tested, and refined. Joining the beta does not start a paid subscription automatically. You will see the pricing and the terms before you commit to anything, and you will hear from us before any change affects your account. We will say plainly what is ready, what is still in development, and what we have not yet decided.
+        </p>
+        <p className="muted" style={{ lineHeight: 1.8 }}>
+          If your team works together on client projects and you are willing to give us honest, specific feedback, I would welcome your application. It helps us most when you tell us how your team actually works: who approves what, where documents get stuck, what you have tried in other tools, and what you wish worked differently. You do not need to describe an ideal workflow. The real one is more useful to us.
+        </p>
+        <p className="muted" style={{ lineHeight: 1.8 }}>
+          Thank you for being part of this early stage. Your time and your candour are what will make Teams worth using.
         </p>
         <p className="caption">— Founder, Revercue</p>
       </section>
