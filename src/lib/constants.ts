@@ -6,7 +6,7 @@ export interface PlanDefinition {
   price: number | null;
   base?: number;
   role: string;
-  status: "available" | "waitlist" | "beta";
+  status: "available" | "beta";
   statusLabel: string;
   features: string[];
   limits: {

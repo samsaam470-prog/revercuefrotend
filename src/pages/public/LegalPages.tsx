@@ -357,7 +357,7 @@ export function TermsPage() {
             <>
               <p>
                 Free is available now. Starter, Growth and Scale are publicly available via checkout.
-                Teams is in beta; join the beta waitlist and the team will reach out when a spot opens.
+                Teams is in beta; join the beta and the team will reach out when a spot opens.
               </p>
               <p>
                 There is no automated checkout in the fresh state and no refunds. A plan change takes

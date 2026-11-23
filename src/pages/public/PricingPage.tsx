@@ -99,7 +99,7 @@ export function PricingPage() {
           return (
             <div
               key={plan.id}
-              className={`plan-card${plan.status === "waitlist" ? " dimmed" : ""}`}
+              className={`plan-card${plan.status === "beta" ? " dimmed" : ""}`}
             >
               <div className="between">
                 <strong>{plan.name}</strong>
@@ -124,7 +124,7 @@ export function PricingPage() {
                     ? "14-day free trial — available for a limited time"
                     : plan.status === "available"
                       ? "Available now — public checkout"
-                      : "In beta — join the beta waitlist"}
+                      : "In beta — join the beta"}
                 </p>
               </div>
               <ul>
@@ -170,8 +170,7 @@ export function PricingPage() {
 
       <p className="caption text-center" style={{ marginTop: 16 }}>
         Prices are in US dollars, per month. Starter, Growth and Scale are publicly available via checkout.
-        Growth includes a limited-time 14-day free trial. Teams is in beta and uses a waitlist; no charge
-        applies while it remains in beta.
+        Growth includes a limited-time 14-day free trial. Teams is in beta; no charge applies while it remains in beta.
       </p>
 
       <section className="section">

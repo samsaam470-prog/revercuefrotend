@@ -79,7 +79,7 @@ export function OnboardingStep5Page() {
               className={`plan-mini${isSelected ? " selected" : ""}`}
               onClick={() => {
                 setPlan(option.id as any);
-                setRequested((option.status === "waitlist" || option.status === "beta" ? option.id : null) as any);
+                setRequested((option.status === "beta" ? option.id : null) as any);
                 if (option.status !== "available") setWaitlistPlan(option.id as any);
               }}
               aria-pressed={isSelected}
@@ -87,7 +87,7 @@ export function OnboardingStep5Page() {
               <b>{option.name}</b>
               {option.price == null ? `$${option.price ?? 0} base` : option.price === 0 ? "Free" : `$${option.price}/mo`}
               <span style={{ display: "block", marginTop: 4 }}>
-                {option.status === "available" ? "available now" : option.status === "beta" ? "in beta" : "waitlist"}
+                {option.status === "available" ? "available now" : "in beta"}
               </span>
               {recommended === option.id && (
                 <span className="badge badge-gold" style={{ marginTop: 6 }}>
@@ -102,7 +102,7 @@ export function OnboardingStep5Page() {
 
       <p className="caption mt-4">
         {requested
-          ? `You will start on Free today and keep your place on the ${requested} waitlist.`
+          ? `You will start on Free today and request ${requested} (the team will reach out).`
           : "You will start on Free today. You can request a plan later from Settings → Plan."}
       </p>
 

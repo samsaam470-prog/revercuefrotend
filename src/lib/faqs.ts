@@ -97,7 +97,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What are the plans?",
     answer:
-      "Free (available now), Starter, Growth and Scale (publicly available via checkout), and Teams (in beta). Growth includes a limited-time 14-day free trial. Teams uses a waitlist while in beta.",
+      "Free (available now), Starter, Growth and Scale (publicly available via checkout), and Teams (in beta). Growth includes a limited-time 14-day free trial. Teams is in beta; join the beta and the team reaches out.",
   },
   {
     id: 12,
@@ -111,13 +111,13 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "How do I pay?",
     answer:
-      "Starter, Growth and Scale are publicly available via checkout. Growth includes a limited-time 14-day free trial. Teams is in beta and uses a waitlist. The Free plan is available now, no payment needed.",
+      "Starter, Growth and Scale are publicly available via checkout. Growth includes a limited-time 14-day free trial. Teams is in beta; join the beta and the team reaches out. The Free plan is available now, no payment needed.",
   },
   {
     id: 14,
     group: "plans",
     question: "Can I pay annually?",
-    answer: "Annual billing is not available yet. Join the waitlist for updates.",
+    answer: "Annual billing is not available yet. Follow Revercue for updates.",
   },
   {
     id: 15,
@@ -150,9 +150,9 @@ export const FAQS: Faq[] = [
   {
     id: 19,
     group: "plans",
-    question: "What is the difference between the waitlist and the beta?",
+    question: "What does it mean that Teams is in beta?",
     answer:
-      "Starter, Growth and Scale are publicly available via checkout (Growth has a limited-time 14-day trial). The waitlist is now only for the Teams beta. Teams is in beta; you join the beta and the team reaches out. The Free plan is available now.",
+      "Starter, Growth and Scale are publicly available via checkout (Growth has a limited-time 14-day trial). Teams is in beta; you join the beta and the team reaches out. The Free plan is available now.",
   },
   {
     id: 20,
@@ -173,7 +173,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What happens if I exceed my storage limit?",
     answer:
-      "You cannot upload a new file. The app says: \"Storage limit reached (50 MB on your plan).\" You can delete an old file or join the waitlist for a paid plan.",
+      "You cannot upload a new file. The app says: \"Storage limit reached (50 MB on your plan).\" You can delete an old file or upgrade to a paid plan.",
   },
 
   {

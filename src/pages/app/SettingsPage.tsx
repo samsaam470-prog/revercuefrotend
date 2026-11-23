@@ -363,7 +363,7 @@ function PlanSection() {
         <p className="caption">
           {plan === "free"
             ? "Free is available now. Starter, Growth and Scale are publicly available via checkout. Teams is in beta."
-            : "Your plan was set by the team. Changes are handled through the waitlist."}
+            : "Your plan was set by the team. Changes are handled by the team."}
         </p>
       </div>
 
@@ -1385,7 +1385,7 @@ function UpgradeCard({ feature }: { feature: string }) {
       </div>
       <p className="muted">
         {feature} is part of a higher plan. Upgrade to Starter, Growth or Scale via checkout, or join
-        the Teams beta waitlist.
+        the Teams beta.
       </p>
       <div className="inline">
         <Link to="/settings/plan" className="btn btn-primary btn-sm">

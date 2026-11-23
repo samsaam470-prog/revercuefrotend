@@ -23,7 +23,7 @@ export function WaitlistModal({
   plan,
   title,
   description,
-  cta = "Join the waitlist",
+  cta = "Join the beta",
 }: WaitlistModalProps) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -64,7 +64,7 @@ export function WaitlistModal({
     <Modal
       open={open}
       onClose={close}
-      title={title || (plan === "teams" ? "Join the beta" : "Join the waitlist")}
+      title={title || (plan === "teams" ? "Join the beta" : "Join the beta")}
       size="sm"
       footer={
         done ? (
@@ -87,7 +87,7 @@ export function WaitlistModal({
             You're on the list. We'll be in touch.
             {plan === "teams"
               ? " Teams is in beta. The team is testing the team features with a small group and will reach out when a spot opens."
-              : " Starter, Growth and Scale are now publicly available via checkout. This waitlist is only for Teams beta."}
+              : " Starter, Growth and Scale are now publicly available via checkout. This form is only for the Teams beta."}
           </p>
           <p className="caption">The Free plan is available now, no invitation needed.</p>
         </div>
@@ -95,7 +95,7 @@ export function WaitlistModal({
         <div className="stack-4">
           <p className="muted">
             {description ||
-              "Teams is in beta. Leave your email to join the Teams beta waitlist. Starter, Growth and Scale are publicly available via checkout."}
+              "Teams is in beta. Leave your email to join the Teams beta. Starter, Growth and Scale are publicly available via checkout."}
           </p>
           <Input
             id="waitlist-email"

@@ -1364,13 +1364,13 @@ const BASE_GUIDES: Guide[] = [
         heading: "Teams, and what beta means",
         paragraphs: [
           "Teams carries everything on Scale and adds the handoff: the Handoff Dashboard, the roles, the bulk transfer and the audit log, with five hundred active documents and thirty-six months of retention. It is in beta, which means the team features are being tested with a small group and will change as that group uses them.",
-          "Joining the beta is not joining the waitlist. The waitlist is the queue for the paid solo plans. The beta is the test for the team features. Both are invitations, and neither is a checkout.",
+          "Joining the beta is for the team features. Starter, Growth and Scale are the paid solo plans, available via checkout. The beta is an invitation, not a checkout.",
         ],
       },
       {
-        heading: "Upgrading, downgrading, and the waitlist",
+        heading: "Upgrading and downgrading",
         paragraphs: [
-          "Starter, Growth and Scale are now publicly available via checkout. The waitlist remains only for the Teams beta: you join with your email and the team reaches out when a spot opens.",
+          "Starter, Growth and Scale are now publicly available via checkout. Teams is in beta: you join with your email and the team reaches out when a spot opens.",
           "Downgrades take effect at the end of the cycle. Documents above the new limit are archived rather than deleted, so the links close but nothing is lost. If you go from a hundred live documents to twenty, eighty of them move to the archive and the archive allowance of the lower plan applies. That is the moment the archive limit matters most, and it is why the archive is counted separately.",
           "Nothing on the pricing page is a trial. Free is free forever, with limits. The paid plans are the same product with more room and more intelligence, and the invitation is how the team keeps the room honest.",
         ],
