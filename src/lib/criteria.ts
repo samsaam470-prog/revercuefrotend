@@ -155,7 +155,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "ease-of-use-support": {
         rating: "yes",
-        note: "One path through the product, so there is little to configure before the first document goes out.",
+        note: "No independent review-listing sample is shown for Revercue on these comparison pages; this row is a product-fit assessment, not a user-satisfaction score.",
       },
     },
   },
@@ -211,7 +211,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "ease-of-use-support": {
         rating: "yes",
-        note: "Clean and quick to learn, with responsive support on paid plans.",
+        note: "Capterra lists Bonsai at 4.6/5 from 95 reviews; ease of use is 4.6 and customer service 4.3. Treat this as a modest sample.",
       },
     },
   },
@@ -270,7 +270,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "ease-of-use-support": {
         rating: "yes",
-        note: "Polished and guided, with support included rather than sold as an add-on.",
+        note: "Capterra lists HoneyBook at 4.7/5 from 696 reviews; ease of use is 4.6 and customer service 4.7. Reviewers also mention email and payment-processing limitations.",
       },
     },
   },
@@ -326,7 +326,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "ease-of-use-support": {
         rating: "partial",
-        note: "Powerful, with a real setup curve; support is good once you ask for it.",
+        note: "Capterra lists Dubsado at 4.2/5 from 61 reviews; ease of use is 3.7 and customer service 4.3. Reviews mention a setup and learning curve.",
       },
     },
   },
@@ -379,7 +379,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "ease-of-use-support": {
         rating: "yes",
-        note: "Friendly interface and responsive support; the writing help is the hook.",
+        note: "Moxie's samples are small on G2 (4.5/5 from 4) and Capterra (4.0/5 from 1); Trustpilot shows 4.8/5 from 539 on a merged profile. Do not infer support quality from the small samples.",
       },
     },
   },
@@ -435,7 +435,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "ease-of-use-support": {
         rating: "partial",
-        note: "Dense interface with a real learning curve; support is decent once you are in.",
+        note: "Capterra lists Plutio at 4.6/5 from 162 reviews; ease of use and customer service are both 4.5. Some reviews mention a learning curve and feature limitations.",
       },
     },
   },
@@ -494,7 +494,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "ease-of-use-support": {
         rating: "partial",
-        note: "Broad and therefore busy; support quality varies by plan.",
+        note: "Agiled is 4.7/5 from 350 Capterra reviews (ease 4.6, customer service 4.7) and 4.7/5 from 387 G2 reviews. Review counts are platform-specific.",
       },
     },
   },
@@ -552,11 +552,11 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "pricing-scalability": {
         rating: "yes",
-        note: "Per-user subscriptions; Google Workspace list prices are $7/$14/$22 per month billed annually. Microsoft currently lists Business Basic at $7, Standard with Copilot at $23.50, and Premium with Copilot at $32 per user/month billed yearly.",
+        note: "Per-user subscriptions; Google Workspace list prices are $7/$14/$22 per user/month on a one-year commitment with monthly payments. Microsoft lists Basic at $7, Standard with Copilot at $23.50, and Premium with Copilot at $32 per user/month paid yearly. Microsoft currently lists Business Basic at $7, Standard with Copilot at $23.50, and Premium with Copilot at $32 per user/month billed yearly.",
       },
       "ease-of-use-support": {
         rating: "yes",
-        note: "Everyone already knows it, and enterprise support is mature.",
+        note: "Capterra's comparison listing shows Google Workspace at 4.7/5 from 89,356 reviews and Microsoft 365 at 4.6/5 from 14,193. These are large but different product listings, not a like-for-like usability test.",
       },
     },
   },
