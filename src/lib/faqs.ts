@@ -56,7 +56,7 @@ export const FAQS: Faq[] = [
     group: "product",
     question: "Does Revercue send my writing to a server?",
     answer:
-      "No. The helper's work never reaches a Revercue server: the text you select, the rewrite that comes back and the document you are editing are not sent to us and are not stored in the database; the team cannot read them. The suggestions elsewhere in the product use patterns: keyword matching, frequency counting and arithmetic over your own record. Nothing is applied without you: you review each suggestion and choose what to change, and Revercue does not make that change on your behalf. The footer has four buttons that open an outside assistant (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled question about Revercue — the answer comes from that tool, not from us.",
+      "Some document content is sent to Revercue servers when you create, save, publish or manage documents and client workflows. The inline Ask the helper rewrite runs in your browser; that rewrite operation does not send the selected passage or its suggested replacement to Revercue. Other product features have their own data flows, described in the Privacy Policy. Suggestions are reviewable: nothing is applied without your choice. The footer has four buttons that open an outside assistant (ChatGPT, Perplexity, Claude or Gemini) with a pre-filled question about Revercue — the answer comes from that tool, not from us.",
   },
   {
     id: 6,
@@ -719,14 +719,14 @@ export const FAQS: Faq[] = [
     group: "product",
     question: 'What is "Ask the helper"?',
     answer:
-      "Ask the helper is the inline assistant in the builder. You select a piece of text, click Ask the helper, and it can rewrite the text in a different tone, fix the grammar, expand it, simplify it, or change the wording. The helper is a tool, not an action. It suggests a rewrite; you decide whether to replace the text, insert it below, or cancel. The text you select is not sent to Revercue, not sent to the team, and not stored in the database. The team cannot read the text you selected, the rewrite the helper suggested, or the document you are editing. The team sees the account details (your email, your name, your plan, your usage), not the content. The content is yours; the helper is the tool that works on it. If the helper is unavailable in your browser, the Ask the helper button is not shown, and you edit the text manually.",
+      "Ask the helper is the inline writing aid in the builder. Select text, choose an instruction, review the suggested rewrite, then replace, insert or cancel. The rewrite itself runs in your browser and does not send the selected passage or suggested replacement to Revercue. This is separate from document creation, saving and publishing, which send document data to Revercue servers to provide those services. If the helper is unavailable in your browser, the button is not shown and you can edit the text manually.",
   },
   {
     id: 103,
     group: "documents",
     question: "What is post-document analysis?",
     answer:
-      "Post-document analysis is the review that runs after you click Create. It reads the document and gives you a quality score (0–100) and a list of issues. The score is both the pattern engine's (the structure, the missing sections, the tone consistency) and the helper's (the readability, the flow, the clarity). The issues are tagged by source (From this client's history, From your usual method, From what works). You see the score and the issues, and you decide whether to fix them or publish anyway. The analysis is not a gate; it is a quality signal.",
+      "Post-document analysis runs when you click Create, before the document is published. It gives an indicative score (0–100) and flags structural and writing issues such as missing sections, missing pricing or next steps, short content, long sentences and repeated text. It does not inspect a client’s historical documents or verify factual claims. Where available, an optional readability pass runs in the browser. You can keep editing or choose to publish anyway; the score is guidance, not a guarantee of quality.",
   },
   {
     id: 104,

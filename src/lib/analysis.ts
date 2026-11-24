@@ -1,10 +1,7 @@
 import type { Block } from "../types";
 import { isAvailable, rewrite } from "./webllm";
 
-export type IssueSource =
-  | "From this client's history"
-  | "From your usual method"
-  | "From what works";
+export type IssueSource = "Document structure" | "Document content" | "Client context" | "Writing quality";
 
 export interface ReviewIssue {
   source: IssueSource;
@@ -46,7 +43,7 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
   const types = new Set(blocks.map((block) => block.type));
 
   if (blocks.length === 0) {
-    issues.push({ source: "From what works", text: "The document has no blocks yet." });
+    issues.push({ source: "Writing quality", text: "The document has no blocks yet." });
     return { score: 0, issues, helperUsed: false };
   }
 
@@ -58,7 +55,7 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
     if (missing.length > 0) {
       score -= Math.min(30, missing.length * 10);
       issues.push({
-        source: "From your usual method",
+        source: "Writing quality",
         text: `These sections are empty: ${missing.join(", ")}.`,
       });
     }
@@ -67,24 +64,24 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
   if (!types.has("pricing_table") && !types.has("packages")) {
     score -= 12;
     issues.push({
-      source: "From what works",
-      text: "There is no pricing block. Most accepted proposals show the packages on the page.",
+      source: "Writing quality",
+      text: "There is no pricing block. Add the agreed price or packages if this document needs them.",
     });
   }
 
   if (!types.has("next_step") && !types.has("button")) {
     score -= 10;
     issues.push({
-      source: "From what works",
-      text: "There is no next step or button. The client reads the page and has nowhere to go.",
+      source: "Writing quality",
+      text: "There is no next step or button. Tell the client what to do after reading.",
     });
   }
 
   if (words < 120) {
     score -= 12;
     issues.push({
-      source: "From this client's history",
-      text: `The document is short (${words} words). A first proposal for this client usually runs longer.`,
+      source: "Document content",
+      text: `The document is short (${words} words). Add enough detail for the client to understand the offer.`,
     });
   }
 
@@ -93,8 +90,8 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
   if (longParagraph) {
     score -= 6;
     issues.push({
-      source: "From what works",
-      text: "One paragraph runs past 140 words. Splitting it keeps the read moving.",
+      source: "Writing quality",
+      text: "One paragraph runs past 140 words. Splitting it may make the document easier to read.",
     });
   }
 
@@ -102,7 +99,7 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
   if (sentences.length > 0) {
     score -= 5;
     issues.push({
-      source: "From your usual method",
+      source: "Writing quality",
       text: `${sentences.length} sentence${sentences.length > 1 ? "s run" : " runs"} past 34 words.`,
     });
   }
@@ -115,21 +112,21 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
   const repeated = duplicated.filter((line) => (seen.has(line) ? true : (seen.add(line), false)));
   if (repeated.length > 0) {
     score -= 4;
-    issues.push({ source: "From what works", text: "A sentence repeats in two places." });
+    issues.push({ source: "Writing quality", text: "A sentence repeats in two places." });
   }
 
   if (!hasClient) {
     score -= 8;
     issues.push({
-      source: "From this client's history",
-      text: "The document is not linked to a client record yet.",
+      source: "Document content",
+      text: "The document is not linked to a client record yet. Link it if you want it associated with a client.",
     });
   }
 
   if (tone === "Formal" && /\b(don't|can't|won't|it's|we're|you're)\b/i.test(body)) {
     score -= 3;
     issues.push({
-      source: "From your usual method",
+      source: "Writing quality",
       text: "The tone is set to Formal, and the text uses contractions.",
     });
   }
@@ -142,7 +139,7 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
     );
     if (note) {
       helperUsed = true;
-      issues.push({ source: "From what works", text: note.split("\n")[0].slice(0, 240) });
+      issues.push({ source: "Writing quality", text: note.split("\n")[0].slice(0, 240) });
     }
   }
 

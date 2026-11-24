@@ -18,7 +18,7 @@ export function DocumentReview({ review, onClose, onPublishAnyway }: DocumentRev
             <div>
               <p className="review-band">{scoreBand(review.score)}</p>
               <p className="caption">
-                The structure and the prose, read once. It is a signal, not a gate.
+                Automated structure and writing checks. This is a guide, not a fact-check or a publishing gate.
               </p>
             </div>
           </div>
@@ -38,7 +38,7 @@ export function DocumentReview({ review, onClose, onPublishAnyway }: DocumentRev
 
           {review.helperUsed && (
             <p className="caption">
-              The readability pass ran on this device. The text did not leave the browser.
+              The optional readability pass ran in this browser. That pass does not send the text to Revercue.
             </p>
           )}
 
