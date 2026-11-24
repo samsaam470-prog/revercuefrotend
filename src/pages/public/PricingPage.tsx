@@ -65,7 +65,7 @@ function cell(plan: PlanName, key: (typeof ROWS)[0]["key"]): string {
 }
 
 export function PricingPage() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, refresh } = useAuth();
   const [waitlist, setWaitlist] = useState<{ plan: PlanName } | null>(null);
   const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
   const [checkingOut, setCheckingOut] = useState(false);
@@ -252,7 +252,10 @@ export function PricingPage() {
             justifyContent: "center",
             zIndex: 1000,
           }}
-          onClick={() => setCheckoutUrl(null)}
+          onClick={() => {
+            setCheckoutUrl(null);
+            void refresh();
+          }}
         >
           <div
             style={{ width: "90%", maxWidth: 520, height: "80vh", background: "#fff", borderRadius: 12, overflow: "hidden" }}
