@@ -12,7 +12,6 @@ import { useAuthAction } from "@authaction/web-sdk/react";
 import { authApi } from "../api/auth";
 import { setUnauthorizedHandler, setTokenProvider } from "../api/client";
 import { tokenStore } from "../lib/storage";
-import { testSessionStore } from "../lib/test-session";
 import { clearReturnTo } from "../lib/authaction";
 import { logAuthFailure } from "../lib/auth-diagnostics";
 import type { User } from "../types";
@@ -24,12 +23,8 @@ export interface AuthState {
   /** The API could not be reached. The session is kept, not cleared. */
   offline: boolean;
   isAuthenticated: boolean;
-  /** True when the session came from the review/test account, not AuthAction. */
-  isTestSession: boolean;
   onboardingDestination: string | null;
   setSession: (token: string, user?: User) => void;
-  /** Starts a review/test session backed by a Revercue-issued token. */
-  startTestSession: (token: string, user: User) => void;
   signIn: () => Promise<void>;
   signOut: () => Promise<void>;
   refresh: () => Promise<User | null>;
@@ -62,14 +57,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [onboardingDestination, setOnboardingDestination] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const tokenRef = useRef<string | null>(null);
-  const [testToken, setTestToken] = useState<string | null>(() => testSessionStore.get());
-  const testTokenRef = useRef<string | null>(testToken);
   const navigate = useNavigate();
 
   const getAccessToken = useCallback(async (): Promise<string | null> => {
-    // A review/test session owns the token even if an AuthAction session also
-    // exists, so review actions cannot accidentally use the wrong identity.
-    if (testTokenRef.current) return testTokenRef.current;
     if (!sdkIsAuthenticated) return null;
     try {
       const t = await sdkGetAccessToken();
@@ -90,9 +80,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const clear = useCallback(() => {
     tokenStore.clear();
-    testSessionStore.clear();
-    testTokenRef.current = null;
-    setTestToken(null);
     setToken(null);
     tokenRef.current = null;
     setUser(null);
@@ -111,7 +98,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
      * request and bounces a freshly authorised session to /login.
      */
     setLoading(true);
-    const current = sdkIsAuthenticated ? await getAccessToken() : testTokenRef.current;
+    const current = sdkIsAuthenticated ? await getAccessToken() : null;
     if (!current) {
       /*
        * The SDK reports a session but cannot produce a token (it expired and no
@@ -150,10 +137,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
    * Load the Revercue record once per authentication transition, not on every
    * render. `lastAuth` also stops a failed `/me` from retrying forever.
    */
-  const lastAuth = useRef<"sdk" | "test" | null>(null);
+  const lastAuth = useRef<"sdk" | null>(null);
   useEffect(() => {
     if (sdkIsLoading) return;
-    const mode: "sdk" | "test" | null = sdkIsAuthenticated ? "sdk" : testToken ? "test" : null;
+    const mode: "sdk" | null = sdkIsAuthenticated ? "sdk" : null;
     if (lastAuth.current === mode) return;
     lastAuth.current = mode;
     if (!mode) {
@@ -161,24 +148,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
     void refresh();
-  }, [sdkIsLoading, sdkIsAuthenticated, testToken, refresh, clear]);
-
-  /**
-   * Review/test sessions are issued by Revercue rather than AuthAction. They
-   * still load the application record through `/api/auth/me`, so everything
-   * downstream (plan, onboarding, guards) reads the same source of truth.
-   */
-  const startTestSession = useCallback((value: string, nextUser: User) => {
-    testSessionStore.set(value);
-    testTokenRef.current = value;
-    setTestToken(value);
-    tokenStore.set(value);
-    setToken(value);
-    tokenRef.current = value;
-    setUser(nextUser);
-    setLoading(false);
-    lastAuth.current = "test";
-  }, []);
+  }, [sdkIsLoading, sdkIsAuthenticated, refresh, clear]);
 
   useEffect(() => {
     setUnauthorizedHandler(() => {
@@ -211,9 +181,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch {
       /* best effort */
     }
-    testSessionStore.clear();
-    testTokenRef.current = null;
-    setTestToken(null);
     clear();
     lastAuth.current = null;
     clearReturnTo();
@@ -227,10 +194,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       loading: loading || sdkIsLoading,
       offline,
       onboardingDestination,
-      isAuthenticated: Boolean((sdkIsAuthenticated || Boolean(testToken)) && user),
-      isTestSession: Boolean(testToken),
+      isAuthenticated: Boolean(sdkIsAuthenticated && user),
       setSession,
-      startTestSession,
       signIn,
       signOut,
       refresh,
@@ -243,10 +208,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       sdkIsLoading,
       offline,
       sdkIsAuthenticated,
-      testToken,
       onboardingDestination,
       setSession,
-      startTestSession,
       signIn,
       signOut,
       refresh,
