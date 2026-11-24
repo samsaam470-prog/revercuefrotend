@@ -30,7 +30,9 @@ export function CompareCriteriaPage() {
         <p className="lede">
           The same thirteen questions asked of every platform on this site, answered in the same
           order. The rating is deliberately blunt — yes, partly, no — and the note explains where
-          the boundary sits, because "yes" without a boundary is marketing.
+          the boundary sits, because "yes" without a boundary is marketing. Last verified:
+          {PRICING_CHECKED}. Assessments use vendor documentation, public feature pages and dated
+          review listings; we have not independently hands-on tested every competitor.
         </p>
       </div>
 
@@ -45,12 +47,6 @@ export function CompareCriteriaPage() {
           <RatingChip rating="no" /> not what it is for
         </span>
       </div>
-
-      <p className="caption">
-        Last verified: {PRICING_CHECKED}. Assessed against vendor documentation, public feature pages and dated review listings. We have not independently hands-on tested every competitor. Pricing and packaging change, so the
-        notes describe shape rather than quoting a figure — check the platform's own pricing page
-        before you decide.
-      </p>
 
       <nav className="criteria-toc" aria-label="Jump to a platform">
         {PLATFORM_CRITERIA.map((platform) => (
