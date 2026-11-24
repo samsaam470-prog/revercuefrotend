@@ -41,7 +41,7 @@ export interface CompetitorResearch {
 
 export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
   bonsai: {
-    checkedOn: PRICING_CHECKED,
+    checkedOn: "24 November 2026",
     pricingSource: { label: "Bonsai — official pricing page", url: "https://www.hellobonsai.com/pricing" },
     pricing: [
       { plan: "Basic", price: "$15/mo, or $9/mo billed yearly", note: "No invoicing on this tier" },
@@ -140,7 +140,7 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
   },
 
   honeybook: {
-    checkedOn: PRICING_CHECKED,
+    checkedOn: "24 November 2026",
     pricingSource: { label: "HoneyBook — official pricing page", url: "https://www.honeybook.com/pricing" },
     pricing: [
       { plan: "Starter", price: "$36/mo, or $29/mo billed yearly", note: "Solo; lead forms, invoices, proposals, contracts" },
@@ -238,22 +238,20 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
   },
 
   dubsado: {
-    checkedOn: PRICING_CHECKED,
-    pricingSource: { label: "Dubsado — official pricing page", url: "https://www.dubsado.com/pricing" },
+    checkedOn: "24 November 2026",
+    pricingSource: { label: "Dubsado — official pricing page (checked 24 November 2026)", url: "https://www.dubsado.com/pricing" },
     pricing: [
-      { plan: "Starter", price: "$35/mo, or $335/yr", note: "Core tools; one active lead form" },
-      { plan: "Premier", price: "$55/mo, or $525/yr", note: "Scheduler, Flows, proposals, Zapier, bookkeeping sync" },
+      { plan: "Starter", price: "$335/yr billed annually", note: "Unlimited projects and clients, invoicing and payment plans, one active lead capture form, no scheduling, workflows or public proposals" },
+      { plan: "Premier", price: "$525/yr billed annually", note: "Adds scheduling, automated workflows, public proposals, Zapier, bookkeeping integration and unlimited lead capture forms" },
     ],
     pricingNote:
-      "Prices are per account, with three additional users included on every plan; more users and extra brands are add-ons. There is no free plan. The trial is 21 days with full Premier access and no card. A Black Friday promotion was live from 23 November 2026 and is not the list price.",
+      "The official page lists annual prices only, in US dollars. Add-ons: $10/mo per additional brand, and $25/mo for 4 to 10 users after three additional users are included free. There is no free plan. The trial is 21 days with full Premier access and no card. A Black Friday promotion runs to 30 November 2026 and is not the list price. Third-party monthly figures such as $35 and $55 are not shown on Dubsado's own page and are not used here.",
     sources: [
-      { label: "Dubsado pricing (official)", url: "https://www.dubsado.com/pricing" },
+      { label: "Dubsado pricing (official, checked 24 November 2026)", url: "https://www.dubsado.com/pricing" },
       { label: "Dubsado help centre — choose the right plan", url: "https://help.dubsado.com/en/articles/15920232-choose-the-right-dubsado-plan-for-your-business" },
-      { label: "Dubsado features (official)", url: "https://www.dubsado.com/features" },
       { label: "Dubsado on Capterra", url: "https://www.capterra.com/p/206389/Dubsado" },
-      { label: "Dubsado on G2", url: "https://www.g2.com/products/dubsado/reviews" },
-      { label: "Finpresso — Dubsado review 2026", url: "https://finpresso.com/reviews/dubsado-review" },
     ],
+
     othersSay: {
       intro:
         "Dubsado's reviews divide cleanly between people who built a machine and people who wanted one out of the box. Nobody disputes the power of its workflows; the argument is about the afternoon of configuration that comes before the first client.",
