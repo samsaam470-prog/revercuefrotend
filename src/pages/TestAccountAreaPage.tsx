@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
-const TEST_API_BASE = ((import.meta.env as ImportMetaEnv & { VITE_TEST_HARNESS_API_URL?: string }).VITE_TEST_HARNESS_API_URL || '').trim().replace(/\\/$/, '');
+const configuredTestApi = ((import.meta.env as ImportMetaEnv & { VITE_TEST_HARNESS_API_URL?: string }).VITE_TEST_HARNESS_API_URL || '').trim();
+const TEST_API_BASE = configuredTestApi.endsWith('/') ? configuredTestApi.slice(0, -1) : configuredTestApi;
 
 type PlanName = 'free' | 'starter' | 'growth' | 'scale';
 type PlanSnapshot = Record<string, string | number | boolean> & { plan: PlanName };
