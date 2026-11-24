@@ -79,7 +79,6 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
   const [preview, setPreview] = useState(false);
   const [share, setShare] = useState<{ url: string; publicId: string } | null>(null);
   const [review, setReview] = useState<Review | null>(null);
-  const [pendingShare, setPendingShare] = useState<{ url: string; publicId: string } | null>(null);
   const [creating, setCreating] = useState(false);
   const [initialised, setInitialised] = useState(false);
   const [research, setResearch] = useState<Research>(() => readResearch(id));
@@ -213,14 +212,22 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     setCreating(true);
     try {
       await autosave.save(payload);
-      const response = await proposalsApi.publish(id);
-      const nextShare = { url: response.url, publicId: response.public_id };
-      const result = await analyzeDocument({
-        blocks,
-        hasClient: Boolean(proposal?.client_id),
-      });
-      setPendingShare(nextShare);
+      const result = await analyzeDocument({ blocks, hasClient: Boolean(proposal?.client_id) });
       setReview(result);
+    } catch (cause) {
+      const apiError = cause as ApiError;
+      toast.error(errorMessage(apiError.code, apiError.message));
+    } finally {
+      setCreating(false);
+    }
+  };
+
+  const publishReviewed = async () => {
+    setCreating(true);
+    try {
+      const response = await proposalsApi.publish(id);
+      setShare({ url: response.url, publicId: response.public_id });
+      setReview(null);
     } catch (cause) {
       const apiError = cause as ApiError;
       toast.error(errorMessage(apiError.code, apiError.message));
@@ -347,10 +354,7 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
       <DocumentReview
         review={review}
         onClose={() => setReview(null)}
-        onPublishAnyway={() => {
-          setShare(pendingShare);
-          setReview(null);
-        }}
+        onPublishAnyway={() => { void publishReviewed(); }}
       />
 
       <ShareModal
