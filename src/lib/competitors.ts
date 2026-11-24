@@ -37,7 +37,7 @@ const BASE_COMPETITORS: Competitor[] = [
         heading: "Where the thread thins out",
         paragraphs: [
           "Bonsai supports proposals, contracts, service selections, forms and a client portal. Its official pages confirm a broad document workflow, so it would be inaccurate to describe every proposal as a static PDF or every client choice as unstructured. The distinction Revercue makes is its specific combination of package decisions, embedded requirements, engagement tracking and a client record; the exact equivalence of those behaviours has not been independently tested across both products.",
-          "The requirement form is a separate document rather than part of the proposal's flow, and the client record does not assemble itself from what the documents already know. You still get a client list, but it is a list you maintain rather than a record that builds itself.",
+          "Bonsai offers proposals, contracts, forms and a client portal. Its public pages do not fully specify whether every requirement answer is embedded in the proposal itself or collected in a separate form, so this comparison does not claim that embedded capture is absent.",
         ],
       },
     ],
@@ -71,7 +71,7 @@ const BASE_COMPETITORS: Competitor[] = [
         heading: "Where the thread thins out",
         paragraphs: [
           "HoneyBook offers interactive files that can combine proposals, service selections, contracts, invoices and forms, and it advertises file tracking. It is not accurate to reduce its proposal experience to a static brochure. The comparison is about product emphasis: HoneyBook organizes a broad lead-to-payment clientflow, while Revercue centers its own proposal-to-record sequence and follow-up view.",
-          "The record is a project file, not a client memory. When the project closes, the history stays attached to the project, and the next job with the same client starts from a new project rather than from a summary of the relationship.",
+          "HoneyBook organizes work around clients and projects and keeps documents and communications in its clientflow. Its public pages do not fully specify how much relationship history is aggregated across repeat projects, so we do not claim that client history is lost when a project closes.",
         ],
       },
     ],
@@ -105,7 +105,7 @@ const BASE_COMPETITORS: Competitor[] = [
         heading: "Where the thread thins out",
         paragraphs: [
           "The setup is the product. Before the thread exists, you are designing it: which form feeds which proposal, which contract follows which package, which email fires when. The first client takes an afternoon of configuration.",
-          "The documents themselves are conventional. A proposal is read and accepted; the package choice and the answers are collected by forms around it rather than inside it, and the client record is a project you manage rather than a memory the product keeps for you.",
+          "Dubsado provides forms, proposals and contracts, with public proposals limited to Premier. Its public plan information does not fully specify whether package selections and form responses are captured as one unified proposal event; we do not claim that capability is absent.",
         ],
       },
     ],
@@ -138,7 +138,7 @@ const BASE_COMPETITORS: Competitor[] = [
       {
         heading: "Where the thread thins out",
         paragraphs: [
-          "The proposal is closer to a document than to a conversation. The client reads it and accepts; the package selection, the embedded question and the record of what they read are not the centre of the design.",
+          "Moxie supports proposals, contracts and forms. Its public product pages do not fully specify per-section engagement tracking or how package choices and requirement answers appear in one unified client record, so this is an unverified product-emphasis distinction rather than a claim that those features are missing.",
           "Moxie positions its Assistant as a broader productivity feature, so it should not be characterized as only a writing tool. The more useful distinction is that Moxie is a project-and-client workspace with an assistant, while Revercue focuses on the state of the client-facing documents and the follow-up they create.",
         ],
       },
@@ -172,8 +172,8 @@ const BASE_COMPETITORS: Competitor[] = [
       {
         heading: "Where the thread thins out",
         paragraphs: [
-          "Breadth has a cost: each module is good at its job, but the connection between them is lighter than in a product built around the connection. A proposal does not necessarily become the client record, and the requirement gathering is a form rather than part of the proposal's flow.",
-          "The tracking and the suggestions are not the centre of the product. You can see whether a document was viewed, but the daily question — what needs a follow-up today, and why — is answered by your own discipline rather than by the workspace.",
+          "Plutio brings projects, proposals, forms, invoices and a client portal into one workspace. Its current pricing page also confirms document tracking and workflow automations; the public material does not fully specify how proposal choices and requirement answers are consolidated into a single client record. We have not verified that as a missing feature.",
+          "Plutio includes document tracking, workflow automations and Plutio Pal AI credits. Its main design is a broad workspace, so the way it prioritizes daily follow-up depends on how you configure projects and workflows; we do not claim that it lacks automation.",
         ],
       },
     ],
@@ -207,7 +207,7 @@ const BASE_COMPETITORS: Competitor[] = [
         heading: "Where the thread thins out",
         paragraphs: [
           "When the CRM is the centre, the document is a step in a process. The client experience of the proposal is functional rather than designed: it is read and accepted, not explored, and the answers a client gives are captured in forms rather than in the document they were reading.",
-          "The thread between proposal, contract, form, invoice and record exists through the deal, but it is a data relationship rather than a client-facing one. The client does not feel one continuous thread; they see separate pages.",
+          "Agiled's official materials describe a connected CRM pipeline, projects, proposals, contracts, forms and invoices. The public documentation does not fully specify the exact client-side proposal experience or how answers are surfaced in a unified client record, so we treat that detail as unverified rather than absent.",
         ],
       },
     ],
@@ -240,8 +240,8 @@ const BASE_COMPETITORS: Competitor[] = [
       {
         heading: "Where the thread breaks",
         paragraphs: [
-          "Nothing connects the pieces. A proposal is a file; the client replies by email with an answer that lives in the inbox; the contract is signed in a different tool; the invoice is a PDF with a bank detail; the record is your memory and a folder tree.",
-          "You cannot see whether the proposal was opened, which package the client was looking at, or how long they spent on the pricing page. The follow-up depends on you remembering, and the history of the relationship is scattered across formats that do not talk to each other.",
+          "The base office apps do not provide a dedicated freelancer clientflow with proposal-level decision tracking out of the box. Google Apps Script, Microsoft Power Automate, marketplace add-ons and e-signature services can connect parts of the workflow, but they require configuration and may not create one consistent client record.",
+          "The base apps do not offer one unified client-facing proposal analytics view by default. Add-ons, e-signature services and administrator audit logs can provide parts of that signal, but they do not automatically create a single proposal-to-invoice follow-up view.",
           "That is not a criticism of the tools. It is the cost of using general-purpose tools for a specific job: they are good at the document and indifferent to the thread.",
         ],
       },
@@ -266,7 +266,7 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The money and the paperwork",
       paragraphs: [
-        "Bonsai follows the invoice further than Revercue does. It adds expense and income tracking, a Bonsai Tax add-on for US filers, and sync to QuickBooks or Xero, so an accountant can be handed a report instead of a folder of PDFs. It is not a full double-entry ledger. That is a genuine advantage for some freelancers, and the reason many choose a suite in the first place.",
+        "Bonsai lists expense and income tracking, tax tools for US filers and accounting integrations such as QuickBooks and Xero. Those are meaningful finance features; whether they replace a full double-entry bookkeeping system depends on the accounting workflow and should be checked with the vendor or accountant.",
         "Revercue stops at the invoice and is explicit about it. The invoice has a payment arrangement, a proof upload and a confirmed state, and then the money lives in whichever tool you already use for money. If you want the accounting inside the same app, Bonsai is the better fit; if you already have an accountant and a bank feed, the extra module is weight you pay for monthly.",
       ],
     },
@@ -335,7 +335,7 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The money and the paperwork",
       paragraphs: [
-        "Moxie handles invoices and payments in the same workspace as the proposals, with a client portal that keeps the paperwork in one place. Moxie lists its Assistant as a product feature and documents it separately in the help centre; this comparison does not assume its capabilities are limited to drafting text.",
+        "Moxie handles invoices and payments in the same workspace as proposals. Its white-label client portal is listed on Pro and Teams, not Starter; the Moxie Assistant is a separate product feature described in its help centre.",
         "Revercue is not positioned as a writing assistant; its primary job is to show what happens after a proposal is sent. The product spends its effort on what happens after the text exists: who opened it, what they chose, what they answered, and what you should do next. If the blank page is your bottleneck, Moxie attacks that problem directly; if the follow-through is your bottleneck, Revercue does.",
       ],
     },
