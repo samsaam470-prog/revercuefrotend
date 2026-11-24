@@ -1459,7 +1459,7 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "When the button is not there",
+        heading: "When the advanced rewrite is unavailable",
         paragraphs: [
           "The helper remains available for common instructions through built-in writing rules when its more capable rewrite is unavailable. You can also edit the text manually at any time; no helper suggestion is applied without your choice.",
           "This is a quiet choice on purpose. A feature that cannot run should not announce itself in the middle of your work. It should be absent, and the work should continue.",
@@ -1492,7 +1492,7 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "The two layers",
+        heading: "The checks",
         paragraphs: [
           "The review uses deterministic checks. It can flag missing brief sections, a missing pricing block or packages, a missing next step or button, a document shorter than 120 words, a paragraph longer than 140 words, a sentence longer than 34 words, repeated text lines, a document not linked to a client record, and contractions when the selected tone is exactly Formal. Section checks run when the brief supplies expected sections.",
           "The review does not query a helper for a prose diagnosis. It does not inspect client history, saved FAQs or packages, winning templates, verify factual claims, assess legal sufficiency, or decide whether a price or timeline is correct.",
@@ -1508,7 +1508,7 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "The three tags",
+        heading: "The issue labels",
         paragraphs: [
           "Client context: the document is not linked to a client record. This is a link-status check, not an analysis of the client's history.",
           "Document structure or writing quality: the review can flag missing brief sections and formal-tone contractions. It does not learn or compare your usual method.",
