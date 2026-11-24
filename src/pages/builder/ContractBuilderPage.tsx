@@ -612,6 +612,7 @@ function ContractCanvas({ id }: { id: string }) {
 
       <DocumentReview
         review={review}
+        publishing={creating}
         onClose={() => setReview(null)}
         onPublishAnyway={() => { void publishReviewed(); }}
       />

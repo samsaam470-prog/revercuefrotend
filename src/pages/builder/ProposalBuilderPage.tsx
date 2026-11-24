@@ -354,6 +354,7 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
 
       <DocumentReview
         review={review}
+        publishing={creating}
         onClose={() => setReview(null)}
         onPublishAnyway={() => { void publishReviewed(); }}
       />

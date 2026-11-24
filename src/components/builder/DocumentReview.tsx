@@ -6,9 +6,10 @@ export interface DocumentReviewProps {
   review: Review | null;
   onClose: () => void;
   onPublishAnyway: () => void;
+  publishing?: boolean;
 }
 
-export function DocumentReview({ review, onClose, onPublishAnyway }: DocumentReviewProps) {
+export function DocumentReview({ review, onClose, onPublishAnyway, publishing = false }: DocumentReviewProps) {
   return (
     <Modal open={Boolean(review)} onClose={onClose} title="The review" size="md">
       {review && (
@@ -40,7 +41,7 @@ export function DocumentReview({ review, onClose, onPublishAnyway }: DocumentRev
             <Button variant="ghost" onClick={onClose}>
               Keep editing
             </Button>
-            <Button onClick={onPublishAnyway}>Publish anyway</Button>
+            <Button onClick={onPublishAnyway} disabled={publishing}>Publish anyway</Button>
           </div>
         </div>
       )}
