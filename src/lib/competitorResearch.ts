@@ -96,14 +96,15 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
     checkedOn: "24 November 2026",
     pricingSource: { label: "Dubsado — official pricing page (checked 24 November 2026)", url: "https://www.dubsado.com/pricing" },
     pricing: [
-      { plan: "Starter", price: "$335/yr billed annually", note: "Unlimited projects and clients, invoicing and payment plans, one active lead capture form, no scheduling, workflows or public proposals" },
-      { plan: "Premier", price: "$525/yr billed annually", note: "Adds scheduling, automated workflows, public proposals, Zapier, bookkeeping integration and unlimited lead capture forms" },
+      { plan: "Starter", price: "$35/mo, or $335/yr", note: "Unlimited projects and clients, invoicing and payment plans, one active lead capture form, no scheduling, workflows or public proposals" },
+      { plan: "Premier", price: "$55/mo, or $525/yr", note: "Adds scheduling, automated workflows, public proposals, Zapier, bookkeeping integration and unlimited lead capture forms" },
     ],
     pricingNote:
-      "The official pricing page checked on 24 November displays annual list prices of $335 for Starter and $525 for Premier. Dubsado's help page confirms three additional users are included; its published extra-user bands are $25/mo for 4–10 users, $45/mo for 11–20 and $60/mo for 21–30, plus $10/mo per additional brand. The 21-day Premier trial requires no card. A monthly plan is referenced by third-party tracking, but the official page text checked here did not expose a monthly price, so it is not presented as a verified vendor price.",
+      "The official Dubsado product information page lists Starter at $35/month or $335/year and Premier at $55/month or $525/year. The help page confirms three additional users are included; extra-user bands are $25/mo for 4–10 users, $45/mo for 11–20 and $60/mo for 21–30, plus $10/mo per additional brand. The 21-day Premier trial requires no card. Legacy subscribers may retain older pricing, so these are the published new-subscriber list prices checked on 24 November 2026.",
     sources: [
       { label: "Dubsado pricing (official)", url: "https://www.dubsado.com/pricing" },
       { label: "Dubsado help centre — choose the right plan", url: "https://help.dubsado.com/en/articles/15920232-choose-the-right-dubsado-plan-for-your-business" },
+      { label: "Dubsado official product information and pricing details", url: "https://www.dubsado.com/llm-info" },
       { label: "Dubsado on Capterra — reviews", url: "https://www.capterra.com/p/206389/Dubsado/reviews/" },
       { label: "Dubsado on G2 — seller profile", url: "https://www.g2.com/sellers/dubsado" },
     ],
@@ -185,10 +186,12 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
       { plan: "Scale", price: "$249/mo, or $199/mo billed yearly", note: "Fifteen seats; accounting intelligence" },
     ],
     pricingNote:
-      "Workspace pricing with 1, 3, 7 and 15 included seats across Starter, Pro, Business and Scale. The official pricing page confirms annual-billing equivalents of $24, $59, $99 and $199 per month; Agiled's own published comparison article lists monthly-billing prices of $29, $69, $129 and $249. Extra seats are listed at $20 per seat per month on Pro and above. The pricing-page FAQ says a workspace can continue on Free after the 14-day trial, but the public plan table does not spell out Free-tier limits; the free-plan status and limits should therefore be treated as incompletely documented rather than assumed away.",
+      "Workspace pricing with 1, 3, 7 and 15 included seats across Starter, Pro, Business and Scale. The official pricing page lists annual-billing equivalents of $24, $59, $99 and $199 per month; Agiled's own freelancer-software comparison article lists monthly-billing prices of $29, $69, $129 and $249. Extra seats are $20 per seat per month on Pro and above. Agiled's pricing FAQ says a workspace can continue on Free after the 14-day trial, while its official product-information page says there is no free plan. Because those official statements conflict and the plan matrix does not list a Free tier, Free availability and limits are unresolved; confirm directly with Agiled before relying on it.",
     sources: [
       { label: "Agiled pricing (official)", url: "https://agiled.app/pricing" },
       { label: "Agiled documentation", url: "https://docs.agiled.app/" },
+      { label: "Agiled official product information and plan availability", url: "https://agiled.app/llm-info" },
+      { label: "Agiled official freelancer software pricing overview", url: "https://agiled.app/blog/software-for-freelancers" },
       { label: "Agiled on Capterra — reviews", url: "https://www.capterra.com/p/206203/Agiled/reviews/" },
       { label: "Agiled on G2 — reviews", url: "https://www.g2.com/products/agiled/reviews" },
     ],
