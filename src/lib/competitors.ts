@@ -89,10 +89,10 @@ const BASE_COMPETITORS: Competitor[] = [
     name: "Dubsado",
     kind: "Client management with automation",
     summary:
-      "Forms, proposals, contracts, invoices and workflow automation. Powerful if you enjoy building the machine; the thread is assembled by you.",
+      "Client management, tasks, time tracking, invoices and workflow automation; Dubsado 3.0 also lists AI email-thread summaries and a meeting notetaker. Public proposals and scheduling are Premier-only.",
     website: "https://www.dubsado.com",
     intro:
-      "Dubsado is a client-management system for small service businesses. Its defining feature is automation: you build workflows that move a client from inquiry to contract to invoice with triggers and templates.",
+      "Dubsado is a client-management system for small service businesses. Its defining feature is automation: you build workflows that move a client from inquiry to contract to invoice with triggers and templates. Its current product information also lists time tracking, task tracking, AI email-thread summaries and a meeting notetaker; confirm plan availability for newer features before purchase.",
     sections: [
       {
         heading: "How the thread works in Dubsado",
@@ -157,10 +157,10 @@ const BASE_COMPETITORS: Competitor[] = [
     name: "Plutio",
     kind: "All-in-one business workspace",
     summary:
-      "Projects, tasks, proposals, invoices, forms and a CRM in one workspace. Broad by design; the thread is one module among many.",
+      "Projects, tasks, proposals, invoices, forms, CRM and client portal, with Plutio Pal / Super Work AI and plan-based AI credits. Broad by design; the client workflow is one part of the workspace.",
     website: "https://www.plutio.com",
     intro:
-      "Plutio is an all-in-one workspace: projects and tasks, proposals, invoices, forms, a CRM, and a client portal. It is built for small teams that want one subscription instead of six.",
+      "Plutio is an all-in-one workspace: projects and tasks, proposals, invoices, forms, a CRM, and a client portal. Its current pricing page includes Plutio Pal / Super Work AI, 500–10,000 AI credits and plan-based workflow-action quotas. It is built for small teams that want one subscription instead of six.",
     sections: [
       {
         heading: "How the thread works in Plutio",
@@ -191,10 +191,10 @@ const BASE_COMPETITORS: Competitor[] = [
     name: "Agiled",
     kind: "All-in-one CRM and operations",
     summary:
-      "CRM, projects, proposals, contracts, invoices and automation for small businesses. Built around the pipeline; the documents follow the deal.",
-    website: "https://www.agiled.app",
+      "CRM, projects, proposals, contracts, invoices, automation and AI workers for small businesses. AI credits and worker limits vary by plan; branded portal and accounting integrations are tier-dependent.",
+    website: "https://agiled.app",
     intro:
-      "Agiled is an all-in-one business platform: a CRM pipeline, projects and tasks, proposals, contracts, invoices, forms and automation. It is aimed at small businesses that want a single system for sales and delivery.",
+      "Agiled is an all-in-one business platform: a CRM pipeline, projects and tasks, proposals, contracts, invoices, forms and automation. Its current plan page lists 500–15,000 AI credits and 1/2/3/unlimited AI workers across Starter, Pro, Business and Scale. Branded portal and accounting integrations are tier-dependent; formal accounting is marked as coming soon.",
     sections: [
       {
         heading: "How the thread works in Agiled",
@@ -225,10 +225,10 @@ const BASE_COMPETITORS: Competitor[] = [
     name: "Google Workspace and Microsoft 365",
     kind: "Documents and email",
     summary:
-      "Docs or Word, Drive or OneDrive, Gmail or Outlook, Forms, Calendar. Free or near-free, universal, and completely manual between the pieces.",
+      "Docs or Word, Drive or OneDrive, Gmail or Outlook, Forms and Calendar, now with Gemini or Copilot features in eligible plans. Universal office suites, but the freelancer workflow still needs to be assembled.",
     website: "https://workspace.google.com",
     intro:
-      "Most freelancers already have the thread — spread across Google Workspace or Microsoft 365. A proposal in Docs or Word, a contract in a PDF, a form in Google Forms or Microsoft Forms, an invoice in a template, and the client history in an inbox.",
+      "Most freelancers already have the thread — spread across Google Workspace or Microsoft 365. A proposal in Docs or Word, a contract in a PDF, a form in Google Forms or Microsoft Forms, an invoice in a template, and the client history in an inbox. Google Workspace adds Gemini in Gmail on Starter and more Workspace apps on Standard/Plus; Microsoft Business Standard and Premium with Copilot add Copilot inside Office apps, while Business Basic includes secure AI chat rather than in-app Copilot.",
     sections: [
       {
         heading: "How the thread works there",
