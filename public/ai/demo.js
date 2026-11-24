@@ -616,7 +616,7 @@
       "LIMITATIONS",
       "- The demo is a simulation with synthetic data; it does not exercise the production API, database or client pages.",
       "- The public site is client-rendered, so product copy could not be read from the app routes themselves.",
-      "- Paid plans are invite-only and Teams is in beta, so no paid flow was tested.",
+      "- Starter, Growth and Scale use checkout and Teams is in beta, so no paid flow was tested.",
       "- The availability of basic suggestions on Free and Starter is documented inconsistently and was not verified.",
       "- No payment, e-signature, email delivery, file upload or on-device helper behaviour was tested."
     ].join("\n");

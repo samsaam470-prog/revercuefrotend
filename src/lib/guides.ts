@@ -1366,7 +1366,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "Teams, and what beta means",
         paragraphs: [
           "Teams carries everything on Scale and adds the handoff: the Handoff Dashboard, the roles, the bulk transfer and the audit log, with five hundred active documents and thirty-six months of retention. It is in beta, which means the team features are being tested with a small group and will change as that group uses them.",
-          "Joining the beta is for the team features. Starter, Growth and Scale are the paid solo plans, available via checkout. The beta is an invitation, not a checkout.",
+          "Joining the beta is for the team features. Starter, Growth and Scale are the paid solo plans, available via checkout. Joining the beta is a sign-up with your email, not a checkout.",
         ],
       },
       {
@@ -1374,7 +1374,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "Starter, Growth and Scale are now publicly available via checkout. Teams is in beta: you join with your email and the team reaches out when a spot opens.",
           "Downgrades take effect at the end of the cycle. Documents above the new limit are archived rather than deleted, so the links close but nothing is lost. If you go from a hundred live documents to twenty, eighty of them move to the archive and the archive allowance of the lower plan applies. That is the moment the archive limit matters most, and it is why the archive is counted separately.",
-          "Nothing on the pricing page is a trial. Free is free forever, with limits. The paid plans are the same product with more room and more intelligence, and the invitation is how the team keeps the room honest.",
+          "Nothing on the pricing page is a trial. Free is free forever, with limits. The paid plans are the same product with more room and more intelligence, and the plan limits keep the room honest.",
         ],
       },
       {
@@ -1382,7 +1382,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "The thread is the same on every plan. The proposal, the contract, the form, the invoice and the client record work identically; the client pages look the same; the interactive link is the interactive link. The free plan is not a demo with the product switched off. The only differences are quantity, retention, storage and the depth of the suggestions.",
           "That is a deliberate shape. A freelancer on Free can send a proposal to a real client this afternoon and look exactly as professional as a freelancer on Scale. The upgrade is about how much you can keep and how much the product can learn from you, not about whether the work is good enough to send.",
-          "The last thing worth saying about plans is that the limits are honest in both directions. Nothing expires because a timer ran out on a plan you never chose, nothing is charged without an invitation, and nothing you have written is held hostage. If you stop paying, the documents archive and the record stays. The product is trying to be the cheapest part of the relationship, and the pricing page is written to be read once, not re-checked every month.",
+          "The last thing worth saying about plans is that the limits are honest in both directions. Nothing expires because a timer ran out on a plan you never chose, nothing is charged without a checkout you complete yourself, and nothing you have written is held hostage. If you stop paying, the documents archive and the record stays. The product is trying to be the cheapest part of the relationship, and the pricing page is written to be read once, not re-checked every month.",
           "If you only remember one line from this guide, remember the order: first the thread, then the room it needs. Start on Free, send a real proposal, watch where the limit actually bites — active documents, storage or retention — and choose the plan that answers that specific bite. Paying for room you do not use is the only genuinely bad plan decision there is.",
         ],
       },
