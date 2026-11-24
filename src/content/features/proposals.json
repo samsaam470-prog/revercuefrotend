@@ -62,6 +62,17 @@
         "Before you publish, read the proposal on a phone as well as a laptop. Most clients open proposals on mobile between meetings, so check that the packages stack cleanly, the FAQs open, and the decision buttons are easy to find. A proposal that is hard to read on a small screen loses decisions it should have won.",
         "After you share, check the activity on the proposal the next working day. A client who has opened the link but not chosen a package is a signal to follow up with a specific question, not a generic check-in. Refer to the part of the proposal they are most likely stuck on."
       ]
+    },
+    {
+      "heading": "How tracking works on each plan",
+      "paragraphs": [
+        "Free records whether a proposal was opened, as a yes or no. That is enough to know the link reached the client, but not when or how many times.",
+        "Starter adds an opened-at timestamp, so you can see when the client first opened the proposal and whether it was that morning or a week later.",
+        "Growth adds an estimated time spent on the proposal and the button clicks, such as the package selection and the questions they opened. The time is an estimate, so read it as a guide to attention rather than an exact figure.",
+        "Scale adds exact time, a full session timeline, deselect and typing signals, and the behavioural signals that feed the interest level. You can see that the client returned, how long they stayed on each package, and whether they answered a question or only read it.",
+        "Teams is in beta and carries everything on Scale, so the same tracking applies to documents shared by a team.",
+        "On every plan, raw tracking events are reduced to a time-spent total after five days and the individual events are deleted."
+      ]
     }
   ],
   "includes": [

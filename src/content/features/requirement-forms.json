@@ -57,6 +57,17 @@
         "Write each question as if the client has never worked with a freelancer before. Replace internal jargon with plain words, and give an example where the answer format is unusual. A clear question gets a usable answer the first time, which saves a round of follow-up.",
         "Use the file upload type for anything the client already has, such as a logo, brand guidelines, a spreadsheet or a list of existing content. Collecting those files at intake is faster than waiting for them after the project is under way."
       ]
+    },
+    {
+      "heading": "How tracking works on each plan",
+      "paragraphs": [
+        "Free records whether the form was opened, as a yes or no. You can see that the client reached it, but not whether they finished it.",
+        "Starter adds an opened-at timestamp, so you know when the client started and can compare that with when you sent the form.",
+        "Growth adds an estimated time spent on the form and button clicks, such as which choice options were selected or whether the client reached the file upload step. The time is an estimate.",
+        "Scale adds exact time, the session timeline, per-question time and a not-submitted state. Per-question time shows which question took longest, which often points to a question that needs rewording. The not-submitted state shows a client who opened the form but did not finish it. On Scale, a reminder suggestion appears when a form has been opened and not submitted after three days.",
+        "Teams is in beta and carries everything on Scale.",
+        "On every plan, raw events are reduced to a time-spent total after five days. Submitted answers are not part of that reduction: they are the project brief and stay with the project."
+      ]
     }
   ],
   "includes": [
