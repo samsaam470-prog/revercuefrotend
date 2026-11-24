@@ -1215,6 +1215,16 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
+        heading: "Native integrations we are looking to introduce",
+        paragraphs: [
+          "Revercue does not connect to other tools yet. There is no public API, no SDK, no webhook system and no integrations directory today. Information moves in and out through the exports that exist: clients can be exported as a CSV file, and each document can be downloaded as a PDF.",
+          "The integrations we are evaluating are native connections into the tools freelancers and small teams already use. The categories under evaluation are accounting, calendar and payment tools. The aim is to avoid retyping the same details: a paid invoice could be matched to the bookkeeping record, and a follow-up date could appear in the calendar you already use.",
+          "No specific integration is promised, and the categories above are not a commitment. We have not chosen which products to build against first, and we have not set a date for any of them. When an integration ships, it will be announced on the changelog and in this guide, with its scope stated plainly, including what it reads from Revercue and what it writes back.",
+          "Until then, do not build your workflow around an integration that does not exist. Keep your accounting software as the record for your books, and use the CSV export when you need to move client details into another system.",
+          "If a particular connection would change how you work, tell us through the contact form. Requests help us understand what matters, but they do not guarantee a place on the list.",
+        ],
+      },
+      {
         heading: "Become a Teams beta partner",
         paragraphs: [
           "If your team wants to help shape the Teams experience, apply to become a Teams beta partner.",
