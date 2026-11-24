@@ -1,0 +1,567 @@
+{
+  "proposal-software": {
+    "slug": "proposal-software",
+    "eyebrow": "Proposal software for freelancers",
+    "title": "Send proposals clients can actually respond to.",
+    "intro": "Create a clear, branded proposal with packages, FAQs and client questions. Share one link, see how the client responds, and keep the next step connected to the same client record.",
+    "summary": "Revercue is proposal software for freelancers that turns a proposal into an interactive, shareable page. Clients can compare packages, ask questions and approve or decline from the page without creating a login. When a client accepts, the same workspace lets you continue into a contract, a requirement form or an invoice without re-entering their details.",
+    "sections": [
+      {
+        "heading": "Why static proposal files stall deals",
+        "paragraphs": [
+          "A proposal sent as an attachment usually starts a chain of emails. The client asks what a package includes, you answer in one message, they ask about revisions in another, and by the time a decision is made nobody is certain which version was agreed. The scope lives in one thread, the pricing lives in a PDF and the client's questions sit in a separate inbox.",
+          "Freelancers feel this most on smaller projects, where the proposal is one of several documents and there is no time to run a sales operation. A structured proposal that a client can review on one page shortens the decision and keeps the record intact from the first message."
+        ]
+      },
+      {
+        "heading": "How an interactive proposal works",
+        "paragraphs": [
+          "In Revercue you build a proposal from a template or from scratch. You describe the work, add one or more packages that list what each one includes, and add FAQs that answer the questions clients usually ask before committing. Client questions can be placed beside the decision they affect, so the answer appears exactly where the client needs context.",
+          "You then share a single link. The client-facing page opens without a client login, so there is no account to create before the client can review the offer. When they choose a package, ask a question or respond, that activity is connected to the proposal and the client record, so it is not lost in an inbox."
+        ]
+      },
+      {
+        "heading": "Writing a proposal that gets a yes",
+        "paragraphs": [
+          "Structure matters more than length. Open with the outcome the client wants, state the scope in plain language, then present the packages side by side so the difference between them is obvious. Keep each package focused on deliverables, timeline and price, and move longer explanations into FAQs. Two or three packages are usually enough, because more options tend to slow the decision.",
+          "Reuse the client's own words where you can. If they described the problem during a discovery call, reflect that language in the opening paragraph. A proposal that reads as if it was written for this client is far more likely to get a response than a generic template with a name swapped in."
+        ]
+      },
+      {
+        "heading": "From accepted proposal to delivered work",
+        "paragraphs": [
+          "Acceptance is where many freelancers lose track of their paperwork. Revercue keeps the proposal attached to the client record, so the next step can be a contract that confirms scope and terms, a requirement form that collects the materials you need, or an invoice for the first payment. Each document stays linked to the same client, so you are not retyping names, project titles or agreed prices.",
+          "This is the practical benefit of a connected proposal tool. The information that was agreed in the proposal is the same information that appears in the contract and the invoice, which reduces the chance of a mismatch that would delay payment."
+        ]
+      },
+      {
+        "heading": "Common proposal mistakes that cost clients",
+        "paragraphs": [
+          "The most common mistake is writing a proposal that describes the freelancer's process rather than the client's outcome. A page full of hours, phases and tools can be accurate and still fail to answer the question the client is really asking, which is what they will get and why it matters to them.",
+          "Another frequent problem is hiding the price. Clients who cannot tell what a package costs often reply with a request for a call, which adds a week to the decision. Showing the price next to each package, with a clear note on what is excluded, usually moves the conversation forward faster.",
+          "Finally, many proposals have no clear next step. End every proposal with one action the client can take, such as choosing a package or asking a question on the page. A proposal with a single obvious action is easier to say yes to than one that leaves the decision open."
+        ]
+      }
+    ],
+    "features": [
+      "Build proposals with editable packages and reusable templates",
+      "Add FAQs and client questions directly where clients need context",
+      "Share a branded link instead of sending a static PDF",
+      "See proposal activity and keep the conversation in the client record",
+      "Continue into a contract, requirement form or invoice"
+    ],
+    "steps": [
+      {
+        "title": "Build",
+        "copy": "Start from a template and shape the packages, scope and FAQs around this specific project and client."
+      },
+      {
+        "title": "Share",
+        "copy": "Send one client-facing link from your own email or messaging account. The client reviews it without signing in."
+      },
+      {
+        "title": "Continue",
+        "copy": "Use the response to move the same client thread into a contract, requirement form or invoice."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Can clients choose between packages?",
+        "answer": "Yes. Add packages to a proposal so the client can compare them on the page and select the option that fits their budget and goals."
+      },
+      {
+        "question": "Do clients need a Revercue account?",
+        "answer": "No. Client-facing proposal pages are designed to open from a share link without a client login, so the client can respond straight away."
+      },
+      {
+        "question": "What happens after a proposal is accepted?",
+        "answer": "You can continue the workflow with a contract, a requirement form or an invoice, and all of those documents stay connected to the same client record."
+      },
+      {
+        "question": "Can I reuse proposal templates?",
+        "answer": "Yes. Templates let you keep your standard package structure, scope wording and FAQs, so each new pitch starts from a tested base rather than a blank page."
+      },
+      {
+        "question": "Is a proposal the same as a contract?",
+        "answer": "No. A proposal sets out the offer and invites a decision. A contract is a separate document that confirms scope, payment terms, revisions and cancellation details, and it can be prepared in Revercue when you want those terms signed."
+      },
+      {
+        "question": "How long should a proposal be?",
+        "answer": "Long enough to answer the client's questions and no longer. Most freelance proposals work best as a single focused page with packages, a short scope summary and FAQs for the details, rather than a long document that the client has to read in full."
+      }
+    ],
+    "related": [
+      {
+        "label": "Freelance client management",
+        "to": "/solutions/client-management"
+      },
+      {
+        "label": "Proposal and invoice workflow",
+        "to": "/solutions/proposal-and-invoice-tool"
+      },
+      {
+        "label": "Invoice and contract software",
+        "to": "/solutions/invoice-contract-software"
+      }
+    ],
+    "key_facts": [
+      "Revercue proposals are shared as a single link that clients can open without a Revercue account.",
+      "Each proposal can include multiple packages, FAQs and client questions on the same page.",
+      "Accepted proposals can continue into a contract, a requirement form or an invoice for the same client.",
+      "Proposal templates can be reused across clients to keep scope wording and packages consistent.",
+      "Proposal activity is connected to the client record rather than kept in a separate inbox."
+    ]
+  },
+  "client-management": {
+    "slug": "client-management",
+    "eyebrow": "Freelance client management software",
+    "title": "Keep every client, conversation and next step together.",
+    "intro": "A practical client management workspace for freelancers: client records, communication history, follow-ups, proposals, contracts, forms and invoices connected in one place.",
+    "summary": "Revercue is client management software built for freelancers. It keeps each client's details, communication history, notes, documents and follow-ups in one connected record, so you can see the full picture of a relationship before you send the next message. Follow-ups that are due can surface on your dashboard.",
+    "sections": [
+      {
+        "heading": "Why freelance client records fall apart",
+        "paragraphs": [
+          "Most freelancers start with a spreadsheet, an inbox and a folder of files. That works for two or three clients. At ten or twenty, the same person appears under two spellings, the latest contract is an attachment buried months back in email, and nobody remembers which follow-up was promised. The cost is more than admin time. Missed follow-ups and lost context make a client feel they are dealing with someone disorganised.",
+          "A client record only helps if it stays current without extra effort. The most useful record is one that grows as you work, rather than one you have to update separately after every conversation."
+        ]
+      },
+      {
+        "heading": "One record for each client relationship",
+        "paragraphs": [
+          "Each client in Revercue has a record that holds their details, the projects you are working on and the documents attached to them. Proposals, contracts, requirement forms and invoices created for that client are linked to the same record, so the history of the relationship is visible in one place rather than spread across tools.",
+          "The communication log captures the interactions that matter, and notes let you record the things that do not belong in a formal document, such as a preferred contact method, the decision maker in a company or a promise you made on a call. That context is what makes the next conversation feel informed."
+        ]
+      },
+      {
+        "heading": "Following up without relying on memory",
+        "paragraphs": [
+          "Follow-ups are where client relationships are won or lost. Revercue surfaces follow-ups that are due on your dashboard, so a proposal that has waited a week or an invoice that is still unpaid is visible without a search through old messages. Because the follow-up sits next to the document it concerns, you can act on it in context.",
+          "Regular, well-timed follow-up also protects your cash flow. When you can see which clients are waiting on a response, which contracts are unsigned and which invoices are outstanding, you can prioritise your time instead of reacting to whichever message arrived last."
+        ]
+      },
+      {
+        "heading": "Who this is for",
+        "paragraphs": [
+          "Revercue's client management is designed for freelancers and independent service providers who run client work themselves. It is not an enterprise sales platform with complex pipelines and forecasting. It is a working workspace for knowing who your clients are, what you have agreed, what you have sent and what needs attention next.",
+          "If you are moving from spreadsheets to a dedicated tool, start by creating records for your active clients only. Add past work as you need it. Starting small keeps the workspace useful from the first day rather than becoming a data-entry project."
+        ]
+      },
+      {
+        "heading": "Setting up a client workspace that you will actually keep up",
+        "paragraphs": [
+          "A client management system only works if it fits into the day. Set a simple rule: every new enquiry gets a client record the same day, and every conversation that changes the project is logged as soon as it ends. This takes a few minutes each time and saves hours of reconstruction later.",
+          "Keep the record focused on what you need to act on. Contact details, the current project, the documents that govern the work and the next follow-up are the core fields. Long biographies and every email address a client has ever used add noise without helping you decide what to do next.",
+          "Review your follow-ups at the start of each working day. A short review of what is due, what is waiting on the client and what is waiting on you turns the record from a filing cabinet into a working tool."
+        ]
+      }
+    ],
+    "features": [
+      "Keep client details and project documents in one record",
+      "See communication history and the next step in context",
+      "Track proposals, contracts, requirement forms and invoices",
+      "Surface follow-ups due from the dashboard",
+      "Add notes and keep a clearer history of each client relationship"
+    ],
+    "steps": [
+      {
+        "title": "Add the client",
+        "copy": "Create or open a client record before you start the project, including the contact details and company name you will use on documents."
+      },
+      {
+        "title": "Work in context",
+        "copy": "Create proposals, contracts, forms and invoices for that client so the record grows naturally with the project."
+      },
+      {
+        "title": "Follow through",
+        "copy": "Use the communication log, notes and due follow-ups to keep work moving and to know exactly where each client stands."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is Revercue a CRM for freelancers?",
+        "answer": "Yes. Revercue includes client records, a communication log, notes and follow-up visibility, connected to its proposal, contract, form and invoice tools."
+      },
+      {
+        "question": "Does the client record update from documents?",
+        "answer": "The client record is designed to collect the documents and activity created in the connected workflow, so the history builds up as you send proposals, contracts and invoices."
+      },
+      {
+        "question": "Can I manage proposals and invoices in the same place?",
+        "answer": "Yes. Proposals and invoices are part of the same client workflow rather than separate tools, so both appear on the client record."
+      },
+      {
+        "question": "Can I add notes to a client?",
+        "answer": "Yes. Notes sit on the client record, so context that does not belong in a document stays with the relationship over time."
+      },
+      {
+        "question": "Is this a sales pipeline tool?",
+        "answer": "Not in the enterprise sense. Revercue focuses on the working relationship with each client and the documents connected to it, rather than forecasting or multi-stage sales pipelines."
+      },
+      {
+        "question": "Can I use Revercue for clients I have already worked with?",
+        "answer": "Yes. You can add existing clients and link new documents to them as you work. Start with your active clients so the workspace is useful immediately, then add past work when it is needed."
+      }
+    ],
+    "related": [
+      {
+        "label": "All-in-one freelancer business tools",
+        "to": "/solutions/freelance-business-management"
+      },
+      {
+        "label": "Proposal software",
+        "to": "/solutions/proposal-software"
+      },
+      {
+        "label": "Proposal and invoice workflow",
+        "to": "/solutions/proposal-and-invoice-tool"
+      }
+    ],
+    "key_facts": [
+      "Each Revercue client record holds contact details, projects, documents, notes and communication history.",
+      "Proposals, contracts, requirement forms and invoices for a client are linked to the same record.",
+      "Follow-ups that are due can be surfaced on the Revercue dashboard.",
+      "Revercue is built for freelancers and independent providers, not enterprise sales pipelines.",
+      "Notes capture context that does not belong in a formal document."
+    ]
+  },
+  "invoice-contract-software": {
+    "slug": "invoice-contract-software",
+    "eyebrow": "Invoice and contract software for freelancers",
+    "title": "Move from agreed scope to signed terms and payment.",
+    "intro": "Create client-ready contracts and invoices in the same workspace as your proposals. Keep scope, signatures, payment instructions and client history connected to the project.",
+    "summary": "Revercue is invoice and contract software for freelancers that keeps both documents in the same client workflow as your proposals. You can prepare a contract covering scope, payment terms, revisions and cancellation, capture a typed-name signature with explicit consent and a recorded date, then issue an invoice with line items, tax, totals and payment instructions.",
+    "sections": [
+      {
+        "heading": "Why agreement and payment get separated",
+        "paragraphs": [
+          "Many freelancers agree a project in one place, sign terms in another and send invoices from a third tool. Each handoff means retyping the client's name, the project title, the agreed price and the payment terms. Errors creep in. A figure on the invoice does not match the proposal, or the payment terms in the contract are not the ones the invoice repeats, and that is often where payment gets delayed.",
+          "Keeping the agreement, the signature and the invoice in one workflow removes most of those handoffs. The same client record and the same agreed scope feed every document."
+        ]
+      },
+      {
+        "heading": "Contracts that match the agreed work",
+        "paragraphs": [
+          "A Revercue contract is built around the terms that most often cause disagreements: the scope of work, the payment terms, the number of revisions included and the cancellation details. Because the contract is created for the same client as the proposal, the scope you presented is the scope you confirm.",
+          "Clients review the contract on a shared page and sign by typing their full name. The signature step includes an explicit consent tick, and the date is recorded. Revercue is clear about the limits of this. It is a typed-name acceptance record, not a qualified electronic signature or an identity-verification service. For many freelance agreements that is a practical level of formality, but if your work requires qualified signatures, use a dedicated signing service instead."
+        ]
+      },
+      {
+        "heading": "Invoices that are easy to pay",
+        "paragraphs": [
+          "Invoices in Revercue are built with line items, tax and totals, so the figures are calculated rather than typed by hand. You can add the payment instructions you normally use. An invoice can carry an external payment link or your account details. Where a client needs to show proof of payment, an optional proof upload lets them attach it to the invoice.",
+          "The most common cause of slow payment in freelance billing is a client who has to ask how to pay. Put the method, the reference and the due date in the invoice itself, so the next step is obvious when the client opens it."
+        ]
+      },
+      {
+        "heading": "Keeping the paper trail together",
+        "paragraphs": [
+          "Contract signature, invoice status and payment confirmation sit alongside the proposal and communication history for the client. When you check on a project, you can see what was agreed, what was signed and what has been billed without opening several tools.",
+          "Invoice status is displayed on the document, and you can confirm payment once it arrives, which records the revenue in Revercue's tracker. That keeps the financial record for each client tied to the work that produced it."
+        ]
+      },
+      {
+        "heading": "What to check before a client signs or pays",
+        "paragraphs": [
+          "Before sending a contract, read the scope aloud as if you were the client. Check that the deliverables, the number of revisions, the payment schedule and the cancellation terms describe the same project as the proposal. A small mismatch here is the most common source of disagreement later in a project.",
+          "Before sending an invoice, check the client's legal or company name, the amount and tax, the currency, the due date and the payment instructions. Confirm that the payment reference the client needs is written on the invoice itself. An invoice that is easy to check is paid sooner.",
+          "Keep copies of signed contracts and sent invoices as part of the client record. If a dispute or a question arises months later, a clear, dated trail is far more useful than memory. This is general good practice rather than legal advice, so for complex terms it is worth asking a qualified professional to review them."
+        ]
+      }
+    ],
+    "features": [
+      "Create contracts with scope, payment terms, revisions and cancellation details",
+      "Capture a typed-name signature with explicit consent and a recorded date",
+      "Generate invoices with line items, tax and totals",
+      "Provide a payment link or account details, with optional proof upload",
+      "Keep document activity connected to the client communication log"
+    ],
+    "steps": [
+      {
+        "title": "Agree the work",
+        "copy": "Start with a proposal that sets out the package and the scope you and the client have discussed."
+      },
+      {
+        "title": "Confirm the terms",
+        "copy": "Prepare a contract covering scope, payment terms, revisions and cancellation, then send it to the client for review and signature."
+      },
+      {
+        "title": "Request payment",
+        "copy": "Create an invoice with line items, tax and the payment method and instructions you use, then track its status until it is paid."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does Revercue support electronic signatures?",
+        "answer": "It supports a typed full name with an explicit consent tick and a recorded date. It is not a qualified electronic signature or an identity-verification service, so it may not meet every legal requirement."
+      },
+      {
+        "question": "Can I add a payment link to an invoice?",
+        "answer": "Yes. An invoice can use an external payment link, or your account details with an optional proof upload for clients who pay by bank transfer."
+      },
+      {
+        "question": "Are contracts and invoices connected to the client?",
+        "answer": "Yes. They belong to the same client workflow and communication history, so you can see every document for that client in one place."
+      },
+      {
+        "question": "Do I need a contract for every project?",
+        "answer": "Not every project does. Small, low-risk jobs may only need a proposal and an invoice. For larger work, a contract that sets out scope, payment terms and revisions reduces disagreement later. This is general information, not legal advice."
+      },
+      {
+        "question": "Can I see whether an invoice has been paid?",
+        "answer": "Revercue shows invoice status. When payment arrives you can confirm it, which records the revenue in the tracker against that client."
+      },
+      {
+        "question": "Can a client dispute an invoice after it has been sent?",
+        "answer": "A client may question an invoice for many reasons. Because each invoice is linked to the proposal and contract for that client, you can quickly show what was agreed and what was delivered, which helps resolve questions faster."
+      }
+    ],
+    "related": [
+      {
+        "label": "Proposal software",
+        "to": "/solutions/proposal-software"
+      },
+      {
+        "label": "Client management software",
+        "to": "/solutions/client-management"
+      },
+      {
+        "label": "Proposal and invoice workflow",
+        "to": "/solutions/proposal-and-invoice-tool"
+      }
+    ],
+    "key_facts": [
+      "Revercue contracts can cover scope of work, payment terms, revisions and cancellation details.",
+      "Clients sign contracts by typing their full name with an explicit consent tick and a recorded date.",
+      "Revercue signatures are not a qualified electronic signature or identity-verification service.",
+      "Invoices include line items, tax and totals, with payment instructions added by the freelancer.",
+      "An invoice can carry an external payment link or account details, with an optional proof upload."
+    ]
+  },
+  "freelance-business-management": {
+    "slug": "freelance-business-management",
+    "eyebrow": "All-in-one business management software for freelancers",
+    "title": "Run the client-workflow side of your freelance business in one place.",
+    "intro": "Revercue connects proposals, contracts, requirement forms, invoices and client management, helping independent professionals spend less time moving information between tools.",
+    "summary": "Revercue is an all-in-one client workflow tool for freelancers. It connects interactive proposals, contracts, requirement forms, invoices and client records so you can handle work from the first proposal through to payment in one product. It focuses on client operations and is not a replacement for accounting, tax, time-tracking or project-delivery software.",
+    "sections": [
+      {
+        "heading": "What an all-in-one freelance workflow means",
+        "paragraphs": [
+          "The all-in-one scope in Revercue is deliberately focused. It covers the client-facing steps of freelance work: presenting an offer, agreeing terms, gathering project requirements, billing and keeping each relationship organised. These steps depend on the same information, which is why connecting them removes so much repetitive admin.",
+          "It does not try to be every tool. Accounting, tax, time tracking and project management are separate concerns, and many freelancers keep specialist software for them. The value of Revercue is that the documents a client sees and signs stay consistent with each other and with the client record."
+        ]
+      },
+      {
+        "heading": "Requirement forms that gather what you need",
+        "paragraphs": [
+          "Projects often stall while you wait for materials, brand assets, access details or answers to a brief. Revercue's requirement forms are built to collect this information before the work starts. Forms are adaptive, so the questions can respond to earlier answers, and submitted responses are kept with the project so you can find them later.",
+          "Sending the form as part of the agreed workflow, rather than as a separate email after the contract is signed, means the client understands from the start what you will need and when."
+        ]
+      },
+      {
+        "heading": "A typical project, end to end",
+        "paragraphs": [
+          "A freelancer might send a proposal with two packages, see the client choose one, send a contract for the chosen package and collect a typed-name signature, use a requirement form to gather assets, and then issue an invoice with payment instructions. Each step builds on the one before, so at no point do you rebuild the project from memory or from scattered notes.",
+          "Because each document belongs to the same client record, the history reads as one story: what was offered, what was agreed, what was provided and what was billed."
+        ]
+      },
+      {
+        "heading": "Building a steadier business",
+        "paragraphs": [
+          "A predictable client workflow is one of the biggest advantages for freelancers who want to grow without hiring an administrator. When proposals, contracts, forms and invoices share one client record, you can take on more clients without the quality of your admin slipping.",
+          "Revercue is built for that stage of a freelance business: enough structure to stay organised, without the overhead of an enterprise system. You can start with the tools you need today and add others as the business grows."
+        ]
+      },
+      {
+        "heading": "How to decide whether you need an all-in-one workflow",
+        "paragraphs": [
+          "An all-in-one workflow makes most sense when the same client information is being typed into more than one tool each week. If you find yourself copying names, prices and project titles from a proposal into a contract, then into an invoice, the time is worth reclaiming. If you only send one or two documents per client, a single tool may be enough.",
+          "Consider how often you would have to look things up. A connected record helps most when you return to a client months later and need to see what was agreed, what was sent and what was paid. That is where separate tools tend to break down.",
+          "Think about the handoff from sales to delivery as well. When the proposal, the requirement form and the invoice all live on one client record, the transition from winning work to starting it is much smoother, and the client experiences a consistent process from start to finish."
+        ]
+      }
+    ],
+    "features": [
+      "Create and share interactive proposals",
+      "Prepare contracts and collect client signatures",
+      "Collect project requirements with adaptive forms",
+      "Send invoices and record payment status",
+      "Manage client records, communication and follow-ups"
+    ],
+    "steps": [
+      {
+        "title": "Win the work",
+        "copy": "Send a proposal with packages, FAQs and client questions, and let the client compare options on one page."
+      },
+      {
+        "title": "Set up the project",
+        "copy": "Confirm terms in a contract and collect requirements through forms, without switching between tools."
+      },
+      {
+        "title": "Get paid and stay organised",
+        "copy": "Invoice the client, track the status and keep the full history in the same client record."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What does all-in-one mean in Revercue?",
+        "answer": "It means the core client workflow, including proposals, contracts, requirement forms, invoices and client management, is connected in one product."
+      },
+      {
+        "question": "Does Revercue replace accounting software?",
+        "answer": "No. Revercue provides invoice creation and payment tracking for client work. It should not be treated as a full accounting or tax platform."
+      },
+      {
+        "question": "Who is Revercue designed for?",
+        "answer": "It is designed for freelancers and independent service providers who manage proposals, client agreements, project requirements and invoices themselves."
+      },
+      {
+        "question": "Does Revercue handle time tracking?",
+        "answer": "No. Revercue focuses on proposals, contracts, requirement forms, invoices and client management. Time tracking and project delivery are outside its scope, so use your preferred tools for those."
+      },
+      {
+        "question": "Can I start with just one tool?",
+        "answer": "Yes. You can begin with proposals or invoices and add contracts, forms and client management as your workflow needs them."
+      },
+      {
+        "question": "Will Revercue work alongside my accounting software?",
+        "answer": "Yes. Many freelancers keep dedicated accounting software for bookkeeping and tax. Revercue handles the client-facing documents and payment tracking, and you can use your accounting software for the records your accountant needs."
+      }
+    ],
+    "related": [
+      {
+        "label": "Client management",
+        "to": "/solutions/client-management"
+      },
+      {
+        "label": "Invoice and contract tools",
+        "to": "/solutions/invoice-contract-software"
+      },
+      {
+        "label": "Proposal software",
+        "to": "/solutions/proposal-software"
+      }
+    ],
+    "key_facts": [
+      "Revercue connects proposals, contracts, requirement forms, invoices and client management in one product.",
+      "Revercue focuses on the client-facing workflow from first proposal through documents and payment.",
+      "Revercue is not a replacement for accounting, tax, time-tracking or project-delivery software.",
+      "Requirement forms are adaptive and their responses are kept with the project.",
+      "Freelancers can start with one tool, such as proposals or invoices, and add others later."
+    ]
+  },
+  "proposal-and-invoice-tool": {
+    "slug": "proposal-and-invoice-tool",
+    "eyebrow": "Proposal and invoice tool for freelancers",
+    "title": "Connect the proposal you send to the invoice that follows.",
+    "intro": "Stop rebuilding the same client and project details in separate tools. Create a proposal, move the agreed work forward and prepare an invoice in the same connected client workflow.",
+    "summary": "Revercue is a proposal and invoice tool for freelancers that keeps both documents on the same client record. Build a proposal with packages, move the agreed work forward with a contract or requirement form when the project needs one, then create an invoice from the same workspace without re-entering client or project details.",
+    "sections": [
+      {
+        "heading": "The admin gap between winning and being paid",
+        "paragraphs": [
+          "Between the moment a client says yes and the moment payment arrives, freelancers spend a surprising amount of time on admin. The client's name and company details are copied into a new document. The agreed package is checked against the original proposal. Line items are recreated, and payment instructions are typed again, sometimes with a small change. Each repetition is a chance for an error that delays payment.",
+          "Revercue is designed to close that gap by keeping the proposal and the invoice on the same client record, so the information flows forward rather than being copied."
+        ]
+      },
+      {
+        "heading": "Proposals that set up the invoice",
+        "paragraphs": [
+          "A proposal that is structured well already contains most of what the invoice needs. Packages define the deliverables and prices, client questions surface the details that matter, and the chosen package is recorded against the client. When you create the invoice from the same workspace, the project context is already there, so the invoice reflects what was agreed rather than your memory of it.",
+          "This matters most when a project has several stages. The invoice for a deposit, a milestone or a final balance can be traced back to the proposal that set out the work, which makes the billing easier to explain if the client asks questions."
+        ]
+      },
+      {
+        "heading": "Contracts and forms when the project needs them",
+        "paragraphs": [
+          "Not every project needs a contract, but larger or riskier work benefits from one. Revercue lets you add a contract between the proposal and the invoice, to confirm scope, payment terms, revisions and cancellation details. Requirement forms can gather the information you need before you begin.",
+          "These steps are optional. A simple project can go straight from an accepted proposal to an invoice, while a bigger engagement can include the full sequence. Either way, the documents stay linked to the same client."
+        ]
+      },
+      {
+        "heading": "Tracking the proposal-to-payment history",
+        "paragraphs": [
+          "Keeping the whole sequence in one place lets you answer the questions that come up during a project: what did we agree, what did I send and what has been paid? Invoice status is shown on the document, and you can confirm payment to record revenue in Revercue's tracker, so the financial picture for each client stays tied to the work that produced it.",
+          "When a client asks about an invoice months later, you can open the record and see the proposal, the agreed package and the payment history together, rather than searching through old emails."
+        ]
+      },
+      {
+        "heading": "Turning an accepted proposal into a clean invoice",
+        "paragraphs": [
+          "An invoice is only as clear as the agreement behind it. Before invoicing, confirm which package the client accepted, whether any add-ons were agreed in writing, and whether the payment is a deposit, a milestone or a final balance. Reflecting these distinctions in the invoice avoids most billing questions.",
+          "Use line items that match the package names the client saw in the proposal. If the proposal offered a Standard and a Premium package, the invoice should show the chosen package by that name rather than a generic description. Familiar wording makes the invoice easy to approve.",
+          "Add the due date and the payment method at the top of the invoice, not buried at the bottom. Clients often look for these first, and a clear invoice is more likely to be paid on time."
+        ]
+      }
+    ],
+    "features": [
+      "Create proposals with packages and client questions",
+      "Keep the agreed project context with the client record",
+      "Prepare a contract before work begins when needed",
+      "Create invoices with line items, tax and payment instructions",
+      "Keep the proposal-to-payment history visible in one workflow"
+    ],
+    "steps": [
+      {
+        "title": "Present the offer",
+        "copy": "Build a proposal that explains the work and the available packages, then share it as a single client link."
+      },
+      {
+        "title": "Confirm the project",
+        "copy": "Record the agreement and, if needed, collect requirements and terms before work starts."
+      },
+      {
+        "title": "Send the invoice",
+        "copy": "Prepare the invoice from the same client workspace, with line items, tax and payment instructions, and track its status."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Can I create both proposals and invoices?",
+        "answer": "Yes. Revercue includes proposal and invoice builders in the same workspace, both linked to the same client."
+      },
+      {
+        "question": "Do I need to create a contract too?",
+        "answer": "Not every project needs one. Revercue includes a contract builder for when you want to confirm scope and terms in writing before invoicing larger work."
+      },
+      {
+        "question": "Can I track invoice payment?",
+        "answer": "Yes. Revercue displays invoice status, and you can confirm payment so the revenue is recorded in the tracker against the client."
+      },
+      {
+        "question": "How do clients pay an invoice?",
+        "answer": "An invoice can include an external payment link or your account details, so clients pay through the method you already use."
+      },
+      {
+        "question": "Can a client send proof of payment?",
+        "answer": "Yes. Where a client pays by bank transfer or similar, an optional proof upload lets them attach evidence to the invoice page."
+      },
+      {
+        "question": "Can I send an invoice for a deposit before the full project starts?",
+        "answer": "Yes. You can create an invoice for a deposit or first milestone in the same workspace as the proposal, so the amount and the agreed project stay linked to the client."
+      }
+    ],
+    "related": [
+      {
+        "label": "Proposal software",
+        "to": "/solutions/proposal-software"
+      },
+      {
+        "label": "Invoice and contract software",
+        "to": "/solutions/invoice-contract-software"
+      },
+      {
+        "label": "All-in-one freelancer business tools",
+        "to": "/solutions/freelance-business-management"
+      }
+    ],
+    "key_facts": [
+      "Revercue keeps proposals and invoices on the same client record.",
+      "Invoices can be prepared from the same workspace without re-entering client or project details.",
+      "A contract step is optional between the proposal and the invoice.",
+      "Invoice status is displayed, and payment can be confirmed to record revenue in the tracker.",
+      "Clients can attach proof of payment through an optional upload on the invoice page."
+    ]
+  }
+}

@@ -4835,3 +4835,8 @@ details.faq-item:hover {
     padding: 22px;
   }
 }
+
+/* Solution pages: key facts list */
+ul.key-facts { list-style: none; padding: 0; margin: 24px auto 0; max-width: 760px; display: grid; gap: 12px; text-align: left; }
+ul.key-facts li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.6; }
+ul.key-facts li svg { flex-shrink: 0; margin-top: 4px; }
