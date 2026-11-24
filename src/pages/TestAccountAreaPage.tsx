@@ -125,7 +125,7 @@ export function TestAccountAreaPage() {
       </div>
 
       <div className="notice notice-gold" style={{ marginBottom: 24 }}>
-        Staging only. No real customer records, payments, emails, signatures or documents are created. The workspace below uses fixture data.
+        Staging only. No real customer records, payments, emails, signatures or documents are created. The workspace below uses fixture data. This sandbox checks plan configuration, not live product workflows.
       </div>
 
       {!token ? (
