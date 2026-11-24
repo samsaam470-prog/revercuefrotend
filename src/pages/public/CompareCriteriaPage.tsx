@@ -6,6 +6,7 @@ import {
   RATING_LABEL,
   type Rating,
 } from "../../lib/criteria";
+import { PRICING_CHECKED } from "../../lib/competitorResearch";
 import { AuthActionStart } from "../../components/auth/AuthActionStart";
 
 function RatingChip({ rating }: { rating: Rating }) {
@@ -46,7 +47,7 @@ export function CompareCriteriaPage() {
       </div>
 
       <p className="caption">
-        Assessed against vendor documentation, public feature pages and dated review listings. We have not independently hands-on tested every competitor. Pricing and packaging change, so the
+        Last verified: {PRICING_CHECKED}. Assessed against vendor documentation, public feature pages and dated review listings. We have not independently hands-on tested every competitor. Pricing and packaging change, so the
         notes describe shape rather than quoting a figure — check the platform's own pricing page
         before you decide.
       </p>
