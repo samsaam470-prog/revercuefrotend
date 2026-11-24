@@ -15,7 +15,7 @@ export function PricingVisual() {
     <div className="cv" aria-label="The pricing comparison table">
       <div className="cv-bar">
         <span>Compare the plans</span>
-        <span>Only Free is self-serve</span>
+        <span>Paid plans via checkout · Teams in beta</span>
       </div>
       <div className="cv-body">
         <table className="cv-table">
