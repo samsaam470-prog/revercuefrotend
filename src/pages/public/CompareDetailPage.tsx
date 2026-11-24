@@ -151,7 +151,7 @@ export function CompareDetailPage() {
             <p>{research.othersSay.intro}</p>
             <p>{research.othersSay.summary}</p>
             <p className="caption">
-              The summaries below are written by Revercue from the linked articles. They describe what
+              The summaries below paraphrase visible review listings and reviewer themes from the linked sources. They describe what
               each article says, not what we think of {competitor.name}. Every link opens the original.
             </p>
             <div className="stack-3">
@@ -178,8 +178,7 @@ export function CompareDetailPage() {
             </h2>
             <p>
               The pricing table and the comparison above were checked against these sources on{" "}
-              {research.checkedOn}. They include the vendor's own pricing and documentation, its
-              product pages, independent review-site profiles and a third-party editorial review.
+              {research.checkedOn}. They include the vendor's own pricing and product documentation, plus independent review listings where available.
             </p>
             <ul className="stack-2">
               {research.sources.map((source) => (

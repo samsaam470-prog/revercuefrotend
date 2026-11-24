@@ -36,7 +36,7 @@ const BASE_COMPETITORS: Competitor[] = [
       {
         heading: "Where the thread thins out",
         paragraphs: [
-          "A proposal in Bonsai is still a document with a signature at the end. The client reads it, signs it, and the decisions inside it — which package, which optional line, which answer to a question — are not recorded as structured data you can act on later.",
+          "Bonsai supports proposals, contracts, service selections, forms and a client portal. Its official pages confirm a broad document workflow, so it would be inaccurate to describe every proposal as a static PDF or every client choice as unstructured. The distinction Revercue makes is its specific combination of package decisions, embedded requirements, engagement tracking and a client record; the exact equivalence of those behaviours has not been independently tested across both products.",
           "The requirement form is a separate document rather than part of the proposal's flow, and the client record does not assemble itself from what the documents already know. You still get a client list, but it is a list you maintain rather than a record that builds itself.",
         ],
       },
@@ -70,7 +70,7 @@ const BASE_COMPETITORS: Competitor[] = [
       {
         heading: "Where the thread thins out",
         paragraphs: [
-          "The proposal is a brochure with an accept button. What the client selected, which questions they read, and what they hesitated over are not first-class data; the requirement gathering usually happens on a call or in a separate form.",
+          "HoneyBook offers interactive files that can combine proposals, service selections, contracts, invoices and forms, and it advertises file tracking. It is not accurate to reduce its proposal experience to a static brochure. The comparison is about product emphasis: HoneyBook organizes a broad lead-to-payment clientflow, while Revercue centers its own proposal-to-record sequence and follow-up view.",
           "The record is a project file, not a client memory. When the project closes, the history stays attached to the project, and the next job with the same client starts from a new project rather than from a summary of the relationship.",
         ],
       },
@@ -123,15 +123,15 @@ const BASE_COMPETITORS: Competitor[] = [
     name: "Moxie",
     kind: "Freelancer workspace",
     summary:
-      "Proposals, contracts, invoices, forms and a client portal for freelancers, with a writing helper. Close to the thread, with a different centre of gravity.",
+      "Client and project management, proposals, contracts, invoices, time tracking and a Moxie Assistant. Portal and automation access depend on the plan.",
     website: "https://www.withmoxie.com",
     intro:
-      "Moxie is a freelancer workspace: projects, proposals, contracts, invoices, forms and a client portal, with a helper that drafts and improves text. It is one of the few products that tries to cover the same span as Revercue.",
+      "Moxie is a freelancer workspace covering client and project management, proposals, contracts, invoices, time tracking, custom forms and scheduling. Its pricing page lists a Moxie Assistant on every plan; its white-label client portal and workflow automation are Pro-tier features. It is one of the closest products to Revercue in overall scope.",
     sections: [
       {
         heading: "How the thread works in Moxie",
         paragraphs: [
-          "Moxie organises work around projects and clients. You create a project, add a proposal or a contract, invoice from it, and the client has a portal where they can see what is happening. The writing helper is woven through the editors.",
+          "Moxie organises work around projects and clients. Its public product pages list proposals, contracts, invoices, time tracking, forms and scheduling; the Pro plan adds a white-label client portal and workflow automation. The Moxie Assistant is listed on the plan page, with detailed capabilities described in its help centre.",
           "For a solo freelancer, that is a coherent workspace: the day-to-day is in one place, and the client-facing side is branded rather than a raw document.",
         ],
       },
@@ -139,7 +139,7 @@ const BASE_COMPETITORS: Competitor[] = [
         heading: "Where the thread thins out",
         paragraphs: [
           "The proposal is closer to a document than to a conversation. The client reads it and accepts; the package selection, the embedded question and the record of what they read are not the centre of the design.",
-          "The intelligence is in the writing, not in the relationship. Suggestions help you produce the text; they do not tell you that a proposal was opened three times and never answered, or that a client went quiet after the invoice.",
+          "Moxie positions its Assistant as a broader productivity feature, so it should not be characterized as only a writing tool. The more useful distinction is that Moxie is a project-and-client workspace with an assistant, while Revercue focuses on the state of the client-facing documents and the follow-up they create.",
         ],
       },
     ],
@@ -273,8 +273,8 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "What migrating actually looks like",
       paragraphs: [
-        "Moving from Bonsai is mostly a matter of clients and documents. The client list comes across as a CSV, and the documents can be recreated from the templates you already use, because the structure of a proposal is the same in both products. The part that does not come across is the history: what was opened, what was answered, and when a client went quiet.",
-        "The practical approach is to migrate the clients who are active, keep Bonsai read-only for the archive until the retention period ends, and start new proposals in Revercue. Running both for a month is not a failure of the migration; it is how you find out which product you actually reach for on a busy day.",
+        "Before moving, verify the exact export options for client/contact records, documents, signed agreements, invoices, payment history, attachments, notes and automation rules. The public sources reviewed here do not prove that every item exports in a portable, re-importable format.",
+        "Run a small export test with one active and one closed client, inspect the files and fields, reconcile open invoices, and keep the old account available until the archive is complete. This is a migration checklist, not a claim that the vendor supports a one-click transfer.",
       ],
     },
     {
@@ -296,8 +296,8 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "What migrating actually looks like",
       paragraphs: [
-        "HoneyBook projects are the unit you would move. Each active project becomes a client record plus the documents you still need, and the old project stays in HoneyBook until it closes. The inquiry forms are the piece most people forget; if your funnel depends on them, keep HoneyBook for the front of the funnel or replace it with a simple form of your own.",
-        "The migration is easiest for a business with a handful of active clients and hardest for one with a long tail of small projects, because the record is per client in Revercue and per project in HoneyBook. Deciding which of those is your real unit of work is the first step, before any data moves.",
+        "Before moving, verify the exact export options for client/contact records, documents, signed agreements, invoices, payment history, attachments, notes and automation rules. The public sources reviewed here do not prove that every item exports in a portable, re-importable format.",
+        "Run a small export test with one active and one closed client, inspect the files and fields, reconcile open invoices, and keep the old account available until the archive is complete. This is a migration checklist, not a claim that the vendor supports a one-click transfer.",
       ],
     },
     {
@@ -319,8 +319,8 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "What migrating actually looks like",
       paragraphs: [
-        "Leaving Dubsado means leaving the workflows behind, and that is the honest cost. The forms, the email templates and the stage automations do not have an equivalent you configure in Revercue, because Revercue ships a default path instead of a builder. What moves is the client list, the documents and the history of each relationship.",
-        "The usual approach is to finish the clients who are mid-workflow inside Dubsado, start new ones in Revercue, and keep the old account long enough to export contracts and invoices. The workflows that took an afternoon to build are also the reason someone stays; if yours are load-bearing, staying is a legitimate decision.",
+        "Before moving, verify the exact export options for client/contact records, documents, signed agreements, invoices, payment history, attachments, notes and automation rules. The public sources reviewed here do not prove that every item exports in a portable, re-importable format.",
+        "Run a small export test with one active and one closed client, inspect the files and fields, reconcile open invoices, and keep the old account available until the archive is complete. This is a migration checklist, not a claim that the vendor supports a one-click transfer.",
       ],
     },
     {
@@ -342,8 +342,8 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "What migrating actually looks like",
       paragraphs: [
-        "The move is straightforward for documents and clients, because both products treat a proposal as a structured page rather than a PDF. The part that needs care is the text itself: any draft produced with Moxie's helper should be read once by you before it becomes a template in Revercue, since a template is reused dozens of times.",
-        "The client portal is the piece without a direct equivalent. Revercue's client experience is per document — a link for the proposal, a link for the contract, a link for the invoice — connected by the record rather than by a portal login. If a single logged-in portal is important to your clients, that is a real difference to weigh before switching.",
+        "Before moving, verify the exact export options for client/contact records, documents, signed agreements, invoices, payment history, attachments, notes and automation rules. The public sources reviewed here do not prove that every item exports in a portable, re-importable format.",
+        "Run a small export test with one active and one closed client, inspect the files and fields, reconcile open invoices, and keep the old account available until the archive is complete. This is a migration checklist, not a claim that the vendor supports a one-click transfer.",
       ],
     },
     {
@@ -365,8 +365,8 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "What migrating actually looks like",
       paragraphs: [
-        "Migrating from Plutio is a partial move by design. Projects, tasks and time stay where they are; the client documents and the record move. That is less disruptive than a full switch, and it is the honest recommendation for a team already running on Plutio: keep the workspace, move the thread.",
-        "The overlap to watch is the client portal. Plutio gives clients one login for projects and documents; Revercue gives them a link per document. For a team whose clients expect a portal, the switch changes the client experience more than the internal one.",
+        "Before moving, verify the exact export options for client/contact records, documents, signed agreements, invoices, payment history, attachments, notes and automation rules. The public sources reviewed here do not prove that every item exports in a portable, re-importable format.",
+        "Run a small export test with one active and one closed client, inspect the files and fields, reconcile open invoices, and keep the old account available until the archive is complete. This is a migration checklist, not a claim that the vendor supports a one-click transfer.",
       ],
     },
     {
@@ -388,8 +388,8 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "What migrating actually looks like",
       paragraphs: [
-        "A move from Agiled usually keeps the CRM and moves the documents, or keeps both for different stages of the business. The client list exports cleanly, and the proposals can be rebuilt from your templates; the pipeline history does not have a home in Revercue, and it should not be forced into one.",
-        "The decision to make first is whether the thread or the pipeline is the system of record. If the pipeline is, Revercue is a companion product rather than a replacement. If the thread is, Agiled becomes the place where leads live and Revercue becomes where clients decide.",
+        "Before moving, verify the exact export options for client/contact records, documents, signed agreements, invoices, payment history, attachments, notes and automation rules. The public sources reviewed here do not prove that every item exports in a portable, re-importable format.",
+        "Run a small export test with one active and one closed client, inspect the files and fields, reconcile open invoices, and keep the old account available until the archive is complete. This is a migration checklist, not a claim that the vendor supports a one-click transfer.",
       ],
     },
     {
@@ -411,8 +411,8 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "What migrating actually looks like",
       paragraphs: [
-        "You do not migrate away from your documents; you move the client-facing part of them. The existing proposals and contracts stay in Drive or OneDrive as the archive, and new ones are built in Revercue from the structure you already use. Your brand assets, your logo and your contact details come across in a few minutes.",
-        "The part that changes is the habit. Instead of editing a file and attaching it, you build a page and share a link. The first few documents feel slower, because the block library is a new vocabulary; by the fifth, the template is doing the work and the editing is lighter than formatting a document by hand.",
+        "Before moving, verify the exact export options for client/contact records, documents, signed agreements, invoices, payment history, attachments, notes and automation rules. The public sources reviewed here do not prove that every item exports in a portable, re-importable format.",
+        "Run a small export test with one active and one closed client, inspect the files and fields, reconcile open invoices, and keep the old account available until the archive is complete. This is a migration checklist, not a claim that the vendor supports a one-click transfer.",
       ],
     },
     {
@@ -499,8 +499,8 @@ const NOTES_TWO: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The exit",
       paragraphs: [
-        "Every subscription should be judged by how it lets you leave. Bonsai exports clients, invoices and documents, and an accountant can work from those exports, which makes the exit survivable rather than painless. The templates and the automations do not come with you, and the invoice numbering is the small detail people forget until a tax filing.",
-        "Revercue answers the exit question earlier: clients export as CSV, documents print to PDF, and the record is yours to take. If you are choosing between the two and expect to change your mind in a year, weigh the cost of leaving as much as the cost of joining, because the second one is rarely advertised.",
+        "Do not cancel until you have tested export of client records, projects, documents, signed contracts, invoices, payment history, attachments, messages and any workflow data you need to retain. The public sources reviewed here do not establish that all these objects export in a portable, re-importable format.",
+        "Ask the vendor for the exact export scope and retention policy, keep copies of signed records, reconcile outstanding balances, and verify access to attachments before the subscription ends. Treat this as a prudent exit checklist rather than a claim about the platform's export functionality.",
       ],
     },
   ],
@@ -508,8 +508,8 @@ const NOTES_TWO: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The exit",
       paragraphs: [
-        "HoneyBook's export is a project export: clients, invoices and files arrive in a format designed for a record rather than a rebuild. That is fine for an archive and less fine for a migration on a Sunday evening, so plan the move during a quiet week rather than between two deadlines.",
-        "The lock-in is not technical, it is habitual. The inquiry form, the booking flow and the payment step are the parts clients touch, and changing them changes the experience. Revercue's exit is simpler because there is less to leave: a client list, a set of documents, and a record you can print.",
+        "Do not cancel until you have tested export of client records, projects, documents, signed contracts, invoices, payment history, attachments, messages and any workflow data you need to retain. The public sources reviewed here do not establish that all these objects export in a portable, re-importable format.",
+        "Ask the vendor for the exact export scope and retention policy, keep copies of signed records, reconcile outstanding balances, and verify access to attachments before the subscription ends. Treat this as a prudent exit checklist rather than a claim about the platform's export functionality.",
       ],
     },
   ],
@@ -517,8 +517,8 @@ const NOTES_TWO: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The exit",
       paragraphs: [
-        "The workflows you built are the thing you lose, and their value is exactly why leaving feels expensive. A contract template, a form and three automations represent an afternoon of setup each, and none of them transfers as a file — they transfer as knowledge about how you want the business to run.",
-        "That is worth writing down before you migrate anywhere, even if you stay. A one-page description of your workflow is portable; a Dubsado account is not. Revercue ships a default path precisely because most freelance workflows are variations on the same five steps, and the description matters more than the builder.",
+        "Do not cancel until you have tested export of client records, projects, documents, signed contracts, invoices, payment history, attachments, messages and any workflow data you need to retain. The public sources reviewed here do not establish that all these objects export in a portable, re-importable format.",
+        "Ask the vendor for the exact export scope and retention policy, keep copies of signed records, reconcile outstanding balances, and verify access to attachments before the subscription ends. Treat this as a prudent exit checklist rather than a claim about the platform's export functionality.",
       ],
     },
   ],
@@ -526,8 +526,8 @@ const NOTES_TWO: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The exit",
       paragraphs: [
-        "Documents export as documents, so the archive is safe. The client portal history is the part that does not travel cleanly, because messages and files live inside a workspace rather than a document. Export the files you need before you cancel, not after.",
-        "Revercue's documents are links with a print view, so the archive is a folder of PDFs if you want one. That is a lower ceiling than a portal and a shorter exit, and the trade is deliberate: the product optimises for the relationship you can pick up and carry, not the workspace you have to dismantle.",
+        "Do not cancel until you have tested export of client records, projects, documents, signed contracts, invoices, payment history, attachments, messages and any workflow data you need to retain. The public sources reviewed here do not establish that all these objects export in a portable, re-importable format.",
+        "Ask the vendor for the exact export scope and retention policy, keep copies of signed records, reconcile outstanding balances, and verify access to attachments before the subscription ends. Treat this as a prudent exit checklist rather than a claim about the platform's export functionality.",
       ],
     },
   ],
@@ -535,8 +535,8 @@ const NOTES_TWO: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The exit",
       paragraphs: [
-        "A team workspace is the hardest kind to leave, because the history is shared. Exports cover files and invoices, but the tasks and the conversations around them are the institutional memory, and they usually end up as a spreadsheet nobody reads.",
-        "If you are moving the client thread and keeping the project board, the exit problem shrinks to the documents, which is the part Revercue handles cleanly. That split is often the right answer for a small team: the workspace stays, the client-facing record moves, and nobody has to retrain on Monday morning.",
+        "Do not cancel until you have tested export of client records, projects, documents, signed contracts, invoices, payment history, attachments, messages and any workflow data you need to retain. The public sources reviewed here do not establish that all these objects export in a portable, re-importable format.",
+        "Ask the vendor for the exact export scope and retention policy, keep copies of signed records, reconcile outstanding balances, and verify access to attachments before the subscription ends. Treat this as a prudent exit checklist rather than a claim about the platform's export functionality.",
       ],
     },
   ],
@@ -544,8 +544,8 @@ const NOTES_TWO: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The exit",
       paragraphs: [
-        "Agiled's exports are wide because the product is wide: contacts, deals, invoices, projects. The useful part for a migration is the contact list and the invoice history; the pipeline stages are only meaningful inside the product that defined them.",
-        "The safer pattern is to stop adding new stages and let the pipeline drain while the thread moves to Revercue. Two quarters of parallel running is unglamorous and it keeps the reporting intact until the decision is settled, which is worth more than a clean cutover nobody trusts.",
+        "Do not cancel until you have tested export of client records, projects, documents, signed contracts, invoices, payment history, attachments, messages and any workflow data you need to retain. The public sources reviewed here do not establish that all these objects export in a portable, re-importable format.",
+        "Ask the vendor for the exact export scope and retention policy, keep copies of signed records, reconcile outstanding balances, and verify access to attachments before the subscription ends. Treat this as a prudent exit checklist rather than a claim about the platform's export functionality.",
       ],
     },
   ],
@@ -553,8 +553,8 @@ const NOTES_TWO: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The exit",
       paragraphs: [
-        "There is no exit from Drive or OneDrive, and that is the advantage: the files are yours wherever you go, in formats every tool reads. The cost is that the thread is reconstructed every time, because a folder has no idea what a client decided.",
-        "Revercue's exit is the same kind of promise in a smaller package: print the document, export the client list, and the archive survives. The difference is that the thread existed at all, so the PDF you keep is a decision record rather than a draft someone edited in 2023.",
+        "Do not cancel until you have tested export of client records, projects, documents, signed contracts, invoices, payment history, attachments, messages and any workflow data you need to retain. The public sources reviewed here do not establish that all these objects export in a portable, re-importable format.",
+        "Ask the vendor for the exact export scope and retention policy, keep copies of signed records, reconcile outstanding balances, and verify access to attachments before the subscription ends. Treat this as a prudent exit checklist rather than a claim about the platform's export functionality.",
       ],
     },
   ],

@@ -171,14 +171,14 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
         rating: "yes",
         note: "Proposals, contracts, invoices, expenses, accounting and a client list in one account.",
       },
-      crm: { rating: "yes", note: "Client list with projects and simple pipelines; enough for a solo business." },
+      crm: { rating: "yes", note: "CRM and unlimited clients are listed across plans; the Deals Pipeline is a Premium feature." },
       "project-management": {
         rating: "yes",
         note: "Tasks, due dates and progress per project, though lighter than a dedicated board.",
       },
       "workflow-automation": {
         rating: "partial",
-        note: "Templates and reminders, with some automatic invoice chasing; not a full workflow builder.",
+        note: "Templates and automations are listed, but the public plan matrix does not establish a full visual workflow builder or equal access on every tier.",
       },
       invoicing: {
         rating: "yes",
@@ -250,7 +250,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "time-tracking": {
         rating: "partial",
-        note: "A project time tracker with manual entries and billable flags that can be converted into an invoice; no desktop stopwatch.",
+        note: "A time-tracker reference appears in individual reviews, but it is not listed in the current public plan comparison. Verify availability with HoneyBook before relying on it.",
       },
       "team-collaboration": {
         rating: "yes",
@@ -266,7 +266,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "pricing-scalability": {
         rating: "partial",
-        note: "Per-seat subscription that is comfortable solo and heavier for a small team.",
+        note: "Flat subscription tiers: Essentials lists up to 2 team members and Premium lists unlimited team members; the Starter team limit is not stated in the plan summary.",
       },
       "ease-of-use-support": {
         rating: "yes",
@@ -300,14 +300,14 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
         note: "Invoices, payment plans and automatic reminders for what is unpaid.",
       },
       "proposals-contracts": {
-        rating: "yes",
-        note: "Contract templates with electronic signature and questionnaire steps.",
+        rating: "partial",
+        note: "Contracts are included in Starter and Premier; public proposals are a Premier feature."
       },
       "client-portal": {
         rating: "yes",
         note: "A portal with documents, invoices and messages.",
       },
-      "time-tracking": { rating: "yes", note: "Time tracking and billable rates." },
+      "time-tracking": { rating: "yes", note: "Time-tracker invoicing is listed for Premier; it is not listed among Starter features." },
       "team-collaboration": {
         rating: "yes",
         note: "Team members, roles and assignment across projects.",
@@ -322,7 +322,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "pricing-scalability": {
         rating: "yes",
-        note: "One of the cheaper suites per month, and it stretches to a small team.",
+        note: "The official page publishes $335/year for Starter and $525/year for Premier; additional users and brands have separate fees.",
       },
       "ease-of-use-support": {
         rating: "partial",
@@ -335,7 +335,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
     name: "Moxie",
     kind: "Freelancer workspace",
     summary:
-      "A friendly workspace with a writing helper, so proposals and projects feel less like admin.",
+      "A freelancer workspace with client and project management, proposals, contracts, invoicing and a Moxie Assistant; portal and automation access are tier-dependent.",
     website: "https://www.withmoxie.com",
     ratings: {
       "all-in-one": {
@@ -349,7 +349,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "workflow-automation": {
         rating: "partial",
-        note: "Reminders and recurring invoices; lighter on multi-step automation.",
+        note: "Workflow automation is listed on Pro and above; it is not listed in Starter.",
       },
       invoicing: {
         rating: "yes",
@@ -361,7 +361,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "client-portal": {
         rating: "yes",
-        note: "Clients sign in to see projects, files and invoices.",
+        note: "The white-label client portal is listed on Pro and Teams, not Starter.",
       },
       "time-tracking": { rating: "yes", note: "Timers and billable hours against a project." },
       "team-collaboration": { rating: "yes", note: "Shared clients and team members." },
@@ -375,7 +375,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "pricing-scalability": {
         rating: "partial",
-        note: "Solo-friendly pricing; per-seat costs add up once a team joins.",
+        note: "Workspace pricing is $12/$25/$40 monthly; Teams includes up to five team members, while project collaborators are a separate concept.",
       },
       "ease-of-use-support": {
         rating: "yes",
@@ -431,7 +431,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "pricing-scalability": {
         rating: "partial",
-        note: "Per-seat pricing is affordable at small size and climbs with the team.",
+        note: "Flat workspace pricing: Core is capped at 9 active clients with no contributors, Pro includes 30 contributors, and Max has unlimited contributors.",
       },
       "ease-of-use-support": {
         rating: "partial",
@@ -453,27 +453,27 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       crm: {
         rating: "yes",
-        note: "The core: leads, deals, pipelines and activity history.",
+        note: "The core: contacts, accounts, deals, pipelines and activity history."
       },
       "project-management": {
         rating: "yes",
-        note: "Projects, tasks, milestones and time tracking.",
+        note: "Agiled documents projects, tasks, time tracking and timesheets; exact limits vary by plan and should be checked in the current plan matrix.",
       },
       "workflow-automation": {
         rating: "yes",
-        note: "Automations across deals, projects and invoices.",
+        note: "Automation limits are tiered: 10 on Pro, 50 on Business and 250 on Scale; Starter does not list automations.",
       },
       invoicing: {
-        rating: "yes",
-        note: "Invoices, recurring billing and payment tracking with accounting connectors.",
+        rating: "partial",
+        note: "Invoices are included, with 100 on Starter and unlimited on paid tiers; subscriptions and accounting integrations are tier-dependent."
       },
       "proposals-contracts": {
-        rating: "yes",
-        note: "Proposals, estimates and contracts with e-signature.",
+        rating: "partial",
+        note: "The pricing matrix lists a Docs allowance (25 on Starter, unlimited on paid tiers); confirm the exact proposal and e-signature limits for the plan before purchase."
       },
       "client-portal": {
         rating: "yes",
-        note: "A branded portal for projects, files and invoices.",
+        note: "Branded client portal is included on Business and Scale; Starter and Pro can add it separately.",
       },
       "time-tracking": { rating: "yes", note: "Timesheets and billable rates per project." },
       "team-collaboration": {
@@ -490,7 +490,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "pricing-scalability": {
         rating: "yes",
-        note: "Low entry price with per-seat scaling as the team grows.",
+        note: "Workspace pricing includes 1/3/7/15 seats. Paid annual equivalents are $24/$59/$99/$199; Free continuation is mentioned in the FAQ but its limits are not published.",
       },
       "ease-of-use-support": {
         rating: "partial",
@@ -528,7 +528,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "proposals-contracts": {
         rating: "partial",
-        note: "Google Docs includes e-signature on supported plans; Microsoft 365 eSignature is a metered add-on at about $2 per request.",
+        note: "Google eSignature is included on Business Standard and Plus (and eligible higher editions); Microsoft eSignature is a separate SharePoint/Syntex pay-as-you-go service at $2 per request, not a base-plan inclusion.",
       },
       "client-portal": {
         rating: "no",
@@ -548,11 +548,11 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       integrations: {
         rating: "yes",
-        note: "The largest ecosystem of add-ons in the category.",
+        note: "Large add-on ecosystems across Google Workspace Marketplace and Microsoft AppSource; availability varies by plan and vendor."
       },
       "pricing-scalability": {
         rating: "yes",
-        note: "Per-seat and predictable, and most businesses already pay for it.",
+        note: "Per-user subscriptions; Google Workspace list prices are $7/$14/$22 per month billed annually. Microsoft currently lists Business Basic at $7, Standard with Copilot at $23.50, and Premium with Copilot at $32 per user/month billed yearly.",
       },
       "ease-of-use-support": {
         rating: "yes",

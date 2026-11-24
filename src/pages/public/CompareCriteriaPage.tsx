@@ -46,7 +46,7 @@ export function CompareCriteriaPage() {
       </div>
 
       <p className="caption">
-        Assessed from public documentation and hands-on use. Pricing and packaging change, so the
+        Assessed against vendor documentation, public feature pages and dated review listings. We have not independently hands-on tested every competitor. Pricing and packaging change, so the
         notes describe shape rather than quoting a figure — check the platform's own pricing page
         before you decide.
       </p>

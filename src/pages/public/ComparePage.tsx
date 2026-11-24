@@ -18,8 +18,7 @@ export function ComparePage() {
           what it does, and the question is what happens between the pieces.
         </p>
         <p className="caption">
-          Competitor pricing was checked on {PRICING_CHECKED}. Every page lists the plans, the six
-          sources behind the comparison and ten independent reviews.
+          Competitor pricing was checked on {PRICING_CHECKED}. Each page lists the plans and the sources checked for that comparison, including third-party review listings where available.
         </p>
       </div>
 
