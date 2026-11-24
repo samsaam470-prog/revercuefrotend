@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import { useAuthAction } from "@authaction/web-sdk/react";
 import { Button } from "../../components/ui/Button";
@@ -62,7 +62,7 @@ export function LoginPage() {
   }
 
   if (isStaging) {
-    const submitStaging = async (event: React.FormEvent<HTMLFormElement>) => {
+    const submitStaging = async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault(); setFormError(""); setBusy(true);
       try {
         const result = await api.post<{ token: string; user: User }>("/api/staging/session", { email: stagingEmail, password: stagingPassword });

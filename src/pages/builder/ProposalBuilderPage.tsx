@@ -352,7 +352,6 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
         reference={proposal.public_id?.slice(0, 8) || "draft"}
         blocks={blocks}
         doc={{ ...doc, currency: proposal.currency || doc.currency || "USD" }}
-        brandName={String(contentOf(proposal).business_name || "Your business")}
       />
 
       <DocumentReview
