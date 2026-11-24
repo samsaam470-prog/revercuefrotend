@@ -13,7 +13,7 @@ import {
   GuidesPage, HomePage, PricingPage, PrivacyPage, SecurityPage, TermsPage,
   SolutionLandingPage, FeatureDetailPage,
 } from "./pages/public";
-import { CallbackPage, LoginPage } from "./pages/auth";
+import { CallbackPage, LoginPage, TestAccountPage } from "./pages/auth";
 import {
   OnboardingStep1Page, OnboardingStep2Page, OnboardingStep4Page, OnboardingStep5Page,
 } from "./pages/onboarding";
@@ -79,6 +79,8 @@ export function App() {
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/callback" element={<CallbackPage />} />
+            {/* Review environment: no AuthAction, fixed sample credentials. */}
+            <Route path="/testaccountforyou" element={<TestAccountPage />} />
           </Route>
           <Route element={<OnboardingGate />}>
             <Route path="/onboarding/step-1" element={<OnboardingStep1Page />} />

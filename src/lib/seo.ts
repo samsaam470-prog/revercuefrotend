@@ -6,7 +6,7 @@ export const PUBLIC_ORIGIN = "https://revercue.co.uk";
 
 const PRIVATE_ROUTES = [
   "/dashboard", "/settings", "/crm", "/proposals", "/contracts", "/forms",
-  "/invoices", "/notifications", "/onboarding", "/callback", "/login",
+  "/invoices", "/notifications", "/onboarding", "/callback", "/login", "/testaccountforyou",
   "/p", "/c", "/i", "/f", "/offline", "/session-expired", "/403", "/500",
 ];
 
