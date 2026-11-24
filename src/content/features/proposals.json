@@ -69,7 +69,7 @@
         "Free records whether a proposal was opened, as a yes or no. That is enough to know the link reached the client, but not when or how many times.",
         "Starter adds an opened-at timestamp, so you can see when the client first opened the proposal and whether it was that morning or a week later.",
         "Growth adds an estimated time spent on the proposal and the button clicks, such as the package selection and the questions they opened. The time is an estimate, so read it as a guide to attention rather than an exact figure.",
-        "Scale adds exact time, a full session timeline, deselect and typing signals, and the behavioural signals that feed the interest level. You can see that the client returned, how long they stayed on each package, and whether they answered a question or only read it.",
+        "Scale adds exact time, a full session timeline, deselect and typing signals, and the behavioural signals that feed the interest level. You can see that the client returned, how long they stayed on each package, and whether they answered a question or only read it. Its advanced tracking, including the exact time and session timeline, is reduced to a time-spent total after five days, and the raw events are deleted.",
         "Teams is in beta and carries everything on Scale, so the same tracking applies to documents shared by a team.",
         "On every plan, raw tracking events are reduced to a time-spent total after five days and the individual events are deleted."
       ]

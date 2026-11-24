@@ -64,7 +64,7 @@
         "Free records whether the contract was opened, as a yes or no. It also shows the signature and decline outcomes, because those are decisions the client has made rather than tracking.",
         "Starter adds an opened-at timestamp, so you can see when the client first looked at the scope and payment terms before signing.",
         "Growth adds an estimated time spent on the contract and the button clicks, such as the signature step or the decline option. This helps you spot a client who stopped at the revisions clause, for example, and address that before the next message.",
-        "Scale adds exact time, the session timeline and the behavioural signals. A signed contract is one of the signals that raises the interest level for that client, and the arithmetic is shown so you can see how the score moved.",
+        "Scale adds exact time, the session timeline and the behavioural signals. A signed contract is one of the signals that raises the interest level for that client, and the arithmetic is shown so you can see how the score moved. Its advanced tracking, including the exact time and session timeline, is reduced to a time-spent total after five days, and the raw events are deleted.",
         "Teams is in beta and carries everything on Scale.",
         "Across all plans, the raw events are reduced to a time-spent total after five days. The signature itself is never reduced: the typed name, the consent and the recorded date stay with the contract."
       ]

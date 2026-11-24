@@ -64,7 +64,7 @@
         "Free records whether the invoice page was opened, as a yes or no. It does not show when the client opened it or whether they paid.",
         "Starter adds an opened-at timestamp, so you can see when the client first viewed the invoice, which is useful when a payment is late and you want to know whether the invoice reached them.",
         "Growth adds an estimated time spent on the invoice and the button clicks, such as the payment link or the proof upload option. This helps you tell whether a client is looking for the payment details or has already paid.",
-        "Scale adds exact time, the session timeline and the behavioural signals. A paid invoice is one of the signals that feeds the interest level on the client record, and the arithmetic is shown.",
+        "Scale adds exact time, the session timeline and the behavioural signals. A paid invoice is one of the signals that feeds the interest level on the client record, and the arithmetic is shown. Its advanced tracking, including the exact time and session timeline, is reduced to a time-spent total after five days, and the raw events are deleted.",
         "Teams is in beta and carries everything on Scale.",
         "Payment status is separate from tracking. Whichever plan you are on, the invoice shows its status, including overdue, and confirming a payment records the revenue in the tracker. The revenue tracker is available on every plan. Opening and time tracking are reduced to a time-spent total after five days on all plans."
       ]
