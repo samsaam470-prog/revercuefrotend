@@ -56,7 +56,7 @@ export const FAQS: Faq[] = [
     group: "product",
     question: "Does Revercue send my writing to a server?",
     answer:
-      "Some document content is sent to Revercue servers when you create, save, publish or manage documents and client workflows. The inline Ask the helper rewrite runs in your browser; that rewrite operation does not send the selected passage or its suggested replacement to Revercue. Other product features have their own data flows, described in the Privacy Policy. Suggestions are reviewable: nothing is applied without your choice. The footer has four buttons that open an outside assistant (ChatGPT, Perplexity, Claude or Gemini) with a pre-filled question about Revercue — the answer comes from that tool, not from us.",
+      "Some document content is sent to Revercue servers when you create, save, publish or manage documents and client workflows. The inline Ask the helper rewrite operation does not send the selected passage or its suggested replacement to Revercue. Other product features have their own data flows, described in the Privacy Policy. Suggestions are reviewable: nothing is applied without your choice. The footer has four buttons that open an outside assistant (ChatGPT, Perplexity, Claude or Gemini) with a pre-filled question about Revercue — the answer comes from that tool, not from us.",
   },
   {
     id: 6,
@@ -719,7 +719,7 @@ export const FAQS: Faq[] = [
     group: "product",
     question: 'What is "Ask the helper"?',
     answer:
-      "Ask the helper is the inline writing aid in the builder. Select text, choose an instruction, review the suggested rewrite, then replace, insert or cancel. The rewrite itself runs in your browser and does not send the selected passage or suggested replacement to Revercue. This is separate from document creation, saving and publishing, which send document data to Revercue servers to provide those services. If the more capable rewrite is unavailable, common instructions still use built-in writing rules and you can edit the text manually.",
+      "Ask the helper is the inline writing aid in the builder. Select text, choose an instruction, review the suggested rewrite, then replace, insert or cancel. The inline rewrite operation does not send the selected passage or suggested replacement to Revercue. This is separate from document creation, saving and publishing, which send document data to Revercue servers to provide those services. If the more capable rewrite is unavailable, common instructions still use built-in writing rules and you can edit the text manually.",
   },
   {
     id: 103,

@@ -275,7 +275,7 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
 
   const written = applyOrganized(applyBrief(blocks, enriched), enriched);
   const writingDetail = source === "helper"
-    ? "Draft copy organised with on-device assistance and local patterns."
+    ? "Draft copy organised from your brief and available research."
     : source === "backend"
       ? "Draft copy organised with backend patterns and supplied facts."
       : "Draft copy assembled locally with deterministic patterns.";

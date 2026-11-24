@@ -1408,7 +1408,7 @@ const BASE_GUIDES: Guide[] = [
     slug: "ask-the-helper",
     title: "Ask the helper",
     excerpt:
-      "Select a sentence, ask for a rewrite, and decide whether to take it. What the helper can do, what it will not do, and where it runs.",
+      "Select a sentence, ask for a rewrite, and decide whether to take it. What the helper can do, what it will not do, and how it handles text.",
     category: "Product",
     readMinutes: 9,
     updated: "2026-11-24",
@@ -1439,7 +1439,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "What happens to your data",
         paragraphs: [
-          "The inline rewrite operation runs in your browser and does not send the selected passage or suggested replacement to Revercue. This is separate from document creation, draft generation, autosave and publishing, which send document data to Revercue servers to provide those services.",
+          "The inline rewrite operation does not send the selected passage or suggested replacement to Revercue. This is separate from document creation, draft generation, autosave and publishing, which send document data to Revercue servers to provide those services.",
           "The helper does not change the document without your choice. You review the suggested wording and decide whether to replace the selected text, insert the rewrite below, or cancel.",
         ],
       },

@@ -127,7 +127,7 @@ The helper is a tool, not an action. It does not change the document on its own.
 
 ## Where the helper runs, and what that means for your data
 
-The inline rewrite itself runs in your browser; that rewrite operation does not send the selected passage or suggested replacement to Revercue. This is not a claim that the whole document stays on your device: document creation, draft generation, autosave and publishing send document data to Revercue servers to provide the product. The helper remains available for common instructions using built-in writing rules when its more capable rewrite is unavailable. It suggests a change; you decide whether to use it.
+The inline rewrite operation does not send the selected passage or suggested replacement to Revercue. This is not a claim that the whole document stays on your device: document creation, draft generation, autosave and publishing send document data to Revercue servers to provide the product. The helper remains available for common instructions using built-in writing rules when its more capable rewrite is unavailable. It suggests a change; you decide whether to use it.
 
 ## Post-document analysis
 
