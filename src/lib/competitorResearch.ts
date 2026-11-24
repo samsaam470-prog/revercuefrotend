@@ -70,15 +70,17 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
     checkedOn: "24 November 2026",
     pricingSource: { label: "HoneyBook — official pricing page", url: "https://www.honeybook.com/pricing" },
     pricing: [
-      { plan: "Starter", price: "$36/mo, or $29/mo billed yearly", note: "Solo; lead forms, invoices, proposals, contracts" },
-      { plan: "Essentials", price: "$59/mo, or $49/mo billed yearly", note: "Automations, scheduler, two team members" },
-      { plan: "Premium", price: "$129/mo, or $109/mo billed yearly", note: "Unlimited team, advanced reporting" },
+      { plan: "Starter", price: "$36/mo, or $29/mo billed yearly", note: "Client portal, proposals, contracts, invoices, HoneyBook AI, task management and file tracking; up to 2 live lead forms" },
+      { plan: "Essentials", price: "$59/mo, or $49/mo billed yearly", note: "Starter plus automations, scheduler, QuickBooks, SMS reminders, up to 2 team members and 10 lead forms" },
+      { plan: "Premium", price: "$129/mo, or $109/mo billed yearly", note: "Essentials plus unlimited team members, priority support, multiple companies, advanced reports and unlimited lead forms" },
     ],
     pricingNote:
-      "US list prices before tax: Starter $36 monthly or $29/month billed yearly; Essentials $59 or $49; Premium $129 or $109. The current official page shows card processing from 2.7% + $0.10 and bank transfer at 1.5%; check the account's payment method and country for the applicable fee. All plans start with a free trial; promotional checkout prices may vary by session and are not the list prices shown here.",
+      "US list prices before tax: Starter $36 monthly or $29/month billed yearly; Essentials $59 or $49; Premium $129 or $109. The current official page lists HoneyBook AI, task management, read receipts and file tracking across plans; automations and QuickBooks integration start on Essentials, while unlimited team members are Premium. The official pricing page displays conflicting card-fee figures: the plan comparison grid says fees start at 2.9% + $0.25, while the detailed processing-fees section says 2.7% + $0.10; bank transfer is 1.5%. Its FAQ also contains both 30-day and 7-day free-trial references. Confirm the fee and trial length at checkout; promotions may vary by session.",
     sources: [
       { label: "HoneyBook pricing (official)", url: "https://www.honeybook.com/pricing" },
       { label: "HoneyBook features (official)", url: "https://www.honeybook.com/features" },
+      { label: "HoneyBook FAQs — trial and product overview", url: "https://www.honeybook.com/faqs" },
+      { label: "HoneyBook billing and membership help centre", url: "https://help.honeybook.com/en/articles/7020217-top-questions-answered-about-honeybook-billing-and-membership" },
       { label: "HoneyBook on Capterra — reviews", url: "https://www.capterra.com/p/162588/HoneyBook/reviews/" },
       { label: "HoneyBook on G2 — reviews", url: "https://www.g2.com/products/honeybook/reviews" },
     ],
