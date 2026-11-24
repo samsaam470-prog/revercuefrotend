@@ -656,7 +656,7 @@ export const FAQS: Faq[] = [
     group: "support",
     question: "What browsers are supported?",
     answer:
-      "Recent versions of Chrome, Edge, Safari, and Firefox. The core product works on every modern browser: documents, clients, invoices and tracking. The helper inside the builders needs newer graphics support; where it cannot run, its button is not shown and the text fields work normally — there is no notice and nothing else changes. The suggestions are patterns, not the helper, and they work everywhere."
+      "Recent versions of Chrome, Edge, Safari, and Firefox. The core product works on modern browsers: documents, clients, invoices and tracking. The builder helper uses a browser-based rewrite when supported and falls back to built-in writing rules for common edits when it is not. The suggestions are patterns, separate from the helper, and work across modern browsers."
   },
   {
     id: 94,
@@ -698,7 +698,7 @@ export const FAQS: Faq[] = [
     group: "support",
     question: "Why is a feature not available in my browser?",
     answer:
-      "One feature needs a modern browser with graphics support: the helper inside the builders. When your browser cannot run it, the Ask the helper button is not shown at all — no warning, no broken control — and every text field works exactly as before. The rest of the product, including the suggestions, the tracking and the client pages, does not depend on it.",
+      "The builder helper offers writing suggestions. When its more capable rewrite is unavailable, common instructions still use built-in writing rules, and you can always edit the text yourself. The rest of the product, including suggestions, tracking and client pages, works independently of that rewrite.",
   },
   {
     id: 100,
@@ -719,7 +719,7 @@ export const FAQS: Faq[] = [
     group: "product",
     question: 'What is "Ask the helper"?',
     answer:
-      "Ask the helper is the inline writing aid in the builder. Select text, choose an instruction, review the suggested rewrite, then replace, insert or cancel. The rewrite itself runs in your browser and does not send the selected passage or suggested replacement to Revercue. This is separate from document creation, saving and publishing, which send document data to Revercue servers to provide those services. If the helper is unavailable in your browser, the button is not shown and you can edit the text manually.",
+      "Ask the helper is the inline writing aid in the builder. Select text, choose an instruction, review the suggested rewrite, then replace, insert or cancel. The rewrite itself runs in your browser and does not send the selected passage or suggested replacement to Revercue. This is separate from document creation, saving and publishing, which send document data to Revercue servers to provide those services. If the more capable rewrite is unavailable, common instructions still use built-in writing rules and you can edit the text manually.",
   },
   {
     id: 103,
