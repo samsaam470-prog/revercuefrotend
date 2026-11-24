@@ -68,6 +68,17 @@
         "Teams is in beta and carries everything on Scale.",
         "On every plan, raw events are reduced to a time-spent total after five days. Submitted answers are not part of that reduction: they are the project brief and stay with the project."
       ]
+    },
+    {
+      "heading": "How adaptive branching works",
+      "paragraphs": [
+        "Branching lets a form change based on what the client has already answered. You set it up on a question: each rule says, if the client chooses this option, show these questions. A question that no rule controls is always shown, so a simple form still behaves like a simple form.",
+        "Here is a concrete case. A web design intake asks, as its first question, what kind of site the client needs, with options for a brochure site, an online shop and a booking system. Set a rule on that question so that choosing an online shop shows the questions about product count and payment providers, and choosing a booking system shows the questions about services and calendars. A client who wants a brochure site never sees either set, and they answer fewer questions as a result.",
+        "The rule works on the answer, not on the layout. If the client picks the option, the linked questions appear. If they pick anything else, the linked questions are hidden. A question that appears in more than one rule is shown only when every rule that lists it is matched, which keeps the logic predictable when you combine several conditions.",
+        "Hidden questions are also removed from the required check. The client cannot be stuck on a question they are not meant to see. On a multi-page form, pages are counted from the questions that are visible, so the progress indicator reflects the path the client is actually taking rather than every question you wrote.",
+        "Branching is available on the Growth and Scale plans. Growth allows three adaptive forms and Scale allows fifteen. You can check a rule before you publish: test mode runs the branching exactly as the client will see it, with no answers saved. That is the honest way to check a rule, because reading the rule list shows what you intended, while clicking through shows what the client will actually experience.",
+        "Keep branches shallow. A form with one or two decision points is easy for a client to follow and easy for you to test. A form with many nested conditions is harder to check, and every extra condition is another place where a question can be hidden when the client expected to see it."
+      ]
     }
   ],
   "includes": [
