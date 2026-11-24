@@ -307,7 +307,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
         rating: "yes",
         note: "A portal with documents, invoices and messages.",
       },
-      "time-tracking": { rating: "yes", note: "Time-tracker invoicing is listed for Premier; it is not listed among Starter features." },
+      "time-tracking": { rating: "yes", note: "Dubsado lists time tracking as a core feature; its current pricing summary does not clearly state plan-specific time-tracking limits." },
       "team-collaboration": {
         rating: "yes",
         note: "Team members, roles and assignment across projects.",
