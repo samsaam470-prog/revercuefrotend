@@ -282,9 +282,9 @@ The builder has a helper. It is the inline assistant that works on the text you 
 
 The helper is a tool, not an action. It does not change the document on its own. It suggests a rewrite; you decide. The helper is not a separate product; it is the assistant inside the builder you already use.
 
-## Where the helper runs, and what that means for your data
+## What the helper sends, and what it does not
 
-The inline rewrite operation does not send the selected passage or suggested replacement to Revercue. This is not a claim that the whole document stays on your device: document creation, draft generation, autosave and publishing send document data to Revercue servers to provide the product. The helper remains available for common instructions using built-in writing rules when its more capable rewrite is unavailable. It suggests a change; you decide whether to use it.
+The inline rewrite operation does not send the selected passage or suggested replacement to Revercue. This applies only to that rewrite operation: document creation, draft generation, autosave and publishing send document data to Revercue servers to provide those services. The helper suggests a change; you decide whether to use it. If the more capable rewrite is unavailable, common instructions still use built-in writing rules.
 
 ## Post-document analysis
 
