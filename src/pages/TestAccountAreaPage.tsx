@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { API_BASE_URL } from '../api/client';
+const TEST_API_BASE = ((import.meta.env as ImportMetaEnv & { VITE_TEST_HARNESS_API_URL?: string }).VITE_TEST_HARNESS_API_URL || '').trim().replace(/\\/$/, '');
 
 type PlanName = 'free' | 'starter' | 'growth' | 'scale';
 type PlanSnapshot = Record<string, string | number | boolean> & { plan: PlanName };
@@ -48,7 +48,7 @@ export function TestAccountAreaPage() {
   const [notice, setNotice] = useState('');
 
   async function request(path: string, method = 'GET', body?: unknown, currentToken = token) {
-    const response = await fetch(`${API_BASE_URL}/api/test-harness${path}`, {
+    if (!TEST_API_BASE) throw new Error('This staging page is not connected to its isolated test API. It will not call the production API.');\n    const response = await fetch(`${TEST_API_BASE}/api/test-harness${path}`, {
       method,
       headers: {
         'Content-Type': 'application/json',
