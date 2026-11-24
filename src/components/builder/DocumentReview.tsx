@@ -24,7 +24,7 @@ export function DocumentReview({ review, onClose, onPublishAnyway }: DocumentRev
           </div>
 
           {review.issues.length === 0 ? (
-            <p className="muted">Nothing stood out. The sections, the pricing and the close are in place.</p>
+            <p className="muted">No issues were flagged by these checks. Review the facts, scope and figures yourself before publishing.</p>
           ) : (
             <ul className="review-issues">
               {review.issues.map((issue, index) => (
@@ -35,8 +35,6 @@ export function DocumentReview({ review, onClose, onPublishAnyway }: DocumentRev
               ))}
             </ul>
           )}
-
-}
 
           <div className="between">
             <Button variant="ghost" onClick={onClose}>
