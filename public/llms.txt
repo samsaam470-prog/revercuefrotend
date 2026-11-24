@@ -27,7 +27,7 @@ An active document is a published document with a public link. Drafts, archived 
 
 ## The patterns, not magic
 
-The product has an optional writing helper: when the user invokes it, it can rewrite selected text locally in the browser. Other suggestions are patterns: keyword matching, frequency counting and arithmetic over the user's own history and public research. Nothing is applied automatically. Any change is the user's decision: the user reviews the suggestion and chooses what to change, and Revercue does not make that change on their behalf. The product is the pen; the user is the author.
+The product has a writing helper: when requested, it suggests a rewrite of selected text. Other suggestions are patterns: keyword matching, frequency counting and arithmetic over the user's own history and public research. Nothing is applied automatically. Any change is the user's decision: the user reviews the suggestion and chooses what to change, and Revercue does not make that change on their behalf. The product is the pen; the user is the author.
 
 ## The retention
 
