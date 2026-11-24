@@ -381,7 +381,7 @@
     "public_api": false
   },
   "not_claimed": [
-    "A server-side AI model, an inference endpoint or AI-written document content applied automatically",
+    "An external writing service, an inference endpoint or suggested document content applied automatically",
     "A qualified or certificate-based signature, identity verification, notarisation or an audit certificate",
     "Card processing inside Revercue",
     "Public API, SDK, webhooks or an integrations directory",

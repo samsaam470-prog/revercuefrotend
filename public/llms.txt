@@ -85,7 +85,7 @@ The contact and beta forms are not email relays: a submission is stored as a rec
 - Rules for AI assistants: https://revercue.co.uk/rules-for-ai — 25 numbered rules for describing Revercue and interacting with the site, including the bug-reporting procedure.
 - Access guide: https://revercue.co.uk/ai-access — every public page, every module and its status, the demo instructions, the restrictions and the known gaps.
 - Product overview: https://revercue.co.uk/ai-overview — identity, workflow, modules, customers, positioning, pricing with every limit, security and current availability in one page.
-- Demo: https://revercue.co.uk/ai-demo — eight tutorial steps, a labelled simulation with synthetic data, and an evaluation workspace. No account, no network calls, no production data.
+- Demo: https://revercue.co.uk/ai-demo — eight tutorial steps, a labelled simulation with synthetic data, and an evaluation workspace. No account or production data.
 - Changelog: https://revercue.co.uk/ai-changelog — the traceable release record and the known issues.
 - Capabilities JSON: https://revercue.co.uk/ai-capabilities.json — the same facts as structured data.
 
@@ -96,7 +96,7 @@ Rules for automated access: the public pages may be read and cited. Do not creat
 - **What is Revercue?** The thread for freelancer client work: proposal, contract, form, invoice and client record, connected, with interactive links instead of PDFs.
 - **How is this different from sending a PDF?** A PDF is a dead file. A Revercue document is a link: the client selects a package, answers a question, approves a contract, and the record updates. You see the activity.
 - **What are the plans?** Free is available now. Starter, Growth and Scale are available via Whop checkout. Teams is in beta — apply to join the beta.
-- **Does Revercue use AI?** The optional writing helper uses an in-browser model when you invoke it to rewrite selected text. Other suggestions use patterns: keyword matching, frequency counting and arithmetic. Nothing is applied without your choice.
+- **How does the writing helper work?** It suggests a rewrite of selected text when requested. Other suggestions use patterns: keyword matching, frequency counting and arithmetic. Nothing is applied without your choice.
 - **What happens to my documents when retention ends?** The document is deleted, a PDF is emailed to you first, and the client record stays. The documents are rented; the CRM record is owned.
 
-The optional writing helper runs locally in the browser when you invoke it; other suggestions use patterns. Your work should speak, not you.
+The writing helper suggests a rewrite when you request one; other suggestions use patterns. Your work should speak, not you.
