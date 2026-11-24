@@ -49,7 +49,8 @@ export function TestAccountAreaPage() {
   const [notice, setNotice] = useState('');
 
   async function request(path: string, method = 'GET', body?: unknown, currentToken = token) {
-    if (!TEST_API_BASE) throw new Error('This staging page is not connected to its isolated test API. It will not call the production API.');\n    const response = await fetch(`${TEST_API_BASE}/api/test-harness${path}`, {
+    if (!TEST_API_BASE) throw new Error('This staging page is not connected to its isolated test API. It will not call the production API.');
+    const response = await fetch(`${TEST_API_BASE}/api/test-harness${path}`, {
       method,
       headers: {
         'Content-Type': 'application/json',
