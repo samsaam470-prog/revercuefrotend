@@ -40,7 +40,7 @@ export function BlockRenderer({
     try { return new Intl.NumberFormat(undefined, { style: "currency", currency }).format(Number(amount)); }
     catch { return Number(amount).toFixed(2) + " " + currency; }
   };
-  const isPlaceholder = (value: string) => /\\{\\{[^}]+\\}\\}/.test(value) || !value.trim();
+  const isPlaceholder = (value: string) => /\{\{[^}]+\}\}/.test(value) || !value.trim();
   const canType = Boolean(editable && onPatch);
 
   /** Text that is typed in place, with the formatted view when it is not editable. */
