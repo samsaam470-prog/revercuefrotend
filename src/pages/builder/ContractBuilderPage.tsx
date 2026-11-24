@@ -400,7 +400,7 @@ function ContractCanvas({ id }: { id: string }) {
   const persistDraft = async (nextBlocks: Block[]) => {
     const base = contract ? contentOf(contract) : {};
     const content = { ...base, ...doc, blocks: nextBlocks, drafted: true };
-    await contractsApi.update(id, { content: content as DocContent }).catch(() => undefined);
+    await contractsApi.update(id, { content: content as DocContent });
   };
 
   /* The first draft fills the template's clauses from the contract itself. */
@@ -429,12 +429,13 @@ function ContractCanvas({ id }: { id: string }) {
     })
       .then(async (result) => {
         if (cancelled) return;
-        if (cancelled) return;
         setBlocks(result.blocks);
         await persistDraft(result.blocks);
         markPipelineDone(id);
       })
-      .catch(() => undefined)
+      .catch(() => {
+        if (!cancelled) toast.error("The draft could not be completed or saved. Your editable draft remains available; check your connection and try again.");
+      })
       .finally(() => {
         if (!cancelled) setStage(null);
       });

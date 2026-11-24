@@ -149,7 +149,7 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
   const persistDraft = async (nextBlocks: Block[]) => {
     const base = proposal ? contentOf(proposal) : {};
     const content = { ...base, ...doc, blocks: nextBlocks, drafted: true };
-    await proposalsApi.update(id, { content: content as DocContent }).catch(() => undefined);
+    await proposalsApi.update(id, { content: content as DocContent });
   };
 
   /* The staged first draft. */
@@ -178,13 +178,14 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     })
       .then(async (result) => {
         if (cancelled) return;
-        if (cancelled) return;
         setBlocks(result.blocks);
         setResearch(readResearch(id));
         await persistDraft(result.blocks);
         markPipelineDone(id);
       })
-      .catch(() => undefined)
+      .catch(() => {
+        if (!cancelled) toast.error("The draft could not be completed or saved. Your editable draft remains available; check your connection and try again.");
+      })
       .finally(() => {
         if (!cancelled) setStage(null);
       });
