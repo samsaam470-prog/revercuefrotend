@@ -60,7 +60,7 @@ export function FeatureDetailPage() {
 
       <section className="section">
         <div className="two-up">
-          <div>
+          <div className="feature-summary">
             <p className="eyebrow">Quick answer</p>
             <h2>What it does.</h2>
             <p className="muted">{guide.summary}</p>

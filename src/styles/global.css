@@ -4902,3 +4902,11 @@ ul.key-facts li svg { flex-shrink: 0; margin-top: 4px; }
 .feature-doc .page-head p { margin-left: auto; margin-right: auto; text-align: center; }
 .feature-doc .section p { margin-left: auto; margin-right: auto; text-align: center; }
 .feature-doc .section p:last-child { margin-bottom: 0; }
+
+/* Feature pages: headings and eyebrows centred */
+.feature-doc .page-head .eyebrow, .feature-doc .page-head h1, .feature-doc .page-head p { text-align: center; }
+.feature-doc .section-head, .feature-doc .section-head h2, .feature-doc .section-head p { text-align: center; }
+.feature-doc .section > .eyebrow, .feature-doc .section-head .eyebrow { text-align: center; }
+.feature-doc .feature-summary, .feature-doc .feature-summary h2, .feature-doc .feature-summary p { text-align: center; margin-left: auto; margin-right: auto; }
+.feature-doc .feature-summary .eyebrow { text-align: center; }
+.feature-doc h2 { text-align: center; }
