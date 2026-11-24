@@ -322,7 +322,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "pricing-scalability": {
         rating: "yes",
-        note: "The official page publishes $335/year for Starter and $525/year for Premier; additional users and brands have separate fees.",
+        note: "Published new-subscriber prices are $35/month or $335/year for Starter and $55/month or $525/year for Premier; additional users and brands have separate fees.",
       },
       "ease-of-use-support": {
         rating: "partial",
@@ -457,7 +457,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "project-management": {
         rating: "yes",
-        note: "Agiled documents projects, tasks, time tracking and timesheets; exact limits vary by plan and should be checked in the current plan matrix.",
+        note: "Agiled's product reference lists projects, tasks, time tracking and timesheets, but the current pricing matrix leaves those entitlement rows blank. Confirm which plan includes them before relying on them.",
       },
       "workflow-automation": {
         rating: "yes",
@@ -490,7 +490,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "pricing-scalability": {
         rating: "yes",
-        note: "Workspace pricing includes 1/3/7/15 seats. Paid annual equivalents are $24/$59/$99/$199; Free continuation is mentioned in the FAQ but its limits are not published.",
+        note: "Workspace pricing includes 1/3/7/15 seats. Paid annual equivalents are $24/$59/$99/$199; the pricing FAQ says users can continue on Free after trial, while Agiled's official product reference says there is no free plan. The conflict is unresolved.",
       },
       "ease-of-use-support": {
         rating: "partial",
