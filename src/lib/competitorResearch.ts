@@ -139,7 +139,7 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
     ],
     othersSay: {
       intro: "Review-listing snapshots checked 24 November 2026; Moxie's G2 and Capterra samples are very small, while Trustpilot's profile is marked as merged.",
-      summary: "G2 shows 4.5/5 from 4 reviews, Capterra 4.0/5 from 1 review, and Trustpilot 4.8/5 from 539 reviews. G2 and Capterra samples are too small to generalize; Trustpilot marks the profile as merged, so its total may include reviews originally posted elsewhere.",
+      summary: "G2 shows 4.5/5 from 4 reviews, Capterra 4.0/5 from 1 review, and Trustpilot 4.8/5 from 539 reviews (34 in the last 12 months). G2 and Capterra samples are too small to generalize; Trustpilot marks the profile as merged, so its total may include reviews originally posted elsewhere.",
       articles: [
       { title: "G2 — 4.5/5 from 4 reviews", source: "G2 · checked 24 Nov 2026", url: "https://www.g2.com/products/geoff-mina-moxie/reviews", summary: "Four reviews are too few to generalize about product quality." },
       { title: "Capterra — 4.0/5 from 1 review", source: "Capterra · checked 24 Nov 2026", url: "https://www.capterra.com/p/10026264/Moxie/", summary: "One review is not a meaningful basis for comparing satisfaction." },
@@ -207,7 +207,7 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
 
   "google-microsoft": {
     checkedOn: "24 November 2026",
-    pricingSource: { label: "Google Workspace pricing (Google support page, checked 24 November 2026)", url: "https://support.google.com/a/answer/15400543" },
+    pricingSource: { label: "Google Workspace pricing (official pricing page, checked 24 November 2026)", url: "https://workspace.google.com/pricing" },
     pricing: [
       { plan: "Google Workspace Business Starter", price: "$7.00/user/mo, annual commitment", note: "30 GB pooled storage; Gemini in Gmail; eSignature not included" },
       { plan: "Google Workspace Business Standard", price: "$14.00/user/mo, annual commitment", note: "2 TB pooled storage; Gemini in Docs/Meet; Docs and PDF eSignature included" },
@@ -228,10 +228,10 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
     ],
     othersSay: {
       intro: "Review-listing snapshots checked 24 November 2026. Ratings and counts belong to the review platforms, can change, and are not Revercue test scores.",
-      summary: "Capterra shows Google Workspace at 4.7/5 from 87,024 reviews and Microsoft 365 at 4.6/5 from 14,176 reviews. These are separate product listings, not a combined score; reviewers praise collaboration and document tools, while mentioning sync delays, complexity and internet dependence.",
+      summary: "Capterra's comparison listing shows Google Workspace at 4.7/5 from 89,356 reviews and Microsoft 365 at 4.6/5 from 14,193 reviews. These are separate product listings, not a combined score; reviewers praise collaboration and document tools, while mentioning sync delays, complexity and internet dependence.",
       articles: [
-      { title: "Google Workspace — 4.7/5 from 87,024 reviews", source: "Capterra · checked 24 Nov 2026", url: "https://www.capterra.com/p/247901/Google-Workspace/", summary: "Capterra describes strong real-time collaboration and a centralized productivity suite. Visible concerns include stable-internet dependence and occasional synchronization delays." },
-      { title: "Microsoft 365 — 4.6/5 from 14,176 reviews", source: "Capterra · checked 24 Nov 2026", url: "https://www.capterra.com/p/227157/Microsoft-365/reviews/", summary: "Capterra reviewers value the broad Office ecosystem and document sharing. Some mention subscription cost, complexity, OneDrive synchronization and interface changes." },
+      { title: "Google Workspace — 4.7/5 from 89,356 reviews", source: "Capterra comparison listing · checked 24 Nov 2026; last updated 20 Nov 2026", url: "https://www.capterra.com/compare/227157-247901/Microsoft-365-vs-Google-Workspace", summary: "Capterra describes strong real-time collaboration and a centralized productivity suite. Visible concerns include stable-internet dependence and occasional synchronization delays." },
+      { title: "Microsoft 365 — 4.6/5 from 14,193 reviews", source: "Capterra comparison listing · checked 24 Nov 2026; last updated 20 Nov 2026", url: "https://www.capterra.com/compare/227157-247901/Microsoft-365-vs-Google-Workspace", summary: "Capterra reviewers value the broad Office ecosystem and document sharing. Some mention subscription cost, complexity, OneDrive synchronization and interface changes." },
       ],
     },
   },
