@@ -105,7 +105,7 @@ export function FeatureDetailPage() {
       <section className="section">
         <div className="section-head">
           <p className="eyebrow">Questions</p>
-          <h2>Common questions about {guide.title.split(" ")[0].toLowerCase()}.</h2>
+          <h2>Common questions.</h2>
         </div>
         <div className="faq-list">
           {guide.faqs.map((faq) => (

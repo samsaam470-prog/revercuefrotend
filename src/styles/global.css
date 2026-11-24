@@ -4900,7 +4900,7 @@ ul.key-facts li svg { flex-shrink: 0; margin-top: 4px; }
 /* Feature pages: centred paragraphs */
 .feature-doc .page-head { margin-left: auto; margin-right: auto; text-align: center; }
 .feature-doc .page-head p { margin-left: auto; margin-right: auto; text-align: center; }
-.feature-doc .section p { margin-left: auto; margin-right: auto; text-align: center; }
+.feature-doc .section p { margin-left: auto; margin-right: auto; text-align: left; }
 .feature-doc .section p:last-child { margin-bottom: 0; }
 
 /* Feature pages: headings and eyebrows centred */
