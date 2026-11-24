@@ -152,13 +152,13 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
     checkedOn: "24 November 2026",
     pricingSource: { label: "Plutio — official pricing page (checked 24 November 2026)", url: "https://www.plutio.com/pricing" },
     pricing: [
-      { plan: "Core", price: "$19/mo", note: "Workspace price; up to 9 active clients; no contributors" },
-      { plan: "Pro", price: "$49/mo", note: "Workspace price; unlimited clients; 30 contributors included" },
-      { plan: "Max", price: "$199/mo", note: "Workspace price; unlimited clients and contributors; white-label included" },
+      { plan: "Core", price: "$19/mo", note: "Workspace price; 9 active clients; 500 AI credits and 500 workflow actions; no contributors" },
+      { plan: "Pro", price: "$49/mo", note: "Workspace price; unlimited clients; 30 contributors; 2,500 AI credits and 5,500 workflow actions" },
+      { plan: "Max", price: "$199/mo", note: "Workspace price; unlimited clients and contributors; 10,000 AI credits and 50,000 workflow actions; white-label included" },
       { plan: "Enterprise", price: "Custom quote" },
     ],
     pricingNote:
-      "Flat workspace pricing, not per seat. The current help-centre plan table lists 9 active clients and no contributors on Core, 30 included contributors on Pro, and unlimited contributors on Max. White-label is an add-on on Core and Pro and included on Max; SSO is unavailable on Core, an add-on on Pro, and included on Max. The seven-day trial includes three active clients and requires no card. Annual billing is offered, but the current help-centre table checked here does not state annual totals.",
+      "Flat workspace pricing, not per seat. Core includes 9 active clients, 500 Plutio Pal AI credits and 500 workflow actions; Pro includes unlimited clients, 30 contributors, 2,500 AI credits and 5,500 actions; Max includes unlimited contributors, 10,000 AI credits and 50,000 actions. White-label is a $9/mo add-on on Core and Pro and included on Max; SSO is a $5/mo add-on on Pro and included on Max (not Core). The seven-day trial includes three active clients and requires no card. Annual billing is offered; the current help-centre plan table does not state annual totals.",
     sources: [
       { label: "Plutio pricing (official)", url: "https://www.plutio.com/pricing" },
       { label: "Plutio help centre — subscription plans overview", url: "https://www.plutio.com/help/subscription-plans-overview" },
@@ -180,13 +180,13 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
     checkedOn: "24 November 2026",
     pricingSource: { label: "Agiled — official pricing page (checked 24 November 2026)", url: "https://agiled.app/pricing" },
     pricing: [
-      { plan: "Starter", price: "$29/mo, or $24/mo billed yearly", note: "One seat; 500 contacts, 10 projects" },
-      { plan: "Pro", price: "$69/mo, or $59/mo billed yearly", note: "Three seats; workflows, API, unlimited projects" },
-      { plan: "Business", price: "$129/mo, or $99/mo billed yearly", note: "Seven seats; branded portal, accounting sync" },
-      { plan: "Scale", price: "$249/mo, or $199/mo billed yearly", note: "Fifteen seats; accounting intelligence" },
+      { plan: "Starter", price: "$29/mo, or $24/mo billed yearly", note: "1 seat; 500 contacts, 10 projects, 100 invoices, 25 docs, 500 AI credits, 1 AI worker" },
+      { plan: "Pro", price: "$69/mo, or $59/mo billed yearly", note: "3 seats; unlimited projects and docs, 10 automations, 2,000 AI credits, 2 AI workers" },
+      { plan: "Business", price: "$129/mo, or $99/mo billed yearly", note: "7 seats; branded portal, QuickBooks/Xero, 50 automations, 6,000 AI credits, 3 AI workers" },
+      { plan: "Scale", price: "$249/mo, or $199/mo billed yearly", note: "15 seats; 250 automations, 15,000 AI credits, unlimited AI workers; formal accounting marked coming soon" },
     ],
     pricingNote:
-      "Workspace pricing with 1, 3, 7 and 15 included seats across Starter, Pro, Business and Scale. The official pricing page lists annual-billing equivalents of $24, $59, $99 and $199 per month; Agiled's own freelancer-software comparison article lists monthly-billing prices of $29, $69, $129 and $249. Extra seats are $20 per seat per month on Pro and above. Agiled's pricing FAQ says a workspace can continue on Free after the 14-day trial, while its official product-information page says there is no free plan. Because those official statements conflict and the plan matrix does not list a Free tier, Free availability and limits are unresolved; confirm directly with Agiled before relying on it.",
+      "Workspace pricing with 1, 3, 7 and 15 included seats across Starter, Pro, Business and Scale. The official pricing page lists annual-billing equivalents of $24, $59, $99 and $199 per month; Agiled's own freelancer-software comparison article lists monthly-billing prices of $29, $69, $129 and $249. Extra seats are $20 per seat per month on Pro and above. Included AI credits are 500/2,000/6,000/15,000 and AI-worker limits are 1/2/3/unlimited across the four plans. Agiled's pricing FAQ says a workspace can continue on Free after the 14-day trial, while its official product-information page says there is no free plan. Because those official statements conflict and the plan matrix does not list a Free tier, Free availability and limits are unresolved; confirm directly with Agiled before relying on it. Formal accounting and accounting intelligence are marked coming soon, not generally available.",
     sources: [
       { label: "Agiled pricing (official)", url: "https://agiled.app/pricing" },
       { label: "Agiled documentation", url: "https://docs.agiled.app/" },
@@ -209,15 +209,15 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
     checkedOn: "24 November 2026",
     pricingSource: { label: "Google Workspace pricing (Google support page, checked 24 November 2026)", url: "https://support.google.com/a/answer/15400543" },
     pricing: [
-      { plan: "Google Workspace Business Starter", price: "$7.00/user/mo, billed annually", note: "30 GB pooled storage per user; eSignature not included" },
-      { plan: "Google Workspace Business Standard", price: "$14.00/user/mo, billed annually", note: "2 TB pooled storage; Docs and PDF eSignature included" },
-      { plan: "Google Workspace Business Plus", price: "$22.00/user/mo, billed annually", note: "5 TB pooled storage; eSignature included" },
-      { plan: "Microsoft 365 Business Basic", price: "$7.00/user/mo, billed annually", note: "Web and mobile Office apps; 1 TB OneDrive" },
-      { plan: "Microsoft 365 Business Standard with Copilot", price: "$23.50/user/mo, billed annually", note: "Desktop Office apps and Copilot" },
-      { plan: "Microsoft 365 Business Premium with Copilot", price: "$32.00/user/mo, billed annually", note: "Productivity apps, Copilot, and advanced security" },
+      { plan: "Google Workspace Business Starter", price: "$7.00/user/mo, annual commitment", note: "30 GB pooled storage; Gemini in Gmail; eSignature not included" },
+      { plan: "Google Workspace Business Standard", price: "$14.00/user/mo, annual commitment", note: "2 TB pooled storage; Gemini in Docs/Meet; Docs and PDF eSignature included" },
+      { plan: "Google Workspace Business Plus", price: "$22.00/user/mo, annual commitment", note: "5 TB pooled storage; Gemini features and eSignature included" },
+      { plan: "Microsoft 365 Business Basic", price: "$7.00/user/mo, paid yearly", note: "Web/mobile Office apps; 1 TB OneDrive; secure AI chat, not Copilot in Office apps" },
+      { plan: "Microsoft 365 Business Standard with Copilot", price: "$23.50/user/mo, paid yearly", note: "Desktop Office apps with Copilot in Word, Excel, PowerPoint, Outlook and Teams" },
+      { plan: "Microsoft 365 Business Premium with Copilot", price: "$32.00/user/mo, paid yearly", note: "Copilot apps plus advanced security and device management" },
     ],
     pricingNote:
-      "US list prices per user/month on annual commitment, before tax. Google's current pricing page lists $7, $14 and $22 for Starter, Standard and Plus; introductory offers may temporarily lower the checkout price. Microsoft's current US page lists Business Basic at $7, Business Standard with Copilot at $23.50, and Business Premium with Copilot at $32. It also shows separate no-Teams variants at $5.40, $20.30 and $28.80 respectively. The Microsoft page checked here displays annual-commitment prices; monthly billing prices are not shown in the extracted plan list. Country, tax and promotional pricing vary.",
+      "US list prices per user/month before tax. Google Workspace lists $7, $14 and $22 for Starter, Standard and Plus on a one-year commitment with monthly payments; the current page also displays introductory offers for new customers. Gemini access differs by tier: Starter includes Gemini in Gmail, while Standard and Plus add Gemini in more Workspace apps. Microsoft's current US page lists Business Basic at $7, Business Standard with Copilot at $23.50, and Business Premium with Copilot at $32, paid yearly. Business Basic includes secure AI chat but not Copilot in Office apps; the Standard and Premium with Copilot plans add Copilot in productivity apps. The page also shows separate no-Teams variants at $5.40, $20.30 and $28.80 respectively. Country, tax and promotional pricing vary.",
     sources: [
       { label: "Google Workspace pricing (official)", url: "https://workspace.google.com/pricing" },
       { label: "Google Workspace eSignature eligibility (official help)", url: "https://support.google.com/docs/answer/16704506" },
