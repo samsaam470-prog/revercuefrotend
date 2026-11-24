@@ -21,7 +21,7 @@ const BASE_COMPETITORS: Competitor[] = [
     name: "Bonsai",
     kind: "Freelancer suite",
     summary:
-      "Proposals, contracts, invoices, expense tracking and a light CRM for freelancers. The thread is mostly there; the documents are still documents.",
+      "Proposals, contracts, invoices, expenses, time tracking, forms and a CRM for freelancers. Bonsai also offers service selections and a client portal, so its document flow is more structured than a simple PDF.",
     website: "https://www.hellobonsai.com",
     intro:
       "Bonsai is one of the closest products to Revercue on paper: a freelancer suite that covers proposals, contracts, invoices and a client list. The difference is not the list of features. It is what happens between them.",

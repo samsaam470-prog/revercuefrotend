@@ -12,12 +12,14 @@ export function ComparePage() {
         <h1>Revercue, next to the tools you already know.</h1>
         <p>
           Seven comparisons, one job: the proposal, the contract, the requirement form, the invoice
-          and the client record, kept on one thread. Each page links to the vendor's published
-          published pricing with the date it was checked, plus independent review listings where available. No competitor bashing — each tool is good at
-          what it does, and the question is what happens between the pieces.
+          and the client record, kept on one thread. Last verified: {PRICING_CHECKED}. Each page links
+          to the vendor's current pricing and product documentation, plus independent review listings
+          where available. Ratings and counts are dated snapshots, not controlled tests, and small
+          samples are called out. No competitor bashing — each tool is good at what it does, and the
+          question is what happens between the pieces.
         </p>
         <p className="caption">
-          Last verified: {PRICING_CHECKED}. Each page lists the published plans and links to the vendor sources and independent review listings checked for that comparison.
+          Each page lists the published plans and the vendor sources and independent review listings checked for that comparison.
         </p>
       </div>
 
