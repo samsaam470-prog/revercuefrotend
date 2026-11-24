@@ -147,7 +147,7 @@ const BASE_COMPETITORS: Competitor[] = [
       "The proposal is a decision surface: package selection, questions and FAQs inside one link.",
       "Tracking and suggestions are about the client's behaviour, not the writer's text.",
       "The client record is built from the thread itself, including the 15-day summary.",
-      "No model writes for you: the product uses patterns, and says so.",
+      "Writing support is optional; the core workflow tracks client decisions and the next action.",
     ],
     fits:
       "Moxie fits a freelancer who wants a project workspace with writing help built in. Revercue fits a freelancer whose bottleneck is the client's decision and follow-up, not the first draft.",
@@ -335,8 +335,8 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The money and the paperwork",
       paragraphs: [
-        "Moxie handles invoices and payments in the same workspace as the proposals, with a client portal that keeps the paperwork in one place. The writing helper is the differentiator, and it shows up across the documents rather than in one corner of the product.",
-        "Revercue does not write for you, and that is a deliberate position. The product spends its effort on what happens after the text exists: who opened it, what they chose, what they answered, and what you should do next. If the blank page is your bottleneck, Moxie attacks that problem directly; if the follow-through is your bottleneck, Revercue does.",
+        "Moxie handles invoices and payments in the same workspace as the proposals, with a client portal that keeps the paperwork in one place. Moxie lists its Assistant as a product feature and documents it separately in the help centre; this comparison does not assume its capabilities are limited to drafting text.",
+        "Revercue is not positioned as a writing assistant; its primary job is to show what happens after a proposal is sent. The product spends its effort on what happens after the text exists: who opened it, what they chose, what they answered, and what you should do next. If the blank page is your bottleneck, Moxie attacks that problem directly; if the follow-through is your bottleneck, Revercue does.",
       ],
     },
     {
