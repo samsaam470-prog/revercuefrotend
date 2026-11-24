@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { API_BASE_URL } from '../api/client';
 
 type PlanName = 'free' | 'starter' | 'growth' | 'scale';
@@ -61,7 +61,7 @@ export function TestAccountAreaPage() {
     return payload;
   }
 
-  async function signIn(event: React.FormEvent) {
+  async function signIn(event: FormEvent) {
     event.preventDefault();
     setBusy(true);
     setError('');
@@ -190,7 +190,7 @@ export function TestAccountAreaPage() {
               <h2 style={{ fontSize: 22, margin: '6px 0 16px' }}>Dashboard fixture</h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 12 }}>
                 {Object.entries(workspace.dashboard).map(([key, value]) => (
-                  <div className="card card-sm" key={key}><span className="caption">{key.replaceAll('_', ' ')}</span><strong style={{ display: 'block', fontSize: 22, marginTop: 8 }}>{typeof value === 'number' && key.includes('revenue') ? `$${value.toLocaleString()}` : String(value)}</strong></div>
+                  <div className="card card-sm" key={key}><span className="caption">{key.replace(/_/g, ' ')}</span><strong style={{ display: 'block', fontSize: 22, marginTop: 8 }}>{typeof value === 'number' && key.includes('revenue') ? `$${value.toLocaleString()}` : String(value)}</strong></div>
                 ))}
               </div>
               <h3 style={{ fontSize: 17, margin: '24px 0 12px' }}>Sample records</h3>
