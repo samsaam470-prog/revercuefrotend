@@ -151,7 +151,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       "pricing-scalability": {
         rating: "yes",
-        note: "Free to start, paid solo plans in the low tens per month, Teams priced separately. Public checkout above Free.",
+        note: "Free to start. Starter, Growth and Scale are $12, $29 and $49 a month, with Teams in beta and priced separately. Paid plans are bought through public checkout.",
       },
       "ease-of-use-support": {
         rating: "yes",

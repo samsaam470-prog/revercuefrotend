@@ -333,8 +333,8 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
   },
 
   moxie: {
-    checkedOn: PRICING_CHECKED,
-    pricingSource: { label: "Moxie — official pricing page", url: "https://www.withmoxie.com/pricing" },
+    checkedOn: "24 November 2026",
+    pricingSource: { label: "Moxie — official pricing page (checked 24 November 2026)", url: "https://withmoxie.com/pricing" },
     pricing: [
       { plan: "Starter", price: "$12/mo, or $10/mo billed yearly", note: "Clients, projects, invoices, proposals, basic accounting" },
       { plan: "Pro", price: "$25/mo, or $20/mo billed yearly", note: "White-label portal, automations, integrations, phone line" },
