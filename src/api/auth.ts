@@ -24,6 +24,8 @@ export const authApi = {
       onboarding?: { step: number; required: boolean; complete: boolean; next_step: number; destination: string };
     }>("/api/auth/me", { token, suppressUnauthorized: true }),
 
+  stagingMe: (token: string) => api.get<{ user: User }>("/api/staging/me", { token, suppressUnauthorized: true }),
+
   logout: () => api.post<{ success: true }>("/api/auth/logout", undefined, {
     suppressUnauthorized: true,
   }),

@@ -56,10 +56,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [offline, setOffline] = useState(false);
   const [onboardingDestination, setOnboardingDestination] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const isStaging = import.meta.env.VITE_STAGING_MODE === "true";
   const tokenRef = useRef<string | null>(null);
   const navigate = useNavigate();
 
   const getAccessToken = useCallback(async (): Promise<string | null> => {
+    if (isStaging) return tokenStore.get();
     if (!sdkIsAuthenticated) return null;
     try {
       const t = await sdkGetAccessToken();
@@ -70,7 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch {
       return tokenRef.current;
     }
-  }, [sdkGetAccessToken, sdkIsAuthenticated]);
+  }, [sdkGetAccessToken, sdkIsAuthenticated, isStaging]);
 
   // Register the async token source for the API client.
   useEffect(() => {
@@ -88,6 +90,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const refresh = useCallback(async (): Promise<User | null> => {
+    if (isStaging) {
+      const current = tokenStore.get();
+      if (!current) { clear(); return null; }
+      setLoading(true);
+      try {
+        const response = await authApi.stagingMe(current);
+        setToken(current);
+        setUser(response.user);
+        setOffline(false);
+        return response.user;
+      } catch {
+        clear();
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    }
     if (!sdkIsAuthenticated) {
       clear();
       return null;
@@ -131,7 +150,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  }, [sdkIsAuthenticated, getAccessToken, clear]);
+  }, [sdkIsAuthenticated, getAccessToken, clear, isStaging]);
 
   /*
    * Load the Revercue record once per authentication transition, not on every
@@ -139,6 +158,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
    */
   const lastAuth = useRef<boolean | null>(null);
   useEffect(() => {
+    if (isStaging) {
+      if (lastAuth.current === true) return;
+      lastAuth.current = true;
+      void refresh();
+      return;
+    }
     if (sdkIsLoading) return;
     if (lastAuth.current === sdkIsAuthenticated) return;
     lastAuth.current = sdkIsAuthenticated;
@@ -147,7 +172,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
     void refresh();
-  }, [sdkIsLoading, sdkIsAuthenticated, refresh, clear]);
+  }, [sdkIsLoading, sdkIsAuthenticated, refresh, clear, isStaging]);
 
   useEffect(() => {
     setUnauthorizedHandler(() => {
@@ -166,8 +191,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signIn = useCallback(async () => {
+    if (isStaging) { navigate("/login"); return; }
     await loginWithRedirect();
-  }, [loginWithRedirect]);
+  }, [loginWithRedirect, isStaging, navigate]);
 
   const signOut = useCallback(async () => {
     try {
@@ -175,7 +201,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch {
       /* best effort */
     }
-    try {
+    if (!isStaging) try {
       await sdkLogout();
     } catch {
       /* best effort */
@@ -184,16 +210,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     lastAuth.current = false;
     clearReturnTo();
     navigate("/", { replace: true });
-  }, [sdkLogout, clear, navigate]);
+  }, [sdkLogout, clear, navigate, isStaging]);
 
   const value = useMemo<AuthState>(
     () => ({
       user,
       token,
-      loading: loading || sdkIsLoading,
+      loading: loading || (!isStaging && sdkIsLoading),
       offline,
       onboardingDestination,
-      isAuthenticated: Boolean(sdkIsAuthenticated && user),
+      isAuthenticated: Boolean((isStaging ? token : sdkIsAuthenticated) && user),
       setSession,
       signIn,
       signOut,
@@ -205,6 +231,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       token,
       loading,
       sdkIsLoading,
+      isStaging,
       offline,
       sdkIsAuthenticated,
       onboardingDestination,
