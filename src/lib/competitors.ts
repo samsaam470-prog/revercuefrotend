@@ -55,10 +55,10 @@ const BASE_COMPETITORS: Competitor[] = [
     name: "HoneyBook",
     kind: "Client flow for service businesses",
     summary:
-      "Inquiry to booking to contract to payment, built for service businesses. Strong on the client experience, lighter on the requirement and the record.",
+      "Interactive proposals, contracts, invoices, payments, scheduling and client portal, with HoneyBook AI, task management and file tracking across plans. Automations and QuickBooks start on Essentials; unlimited team members are Premium.",
     website: "https://www.honeybook.com",
     intro:
-      "HoneyBook is built around the client journey: an inquiry form, a call, a proposal, a contract, an invoice, a payment. For service businesses with a repeatable sales motion, that flow is the product.",
+      "HoneyBook is built around the client journey: inquiry forms, interactive proposals, contracts, invoices, payments, scheduling and client communication. Its current pricing page lists HoneyBook AI, task management, read receipts and file tracking across plans; automations and QuickBooks access start on Essentials, while unlimited team members are Premium.",
     sections: [
       {
         heading: "How the thread works in HoneyBook",
