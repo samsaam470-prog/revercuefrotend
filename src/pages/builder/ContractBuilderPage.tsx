@@ -473,7 +473,7 @@ function ContractCanvas({ id }: { id: string }) {
     setCreating(true);
     try {
       await autosave.save(payload);
-      const result = await analyzeDocument({ blocks, hasClient: Boolean(contract?.client_id) });
+      const result = await analyzeDocument({ blocks, sections: briefRef.current?.sections ?? [], tone: briefRef.current?.tone, hasClient: Boolean(contract?.client_id) });
       setReview(result);
     } catch (cause) {
       const apiError = cause as ApiError;

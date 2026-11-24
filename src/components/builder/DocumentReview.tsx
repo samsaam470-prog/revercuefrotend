@@ -36,11 +36,7 @@ export function DocumentReview({ review, onClose, onPublishAnyway }: DocumentRev
             </ul>
           )}
 
-          {review.helperUsed && (
-            <p className="caption">
-              The optional readability pass ran in this browser. That pass does not send the text to Revercue.
-            </p>
-          )}
+}
 
           <div className="between">
             <Button variant="ghost" onClick={onClose}>

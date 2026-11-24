@@ -1,5 +1,4 @@
 import type { Block } from "../types";
-import { isAvailable, rewrite } from "./webllm";
 
 export type IssueSource = "Document structure" | "Document content" | "Client context" | "Writing quality";
 
@@ -11,7 +10,6 @@ export interface ReviewIssue {
 export interface Review {
   score: number;
   issues: ReviewIssue[];
-  helperUsed: boolean;
 }
 
 interface ReviewInput {
@@ -30,9 +28,8 @@ const textOf = (block: Block): string => {
 };
 
 /**
- * The post-document review. The pattern engine checks the structure, the
- * helper checks the prose when it can run, and the two produce one score and
- * one list. Nothing here blocks publishing.
+ * The post-document review uses deterministic structure and writing checks.
+ * It does not inspect client history or verify factual claims.
  */
 export async function analyzeDocument({ blocks, sections = [], tone, hasClient }: ReviewInput): Promise<Review> {
   const issues: ReviewIssue[] = [];
@@ -43,8 +40,8 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
   const types = new Set(blocks.map((block) => block.type));
 
   if (blocks.length === 0) {
-    issues.push({ source: "Writing quality", text: "The document has no blocks yet." });
-    return { score: 0, issues, helperUsed: false };
+    issues.push({ source: "Document structure", text: "The document has no blocks yet." });
+    return { score: 0, issues };
   }
 
   if (sections.length > 0) {
@@ -55,7 +52,7 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
     if (missing.length > 0) {
       score -= Math.min(30, missing.length * 10);
       issues.push({
-        source: "Writing quality",
+        source: "Document structure",
         text: `These sections are empty: ${missing.join(", ")}.`,
       });
     }
@@ -64,7 +61,7 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
   if (!types.has("pricing_table") && !types.has("packages")) {
     score -= 12;
     issues.push({
-      source: "Writing quality",
+      source: "Document structure",
       text: "There is no pricing block. Add the agreed price or packages if this document needs them.",
     });
   }
@@ -72,7 +69,7 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
   if (!types.has("next_step") && !types.has("button")) {
     score -= 10;
     issues.push({
-      source: "Writing quality",
+      source: "Document structure",
       text: "There is no next step or button. Tell the client what to do after reading.",
     });
   }
@@ -104,8 +101,7 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
     });
   }
 
-  const duplicated = body
-    .split(/\n+/)
+  const duplicated = blocks.flatMap((block) => textOf(block).split(/\n+/))
     .map((line) => line.trim())
     .filter((line) => line.length > 40);
   const seen = new Set<string>();
@@ -118,7 +114,7 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
   if (!hasClient) {
     score -= 8;
     issues.push({
-      source: "Document content",
+      source: "Client context",
       text: "The document is not linked to a client record yet. Link it if you want it associated with a client.",
     });
   }
@@ -131,19 +127,9 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
     });
   }
 
-  let helperUsed = false;
-  if (isAvailable() && body.length > 80) {
-    const note = await rewrite(
-      body.slice(0, 1200),
-      "Reply with one sentence naming the clarity problem only. No praise, no rewrite.",
-    );
-    if (note) {
-      helperUsed = true;
-      issues.push({ source: "Writing quality", text: note.split("\n")[0].slice(0, 240) });
-    }
-  }
 
-  return { score: Math.max(0, Math.min(100, score)), issues, helperUsed };
+
+  return { score: Math.max(0, Math.min(100, score)), issues };
 }
 
 export function scoreBand(score: number): string {

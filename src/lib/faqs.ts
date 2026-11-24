@@ -726,7 +726,7 @@ export const FAQS: Faq[] = [
     group: "documents",
     question: "What is post-document analysis?",
     answer:
-      "Post-document analysis runs when you click Create, before the document is published. It gives an indicative score (0–100) and flags structural and writing issues such as missing sections, missing pricing or next steps, short content, long sentences and repeated text. It does not inspect a client’s historical documents or verify factual claims. Where available, an optional readability pass runs in the browser. You can keep editing or choose to publish anyway; the score is guidance, not a guarantee of quality.",
+      "Post-document analysis runs when you click Create, before the document is published. It gives an indicative score (0–100) and flags structural and writing issues such as missing sections, missing pricing or next steps, short content, long sentences and repeated text. It does not inspect a client’s historical documents or verify factual claims. You can keep editing or choose to publish anyway; the score is guidance, not a guarantee of quality.",
   },
   {
     id: 104,
