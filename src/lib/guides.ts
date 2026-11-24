@@ -1215,6 +1215,79 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
+        heading: "Native integrations we are looking to introduce",
+        paragraphs: [
+          "Revercue does not connect to other tools yet. There is no public API, no SDK, no webhook system and no integrations directory today. Information moves in and out through the exports that exist: clients can be exported as a CSV file, and each document can be downloaded as a PDF.",
+          "The integrations we are evaluating are native connections into the tools freelancers and small teams already use. The categories under evaluation are accounting, calendar and payment tools. The aim is to avoid retyping the same details: a paid invoice could be matched to the bookkeeping record, and a follow-up date could appear in the calendar you already use.",
+          "No specific integration is promised, and the categories above are not a commitment. We have not chosen which products to build against first, and we have not set a date for any of them. When an integration ships, it will be announced on the changelog and in this guide, with its scope stated plainly, including what it reads from Revercue and what it writes back.",
+          "Until then, do not build your workflow around an integration that does not exist. Keep your accounting software as the record for your books, and use the CSV export when you need to move client details into another system.",
+          "If a particular connection would change how you work, tell us through the contact form. Requests help us understand what matters, but they do not guarantee a place on the list.",
+        ],
+      },
+      {
+        heading: "Google Workspace",
+        paragraphs: [
+          "Status: not available. This integration is in the planning stage. No build has started and no release date is set.",
+          "Google Workspace is Google's suite of business tools: Gmail for email, Google Calendar for scheduling, Google Drive for file storage and Google Meet for video calls. Many freelancers and small agencies run client communication through it, which makes it one of the most common places where follow-ups, meeting times and shared files already live.",
+          "Why this matters: a follow-up date in Revercue is only useful if it appears where you actually look. A calendar connection would let a follow-up or a booked call sit next to the rest of your day without retyping it. Drive is also where many client files end up, so a link to a signed PDF or an uploaded brief could be stored with the rest of the project. Without a connection, the same information lives in two places and drifts apart.",
+          "What we think: a calendar connection is the most useful first step, because it removes a repeated manual task with a small, clear scope. A Drive connection is more sensitive, since it involves documents, so it would need a narrow permission and a plain statement of what Revercue reads and what it writes. This is our view of where the value is, not a commitment, and nothing would be announced until it has been tested.",
+        ],
+      },
+      {
+        heading: "Microsoft 365",
+        paragraphs: [
+          "Status: not available. This integration is in the planning stage. No build has started and no release date is set.",
+          "Microsoft 365 is Microsoft's business suite: Outlook for email and calendar, OneDrive for file storage, Teams for chat and meetings, and the Office apps. It is the other common home for freelancer and small-business communication, and many clients will use it even when the freelancer does not.",
+          "Why this matters: a connection to Microsoft 365 would serve the same purpose as one to Google Workspace, for the many people who work in Outlook. It also matters because a client's own calendar or inbox may be Microsoft-based, so a meeting booked from Revercue should reach that client correctly whichever provider they use. Supporting one suite and not the other would leave a large share of freelancers doing the same manual work.",
+          "What we think: Google Workspace and Microsoft 365 should be treated as a pair, not as a choice of one. The calendar use case is the same for both, so the design should be shared, with the same permission model and the same explanation to the user. We think the order should follow what users ask for rather than which suite is larger. This is a view, not a plan with a date.",
+        ],
+      },
+      {
+        heading: "Whop",
+        paragraphs: [
+          "Status: available today for subscription plans only, where Starter, Growth and Scale are bought through Whop checkout. Any further Whop-based payment features are in the planning stage and are not available.",
+          "Whop is the checkout provider Revercue uses for its paid subscription plans. Starter, Growth and Scale are bought through Whop checkout, and that is how plan billing is handled today. Whop is a payment and subscription platform. It is separate from the payment links a freelancer uses to collect money from their own clients.",
+          "Why this matters: people should know who processes their subscription payment and why. Whop is already part of the product, so it is not a future integration; it is the current billing path. The distinction matters because there are two different payments in Revercue. The first is the subscription a freelancer pays to use Revercue, which goes through Whop. The second is the invoice a freelancer sends to a client, which uses a payment link or account details that the freelancer provides. Whop does not handle client invoices.",
+          "What we think: keeping subscription billing with a dedicated checkout provider keeps the product's own finances simple and separate from client money. We also think a freelancer's invoice payments should stay under the freelancer's own control. Any future change to how Whop is used, such as moving more of the checkout into the product, would be announced in advance and would not change how existing invoices are paid.",
+        ],
+      },
+      {
+        heading: "Stripe",
+        paragraphs: [
+          "Status: not available. Card payments through Stripe are in the planning stage and are not available. Clients can pay invoices today only through a payment link or account details that the freelancer provides.",
+          "Stripe is a payment processor that lets businesses accept cards and other payment methods online, and it is one of the most widely used providers for freelance and software businesses. A business connects its own Stripe account, and money from a payment flows to that account, minus the processing fee that Stripe charges.",
+          "Why this matters: card payments are the most common way clients expect to pay, and many freelancers already use Stripe through other tools. A Stripe connection would let an invoice be paid by card directly from the invoice page, and the payment would be recorded against that invoice without a manual confirmation. Today the freelancer confirms each payment after it arrives. The gap between a client paying and the record being updated is where mistakes and delays happen.",
+          "What we think: card payments are the most valuable payment integration, and Stripe is a sensible candidate because of its reach. Taking money changes the product's responsibility, so the design needs care: clear fees, clear refund behaviour, and nothing that holds a client's money in a way the freelancer cannot see. We would not rush card payments. Until then, a payment link that the freelancer provides, which may already come from Stripe, remains the honest path, and it is the one the product supports today.",
+        ],
+      },
+      {
+        heading: "PayPal",
+        paragraphs: [
+          "Status: not available. A PayPal connection is in the planning stage and is not available. Clients can pay invoices today only through a payment link or account details that the freelancer provides.",
+          "PayPal is a payment platform that lets people send and receive money, pay by wallet or card, and hold a balance. Many freelancers, particularly those working with clients in other countries, already use it, and some clients prefer to pay through it rather than by bank transfer or card.",
+          "Why this matters: payment preference differs by country and by client. A freelancer who works across borders may find that PayPal is the method clients trust most. A PayPal connection would widen the ways a client can pay without leaving the invoice. It would also raise a design question that is not trivial: whether a payment should be recorded automatically when it arrives, or confirmed by the freelancer, as it is today.",
+          "What we think: PayPal is worth evaluating alongside Stripe, not as a replacement, because the two serve different clients. The first step should be a payment link that clients can open from the invoice and that the freelancer controls, before any automatic matching. Fees, currency conversion and dispute rules are part of what the freelancer keeps and must be stated in front of them before they choose the method.",
+        ],
+      },
+      {
+        heading: "User-provided AI provider API keys",
+        paragraphs: [
+          "Status: not available. Bring-your-own-key AI is in the planning stage and is not available. No feature asks you for a provider key today.",
+          "An AI provider API key is a secret credential issued by a company that runs an AI model. It lets software send requests to that provider and bills the account that owns the key. A bring-your-own-key feature would let a freelancer add their own key so that any AI-assisted step uses their provider account rather than a key held by Revercue.",
+          "Why this matters: it changes who pays for AI usage and who controls the data that reaches the provider. Revercue does not ask you for an AI provider key today. A key that a user supplies would have to be stored safely, used only for the requests the user asked for, and removable at any time. A user should know exactly which provider receives which text before they add a key.",
+          "What we think: bring-your-own-key is more transparent than hiding AI usage inside a subscription, but it also carries a security responsibility. We would store keys encrypted, show what each key is used for, never send document content to a provider without a clear action by the user, and let the key be deleted immediately. We would not offer it until those controls exist, and we would keep disclosing which features use a provider.",
+        ],
+      },
+      {
+        heading: "E-signature software",
+        paragraphs: [
+          "Status: the typed-name signature described in the contracts guide is available today. It is not a certified or advanced electronic signature. Connecting a specialist e-signature provider is in the planning stage and is not available.",
+          "E-signature software is a specialist service that collects a signature with stronger evidence than a typed name. Advanced electronic signatures and qualified electronic signatures, as defined in many legal systems, add features such as identity verification, a tamper-evident certificate and an audit record, and they are usually supplied by a trust service provider.",
+          "Why this matters: some agreements need more proof than a typed name. Revercue's current signature is a typed full name with an explicit consent tick, a recorded date and the exact version that was signed. That is a practical record for many freelance agreements. It is not a certified or advanced electronic signature, and it does not verify identity. A freelancer who needs stronger evidence should not rely on it, and this guide should never suggest that it is.",
+          "What we think: Revercue is not planning to become a certified signing provider, and we think the product should say so plainly. The better route is to let a freelancer connect a specialist signing service for the contracts that need one, while keeping the typed-name record for the rest. Until such a connection exists, the accurate answer is that Revercue's signature is not certified or advanced, and a freelancer who needs stronger proof should check the requirement with a qualified adviser.",
+        ],
+      },
+      {
         heading: "Become a Teams beta partner",
         paragraphs: [
           "If your team wants to help shape the Teams experience, apply to become a Teams beta partner.",
