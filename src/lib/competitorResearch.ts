@@ -225,8 +225,7 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
       { label: "Google Workspace eSignature eligibility (official help)", url: "https://support.google.com/docs/answer/16704506" },
       { label: "Microsoft 365 business plans and pricing (official)", url: "https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-plans-and-pricing" },
       { label: "Microsoft eSignature pay-as-you-go pricing (Microsoft Learn)", url: "https://learn.microsoft.com/microsoft-365/documentprocessing/syntex-pay-as-you-go-services?view=o365-worldwide" },
-      { label: "Google Workspace on Capterra", url: "https://www.capterra.com/p/247901/Google-Workspace/" },
-      { label: "Microsoft 365 on Capterra", url: "https://www.capterra.com/p/227157/Microsoft-365/reviews/" },
+      { label: "Capterra side-by-side review listing — Google Workspace vs Microsoft 365 (updated 20 Nov 2026)", url: "https://www.capterra.com/compare/227157-247901/Microsoft-365-vs-Google-Workspace" },
     ],
     othersSay: {
       intro: "Review-listing snapshots checked 24 November 2026. Ratings and counts belong to the review platforms, can change, and are not Revercue test scores.",
