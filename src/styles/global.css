@@ -4840,3 +4840,59 @@ details.faq-item:hover {
 ul.key-facts { list-style: none; padding: 0; margin: 24px auto 0; max-width: 760px; display: grid; gap: 12px; text-align: left; }
 ul.key-facts li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.6; }
 ul.key-facts li svg { flex-shrink: 0; margin-top: 4px; }
+
+/* Feature wheel (header) */
+.feature-wheel-btn { color: var(--gold); }
+.feature-wheel-backdrop {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55); z-index: 200;
+}
+.feature-wheel {
+  position: fixed; left: 50%; top: 50%; width: 0; height: 0; z-index: 201;
+}
+.feature-wheel-hub {
+  position: absolute; left: -74px; top: -74px; width: 148px; height: 148px; border-radius: 50%;
+  background: var(--bg-card); border: 1px solid var(--gold); color: var(--text-primary);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-decoration: none; text-align: center; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+.feature-wheel-hub span { font-family: var(--font-display); font-size: 20px; }
+.feature-wheel-hub small { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
+.feature-wheel-item {
+  position: absolute; left: -58px; top: -24px; width: 116px; padding: 10px 8px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  color: var(--text-primary); text-decoration: none; text-align: center; font-size: 14px;
+  line-height: 1.3; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+}
+.feature-wheel-item:hover, .feature-wheel-item:focus-visible { border-color: var(--gold); outline: none; }
+
+/* Feature pages: readable type and spacing */
+.feature-doc { font-size: 17px; line-height: 1.75; }
+.feature-doc .page { padding-top: 72px; }
+.feature-doc .page-head { max-width: 780px; margin-bottom: 56px; }
+.feature-doc .page-head h1 { font-size: 46px; line-height: 1.2; margin: 14px 0 22px; }
+.feature-doc .page-head p { font-size: 19px; line-height: 1.7; }
+.feature-doc .section { padding: 72px 0; }
+.feature-doc .section-head { margin-bottom: 36px; }
+.feature-doc .section-head h2, .feature-doc h2 { font-size: 34px; line-height: 1.25; margin-bottom: 14px; }
+.feature-doc .section p { font-size: 17px; line-height: 1.8; max-width: 72ch; margin-bottom: 20px; }
+.feature-doc .section p:last-child { margin-bottom: 0; }
+.feature-doc .muted { color: var(--text-secondary); }
+.feature-doc .caption { font-size: 14px; }
+.feature-doc ul.key-facts { max-width: 72ch; gap: 16px; margin-top: 32px; }
+.feature-doc ul.key-facts li { font-size: 16px; line-height: 1.7; }
+.feature-doc .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.feature-doc .module-card { padding: 26px; }
+.feature-doc .module-card p, .feature-doc .module-card h3 { font-size: 16px; line-height: 1.6; }
+.feature-doc .faq-item summary { font-size: 17px; padding: 18px 0; }
+.feature-doc .faq-item p { font-size: 16px; line-height: 1.75; max-width: 72ch; padding-bottom: 18px; }
+.feature-doc .btn { font-size: 15px; }
+.feature-doc .two-up { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+.feature-doc .stack-2 li { font-size: 16px; line-height: 1.7; }
+@media (max-width: 760px) {
+  .feature-doc { font-size: 16px; }
+  .feature-doc .page { padding-left: 20px; padding-right: 20px; }
+  .feature-doc .page-head h1 { font-size: 34px; }
+  .feature-doc .page-head p, .feature-doc .section p { font-size: 16px; }
+  .feature-doc .section-head h2, .feature-doc h2 { font-size: 28px; }
+  .feature-doc .module-grid { grid-template-columns: 1fr; }
+}

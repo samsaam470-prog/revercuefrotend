@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { CircleDot, Menu, X } from "lucide-react";
+import { FeatureWheel } from "./FeatureWheel";
 import { Logo } from "../shared/Logo";
 import { AuthActionStart } from "../auth/AuthActionStart";
 
@@ -16,6 +17,7 @@ const LINKS = [
 export function PublicHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [wheelOpen, setWheelOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -62,6 +64,16 @@ export function PublicHeader() {
           </AuthActionStart>
           <button
             type="button"
+            className="btn-icon feature-wheel-btn"
+            onClick={() => setWheelOpen((value) => !value)}
+            aria-label="Open the feature wheel"
+            aria-expanded={wheelOpen}
+            title="Features"
+          >
+            <CircleDot size={20} />
+          </button>
+          <button
+            type="button"
             className="btn-icon menu-btn"
             onClick={() => setOpen((value) => !value)}
             aria-label={open ? "Close menu" : "Open menu"}
@@ -71,6 +83,7 @@ export function PublicHeader() {
           </button>
         </div>
       </header>
+      <FeatureWheel open={wheelOpen} onClose={() => setWheelOpen(false)} />
       {open && (
         <div className="mobile-nav">
           {LINKS.map((link) => (

@@ -119,7 +119,7 @@ export function FeaturesPage() {
   }, []);
 
   return (
-    <div className="page page-wide">
+    <div className="page page-wide feature-doc">
       <div className="page-head">
         <p className="eyebrow">Features</p>
         <h1>Seven features, one client thread.</h1>

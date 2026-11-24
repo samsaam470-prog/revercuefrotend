@@ -47,7 +47,7 @@ export function FeatureDetailPage() {
   }
 
   return (
-    <div className="page page-wide">
+    <div className="page page-wide feature-doc">
       <header className="page-head">
         <p className="eyebrow">{guide.eyebrow}</p>
         <h1>{guide.title}</h1>
