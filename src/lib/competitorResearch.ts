@@ -629,8 +629,8 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
   },
 
   "google-microsoft": {
-    checkedOn: PRICING_CHECKED,
-    pricingSource: { label: "Google Workspace pricing (official)", url: "https://workspace.google.com/pricing" },
+    checkedOn: "24 November 2026",
+    pricingSource: { label: "Google Workspace pricing (Google support page, checked 24 November 2026)", url: "https://support.google.com/a/answer/15400543" },
     pricing: [
       { plan: "Google Workspace Business Starter", price: "$8.40/mo flexible, or $7.00/mo annual", note: "30 GB per user, 100-person meetings" },
       { plan: "Google Workspace Business Standard", price: "$16.80/mo flexible, or $14.00/mo annual", note: "2 TB per user, recording, eSignature" },
@@ -640,7 +640,7 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
       { plan: "Microsoft 365 Business Premium", price: "$26.40/mo monthly, or $22.00/mo annual", note: "Intune, Defender, conditional access" },
     ],
     pricingNote:
-      "Per user, per month, before tax, on US list prices. Since July 2026 both suites list at the same $7 / $14 / $22 annual tiers and $8.40 / $16.80 / $26.40 monthly tiers. Google and Microsoft both run time-limited promotions, and local currency and reseller pricing vary; the vendor pages are the only reliable source for a specific country.",
+      "Per user, per month, before tax, on US list prices. Google figures are from Google's own support page: Business Starter $7 annual or $8.40 flexible, Standard $14 or $16.80, Plus $22 or $26.40. Microsoft figures are from secondary sources that agree with each other (Business Basic $7 annual or $8.40 monthly, Standard $14 or $16.80, Premium $22 or $26.40, after the July 2026 price change); they are not yet confirmed on Microsoft's own page. Promotions and local pricing vary, so check the vendor page for a specific country.",
     sources: [
       { label: "Google Workspace pricing (official)", url: "https://workspace.google.com/pricing" },
       { label: "Microsoft 365 business plans (official)", url: "https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-plans-and-pricing" },
