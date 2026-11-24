@@ -347,7 +347,6 @@ function ContractCanvas({ id }: { id: string }) {
   const [share, setShare] = useState<{ url: string } | null>(null);
   const [creating, setCreating] = useState(false);
   const [review, setReview] = useState<Review | null>(null);
-  const [pendingShare, setPendingShare] = useState<{ url: string } | null>(null);
   const [initialised, setInitialised] = useState(false);
   const [stage, setStage] = useState<DraftStage | null>(null);
   const [stageStatuses, setStageStatuses] = useState<DraftProgressState>({});
@@ -474,29 +473,34 @@ function ContractCanvas({ id }: { id: string }) {
     setCreating(true);
     try {
       await autosave.save(payload);
+      const result = await analyzeDocument({ blocks, hasClient: Boolean(contract?.client_id) });
+      setReview(result);
+    } catch (cause) {
+      const apiError = cause as ApiError;
+      toast.error(errorMessage(apiError.code, apiError.message));
+    } finally {
+      setCreating(false);
+    }
+  };
+
+  const publishReviewed = async () => {
+    setCreating(true);
+    try {
       if (!freelancerSigned) {
         if (!signerName.trim()) {
           toast.error("Enter your name to sign the contract first.");
-          setCreating(false);
           return;
         }
         if (!signConsent) {
           toast.error("You must consent to sign the contract first.");
-          setCreating(false);
           return;
         }
-        await contractsApi.signFreelancer(id, {
-          signature: signerName,
-          consent: signConsent,
-          name: signerName,
-        });
+        await contractsApi.signFreelancer(id, { signature: signerName, consent: signConsent, name: signerName });
         setFreelancerSigned(true);
       }
       const response = await contractsApi.publish(id);
-      const nextShare = { url: response.url };
-      const result = await analyzeDocument({ blocks, hasClient: Boolean(contract?.client_id) });
-      setPendingShare(nextShare);
-      setReview(result);
+      setShare({ url: response.url });
+      setReview(null);
     } catch (cause) {
       const apiError = cause as ApiError;
       toast.error(errorMessage(apiError.code, apiError.message));
@@ -608,10 +612,7 @@ function ContractCanvas({ id }: { id: string }) {
       <DocumentReview
         review={review}
         onClose={() => setReview(null)}
-        onPublishAnyway={() => {
-          setShare(pendingShare);
-          setReview(null);
-        }}
+        onPublishAnyway={() => { void publishReviewed(); }}
       />
 
       <ShareModal
