@@ -14,7 +14,6 @@ import {
   SolutionLandingPage, FeatureDetailPage,
 } from "./pages/public";
 import { CallbackPage, LoginPage } from "./pages/auth";
-import { TestAccountAreaPage } from "./pages/TestAccountAreaPage";
 import {
   OnboardingStep1Page, OnboardingStep2Page, OnboardingStep4Page, OnboardingStep5Page,
 } from "./pages/onboarding";
@@ -77,7 +76,6 @@ export function App() {
             <Route path="/security" element={<SecurityPage />} />
             <Route path="/faqs" element={<FaqsPage />} />
           </Route>
-          <Route path="/testaccountarea" element={<TestAccountAreaPage />} />
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/callback" element={<CallbackPage />} />
