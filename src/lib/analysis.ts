@@ -53,7 +53,7 @@ export async function analyzeDocument({ blocks, sections = [], tone, hasClient }
       score -= Math.min(30, missing.length * 10);
       issues.push({
         source: "Document structure",
-        text: `These sections are empty: ${missing.join(", ")}.`,
+        text: `These expected section labels were not found in the document: ${missing.join(", ")}.`,
       });
     }
   }
