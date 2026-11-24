@@ -431,8 +431,8 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
   },
 
   plutio: {
-    checkedOn: PRICING_CHECKED,
-    pricingSource: { label: "Plutio — official pricing page", url: "https://www.plutio.com/pricing" },
+    checkedOn: "24 November 2026",
+    pricingSource: { label: "Plutio — official pricing page (checked 24 November 2026)", url: "https://www.plutio.com/pricing" },
     pricing: [
       { plan: "Core", price: "$19/mo, or $190/yr", note: "Solo; 9 active clients, no contributors" },
       { plan: "Pro", price: "$49/mo, or $490/yr", note: "Unlimited clients, 30 contributors" },
@@ -530,8 +530,8 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
   },
 
   agiled: {
-    checkedOn: PRICING_CHECKED,
-    pricingSource: { label: "Agiled — official pricing page", url: "https://agiled.app/pricing" },
+    checkedOn: "24 November 2026",
+    pricingSource: { label: "Agiled — official pricing page (checked 24 November 2026)", url: "https://agiled.app/pricing" },
     pricing: [
       { plan: "Starter", price: "$29/mo, or $24/mo billed yearly", note: "One seat; 500 contacts, 10 projects" },
       { plan: "Pro", price: "$69/mo, or $59/mo billed yearly", note: "Three seats; workflows, API, unlimited projects" },
@@ -539,7 +539,7 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
       { plan: "Scale", price: "$249/mo, or $199/mo billed yearly", note: "Fifteen seats; accounting intelligence" },
     ],
     pricingNote:
-      "Per workspace, with seats included per plan; extra seats cost about $20 per seat per month on Pro and above. There is no free plan; the trial is 14 days with Business features and no card. Agiled only renders its annual view server-side, so the monthly figures are corroborated by its own comparison posts and an independent tracker rather than read directly from the toggle.",
+      "Per workspace, with seats included per plan; extra seats cost about $20 per seat per month on Pro and above. There is no free plan; the trial is 14 days with Business features and no card. Agiled only renders its annual view server-side, so the monthly figures are corroborated by its own comparison posts and an independent tracker rather than read directly from the toggle. The official page confirms the annual prices ($24, $59, $99, $199 a month billed annually). The monthly figures are from a third-party read of the monthly view and are not confirmed on the official page.",
     sources: [
       { label: "Agiled pricing (official)", url: "https://agiled.app/pricing" },
       { label: "Agiled documentation", url: "https://docs.agiled.app/" },
