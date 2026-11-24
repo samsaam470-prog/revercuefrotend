@@ -22,8 +22,8 @@ export function PreviewPane({
   reference,
   blocks,
   doc,
-  brandName = "Acme Studio",
-  footnote = "This is an offer, not a contract.",
+  brandName = "Your business",
+  footnote = "Please review the scope, pricing and assumptions before approving.",
 }: PreviewPaneProps) {
   if (!open) return null;
 
@@ -56,7 +56,7 @@ export function PreviewPane({
         </div>
         <div style={{ maxWidth: doc.max_width ? doc.max_width - 60 : 660 }}>
           {blocks.map((block) => (
-            <BlockRenderer key={block.id} block={block} brandPrimary={doc.brand_primary} />
+            <BlockRenderer key={block.id} block={block} brandPrimary={doc.brand_primary} currency={doc.currency || "USD"} />
           ))}
         </div>
         <div className="doc-foot">{footnote}</div>

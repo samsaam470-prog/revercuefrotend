@@ -338,6 +338,7 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
             : undefined
         }
         clientName={proposal.client_name || "the client"}
+        brandName={String(contentOf(proposal).business_name || "Your business")}
         title={title}
         reference={proposal.public_id?.slice(0, 8) || "draft"}
       />
@@ -347,9 +348,11 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
         onClose={() => setPreview(false)}
         title={title}
         clientName={proposal.client_name || "the client"}
+        brandName={String(contentOf(proposal).business_name || "Your business")}
         reference={proposal.public_id?.slice(0, 8) || "draft"}
         blocks={blocks}
-        doc={doc}
+        doc={{ ...doc, currency: proposal.currency || doc.currency || "USD" }}
+        brandName={String(contentOf(proposal).business_name || "Your business")}
       />
 
       <DocumentReview

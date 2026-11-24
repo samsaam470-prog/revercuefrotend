@@ -18,6 +18,7 @@ export interface CanvasProps {
   clientName: string;
   title: string;
   reference: string;
+  brandName?: string;
   afterApproval?: string;
   onAfterApprovalChange?: (value: string) => void;
   showAfterApproval?: boolean;
@@ -37,6 +38,7 @@ export function Canvas({
   clientName,
   title,
   reference,
+  brandName = "Your business",
   afterApproval,
   onAfterApprovalChange,
   showAfterApproval,
@@ -95,7 +97,8 @@ export function Canvas({
           onClick={(event) => event.stopPropagation()}
         >
           <div className="canvas-meta">
-            <span className="mark">{clientName.charAt(0)}</span>
+            <span className="mark">{brandName.charAt(0)}</span>
+            <span>{brandName}</span>
             <span>Prepared for {clientName}</span>
             <span className="mono">ref {reference}</span>
           </div>
@@ -131,6 +134,7 @@ export function Canvas({
                 )
               }
               brandPrimary={doc.brand_primary}
+              currency={doc.currency || "USD"}
             />
           ))}
         </div>

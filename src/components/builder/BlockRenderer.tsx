@@ -18,6 +18,7 @@ export interface BlockRendererProps {
   onMoveDown?: () => void;
   onPatch?: (patch: Partial<Block>) => void;
   brandPrimary?: string;
+  currency?: string;
 }
 
 export function BlockRenderer({
@@ -32,7 +33,14 @@ export function BlockRenderer({
   onMoveDown,
   onPatch,
   brandPrimary = "#c9a961",
+  currency = "USD",
 }: BlockRendererProps) {
+  const formatMoney = (amount?: number) => {
+    if (amount === undefined || amount === null || !Number.isFinite(Number(amount))) return "Quote required";
+    try { return new Intl.NumberFormat(undefined, { style: "currency", currency }).format(Number(amount)); }
+    catch { return Number(amount).toFixed(2) + " " + currency; }
+  };
+  const isPlaceholder = (value: string) => /\\{\\{[^}]+\\}\\}/.test(value) || !value.trim();
   const canType = Boolean(editable && onPatch);
 
   /** Text that is typed in place, with the formatted view when it is not editable. */
@@ -136,49 +144,32 @@ export function BlockRenderer({
             </p>
           </div>
         );
-      case "pricing_table":
+      case "pricing_table": {
+        const items = (block.items ?? []).filter((item) => !isPlaceholder(item.label));
+        if (!items.length) return <p className="muted">Add confirmed line items and pricing before sharing.</p>;
         return (
           <table className="doc-table" style={{ margin: "8px 0" }}>
-            <thead>
-              <tr>
-                <th>Description</th>
-                <th>Qty</th>
-                <th style={{ textAlign: "right" }}>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {(block.items?.length ? block.items : [{ label: "Design", price: 700 }, { label: "Build", price: 500 }]).map(
-                (item, index) => (
-                  <tr key={index}>
-                    <td>
-                      {block.items?.length ? typeableItem(index, item.label, "items") : <RichText value={item.label} />}
-                    </td>
-                    <td>{item.quantity ?? 1}</td>
-                    <td style={{ textAlign: "right" }}>${item.price ?? 0}</td>
-                  </tr>
-                ),
-              )}
-            </tbody>
+            <thead><tr><th>Description</th><th>Qty</th><th style={{ textAlign: "right" }}>Total</th></tr></thead>
+            <tbody>{items.map((item, index) => (
+              <tr key={index}><td>{typeableItem(index, item.label, "items")}</td><td>{item.quantity ?? 1}</td><td style={{ textAlign: "right" }}>{formatMoney(item.price)}</td></tr>
+            ))}</tbody>
           </table>
         );
-      case "packages":
+      }
+      case "packages": {
+        const items = (block.items ?? []).filter((item) => !isPlaceholder(item.label));
+        if (!items.length) return <p className="muted">Add confirmed packages and prices before sharing this proposal.</p>;
         return (
           <div className="canvas-packages">
-            {(block.items?.length
-              ? block.items
-              : [
-                  { label: "Basic", price: 500 },
-                  { label: "Standard", price: 1200 },
-                  { label: "Premium", price: 2500 },
-                ]
-            ).map((item, index) => (
+            {items.map((item, index) => (
               <div className="canvas-package" key={index} style={index === 1 ? { borderColor: brandPrimary } : undefined}>
-                <b>{block.items?.length ? typeableItem(index, item.label, "items") : <RichText value={item.label} />}</b>
-                <span className="amount">${item.price ?? 0}</span>
+                <b>{typeableItem(index, item.label, "items")}</b>
+                <span className="amount">{formatMoney(item.price)}</span>
               </div>
             ))}
           </div>
         );
+      }
       case "timeline":
         return (
           <ol style={{ paddingLeft: 0 }}>

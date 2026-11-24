@@ -372,6 +372,7 @@ export interface DocContent {
   blocks: Block[];
   /** The brief fields and settings travel inside the document content. */
   drafted?: boolean;
+  business_name?: string;
   problem?: string;
   sections?: string[];
   packages?: { name?: string; price?: number; description?: string }[];
