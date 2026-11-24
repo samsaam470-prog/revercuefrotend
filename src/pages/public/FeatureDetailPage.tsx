@@ -62,7 +62,7 @@ export function FeatureDetailPage() {
         <div className="two-up">
           <div className="feature-summary">
             <p className="eyebrow">Quick answer</p>
-            <h2>What it does.</h2>
+            <h2 className="serif">What it does.</h2>
             <p className="muted">{guide.summary}</p>
           </div>
           <div>
@@ -136,14 +136,6 @@ export function FeatureDetailPage() {
         </div>
       </section>
 
-      <section className="section text-center">
-        <h2>Put this to work for your next client.</h2>
-        <p className="muted">Start with the free plan and set up your first client workflow in Revercue.</p>
-        <div className="hero-ctas" style={{ justifyContent: "center", marginTop: 20 }}>
-          <AuthActionStart className="btn btn-primary btn-lg">Start Free</AuthActionStart>
-          <Link to="/pricing" className="btn btn-secondary btn-lg">See pricing</Link>
-        </div>
-      </section>
     </div>
   );
 }

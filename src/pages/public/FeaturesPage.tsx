@@ -127,6 +127,10 @@ export function FeaturesPage() {
           Every part of the work shares the same client, the same brand and the same record. Nothing
           is copy-pasted between tools because there is only one tool.
         </p>
+        <div className="hero-ctas" style={{ justifyContent: "center", marginTop: 24 }}>
+          <AuthActionStart className="btn btn-primary btn-lg">Start Free</AuthActionStart>
+          <Link to="/pricing" className="btn btn-secondary btn-lg">See pricing</Link>
+        </div>
       </div>
 
       <div className="tabs" style={{ position: "sticky", top: 72, background: "var(--bg-base)", zIndex: 20, paddingTop: 8 }}>
@@ -151,14 +155,14 @@ export function FeaturesPage() {
                   <p className="eyebrow">0{index + 1}</p>
                   <div className="feature-title">
                     <span className="feature-icon"><Icon size={20} /></span>
-                    <h2 className="serif" style={{ fontSize: 28, margin: 0 }}>{section.title}</h2>
+                    <h2 className="serif" style={{ margin: 0 }}>{section.title}</h2>
                   </div>
                   <p className="muted" style={{ marginBottom: 16 }}>{section.copy}</p>
                   <ul className="stack-2">
                     {section.highlights.map((highlight) => (
                       <li key={highlight} className="inline" style={{ alignItems: "flex-start" }}>
                         <Check size={15} color="var(--gold)" style={{ flex: "0 0 auto", marginTop: 3 }} />
-                        <span className="muted" style={{ fontSize: 14 }}>{highlight}</span>
+                        <span className="muted" style={{ fontSize: 16 }}>{highlight}</span>
                       </li>
                     ))}
                   </ul>
@@ -201,6 +205,7 @@ export function FeaturesPage() {
 
       <section className="section">
         <div className="section-head">
+          <p className="eyebrow">Questions</p>
           <h2>Questions about the details.</h2>
         </div>
         <div className="faq-list">
