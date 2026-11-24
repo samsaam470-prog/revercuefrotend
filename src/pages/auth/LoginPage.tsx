@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuthAction } from "@authaction/web-sdk/react";
 import { Button } from "../../components/ui/Button";
 import { errorMessage } from "../../lib/errors";
@@ -23,6 +23,7 @@ export function LoginPage() {
   const isStaging = import.meta.env.VITE_STAGING_MODE === "true";
   const { loginWithRedirect } = useAuthAction();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [formError, setFormError] = useState("");
   const [busy, setBusy] = useState(false);
