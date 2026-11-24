@@ -1,0 +1,111 @@
+{
+  "slug": "suggestions",
+  "metaTitle": "Client Follow-up Suggestions from Your Own Log | Revercue",
+  "metaDescription": "Revercue suggestions surface follow-ups, missing contracts and clients worth reopening, built from patterns in your own client log. You stay in control of every action.",
+  "eyebrow": "Feature: Suggestions",
+  "title": "Suggestions drawn from your own client history, with you in control.",
+  "intro": "Revercue's suggestions point to the follow-up that is due, the contract that should exist, or the client worth reopening. They come from patterns in your own log, and every card hands the action back to you.",
+  "summary": "Revercue suggestions are cards that appear from patterns in your own client log: a follow-up that is due, a contract that should follow an answered proposal, an invoice when work has been delivered, or a client worth reopening. Each card offers a Do it action that opens the right screen with the client already filled in, or a Dismiss action that removes the suggestion for that client or document. Nothing is sent on your behalf.",
+  "key_facts": [
+    "Suggestions are built from patterns in your own client log.",
+    "Every plan includes basic CRM suggestions, and higher plans add more context.",
+    "Do it opens the correct screen with the client filled in.",
+    "Dismiss removes a suggestion for that specific client or document.",
+    "Nothing is sent to a client automatically: you are always the actor."
+  ],
+  "visual": "SuggestionVisual",
+  "sections": [
+    {
+      "heading": "Where suggestions come from",
+      "paragraphs": [
+        "Suggestions are based on what has already happened in your client record. A proposal that has been left unanswered for a while, a contract that should exist because a proposal was accepted, or an invoice that is due because work has landed each create a signal. Revercue turns those signals into a card you can act on.",
+        "The suggestions are built from patterns in your own log rather than from a general model trained on other people's work. That is a deliberate choice. The most useful next step for one freelancer depends on how their own clients respond, and the record of those responses is what the suggestions draw on."
+      ]
+    },
+    {
+      "heading": "The kinds of suggestion you will see",
+      "paragraphs": [
+        "Follow-up suggestions appear when a client has gone quiet, timed to the point where a message is likely to be useful rather than intrusive. On the Scale plan the timing can also reflect your own follow-up habit, so the reminder fits the way you already work.",
+        "Document suggestions move the work forward. A contract is suggested when a proposal has been answered, and an invoice is suggested when work has been delivered. A client who has previously worked with you may also be flagged as worth reopening, so an earlier relationship does not disappear from view."
+      ]
+    },
+    {
+      "heading": "What each plan adds",
+      "paragraphs": [
+        "Every plan includes basic CRM suggestions, which cover the core follow-ups and document prompts. The Starter plan adds suggestions based on your previous outreach patterns and a follow-up strategy. The Growth plan adds paragraph suggestions in the context of the document you are writing, detailed prompts, and suggestions for project expenses.",
+        "The Scale plan adds broader client-history context, so suggestions can reflect the full relationship rather than only the latest project. The effect is that each plan builds on the one before, and you choose the level of guidance that fits the size of your business."
+      ]
+    },
+    {
+      "heading": "Do it, or dismiss it",
+      "paragraphs": [
+        "Each suggestion offers two actions. Do it opens the right screen with the client already filled in, so a follow-up opens the client record and a contract suggestion opens the contract builder for that client. Dismiss removes the suggestion for that specific client or document, so it does not reappear as noise.",
+        "Dismissing is a useful signal in its own right. If you consistently dismiss a type of suggestion for a particular kind of client, you are telling the system, and yourself, what is not helpful for that work."
+      ]
+    },
+    {
+      "heading": "You are always the actor",
+      "paragraphs": [
+        "Suggestions never send anything for you. A follow-up card hands you the context and a route to the client record, and you write the message in your own email or messaging account. A document suggestion opens a draft for you to review, rather than publishing it on your behalf.",
+        "This keeps client communication in your hands, which is where it belongs for a freelancer. The suggestions reduce the time you spend remembering what to do next, while every decision and every message remains yours."
+      ]
+    },
+    {
+      "heading": "Using suggestions well: a practical checklist",
+      "paragraphs": [
+        "Treat each suggestion as a prompt to decide, not an instruction to follow. Open the card, read the context, and choose whether to act now, act later or dismiss it. Acting on the most urgent suggestions first keeps the rest of the list manageable.",
+        "Dismiss suggestions that do not fit a client. A follow-up that would be inappropriate for a long-standing relationship, or a contract prompt for work that does not need one, is better removed than left in the list. The more accurately you dismiss, the more relevant the next suggestions become.",
+        "Use the suggestions as a weekly review habit. Once a week, look at the clients who have gone quiet, the proposals without a decision and the invoices that are due. That short review catches the work that would otherwise drift, and it takes far less time than checking each client individually."
+      ]
+    }
+  ],
+  "includes": [
+    "Follow-up suggestions when a client has gone quiet",
+    "Document suggestions for contracts after answered proposals and invoices after delivered work",
+    "Basic CRM suggestions on every plan",
+    "Previous outreach patterns and follow-up strategy on Starter",
+    "In-context paragraph suggestions, detailed prompts and project expense suggestions on Growth",
+    "Broader client-history context on Scale",
+    "Do it and Dismiss actions on every card"
+  ],
+  "faqs": [
+    {
+      "question": "Are suggestions sent to clients automatically?",
+      "answer": "No. Suggestions never send anything for you. Do it opens the right screen, and you decide what to send and when."
+    },
+    {
+      "question": "Where do the suggestions come from?",
+      "answer": "They come from patterns in your own client log, such as unanswered proposals, accepted proposals without a contract, and delivered work without an invoice."
+    },
+    {
+      "question": "What does Dismiss do?",
+      "answer": "Dismiss removes the suggestion for that specific client or document, so it stops appearing for that item."
+    },
+    {
+      "question": "Is this the same as the Ask the helper writing tool?",
+      "answer": "No. The suggestion cards are based on patterns in your client log. The Ask the helper tool is a separate writing aid that you invoke yourself to improve a sentence or section."
+    },
+    {
+      "question": "Will suggestions keep appearing for a client I dismissed?",
+      "answer": "Dismiss removes the suggestion for that specific client or document. It is designed to stop that item from reappearing as noise, so the list stays focused on what needs attention."
+    },
+    {
+      "question": "Do suggestions work without a long client history?",
+      "answer": "Yes. Every plan includes basic CRM suggestions, and they become more specific as the client record fills with proposals, contracts, forms, invoices and communication."
+    }
+  ],
+  "related": [
+    {
+      "label": "CRM",
+      "to": "/features/crm"
+    },
+    {
+      "label": "Contracts",
+      "to": "/features/contracts"
+    },
+    {
+      "label": "Invoices",
+      "to": "/features/invoices"
+    }
+  ]
+}

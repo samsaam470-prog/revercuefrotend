@@ -1,0 +1,110 @@
+{
+  "slug": "invoices",
+  "metaTitle": "Freelance Invoice Software with Payment Links and Proof Upload | Revercue",
+  "metaDescription": "Create freelance invoices with line items, tax and totals. Share a payment link or bank details, collect proof of payment and track overdue status in Revercue.",
+  "eyebrow": "Feature: Invoices",
+  "title": "Invoices with clear totals, clear payment steps and honest status.",
+  "intro": "Revercue's invoices carry line items, tax and totals on one page, with two ways for clients to pay: a payment link you provide, or your account details with an optional proof upload.",
+  "summary": "A Revercue invoice is a shared page with line items, tax and totals, numbered automatically in the format INV-YEAR-NNNN. You can add a payment link or your bank details, and clients who pay by transfer can upload proof of payment. When you confirm payment, the revenue is recorded in the tracker. Overdue invoices show an overdue state to the client as well as to you, so the status is never a surprise.",
+  "key_facts": [
+    "Revercue invoices are numbered automatically in the format INV-YEAR-NNNN.",
+    "Each invoice shows line items, tax and totals on one page.",
+    "There are two payment options: an external payment link, or bank details with an optional proof upload.",
+    "Confirming payment records the revenue in the Revercue tracker against the client.",
+    "Overdue status is visible to both the freelancer and the client."
+  ],
+  "visual": "InvoiceVisual",
+  "sections": [
+    {
+      "heading": "What goes on a Revercue invoice",
+      "paragraphs": [
+        "A good invoice answers four questions for the client: what am I being charged for, how much is it, when is it due, and how do I pay. Revercue's invoice layout is built around those questions. Line items describe the work in the same terms as the agreed package, tax is applied where it applies, and the totals are calculated from the line items rather than typed by hand.",
+        "Because the invoice sits on the same client record as the proposal and contract, the line items can reflect what was actually agreed. That reduces the most common reason for delayed payment, which is a client who looks at the invoice and cannot match it to what they signed."
+      ]
+    },
+    {
+      "heading": "Numbering that keeps your records in order",
+      "paragraphs": [
+        "Each invoice is numbered automatically in the format INV-YEAR-NNNN, where the year is the year of issue and the number increases in sequence. Automatic numbering removes the risk of duplicate or skipped numbers, which matters for your own records and for any accountant or tax adviser who reviews them later.",
+        "The number appears on the invoice page the client sees, so when they quote a reference in their bank transfer, it matches the record in Revercue. That makes reconciliation faster for both sides."
+      ]
+    },
+    {
+      "heading": "Two ways to get paid",
+      "paragraphs": [
+        "Option one is an external payment link. You paste a link from the payment method you already use, and the client pays through it. Option two is your bank details, with an optional proof upload. The client sees your account details on the invoice and, if they pay by transfer, can upload proof of payment to the invoice page.",
+        "Revercue does not take the payment for you through the invoice. The payment happens through the method you choose, and you then confirm it in Revercue. Keeping the payment step separate means you are not locked into one payment provider, and clients can pay in the way that is most convenient for them."
+      ]
+    },
+    {
+      "heading": "Confirming payment and recording revenue",
+      "paragraphs": [
+        "When money arrives, you confirm the payment on the invoice. Confirming records the revenue in the Revercue tracker against that client and that invoice, so your view of income is linked to the work that produced it rather than to a separate spreadsheet.",
+        "The record also helps when a client asks about a past payment. You can open the invoice, see the proof that was uploaded if there was one, and see the date the payment was confirmed, without searching through old bank notifications."
+      ]
+    },
+    {
+      "heading": "Overdue status, shown honestly",
+      "paragraphs": [
+        "An invoice that has passed its due date shows an overdue state. The important detail is that the client can see that state as well as you. Hiding an overdue invoice from the person who owes the money tends to create more confusion, not less. A visible status lets the client check whether payment has been missed and act on it.",
+        "When you see an overdue invoice on the dashboard, you can follow up through your own email or messaging account, with the invoice number and the amount to hand. Revercue shows the status and keeps the history, while the conversation about payment stays in the channel you normally use."
+      ]
+    },
+    {
+      "heading": "Using invoices well: a practical checklist",
+      "paragraphs": [
+        "Send the invoice as soon as the work is delivered or the milestone is reached, not at the end of the month. Invoices sent promptly are paid faster, and the amount is still fresh in the client's mind. Include the due date, the invoice number and the payment method at the top of the page.",
+        "Match line items to the package names in the proposal and the contract. When a client sees the same wording across all three documents, the invoice is approved faster. If you added work beyond the agreed scope, show it as a separate line so the client can see what changed.",
+        "Confirm payment as soon as you receive it. Leaving confirmed payments unrecorded makes the tracker and the overdue status inaccurate, which then undermines the dashboard you rely on to decide what to chase."
+      ]
+    }
+  ],
+  "includes": [
+    "Line items, tax and totals calculated on one page",
+    "Automatic invoice numbers in the format INV-YEAR-NNNN",
+    "Option A: an external payment link",
+    "Option B: bank details with an optional proof upload",
+    "Confirm payment to record the revenue in the tracker",
+    "Overdue status visible to the client and the freelancer"
+  ],
+  "faqs": [
+    {
+      "question": "Does Revercue take card payments inside the invoice?",
+      "answer": "Invoices use a payment link you provide or your account details. The payment happens through the method you choose, and you confirm it in Revercue afterwards."
+    },
+    {
+      "question": "How are invoices numbered?",
+      "answer": "Invoices are numbered automatically in the format INV-YEAR-NNNN, so each invoice has a unique reference that clients can quote when they pay."
+    },
+    {
+      "question": "Can a client send proof of payment?",
+      "answer": "Yes, where you have chosen to show bank details. The client can upload proof of payment to the invoice page as an optional step."
+    },
+    {
+      "question": "Does Revercue replace accounting software?",
+      "answer": "No. Revercue creates invoices and tracks payment status for client work. It is not a full accounting or tax platform, so keep using your accounting software for the books your accountant needs."
+    },
+    {
+      "question": "What should I do with an invoice that is overdue?",
+      "answer": "Follow up with a short, specific message from your own email or messaging account, quoting the invoice number, the amount and the due date. Revercue shows the status to both you and the client, so the message can refer to the same record."
+    },
+    {
+      "question": "Can I add notes to an invoice?",
+      "answer": "Yes. Use notes on the invoice to explain a line item or the payment method clearly, so the client does not have to ask. The Ask the helper tool can also help you word a note more clearly."
+    }
+  ],
+  "related": [
+    {
+      "label": "Contracts",
+      "to": "/features/contracts"
+    },
+    {
+      "label": "Proposals",
+      "to": "/features/proposals"
+    },
+    {
+      "label": "Proposal and invoice tool for freelancers",
+      "to": "/solutions/proposal-and-invoice-tool"
+    }
+  ]
+}

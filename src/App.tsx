@@ -11,7 +11,7 @@ import {
   AboutPage, BetaPage, BlogPage, BlogPostPage, ComparePage, CompareDetailPage,
   CompareCriteriaPage, ContactPage, FeaturesPage, FaqsPage, GuideDetailPage,
   GuidesPage, HomePage, PricingPage, PrivacyPage, SecurityPage, TermsPage,
-  SolutionLandingPage,
+  SolutionLandingPage, FeatureDetailPage,
 } from "./pages/public";
 import { CallbackPage, LoginPage } from "./pages/auth";
 import {
@@ -58,6 +58,7 @@ export function App() {
           <Route element={<PublicLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/features" element={<FeaturesPage />} />
+            <Route path="/features/:slug" element={<FeatureDetailPage />} />
             <Route path="/solutions/:slug" element={<SolutionLandingPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/compare" element={<ComparePage />} />

@@ -60,11 +60,22 @@ const FALLBACK_BY_SECTION: Record<string, RouteMeta> = {
 
 function isPublicPage(pathname: string): boolean {
   if (ROUTES[pathname]) return true;
+  if (pathname.startsWith("/features/")) return true;
   const section = "/" + pathname.split("/").filter(Boolean)[0];
   return Boolean(FALLBACK_BY_SECTION[section]);
 }
 
+const FEATURE_META_MODULES = import.meta.glob<{ slug: string; metaTitle: string; metaDescription: string }>(
+  "../content/features/*.json",
+  { eager: true, import: "default" },
+);
+const FEATURE_META: Record<string, RouteMeta> = Object.fromEntries(
+  Object.values(FEATURE_META_MODULES).map((g) => [g.slug, { title: g.metaTitle, description: g.metaDescription }]),
+);
+
 export function routeMeta(pathname: string): RouteMeta {
+  const featureSlug = pathname.startsWith("/features/") ? pathname.split("/")[2] : "";
+  if (featureSlug && FEATURE_META[featureSlug]) return FEATURE_META[featureSlug];
   const solutionSlug = pathname.startsWith("/solutions/") ? pathname.split("/")[2] : "";
   if (solutionSlug && SOLUTION_META[solutionSlug]) return SOLUTION_META[solutionSlug];
   const direct = ROUTES[pathname];

@@ -1,0 +1,111 @@
+{
+  "slug": "contracts",
+  "metaTitle": "Freelance Contract Builder with Typed-Name Signatures | Revercue",
+  "metaDescription": "Create freelance contracts covering scope, payment terms, revisions and cancellation. Clients sign with a typed name and explicit consent, recorded with the date.",
+  "eyebrow": "Feature: Contracts",
+  "title": "Contracts that match the proposal and get signed on one page.",
+  "intro": "Revercue's contract builder lets you confirm scope, payment terms, revisions and cancellation in writing, then collect a typed-name signature with explicit consent and a recorded date.",
+  "summary": "A Revercue contract is a shared page that sets out the scope of work, payment terms, revisions and cancellation details. The client can sign by typing their full name and ticking an explicit consent box, and the signature is recorded with the date and the version signed. Clients can also decline with an optional reason or ask a question from the same page. Revercue states clearly that this is not a qualified electronic signature.",
+  "key_facts": [
+    "Revercue contracts cover scope, payment terms, revisions and cancellation details on one page.",
+    "The client signs by typing a full name and ticking an explicit consent box.",
+    "Each signature is recorded with the date and the exact version that was signed.",
+    "Publishing is blocked until the freelancer has signed the exact version first.",
+    "Revercue signatures are not qualified electronic signatures and do not include an identity check."
+  ],
+  "visual": "ContractVisual",
+  "sections": [
+    {
+      "heading": "Why the contract belongs in the same workflow",
+      "paragraphs": [
+        "Most freelance disputes do not start with bad intent. They start with two people remembering the same project differently. One expected three rounds of revisions, the other believed revisions were unlimited. One assumed a deposit was due on signing, the other assumed it was due on delivery. A written contract is the remedy, but only if it is easy to produce, easy to read and easy to sign.",
+        "Revercue builds the contract from the same client record as the proposal. The scope you presented to the client is the scope you confirm in the contract, and the payment terms match the invoice that follows. Keeping these documents together reduces the chance of a mismatch that would otherwise surface at the moment you ask for payment."
+      ]
+    },
+    {
+      "heading": "How signing works: typed name and explicit consent",
+      "paragraphs": [
+        "The client signs by typing their full name into the signature field and ticking a consent box that states they agree to the terms shown. Both steps are required. The typed name identifies who signed, and the explicit tick confirms that the signer chose to agree rather than scrolling past the terms by accident.",
+        "After signing, the record keeps the date and the version of the contract that was signed. That record is visible on the contract and in the communication log for the client, so you can see when the signature happened without searching through email for a confirmation message."
+      ]
+    },
+    {
+      "heading": "Signing the exact version first",
+      "paragraphs": [
+        "Revercue asks you to sign the exact version of the contract before it can be published. This is a deliberate check. It ensures that the freelancer has read the final wording, including the scope and payment terms, before the client is asked to commit. Publishing stays blocked until your own signature is recorded.",
+        "The client then signs the same version. Because the signature is tied to that version, any later change should be handled as a new version for the client to review and sign, rather than an edit to text they have already agreed. This keeps the record clear if a question arises months later about what was agreed."
+      ]
+    },
+    {
+      "heading": "What the signature is, and what it is not",
+      "paragraphs": [
+        "A typed-name signature with consent and a recorded date is a practical way to show that a named person agreed to specific terms on a specific date. It is appropriate for many freelance agreements. It is not a qualified electronic signature, it does not involve a certificate issued by a trust service provider, and it does not include an identity check or an audit certificate.",
+        "Revercue states these limits openly in the product because the right level of formality depends on the work. For high-value, regulated or cross-border agreements, or where your jurisdiction requires a specific form of signature, use a dedicated qualified signing service. This is general information about the product, not legal advice, so for complex terms it is worth asking a qualified professional to review the wording."
+      ]
+    },
+    {
+      "heading": "After signing, declining and questions",
+      "paragraphs": [
+        "Once a contract is signed, you choose the next step: send the client a requirement form, issue an invoice, or provide a PDF of the signed agreement. This turns the contract into the start of the project rather than a dead end. The chosen step is linked to the same client record as the contract.",
+        "A client who is not ready to sign can decline, and the decline takes an optional reason so you learn what needs to change. A client who has a question can ask it from the contract page. Every signature, decline and question is written to the communication log, so the full history of the agreement is visible in one thread."
+      ]
+    },
+    {
+      "heading": "Using contracts well: a practical checklist",
+      "paragraphs": [
+        "Write the scope in terms of deliverables, not effort. Say what the client will receive, in what format, and by when. Then state what is excluded, because most contract disagreements are about the work that was assumed to be included rather than the work that was listed.",
+        "Make the payment terms match the invoice schedule exactly. If the contract says a deposit is due on signing and a balance on delivery, the invoices should reflect the same amounts and the same triggers. A mismatch between the two is one of the most common reasons a client questions an invoice.",
+        "Keep revisions and cancellation specific. State how many rounds of revisions are included, what counts as a revision, and how notice of cancellation is given. Specific terms are easier for both parties to follow, and they are easier to rely on if a question arises later."
+      ]
+    }
+  ],
+  "includes": [
+    "Scope, payment terms, revisions and cancellation on one page",
+    "Typed full name plus an explicit consent tick, recorded with the date",
+    "Freelancer signs the exact version before publishing is allowed",
+    "Client signs the same version, with the version and date kept on the record",
+    "Decline with an optional reason, and questions from the contract page",
+    "Choose the after-approval step: requirement form, invoice or PDF",
+    "Every signature, decline and question recorded in the communication log"
+  ],
+  "faqs": [
+    {
+      "question": "Is a typed-name signature legally binding?",
+      "answer": "Revercue does not provide legal advice. The signature is a typed full name with an explicit consent tick and a recorded date. It is not a qualified electronic signature, so check with a qualified adviser if your jurisdiction or the type of contract requires a more formal signature."
+    },
+    {
+      "question": "Can I change a contract after the client has signed it?",
+      "answer": "The client's signature is tied to the exact version they signed. If the terms change, create a new version for the client to review and sign, rather than altering text they have already agreed to."
+    },
+    {
+      "question": "What can the client do on the contract page?",
+      "answer": "The client can read the scope, payment terms, revisions and cancellation details, sign with a typed name and consent, decline with an optional reason, or ask a question before deciding."
+    },
+    {
+      "question": "Do I need a contract for every project?",
+      "answer": "Not every project needs one. Smaller, lower-risk work may only need a proposal and an invoice. Larger or more detailed engagements benefit from a written contract that sets out scope, payment and revisions. This is general guidance rather than legal advice."
+    },
+    {
+      "question": "Should the contract repeat everything in the proposal?",
+      "answer": "No. The contract should confirm the agreed scope, terms and payment in precise language. The proposal can stay focused on persuading the client, while the contract records the commitments."
+    },
+    {
+      "question": "What is the best order of steps after a client signs?",
+      "answer": "Usually a requirement form to collect materials, then an invoice for the first payment. Revercue lets you choose the after-approval step, so you can start the work in the order that suits the project."
+    }
+  ],
+  "related": [
+    {
+      "label": "Proposals",
+      "to": "/features/proposals"
+    },
+    {
+      "label": "Invoices",
+      "to": "/features/invoices"
+    },
+    {
+      "label": "Invoice and contract software for freelancers",
+      "to": "/solutions/invoice-contract-software"
+    }
+  ]
+}

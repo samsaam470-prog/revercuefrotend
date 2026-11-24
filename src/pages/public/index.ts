@@ -14,3 +14,4 @@ export { BlogPage } from "./BlogPage";
 export { BlogPostPage } from "./BlogPostPage";
 export { BetaPage } from "./BetaPage";
 export { PrivacyPage, TermsPage, SecurityPage } from "./LegalPages";
+export { FeatureDetailPage } from "./FeatureDetailPage";

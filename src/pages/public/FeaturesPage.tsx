@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
+  ArrowRight,
   Check,
   FileText,
   ScrollText,
@@ -20,157 +21,69 @@ interface Section {
   id: string;
   title: string;
   copy: string;
-  bullets: string[];
+  highlights: string[];
   visual: VisualName;
+  icon: LucideIcon;
 }
 
 const SECTIONS: Section[] = [
   {
     id: "proposals",
     title: "Proposals",
-    copy: "A proposal is a page, not a file. Packages, FAQs and embedded questions, with an info icon wherever a question needs one.",
-    bullets: [
-      "Packages: Basic, Standard, Premium — rename or remove them",
-      "Collapsible FAQs and per-question Ask a Question",
-      "No watermark over the document: the credit is one footer line, removed on Growth and above",
-      "Unguessable, noindex links; an optional password wall on Growth and Scale",
-      "The client selects a package; you see the click",
-      "Approve or decline from the bottom of the page; the record updates and the conversation stays in your own inbox",
-    ],
+    copy: "Proposals are shareable web pages with packages, FAQs and client questions, so the client can choose and respond from one link.",
+    highlights: ["Packages with Basic, Standard and Premium starting tiers", "Collapsible FAQs and per-question Ask a Question", "Approve or decline from the bottom of the page"],
     visual: "ProposalVisual",
+    icon: FileText,
   },
   {
     id: "contracts",
     title: "Contracts",
-    copy: "Sign, decline, or ask a question. The signature is a typed full name plus an explicit consent tick, recorded with the date.",
-    bullets: [
-      "Typed-name e-signature: full name and an explicit consent tick",
-      "You sign the exact version first; publishing is blocked until you do",
-      "The client signs the same version; the record keeps the date",
-      "Not a qualified signature: no certificate, no identity check, no audit certificate",
-      "Scope, payment terms, revisions and cancellation in one page",
-      "Choose the after-approval step: form, invoice or PDF",
-      "Every signature, decline and question lands in the communication log",
-      "Decline takes an optional reason",
-    ],
+    copy: "Scope, payment terms, revisions and cancellation on one page, with a typed-name signature, explicit consent and a recorded date.",
+    highlights: ["Freelancer signs the exact version before publishing", "Client signs the same version, with the date recorded", "Choose the after-approval step: form, invoice or PDF"],
     visual: "ContractVisual",
+    icon: ScrollText,
   },
   {
-    id: "forms",
+    id: "requirement-forms",
     title: "Requirement forms",
-    copy: "A question builder, not a canvas. Seven question types and branching on Growth and Scale.",
-    bullets: [
-      "Short text, long text, file upload, single, multiple, combined, dropdown",
-      "Branching: if the answer is this, show those questions",
-      "One page or multi-page with a progress indicator",
-      "Custom thank-you page on Scale",
-      "The Prompt Creator assembles a structured paragraph from the answers",
-    ],
+    copy: "A question builder for project briefs, with seven question types, branching on Growth and Scale, and a structured brief at the end.",
+    highlights: ["Short text, long text, file upload, choice and dropdown questions", "Branching that shows follow-ups only when they apply", "The Prompt Creator assembles answers into a brief"],
     visual: "FormVisual",
+    icon: ListChecks,
   },
   {
     id: "invoices",
     title: "Invoices",
-    copy: "Line items, tax, totals, and two ways to get paid: a payment link or your account details with a proof upload.",
-    bullets: [
-      "Auto-generated invoice number (INV-YEAR-NNNN)",
-      "Option A: external payment link",
-      "Option B: bank details plus optional proof upload",
-      "Confirm payment records revenue for the tracker",
-      "Overdue state is visible to the client, honestly",
-    ],
+    copy: "Line items, tax and totals, numbered automatically, with a payment link or your bank details and an optional proof upload.",
+    highlights: ["Automatic numbers in the format INV-YEAR-NNNN", "Two ways to get paid: a payment link or bank details", "Confirmed payments are recorded in the revenue tracker"],
     visual: "InvoiceVisual",
+    icon: Receipt,
   },
   {
     id: "crm",
     title: "CRM",
-    copy: "The client record is the thread's home. The communication log is the main body, not a tab.",
-    bullets: [
-      "The log records messages, replies, follow-ups, documents",
-      "Notes are plan-limited and shown honestly",
-      "Follow-ups due surface on the dashboard",
-      "Interest level on Scale, with the full arithmetic",
-      "The record builds itself from the documents",
-    ],
+    copy: "A client record with a communication log at its centre, notes, follow-up reminders, and a record that fills in as you work.",
+    highlights: ["A communication log of messages, replies and documents", "Follow-ups that are due appear on the dashboard", "A record that builds itself from your documents"],
     visual: "CrmVisual",
+    icon: Users,
   },
   {
     id: "builder",
     title: "The builder",
-    copy: "The template is the starting layout, the block library is the toolset, and your edits are structured data.",
-    bullets: [
-      "Three panels: sections and blocks, the canvas, the properties",
-      "The canvas is a white page inside the dark app",
-      "Preview and a live auto-save indicator",
-      "60-second interval, session-end beacon, explicit save",
-      "The share sheet never sends for you",
-    ],
+    copy: "A three-panel editor with a template as the starting layout, a block library, auto-save, and a review before you share.",
+    highlights: ["Sections and blocks, the canvas and the properties in three panels", "Auto-save every 60 seconds and at session end", "A review with a score before the document goes out"],
     visual: "BuilderVisual",
+    icon: LayoutDashboard,
   },
   {
     id: "suggestions",
     title: "Suggestions",
-    copy: "Patterns from your own log, not a model. A follow-up that is due, a contract that should exist, a client worth reopening.",
-    bullets: [
-      "Suggestions on every plan, starting with basic CRM suggestions",
-      "Starter adds previous outreach patterns and follow-up strategy",
-      "Growth adds in-context paragraph suggestions, detailed prompts and project expense suggestions",
-      "Scale adds broader client-history context",
-      "Do it opens the right screen with the client filled in",
-      "Dismiss removes it for that client or document",
-      "You are always the actor",
-    ],
+    copy: "Follow-ups, contracts and invoices suggested from patterns in your own client log. Every card hands the action back to you.",
+    highlights: ["Follow-ups for clients who have gone quiet", "Document suggestions after proposals and delivered work", "Do it opens the right screen, Dismiss removes the card"],
     visual: "SuggestionVisual",
+    icon: Sparkles,
   },
 ];
-
-const ICONS: Record<string, LucideIcon> = {
-  proposals: FileText,
-  contracts: ScrollText,
-  forms: ListChecks,
-  invoices: Receipt,
-  crm: Users,
-  builder: LayoutDashboard,
-  suggestions: Sparkles,
-};
-
-const SUBS: Record<string, { label: string; copy: string }[]> = {
-  proposals: [
-    { label: "Package selection", copy: "The client picks a package and you see the click." },
-    { label: "Embedded questions", copy: "Ask inside the page, with an info icon on the ones that need it." },
-    { label: "Ask the helper", copy: "Select a sentence, ask for a clearer version, keep what you like." },
-  ],
-  contracts: [
-    { label: "The signature, spelled out", copy: "A typed name and an explicit consent tick, recorded with the date and the version." },
-    { label: "After signing", copy: "Send the form, the invoice, or the PDF next." },
-    { label: "Ask the helper", copy: "Tighten a clause in the builder without retyping it." },
-  ],
-  forms: [
-    { label: "Seven question types", copy: "From short text to file upload, with branching on Growth and Scale." },
-    { label: "Ask the client instead", copy: "Every question allows a question back, so nothing stalls." },
-    { label: "Ask the helper", copy: "Rewrite a description so the request is understood the first time." },
-  ],
-  invoices: [
-    { label: "Two ways to pay", copy: "A payment link, or your account details with a proof upload." },
-    { label: "Overdue, honestly", copy: "The client sees the state, and so do you." },
-    { label: "Ask the helper", copy: "Clearer notes on the invoice, written in one selection." },
-  ],
-  crm: [
-    { label: "The communication log", copy: "Direction, channel, next step, follow-up date — the memory of the thread." },
-    { label: "The interest level", copy: "Arithmetic over real behaviour, with the working shown." },
-    { label: "The 15-day summary", copy: "What was sent, what came back, what is next." },
-  ],
-  builder: [
-    { label: "Three panels", copy: "Sections and blocks, the page, the properties of the selected block." },
-    { label: "The block library", copy: "Twelve blocks in a proposal, seven in a contract — each one readable, none hidden." },
-    { label: "The post-document review", copy: "A score and a short list of what to fix, before you send." },
-  ],
-  suggestions: [
-    { label: "Follow-ups", copy: "Due when the client has gone quiet, timed by your own habit on Scale." },
-    { label: "Document suggestions", copy: "A contract when a proposal is answered, an invoice when work lands." },
-    { label: "You are the actor", copy: "Every card hands you a line and a link. Nothing is sent for you." },
-  ],
-};
 
 export function FeaturesPage() {
   const [active, setActive] = useState(SECTIONS[0].id);
@@ -196,7 +109,7 @@ export function FeaturesPage() {
     <div className="page page-wide">
       <div className="page-head">
         <p className="eyebrow">Features</p>
-        <h1>Five modules, one thread.</h1>
+        <h1>Seven features, one client thread.</h1>
         <p>
           Every part of the work shares the same client, the same brand and the same record. Nothing
           is copy-pasted between tools because there is only one tool.
@@ -216,58 +129,40 @@ export function FeaturesPage() {
       </div>
 
       <div className="stack-8">
-        {SECTIONS.map((section, index) => (
-          <section id={section.id} key={section.id} className="section" style={{ paddingTop: 24 }}>
-            <div className={`two-up`} style={{ direction: index % 2 ? "rtl" : "ltr" }}>
-              <div style={{ direction: "ltr" }}>
-                <p className="eyebrow">0{index + 1}</p>
-                <div className="feature-title">
-                  <span className="feature-icon">
-                    {(() => {
-                      const Icon = ICONS[section.id] ?? Sparkles;
-                      return <Icon size={20} />;
-                    })()}
-                  </span>
-                  <h2 className="serif" style={{ fontSize: 28, margin: 0 }}>
-                    {section.title}
-                  </h2>
+        {SECTIONS.map((section, index) => {
+          const Icon = section.icon;
+          return (
+            <section id={section.id} key={section.id} className="section" style={{ paddingTop: 24 }}>
+              <div className="two-up" style={{ direction: index % 2 ? "rtl" : "ltr" }}>
+                <div style={{ direction: "ltr" }}>
+                  <p className="eyebrow">0{index + 1}</p>
+                  <div className="feature-title">
+                    <span className="feature-icon"><Icon size={20} /></span>
+                    <h2 className="serif" style={{ fontSize: 28, margin: 0 }}>{section.title}</h2>
+                  </div>
+                  <p className="muted" style={{ marginBottom: 16 }}>{section.copy}</p>
+                  <ul className="stack-2">
+                    {section.highlights.map((highlight) => (
+                      <li key={highlight} className="inline" style={{ alignItems: "flex-start" }}>
+                        <Check size={15} color="var(--gold)" style={{ flex: "0 0 auto", marginTop: 3 }} />
+                        <span className="muted" style={{ fontSize: 14 }}>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="btn-row" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 24 }}>
+                    <Link className="btn btn-primary btn-sm" to={`/features/${section.id}`}>
+                      Read the full guide <ArrowRight size={14} />
+                    </Link>
+                    <AuthActionStart className="btn btn-secondary btn-sm">Start Free</AuthActionStart>
+                  </div>
                 </div>
-                <p className="muted" style={{ marginBottom: 16 }}>
-                  {section.copy}
-                </p>
-                <ul className="stack-2">
-                  {section.bullets.map((bullet) => (
-                    <li key={bullet} className="inline" style={{ alignItems: "flex-start" }}>
-                      <Check size={15} color="var(--gold)" style={{ flex: "0 0 auto", marginTop: 3 }} />
-                      <span className="muted" style={{ fontSize: 14 }}>
-                        {bullet}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="feature-subs">
-                  {(SUBS[section.id] ?? []).map((sub) => (
-                    <div className="feature-sub" key={sub.label}>
-                      <span className="feature-sub-dot" />
-                      <div>
-                        <p className="feature-sub-label">{sub.label}</p>
-                        <p className="muted" style={{ fontSize: 13 }}>
-                          {sub.copy}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                <div style={{ direction: "ltr" }}>
+                  <CodeVisual name={section.visual} />
                 </div>
-                <AuthActionStart className="btn btn-secondary btn-sm mt-6">
-                  Start Free
-                </AuthActionStart>
               </div>
-              <div style={{ direction: "ltr" }}>
-                <CodeVisual name={section.visual} />
-              </div>
-            </div>
-          </section>
-        ))}
+            </section>
+          );
+        })}
       </div>
 
       <section className="section">

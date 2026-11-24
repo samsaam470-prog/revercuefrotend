@@ -1,0 +1,110 @@
+{
+  "slug": "requirement-forms",
+  "metaTitle": "Client Requirement Forms and Intake Builder for Freelancers | Revercue",
+  "metaDescription": "Collect project briefs, files and client requirements with adaptive intake forms. Seven question types, branching logic and structured briefs for freelancers.",
+  "eyebrow": "Feature: Requirement forms",
+  "title": "Collect what you need to start, without the back-and-forth.",
+  "intro": "Revercue's requirement forms gather project briefs, assets and answers before work begins. Build them with a question builder, add branching where it helps, and turn the responses into a clear brief.",
+  "summary": "Revercue requirement forms are a question builder for collecting project information from clients. They support seven question types, including short text, long text, file upload, single and multiple choice, and dropdowns. Branching on Growth and Scale plans shows follow-up questions only when they apply. Responses are kept with the project, and the Prompt Creator can assemble the answers into a structured paragraph you can use as a brief.",
+  "key_facts": [
+    "Requirement forms use a question builder, not a free-form canvas, so every question is structured.",
+    "Revercue supports seven question types, including file upload for assets and documents.",
+    "Branching on Growth and Scale shows a question only when an earlier answer makes it relevant.",
+    "Forms can be a single page or multi-page with a progress indicator.",
+    "The Prompt Creator assembles answers into a structured paragraph for use as a brief."
+  ],
+  "visual": "FormVisual",
+  "sections": [
+    {
+      "heading": "Why a structured intake form beats a long email",
+      "paragraphs": [
+        "Projects stall at the start more often than at any other point. The contract is signed, the deposit is paid, and then work waits while you chase a logo file, a login, a list of competitors or a clear answer about the target audience. Each request is a separate email, and each reply arrives in a different format, so the brief ends up scattered across the inbox.",
+        "A requirement form collects everything in one structured place. Each question has a purpose, the answers are stored against the client's project, and nothing depends on remembering which email contained the final detail. Clients also tend to answer better when the questions are specific and visible, rather than a blank page asking them to describe everything at once."
+      ]
+    },
+    {
+      "heading": "The seven question types",
+      "paragraphs": [
+        "Revercue's form builder offers seven question types. Short text suits names, URLs and single facts. Long text is for descriptions, goals and context. File upload lets the client attach logos, briefs, spreadsheets or reference material directly to the form. Single choice and multiple choice handle decisions that have defined options, and a dropdown keeps a long list of options tidy. A combined question type brings several related answers together in one step.",
+        "Choosing the right type is part of writing a good brief. A question that asks for a free-text answer when the options are known produces inconsistent results, while a choice question with the right options gives you comparable answers across clients."
+      ]
+    },
+    {
+      "heading": "Branching that keeps the form short",
+      "paragraphs": [
+        "Branching shows follow-up questions only when they apply. If a client says they need an e-commerce site, the form can ask about product count and payment providers. If they say they need a brochure site, those questions disappear, and the client is not asked to answer things that do not matter for their project.",
+        "Branching is available on the Growth and Scale plans. It keeps forms short for simple projects while still capturing the detail that complex work requires. A shorter, relevant form is more likely to be completed, which means you receive the information before the work begins rather than halfway through."
+      ]
+    },
+    {
+      "heading": "Single-page or multi-page, and a clear finish",
+      "paragraphs": [
+        "You can publish a form as a single page for short intakes, or as a multi-page form with a progress indicator for longer briefs. The progress indicator tells the client how much remains, which reduces the chance they abandon the form halfway through.",
+        "On the Scale plan you can add a custom thank-you page, which is a good place to restate the next steps, the expected timeline and how to reach you. A clear finish turns the form into a confirmation the client can rely on, rather than a dead end."
+      ]
+    },
+    {
+      "heading": "From answers to a usable brief",
+      "paragraphs": [
+        "Answers are only useful if they become something you can act on. The Prompt Creator assembles the responses into a structured paragraph that summarises the project in plain language. You can use that paragraph as the starting point for a project brief, a discovery document or the first message to the client confirming what they told you.",
+        "Responses stay with the project record, so when you return to the work weeks later you can see exactly what was requested and when. This matters most when a project changes direction, because you can compare the original answers with the revised scope instead of relying on recollection."
+      ]
+    },
+    {
+      "heading": "Using requirement forms well: a practical checklist",
+      "paragraphs": [
+        "Ask only for what you need before work starts. Every extra question lowers completion rates, and anything you can ask later should wait. Group related questions together, and put the most important questions first so they are answered even if the client stops partway through.",
+        "Write each question as if the client has never worked with a freelancer before. Replace internal jargon with plain words, and give an example where the answer format is unusual. A clear question gets a usable answer the first time, which saves a round of follow-up.",
+        "Use the file upload type for anything the client already has, such as a logo, brand guidelines, a spreadsheet or a list of existing content. Collecting those files at intake is faster than waiting for them after the project is under way."
+      ]
+    }
+  ],
+  "includes": [
+    "Short text, long text, file upload, single choice, multiple choice, dropdown and combined questions",
+    "Branching that shows follow-up questions only when they apply, on Growth and Scale",
+    "Single-page or multi-page forms with a progress indicator",
+    "A custom thank-you page on Scale",
+    "The Prompt Creator, which assembles answers into a structured paragraph",
+    "Ask-the-client options so a question never stalls the form"
+  ],
+  "faqs": [
+    {
+      "question": "Can clients upload files through a requirement form?",
+      "answer": "Yes. The file upload question type lets clients attach logos, briefs, reference material and other documents directly to the form."
+    },
+    {
+      "question": "Can a client ask a question instead of answering?",
+      "answer": "Yes. Every question allows the client to ask a question back, so an unclear item does not stop the form from being completed."
+    },
+    {
+      "question": "Is branching available on every plan?",
+      "answer": "Branching is available on the Growth and Scale plans. Forms on other plans still use the full question builder and the same question types."
+    },
+    {
+      "question": "What is the Prompt Creator?",
+      "answer": "The Prompt Creator takes the answers from a completed form and assembles them into a structured paragraph. It helps you turn a set of responses into a readable brief quickly."
+    },
+    {
+      "question": "How many questions should a requirement form have?",
+      "answer": "As few as the project allows. A short form for a simple job might have five or six questions. Complex projects can use a multi-page form with a progress indicator so the client can see how much is left."
+    },
+    {
+      "question": "Can I change a form after clients have started filling it in?",
+      "answer": "Changes apply to the form going forward, so review it carefully before you share it. If a question changes meaning, it is worth asking the client again rather than assuming their earlier answer still holds."
+    }
+  ],
+  "related": [
+    {
+      "label": "Contracts",
+      "to": "/features/contracts"
+    },
+    {
+      "label": "Proposals",
+      "to": "/features/proposals"
+    },
+    {
+      "label": "All-in-one freelance business management",
+      "to": "/solutions/freelance-business-management"
+    }
+  ]
+}

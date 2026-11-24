@@ -1,0 +1,110 @@
+{
+  "slug": "crm",
+  "metaTitle": "Freelance CRM and Client Communication Log | Revercue",
+  "metaDescription": "A freelance CRM with a client communication log, notes, follow-up reminders and a record that builds itself from proposals, contracts and invoices.",
+  "eyebrow": "Feature: CRM",
+  "title": "A client record that remembers the thread for you.",
+  "intro": "Revercue's CRM puts the client record at the centre of your work. The communication log is the main body of the record, not a side tab, and it fills in as proposals, contracts, forms and invoices move forward.",
+  "summary": "The Revercue CRM is a freelance client record with a communication log at its centre. The log records messages, replies, follow-ups and documents in the order they happened. Notes capture context that does not belong in a document, follow-ups due appear on the dashboard, and the record builds itself from the documents you create for the client. On the Scale plan, an interest level shows engagement with the working displayed.",
+  "key_facts": [
+    "The communication log records messages, replies, follow-ups and documents in order.",
+    "The client record is the home of each thread, with documents attached to it.",
+    "Notes are plan-limited, and the limit is shown in the product rather than hidden.",
+    "Follow-ups that are due surface on the Revercue dashboard.",
+    "On Scale, an interest level summarises client engagement, with the arithmetic shown."
+  ],
+  "visual": "CrmVisual",
+  "sections": [
+    {
+      "heading": "The client record as the home of the thread",
+      "paragraphs": [
+        "Most freelance CRMs are built around a sales pipeline with stages and deal values. Revercue's CRM is built around the working relationship. Each client has one record, and that record holds their details, their projects and every document you have created for them. The question it answers is not how far a deal has progressed, but what has happened with this client and what happens next.",
+        "Because the proposal, contract, requirement form and invoice all belong to the same record, you do not need to hunt through folders to find the version of a document that was sent. The record shows the sequence of work for that client in one place."
+      ]
+    },
+    {
+      "heading": "The communication log",
+      "paragraphs": [
+        "The communication log is the memory of the thread. It records messages, replies, follow-ups and documents in the order they happened, with the direction of each entry and the channel it used. When you return to a client after a month, the log shows whether the last message was yours or theirs, what you promised, and what has already been sent.",
+        "The log is designed to be the main body of the client record rather than a tab you have to open. That matters because the most useful context is usually the most recent conversation, and it should be visible the moment you open the client."
+      ]
+    },
+    {
+      "heading": "Notes, and the limits shown honestly",
+      "paragraphs": [
+        "Notes capture what does not fit a document: a preferred contact method, the person who makes final decisions at a company, a deadline the client mentioned on a call, or a note to avoid a certain topic. Notes are useful because they stay with the relationship across projects.",
+        "Notes are limited by plan. Revercue shows that limit inside the product rather than hiding it, so you know where you stand before you reach it. The aim is a clear picture of what your plan includes, not a surprise at the moment you need to write something down."
+      ]
+    },
+    {
+      "heading": "Follow-ups, the dashboard and the interest level",
+      "paragraphs": [
+        "Follow-ups are recorded with a date, and those that are due surface on the dashboard. This is how a proposal that has waited a week, or a client who has gone quiet after a delivery, is brought back to your attention without relying on memory or an overflowing inbox.",
+        "On the Scale plan, an interest level summarises how engaged a client has been, based on their activity with your documents. Revercue shows the working behind the figure, so you can see which signals contributed to it rather than trusting a number you cannot explain. A 15-day summary also shows what was sent, what came back and what is next."
+      ]
+    },
+    {
+      "heading": "A record that builds itself",
+      "paragraphs": [
+        "The most practical part of the CRM is that you do not have to keep it up separately. Creating a proposal for a client adds it to their record. Sending a contract, collecting a requirement form or issuing an invoice adds those too, and the communication log picks up the activity around them.",
+        "The result is a client record that grows with the work rather than one you must maintain as an extra chore. Because the record is accurate, the suggestions and follow-up reminders that depend on it are also more useful."
+      ]
+    },
+    {
+      "heading": "Using the CRM well: a practical checklist",
+      "paragraphs": [
+        "Create a client record as soon as an enquiry arrives, even before a proposal is written. Then log each meaningful conversation as it ends. Five minutes of logging after a call is worth more than an hour of reconstruction when the client returns months later.",
+        "Keep notes short and useful. A good note answers a question you would otherwise have to ask again: who decides, when the budget resets, what they dislike in a previous design, or how they prefer to be contacted. Remove notes that have stopped being true rather than letting the record fill with old context.",
+        "Review your due follow-ups at the start of each working day. A short review keeps proposals moving and stops clients from drifting out of view. Treat the dashboard as your daily list rather than a report you check once a month."
+      ]
+    }
+  ],
+  "includes": [
+    "A client record with details, projects and attached documents",
+    "A communication log covering messages, replies, follow-ups and documents",
+    "Notes with plan limits shown in the product",
+    "Follow-ups that are due surfaced on the dashboard",
+    "An interest level on Scale, with the working shown",
+    "A record that builds itself from proposals, contracts, forms and invoices"
+  ],
+  "faqs": [
+    {
+      "question": "Is Revercue a CRM for freelancers?",
+      "answer": "Yes. Revercue's CRM covers client records, the communication log, notes and follow-up visibility, all connected to proposals, contracts, requirement forms and invoices."
+    },
+    {
+      "question": "Does the client record update on its own?",
+      "answer": "The record is designed to build from the documents and activity created in the connected workflow, so you do not have to maintain it as a separate step."
+    },
+    {
+      "question": "Are notes limited on every plan?",
+      "answer": "Notes are limited by plan, and Revercue shows the limit inside the product so you know what your plan includes."
+    },
+    {
+      "question": "What is the interest level?",
+      "answer": "On the Scale plan, the interest level summarises a client's engagement with your documents. The calculation is shown so you can see which signals contributed to it."
+    },
+    {
+      "question": "How is this different from a sales CRM?",
+      "answer": "A sales CRM is built around pipeline stages and deal forecasting. Revercue's CRM is built around the working relationship: the record, the communication, and the documents that move each client's work forward."
+    },
+    {
+      "question": "Can I log conversations that happen outside Revercue?",
+      "answer": "Yes. Log the conversation in the communication log as it happens, including the direction, channel and any follow-up date, so the thread stays complete even though the message itself lived in your own inbox."
+    }
+  ],
+  "related": [
+    {
+      "label": "Suggestions",
+      "to": "/features/suggestions"
+    },
+    {
+      "label": "Invoices",
+      "to": "/features/invoices"
+    },
+    {
+      "label": "Freelance client management software",
+      "to": "/solutions/client-management"
+    }
+  ]
+}

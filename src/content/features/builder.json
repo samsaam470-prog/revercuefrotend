@@ -1,0 +1,111 @@
+{
+  "slug": "builder",
+  "metaTitle": "Document Builder for Proposals, Contracts and Forms | Revercue",
+  "metaDescription": "A three-panel document builder with a block library, live preview, auto-save and a pre-send review. Build proposals, contracts and forms without code.",
+  "eyebrow": "Feature: The builder",
+  "title": "A document builder that keeps your edits as structured, readable content.",
+  "intro": "Revercue's builder gives you a template as a starting layout, a block library as the toolset, and a canvas that shows exactly what the client will see. Your edits are saved as structured data, not as a pasted page.",
+  "summary": "The Revercue builder is a three-panel editor for proposals, contracts and forms. The left panel holds sections and blocks, the centre is the canvas, and the right panel holds the properties of the selected block. A block library offers twelve blocks in a proposal and seven in a contract. Auto-save runs on a 60-second interval and when a session ends, a live indicator shows the save state, and a post-document review flags items to fix before you share.",
+  "key_facts": [
+    "The builder uses three panels: sections and blocks, the canvas, and the properties of the selected block.",
+    "The block library offers twelve blocks in a proposal and seven in a contract.",
+    "Auto-save runs every 60 seconds and at the end of a session, with an explicit save available.",
+    "A post-document review gives a score and a short list of what to fix before sending.",
+    "The share sheet never sends a document on your behalf; you choose when to share it."
+  ],
+  "visual": "BuilderVisual",
+  "sections": [
+    {
+      "heading": "A template is a starting layout",
+      "paragraphs": [
+        "Most builders begin with a blank page, which is slow, or with a rigid template, which is hard to adapt. Revercue starts from a template that gives you a sensible layout for the document type: a proposal with packages and FAQs, a contract with its standard clauses, or a form with its question sections. You then shape that layout around the specific project.",
+        "Because the template is a starting point rather than a locked design, you can change the order of sections, remove what you do not need and add what you do. The structure stays consistent across documents, so your clients recognise your work even when each project is different."
+      ]
+    },
+    {
+      "heading": "Three panels, one clear workspace",
+      "paragraphs": [
+        "The builder is laid out in three panels. The left panel lists sections and blocks so you can see the structure of the document at a glance. The centre is the canvas, a white page inside the dark app that matches how the client will see the finished document. The right panel shows the properties of whichever block is selected, such as its heading, price, label or options.",
+        "This separation keeps the page readable while you edit. You are not toggling between an editor and a preview to see what a change looks like, because the canvas is the preview."
+      ]
+    },
+    {
+      "heading": "The block library",
+      "paragraphs": [
+        "Blocks are the building units of a document. A proposal offers twelve blocks, including packages, FAQs, text, lists and questions. A contract offers seven, covering the sections that a written agreement normally needs. Each block is readable on its own, and none of them is hidden behind a setting, so you can see what the document contains.",
+        "Using blocks rather than free-form layout keeps documents consistent and accessible. A package block always presents price and inclusions in the same way, and a FAQ block always opens and closes in the same manner on every device."
+      ]
+    },
+    {
+      "heading": "Auto-save and a clear save state",
+      "paragraphs": [
+        "Your work is saved automatically on a 60-second interval, and again when your session ends, so closing a tab is not the only thing standing between you and lost edits. A live indicator shows whether your latest changes have been saved. An explicit save is always available if you want to be certain before you step away.",
+        "The edits are stored as structured data. That is why a document can be reviewed, previewed and shared consistently, and why changes can be connected to the client record rather than sitting in a pasted block of text."
+      ]
+    },
+    {
+      "heading": "Review before you share",
+      "paragraphs": [
+        "Before a document goes to a client, the post-document review gives it a score and a short list of what to fix. The checks are practical: missing prices, empty sections, unclear next steps and similar gaps that are easy to miss when you are close to the work.",
+        "The share sheet never sends a document for you. It opens the choices for sharing, and you decide when the link goes out. That keeps the final step under your control, which matters for any document that carries a price, a commitment or a signature request."
+      ]
+    },
+    {
+      "heading": "Using the builder well: a practical checklist",
+      "paragraphs": [
+        "Start from the template closest to the job, then cut more than you add. Most documents are better with fewer blocks and clearer wording. Remove any block that does not help the client decide or act, and keep only the sections that answer a real question.",
+        "Use the preview as the client's view. Check the document at the width of a phone as well as a laptop, look at the order of the sections, and read each price and date aloud. A document that reads well in the preview is far more likely to read well when the client opens it.",
+        "Run the post-document review before sharing, then fix the items it flags. The review is quick and catches the small gaps that create questions later, such as a missing date, an empty section or an unclear next step."
+      ]
+    }
+  ],
+  "includes": [
+    "A three-panel layout: sections and blocks, canvas and properties",
+    "A canvas that matches the client's view of the document",
+    "A block library with twelve proposal blocks and seven contract blocks",
+    "Auto-save every 60 seconds, at session end and on explicit save",
+    "A live save indicator and a preview before sharing",
+    "A post-document review with a score and a list of fixes",
+    "A share sheet that never sends on your behalf"
+  ],
+  "faqs": [
+    {
+      "question": "Will I lose my edits if my browser closes?",
+      "answer": "Auto-save runs every 60 seconds and at the end of a session, and an explicit save is always available. The live indicator shows whether your latest changes have been stored."
+    },
+    {
+      "question": "Can I preview a document before I share it?",
+      "answer": "Yes. The canvas shows the layout the client will see, and a preview is available before you share."
+    },
+    {
+      "question": "Does sharing a document send it automatically?",
+      "answer": "No. The share sheet never sends a document for you. You choose when the link goes out."
+    },
+    {
+      "question": "How many blocks can I use?",
+      "answer": "The block library offers twelve blocks in a proposal and seven in a contract. Each block is visible in the library, so you can see exactly what is available."
+    },
+    {
+      "question": "Can I reuse a layout across clients?",
+      "answer": "Yes. Templates give you a consistent starting layout, so each new document begins from a structure you have already refined rather than from a blank page."
+    },
+    {
+      "question": "Is the builder the same for proposals, contracts and forms?",
+      "answer": "The builder uses the same three-panel layout across document types, but each type offers its own set of blocks. A proposal offers twelve blocks and a contract offers seven, so the tools match the job."
+    }
+  ],
+  "related": [
+    {
+      "label": "Proposals",
+      "to": "/features/proposals"
+    },
+    {
+      "label": "Contracts",
+      "to": "/features/contracts"
+    },
+    {
+      "label": "Requirement forms",
+      "to": "/features/requirement-forms"
+    }
+  ]
+}

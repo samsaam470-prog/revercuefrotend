@@ -1,0 +1,115 @@
+{
+  "slug": "proposals",
+  "metaTitle": "Proposal Builder for Freelancers: Interactive Proposal Pages | Revercue",
+  "metaDescription": "Build interactive freelance proposals with packages, collapsible FAQs and client questions. Share one private link and track the client response in Revercue.",
+  "eyebrow": "Feature: Proposals",
+  "title": "Interactive proposals that clients can respond to on one page.",
+  "intro": "Revercue's proposal builder turns a freelance proposal into a shareable web page. Packages, FAQs and client questions sit together, and the client responds from the same page you sent.",
+  "summary": "Revercue proposals are web pages, not downloadable files. You add packages such as Basic, Standard and Premium, answer common questions with collapsible FAQs, and share one private link. The client can choose a package, ask a question on the page, or approve or decline. Each action is recorded against the proposal and the client record, so the decision and its history stay in one place.",
+  "key_facts": [
+    "Revercue proposals are shareable web pages rather than static attachments.",
+    "Packages can be renamed or removed, and the starting tiers are Basic, Standard and Premium.",
+    "Clients can ask a question on the page without creating a Revercue account.",
+    "Proposal links are unguessable and marked noindex, so they are not listed in search engines.",
+    "Growth and Scale plans can add an optional password wall to a proposal."
+  ],
+  "visual": "ProposalVisual",
+  "sections": [
+    {
+      "heading": "What a Revercue proposal is",
+      "paragraphs": [
+        "A proposal in most freelance workflows is a file. It is emailed, opened, saved, forwarded and then lost in a folder, and the client's reply comes back as another email with questions buried in the body. Revercue treats the proposal as a page instead. You build it once, share a link, and the client opens the same live page on a laptop or phone without downloading anything.",
+        "Because the proposal is a page, the structure can do work that a PDF cannot. Packages sit side by side, questions sit next to the decisions they affect, and the call to action is always visible. A client who wants to compare two options does not need to scroll back through a document to find the price of the second one.",
+        "Revercue does not place a watermark across the document. A single footer credit line identifies the platform, and that line is removed on the Growth plan and above, so the proposal looks like your work rather than a template."
+      ]
+    },
+    {
+      "heading": "Packages that help clients decide",
+      "paragraphs": [
+        "Packages are the core of a proposal that gets a response. Revercue starts each proposal with three tiers, Basic, Standard and Premium, which you can rename or remove so they match the way you actually sell. Two or three packages is usually the right number. Fewer options make the decision feel clear, while a long list of choices tends to delay it.",
+        "Each package should describe the outcome, the deliverables, the timeline and the price in the same way, so the client can compare them without translating your wording. Keep long explanations in the FAQ section instead of inside the package itself. That keeps the comparison scannable.",
+        "When the client selects a package, you see the selection. The click is recorded against the proposal, so you know which option they are considering before you write the next message, and the follow-up can refer to the choice they made rather than asking them to restate it."
+      ]
+    },
+    {
+      "heading": "Collapsible FAQs and questions in context",
+      "paragraphs": [
+        "Most clients have the same few concerns: what is included, how revisions work, when payment is due, and what happens if the project changes. Revercue lets you answer these in collapsible FAQs at the bottom of the proposal, or as embedded questions placed beside the relevant part of the page. Embedded questions can carry an info icon so the client knows that more detail is available.",
+        "Each question can also be answered through Ask a Question. A client who is not satisfied by the existing answer can send a question from the page, and the question is recorded against the proposal. This keeps the conversation tied to the document instead of spreading it across several email threads.",
+        "The result is a proposal that answers most questions before the client needs to ask them, while still leaving room for the questions you did not anticipate."
+      ]
+    },
+    {
+      "heading": "Approving, declining and following up",
+      "paragraphs": [
+        "A proposal ends with a decision. The client can approve or decline from the bottom of the page, and the proposal record updates straight away. There is no need to wait for a reply email to know where the opportunity stands, and the dashboard reflects the new status.",
+        "The conversation itself still happens in your own email or messaging account. Revercue records the outcome and the activity, but it does not replace your inbox. That separation is intentional: you keep the relationship in the channel you already use, and Revercue keeps the structured record of what was decided.",
+        "If a client declines, the decision is kept on the proposal and the client record. You can then decide whether to follow up, revise the packages or close the opportunity, with the full history in view rather than reconstructed from memory."
+      ]
+    },
+    {
+      "heading": "Sharing, privacy and access control",
+      "paragraphs": [
+        "Each proposal is shared through a link that is difficult to guess, and the page is marked noindex so search engines do not list it. The proposal is meant for the client you send it to, not for public discovery, which protects pricing and scope details that you may not want indexed.",
+        "On Growth and Scale plans you can add an optional password wall. The client must enter the password before the proposal opens, which is useful for sensitive pricing or for work that involves confidential information. Use a password you can share with the client through a separate channel rather than in the same email as the link.",
+        "A proposal moves through drafting, publishing and sharing as separate steps. Until you publish and share it, the client has no access to it, so you can build and review the offer without anything going out by accident."
+      ]
+    },
+    {
+      "heading": "Using proposals well: a practical checklist",
+      "paragraphs": [
+        "Start by writing the outcome the client wants in the first paragraph, in their words if you can. Then list what is included in each package, using the same headings across packages so the comparison is easy. Add the price, the timeline and any exclusions in a consistent order.",
+        "Before you publish, read the proposal on a phone as well as a laptop. Most clients open proposals on mobile between meetings, so check that the packages stack cleanly, the FAQs open, and the decision buttons are easy to find. A proposal that is hard to read on a small screen loses decisions it should have won.",
+        "After you share, check the activity on the proposal the next working day. A client who has opened the link but not chosen a package is a signal to follow up with a specific question, not a generic check-in. Refer to the part of the proposal they are most likely stuck on."
+      ]
+    }
+  ],
+  "includes": [
+    "Editable packages with Basic, Standard and Premium starting tiers",
+    "Collapsible FAQs and per-question Ask a Question",
+    "Embedded questions with an info icon where a client needs context",
+    "Package selection that records the client's choice",
+    "Approve or decline from the bottom of the page",
+    "Unguessable, noindex links, with an optional password wall on Growth and Scale"
+  ],
+  "faqs": [
+    {
+      "question": "Can a client see a proposal before I send it?",
+      "answer": "No. A proposal moves through draft, publish and share steps. The client can only open it once you have published it and shared the link with them."
+    },
+    {
+      "question": "Will my proposal appear in Google search results?",
+      "answer": "No. Proposal links are unguessable and marked noindex, so they are intended for the client you send them to rather than for public search."
+    },
+    {
+      "question": "Can I remove the Revercue credit from my proposal?",
+      "answer": "The credit is a single footer line rather than a watermark across the page. It is removed on the Growth plan and above."
+    },
+    {
+      "question": "What happens if a client declines?",
+      "answer": "The decision is recorded on the proposal and the client record, with any activity around it. You can then follow up, revise the packages or close the opportunity with the full history in view."
+    },
+    {
+      "question": "What should a freelance proposal include?",
+      "answer": "At minimum: the client's goal, the scope of work, the packages with price and timeline, the assumptions behind the price, and one clear next step. FAQs cover the questions that would otherwise start an email chain."
+    },
+    {
+      "question": "How do I follow up on a proposal the client has opened but not answered?",
+      "answer": "Use the activity on the proposal to see that it was opened, then send a specific question tied to the part of the proposal they are likely to be weighing, such as the timeline or the revisions included."
+    }
+  ],
+  "related": [
+    {
+      "label": "Contracts",
+      "to": "/features/contracts"
+    },
+    {
+      "label": "Requirement forms",
+      "to": "/features/requirement-forms"
+    },
+    {
+      "label": "Proposal software for freelancers",
+      "to": "/solutions/proposal-software"
+    }
+  ]
+}

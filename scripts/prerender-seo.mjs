@@ -83,3 +83,62 @@ for (const [slug, page] of Object.entries(solutions)) {
   count++;
 }
 console.log("Pre-rendered " + count + " SEO landing pages.");
+
+// ---- Feature detail pages: /features/<slug> ----
+import { readdir } from "node:fs/promises";
+const featureDir = resolve(process.cwd(), "src/content/features");
+const featureFiles = (await readdir(featureDir)).filter((f) => f.endsWith(".json"));
+let featureCount = 0;
+for (const file of featureFiles) {
+  const feature = JSON.parse(await readFile(resolve(featureDir, file), "utf8"));
+  const url = origin + "/features/" + feature.slug;
+  let html = shell.replace(/<title>[^<]*<\/title>/i, "<title>" + esc(feature.metaTitle) + "</title>");
+  html = setMeta(html, "name", "description", feature.metaDescription);
+  html = setMeta(html, "property", "og:title", feature.metaTitle);
+  html = setMeta(html, "property", "og:description", feature.metaDescription);
+  html = setMeta(html, "property", "og:url", url);
+  html = setMeta(html, "name", "twitter:title", feature.metaTitle);
+  html = setMeta(html, "name", "twitter:description", feature.metaDescription);
+  const canonicalTag = "<link rel=\"canonical\" href=\"" + url + "\" />";
+  html = /<link[^>]+rel=["']canonical["']/i.test(html)
+    ? html.replace(/<link[^>]+rel=["']canonical["'][^>]*>/i, canonicalTag)
+    : html.replace("</head>", canonicalTag + "</head>");
+
+  const graph = [
+    { "@type": "WebPage", "@id": url + "#webpage", name: feature.metaTitle, description: feature.metaDescription, url, isPartOf: { "@type": "WebSite", name: "Revercue", url: origin + "/" }, dateModified: "2026-11-24" },
+    { "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Revercue", item: origin + "/" },
+      { "@type": "ListItem", position: 2, name: "Features", item: origin + "/features" },
+      { "@type": "ListItem", position: 3, name: feature.slug.replaceAll("-", " "), item: url },
+    ] },
+    { "@type": "FAQPage", mainEntity: feature.faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })) },
+  ];
+  html = html.replace("</head>", "<script type=\"application/ld+json\">" + JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c") + "</script></head>");
+
+  const facts = feature.key_facts.map((f) => "<li>" + esc(f) + "</li>").join("");
+  const sections = feature.sections.map((s) => "<section><h2>" + esc(s.heading) + "</h2>" + s.paragraphs.map((p) => "<p>" + esc(p) + "</p>").join("") + "</section>").join("");
+  const includes = feature.includes.map((i) => "<li>" + esc(i) + "</li>").join("");
+  const faqs = feature.faqs.map((f) => "<details><summary>" + esc(f.question) + "</summary><p>" + esc(f.answer) + "</p></details>").join("");
+  const related = feature.related.map((r) => "<li><a href=\"" + r.to + "\">" + esc(r.label) + "</a></li>").join("");
+
+  const body =
+    "<main style=\"max-width:960px;margin:0 auto;padding:48px 24px;font-family:Inter,Arial,sans-serif;line-height:1.65\">" +
+    "<nav aria-label=\"Breadcrumb\"><a href=\"/\">Revercue</a> / <a href=\"/features\">Features</a> / " + esc(feature.slug.replaceAll("-", " ")) + "</nav>" +
+    "<header><p>" + esc(feature.eyebrow) + "</p><h1>" + esc(feature.title) + "</h1><p>" + esc(feature.intro) + "</p>" +
+    "<p><a href=\"/login\">Start free</a> | <a href=\"/pricing\">See pricing</a></p></header>" +
+    "<section><h2>Quick answer</h2><p>" + esc(feature.summary) + "</p><ul>" + facts + "</ul></section>" +
+    sections +
+    "<section><h2>What is included</h2><ul>" + includes + "</ul></section>" +
+    "<section><h2>Questions</h2>" + faqs + "</section>" +
+    "<section><h2>Keep exploring</h2><ul>" + related + "</ul>" +
+    "<p><a href=\"/features\">All features</a> | <a href=\"/pricing\">Plans and pricing</a> | <a href=\"/solutions/proposal-software\">Solutions</a></p></section>" +
+    "</main>";
+
+  html = html.replace("<div id=\"root\"></div>", "<div id=\"root\">" + body + "</div>");
+  const dir = resolve(dist, "features", feature.slug);
+  await mkdir(dir, { recursive: true });
+  await writeFile(resolve(dir, "index.html"), html, "utf8");
+  console.log("Pre-rendered /features/" + feature.slug);
+  featureCount++;
+}
+console.log("Pre-rendered " + featureCount + " feature pages.");
