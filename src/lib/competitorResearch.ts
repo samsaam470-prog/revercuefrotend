@@ -6,7 +6,7 @@
  * a broken claim. Update `PRICING_CHECKED` and the affected entry together.
  */
 
-export const PRICING_CHECKED = "23 November 2026";
+export const PRICING_CHECKED = "24 November 2026";
 
 export interface CompetitorPrice {
   plan: string;
@@ -60,11 +60,11 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
       { label: "The Digital Project Manager — Hello Bonsai review", url: "https://thedigitalprojectmanager.com/tools/hello-bonsai-review" },
     ],
     othersSay: {
-      intro:
-        "Independent reviews are not listed on this page yet. Each comparison is checked against the vendor's own pricing and product pages first, and third-party coverage is added only after its source has been read and dated.",
-      summary:
-        "Read the vendor's own pages for current pricing and features, and the checked dates above for when each figure was last confirmed.",
-      articles: [],
+      intro: "Review-listing snapshots checked 24 November 2026. Ratings and counts belong to the review platforms, can change, and are not Revercue test scores.",
+      summary: "Capterra shows 4.6/5 from 95 reviews; reviewers highlight contract-template flexibility and ease of use. Capterra lists ease of use at 4.6/5 and customer service at 4.3/5. This is a modest sample, not a universal verdict.",
+      articles: [
+      { title: "Capterra — 4.6/5 from 95 reviews", source: "Capterra · checked 24 Nov 2026", url: "https://www.capterra.com/p/238825/Bonsai/reviews/", summary: "Reviewers highlight contract-template flexibility and a straightforward experience; the profile lists ease of use at 4.6/5 and customer service at 4.3/5." },
+      ],
     },
   },
 
@@ -87,11 +87,12 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
       { label: "PCMag — HoneyBook review", url: "https://www.pcmag.com/reviews/honeybook" },
     ],
     othersSay: {
-      intro:
-        "Independent reviews are not listed on this page yet. Each comparison is checked against the vendor's own pricing and product pages first, and third-party coverage is added only after its source has been read and dated.",
-      summary:
-        "Read the vendor's own pages for current pricing and features, and the checked dates above for when each figure was last confirmed.",
-      articles: [],
+      intro: "Review-listing snapshots checked 24 November 2026. Ratings and counts belong to the review platforms, can change, and are not Revercue test scores.",
+      summary: "Capterra shows 4.7/5 from 696 reviews; G2 shows 4.4/5 from 253 reviews. Reviewers praise the centralized client workflow and ease of use, while some mention pricing, learning curve, reporting or customization limits.",
+      articles: [
+      { title: "Capterra — 4.7/5 from 696 reviews", source: "Capterra · checked 24 Nov 2026", url: "https://www.capterra.com/p/162588/HoneyBook/reviews/", summary: "Capterra lists ease of use at 4.6/5 and customer service at 4.7/5. Visible reviews praise bringing contracts, invoices, payments and client communication together; some report setup friction or limited customization." },
+      { title: "G2 — 4.4/5 from 253 reviews", source: "G2 · checked 24 Nov 2026", url: "https://www.g2.com/products/honeybook/reviews", summary: "G2 reviewers value the connected client workflow, templates and automations. Recurring cautions include subscription cost, learning curve, limited customization and integrations." },
+      ],
     },
   },
 
@@ -111,11 +112,12 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
     ],
 
     othersSay: {
-      intro:
-        "Independent reviews are not listed on this page yet. Each comparison is checked against the vendor's own pricing and product pages first, and third-party coverage is added only after its source has been read and dated.",
-      summary:
-        "Read the vendor's own pages for current pricing and features, and the checked dates above for when each figure was last confirmed.",
-      articles: [],
+      intro: "Review-listing snapshots checked 24 November 2026. Ratings and counts belong to the review platforms, can change, and are not Revercue test scores.",
+      summary: "Capterra shows 4.2/5 from 61 reviews (ease of use 3.7/5, customer service 4.3/5). G2's Dubsado seller profile shows 4.3/5 from 76 reviews. Reviewers value automation but also mention setup effort and learning curve.",
+      articles: [
+      { title: "Capterra — 4.2/5 from 61 reviews", source: "Capterra · checked 24 Nov 2026", url: "https://www.capterra.com/p/206389/Dubsado/reviews/", summary: "Reviewers praise automated workflows and client administration, while some describe form design, scheduling and setup as difficult. Recent feedback also raises concern about pricing increases." },
+      { title: "G2 — 4.3/5 from 76 reviews", source: "G2 seller profile · checked 24 Nov 2026", url: "https://www.g2.com/sellers/dubsado", summary: "G2's seller profile shows a 4.3/5 average across 76 reviews; this is a seller-profile aggregate, not a controlled feature test." },
+      ],
     },
   },
 
@@ -138,11 +140,13 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
       { label: "Millo — Moxie app review", url: "https://millo.co/moxie-app-review" },
     ],
     othersSay: {
-      intro:
-        "Independent reviews are not listed on this page yet. Each comparison is checked against the vendor's own pricing and product pages first, and third-party coverage is added only after its source has been read and dated.",
-      summary:
-        "Read the vendor's own pages for current pricing and features, and the checked dates above for when each figure was last confirmed.",
-      articles: [],
+      intro: "Review-listing snapshots checked 24 November 2026; Moxie's G2 and Capterra samples are very small, while Trustpilot's profile is marked as merged.",
+      summary: "G2 shows 4.5/5 from 4 reviews, Capterra 4.0/5 from 1 review, and Trustpilot 4.8/5 from 539 reviews. G2 and Capterra samples are too small to generalize; Trustpilot marks the profile as merged, so its total may include reviews originally posted elsewhere.",
+      articles: [
+      { title: "G2 — 4.5/5 from 4 reviews", source: "G2 · checked 24 Nov 2026", url: "https://www.g2.com/products/geoff-mina-moxie/reviews", summary: "Four reviews are too few to generalize about product quality." },
+      { title: "Capterra — 4.0/5 from 1 review", source: "Capterra · checked 24 Nov 2026", url: "https://www.capterra.com/p/10026264/Moxie/", summary: "One review is not a meaningful basis for comparing satisfaction." },
+      { title: "Trustpilot — 4.8/5 from 539 reviews", source: "Trustpilot · checked 24 Nov 2026", url: "https://www.trustpilot.com/review/withmoxie.com", summary: "Trustpilot notes that the company profile was merged with one or more other profiles; take that merged history into account when interpreting the score." },
+      ],
     },
   },
 
@@ -150,13 +154,13 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
     checkedOn: "24 November 2026",
     pricingSource: { label: "Plutio — official pricing page (checked 24 November 2026)", url: "https://www.plutio.com/pricing" },
     pricing: [
-      { plan: "Core", price: "$19/mo, or $190/yr", note: "Solo; 9 active clients, no contributors" },
-      { plan: "Pro", price: "$49/mo, or $490/yr", note: "Unlimited clients, 30 contributors" },
-      { plan: "Max", price: "$199/mo, or $1,990/yr", note: "Unlimited contributors, white-label included" },
+      { plan: "Core", price: "$19/mo", note: "Workspace price; up to 9 active clients; no contributors" },
+      { plan: "Pro", price: "$49/mo", note: "Workspace price; unlimited clients; 30 contributors included" },
+      { plan: "Max", price: "$199/mo", note: "Workspace price; unlimited clients and contributors; white-label included" },
       { plan: "Enterprise", price: "Custom quote" },
     ],
     pricingNote:
-      "Flat per workspace, not per seat, before tax. There is no free plan; the trial is seven days with no card and capped at three active clients. White-label is a $9/mo add-on on Core and Pro, SSO is a $5/mo add-on on Pro, and both are included on Max.",
+      "Flat workspace pricing, not per seat. The current help-centre plan table lists 9 active clients and no contributors on Core, 30 included contributors on Pro, and unlimited contributors on Max. White-label is an add-on on Core and Pro and included on Max; SSO is unavailable on Core, an add-on on Pro, and included on Max. The seven-day trial includes three active clients and requires no card. Annual billing is offered, but the current help-centre table checked here does not state annual totals.",
     sources: [
       { label: "Plutio pricing (official)", url: "https://www.plutio.com/pricing" },
       { label: "Plutio help centre — subscription plans overview", url: "https://www.plutio.com/help/subscription-plans-overview" },
@@ -166,11 +170,12 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
       { label: "Search Legion — Plutio review 2026", url: "https://searchlegion.com/reviews/plutio" },
     ],
     othersSay: {
-      intro:
-        "Independent reviews are not listed on this page yet. Each comparison is checked against the vendor's own pricing and product pages first, and third-party coverage is added only after its source has been read and dated.",
-      summary:
-        "Read the vendor's own pages for current pricing and features, and the checked dates above for when each figure was last confirmed.",
-      articles: [],
+      intro: "Review-listing snapshots checked 24 November 2026. Ratings and counts belong to the review platforms, can change, and are not Revercue test scores.",
+      summary: "Capterra shows 4.6/5 from 162 reviews; G2 shows 4.3/5 from 57 reviews. Reviewers value breadth and customization, while some report a learning curve, navigation friction, support concerns or reliability issues.",
+      articles: [
+      { title: "Capterra — 4.6/5 from 162 reviews", source: "Capterra · checked 24 Nov 2026", url: "https://www.capterra.com/p/179406/Plutio/reviews/", summary: "Capterra lists ease of use and customer service at 4.5/5. Visible feedback praises customization and collaboration; some reviewers describe limitations in task handling or the client experience." },
+      { title: "G2 — 4.3/5 from 57 reviews", source: "G2 · checked 24 Nov 2026", url: "https://www.g2.com/products/plutio/reviews", summary: "G2 reviewers value projects, proposals, invoicing and client communication. Some older reviews raise concerns about support responsiveness, reliability and learning curve." },
+      ],
     },
   },
 
@@ -184,7 +189,7 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
       { plan: "Scale", price: "$249/mo, or $199/mo billed yearly", note: "Fifteen seats; accounting intelligence" },
     ],
     pricingNote:
-      "Per workspace, with seats included per plan; extra seats cost about $20 per seat per month on Pro and above. There is no free plan; the trial is 14 days with Business features and no card. Agiled only renders its annual view server-side, so the monthly figures are corroborated by its own comparison posts and an independent tracker rather than read directly from the toggle. The official page confirms the annual prices ($24, $59, $99, $199 a month billed annually). The monthly figures are from a third-party read of the monthly view and are not confirmed on the official page.",
+      "Workspace pricing with 1, 3, 7 and 15 included seats across Starter, Pro, Business and Scale. The official pricing page confirms annual-billing equivalents of $24, $59, $99 and $199 per month; Agiled's own published comparison article lists monthly-billing prices of $29, $69, $129 and $249. Extra seats are listed at $20 per seat per month on Pro and above. The pricing-page FAQ says a workspace can continue on Free after the 14-day trial, but the public plan table does not spell out Free-tier limits; the free-plan status and limits should therefore be treated as incompletely documented rather than assumed away.",
     sources: [
       { label: "Agiled pricing (official)", url: "https://agiled.app/pricing" },
       { label: "Agiled documentation", url: "https://docs.agiled.app/" },
@@ -194,11 +199,12 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
       { label: "Frontier Edit — how Agiled built its user base", url: "https://www.frontieredit.com/stories/startup-agiled" },
     ],
     othersSay: {
-      intro:
-        "Independent reviews are not listed on this page yet. Each comparison is checked against the vendor's own pricing and product pages first, and third-party coverage is added only after its source has been read and dated.",
-      summary:
-        "Read the vendor's own pages for current pricing and features, and the checked dates above for when each figure was last confirmed.",
-      articles: [],
+      intro: "Review-listing snapshots checked 24 November 2026. Ratings and counts belong to the review platforms, can change, and are not Revercue test scores.",
+      summary: "Capterra shows 4.7/5 from 350 reviews; G2 shows 4.7/5 from 387 reviews. Reviewers praise the breadth of CRM, project and finance tools; some mention performance, integration setup and customization limitations.",
+      articles: [
+      { title: "Capterra — 4.7/5 from 350 reviews", source: "Capterra · checked 24 Nov 2026", url: "https://www.capterra.com/p/206203/Agiled/reviews/", summary: "Capterra lists ease of use at 4.6/5 and customer service at 4.7/5. Visible reviewers praise CRM, onboarding and finance in one place; some mention notification volume and communication limits." },
+      { title: "G2 — 4.7/5 from 387 reviews", source: "G2 · checked 24 Nov 2026", url: "https://www.g2.com/products/agiled/reviews", summary: "G2 reviewers highlight CRM, project management, invoicing and HRM. Some report slower performance, integration setup friction or less flexible templates and reports." },
+      ],
     },
   },
 
@@ -206,15 +212,15 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
     checkedOn: "24 November 2026",
     pricingSource: { label: "Google Workspace pricing (Google support page, checked 24 November 2026)", url: "https://support.google.com/a/answer/15400543" },
     pricing: [
-      { plan: "Google Workspace Business Starter", price: "$8.40/mo flexible, or $7.00/mo annual", note: "30 GB per user, 100-person meetings" },
-      { plan: "Google Workspace Business Standard", price: "$16.80/mo flexible, or $14.00/mo annual", note: "2 TB per user, recording, eSignature" },
-      { plan: "Google Workspace Business Plus", price: "$26.40/mo flexible, or $22.00/mo annual", note: "5 TB per user, Vault, advanced controls" },
-      { plan: "Microsoft 365 Business Basic", price: "$8.40/mo monthly, or $7.00/mo annual", note: "Web and mobile Office apps, 1 TB OneDrive" },
-      { plan: "Microsoft 365 Business Standard", price: "$16.80/mo monthly, or $14.00/mo annual", note: "Desktop Office apps on five devices" },
-      { plan: "Microsoft 365 Business Premium", price: "$26.40/mo monthly, or $22.00/mo annual", note: "Intune, Defender, conditional access" },
+      { plan: "Google Workspace Business Starter", price: "$7.00/user/mo, billed annually", note: "30 GB pooled storage per user; eSignature not included" },
+      { plan: "Google Workspace Business Standard", price: "$14.00/user/mo, billed annually", note: "2 TB pooled storage; Docs and PDF eSignature included" },
+      { plan: "Google Workspace Business Plus", price: "$22.00/user/mo, billed annually", note: "5 TB pooled storage; eSignature included" },
+      { plan: "Microsoft 365 Business Basic", price: "$7.00/user/mo, billed annually", note: "Web and mobile Office apps; 1 TB OneDrive" },
+      { plan: "Microsoft 365 Business Standard with Copilot", price: "$23.50/user/mo, billed annually", note: "Desktop Office apps and Copilot" },
+      { plan: "Microsoft 365 Business Premium with Copilot", price: "$32.00/user/mo, billed annually", note: "Productivity apps, Copilot, and advanced security" },
     ],
     pricingNote:
-      "Per user, per month, before tax, on US list prices. Google figures are from Google's own support page: Business Starter $7 annual or $8.40 flexible, Standard $14 or $16.80, Plus $22 or $26.40. Microsoft figures are from secondary sources that agree with each other (Business Basic $7 annual or $8.40 monthly, Standard $14 or $16.80, Premium $22 or $26.40, after the July 2026 price change); they are not yet confirmed on Microsoft's own page. Promotions and local pricing vary, so check the vendor page for a specific country.",
+      "US list prices per user/month on annual commitment, before tax. Google's current pricing page lists $7, $14 and $22 for Starter, Standard and Plus; introductory offers may temporarily lower the checkout price. Microsoft's current US page lists Business Basic at $7, Business Standard with Copilot at $23.50, and Business Premium with Copilot at $32. It also shows separate no-Teams variants at $5.40, $20.30 and $28.80 respectively. The Microsoft page checked here displays annual-commitment prices; monthly billing prices are not shown in the extracted plan list. Country, tax and promotional pricing vary.",
     sources: [
       { label: "Google Workspace pricing (official)", url: "https://workspace.google.com/pricing" },
       { label: "Microsoft 365 business plans (official)", url: "https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-plans-and-pricing" },
@@ -224,11 +230,12 @@ export const COMPETITOR_RESEARCH: Record<string, CompetitorResearch> = {
       { label: "Computerworld — Google Workspace vs Microsoft 365", url: "https://www.computerworld.com/article/1672155/g-suite-vs-office-365-whats-the-best-office-suite-for-business.html" },
     ],
     othersSay: {
-      intro:
-        "Independent reviews are not listed on this page yet. Each comparison is checked against the vendor's own pricing and product pages first, and third-party coverage is added only after its source has been read and dated.",
-      summary:
-        "Read the vendor's own pages for current pricing and features, and the checked dates above for when each figure was last confirmed.",
-      articles: [],
+      intro: "Review-listing snapshots checked 24 November 2026. Ratings and counts belong to the review platforms, can change, and are not Revercue test scores.",
+      summary: "Capterra shows Google Workspace at 4.7/5 from 87,024 reviews and Microsoft 365 at 4.6/5 from 14,176 reviews. These are separate product listings, not a combined score; reviewers praise collaboration and document tools, while mentioning sync delays, complexity and internet dependence.",
+      articles: [
+      { title: "Google Workspace — 4.7/5 from 87,024 reviews", source: "Capterra · checked 24 Nov 2026", url: "https://www.capterra.com/p/247901/Google-Workspace/", summary: "Capterra describes strong real-time collaboration and a centralized productivity suite. Visible concerns include stable-internet dependence and occasional synchronization delays." },
+      { title: "Microsoft 365 — 4.6/5 from 14,176 reviews", source: "Capterra · checked 24 Nov 2026", url: "https://www.capterra.com/p/227157/Microsoft-365/reviews/", summary: "Capterra reviewers value the broad Office ecosystem and document sharing. Some mention subscription cost, complexity, OneDrive synchronization and interface changes." },
+      ],
     },
   },
 };
