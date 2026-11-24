@@ -150,7 +150,7 @@ const BASE_COMPETITORS: Competitor[] = [
       "Writing support is optional; the core workflow tracks client decisions and the next action.",
     ],
     fits:
-      "Moxie fits a freelancer who wants a project workspace with writing help built in. Revercue fits a freelancer whose bottleneck is the client's decision and follow-up, not the first draft.",
+      "Moxie fits a freelancer who wants a project workspace with a built-in Assistant; its white-label portal and workflow automation are plan-dependent. Revercue fits a freelancer whose main bottleneck is the client's decision and follow-up.",
   },
   {
     slug: "plutio",
@@ -349,7 +349,7 @@ const NOTES: Record<string, { heading: string; paragraphs: string[] }[]> = {
     {
       heading: "The day-to-day difference",
       paragraphs: [
-        "Moxie's day is a workspace: projects, tasks, drafts, client messages. The helper is always one keystroke away, and the rhythm is productive rather than analytical — you are making things.",
+        "Moxie's day is a workspace: projects, tasks, drafts and client messages. Its Assistant adds another productivity layer, while the main workflow remains organized around projects and client administration.",
         "Revercue's day is quieter and more diagnostic: a client opened the pricing twice, a proposal has been unanswered for four days, a contract was approved and no invoice exists yet. It is a product you check rather than one you work inside, which suits freelancers whose writing is not the bottleneck.",
       ],
     },
@@ -457,7 +457,7 @@ const NOTES_THREE: Record<string, { heading: string; paragraphs: string[] }[]> =
     {
       heading: "If you are choosing between the two this week",
       paragraphs: [
-        "Look at your last three proposals and ask which part took longest: the writing or the follow-up. Moxie attacks the writing; Revercue attacks the follow-up. Nobody can tell you which is your bottleneck, and the honest answer changes with the season, so choose the tool that fixes the current one rather than the imaginary one.",
+        "Look at your last three proposals and ask which part took longest: preparing the material or following up after it was sent. Moxie offers an Assistant inside its broader workspace; Revercue's main differentiator is the client decision and follow-up view. Choose based on the bottleneck you can actually observe, not the one you imagine.",
         "A practical compromise for writers: draft in Moxie or in your own editor, then rebuild the structure in Revercue for the send. The text is yours, the decisions and the tracking are the product's, and neither tool has to be the whole answer. It costs one extra step per document and removes the pressure to pick a side.",
         "Whichever you pick, read the generated text once with the client's name and one specific detail of their business in mind. That single edit is what turns a competent draft into a document that could only have been written for them, and no helper can do it for you.",
       ],
