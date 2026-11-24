@@ -1411,7 +1411,7 @@ const BASE_GUIDES: Guide[] = [
       "Select a sentence, ask for a rewrite, and decide whether to take it. What the helper can do, what it will not do, and where it runs.",
     category: "Product",
     readMinutes: 9,
-    updated: "2026-11-22",
+    updated: "2026-11-24",
     visual: "BuilderVisual",
     sections: [
       {
@@ -1439,8 +1439,8 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "What happens to your data",
         paragraphs: [
-          "The text you select is never sent to a Revercue server, never sent to the team, and never stored in the database. Nothing about the passage or the rewrite reaches us at any point in the flow, not when you select it, not when you ask, not when you accept the rewrite.",
-          "The team cannot read the passage you selected, the rewrite that came back, or the document you are editing. The team sees the account details — your email, your name, your plan and your usage — and nothing of the content. That distinction is the point: the content is yours, and the helper is the tool that works on it.",
+          "The inline rewrite operation runs in your browser and does not send the selected passage or suggested replacement to Revercue. This is separate from document creation, draft generation, autosave and publishing, which send document data to Revercue servers to provide those services.",
+          "The helper does not change the document without your choice. You review the suggested wording and decide whether to replace the selected text, insert the rewrite below, or cancel.",
         ],
       },
       {
@@ -1461,7 +1461,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "When the button is not there",
         paragraphs: [
-          "Some browsers and some devices cannot run the helper. In that case the button is simply not rendered: no warning, no broken control, no message about compatibility. The text fields keep working exactly as before, and you write the passage yourself. Nothing else in the builder depends on the helper, so the product is whole without it.",
+          "The helper remains available for common instructions through built-in writing rules when its more capable rewrite is unavailable. You can also edit the text manually at any time; no helper suggestion is applied without your choice.",
           "This is a quiet choice on purpose. A feature that cannot run should not announce itself in the middle of your work. It should be absent, and the work should continue.",
         ],
       },
@@ -1481,45 +1481,45 @@ const BASE_GUIDES: Guide[] = [
       "The review that runs after Create: a score out of 100, the issues behind it, and what to do with them before you send.",
     category: "Product",
     readMinutes: 9,
-    updated: "2026-11-22",
+    updated: "2026-11-24",
     visual: "DashboardVisual",
     sections: [
       {
         heading: "What runs after Create",
         paragraphs: [
-          "You press Create. The document is published to its link, and then the review runs. It reads what you just built and gives you two things: a quality score out of 100, and a list of the issues that produced it. The review appears once, in front of you, before the share modal. You read it, decide, and either go back into the builder or publish anyway.",
+          "In the proposal and contract builders, you click Create and the draft is saved. The review runs before publication and shows an indicative score out of 100 with a list of flagged issues. You can keep editing or choose Publish anyway; the review does not publish the document by itself.",
           "The score is not a grade on your work and it is not a gate. Publishing is a button on the same panel. The review exists because most documents are sent within a minute of being written, and a minute is not enough time to notice that the pricing block is missing or that the close is three screens down.",
         ],
       },
       {
         heading: "The two layers",
         paragraphs: [
-          "The pattern engine checks the structure. It looks at the sections you said you wanted and the sections that actually exist, the presence of the pricing, the presence of a next step, the length of the document against the length you chose, the tone you set against the words on the page, and the repetition of a line in two places. Those checks are arithmetic and comparison; they do not need to read for meaning.",
-          "The helper checks the prose, when it is available. It reads the text for readability, flow and clarity, and returns one short note rather than a rewrite. That note is attached to the same list. The text is not sent to a Revercue server to produce the note.",
-          "The two layers are separated on purpose. Structure problems are objective: a missing pricing block is missing whether or not the writing is good. Prose problems are judgment, and they come from a different place.",
+          "The review uses deterministic checks. It can flag missing brief sections, a missing pricing block or packages, a missing next step or button, a document shorter than 120 words, a paragraph longer than 140 words, a sentence longer than 34 words, repeated text lines, a document not linked to a client record, and contractions when the selected tone is exactly Formal. Section checks run when the brief supplies expected sections.",
+          "The review does not query a helper for a prose diagnosis. It does not inspect client history, saved FAQs or packages, winning templates, verify factual claims, assess legal sufficiency, or decide whether a price or timeline is correct.",
+          "Treat the score as a checklist signal, not a fact-check or a guarantee that the document is ready to send.",
         ],
       },
       {
         heading: "The score bands",
         paragraphs: [
-          "Eighty and above is ready. The sections are there, the pricing is there, the close is there, and nothing in the prose stalled the read. Send it.",
-          "Fifty to seventy-nine is good with a few improvements. Usually one thing is missing: a next step, a pricing block, or a section you chose but never wrote. The list tells you which; fixing it takes a minute and moves the score.",
-          "Under fifty is not ready. More than one structural piece is absent, or the document is far shorter than the shape you chose. That is not a failure, it is an unfinished draft that was published by accident. Keep editing is the right answer.",
+          "80 or above is labelled Ready. It is a heuristic score, not a guarantee that the facts, terms or price are correct.",
+          "50–79 is labelled Good, with a few improvements. Read the flagged items and decide which ones matter for this document.",
+          "Below 50 is labelled Not ready yet. A low score still does not block publication; you decide whether to keep editing or proceed.",
         ],
       },
       {
         heading: "The three tags",
         paragraphs: [
-          "From this client's history: the issue comes from the shape of this relationship — the document is not linked to a client record, the length is short for a first proposal to this client, the client's previous documents ran longer. These are the issues a colleague who knows the account would raise first.",
-          "From your usual method: the issue comes from how you normally work — a section you usually include is empty, a sentence pattern you usually avoid has crept in, the formal tone has contractions in it. These are the issues you would notice yourself on a second read.",
-          "From what works: the issue comes from the shape of the accepted documents across the product — no pricing block, no clear next step, a paragraph long enough to lose the reader, a repeated line. These are the issues that do not depend on who you are.",
+          "Client context: the document is not linked to a client record. This is a link-status check, not an analysis of the client's history.",
+          "Document structure or writing quality: the review can flag missing brief sections and formal-tone contractions. It does not learn or compare your usual method.",
+          "Document structure or writing quality: the review can flag missing pricing or next steps, long paragraphs or sentences, and repeated text. It does not compare your document with other customers' accepted documents.",
         ],
       },
       {
         heading: "What it checks, and what it does not",
         paragraphs: [
-          "It checks the structure, the sections, the pricing, the timeline, the tone consistency, the call to action, the length against the shape you chose, the paragraphs that run long, the sentences that run long, a repeated line, and whether the document is linked to a client.",
-          "It does not check whether the price is right, whether the timeline is achievable, or whether the client will say yes. It does not check the legal sufficiency of a clause, and it does not replace a read. It also does not block: there is no state in which the product refuses to publish because the score is low.",
+          "It checks the items listed above: brief sections when supplied, pricing block or packages, next step or button, word count, paragraph and sentence length, repeated lines, client linkage, and Formal-tone contractions.",
+          "It does not check whether a price or timeline is correct, whether the client will accept, or whether a clause is legally sufficient. It does not replace your review and does not block publication.",
         ],
       },
       {
@@ -1535,7 +1535,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "The number is a summary of the checks, and a summary always loses something. A document at eighty-two can still be the wrong proposal for the wrong client, and a document at fifty-eight can be exactly what the client asked for in three lines. Treat the score as a checklist pressure, not a verdict.",
           "What you are actually buying from the review is the pause. It is the thirty seconds between writing and sending, in which someone — even a pattern — asks whether the pricing is on the page and whether the client has anywhere to click. Most of the value of a review is that it happens at all.",
-          "The review also leaves a trace you can compare. Publish three proposals in a week and the scores tell you which shape you write well and which one you rush. That is not a ranking of you; it is a pattern in your own work, and the pattern engine is good at exactly that kind of counting.",
+          "The review is shown in the builder before publication; it is not a saved score history or a comparison across documents.",
         ],
       },
     ],
