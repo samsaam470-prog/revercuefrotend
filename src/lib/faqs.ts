@@ -656,7 +656,7 @@ export const FAQS: Faq[] = [
     group: "support",
     question: "What browsers are supported?",
     answer:
-      "Recent versions of Chrome, Edge, Safari, and Firefox. The core product works on modern browsers: documents, clients, invoices and tracking. The builder helper uses a browser-based rewrite when supported and falls back to built-in writing rules for common edits when it is not. The suggestions are patterns, separate from the helper, and work across modern browsers."
+      "Recent versions of Chrome, Edge, Safari, and Firefox. The core product works on modern browsers: documents, clients, invoices and tracking. The builder helper provides an enhanced rewrite when supported and falls back to built-in writing rules for common edits when it is not. The suggestions are patterns, separate from the helper, and work across modern browsers."
   },
   {
     id: 94,

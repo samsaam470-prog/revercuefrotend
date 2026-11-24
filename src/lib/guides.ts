@@ -142,7 +142,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "Select words inside any text field and a toolbar appears above it: Ask the helper, bold, italic, underline, a size picker, a colour picker and delete. The formatting is written into the text with the document's small markup, so what you apply in the builder is what the client reads on the page — no separate preview and no export step.",
           "Select a block on the canvas and its action strip appears under the content: Ask the helper, Upload from device where the element takes a file, and Remove. The helper here reads that element's own words — a heading, a card, a chart caption, an image description, an FAQ answer — and writes the result back through the same update the properties panel uses, so nothing is changed anywhere you cannot see it.",
-          "The icon row on the block still does the structural work: move up, move down, duplicate, delete, select. The action strip is the content work. When the browser cannot run the helper, that one button is not rendered; the formatting toolbar, upload and the rest of the strip are unaffected.",
+          "The icon row on the block still does the structural work: move up, move down, duplicate, delete, select. The action strip is the content work. When the enhanced rewrite is unavailable, common instructions still use built-in writing rules; the formatting toolbar, upload and the rest of the strip are unaffected.",
         ],
       },
     ],
