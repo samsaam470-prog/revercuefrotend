@@ -39,7 +39,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Finish the five onboarding steps",
         paragraphs: [
-          "Choose freelancer or agency, fill in your profile and services, confirm the legal consent, then pick a plan. Free is available now. Starter, Growth and Scale are publicly available via checkout; Teams is in beta and you join the beta.",
+          "Choose freelancer or agency, fill in your profile and services, confirm the legal consent, then pick a plan. Free is available now. Starter, Growth and Scale are publicly available via checkout; Teams is in beta and you join the beta. Growth starts with fourteen days of Scale access free, so the Scale features are usable from the first day and the plan settles on Growth when the fourteen days end.",
           "The profile step asks for your business name, your website, your Fiverr profile if you take work there, and the services you sell. The website and the Fiverr profile are optional and labelled that way. The services are not decoration: they decide which built-in templates are marked Suggested when you open a proposal.",
           "The tutorial overlay walks through the ten places you will use most. It is a single modal with numbered steps, not a chain of popovers that trap the pointer. You can skip it at any step and find every screen again in the Guides.",
         ],
@@ -1391,6 +1391,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "Growth: project costs, profit and all-time profit",
         paragraphs: [
           "Growth adds the cost side. You record project expenses with an amount, a date, a category such as hosting, editing or building, the platform or provider where you paid for it, and an optional note. Recording starts on Growth, so Free and Starter do not show the expense form.",
+          "The first fourteen days of Growth also open the Scale side of the overview: the price suggestion reads the same costs and confirmed payments while the trial runs, so the first fortnight is the time to price real work with it. When the fourteen days end the expenses and the profit stay; the price suggestion waits until you upgrade to Scale.",
           "With costs recorded, the overview shows the project expenses, the profit and the all-time profit. Profit is the confirmed revenue minus the recorded expenses. The expense list under the figures keeps each recorded cost with its category, platform, date and note, so a high month can be checked against the tools and suppliers that produced it. The all-time profit is the same calculation across every date, which is the number to watch when you decide where to spend your time.",
         ],
       },
@@ -1500,7 +1501,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "Starter, Growth and Scale are now publicly available via checkout. Teams is in beta: you join with your email and the team reaches out when a spot opens.",
           "Downgrades take effect at the end of the cycle. Documents above the new limit are archived rather than deleted, so the links close but nothing is lost. If you go from a hundred live documents to twenty, eighty of them move to the archive and the archive allowance of the lower plan applies. That is the moment the archive limit matters most, and it is why the archive is counted separately.",
-          "Free is free forever, with limits, and is not a trial. Growth has a limited-time 14-day free trial, shown on the pricing page. The paid plans are the same product with more room and more intelligence, and the plan limits keep the room honest.",
+          "Free is free forever, with limits, and is not a trial. Growth starts with fourteen days of Scale access at no extra cost: the price suggestion, the interest level, advanced tracking and the custom thank-you page are yours for the first two weeks, and after that the account continues on Growth at $29 a month. The paid plans are the same product with more room and more intelligence, and the plan limits keep the room honest.",
         ],
       },
       {

@@ -362,9 +362,16 @@ function PlanSection() {
         </div>
         <p className="caption">
           {plan === "free"
-            ? "Free is available now. Starter, Growth and Scale are publicly available via checkout. Teams is in beta."
+            ? "Free is available now. Starter, Growth and Scale are publicly available via checkout. Growth starts with 14 days of Scale access free. Teams is in beta."
             : "Your plan was set by the team. Changes are handled by the team."}
         </p>
+        {query.data?.trial && (
+          <p className="caption">
+            Scale access is included free until {new Date(query.data.trial.ends_at).toLocaleDateString()} —{" "}
+            {query.data.trial.days_left} {query.data.trial.days_left === 1 ? "day" : "days"} left. After that the
+            account continues on the plan you bought.
+          </p>
+        )}
       </div>
 
       <div className="settings-card">

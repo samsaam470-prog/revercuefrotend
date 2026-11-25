@@ -97,21 +97,21 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What are the plans?",
     answer:
-      "Free (available now), Starter, Growth and Scale (available via Whop checkout), and Teams (in beta). Growth includes a limited-time 14-day free trial. Teams is in beta; join the beta and the team reaches out.",
+      "Free (available now), Starter, Growth and Scale (available via Whop checkout), and Teams (in beta). Buy Growth and your first 14 days include Scale access free; after that you continue on Growth at $29/month. Teams is in beta; join the beta and the team reaches out.",
   },
   {
     id: 12,
     group: "plans",
     question: "What is the difference between the plans?",
     answer:
-      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and basic CRM suggestions. Starter adds custom templates, previous outreach patterns and follow-up strategy. Growth adds saved FAQs, saved packages, adaptive forms, no Revercue branding, in-context paragraph suggestions, detailed prompts using previous data, project expense recording with expense categories and platform records, profit and all-time profit. The revenue overview itself is on every plan. Scale adds advanced tracking, the interest level, the what-revercue-knows page, the custom thank-you page, broader client-history context and the price suggestion. Teams adds the team features (in beta).",
+      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and basic CRM suggestions. Starter adds custom templates, previous outreach patterns and follow-up strategy. Growth adds saved FAQs, saved packages, adaptive forms, no Revercue branding, in-context paragraph suggestions, detailed prompts using previous data, project expense recording with expense categories and platform records, profit and all-time profit. The revenue overview itself is on every plan. Scale adds advanced tracking, the interest level, the what-revercue-knows page, the custom thank-you page, broader client-history context and the price suggestion. The first 14 days of Growth include all of that Scale access free, so you can use the price suggestion, interest level, advanced tracking and the custom thank-you page before the trial ends. Teams adds the team features (in beta).",
   },
   {
     id: 13,
     group: "plans",
     question: "How do I pay?",
     answer:
-      "Starter, Growth and Scale are publicly available via checkout. Growth includes a limited-time 14-day free trial. Teams is in beta; join the beta and the team reaches out. The Free plan is available now, no payment needed.",
+      "Starter, Growth and Scale are publicly available via checkout. Growth starts with 14 days of Scale access free, then bills at $29/month. Teams is in beta; join the beta and the team reaches out. The Free plan is available now, no payment needed.",
   },
   {
     id: 14,
@@ -152,7 +152,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What does it mean that Teams is in beta?",
     answer:
-      "Starter, Growth and Scale are available via Whop checkout (Growth has a limited-time 14-day trial). Teams is in beta; you join the beta and the team reaches out. The Free plan is available now.",
+      "Starter, Growth and Scale are available via Whop checkout. The first 14 days of Growth include Scale access free. Teams is in beta; you join the beta and the team reaches out. The Free plan is available now.",
   },
   {
     id: 20,

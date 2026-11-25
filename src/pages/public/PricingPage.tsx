@@ -89,8 +89,8 @@ export function PricingPage() {
         <p className="eyebrow">Pricing</p>
         <h1>Start free. Upgrade when the thread pays for itself.</h1>
         <p>
-          Free is available now. Starter, Growth and Scale are available through Whop checkout. Growth includes a
-          limited-time 14-day free trial. Teams is in beta.
+          Free is available now. Starter, Growth and Scale are available through Whop checkout. Buy Growth and your
+          first 14 days include Scale access free — then Growth continues at $29/month. Teams is in beta.
         </p>
       </div>
 
@@ -106,7 +106,7 @@ export function PricingPage() {
                 {plan.id === "growth" && (
                   <span className="trial-badge">
                     <span className="trial-badge-dot" />
-                    14-day free trial
+                    14 days of Scale free
                   </span>
                 )}
               </div>
@@ -127,7 +127,7 @@ export function PricingPage() {
                 <div className="role">{plan.role}</div>
                 <p className="plan-availability">
                   {plan.id === "growth"
-                    ? "Try every Growth feature free for 14 days."
+                    ? "Buy Growth, get Scale access free for 14 days — price suggestion, interest level, advanced tracking and the custom thank-you page."
                     : plan.status === "available"
                       ? "Ready to use today"
                       : "Early access — join the beta"}
@@ -177,8 +177,9 @@ export function PricingPage() {
       </div>
 
       <p className="caption text-center" style={{ marginTop: 16 }}>
-        Prices are in US dollars, per month. Starter, Growth and Scale are available via Whop checkout.
-        Growth includes a limited-time 14-day free trial. Teams is in beta; no charge applies while it remains in beta.
+        Prices are in US dollars, per month. Starter, Growth and Scale are available via Whop checkout. Growth starts
+        with 14 days of Scale access at no extra cost and then continues at $29/month. Teams is in beta; no charge
+        applies while it remains in beta.
       </p>
 
       <section className="section">

@@ -132,6 +132,25 @@ export function DashboardOverviewPage() {
         </div>
       </div>
 
+      {user?.trial && (
+        <div
+          className="notice notice-gold"
+          style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 16 }}
+        >
+          <Info size={16} style={{ flexShrink: 0, marginTop: 2 }} />
+          <div style={{ flex: 1 }}>
+            <strong style={{ display: "block", fontSize: 13 }}>
+              Scale access is included free with Growth
+            </strong>
+            <p style={{ fontSize: 13, marginTop: 4 }}>
+              Your first 14 days include the price suggestion, interest level, advanced tracking and the custom
+              thank-you page. {user.trial.days_left} {user.trial.days_left === 1 ? "day" : "days"} left, until{" "}
+              {new Date(user.trial.ends_at).toLocaleDateString()}. After that the account continues on Growth.
+            </p>
+          </div>
+        </div>
+      )}
+
       {summaryQuery.isLoading && (
         <div className="stat-grid">
           {Array.from({ length: 4 }).map((_, index) => (

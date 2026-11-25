@@ -20,6 +20,12 @@ export interface User {
   email_missing?: boolean;
   name?: string;
   plan: PlanName;
+  /** The 14 days of Scale access included with a Growth purchase. */
+  trial?: {
+    access_plan: string;
+    ends_at: string;
+    days_left: number;
+  } | null;
   onboarding_step: number;
   account_type?: AccountType;
   business_name?: string;

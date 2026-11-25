@@ -12,6 +12,11 @@ export interface PlanUsage {
   plan: PlanName;
   expires_at?: string;
   renewal_date?: string;
+  trial?: {
+    access_plan: string;
+    ends_at: string;
+    days_left: number;
+  } | null;
   active_documents?: number;
   storage_gb?: number;
   archive_count?: number;
@@ -63,7 +68,14 @@ export const settingsApi = {
   receipt: (paymentId: string) => api.get<Blob>(`/api/settings/plan/receipt/${paymentId}`, { raw: true }),
 
   billingSubscription: () => api.get<any>("/api/settings/billing/subscription"),
-  billingCheckout: (plan: string) => api.post<{ checkout_id: string; checkout_url: string; trial: boolean }>("/api/settings/billing/checkout", { plan }),
+  billingCheckout: (plan: string) =>
+    api.post<{
+      checkout_id: string;
+      checkout_url: string;
+      trial: boolean;
+      trial_days?: number;
+      trial_access_plan?: string | null;
+    }>("/api/settings/billing/checkout", { plan }),
   billingCancel: () => api.post<{ success: true }>("/api/settings/billing/cancel", {}),
   billingReactivate: () => api.post<{ success: true }>("/api/settings/billing/reactivate", {}),
   billingChangePlan: (plan: string) => api.post<{ success: true; scheduled: boolean }>("/api/settings/billing/change-plan", { plan }),
