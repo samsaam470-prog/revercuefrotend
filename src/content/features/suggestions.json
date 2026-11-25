@@ -32,7 +32,7 @@
     {
       "heading": "What each plan adds",
       "paragraphs": [
-        "Every plan includes basic CRM suggestions, which cover the core follow-ups and document prompts. The Starter plan adds suggestions based on your previous outreach patterns and a follow-up strategy. The Growth plan adds paragraph suggestions in the context of the document you are writing, detailed prompts, and suggestions for project expenses.",
+        "Every plan includes basic CRM suggestions, which cover the core follow-ups and document prompts. The Starter plan adds suggestions based on your previous outreach patterns and a follow-up strategy. The Growth plan adds paragraph suggestions in the context of the document you are writing and detailed prompts.",
         "The Scale plan adds broader client-history context, so suggestions can reflect the full relationship rather than only the latest project. The effect is that each plan builds on the one before, and you choose the level of guidance that fits the size of your business."
       ]
     },
@@ -64,7 +64,7 @@
     "Document suggestions for contracts after answered proposals and invoices after delivered work",
     "Basic CRM suggestions on every plan",
     "Previous outreach patterns and follow-up strategy on Starter",
-    "In-context paragraph suggestions, detailed prompts and project expense suggestions on Growth",
+    "In-context paragraph suggestions and detailed prompts on Growth",
     "Broader client-history context on Scale",
     "Do it and Dismiss actions on every card"
   ],

@@ -317,7 +317,9 @@ export interface Summary {
   active_documents: number;
   clients: number;
   follow_ups_due: number;
-  revenue_this_month: number;
+  revenue_total: number;
+  /** Older API builds returned the all-time total under this name. */
+  revenue_this_month?: number;
   pending_total: number;
   pending_count: number;
   overdue_total?: number;

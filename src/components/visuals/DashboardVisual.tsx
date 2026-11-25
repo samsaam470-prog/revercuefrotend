@@ -16,7 +16,7 @@ export function DashboardVisual() {
     { value: 12, label: "Active documents", icon: FileText },
     { value: 8, label: "Clients", icon: Users },
     { value: 3, label: "Follow-ups due", icon: Clock },
-    { value: 2900, label: "Revenue this month", icon: DollarSign, money: true },
+    { value: 2900, label: "Total revenue", icon: DollarSign, money: true },
   ];
   const activity = [
     "Acme Co. opened the proposal · 2h ago",

@@ -39,11 +39,11 @@ function cell(plan: PlanName, key: (typeof ROWS)[0]["key"]): string {
     case "password":
       return plan === "free" || plan === "starter" ? "—" : `${definition.limits.password_protected}`;
     case "revenue":
-      return "Yes";
+      return plan === "scale" || plan === "teams" ? "Yes" : "—";
     case "interest":
       return plan === "scale" || plan === "teams" ? "Yes" : "—";
     case "expenses":
-      return plan === "growth" || plan === "scale" || plan === "teams" ? "Yes" : "—";
+      return plan === "scale" || plan === "teams" ? "Yes" : "—";
     case "expense_categories":
       return plan === "scale" || plan === "teams" ? "Yes" : "—";
     case "suggestions":

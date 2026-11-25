@@ -171,8 +171,8 @@ export function DashboardOverviewPage() {
               <span>Follow-ups due today</span>
             </Link>
             <Link to="/invoices?status=confirmed" className="stat-card">
-              <b>{formatCurrency(summary.revenue_this_month)}</b>
-              <span>Revenue this month</span>
+              <b>{formatCurrency(summary.revenue_total ?? summary.revenue_this_month ?? 0)}</b>
+              <span>Total revenue</span>
               {!hasFeature("revenue_tracker") && (
                 <span className="stat-note">Profit: available on Scale.</span>
               )}
@@ -309,13 +309,13 @@ export function DashboardOverviewPage() {
             <div className="panel">
               <div className="panel-head">
                 <div>
-                  <h2>This month</h2>
-                  <p>Revenue is a number, not a chart.</p>
+                  <h2>Total revenue</h2>
+                  <p>The confirmed payments on the whole account, not a chart.</p>
                 </div>
                 <DollarSign size={16} color="var(--gold)" />
               </div>
               <p className="serif" style={{ fontSize: 28 }}>
-                {formatCurrency(summary.revenue_this_month)}
+                {formatCurrency(summary.revenue_total ?? summary.revenue_this_month ?? 0)}
               </p>
             </div>
           </div>
