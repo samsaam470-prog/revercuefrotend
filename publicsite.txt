@@ -14,7 +14,7 @@ The dark base (#0A0A0A), the gold (#C9A961), the serif headlines (Instrument Ser
 
 ## The footer (the four buttons, not an AI chat)
 The footer has four buttons: ChatGPT, Perplexity, Claude, Gemini. Each opens the external tool with a pre-filled prompt about Revercue. The answer comes from the external tool. Revercue does not host it.
-The prompt: "Explain Revercue: a freelancer tool for the thread from proposal to contract to invoice to CRM. The tagline is 'Your work should speak, not you.' The thesis is 'a thread, not disconnected workflows.' The Free plan is available now. The paid plans (Starter, Growth, Scale) are invite-only in the fresh state — join the waitlist. Teams is in beta — join the beta. The product does not use AI; it uses patterns. Answer in 2–3 sentences."
+The prompt: "Explain Revercue: a freelancer tool for the thread from proposal to contract to invoice to CRM. The tagline is 'Your work should speak, not you.' The thesis is 'a thread, not disconnected workflows.' The Free plan is available now. The paid plans (Starter, Growth, Scale) are available via Whop checkout. Teams is in beta — join the beta. The product does not use AI; it uses patterns. Answer in 2–3 sentences."
 
 ## The 14 main pages
 
@@ -25,7 +25,7 @@ The thread section: the 3 steps (Create, Share, Track) + the `<CodeVisual name="
 The modules section: the 5 cards (Proposals, Contracts, Forms, Invoices, CRM).
 The client view: the `<CodeVisual name="ProposalVisual" />` + the `<CodeVisual name="InvoiceVisual" />`.
 The social proof (if the real testimonials exist; otherwise omitted).
-The pricing teaser: the 5 plan chips (Free = start, Starter/Growth/Scale = waitlist, Teams = beta).
+The pricing teaser: the 5 plan chips (Free = start, Starter/Growth/Scale = available via checkout, Teams = beta).
 The FAQs: the first 12 + "Show all 100."
 The Start Free band.
 The footer (the four buttons).
@@ -38,12 +38,12 @@ The Start Free band. The footer.
 ### 3. Pricing (/pricing)
 The 5 cards:
 - Free: "Start free. No invitation needed." (gold)
-- Starter: "Join the waitlist." (ghost)
-- Growth: "Join the waitlist." (ghost, "Most popular" badge)
-- Scale: "Join the waitlist." (ghost)
+- Starter: "Buy with checkout." (ghost)
+- Growth: "Buy with checkout." (ghost, "Most popular" badge)
+- Scale: "Buy with checkout." (ghost)
 - Teams: "Join the beta." (ghost, "In beta" badge)
 The comparison table: the `<CodeVisual name="PricingVisual" />`.
-The billing FAQs: the plans, the waitlist, the beta, the downgrade, the retention, the refunds.
+The billing FAQs: the plans, checkout, the beta, the downgrade, the retention, the refunds.
 The Start Free band. The footer.
 
 ### 4. Compare (/compare)
@@ -90,7 +90,7 @@ The legal text (the sections: what we collect, how we use it, who we share it wi
 The footer.
 
 ### 13. Terms (/terms)
-The legal text (the service, your account, the acceptable use, the payment — the invite-only, the termination, the liability, the governing law).
+The legal text (the service, your account, the acceptable use, the payment — the termination, the liability, the governing law).
 The footer.
 
 ### 14. Security (/security)
@@ -109,8 +109,8 @@ The email field, the "Send reset code" (gold). The code screen, the new password
 
 ## The rules (every page)
 - No "AI", no "local model", no "browser model". The replacement: "the helper", "the rewrite", "the suggestion", "the review".
-- No "MVP", no "v2", no "v3". The replacement: "available now", "invite-only, join the waitlist", "in beta, join the beta".
-- No "Payoneer", no "send the receipt". The replacement: "the paid plans are invite-only. Join the waitlist. The team will reach out when a spot opens."
+- No "MVP", no "v2", no "v3". The replacement: "available now", "available via Whop checkout", "in beta, join the beta".
+- No "Payoneer", no "send the receipt". The replacement: "the paid plans are available via Whop checkout. The team will reach out when a spot opens."
 - Teams is in beta. The copy: "Teams is in beta. Join the beta."
 - The footer: the four external AI buttons (ChatGPT, Perplexity, Claude, Gemini) with the pre-filled prompt. Not an AI chat.
 - The FAQ count: 100. The Home page: "Show all 100."

@@ -65,7 +65,7 @@ The common issues: the FormSubmit activation, the browser feature, the document 
 - The footer.
 
 ## The rules
-No "AI" in the guides. The helper is "the helper." The plans are "available now" / "invite-only" / "in beta." The payment is "join the waitlist." Teams is "in beta."
+No "AI" in the guides. The helper is "the helper." The plans are "available now" / "available via checkout" / "in beta." The payment is "join the waitlist." Teams is "in beta."
 
 ## THE SUGGESTIONS GUIDE — What each plan gets
 

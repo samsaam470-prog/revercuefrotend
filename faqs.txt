@@ -38,16 +38,16 @@ A10. "A thread, not disconnected workflows."
 ## GROUP 2 — THE PLANS AND THE PRICING (Q11–Q22)
 
 Q11. What are the plans?
-A11. Free (available now), Starter, Growth, Scale (invite-only), and Teams (in beta). The paid plans are invite-only in the fresh state. You join the waitlist, and the team reaches out when a spot opens. Teams is in beta. You join the beta.
+A11. Free (available now), Starter, Growth, Scale (available via Whop checkout), and Teams (in beta). The paid plans are available via Whop checkout. Teams is in beta. You join the beta.
 
 Q12. What is the difference between the plans?
 A12. The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and the basic suggestions. Starter adds custom templates and email notifications on the same basic suggestions. Growth adds the saved FAQs and the saved packages on top of the basic suggestions, plus adaptive forms and no Revercue branding on the public pages. Scale adds advanced tracking, the interest level, the revenue tracker, the expense entry, the price suggestion, the what-revercue-knows page, and the custom thank-you page. Teams adds the team features (in beta).
 
 Q13. How do I pay?
-A13. The paid plans are invite-only in the fresh state. Join the waitlist. The team will contact you with the next steps when a spot opens. The Free plan is available now, no invitation needed.
+A13. The paid plans are available via Whop checkout. The Free plan is available now, no invitation needed.
 
 Q14. Can I pay annually?
-A14. Annual billing is not available yet. Join the waitlist for updates.
+A14. Annual billing is not available yet.
 
 Q15. Can I downgrade?
 A15. Yes. At the end of your billing cycle. You choose which documents to keep within the new plan's limit. The rest are archived, and you have 7 days to download the PDFs.
@@ -62,7 +62,7 @@ Q18. What is the Teams plan?
 A18. Teams is the agency plan. It adds the Handoff Dashboard, the team roles, the bulk transfer, the audit log, and the team attribution. Teams is in beta. The team is testing the team features with a small group. You can join the beta from the Pricing page.
 
 Q19. What is the difference between the waitlist and the beta?
-A19. The waitlist is for the paid plans (Starter, Growth, Scale). The paid plans are invite-only in the fresh state. You join the waitlist, and the team reaches out when a spot opens. The beta is for Teams. Teams is in beta. You join the beta, and the team will reach out to include you in the test. The Free plan is available now.
+A19. The paid plans (Starter, Growth, Scale) are bought through Whop checkout. The paid plans are available via Whop checkout. The beta is for Teams. Teams is in beta. You join the beta, and the team will reach out to include you in the test. The Free plan is available now.
 
 Q20. What is the Free plan?
 A20. The Free plan is free forever, not a trial. It includes 5 active documents, 1-month retention, 50 MB storage, 3 notes per client, and the full thread. It is enough to try the product with real clients.

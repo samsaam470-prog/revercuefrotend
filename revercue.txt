@@ -27,9 +27,9 @@ The thread. The continuous flow from proposal to payment, all linked to the same
 
 ## The plans (the fresh state)
 - Free: available now. 5 active documents, 1-month retention, 50 MB storage, 3 notes per client.
-- Starter: invite-only. Join the waitlist.
-- Growth: invite-only. Join the waitlist.
-- Scale: invite-only. Join the waitlist.
+- Starter: available via Whop checkout.
+- Growth: available via Whop checkout.
+- Scale: available via Whop checkout.
 - Teams: in beta. Join the beta.
 
 ## The four-layer pipeline
@@ -45,10 +45,10 @@ The instructions, the patterns, the pairings. The suggestions are basic on Growt
 The product does not use AI. It uses patterns. The helper is the local model (the rewrite, the suggestion, the review). The footer has four buttons (ChatGPT, Perplexity, Claude, Gemini) with a pre-filled prompt. The product does not claim AI.
 
 ## The no-MVP rule
-The plans are "available now", "invite-only", "in beta". No "MVP", no "v2", no "v3".
+The plans are "available now", "available via checkout", "in beta". No "MVP", no "v2", no "v3".
 
 ## The no-Payoneer rule
-The paid plans are invite-only. Join the waitlist. The team reaches out when a spot opens. The Free plan is available now.
+The paid plans are available via Whop checkout. The Free plan is available now.
 
 ## The retention model
 The documents are rented; the CRM record is owned. The PDF is emailed before the deletion. The CRM record survives.
