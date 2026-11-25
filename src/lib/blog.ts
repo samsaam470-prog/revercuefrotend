@@ -1,3 +1,5 @@
+import { BLOG_2027_POSTS } from "./blog2027";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -896,7 +898,7 @@ const CLOSERS_TWO: Record<string, { heading?: string; paragraphs: string[] }[]> 
   ],
 };
 
-export const BLOG_POSTS: BlogPost[] = BASE_POSTS.map((post) => ({
+export const BLOG_POSTS: BlogPost[] = [...BASE_POSTS, ...BLOG_2027_POSTS].map((post) => ({
   ...post,
   readMinutes: post.readMinutes + 2,
   body: [...post.body, ...(CLOSERS[post.slug] ?? []), ...(CLOSERS_TWO[post.slug] ?? [])],
