@@ -1291,28 +1291,50 @@ function RevenueSection() {
       <h2>Revenue overview</h2>
       {query.isLoading && <SkeletonLines count={3} />}
       {data && (
-        <div className="two-up" style={{ marginBottom: 16 }}>
-          <div>
-            <div className="muted" style={{ fontSize: 12 }}>Earned</div>
-            <div style={{ fontSize: 20, fontWeight: 600 }}>{formatCurrency(data.earned)}</div>
-          </div>
-          <div>
-            <div className="muted" style={{ fontSize: 12 }}>Spent</div>
-            <div style={{ fontSize: 20, fontWeight: 600 }}>{formatCurrency(data.spent)}</div>
-          </div>
-          <div>
-            <div className="muted" style={{ fontSize: 12 }}>Profit</div>
-            <div style={{ fontSize: 20, fontWeight: 600 }}>{formatCurrency(data.profit)}</div>
-          </div>
-          <div>
-            <div className="muted" style={{ fontSize: 12 }}>Pending</div>
-            <div style={{ fontSize: 20, fontWeight: 600 }}>
-              {formatCurrency(data.pending_total)} ({data.pending_count})
+        <>
+          <div className="two-up" style={{ marginBottom: 16 }}>
+            <div>
+              <div className="muted" style={{ fontSize: 12 }}>Invoices sent</div>
+              <div style={{ fontSize: 20, fontWeight: 600 }}>
+                {formatCurrency(data.sent ?? 0)} ({data.sent_count ?? 0})
+              </div>
+            </div>
+            <div>
+              <div className="muted" style={{ fontSize: 12 }}>Pending payments</div>
+              <div style={{ fontSize: 20, fontWeight: 600 }}>
+                {formatCurrency(data.pending_total)} ({data.pending_count})
+              </div>
+            </div>
+            <div>
+              <div className="muted" style={{ fontSize: 12 }}>Confirmed as paid</div>
+              <div style={{ fontSize: 20, fontWeight: 600 }}>{formatCurrency(data.earned)}</div>
+            </div>
+            <div>
+              <div className="muted" style={{ fontSize: 12 }}>Remaining pending</div>
+              <div style={{ fontSize: 20, fontWeight: 600 }}>{formatCurrency(data.remaining_pending ?? data.pending_total)}</div>
             </div>
           </div>
-        </div>
+          {data.profit !== undefined && (
+            <div className="two-up" style={{ marginBottom: 16 }}>
+              <div>
+                <div className="muted" style={{ fontSize: 12 }}>Project expenses</div>
+                <div style={{ fontSize: 20, fontWeight: 600 }}>{formatCurrency(data.spent ?? 0)}</div>
+              </div>
+              <div>
+                <div className="muted" style={{ fontSize: 12 }}>Profit</div>
+                <div style={{ fontSize: 20, fontWeight: 600 }}>{formatCurrency(data.profit)}</div>
+              </div>
+              <div>
+                <div className="muted" style={{ fontSize: 12 }}>All-time profit</div>
+                <div style={{ fontSize: 20, fontWeight: 600 }}>{formatCurrency(data.all_time_profit ?? data.profit)}</div>
+              </div>
+            </div>
+          )}
+        </>
       )}
 
+      {hasFeature("expense_entry") ? (
+        <>
       <h3 style={{ marginTop: 8 }}>Record an expense</h3>
       <div className="two-up">
         <Input id="exp-amount" label="Amount" type="number" value={amount} onChange={setAmount} />
@@ -1349,6 +1371,10 @@ function RevenueSection() {
           {saving ? "Saving…" : "Add expense"}
         </Button>
       </div>
+        </>
+      ) : (
+        <p className="caption" style={{ marginTop: 8 }}>Recording project expenses starts on Growth.</p>
+      )}
 
       {data?.expenses?.length ? (
         <>

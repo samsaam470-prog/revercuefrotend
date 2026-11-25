@@ -104,7 +104,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What is the difference between the plans?",
     answer:
-      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and basic CRM suggestions. Starter adds custom templates, previous outreach patterns and follow-up strategy. Growth adds saved FAQs, saved packages, adaptive forms, no Revercue branding, in-context paragraph suggestions, detailed prompts using previous data and project expense recording. The revenue overview is on every plan. Scale adds advanced tracking, the interest level, expense categories, the what-revercue-knows page, the custom thank-you page and broader client-history context. Teams adds the team features (in beta). The price suggestion is not available.",
+      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and basic CRM suggestions. Starter adds custom templates, previous outreach patterns and follow-up strategy. Growth adds saved FAQs, saved packages, adaptive forms, no Revercue branding, in-context paragraph suggestions, detailed prompts using previous data and project expense recording. The revenue overview is on every plan. Scale adds advanced tracking, the interest level, expense categories, the what-revercue-knows page, the custom thank-you page and broader client-history context. Teams adds the team features (in beta). The price suggestion is available on Scale and Teams.",
   },
   {
     id: 13,
@@ -357,14 +357,14 @@ export const FAQS: Faq[] = [
     group: "tracking",
     question: "What is the revenue tracker?",
     answer:
-      "On every plan, it shows the earned revenue and pending payments. On Growth and above, project expense recording and totals are included. On Scale, expense categories, platform and provider records and spending breakdowns are included. The price suggestion is not available.",
+      "On every plan, it shows the earned revenue and pending payments. On Growth and above, project expense recording and totals are included. On Scale, expense categories, platform and provider records and spending breakdowns are included. The price suggestion is available on Scale and Teams.",
   },
   {
     id: 49,
     group: "tracking",
     question: "What is the price suggestion?",
     answer:
-      "The price suggestion is not available. It is not a current feature and no release date is promised.",
+      "The price suggestion is available on Scale and Teams. It reads the client's own history: what you earned, what it cost, and your last confirmed invoice. It states those figures and suggests a price for the next pricing document.",
   },
   {
     id: 50,

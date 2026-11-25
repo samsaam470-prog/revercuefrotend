@@ -189,7 +189,7 @@ const BASE_POSTS: BlogPost[] = [
       {
         heading: "The four suggestions",
         paragraphs: [
-          "The follow-up: a proposal was opened and not answered for three days, so the app suggests a message. The document suggestion: a contract was approved and no invoice exists, so the app suggests creating one. The interest flag: a client is marked not interested but the interest level is high, so the app suggests reopening. The price suggestion is not available.",
+          "The follow-up: a proposal was opened and not answered for three days, so the app suggests a message. The document suggestion: a contract was approved and no invoice exists, so the app suggests creating one. The interest flag: a client is marked not interested but the interest level is high, so the app suggests reopening. The price suggestion is available on Scale and Teams.",
           "Every one of those is a rule with a visible trigger. None of them sends anything. None of them edits a document. They are cards you accept or dismiss, and your answer is recorded.",
         ],
       },

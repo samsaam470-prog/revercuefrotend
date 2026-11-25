@@ -294,7 +294,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "The interest level and revenue",
         paragraphs: [
           "On Scale the interest badge opens the arithmetic: base fifty, plus and minus per signal, clamped to zero and one hundred. Opens, time spent, questions and replies move it; what the client says does not. It is arithmetic, not a model, and the breakdown is always visible.",
-          "Revenue overview (earned revenue, pending payments and totals) is available on every plan. Project expense recording and project expense totals are available on Growth and above. Expense categories, platform and provider records and spending breakdowns are available on Scale and above. The price suggestion is not available.",
+          "Revenue overview (earned revenue, pending payments and totals) is available on every plan. Project expense recording and project expense totals are available on Growth and above. Expense categories, platform and provider records and spending breakdowns are available on Scale and above. The price suggestion is available on Scale and Teams.",
         ],
       },
       {
@@ -881,9 +881,9 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "Price suggestion (not available)",
+        heading: "Price suggestion (Scale)",
         paragraphs: [
-          "The price suggestion is not available. It is not a current feature and no release date is promised.",
+          "The price suggestion is available on Scale and Teams. It reads the client's own history: what you earned, what it cost, and your last confirmed invoice. It states those figures and suggests a price for the next pricing document.",
         ],
       },
       {
@@ -893,7 +893,7 @@ const BASE_GUIDES: Guide[] = [
           "Every plan includes basic CRM suggestions. Free includes basic CRM suggestions only.",
           "Starter adds previous outreach patterns and follow-up strategy on top of the basic CRM suggestions.",
           "Growth adds in-context paragraph suggestions, detailed prompts using previous data and project expense suggestions on top of the Starter capabilities.",
-          "The Scale plan has the advanced suggestions. The follow-up (the user's own median delay, not the default). The document suggestion (the user's own intent to document pattern, not the default). The interest flag (the client marked not interested, the interest 80%+). The form reminder (the client opened the form, not submitted after 3 days). The reopen (the not-interested client, the high interest). Broader client-history context is available on Scale. The price suggestion is not available.",
+          "The Scale plan has the advanced suggestions. The follow-up (the user's own median delay, not the default). The document suggestion (the user's own intent to document pattern, not the default). The interest flag (the client marked not interested, the interest 80%+). The form reminder (the client opened the form, not submitted after 3 days). The reopen (the not-interested client, the high interest). Broader client-history context is available on Scale. The price suggestion is available on Scale and Teams.",
           "Teams includes the Scale capabilities. Teams is in beta.",
         ],
       },
@@ -932,9 +932,9 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "Price suggestion (not available)",
+        heading: "Price suggestion (Scale)",
         paragraphs: [
-          "The price suggestion is not available. It is not a current feature and no release date is promised.",
+          "The price suggestion is available on Scale and Teams. It reads the client's own history: what you earned, what it cost, and your last confirmed invoice. It states those figures and suggests a price for the next pricing document.",
         ],
       },
       {
@@ -1365,6 +1365,59 @@ const BASE_GUIDES: Guide[] = [
     ],
   },
   {
+    slug: "revenue-overview",
+    title: "The revenue overview, plan by plan",
+    excerpt: "What the overview shows on Free and Starter, what Growth adds for project costs and profit, and what Scale adds for pricing.",
+    category: "Pricing",
+    readMinutes: 5,
+    updated: "2026-11-25",
+    visual: "PricingVisual",
+    sections: [
+      {
+        heading: "What the revenue overview is",
+        paragraphs: [
+          "The revenue overview is the money side of the client thread. It reads the invoices you have sent and the payments you have confirmed, and it shows what is still waiting to be paid. It does not connect to your bank, and it does not match payments automatically. A payment appears as confirmed only when you confirm it from the invoices list, so the figures are only as current as the confirmations you make.",
+          "The overview is available on every plan, Free included. What changes between plans is how much of the picture you see: the money you were paid on Free and Starter, the cost of each project from Growth, and the pricing guidance from Scale. The same invoices and payments feed every plan, so nothing is re-entered when you upgrade.",
+        ],
+      },
+      {
+        heading: "Free and Starter: sent, pending and remaining",
+        paragraphs: [
+          "On Free and Starter the overview shows three things. Invoices sent is the total of every invoice you have published, with the number of invoices. Pending payments is the total still owed, with the number of invoices that are waiting: published, proof submitted, or overdue. Confirmed as paid is what you have marked as received.",
+          "The line that matters most is remaining pending. When you confirm a payment, it moves from pending to confirmed and the remaining figure drops by that amount. If you send a $1,200 invoice and the client pays $500 by transfer, you confirm the $500, and the remaining pending figure shows $700 until the balance arrives. The same process applies on Starter, with the same limits.",
+        ],
+      },
+      {
+        heading: "Growth: project costs, profit and all-time profit",
+        paragraphs: [
+          "Growth adds the cost side. You record project expenses with an amount, a date, a category such as hosting, editing or building, the platform or provider where you paid for it, the client the cost belongs to, and an optional note. Recording starts on Growth, so Free and Starter do not show the expense form.",
+          "With costs recorded, the overview shows the project expenses, the profit for the period, and the all-time profit. Profit is the confirmed revenue minus the recorded expenses. The overview also breaks the figures down by client, so you can see which project earned what it cost and which one did not. The all-time profit is the same calculation across every client and every date, which is the number to watch when you decide where to spend your time.",
+        ],
+      },
+      {
+        heading: "Scale: the price suggestion while you build",
+        paragraphs: [
+          "Scale and Teams carry everything on Growth, and add the intelligence. The main addition is the price suggestion. When you are pricing a proposal, a contract or an invoice for a client, the suggestion reads that client's history and tells you what happened before. For example: previously you spent $400 on this client and earned $900, a profit of $500. Keep charging at least $900, which is above the $520 needed for a 30% profit on your costs. If you had earned only $400 from $400 of costs, the suggestion would say to charge $520 next time.",
+          "The suggestion never sets a price for you. It states the figures it is based on, so you can disagree with it. If the client has earned you more than the cost-based price, it keeps the higher figure. If there are costs but no confirmed payment yet, it gives the minimum price for the 30% profit. If there is neither, it asks you to record a cost or confirm a payment first.",
+        ],
+      },
+      {
+        heading: "How a payment moves through the overview",
+        paragraphs: [
+          "Follow one invoice to see the whole path. You publish an invoice for $1,200 and it counts in invoices sent and in pending payments. The client uploads proof of a transfer, and the invoice moves to proof submitted, still pending. You check the transfer and confirm the payment. The invoice moves to confirmed as paid, the remaining pending figure drops, and from Growth the profit recalculates with the amount now counted as earned.",
+          "If the due date passes before payment, the invoice shows as overdue and stays in pending payments. Overdue is shown to the client as well, so the figure is not a surprise when you follow up.",
+        ],
+      },
+      {
+        heading: "What the overview does not do",
+        paragraphs: [
+          "The overview is a record, not an accountant. It does not calculate tax, it does not file anything, and it does not connect to your bank or your accounting software. Expenses are only the costs you enter, so an unrecorded cost makes the profit look better than it is. Keep your accounting software as the book of record, and use this overview to see the work and the money together.",
+          "There are no integrations for payments or accounting today. Payments run through the payment link or bank details you give the client, and you confirm them here.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "plans-explained",
     title: "The plans, explained",
     excerpt:
@@ -1386,7 +1439,7 @@ const BASE_GUIDES: Guide[] = [
           "Free gives you 5 active documents, 1-month retention, 50 MB of storage, 3 notes per client, and the full thread. It is the product, not a demo.",
           "Starter adds room: 20 active documents, 3-month retention, 100 MB, 10 notes per client, and 3 custom templates. Email notifications start on Growth, not Starter.",
           "Growth adds the features that change how a document is made: 100 active documents, 12-month retention, 1 GB, 10 custom templates, 10 saved FAQs, 10 saved packages, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, and no Revercue branding on the client pages.",
-          "Scale adds the numbers: 300 active documents, 24-month retention, 5 GB, 15 custom templates, 30 saved FAQs, 15 saved packages, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, project expense recording, expense categories, the what-revercue-knows page, the custom thank-you page, and the full set of suggestions. The price suggestion is not available.",
+          "Scale adds the numbers: 300 active documents, 24-month retention, 5 GB, 15 custom templates, 30 saved FAQs, 15 saved packages, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, project expense recording, expense categories, the what-revercue-knows page, the custom thank-you page, and the full set of suggestions. The price suggestion is available on Scale and Teams.",
           "Teams adds the people: 500 active documents, 36-month retention, 10 GB, unlimited custom templates, saved FAQs, saved packages, password-protected documents and adaptive forms, everything on Scale, and the team features — the Handoff Dashboard, the roles, the bulk transfer and the audit log. Teams is in beta.",
         ],
       },
@@ -1430,8 +1483,8 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Choosing Scale",
         paragraphs: [
-          "Scale is the plan for the freelancer who has stopped asking how many documents fit and started asking what the account knows. Three hundred active documents, twenty-four months of retention, five gigabytes of storage, fifty password-protected documents and fifteen adaptive forms are the room. The interest level, project expense recording, expense categories and the what-revercue-knows page are the intelligence. The price suggestion is not available.",
-          "The revenue overview is available on every plan. Project expense recording and totals are available on Growth. Expense categories, platform and provider records and spending breakdowns are available on Scale. The price suggestion is not available.",
+          "Scale is the plan for the freelancer who has stopped asking how many documents fit and started asking what the account knows. Three hundred active documents, twenty-four months of retention, five gigabytes of storage, fifty password-protected documents and fifteen adaptive forms are the room. The interest level, project expense recording, expense categories and the what-revercue-knows page are the intelligence. The price suggestion is available on Scale and Teams.",
+          "The revenue overview is available on every plan. Project expense recording and totals are available on Growth. Expense categories, platform and provider records and spending breakdowns are available on Scale. The price suggestion is available on Scale and Teams.",
           "The same is true of the advanced suggestions: the follow-up timing becomes your own median delay instead of the product's default, and the document suggestions follow your own intent-to-document pattern instead of a generic one. Nothing new is invented; the plan changes whose pattern the product reads.",
         ],
       },
@@ -1903,7 +1956,7 @@ const PRACTICE: Record<string, GuideSection[]> = {
       heading: "Dismissing well",
       paragraphs: [
         "A suggestion is only useful if dismissing it teaches the product something. When you dismiss the follow-up because the client asked for two weeks, dismiss it — that answer adjusts the timing. Ignoring it is the one response that teaches nothing and still leaves the card in the way tomorrow.",
-        "Accept suggestions in the same spirit: they are shortcuts to the next action, not instructions. The price suggestion is not available.",
+        "Accept suggestions in the same spirit: they are shortcuts to the next action, not instructions. The price suggestion is available on Scale and Teams.",
       ],
       bullets: [
         "Dismiss with a reason in your head; the product learns from the action, you learn from the reason.",
