@@ -331,6 +331,48 @@ const BASE_POSTS: BlogPost[] = [
           "Revercue does not connect to your inbox, calendar or accounting software yet. There is no public API and no integrations directory. Information leaves the product through a CSV export of clients and a PDF of each document. If your work depends on a tool sending messages from the client record, Revercue is not that tool yet. If you want one place for the proposal, the contract, the form and the invoice, it is built for that.",
         ],
       },
+      {
+        heading: "How the record should behave day to day",
+        paragraphs: [
+          "A client record earns its place by being the first thing you open each morning. Before you reply to a client, you should be able to see the last thing you sent, the last thing they sent, the price you agreed, and the date of the next follow-up, without scrolling through an inbox. If the record makes you hunt, you will stop trusting it, and it will drift out of date. The test is simple: open a client you last worked with three months ago and see whether you can answer those four questions in under a minute.",
+          "The second daily test is follow-up discipline. A follow-up is only useful if it is due when you need it. Tools that show overdue follow-ups on a dashboard make this easier than tools where the reminder lives only in your head. Check that the follow-up list is visible without opening each client, and that a follow-up can be moved or dismissed without losing the history behind it.",
+        ],
+      },
+      {
+        heading: "What to set up in your first afternoon",
+        paragraphs: [
+          "Start with your five most active clients, not your whole history. Create one record for each, with the contact person, the company name exactly as it should appear on documents, and the project you are working on now. Attach the documents that already exist for those clients: the signed agreement, the latest invoice, the brief. Add one note per client about how they like to be contacted and who makes the final decision.",
+          "Leave older clients for later. Adding everything on day one creates a large amount of data entry that most freelancers abandon halfway. Once your active clients are complete, add past clients as you work with them again. The record grows with your work, which is the only way it stays accurate.",
+        ],
+      },
+      {
+        heading: "Mistakes to avoid when you move from a spreadsheet",
+        paragraphs: [
+          "The most common mistake is copying the spreadsheet column for column. A spreadsheet holds one row per contact, while a client record holds one client with several projects, documents and messages. Map each column to the right place: contact fields to the client, project names to projects, and dates of past messages to the communication log if they matter. Do not import every old email; it will make the record noisy without making it more useful.",
+          "The second mistake is trusting an import without checking it. Pick three clients, compare the record with what you remember, and fix any wrong price or wrong contact before you rely on the data. The third mistake is keeping the spreadsheet open alongside the new tool for months. Choose a cut-over date, export the spreadsheet once for your records, and stop updating it.",
+        ],
+      },
+      {
+        heading: "A checklist of questions to ask any vendor",
+        paragraphs: [
+          "Ask how documents attach to a client: automatically when created, or by hand. Ask how messages get into the record: by hand, from a connected inbox, or both. Ask what a client can see on their side, and whether they need an account to see it. Ask what the signature on a contract proves, and whether it is a typed name, a certified signature or something else. Ask how payments are recorded, and whether a payment is confirmed by you or by the platform.",
+          "Ask about exports: what you can export, in what format, and whether the export includes the documents themselves or only the records. Ask what happens to your data if you stop paying. Ask whether the price changes at your client count, and how many active clients the plan allows. A written answer to each of these will tell you more than a feature page.",
+        ],
+      },
+      {
+        heading: "How Revercue answers those questions",
+        paragraphs: [
+          "Documents created for a client are linked to that client's record as they are created. Messages and replies appear in the communication log only when you add them by hand; Revercue does not read your inbox or send messages for you. Clients open proposals, contracts and invoices from a private link and do not need a Revercue account to view them. A contract is signed with a typed full name, an explicit consent tick and a recorded date. That is a practical record, and it is not a certified or advanced electronic signature.",
+          "Clients and documents can be exported as a CSV, and each document can be downloaded as a PDF. There is no public API and no integrations directory yet. Plans start at Free, with Starter at $12 a month, Growth at $29 and Scale at $49, and Teams is in beta. These are the answers Revercue gives to the questions above, written the same way you would ask a rival vendor to answer them.",
+        ],
+      },
+      {
+        heading: "Why the record matters more than the feature list",
+        paragraphs: [
+          "A feature list tells you what a tool can do in principle. A client record tells you what will happen in practice, when you are busy and a client writes at the wrong time. The record is the place where you decide what to say next, so its quality is the quality of your decisions. A tool with fewer features and a record you trust is worth more than a tool with many features and a record you have to check before every reply.",
+          "When you compare tools, spend most of your time on the record. Open a client, look at the thread, and ask whether the next action is obvious. If it is, you have found a tool that will support the work. If it is not, the other features will not compensate for it.",
+        ],
+      },
     ],
   },
   {
@@ -385,6 +427,58 @@ const BASE_POSTS: BlogPost[] = [
           "Do clients need an account to open a proposal? In Revercue they do not. The proposal opens from a private link.",
           "Can a client decline a contract? Yes. A decline can include an optional reason, and the decision is recorded on the contract.",
           "Can I see whether an invoice has been paid? Revercue shows invoice status, and you confirm payment when it arrives, which updates the revenue overview.",
+        ],
+      },
+      {
+        heading: "Sending the proposal: the sequence that avoids a second round",
+        paragraphs: [
+          "Most of the time a proposal takes to be accepted is spent waiting for a second round of questions. You can shorten that by sending the proposal in the order the client will decide. Send the outcome and the scope first, then the packages with their prices, then the questions the client is most likely to ask. Put the single next step at the end, and make it an action the client can take in one click: accept a package, reply with a start date, or book the kickoff call.",
+          "Before you send, read the proposal as the client. Check that the price is visible without scrolling far, that each package names what the client receives, and that every term used in the proposal appears in the contract you will send next. A proposal that uses one name for a deliverable and a different name in the contract creates the disagreement you were trying to avoid.",
+        ],
+      },
+      {
+        heading: "The contract: what it records and what it cannot do",
+        paragraphs: [
+          "A contract records the terms: the scope of work, the payment schedule, the number of revisions included, how either side can cancel, and what happens if the project changes. Its job is to make the terms precise enough that neither side has to remember what was agreed. It should match the accepted proposal word for word where the two overlap.",
+          "A contract does not replace advice on your specific situation. If the work is high-value, regulated, or crosses borders, the terms may need a qualified adviser before you sign. The signature is also part of the picture. A typed full name with an explicit consent tick and a recorded date is a practical record for many freelance agreements. It is not a qualified or advanced electronic signature, and it does not verify identity. Where stronger proof is needed, use a specialist signing service.",
+        ],
+      },
+      {
+        heading: "The invoice: the details that get it paid",
+        paragraphs: [
+          "An invoice gets paid when the client can match it to what they agreed, understand what to pay, and know when. Use the same names and prices as the accepted proposal and the contract. List each piece of work as a line item, show tax separately, and state the total clearly. Give the invoice a number that will not repeat, state the due date, and state exactly how to pay: a payment link, or the bank details and the reference to quote.",
+          "Send the invoice as soon as the work is delivered or the milestone is reached. An invoice that waits a month for the next batch of work is easier for the client to forget. If the due date passes, follow up with a specific message that quotes the invoice number, the amount and the date. A generic reminder gets a generic response.",
+        ],
+      },
+      {
+        heading: "Keeping the three documents in one thread",
+        paragraphs: [
+          "The thread works when the documents share one client record, so the names, the project and the agreed price carry from one to the next. In Revercue, a proposal, a contract, a requirement form and an invoice are created for the same client. Invoices are numbered automatically in the format INV-YEAR-NNNN, and confirming a payment updates the revenue overview.",
+          "A single tool does not remove the need to check. Before you send an invoice, compare its line items with the accepted proposal. Before you send a contract, compare its scope with the proposal. A two-minute check at each step prevents most of the payment delays that freelancers blame on the client.",
+        ],
+      },
+      {
+        heading: "What to do when a client changes the scope",
+        paragraphs: [
+          "Scope changes happen. The mistake is absorbing them silently. When a client asks for something new, write down what it adds: the extra deliverable, the extra time, and the change to the date. Send that as a short written change, and ask for agreement before you start the work. For a contract that is already signed, record the change as a new version the client signs, rather than editing the text they already agreed.",
+          "A change note does not need to be long. It needs to name the change, state the price or date effect, and ask for a yes. Clients accept changes more readily when the effect is visible than when it is discovered at the invoice stage.",
+        ],
+      },
+      {
+        heading: "Common questions, answered briefly",
+        paragraphs: [
+          "Do clients need to create an account to open a proposal or contract? In Revercue they do not. Both open from a private link.",
+          "Can a client decline a contract? Yes. Revercue records the decline, and the client can give an optional reason.",
+          "Can I see whether an invoice has been paid? Revercue shows invoice status. You confirm a payment when it arrives, and the confirmed amount moves out of the pending figure.",
+          "Is this legal advice? No. This article gives general guidance on how the documents usually fit together. For contracts with significant risk, check the terms with a qualified adviser.",
+        ],
+      },
+      {
+        heading: "A worked example from first message to paid invoice",
+        paragraphs: [
+          "Imagine a copywriter who has a discovery call with a company that needs a new product page. On Monday she writes a proposal with three packages, the outcome for each, the revision rounds included and the price. She sends it as a link. On Tuesday the client chooses the middle package and asks whether the timeline can start the following week.",
+          "She answers the timeline question in writing, updates the proposal's start date, and sends a contract that uses the same package name, the same price and the same revision count. The client signs the contract with a typed name and a consent tick. On Thursday she sends a short requirement form asking for the product details and brand guidelines, and she sends the invoice for the deposit with the bank details and a clear due date. When the deposit arrives, she confirms it, and the remaining amount stays visible until the balance is paid.",
+          "Nothing in that sequence required retyping a name, a price or a project title. The example is one way to run the work, not the only way, and a different business may need an extra step. The principle is the same: each document should carry the agreed facts forward.",
         ],
       },
     ],
@@ -453,6 +547,62 @@ const BASE_POSTS: BlogPost[] = [
         heading: "Revercue",
         paragraphs: [
           "Revercue is free to start. Starter is $12 a month, Growth $29 and Scale $49, with Teams in beta. It is built around the client thread: proposals, contracts, requirement forms, invoices and a client record that links them. It does not connect to an inbox, calendar or accounting software yet, and it offers a CSV export of clients and PDF downloads of documents rather than an API.",
+        ],
+      },
+      {
+        heading: "What changed since the earlier comparison",
+        paragraphs: [
+          "Vendor prices change, and an earlier comparison goes stale quickly. This version records the date each figure was checked and the source it came from. Where a figure is from a secondary source, it is labelled as such. If you find a figure here that differs from the vendor's current page, trust the vendor's page and tell us, so the article can be corrected.",
+          "The comparison does not change its verdicts because a price moved. It describes what each tool is built around. A price change alters the cost of a choice, not the nature of the tool.",
+        ],
+      },
+      {
+        heading: "How to read the prices",
+        paragraphs: [
+          "Compare like with like. Some vendors price per user, some per plan with a user limit, and some per client or document. A low headline price can cost more at your size once users, clients or documents are counted. Work out your count for the next twelve months and multiply it through each plan, rather than comparing entry prices.",
+          "Annual and monthly prices also differ. Where a vendor lists both, we show both. Where a vendor lists annual billing only, we show that, and do not estimate a monthly figure. Before-tax figures are the default, and currency is US dollars unless stated.",
+        ],
+      },
+      {
+        heading: "What each tool is built around",
+        paragraphs: [
+          "Bonsai, HoneyBook, Plutio, Moxie, Agiled and Dubsado are freelancer all-in-ones, but each emphasises a different part of the client lifecycle. Dubsado's own pricing page describes Premier as including scheduling, automated workflows, public proposals, Zapier and bookkeeping integration. Moxie's own product materials list connections to PayPal, Stripe, QuickBooks, Zapier, Make, webhooks and a public API. Plutio's pricing page lists a nine-client cap on Core. These are the parts of each product that the vendor itself describes.",
+          "Google Workspace and Microsoft 365 are business suites. They are useful alongside a client tool, and they are not client management tools themselves. Revercue is built around the client thread: proposals, contracts, requirement forms, invoices and a client record that links them.",
+        ],
+      },
+      {
+        heading: "What this comparison does not say",
+        paragraphs: [
+          "It does not rank the tools. It does not say which one is best for you, because that depends on how you win work, how you bill, and how many people use the software. It does not claim how well any tool performs for a user, and it does not report reviews or ratings.",
+          "It also does not say that any AI assistant recommends any of these tools. That has not been tested.",
+        ],
+      },
+      {
+        heading: "How to shortlist from this page",
+        paragraphs: [
+          "Start with the feature you cannot do without. If you need project boards or time tracking, the freelancer all-in-ones with those features are the starting point. If you need proposals, contracts, forms and invoices tied to one client record, compare the tools built around that thread. If you need an integration with your inbox, calendar or accounting software, check each vendor's integrations page first, because that is the most common gap.",
+          "Then run a one-week test with a real client, as described in the best all-in-one guide. Keep the shortlist to two or three tools, and compare them on the same piece of work.",
+        ],
+      },
+      {
+        heading: "Revercue's position, plainly",
+        paragraphs: [
+          "Revercue is free to start, with Starter at $12 a month, Growth at $29 and Scale at $49. Teams is in beta. Revercue does not connect to an inbox, calendar or accounting software yet, and there is no public API or integrations directory. It offers a CSV export of clients and PDF downloads of documents. If one of those gaps matters to you, choose a tool that closes it, and treat Revercue as a candidate only if the gap does not matter to your work.",
+        ],
+      },
+      {
+        heading: "A note on reading any comparison",
+        paragraphs: [
+          "Every comparison has a point of view, including this one. The useful question is whether the author shows the source for each claim and says what the comparison leaves out. Check the date of every price, check the vendor's own page for anything that matters to your decision, and be wary of any comparison that ranks tools without showing its criteria.",
+          "If you find an error in this article, the fix is to check the vendor's page, correct the figure, and record the date of the correction. That is the standard this page is written to, and it is the standard to apply to any comparison you read.",
+        ],
+      },
+      {
+        heading: "Questions to put to every vendor before you buy",
+        paragraphs: [
+          "Send the same questions to each vendor and compare the answers in writing. Ask whether the price you see is the price you will pay after tax and at your user and client count. Ask what the plan includes that the entry price does not, and whether the features you need are on the plan you would buy. Ask how the export works, what it includes, and how long it takes to get your data out if you cancel.",
+          "Ask about payments: whether the platform takes a fee on payments, whether you can use your own payment provider, and what the client sees when they pay. Ask about the signature: what it records, whether it is certified in your jurisdiction, and what a client needs to do to sign. Ask about integrations: which ones exist today, which are planned, and whether the plan you are buying includes them.",
+          "Finally, ask how the vendor will tell you when the price or a feature changes. A vendor that answers these questions clearly, in writing, is easier to work with than one that answers them only in a sales call. The answers also become the baseline for checking the vendor's claims later.",
         ],
       },
     ],
