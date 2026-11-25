@@ -173,8 +173,8 @@ export function DashboardOverviewPage() {
             <Link to="/invoices?status=confirmed" className="stat-card">
               <b>{formatCurrency(summary.revenue_total ?? summary.revenue_this_month ?? 0)}</b>
               <span>Total revenue</span>
-              {!hasFeature("revenue_tracker") && (
-                <span className="stat-note">Profit: available on Scale.</span>
+              {!hasFeature("expense_entry") && (
+                <span className="stat-note">Profit: available on Growth.</span>
               )}
             </Link>
           </div>
@@ -298,7 +298,7 @@ export function DashboardOverviewPage() {
               <div className="panel-head">
                 <div>
                   <h2>Clients</h2>
-                  <p>The record builds itself from the documents.</p>
+                  <p>Documents link to the client record as they are created. Messages and replies appear in the log only when you add them by hand.</p>
                 </div>
                 <Users size={16} color="var(--gold)" />
               </div>

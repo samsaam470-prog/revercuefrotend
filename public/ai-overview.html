@@ -148,7 +148,7 @@
                 <th scope="row">One sentence</th>
                 <td>
                   One client, one link, from the proposal to the contract to the form to the invoice to
-                  the client record — and the record builds itself from what happens in those documents.
+                  the client record — and documents link to the record as they are created. Messages appear only when logged by hand.
                 </td>
               </tr>
               <tr>
@@ -291,7 +291,7 @@
               <dt>Recorded</dt>
               <dd>Sent, opened, overdue, proof uploaded, payment confirmed, revenue booked.</dd>
               <dt>Plan gates</dt>
-              <dd>Revenue tracker and expense entry are Scale.</dd>
+              <dd>Revenue overview is on every plan. Expense recording starts on Growth; expense categories are on Scale.</dd>
             </dl>
           </article>
 
@@ -303,7 +303,7 @@
               Scale — interest level, revenue per client, expenses and the 15-day summary.
             </p>
             <p>
-              The record is assembled from the documents rather than typed in a second time. Documents
+              Documents link to the record as they are created; messages appear only when logged by hand. Documents
               expire on the plan's retention; the record, the log and the notes survive them. That
               asymmetry is deliberate and is repeated on the site: the documents are rented, the
               relationship is owned.
@@ -586,7 +586,7 @@
               </tr>
               <tr>
                 <th scope="row">A CRM you maintain by hand</th>
-                <td>A record assembled from the documents themselves</td>
+                <td>Documents linked to the client record as they are created</td>
                 <td>The record stays current because the work already happened in it</td>
               </tr>
               <tr>
@@ -800,7 +800,7 @@
                 <td>Yes</td>
               </tr>
               <tr>
-                <th scope="row">Interest level, revenue tracker, expenses, price suggestion</th>
+                <th scope="row">Interest level, expense categories, price suggestion (Scale)</th>
                 <td>—</td>
                 <td>—</td>
                 <td>—</td>
@@ -1005,10 +1005,9 @@
         </p>
         <ul>
           <li>
-            <strong>Where the basic suggestions sit.</strong> The application gates the dashboard's
-            suggestion card behind the Growth-and-above feature flag, while the guides and an FAQ
-            describe the basic suggestions as being on every plan. Which of the two is authoritative has
-            not been confirmed, so treat the suggestions' availability on Free and Starter as
+            <strong>Where the basic suggestions sit.</strong> Source now shows the suggestion card on every
+            plan, with the basic follow-up on Free and pattern suggestions from Starter. It goes live once the
+            backend deploy is confirmed, so until then treat the availability on Free and Starter as
             <span class="pill pill--unverified">unverified</span>.
           </li>
           <li>

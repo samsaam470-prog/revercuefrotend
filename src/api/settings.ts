@@ -105,8 +105,13 @@ export const settingsApi = {
   revenue: () =>
     api.get<{
       earned: number;
-      spent: number;
-      profit: number;
+      sent?: number;
+      sent_count?: number;
+      remaining_pending?: number;
+      spent?: number;
+      profit?: number;
+      all_time_profit?: number;
+      by_client?: { client_id: string; name: string; earned: number; spent: number; profit: number }[];
       pending_total: number;
       pending_count: number;
       expenses: { id: string; date: string; category: string; platform?: string; amount: number; note?: string }[];

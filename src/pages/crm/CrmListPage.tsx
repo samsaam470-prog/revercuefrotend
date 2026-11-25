@@ -164,7 +164,7 @@ export function CrmListPage() {
       <div className="page-top">
         <div>
           <h1>Clients</h1>
-          <p>The record builds itself from the documents. You can also add one by hand.</p>
+          <p>Documents link to the client record as they are created. Messages and replies appear in the log only when you add them by hand.</p>
         </div>
         <div className="inline">
           <Button onClick={() => setAddOpen(true)}>

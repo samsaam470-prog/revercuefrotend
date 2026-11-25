@@ -28,7 +28,7 @@ export const FAQS: Faq[] = [
     group: "product",
     question: "What is Revercue?",
     answer:
-      "Revercue is a tool for freelancers and agencies. It keeps your client work in one thread: proposal, contract, requirement form, invoice, and client record. The documents are interactive links, not PDFs. The client opens a link, reads, answers questions, and selects a package. You see the activity, and the client record builds itself.",
+      "Revercue is a tool for freelancers and agencies. It keeps your client work in one thread: proposal, contract, requirement form, invoice, and client record. The documents are interactive links, not PDFs. The client opens a link, reads, answers questions, and selects a package. You see the activity, and documents link to the client record as they are created.",
   },
   {
     id: 2,
@@ -104,7 +104,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What is the difference between the plans?",
     answer:
-      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and basic CRM suggestions. Starter adds custom templates, previous outreach patterns and follow-up strategy. Growth adds saved FAQs, saved packages, adaptive forms, no Revercue branding, in-context paragraph suggestions and detailed prompts using previous data. Scale adds advanced tracking, the interest level, the revenue overview, project expense recording, expense categories, the what-revercue-knows page, the custom thank-you page and broader client-history context. Teams adds the team features (in beta). The price suggestion is not available.",
+      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and basic CRM suggestions. Starter adds custom templates, previous outreach patterns and follow-up strategy. Growth adds saved FAQs, saved packages, adaptive forms, no Revercue branding, in-context paragraph suggestions, detailed prompts using previous data, project expense recording with expense categories and platform records, profit and all-time profit. The revenue overview itself is on every plan. Scale adds advanced tracking, the interest level, the what-revercue-knows page, the custom thank-you page, broader client-history context and the price suggestion. Teams adds the team features (in beta).",
   },
   {
     id: 13,
@@ -357,14 +357,14 @@ export const FAQS: Faq[] = [
     group: "tracking",
     question: "What is the revenue tracker?",
     answer:
-      "On every plan, the dashboard shows the total confirmed revenue plus the pending and overdue invoice lines, and confirming a payment records it on the invoice. On Scale and above, Settings → Revenue & Expenses adds the earned, spent, profit and pending totals with project expense recording, expense categories, platform and provider records and spending breakdowns, and the client record gains a Revenue tab. The price suggestion is not available.",
+      "On every plan, it shows the invoices sent, the confirmed payments, the pending payments and the remaining pending amount, and confirming a payment moves an invoice from pending to confirmed. On Growth and above, it adds project expense recording with expense categories and platform records, project expense totals, profit and all-time profit. On Scale and Teams, it adds the price suggestion.",
   },
   {
     id: 49,
     group: "tracking",
     question: "What is the price suggestion?",
     answer:
-      "The price suggestion is not available. It is not a current feature and no release date is promised.",
+      "The price suggestion is available on Scale and Teams. It reads the client's own history: what you earned, what it cost, and your last confirmed invoice. It states those figures and suggests a price for the next pricing document.",
   },
   {
     id: 50,
@@ -528,14 +528,14 @@ export const FAQS: Faq[] = [
     group: "crm",
     question: "What is the revenue tab?",
     answer:
-      "On Scale, it is the client-level view: the earned from this client, the spent on this client, the profit, the expense list, and the price suggestion.",
+      "On every plan, the client record's Revenue tab shows what this client has paid and what is still pending, from the invoices linked to the client. Expense recording and the account-wide profit figures are part of Growth and above, in Settings → Revenue & Expenses, and the price suggestion is part of Scale and Teams.",
   },
   {
     id: 76,
     group: "crm",
     question: "What is the expense entry?",
     answer:
-      "On Scale, you add an expense per client: the amount, the category (domain, hosting, video editing, etc.), the platform (Namecheap, GoDaddy, Adobe Premiere, etc.), the date, the note.",
+      "On Growth and above, you record an expense in Settings → Revenue & Expenses: the amount, a category (domain, hosting, video editing and so on), the date and a note. The expense is counted against your account, so it reduces the profit figure that the overview shows.",
   },
   {
     id: 77,
@@ -705,7 +705,7 @@ export const FAQS: Faq[] = [
     group: "support",
     question: "What makes Revercue different?",
     answer:
-      "Three things. The thread: the client work in one place. The interactive document: the documents are links, not PDFs. The client record builds itself. The design: the product is built to feel like one workspace, not five tools. The honesty: the product does not claim an assistant where it uses patterns. The data is yours. The trust is earned by the transparency.",
+      "Three things. The thread: the client work in one place. The interactive document: the documents are links, not PDFs. Documents link to the client record as you create them. The design: the product is built to feel like one workspace, not five tools. The honesty: the product does not claim an assistant where it uses patterns. The data is yours. The trust is earned by the transparency.",
   },
   {
     id: 101,

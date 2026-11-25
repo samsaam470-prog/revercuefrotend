@@ -66,7 +66,7 @@
         "Growth adds an estimated time spent on the invoice and the button clicks, such as the payment link or the proof upload option. This helps you tell whether a client is looking for the payment details or has already paid.",
         "Scale adds exact time, the session timeline and the behavioural signals. A paid invoice is one of the signals that feeds the interest level on the client record, and the arithmetic is shown. Its advanced tracking, including the exact time and session timeline, is reduced to a time-spent total after five days, and the raw events are deleted.",
         "Teams is in beta and carries everything on Scale.",
-        "Payment status is separate from tracking. Whichever plan you are on, the invoice shows its status, including overdue, and confirming a payment records the revenue in the tracker. The dashboard's total revenue card and pending line are available on every plan; the Revenue & Expenses page and the revenue tab on the client record are on Scale and above. Opening and time tracking are reduced to a time-spent total after five days on all plans."
+        "Payment status is separate from tracking. Whichever plan you are on, the invoice shows its status, including overdue, and confirming a payment records the revenue in the tracker. The revenue overview is available on every plan, as are the dashboard's total revenue card and its pending line. Project expense recording, expense categories, profit and the per-client breakdown are on Growth and above. Opening and time tracking are reduced to a time-spent total after five days on all plans."
       ]
     }
   ],

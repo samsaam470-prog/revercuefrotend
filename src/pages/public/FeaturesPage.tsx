@@ -63,7 +63,7 @@ const SECTIONS: Section[] = [
     id: "crm",
     title: "CRM",
     copy: "A client record with a communication log at its centre, notes, follow-up reminders, and a record that fills in as you work.",
-    highlights: ["A communication log of messages, replies and documents", "Follow-ups that are due appear on the dashboard", "A record that builds itself from your documents"],
+    highlights: ["A communication log of messages, replies and documents", "Follow-ups that are due appear on the dashboard", "Documents linked to the record, and messages you log by hand"],
     visual: "CrmVisual",
     icon: Users,
   },

@@ -68,7 +68,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "What each card answers",
         paragraphs: [
           "The stat strip answers one question: what needs my attention today. Active documents, clients, follow-ups due and total revenue. Each card is a link to the filtered list behind the number, so a surprising figure is one click from its evidence.",
-          "Pending payments is a line, not a fifth card. If something is overdue, a second line appears in red. Total revenue counts confirmed payments only, across the whole account rather than one calendar month: an invoice marked paid by the client but not confirmed by you does not inflate the number, and the figure does not reset when a month ends.",
+          "Pending payments is a line, not a fifth card. If something is overdue, a second line appears in red. Revenue counts confirmed payments only: an invoice marked paid by the client but not confirmed by you does not inflate the number.",
           "The numbers count up when the page loads, briefly, because a moving figure is easier to notice than a static one. If your system asks for reduced motion, they appear at their final value instead.",
         ],
         visual: "DashboardVisual",
@@ -294,7 +294,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "The interest level and revenue",
         paragraphs: [
           "On Scale the interest badge opens the arithmetic: base fifty, plus and minus per signal, clamped to zero and one hundred. Opens, time spent, questions and replies move it; what the client says does not. It is arithmetic, not a model, and the breakdown is always visible.",
-          "The dashboard's total revenue card and its pending and overdue lines are available on every plan. The detailed Revenue & Expenses page in Settings, the Revenue tab on the client record, project expense recording and project expense totals are available on Scale and above. Expense categories, platform and provider records and spending breakdowns are part of that Scale page. The price suggestion is not available.",
+          "The revenue overview (invoices sent, confirmed as paid, pending payments and remaining pending) is available on every plan. Project expense recording, project expense totals, expense categories, platform and provider records, profit and all-time profit are available on Growth and above. The price suggestion is available on Scale and Teams.",
         ],
       },
       {
@@ -881,9 +881,9 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "Price suggestion (not available)",
+        heading: "Price suggestion (Scale)",
         paragraphs: [
-          "The price suggestion is not available. It is not a current feature and no release date is promised.",
+          "The price suggestion is available on Scale and Teams. It reads the client's own history: what you earned, what it cost, and your last confirmed invoice. It states those figures and suggests a price for the next pricing document.",
         ],
       },
       {
@@ -893,7 +893,7 @@ const BASE_GUIDES: Guide[] = [
           "Every plan includes basic CRM suggestions. Free includes basic CRM suggestions only.",
           "Starter adds previous outreach patterns and follow-up strategy on top of the basic CRM suggestions.",
           "Growth adds in-context paragraph suggestions and detailed prompts using previous data on top of the Starter capabilities.",
-          "The Scale plan has the advanced suggestions. The follow-up (the user's own median delay, not the default). The document suggestion (the user's own intent to document pattern, not the default). The interest flag (the client marked not interested, the interest 80%+). The form reminder (the client opened the form, not submitted after 3 days). The reopen (the not-interested client, the high interest). Broader client-history context is available on Scale. The price suggestion is not available.",
+          "The Scale plan has the advanced suggestions. The follow-up (the user's own median delay, not the default). The document suggestion (the user's own intent to document pattern, not the default). The interest flag (the client marked not interested, the interest 80%+). The form reminder (the client opened the form, not submitted after 3 days). The reopen (the not-interested client, the high interest). Broader client-history context is available on Scale. The price suggestion is available on Scale and Teams.",
           "Teams includes the Scale capabilities. Teams is in beta.",
         ],
       },
@@ -932,9 +932,9 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "Price suggestion (not available)",
+        heading: "Price suggestion (Scale)",
         paragraphs: [
-          "The price suggestion is not available. It is not a current feature and no release date is promised.",
+          "The price suggestion is available on Scale and Teams. It reads the client's own history: what you earned, what it cost, and your last confirmed invoice. It states those figures and suggests a price for the next pricing document.",
         ],
       },
       {
@@ -1365,6 +1365,59 @@ const BASE_GUIDES: Guide[] = [
     ],
   },
   {
+    slug: "revenue-overview",
+    title: "The revenue overview, plan by plan",
+    excerpt: "What the overview shows on Free and Starter, what Growth adds for project costs and profit, and what Scale adds for pricing.",
+    category: "Pricing",
+    readMinutes: 5,
+    updated: "2026-11-25",
+    visual: "PricingVisual",
+    sections: [
+      {
+        heading: "What the revenue overview is",
+        paragraphs: [
+          "The revenue overview is the money side of the client thread. It reads the invoices you have sent and the payments you have confirmed, and it shows what is still waiting to be paid. It does not connect to your bank, and it does not match payments automatically. A payment appears as confirmed only when you confirm it from the invoices list, so the figures are only as current as the confirmations you make.",
+          "The overview is available on every plan, Free included. What changes between plans is how much of the picture you see: the money you were paid on Free and Starter, the cost of each project from Growth, and the pricing guidance from Scale. The same invoices and payments feed every plan, so nothing is re-entered when you upgrade.",
+        ],
+      },
+      {
+        heading: "Free and Starter: sent, pending and remaining",
+        paragraphs: [
+          "On Free and Starter the overview shows three things. Invoices sent is the total of every invoice you have published, with the number of invoices. Pending payments is the total still owed, with the number of invoices that are waiting: published, proof submitted, or overdue. Confirmed as paid is what you have marked as received.",
+          "The line that matters most is remaining pending. When you confirm a payment, it moves from pending to confirmed and the remaining figure drops by that amount. If you send a $1,200 invoice and the client pays $500 by transfer, you confirm the $500, and the remaining pending figure shows $700 until the balance arrives. The same process applies on Starter, with the same limits.",
+        ],
+      },
+      {
+        heading: "Growth: project costs, profit and all-time profit",
+        paragraphs: [
+          "Growth adds the cost side. You record project expenses with an amount, a date, a category such as hosting, editing or building, the platform or provider where you paid for it, and an optional note. Recording starts on Growth, so Free and Starter do not show the expense form.",
+          "With costs recorded, the overview shows the project expenses, the profit and the all-time profit. Profit is the confirmed revenue minus the recorded expenses. The expense list under the figures keeps each recorded cost with its category, platform, date and note, so a high month can be checked against the tools and suppliers that produced it. The all-time profit is the same calculation across every date, which is the number to watch when you decide where to spend your time.",
+        ],
+      },
+      {
+        heading: "Scale: the price suggestion while you build",
+        paragraphs: [
+          "Scale and Teams carry everything on Growth, and add the intelligence. The main addition is the price suggestion. When you are pricing a proposal, a contract or an invoice for a client, the suggestion reads that client's history and tells you what happened before. For example: previously you spent $400 on this client and earned $900, a profit of $500. Keep charging at least $900, which is above the $520 needed for a 30% profit on your costs. If you had earned only $400 from $400 of costs, the suggestion would say to charge $520 next time.",
+          "The suggestion never sets a price for you. It states the figures it is based on, so you can disagree with it. If the client has earned you more than the cost-based price, it keeps the higher figure. If there are costs but no confirmed payment yet, it gives the minimum price for the 30% profit. If there is neither, it asks you to record a cost or confirm a payment first.",
+        ],
+      },
+      {
+        heading: "How a payment moves through the overview",
+        paragraphs: [
+          "Follow one invoice to see the whole path. You publish an invoice for $1,200 and it counts in invoices sent and in pending payments. The client uploads proof of a transfer, and the invoice moves to proof submitted, still pending. You check the transfer and confirm the payment. The invoice moves to confirmed as paid, the remaining pending figure drops, and from Growth the profit recalculates with the amount now counted as earned.",
+          "If the due date passes before payment, the invoice shows as overdue and stays in pending payments. Overdue is shown to the client as well, so the figure is not a surprise when you follow up.",
+        ],
+      },
+      {
+        heading: "What the overview does not do",
+        paragraphs: [
+          "The overview is a record, not an accountant. It does not calculate tax, it does not file anything, and it does not connect to your bank or your accounting software. Expenses are only the costs you enter, so an unrecorded cost makes the profit look better than it is. Keep your accounting software as the book of record, and use this overview to see the work and the money together.",
+          "There are no integrations for payments or accounting today. Payments run through the payment link or bank details you give the client, and you confirm them here.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "plans-explained",
     title: "The plans, explained",
     excerpt:
@@ -1385,8 +1438,8 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "Free gives you 5 active documents, 1-month retention, 50 MB of storage, 3 notes per client, and the full thread. It is the product, not a demo.",
           "Starter adds room: 20 active documents, 3-month retention, 100 MB, 10 notes per client, and 3 custom templates. Email notifications start on Growth, not Starter.",
-          "Growth adds the features that change how a document is made: 100 active documents, 12-month retention, 1 GB, 10 custom templates, 10 saved FAQs, 10 saved packages, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, and no Revercue branding on the client pages.",
-          "Scale adds the numbers: 300 active documents, 24-month retention, 5 GB, 15 custom templates, 30 saved FAQs, 15 saved packages, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue overview, project expense recording, expense categories, the what-revercue-knows page, the custom thank-you page, and the full set of suggestions. The price suggestion is not available.",
+          "Growth adds the features that change how a document is made: 100 active documents, 12-month retention, 1 GB, 10 custom templates, 10 saved FAQs, 10 saved packages, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, no Revercue branding on the client pages, and the cost side of the revenue overview: project expenses, expense categories and platform records, profit and all-time profit.",
+          "Scale adds the numbers: 300 active documents, 24-month retention, 5 GB, 15 custom templates, 30 saved FAQs, 15 saved packages, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the what-revercue-knows page, the custom thank-you page, the full set of suggestions and the price suggestion.",
           "Teams adds the people: 500 active documents, 36-month retention, 10 GB, unlimited custom templates, saved FAQs, saved packages, password-protected documents and adaptive forms, everything on Scale, and the team features — the Handoff Dashboard, the roles, the bulk transfer and the audit log. Teams is in beta.",
         ],
       },
@@ -1430,8 +1483,8 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Choosing Scale",
         paragraphs: [
-          "Scale is the plan for the freelancer who has stopped asking how many documents fit and started asking what the account knows. Three hundred active documents, twenty-four months of retention, five gigabytes of storage, fifty password-protected documents and fifteen adaptive forms are the room. The interest level, the revenue overview, project expense recording, expense categories and the what-revercue-knows page are the intelligence. The price suggestion is not available.",
-          "The dashboard's total revenue card and pending line are available on every plan. The Revenue & Expenses page, the client revenue tab, project expense recording and totals, expense categories, platform and provider records and spending breakdowns are available on Scale and above. The price suggestion is not available.",
+          "Scale is the plan for the freelancer who has stopped asking how many documents fit and started asking what the account knows. Three hundred active documents, twenty-four months of retention, five gigabytes of storage, fifty password-protected documents and fifteen adaptive forms are the room. The interest level, the what-revercue-knows page and the price suggestion are the intelligence that is unique to this tier.",
+          "The revenue overview is available on every plan. Project expense recording, expense totals, expense categories, platform and provider records, profit and all-time profit are available on Growth and above. The price suggestion is available on Scale and Teams.",
           "The same is true of the advanced suggestions: the follow-up timing becomes your own median delay instead of the product's default, and the document suggestions follow your own intent-to-document pattern instead of a generic one. Nothing new is invented; the plan changes whose pattern the product reads.",
         ],
       },
@@ -1447,7 +1500,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "Starter, Growth and Scale are now publicly available via checkout. Teams is in beta: you join with your email and the team reaches out when a spot opens.",
           "Downgrades take effect at the end of the cycle. Documents above the new limit are archived rather than deleted, so the links close but nothing is lost. If you go from a hundred live documents to twenty, eighty of them move to the archive and the archive allowance of the lower plan applies. That is the moment the archive limit matters most, and it is why the archive is counted separately.",
-          "Nothing on the pricing page is a trial. Free is free forever, with limits. The paid plans are the same product with more room and more intelligence, and the plan limits keep the room honest.",
+          "Free is free forever, with limits, and is not a trial. Growth has a limited-time 14-day free trial, shown on the pricing page. The paid plans are the same product with more room and more intelligence, and the plan limits keep the room honest.",
         ],
       },
       {
@@ -1473,88 +1526,6 @@ const BASE_GUIDES: Guide[] = [
           "The archive is a parking space with its own allowance and its own clock: five documents for fifteen days on Free, fifteen for thirty on Starter, thirty for thirty on Growth and above. Archiving closes the public link, keeps the document and its content, and returns the active-document slot immediately. The client who opens an archived link sees a closed page, not a broken one.",
           "It is separate because the two limits answer different questions. The active limit asks how many conversations are open. The archive limit asks how much closed work you are keeping. A freelancer can be at five of five active with an empty archive, or at two of five active with five archived documents waiting for a decision. The bars tell you which problem you have.",
           "The archive is also the safe way to handle a downgrade. When a plan change lowers the active limit, the excess is archived rather than deleted, so nothing is destroyed by a billing decision. You can unarchive a document later if a slot opens, and the link comes back with the same address.",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "revenue-overview",
-    title: "The revenue overview",
-    excerpt:
-      "What the revenue and expense figures mean, where each one comes from, and which plan shows which view.",
-    category: "Pricing",
-    readMinutes: 7,
-    updated: "2026-11-25",
-    visual: "DashboardVisual",
-    sections: [
-      {
-        heading: "Two layers, one record",
-        paragraphs: [
-          "Revercue keeps one financial record per client and draws two views from it. The first is the dashboard card that every plan shows: the total of your confirmed payments, with the pending and overdue invoices waiting on the same strip. The second is Revenue & Expenses, the detailed page in Settings that is part of Scale and above, together with the Revenue tab on a client record, which is also Scale and above. Both views read the same rows, so a payment confirmed on an invoice appears in both at once. Nothing is typed twice, and no figure is stored separately for the report.",
-          "That shape is deliberate. A freelancer on Free still sees whether money has come in, because a proposal-to-payment thread that hides the payment half is not a thread. What the higher plans add is the cost side and the breakdown: what a client cost you, what the profit is, and which category the money went to. The revenue arithmetic never changes between plans; only the amount of it you can see changes.",
-        ],
-        visual: "DashboardVisual",
-      },
-      {
-        heading: "The dashboard figure, on every plan",
-        paragraphs: [
-          "The card is labelled Total revenue and it counts confirmed payments only. When you confirm a payment on an invoice, Revercue writes a payment row with the amount, the date and the status paid, and that row is what the card sums. An invoice the client has paid externally but that you have not confirmed is not counted there. It stays in the pending line until you confirm it. That is why the figure is trustworthy: it reflects your decision, not a client's word.",
-          "Under the strip is the pending line: the sum of invoices in the published, proof submitted or overdue state, with a count. If any invoice is overdue, a second line appears in red with the overdue total and count. Both lines link to the invoice list filtered to the matching status, so a figure that surprises you is one click away from the rows behind it.",
-          "The card is also honest about its scope. It is the sum of every confirmed payment on the account, not a calendar month. It is a running total of the money you have confirmed as received, which is why it does not reset on the first of the month and does not need clearing at the start of a year. If you want a month-by-month view, the invoice list and its confirmed filter are the place to read it from, because the invoice carries the date.",
-        ],
-      },
-      {
-        heading: "Confirming a payment, step by step",
-        paragraphs: [
-          "A client opens the invoice link. With Option A they follow your external payment link; with Option B they see your bank details and can upload proof of payment. A proof upload moves the invoice to proof submitted and notifies you, but it does not mark it paid. You open the invoice, check that the money actually arrived, and confirm. Confirming sets the invoice to confirmed and records the payment row that feeds every revenue figure in the product.",
-          "The human step is the point, not an oversight. A screenshot is evidence that someone paid something; a bank statement is evidence that it landed. Revercue records your confirmation, so the revenue figure is only ever as good as the confirmations you make. If a payment is confirmed by mistake, the invoice and its payment row are the record to correct, and the totals on the dashboard, in Settings and on the client tab all follow the correction because they read the same rows.",
-          "Overdue is derived from the due date and needs no reminder to be set. An invoice past its date shows overdue to you and to the client, and it appears in the dashboard's pending line with the rest. That means the pending figure is not only money you are waiting for; it is money you are waiting for with a visible clock on it, which is usually the more useful version of the same number.",
-        ],
-      },
-      {
-        heading: "Revenue & Expenses, on Scale and above",
-        paragraphs: [
-          "Settings → Revenue & Expenses is the full view, and it is part of Scale and above. Four figures sit at the top: earned, spent, profit and pending. Earned is the same confirmed-payment total the dashboard shows. Spent is the sum of the expenses you have recorded. Profit is earned minus spent, calculated rather than typed. Pending is the same unpaid invoice total and count. The page and the dashboard therefore agree by construction, and a discrepancy is a bug rather than a difference of opinion between two reports.",
-          "Below the figures is the expense form and the most recent expenses. An expense takes an amount, a category, a date and a note, and is recorded against your account; the underlying record also carries a client field so an expense can be tied to the project it belongs to. Categories are free text, so the categories you actually use are the categories the page shows. A registrar, a hosting bill or a video tool can be named in the category or the note instead of being forced into a fixed list that does not match how you work.",
-          "The page lists the hundred most recent expenses, newest date first. It is a working record for pricing decisions and a quick answer to whether a project made money, not a substitute for bookkeeping. The totals are sums of what you entered: they are not reconciled against a bank feed, they are not adjusted for refunds you did not record, and they are not a tax calculation. Used with that in mind, the page answers the question a freelancer actually asks, which is whether the work is worth repeating.",
-          "The page is gated as a whole. On Free, Starter and Growth the Settings section shows an upgrade card instead of the figures and the form, and the expense endpoint refuses the request even if it is called directly. The gate is on the plan, not on a button, so there is no half-working version of the page on a lower tier.",
-        ],
-      },
-      {
-        heading: "The client revenue tab, on Scale",
-        paragraphs: [
-          "On Scale and above, the client record carries a Revenue tab. It is the same arithmetic at the level of one relationship: what this client has paid, what you have spent on them, and the profit that follows. Expenses recorded against the client are listed beside the figures, so a project that looked healthy at the invoice can be checked against the domain, the hosting, the stock footage and the subcontractor.",
-          "This is where the cost side earns its place. A client who pays well and costs almost nothing is a different relationship from a client who pays the same and consumes a third of it in tools and time. The figure does not decide what you charge, and the price suggestion is not available in the current build, so the tab gives you the evidence and leaves the judgement with you. On lower plans the tab is not shown at all, which keeps the record consistent: a client screen never offers a revenue view the account cannot fill.",
-        ],
-      },
-      {
-        heading: "How the plans line up",
-        paragraphs: [
-          "Free includes the dashboard's total revenue card, the pending line and the overdue line, and confirming a payment records revenue on the invoice. The detailed Revenue & Expenses page, expense recording and the client Revenue tab are not included, because they depend on the cost side that Free does not open.",
-          "Starter and Growth add room, templates, saved content and, on Growth, adaptive forms, the branded client page and paragraph suggestions. The revenue and expense views are the same as Free: the dashboard total, the pending and overdue lines, and confirmation on the invoice. Expense recording starts on Scale, not Growth, so a Growth account can confirm payments but cannot yet record what the project cost.",
-          "Scale adds the Revenue & Expenses page with earned, spent, profit and pending, the expense form and the recent-expense list, and the Revenue tab on the client record with the per-client earned, spent and profit. Expense categories, platform and provider records and spending breakdowns are part of that page. The price suggestion is not available.",
-          "Teams is in beta and carries everything on Scale, including the revenue and expense views, alongside the handoff features. Beta means the team features are still being tested with a small group; the revenue arithmetic is the same arithmetic, and the figures are scoped to the same account.",
-        ],
-        bullets: [
-          "Free, Starter, Growth: dashboard total revenue, pending and overdue lines, confirm payment on an invoice.",
-          "Scale and Teams: everything above, plus Revenue & Expenses, expense recording, categories and the client Revenue tab.",
-          "The price suggestion is not available on any plan.",
-        ],
-      },
-      {
-        heading: "What the numbers do not include",
-        paragraphs: [
-          "Revercue does not process card payments inside the invoice. There is no built-in checkout and no payout balance, so there is no processing fee, no settlement delay and no processor hold in the figures. Money moves through the payment link or the bank transfer you chose, and the product records the confirmation you make when it arrives.",
-          "The figures are not a ledger. They are not double-entry, there are no journals or reconciliation, and there is no tax or VAT calculation. Amounts are summed as stored, so a client invoiced in one currency and an expense recorded in another are not converted against an exchange rate. If you need books for an accountant, keep the accounting software you already use and treat Revercue's numbers as the operational view of client work rather than the statutory record.",
-        ],
-      },
-      {
-        heading: "Keeping it accurate",
-        paragraphs: [
-          "Confirm payments as soon as they land. An unconfirmed payment is invisible to the total and keeps the invoice in the pending line, which makes both figures wrong in opposite directions. Record expenses when they happen rather than at the end of a quarter, because an expense entered from memory is an estimate and the profit figure will inherit the error without telling you.",
-          "Remember what the audit trail is for. The invoice keeps its status history and the proof a client uploaded, so a question months later is answered from the record rather than from a search through bank notifications. The revenue figures are a summary of the rows; the rows remain the evidence, and the evidence is what you show when a payment is disputed.",
-          "Read the figures at the level they were meant for. The dashboard answers whether money is coming in. Revenue & Expenses answers whether the work is profitable after costs. The client tab answers whether this particular relationship is worth repeating. None of them is a valuation of the business, and none of them needs to be; each one removes a question you would otherwise answer from memory.",
-          "That is the whole idea behind the tracker: the invoice, the payment and the expense are already part of the thread, so the totals are a reading of work you have done rather than a second system to maintain. The less time you spend reconciling, the more of it goes to the clients who pay.",
         ],
       },
     ],
@@ -1985,7 +1956,7 @@ const PRACTICE: Record<string, GuideSection[]> = {
       heading: "Dismissing well",
       paragraphs: [
         "A suggestion is only useful if dismissing it teaches the product something. When you dismiss the follow-up because the client asked for two weeks, dismiss it — that answer adjusts the timing. Ignoring it is the one response that teaches nothing and still leaves the card in the way tomorrow.",
-        "Accept suggestions in the same spirit: they are shortcuts to the next action, not instructions. The price suggestion is not available.",
+        "Accept suggestions in the same spirit: they are shortcuts to the next action, not instructions. The price suggestion is available on Scale and Teams.",
       ],
       bullets: [
         "Dismiss with a reason in your head; the product learns from the action, you learn from the reason.",

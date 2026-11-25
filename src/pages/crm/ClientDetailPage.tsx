@@ -569,16 +569,6 @@ export function ClientDetailPage() {
         </div>
       )}
 
-      {tab === "Revenue" && !hasFeature("revenue_tracker") && (
-        <div className="card card-lg">
-          <EmptyState
-            title="Revenue tracking is part of Scale."
-            description={`See paid and pending revenue per client. Your plan allows ${PLAN_LIMITS.free.active_documents} active documents.`}
-            action={{ label: "See plans", onClick: () => navigate("/pricing") }}
-          />
-        </div>
-      )}
-
       <Modal
         open={commsOpen}
         onClose={() => setCommsOpen(false)}
