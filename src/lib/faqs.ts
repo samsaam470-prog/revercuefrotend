@@ -28,7 +28,7 @@ export const FAQS: Faq[] = [
     group: "product",
     question: "What is Revercue?",
     answer:
-      "Revercue is a tool for freelancers and agencies. It keeps your client work in one thread: proposal, contract, requirement form, invoice, and client record. The documents are interactive links, not PDFs. The client opens a link, reads, answers questions, and selects a package. You see the activity, and the client record builds itself.",
+      "Revercue is a tool for freelancers and agencies. It keeps your client work in one thread: proposal, contract, requirement form, invoice, and client record. The documents are interactive links, not PDFs. The client opens a link, reads, answers questions, and selects a package. You see the activity, and documents link to the client record as they are created.",
   },
   {
     id: 2,
@@ -104,7 +104,7 @@ export const FAQS: Faq[] = [
     group: "plans",
     question: "What is the difference between the plans?",
     answer:
-      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and basic CRM suggestions. Starter adds custom templates, previous outreach patterns and follow-up strategy. Growth adds saved FAQs, saved packages, adaptive forms, no Revercue branding, in-context paragraph suggestions, detailed prompts using previous data and project expense recording. Scale adds advanced tracking, the interest level, the revenue overview, expense categories, the what-revercue-knows page, the custom thank-you page and broader client-history context. Teams adds the team features (in beta). The price suggestion is not available.",
+      "The plans scale on active documents, retention, storage, and the advanced features. Free has 5 active documents, 1-month retention, and basic CRM suggestions. Starter adds custom templates, previous outreach patterns and follow-up strategy. Growth adds saved FAQs, saved packages, adaptive forms, no Revercue branding, in-context paragraph suggestions, detailed prompts using previous data and project expense recording. The revenue overview is on every plan. Scale adds advanced tracking, the interest level, expense categories, the what-revercue-knows page, the custom thank-you page and broader client-history context. Teams adds the team features (in beta). The price suggestion is not available.",
   },
   {
     id: 13,
@@ -705,7 +705,7 @@ export const FAQS: Faq[] = [
     group: "support",
     question: "What makes Revercue different?",
     answer:
-      "Three things. The thread: the client work in one place. The interactive document: the documents are links, not PDFs. The client record builds itself. The design: the product is built to feel like one workspace, not five tools. The honesty: the product does not claim an assistant where it uses patterns. The data is yours. The trust is earned by the transparency.",
+      "Three things. The thread: the client work in one place. The interactive document: the documents are links, not PDFs. Documents link to the client record as you create them. The design: the product is built to feel like one workspace, not five tools. The honesty: the product does not claim an assistant where it uses patterns. The data is yours. The trust is earned by the transparency.",
   },
   {
     id: 101,

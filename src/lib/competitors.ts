@@ -45,7 +45,7 @@ const BASE_COMPETITORS: Competitor[] = [
       "Proposals are interactive links: the client selects a package, expands the FAQs and answers questions inside the page.",
       "Tracking by plan: opened, when, time spent, clicks, answers.",
       "The requirement form is part of the thread, with branching and a structured answer you can reuse.",
-      "The client record is assembled from the documents, and it survives them.",
+      "Documents link to the client record as they are created, and it survives them.",
     ],
     fits:
       "Bonsai fits a freelancer who wants accounting and tax in the same subscription. Revercue fits a freelancer who wants the client work itself to stay connected and observable, and who already has an accountant.",
@@ -112,7 +112,7 @@ const BASE_COMPETITORS: Competitor[] = [
     differences: [
       "No workflow to build: the thread is the default path, not a diagram you maintain.",
       "The proposal collects the decision — package, questions, FAQs — in one page.",
-      "The client record builds itself from the documents and outlives them.",
+      "Documents link to the client record as they are created, and the record outlives them.",
       "Suggestions are patterns on your own activity, not automations you configured.",
     ],
     fits:
@@ -214,7 +214,7 @@ const BASE_COMPETITORS: Competitor[] = [
     differences: [
       "The client-facing thread is the product, not the pipeline.",
       "Interactive proposals with package selection, embedded questions and FAQs.",
-      "The client record is assembled from the documents and survives them.",
+      "Documents link to the client record as they are created, and it survives them.",
       "One clear next action per screen, without a pipeline to maintain.",
     ],
     fits:

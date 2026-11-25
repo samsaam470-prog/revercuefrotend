@@ -1,11 +1,11 @@
 {
   "slug": "crm",
   "metaTitle": "Freelance CRM and Client Communication Log | Revercue",
-  "metaDescription": "A freelance CRM with a client communication log, notes, follow-up reminders and a record that builds itself from proposals, contracts and invoices.",
+  "metaDescription": "A freelance CRM with a client communication log, notes, follow-up reminders and a record where documents link as you create them, with messages logged by hand.",
   "eyebrow": "Feature: CRM",
   "title": "A client record that remembers the thread for you.",
   "intro": "Revercue's CRM puts the client record at the centre of your work. The communication log is the main body of the record, not a side tab, and it fills in as proposals, contracts, forms and invoices move forward.",
-  "summary": "The Revercue CRM is a freelance client record with a communication log at its centre. The log records messages, replies, follow-ups and documents in the order they happened. Notes capture context that does not belong in a document, follow-ups due appear on the dashboard, and the record builds itself from the documents you create for the client. On the Scale plan, an interest level shows engagement with the working displayed.",
+  "summary": "The Revercue CRM is a freelance client record with a communication log at its centre. The log records messages, replies, follow-ups and documents in the order they happened. Notes capture context that does not belong in a document, follow-ups due appear on the dashboard, and the record links documents as they are created from the documents you create for the client. On the Scale plan, an interest level shows engagement with the working displayed.",
   "key_facts": [
     "The communication log records messages, replies, follow-ups and documents in order.",
     "The client record is the home of each thread, with documents attached to it.",
@@ -44,7 +44,7 @@
       ]
     },
     {
-      "heading": "A record that builds itself",
+      "heading": "A record that links documents as they are created",
       "paragraphs": [
         "The most practical part of the CRM is that you do not have to keep it up separately. Creating a proposal for a client adds it to their record. Sending a contract, collecting a requirement form or issuing an invoice adds those too, and the communication log picks up the activity around them.",
         "The result is a client record that grows with the work rather than one you must maintain as an extra chore. Because the record is accurate, the suggestions and follow-up reminders that depend on it are also more useful."
@@ -65,7 +65,7 @@
     "Notes with plan limits shown in the product",
     "Follow-ups that are due surfaced on the dashboard",
     "An interest level on Scale, with the working shown",
-    "A record that builds itself from proposals, contracts, forms and invoices"
+    "Documents linked to the record as you create them, with messages logged by hand"
   ],
   "faqs": [
     {

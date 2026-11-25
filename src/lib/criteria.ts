@@ -111,7 +111,7 @@ export const PLATFORM_CRITERIA: PlatformRow[] = [
       },
       crm: {
         rating: "yes",
-        note: "The record builds itself from the documents, and notes, follow-ups and interest level sit on the client.",
+        note: "Documents link to the client record as they are created. Messages appear only when logged by hand, and notes, follow-ups and interest level sit on the client.",
       },
       "project-management": {
         rating: "no",

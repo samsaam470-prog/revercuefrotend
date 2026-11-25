@@ -298,7 +298,7 @@ export function DashboardOverviewPage() {
               <div className="panel-head">
                 <div>
                   <h2>Clients</h2>
-                  <p>The record builds itself from the documents.</p>
+                  <p>Documents link to the client record as they are created. Messages and replies appear in the log only when you add them by hand.</p>
                 </div>
                 <Users size={16} color="var(--gold)" />
               </div>

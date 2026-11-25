@@ -211,7 +211,7 @@ const BASE_POSTS: BlogPost[] = [
   },
   {
     slug: "the-client-record-builds-itself",
-    title: "The client record builds itself",
+    title: "Documents link to the client record",
     excerpt:
       "The CRM is where the thread lands. You should not have to maintain a second database of things you already sent.",
     date: "2026-11-22",

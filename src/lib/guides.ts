@@ -1386,7 +1386,7 @@ const BASE_GUIDES: Guide[] = [
           "Free gives you 5 active documents, 1-month retention, 50 MB of storage, 3 notes per client, and the full thread. It is the product, not a demo.",
           "Starter adds room: 20 active documents, 3-month retention, 100 MB, 10 notes per client, and 3 custom templates. Email notifications start on Growth, not Starter.",
           "Growth adds the features that change how a document is made: 100 active documents, 12-month retention, 1 GB, 10 custom templates, 10 saved FAQs, 10 saved packages, 3 adaptive forms, 15 password-protected documents, the follow-up suggestions, and no Revercue branding on the client pages.",
-          "Scale adds the numbers: 300 active documents, 24-month retention, 5 GB, 15 custom templates, 30 saved FAQs, 15 saved packages, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, the revenue overview, project expense recording, expense categories, the what-revercue-knows page, the custom thank-you page, and the full set of suggestions. The price suggestion is not available.",
+          "Scale adds the numbers: 300 active documents, 24-month retention, 5 GB, 15 custom templates, 30 saved FAQs, 15 saved packages, 15 adaptive forms, 50 password-protected documents, the advanced tracking, the interest level, project expense recording, expense categories, the what-revercue-knows page, the custom thank-you page, and the full set of suggestions. The price suggestion is not available.",
           "Teams adds the people: 500 active documents, 36-month retention, 10 GB, unlimited custom templates, saved FAQs, saved packages, password-protected documents and adaptive forms, everything on Scale, and the team features — the Handoff Dashboard, the roles, the bulk transfer and the audit log. Teams is in beta.",
         ],
       },
@@ -1430,7 +1430,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Choosing Scale",
         paragraphs: [
-          "Scale is the plan for the freelancer who has stopped asking how many documents fit and started asking what the account knows. Three hundred active documents, twenty-four months of retention, five gigabytes of storage, fifty password-protected documents and fifteen adaptive forms are the room. The interest level, the revenue overview, project expense recording, expense categories and the what-revercue-knows page are the intelligence. The price suggestion is not available.",
+          "Scale is the plan for the freelancer who has stopped asking how many documents fit and started asking what the account knows. Three hundred active documents, twenty-four months of retention, five gigabytes of storage, fifty password-protected documents and fifteen adaptive forms are the room. The interest level, project expense recording, expense categories and the what-revercue-knows page are the intelligence. The price suggestion is not available.",
           "The revenue overview is available on every plan. Project expense recording and totals are available on Growth. Expense categories, platform and provider records and spending breakdowns are available on Scale. The price suggestion is not available.",
           "The same is true of the advanced suggestions: the follow-up timing becomes your own median delay instead of the product's default, and the document suggestions follow your own intent-to-document pattern instead of a generic one. Nothing new is invented; the plan changes whose pattern the product reads.",
         ],

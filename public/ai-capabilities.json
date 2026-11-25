@@ -85,7 +85,7 @@
     {
       "stage": "client_record",
       "public_url": null,
-      "note": "Account only. Assembled from the documents; survives their retention."
+      "note": "Account only. Documents link as they are created; the record survives document retention."
     }
   ],
   "modules": [
@@ -279,7 +279,7 @@
       },
       "features": [
         "Advanced tracking and session timeline",
-        "Interest level and revenue tracker",
+        "Interest level and expense categories",
         "Expense entry; price suggestion not available",
         "What Revercue Knows page",
         "Custom thank-you page"
@@ -393,8 +393,8 @@
   "known_issues": [
     {
       "id": "suggestions-plan-gate",
-      "detail": "The dashboard gates its suggestion card behind the Growth-and-above feature flag, while guides and an FAQ describe basic suggestions on every plan. Which is authoritative has not been confirmed.",
-      "status": "unresolved"
+      "detail": "Source now shows the suggestion card on every plan (basic follow-up on Free, pattern suggestions from Starter) pending the backend deploy. Confirm after deploy. Which is authoritative has not been confirmed.",
+      "status": "resolved_in_source_pending_deploy"
     },
     {
       "id": "simulation-not-production",

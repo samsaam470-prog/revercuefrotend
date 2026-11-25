@@ -12,7 +12,7 @@ const STEPS = [
   { title: "New invoice", body: "Invoices are tables: line items, tax, payment link or account details with proof." },
   { title: "Recent activity", body: "The activity feed is the last card on the dashboard. Every open, answer and payment lands there." },
   { title: "Follow-ups due", body: "Follow-ups come from the communication log. Mark one done and it disappears from this count." },
-  { title: "CRM", body: "The client record builds itself from the documents. There is nothing to type twice." },
+  { title: "CRM", body: "Documents link to the client record as they are created. Messages and replies appear in the log only when you add them by hand." },
   { title: "Settings", body: "Profile, plan, security, notifications, saved libraries and the transparency page." },
   { title: "Done", body: "That is the whole product. The Free plan is available now; Starter, Growth and Scale are publicly available; Teams is in beta." },
 ];

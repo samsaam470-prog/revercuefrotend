@@ -38,7 +38,7 @@ export function HomePage() {
       <section className="hero">
         <p className="eyebrow">{THESIS}</p>
         <h1>{TAGLINE}</h1>
-        <p className="lede">{"Proposal. Contract. Form. Invoice. Client. In one place, not five.\nInteractive links, not PDFs. The client record builds itself."}</p>
+        <p className="lede">{"Proposal. Contract. Form. Invoice. Client. In one place, not five.\nInteractive links, not PDFs. Documents link to the client record as you create them."}</p>
         <div className="hero-ctas">
           <AuthActionStart className="btn btn-primary btn-lg">Start Free</AuthActionStart>
           <Link to="/pricing" className="btn btn-secondary btn-lg">See Pricing</Link>

@@ -125,7 +125,7 @@ export const PLANS: PlanDefinition[] = [
       "300 active documents",
       "24-month document retention",
       "Advanced tracking and session timeline",
-      "Interest level and revenue tracker",
+      "Interest level and expense categories",
       "Custom thank-you page",
       "Custom templates (15), saved FAQs (30), saved packages (15)",
     ],
