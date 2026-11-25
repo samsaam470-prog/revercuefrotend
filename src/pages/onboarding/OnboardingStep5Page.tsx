@@ -102,8 +102,8 @@ export function OnboardingStep5Page() {
 
       <p className="caption mt-4">
         {requested
-          ? `You will start on Free today and request ${requested} (the team will reach out).`
-          : "You will start on Free today. You can request a plan later from Settings → Plan."}
+          ? `You will start on Free today and join the ${requested} beta (the team will reach out).`
+          : "You will start on Free today. You can upgrade to Starter, Growth or Scale via checkout at any time from Settings → Plan & Billing."}
       </p>
 
       {error && <p className="notice notice-red mt-6">{error}</p>}

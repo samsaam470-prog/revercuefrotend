@@ -1447,7 +1447,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "Starter, Growth and Scale are now publicly available via checkout. Teams is in beta: you join with your email and the team reaches out when a spot opens.",
           "Downgrades take effect at the end of the cycle. Documents above the new limit are archived rather than deleted, so the links close but nothing is lost. If you go from a hundred live documents to twenty, eighty of them move to the archive and the archive allowance of the lower plan applies. That is the moment the archive limit matters most, and it is why the archive is counted separately.",
-          "Nothing on the pricing page is a trial. Free is free forever, with limits. The paid plans are the same product with more room and more intelligence, and the plan limits keep the room honest.",
+          "Free is free forever, with limits, and is not a trial. Growth has a limited-time 14-day free trial, shown on the pricing page. The paid plans are the same product with more room and more intelligence, and the plan limits keep the room honest.",
         ],
       },
       {
