@@ -1,3 +1,4 @@
+import { postBySlug } from "./blog";
 /**
  * Per-route metadata for Revercue's client-rendered public site.
  */
@@ -74,6 +75,10 @@ const FEATURE_META: Record<string, RouteMeta> = Object.fromEntries(
 );
 
 export function routeMeta(pathname: string): RouteMeta {
+  if (pathname.startsWith("/blog/") && pathname.split("/")[2]) {
+    const post = postBySlug(pathname.split("/")[2]);
+    if (post) return { title: `${post.title} | Revercue`, description: post.excerpt };
+  }
   const featureSlug = pathname.startsWith("/features/") ? pathname.split("/")[2] : "";
   if (featureSlug && FEATURE_META[featureSlug]) return FEATURE_META[featureSlug];
   const solutionSlug = pathname.startsWith("/solutions/") ? pathname.split("/")[2] : "";

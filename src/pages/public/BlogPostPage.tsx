@@ -72,6 +72,19 @@ export function BlogPostPage() {
             </section>
           ))}
 
+          {post.links && post.links.length > 0 && (
+            <section className="mt-8">
+              <h2>Related on Revercue</h2>
+              <ul style={{ paddingLeft: 20, lineHeight: 1.8 }}>
+                {post.links.map((item) => (
+                  <li key={item.to}>
+                    <Link to={item.to}>{item.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           <div className="card card-md mt-8">
             <h3 style={{ marginBottom: 8 }}>One link. One thread.</h3>
             <p className="muted" style={{ fontSize: 14, marginBottom: 16 }}>
