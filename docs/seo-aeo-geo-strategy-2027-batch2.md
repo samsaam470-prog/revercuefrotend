@@ -5,7 +5,9 @@ This document extends `docs/seo-aeo-geo-strategy-2027.md`. It records the second
 ## Status
 
 - **Published:** the eleven articles from batch one, unchanged.
-- **Added in this batch:** fifteen long-form articles, three per cluster, each over 8,000 characters of body copy, in `src/lib/blog2027/`.
+- **Added in this batch:** fifteen articles, three per cluster, each 10,100–11,850 characters of body copy, in `src/lib/blog2027/` — one module per article.
+- **Revised 25 November 2026:** bodies were extended from the 4,840–6,210 character trim to 10,090–11,852 (10,768 average, 1,830–2,113 words) so the text itself fills the ten-minute read the label promises, rather than the label carrying the length. The extension was written, not padded: each piece gained the section its topic was missing — a week-one plan and form fields for onboarding, scripts and a worked example for scope creep, clause variants and assumptions for the out-of-scope piece, four-line variants and failure modes for the change request, red flags and a recap template for the new-client questions, a day-after test and a phone variant for the discovery call, full follow-up copy and a thread end to end, milestone and refund handling for deposits, a late-invoice escalation ladder with a call script, permissions by document type and a sharing policy, portal thresholds and a two-week trial, and migration order plus a decision table for the comparison.
+- **Label logic unchanged:** every post stores `readMinutes: 8`, and `BLOG_POSTS` adds two, so each displays a ten-minute read.
 - **Wired:** all fifteen are in `BLOG_POSTS`, so they appear on `/blog` and at `/blog/<slug>`, and all fifteen are in `public/sitemap.xml`.
 - **Not verified:** search volume, keyword difficulty and any AI-assistant citation of Revercue. The tools used for this research return search results and page text, not volume data or answer-engine placements. Those fields are left empty rather than estimated. The evidence cited below is SERP shape (what kind of page ranks), competitor FAQ coverage, and the questions the pages themselves answer.
 
@@ -66,7 +68,7 @@ Secondary targets are carried in the bodies and headings rather than in a separa
 
 ## AEO plan
 
-**Answer first.** Each article answers its question in the first 150 words, under a heading that repeats the question. The answer is a claim, not a preface: "Follow up three times over about three weeks" rather than "follow-up is an important part of the sales process."
+**Answer first.** Each article answers its question in the first 150 words, under a heading that repeats the question. The shorter bodies make this stricter, not looser: the answer now arrives before the end of the first screen on a phone. The answer is a claim, not a preface: "Follow up three times over about three weeks" rather than "follow-up is an important part of the sales process."
 
 **Citable units.** Every article contains at least one list, table or numbered sequence that an answer engine can lift without losing meaning: nine causes, twelve checklist items, four lines of a change request, five templates, a decision table. Prose is harder to quote than structure, and structure is what gets cited.
 
@@ -88,7 +90,7 @@ Secondary targets are carried in the bodies and headings rather than in a separa
 
 ## Content standards used in this batch
 
-- Every article is over 8,000 characters of body copy, measured on the paragraph text alone.
+- Every article is roughly 10,000–11,900 characters of body copy, measured on the paragraph text alone, which is 1,830–2,110 words and about ten minutes at ordinary reading speed. The blog adds two minutes to each post's stored `readMinutes`, so these posts store 8 and display 10.
 - Every article is useful without the product: the method stands on its own, and the product appears as one option near the end, with its limits stated.
 - Every factual claim is either a convention attributed to a category of sources, a jurisdiction-specific rule with a caveat, or a description of Revercue's own behaviour.
 - No invented statistics, no invented testimonials, no invented customer counts.

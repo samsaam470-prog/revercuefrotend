@@ -1,12 +1,15 @@
 import type { BlogPost } from "../blog";
 
+// Cluster D, article two: the question bank. Grouped by what each answer
+// actually changes, so the list is diagnostic rather than a script.
+
 export const CLIENT_QUESTIONS_POST: BlogPost = {
   slug: "questions-to-ask-a-new-client",
   title: "Questions to ask a new client before you start",
   excerpt:
-    "The questions that decide whether a project will be easy or exhausting are not the ones about colours. They are about decisions, money, history and what happens when something goes wrong. Twenty questions, grouped by what they protect.",
+    "Twenty questions is a survey. Six are a qualification. These are the questions that change what you quote, what you write, and whether you take the work at all, with the answer that should make you pause.",
   date: "2026-11-25",
-  readMinutes: 12,
+  readMinutes: 8,
   links: [
     { label: "Requirement forms in Revercue", to: "/features/requirement-forms" },
     { label: "Client onboarding checklist", to: "/blog/client-onboarding-checklist" },
@@ -16,93 +19,114 @@ export const CLIENT_QUESTIONS_POST: BlogPost = {
   body: [
     {
       paragraphs: [
-        "A discovery conversation usually covers the brief: what the client wants, who it is for, when it is needed. Those questions are necessary and they are the easy ones. The questions that decide whether the project runs smoothly are different, and they are mostly about the client's situation rather than the work.",
-        "Who decides, who pays, what has failed before, what happens in the week everything is due. A client who answers those clearly will be a good client even if the brief is vague. A client who cannot answer them will be difficult even if the brief is perfect, and knowing that before you quote is worth more than any amount of proposal polish.",
-        "The list below is organised by what each group protects: the decision, the money, the work, the history and the exit. Ask the ones that matter for the size of the project. A two-day job does not need all twenty.",
+        "The first call with a new client is usually spent being helpful. That is the right instinct and the wrong structure, because the questions you ask in the first twenty minutes decide what you quote, what you promise and how much of the next three months you will spend managing expectations rather than doing the work.",
+        "The list below is short on purpose. Each question exists because the answer changes something concrete, and each comes with the answer that should make you slow down. Ask them in whatever order the conversation allows; the point is that all of them get asked before you send a proposal.",
       ],
     },
     {
       heading: "The short answer",
       paragraphs: [
-        "Ask four questions first, because their answers determine whether the rest are worth asking. Who will make the final decision on this? Who pays for it, and does the budget already exist? What has already been tried? And what does success look like in a sentence you could put on a slide?",
-        "If those four produce clear answers, the project has a decision-maker, a budget, a history and a definition of success. If any of them produces a shrug, the project is at risk before it begins, and the risk is worth naming in the proposal rather than discovering in week five.",
+        "Ask who decides, what happens after the decision, what the budget range is, what has already been tried, what would make this a failure, and what happens if the project has to stop. Those six cover authority, money, context, history, success and exit, which between them predict most of what a project will cost you in time you did not bill.",
+        "Six is the number that fits a twenty-minute conversation with time to listen. Everything else, the brand guidelines, the font preferences, the list of competitors, can go in a form afterwards. The call is for the answers that need a follow-up question attached.",
       ],
     },
     {
       heading: "The decision",
       paragraphs: [
-        "Who makes the final decision? Not who is in the meeting. A single name, with a role. If the answer is we decide together, ask who breaks a tie, because a tie is what happens the week before launch.",
-        "Who else will review the work before it is approved? This surfaces the stakeholder nobody mentioned, usually a founder, a brand manager or a partner. Every hidden reviewer adds a round of feedback, and each round has a cost. Knowing the number in advance lets you plan the schedule honestly.",
-        "How quickly do decisions usually get made here? A useful question because it is about the client's habits rather than their intentions. A client who says we are usually quick but the last project slipped three weeks is telling you the schedule you should plan for.",
-        "What would make you say no to this project going ahead? A surprising question that often produces the most useful answer of the conversation: a budget cap, a board approval, a competing priority. Whatever it is, it is the real constraint, and the proposal should address it.",
+        "Who signs this off, and who else needs to be comfortable with it? The answer tells you whether you are talking to the buyer or the researcher. If it is the researcher, ask when the decision-maker will see the proposal and what they will want to know. Then write the proposal for that person rather than the one on the call.",
+        "What happens after we agree? A client who says we will get started, and a client who says it goes to the finance committee on the 12th, are describing two different projects with the same scope. The second needs a version that can be forwarded and read cold, and a proposal that assumes the first will stall in a queue.",
+        "The pause-worthy answer: nobody else needs to be involved. That is either very good news or it is a sign the project has no sponsor, and the difference shows up later when nobody will release the budget. Ask who is paying for it, and whether they have seen the plan.",
       ],
     },
     {
       heading: "The money",
       paragraphs: [
-        "Is the budget already approved, or is this a conversation about whether to spend it? The distinction changes everything. A project with an approved budget is a scheduling exercise. A project without one is a sales process, and it may not close this quarter.",
-        "What range did you have in mind? Ask it plainly and then be quiet. Most clients have a number, and the number is information rather than an insult. If the range is below your price, you can choose to show a smaller scope rather than a discount, and you can do that before you have written a proposal.",
-        "Who approves the invoice, and what does your payment process look like? This is the question that prevents the late payment article you would otherwise be reading in six weeks. Ask for the name, the address, the purchase order requirement and the usual payment run.",
-        "Is there anything about this purchase that needs to go through procurement, legal or finance? In larger organisations the answer determines the timeline. A contract that needs legal review can take three weeks, and a project that starts before the contract is signed is a project without terms.",
+        "What range have you set aside for this? Most freelancers avoid this question and then discover the answer through silence. Asked plainly and early, it is not rude, and the reply usually saves everyone a week. If the client will not give a range, offer three: here is what 4,000 buys, here is 8,000, here is 15,000.",
+        "Who pays the invoice, and what does their process require? A purchase order, a supplier form, a portal, a named contact in finance. This is the least interesting question on the list and the one most likely to delay your money by six weeks.",
+        "The pause-worthy answer: we will sort the budget once we see the proposal. That is not a red flag on its own, but it becomes one if it is still the answer after you send three options. An organisation that cannot state a range usually cannot approve one quickly either.",
       ],
     },
     {
       heading: "The work",
       paragraphs: [
-        "What does success look like, in one sentence? If the client cannot answer, offer three options and ask them to pick. A number, a feeling, a comparison to a competitor, a reduction in support tickets. The answer becomes the first line of the proposal and the last line of the delivery note.",
-        "What is the one thing that must not change? Every client has a fixed point: a logo, a way of speaking, a page that cannot be touched. Knowing it prevents the one piece of feedback that undoes a week of work.",
-        "Which parts of this already exist, and which need to be made? A client may assume the copy, the photography or the content is included because it exists somewhere. Separating existing material from new work is the fastest way to make the scope honest.",
-        "Who is going to use this after we finish? The answer determines how much documentation and training the handover needs, and it is often the difference between a project that gets used and one that gets replaced in a year.",
-        "What is the deadline, and what happens if it moves? Some deadlines are real, such as a launch event or a regulatory date. Others are preferences. Knowing which is which decides whether overtime is a conversation about scope or about goodwill.",
+        "What have you already tried? The answer tells you what the client believes has failed and why, which is usually the real brief. It also tells you whether you are the third freelancer on the same problem, which changes both the price and the risk.",
+        "What would make this a success in six months? Clients often answer with a deliverable, and the useful follow-up is what that deliverable is supposed to cause. More enquiries, fewer support tickets, a launch date, a board decision. Once you know the effect, you can tell whether the thing you are being asked to build can produce it.",
+        "Who is this for, and what do they currently do instead? The second half is the one people skip. Whatever your client's customers do today is your real competition, and it often costs nothing.",
+        "The pause-worthy answer: nobody has tried anything yet, and we need it live in three weeks. That combination usually means the problem is bigger than the timeline, and the useful response is a smaller first phase that can genuinely ship.",
       ],
     },
     {
       heading: "The history",
       paragraphs: [
-        "What has already been tried? This is the highest-value question in the list. A client who has been through two agencies will tell you what went wrong, and the answer is usually about process rather than talent: nobody could get a decision, the scope kept changing, the last one disappeared.",
-        "Why did the last version stop working? If there is a previous website, deck or system, ask what it failed to do. The answer is usually more specific than the brief and more useful than the brief.",
-        "Is there anything I should know about how this has gone before? Open, deliberately vague, and often produces the thing the client was too polite to say at the start. Give them room, and do not react defensively to the answer.",
-        "Who else has seen this brief? If a colleague, a partner or a previous supplier has opinions, they will surface eventually. Better to know now than in the feedback round.",
+        "Has anything like this been built before, and what happened to it? A previous failure is free research. So is a previous success: if an earlier version worked, the question is why it stopped, and the answer is often organisational rather than technical.",
+        "Who will be affected by this internally? The person whose job changes when the new system arrives is the most reliable source of late-stage objections. Finding them in week one is cheaper than finding them in the final review.",
+        "The pause-worthy answer: the last two agencies did not work out, but it was definitely their fault. It might be entirely true. It is still worth asking what the agency was asked to do and what the handover looked like, because the next three months will answer the same question about you.",
       ],
     },
     {
       heading: "The exit",
       paragraphs: [
-        "What happens if we disagree about the work? A light question with a serious purpose. It establishes that disagreement is possible and that there is a way through it, which makes the first difficult feedback easier to give and to receive.",
-        "Who owns the files at the end? The default in most freelance contracts is transfer on full payment, and it should be stated rather than assumed. Ask whether the client needs editable source files, and price them if they do.",
-        "What is the plan for after launch? Maintenance, hosting, updates, and who is responsible. A project that ends with nobody responsible for the site is a project that comes back as an emergency three months later, usually at the worst possible time.",
-        "If this goes well, what would the next phase look like? A good closing question. It tells you whether the client is thinking long term, and it gives you a reason to structure the first project so that a second one is possible.",
+        "What happens if the budget changes or the project has to pause? A client who has thought about this is usually a client who has run a project before. A client who has not is not necessarily bad, but you should write the pause and cancellation terms more carefully and say them out loud on the call.",
+        "What would make you stop working with a freelancer? It is an unusual question and it produces unusually honest answers, usually about communication rather than quality. Take the answer literally and build your update rhythm around it.",
+        "The pause-worthy answer: we have never had to pause a project. That is exactly the client most likely to need a pause clause explained twice, because the possibility has not occurred to them. Say what happens before it happens, while it is still a hypothetical.",
       ],
     },
     {
-      heading: "How to ask them",
+      heading: "What to do with the answers",
       paragraphs: [
-        "Do not send twenty questions as an email. It reads as an interrogation and it will get a partial reply. Put the operational questions in a form or a numbered list, and ask the relationship questions in the call. The form gives you structure; the call gives you tone.",
-        "Ask the hard ones early and lightly. Is the budget approved is easier to answer in the first ten minutes than after an hour of design discussion, because by then the client feels committed and may shade the answer to keep the conversation pleasant. Early questions get honest answers.",
-        "Write down the answers in the client's own words where you can. A phrase such as we just need it to feel less like a bank is worth more than a paragraph of your interpretation, and it can go straight into the brief and the proposal.",
+        "Write them down during the call, in the client's words where possible, and send a short recap the same day. The recap has three headings: what I heard, what I am assuming, and what I still need. It takes four minutes and catches most misunderstandings while they are still cheap.",
+        "The assumptions section is the valuable one, because it is where you make the invisible visible. I have assumed the existing site stays live during the build, and that you will supply the product photography. If either is wrong, the date changes. A client who corrects that sentence on day one has saved both of you a week.",
+        "Then quote against the recap rather than the conversation. The proposal can be shorter, because it now refers to a document the client has already agreed is accurate, and the scope can be specific without being long.",
       ],
     },
     {
-      heading: "What the answers tell you",
+      heading: "Five answers that should make you pause",
       paragraphs: [
-        "A client who answers the decision, money and history questions clearly is ready to buy. A client who cannot name a decision-maker is not, and the proposal should be a discovery document rather than a fixed price. A client who will not discuss the budget is either inexperienced or negotiating, and both are worth one more conversation before you write anything.",
-        "The most important signal is not the answer itself but whether the client engages with the question. A client who thinks about who signs off is a client who runs projects. A client who says it is all fine, we will sort it out, is telling you that you will be doing the sorting.",
-        "None of this requires a long process. Four good questions in a twenty-minute call will tell you more than a template of forty. The point is not to interrogate; it is to make the invisible parts of the project visible while they are still cheap to fix.",
+        "The budget is whatever it takes, followed by no number when you ask again. Enthusiasm without a figure is usually a stakeholder problem, and stakeholder problems consume schedules.",
+        "We need it in two weeks, and the copy is not written. The timeline depends on material that does not exist yet. Either the copy is in scope or the date is not real, and you should ask which.",
+        "Can you send the proposal to my colleague, I am not sure who decides. Then the sale has not started, and you are writing for an audience you cannot name.",
+        "We do not need anything in writing, we trust you. It sounds generous and it removes your only protection. Reply that the writing protects the date rather than the relationship, and send it anyway.",
+        "The last person did the same thing for half the price. That may be true, and it is still a question about what the half-price version included. If the answer is everything, the difference is your margin, not your value.",
+      ],
+    },
+    {
+      heading: "When they cannot answer",
+      paragraphs: [
+        "Some clients genuinely do not know their budget, their approver or their success measure. That is common on a first project and it is not a reason to guess. Offer a short paid discovery with a written brief as the deliverable, and make the build proposal conditional on it.",
+        "The discovery should be small: one call, a written summary, a scope and a range. Price it as a fixed fee that is credited against the build if the client proceeds. That structure respects the client's uncertainty and stops you from absorbing it.",
+        "If the client will not pay for discovery and will not answer the questions, the project is not ready. Saying so kindly is the most useful thing you can do in the first week, and it is much cheaper than discovering it in the fourth.",
+      ],
+    },
+    {
+      heading: "How to ask without it feeling like an interrogation",
+      paragraphs: [
+        "Ask two or three per topic, not all at once, and write the answers down while the client is talking. Send a short recap the same day: what I heard, what I am assuming, what I still need. The recap is where most misunderstandings are caught, and it takes four minutes to write.",
+        "Explain why you are asking before you ask. I ask about the approver because it changes how I structure the review rounds is a sentence that turns a personal question into a professional one.",
+        "If the client cannot answer the money or decision questions, do not fill the gap with optimism. Offer a paid discovery step that answers them, and make the proposal conditional on it. That is a smaller sale, and it is the honest one.",
+      ],
+    },
+    {
+      heading: "Questions not to ask",
+      paragraphs: [
+        "Some questions cost more than they return. What is your brand voice? invites a paragraph that means nothing and takes ten minutes. What is your timeline? is answered with soon, and the useful version is the one about the trade show date. How did you hear about me? is a marketing question wearing a scoping hat.",
+        "Others are worse than useless. Asking what the budget is and then arguing with the answer ends the call. Asking who else is quoting turns a conversation into a comparison you cannot see. Asking whether they have read your website tells you nothing you can act on.",
+        "The test is simple: if the answer would not change what you quote, what you write or whether you take the work, it belongs in a form or nowhere. A shorter call with sharper questions is more impressive than a thorough one that covers everything.",
       ],
     },
     {
       heading: "Frequently asked questions",
       paragraphs: [
-        "Is it rude to ask about the budget? No. It is the fastest way to avoid wasting both people's time. Ask for a range and explain that you use it to decide which scope to recommend.",
-        "How many questions is too many? More than ten in one message. Split them: operational ones in a form, relationship ones in the call.",
-        "What if the client does not know the answers? Offer options rather than leaving the question open. Most clients know what they do not want, and that is enough to start.",
-        "Should I ask all of this before quoting? Ask the decision, money and history questions before quoting. The rest can follow once the proposal is accepted.",
+        "Is it rude to ask about budget? No, it is the question that makes the proposal relevant. Offer ranges if a single number feels too blunt.",
+        "What if the client does not know what they want? That is normal and it is not a reason to guess. Sell a short discovery phase with a written brief as the deliverable.",
+        "How many questions is too many? If it takes more than twenty minutes, it has become a survey. Six questions answered properly beat twenty answered politely.",
+        "Should I send the questions before the call? Send the six in the calendar invitation. Clients who see them in advance answer more precisely, and the ones who do not read them still get the benefit of your structure.",
+        "What if the answers contradict the brief? Say so in the recap, plainly, and ask which one is right. Contradictions found on day one are clarifications; contradictions found in week five are arguments.",
       ],
     },
     {
       heading: "The takeaway",
       paragraphs: [
-        "The best discovery questions are about the client's situation, not the deliverable. Ask who decides, who pays, what was tried and what success means, and listen for the answer behind the answer. Twenty minutes of good questions in week zero is cheaper than any amount of rework in week six, and it is the difference between quoting a project and guessing at one.",
+        "Ask who decides, what happens next, what the range is, what was tried, what success causes, and what happens on exit. Write the answers down, send them back, and quote against them. The proposal that follows will be shorter, more accurate and much harder to misunderstand.",
       ],
     },
   ],

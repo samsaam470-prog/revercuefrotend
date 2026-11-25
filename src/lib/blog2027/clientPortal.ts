@@ -1,12 +1,15 @@
 import type { BlogPost } from "../blog";
 
+// Cluster E — sharing. This is the buyer-adjacent piece in the cluster, so the
+// product appears at the end with a clear statement of what it is not.
+
 export const CLIENT_PORTAL_POST: BlogPost = {
   slug: "do-freelancers-need-a-client-portal",
   title: "Do freelancers need a client portal? The honest answer for a one-person business",
   excerpt:
-    "A portal is not a status symbol and it is not a replacement for email. It solves three specific problems. Here is when it earns its place, when a shared link is enough, and what to check before you buy one.",
+    "A portal is not a status symbol and it is not a substitute for a process. Here are the three problems it genuinely solves, the four it does not, and the smaller version that works when you are not ready to buy one.",
   date: "2026-11-25",
-  readMinutes: 11,
+  readMinutes: 8,
   links: [
     { label: "Sharing documents with clients", to: "/blog/how-to-share-documents-with-clients" },
     { label: "Portal, drive or PDF", to: "/blog/client-portal-vs-shared-drive" },
@@ -16,81 +19,106 @@ export const CLIENT_PORTAL_POST: BlogPost = {
   body: [
     {
       paragraphs: [
-        "The word portal suggests a login screen, a sidebar and a support ticket queue. That is enterprise software, and a freelancer does not need it. But the problem the word points at is real: a client's proposal, contract, answers, invoice and history are usually spread across four tools and an inbox, and nobody can see the whole picture in one place.",
-        "So the useful question is not whether freelancers need a portal in the enterprise sense. It is whether your clients need one place where the work lives, and whether that place should require a login. For most one-person businesses the answer is a place without a login, which is a different product from what the category usually sells.",
+        "The case for a client portal is usually made in the language of professionalism: look established, keep everything in one place, give clients a home. None of that is wrong, and none of it is a reason to pay for software. A portal is a tool for three specific problems, and if you do not have those problems it will mostly be a second inbox you have to check.",
+        "This is a decision guide rather than a review. It sets out what a portal does that a shared folder does not, what it will not fix no matter how much it costs, and the version you can build in an afternoon if the answer is not yet.",
       ],
     },
     {
       heading: "The short answer",
       paragraphs: [
-        "If you send more than a handful of proposals a month, work with repeat clients, or handle documents that need a decision rather than a read, a shared place is worth having. It does not have to be a portal with accounts. A link per document, with a client record behind it, solves most of the same problems and removes the signup step that clients dislike.",
-        "If you send one proposal a month to a new client each time, a well-made link and a tidy folder will do. The portal earns its place when the same client returns, because that is when the history matters and when scattered documents start to cost you time.",
+        "You need some form of portal when clients regularly ask where something is, when approvals happen over email and get lost, or when the work involves documents a client has to act on rather than read. You do not need one when you have a handful of clients, one deliverable type, and a system that already works. In that case a single well-named folder and a clear email will do more than a subscription.",
       ],
     },
     {
       heading: "The three problems a portal actually solves",
       paragraphs: [
-        "The first is the lost thread. A client asks about the scope, you search for the proposal, the answer is in a different email, and the invoice references a number nobody can find. A shared place makes the thread the default rather than something you reconstruct.",
-        "The second is the invisible decision. A PDF tells you nothing about whether it was read. A document in a portal can show that it was opened, when, and which sections were looked at, which changes the follow-up from a guess into a conversation. This is the most underrated benefit, and it is the one clients rarely think about.",
-        "The third is the handover. When a project ends, the client should be able to find what was agreed, what was delivered and what was paid without asking you. A portal is a small courtesy that becomes valuable eighteen months later, when the person who commissioned the work has moved on and someone else is looking for the files.",
+        "The first is findability. A client who has to search their inbox for the invoice, the contract and the brief will ask you for all three, usually in the week you are busiest. A portal replaces the search with a link, and the link is the same every time.",
+        "The second is action. Reading a PDF is passive; approving a proposal, signing a contract or filling a requirement form is an event with a timestamp. When the document is interactive, the approval is a record rather than a reply you have to interpret later.",
+        "The third is continuity. A client who can see the current status without asking is a client who interrupts less. That is less about the software's features than about the habit it enforces: everything in one place, with one link, and a visible next step.",
       ],
     },
     {
       heading: "What a portal does not fix",
       paragraphs: [
-        "It does not make a client read. A portal with a login adds friction, and friction reduces opens. If your problem is that your proposals are not read, the answer is a shorter document and a link that opens in one tap, not a portal that asks for a password.",
-        "It does not replace a contract, an invoice or a payment provider. A portal can hold those documents, but the obligation to pay, the signature and the payment itself still live in the contract and the bank. A portal that promises to do everything usually does each thing a little worse than a specialist tool.",
-        "It does not fix a process problem. If your scope is vague and your follow-up is inconsistent, moving the same process into a nicer interface produces the same project in a nicer interface. The portal is a container; the contents decide whether the project works.",
+        "It does not fix an unclear scope, a late invoice or a client who will not decide. A portal makes a good process visible and a bad process faster to expose. It does not replace a written agreement, and it is not a substitute for saying the awkward thing on a call.",
+        "It also does not fix adoption. If the client will not open a link, the portal becomes an empty room with your files in it. The most common failure is buying the tool before agreeing the habit: one link, one channel, everything goes there.",
+        "Nor does it fix your own side of the habit. A portal with three versions of the same contract, an invoice that was superseded and a brief nobody updated is less useful than a folder, because it looks authoritative while being wrong.",
       ],
     },
     {
       heading: "Portal versus shared link",
       paragraphs: [
-        "A shared link is the lightest option: one URL per document, unguessable, no account. The client opens it, reads, and can usually act on it, such as choosing a package or asking a question. The advantage is that it removes every barrier between the client and the document, which is exactly where most proposals are lost.",
-        "A portal with accounts is heavier. It gives the client a persistent home for everything about their project, and it gives you a place to put updates. The cost is the signup, the password reset and the client who never logs in, which is why portals tend to work best with clients who have several live projects and a reason to return.",
-        "The middle path, which is what most freelancers actually need, is a link per document plus a record behind it. The client never logs in. You keep one record per client that links every document and every action. The client gets convenience; you get the thread.",
+        "A shared folder is cheap, familiar and good enough for files that do not need an action. A portal is better when the client has to do something, because each document can be approved, signed or completed rather than downloaded and returned. If your projects are mostly deliverable files, a folder wins on cost and habit. If they are mostly decisions, a portal wins on the record.",
+        "The middle option most freelancers miss is a single page per project, with the current status, the documents and one next step. That is 80 percent of the value of a portal and it costs nothing but discipline.",
+      ],
+    },
+    {
+      heading: "When to move from folder to portal",
+      paragraphs: [
+        "Three thresholds are worth watching. The first is more than five active clients, because the folder naming that works for three becomes a filing system nobody maintains at eight. The second is more than two document types per client that need a decision, such as a proposal, a contract and a form, because those are the three that get lost in email.",
+        "The third is a client asking the same question twice, which is the clearest signal that the information exists but is not visible. If all three are true, the subscription is probably cheaper than the time you are spending on status updates. If none of them are true, a portal is a way of feeling organised rather than being organised.",
       ],
     },
     {
       heading: "The questions to ask before you buy",
       paragraphs: [
-        "Does the client need an account? If yes, how much friction is that, and can you send a document without one? The best answer is that the client can act without an account and you can still see what happened.",
-        "What does the client see when they open a document? A clean page with your name on it is very different from a branded platform page with another company's logo in the corner. On lower plans, some tools put their own branding on client-facing pages, which is a real cost if you sell design.",
-        "What can the client do without you? Choose a package, ask a question, sign, upload a file, pay. Every action that happens on the page is an email you do not have to write and a detail you do not have to retype.",
-        "What do you get after they act? A notification, a timestamp, a record. A portal that does not report activity is a folder with a login.",
-        "How do you export, and what happens to the documents when you leave? A portal that holds your client history hostage is not a business tool. Check the export before you need it.",
-      ],
-    },
-    {
-      heading: "What it costs, in time as well as money",
-      paragraphs: [
-        "The subscription is the visible cost. The hidden cost is the setup: templates, branding, a process for every document type. A portal that takes a month to configure and is used for three projects has cost more than it saved.",
-        "There is also a cost to your client's attention. Every new tool is another login, another notification and another place to look. If you add a portal on top of email, WhatsApp and a shared drive without removing anything, you have added a fourth place rather than consolidated three.",
-        "The rule of thumb is to add a tool only when it replaces at least two. A portal that replaces a proposal PDF, a separate e-signature link, a form builder and a spreadsheet of clients is a consolidation. A portal that sits beside all four is a subscription.",
-        "There is also the question of what the portal says about you. A client page that carries your name, your colours and your terms reads as a business. A page that carries another company's branding in the header reads as a tool you are borrowing, which is a strange message to send while selling design or consulting. If you work on custom domains and remove vendor branding, check which plan includes it, because it is often the tier above the one advertised, and the difference is usually visible to the client rather than to you.",
+        "Does the client need an account? Every login is a reason not to open the link. What does the client see on a phone, in ten seconds? Can a proposal be approved, or only read? What happens to the history when you stop paying? And does it connect to the invoicing you already do, or does it create a second place to keep money?",
+        "Price the time as well as the subscription. A tool that saves three client emails a week is worth a monthly fee; one that saves nothing but looks tidy is a cost you will rationalise for a year and then cancel.",
+        "Ask one more question that vendors rarely volunteer: what does the client see when they are not logged in? If the answer is a login wall, you are buying a tool your client has to adopt rather than a link they can open. For a one-person business, the link is almost always the better product.",
       ],
     },
     {
       heading: "A smaller version that works",
       paragraphs: [
-        "If a full portal is too much, build the smallest useful version: one link per document, a client record that lists every document and what happened to it, and a consistent follow-up. That combination gives the client a page they can act on and gives you the history, without a login or a new habit.",
-        "This is the model Revercue uses: a proposal, contract, form and invoice are each an interactive link the client opens without an account, and the client record assembles itself from what happens on those pages. It is a portal in the sense that matters, which is one place per client, and not in the sense that adds a login screen.",
-        "Whether you use that or build the same thing from a folder and a spreadsheet, the test is the same: can a client find what was agreed, act on it, and be reminded without you writing a message? If yes, you have the benefit. If no, the tool is decoration.",
+        "One link per project, containing five things: the brief, the proposal, the contract, the invoice and the current status. Name it consistently, put it in your email signature, and never send a document as an attachment again unless the client asks. Review it every Friday and update the status line, even when nothing has changed.",
+        "That habit is what a portal is trying to sell you. If you can keep it for a month without software, you will know whether you need the software or just the habit. If you cannot keep it, buying the tool will not keep it for you.",
+      ],
+    },
+    {
+      heading: "What good looks like from the client's side",
+      paragraphs: [
+        "One link, opening without an account. The first screen says what this project is, what stage it is at, and what the client needs to do next. The documents are named in the client's language rather than your internal codes, and the most recent thing is at the top.",
+        "A phone is the real test. Most clients will open your link on a phone, in a queue, with one hand. If the proposal needs pinch-and-zoom to read the price, the client will close it and mean to come back. Open your own link on a phone once a month and check the three things above.",
+        "The last piece is the exit. A client who finishes a project should be able to download what they paid for without asking you. If the portal keeps their documents hostage to your subscription, it is not a client portal; it is a filing cabinet with a lock.",
+      ],
+    },
+    {
+      heading: "Where Revercue fits, plainly",
+      paragraphs: [
+        "Revercue is built around the client thread rather than a file drive: proposals, contracts, requirement forms, invoices and a client record that links them, with documents shared as links rather than attachments. A client can ask a question on the page, and you can see whether a document was opened, with how much detail depending on your plan.",
+        "It is not a project management tool. There are no task boards, no time tracking and no shared file drive, and it does not yet connect to your inbox, calendar or accounting software. There is no public API, and a contract is signed with a typed name, consent and a recorded date rather than a certified electronic signature. Payment runs through the link or bank details you provide, and you confirm it in the product rather than the platform moving money for you.",
+        "Plans are Free, Starter at $12 a month, Growth at $29 and Scale at $49, with Teams in beta, and the revenue overview is on every plan. If you need a portal that holds working files or replaces a project tracker, look elsewhere and use this article as the checklist. If the problem you actually have is that decisions and money are scattered across email, that is the problem this is built for.",
+      ],
+    },
+    {
+      heading: "What a portal should not become",
+      paragraphs: [
+        "A portal should not become the place you do your thinking. Drafts, half-written proposals and internal notes belong in your own workspace, not in front of a client. The clean rule is that anything visible in the portal is finished enough to be judged.",
+        "It should not become a second inbox either. If clients can message inside it, decide whether that channel is monitored daily or not used at all, and tell them which. A portal with a comment thread nobody reads is worse than email, because it looks attended.",
+        "And it should not become the only copy of anything that matters. Keep an export, a PDF or a folder of the signed documents you would need if the subscription lapsed tomorrow. Portability is a feature you only notice when it is missing.",
+      ],
+    },
+    {
+      heading: "A two-week trial before you commit",
+      paragraphs: [
+        "Run one real project through the tool before you move anything else. Week one: send a proposal from it to a client who is genuinely deciding, and watch whether they open it, whether they ask you for a PDF, and whether the approval arrives without a follow-up. Week two: issue an invoice from the same place and see whether the payment lands with less admin than usual.",
+        "At the end, answer three questions honestly. Did the client have to ask you where anything was? Did you spend less time on status updates than before? Could you produce the full history for that project in under a minute? Two yeses out of three is a tool worth paying for; one is a tool you are keeping because it looks tidy.",
       ],
     },
     {
       heading: "Frequently asked questions",
       paragraphs: [
-        "Is a client portal worth it for a solo freelancer? It is worth it when you have repeat clients and several documents per project. For one-off small projects, a link and a folder are enough.",
-        "Do clients actually use portals? Some do, many do not. The ones who return to the portal are usually managing several projects with you. Design for the client who opens a link once, and treat the portal as a bonus for the ones who come back.",
-        "Can I use Notion or Google Drive as a portal? Yes, and many freelancers do. The limitation is that a shared folder does not report who opened what, and it rarely supports an action such as choosing a package or signing. It is a place, not a workflow.",
-        "What is the minimum viable setup? One link per document, one record per client, one follow-up rhythm, and an export you have tested.",
+        "Is a portal unprofessional for a one-person business? No, but neither is a folder. Clients care that they can find the document and that the next step is clear, not which tool produced it.",
+        "Do clients actually use portals? Some do, most use whatever is easiest to open. Test yours on a phone before you roll it out; if it needs an app, expect resistance.",
+        "What if I already use a shared drive? Keep it for files and add one page per project for status and decisions. That covers the action problem without migrating everything.",
+        "Should the portal have my branding? A little goes a long way: your name, your colours, a sensible project title. Beyond that, the client wants the document, not the design.",
+        "What happens when a project ends? Archive it, keep the link working for a stated period, and tell the client how long that is. Documents that vanish without warning undo the trust the portal was meant to build.",
       ],
     },
     {
       heading: "The takeaway",
       paragraphs: [
-        "Freelancers do not need an enterprise portal. They need one place per client where the proposal, contract, form, invoice and history live, and they need the client to reach it without a login. Start with links and a record, add a portal only when it replaces at least two tools, and judge it by what the client can do without emailing you.",
+        "A portal is worth paying for when clients cannot find things, approvals live in email, or documents need action rather than reading. If none of that is true yet, build the one-link habit first. Software makes a working process easier; it does not create one.",
       ],
     },
   ],

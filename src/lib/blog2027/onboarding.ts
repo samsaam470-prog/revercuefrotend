@@ -1,12 +1,15 @@
 import type { BlogPost } from "../blog";
 
+// Cluster D — onboarding. The checklist is the artefact; the article explains
+// what each item prevents rather than just listing twelve boxes.
+
 export const ONBOARDING_POST: BlogPost = {
   slug: "client-onboarding-checklist",
   title: "Client onboarding checklist for freelancers: the twelve things to settle in week one",
   excerpt:
-    "Most project problems are decided in the first week, before any work starts. Here is the checklist that settles access, approvals, payments, scope and communication while everyone is still being polite.",
+    "Most difficult projects were difficult in week one and nobody noticed. Here is the twelve-item checklist that settles money, access, approval and rhythm before the work starts, and how to run it without another meeting.",
   date: "2026-11-25",
-  readMinutes: 12,
+  readMinutes: 8,
   links: [
     { label: "Requirement forms in Revercue", to: "/features/requirement-forms" },
     { label: "Questions to ask a new client", to: "/blog/questions-to-ask-a-new-client" },
@@ -16,84 +19,112 @@ export const ONBOARDING_POST: BlogPost = {
   body: [
     {
       paragraphs: [
-        "The first week of a project is the cheapest week you will ever spend on it. An hour spent confirming who approves the design, where the invoice goes and what the client means by a draft will save days later, when the same questions arrive as a blocked task or a disputed invoice. The problem is that week one is also the week everyone is most eager to start, and the paperwork feels like a delay.",
-        "Onboarding is not paperwork. It is the process of converting a yes into a working relationship with known rules. The checklist below is the version that fits freelance work: twelve items, each with a sentence you can send, and none of them requiring a project manager. Run it once and it becomes the template for every client after.",
+        "The projects that go badly rarely announce themselves. They start in a week where everyone is enthusiastic, the documents are signed, and a handful of small things are left for later: who approves the work, which folder the assets are in, what happens if the invoice is late. Later arrives in week five, and by then each of those small things has become a conversation with a deadline attached.",
+        "Onboarding is the cheapest hour in a project. It is also the one most often skipped, because the work feels like it has already started and the client is keen to see something. The checklist below is deliberately short enough to complete in one form or one call, and each item exists because of a specific way projects fail.",
+        "What follows is not a template to admire. It is a sequence: the twelve things to settle, the order to ask them in, the wording to use, the five working days in which to do it, and the four ways clients push back with an answer for each.",
       ],
     },
     {
       heading: "The short answer",
       paragraphs: [
-        "Settle five areas before the first deliverable: the money, the approver, the material, the scope and the channel. Twelve items spread across those five areas covers almost every failure that shows up in week three. If a client cannot answer one of them, that is itself the most useful information you will get all month.",
-        "The order matters. Settle the money first, because it is the easiest to postpone and the most expensive to leave open. Then the approver, because it determines how every decision will be made. Then the material and access, which determine whether you can start at all. Then the scope in writing, and finally the channel and rhythm of communication.",
+        "Settle twelve things before the first deliverable: the decision-maker, the invoice details, the deposit, the approval process, the assets, the access, the scope and exclusions, the change mechanism, the communication channel, the update rhythm, the review dates and the exit conditions. Send them as one form with a deadline, not as twelve questions spread over three weeks.",
+        "If you only have time for three, take the approver, the deposit and the delivery date. Those three cause more rework, more late payment and more quiet resentment than the other nine combined, and the remaining items can follow in the first weekly update.",
       ],
     },
     {
       heading: "The money",
       paragraphs: [
-        "One: the signed agreement and the deposit, before the start date. If the contract is not signed, the project has not started, however enthusiastic the emails are. If the deposit has not cleared, the start date is not reserved. Say it kindly and hold it: the calendar slot is held until both arrive, and after that it goes to the next project.",
-        "Two: who approves the invoice, and where it goes. Ask for the name, the email address and any purchase order requirement. In a larger client, the person who approves the work is rarely the person who pays the invoice, and an invoice sent to the wrong inbox is late before it is opened.",
-        "Three: the payment schedule and the due date, restated. Even if it is in the contract, repeat it in the kickoff message: 50 percent now, 50 percent on delivery, invoices due within 14 days. Repetition is not distrust; it is how a term becomes a habit on both sides.",
+        "Billing entity and address, purchase order if they need one, who receives the invoice, and what the payment terms actually are in their system. Ask for a sample invoice or a supplier form in week one, because the finance team's requirements are the ones that hold up payment in week six. Confirm the deposit has cleared before the start date, and say that work begins when it does.",
+        "The deposit deserves a sentence of its own, because it is the item freelancers most often waive in the interests of momentum. It is not mainly about cash flow. It is the cheapest test of whether the client can complete a task that involves their own finance team. A client who cannot move a deposit through their organisation in a week will not move a purchase order through it in a month, and you will find that out either now or after you have done the work.",
+        "Write the terms in the same place as the scope rather than in a separate email. Fifty per cent before the start, the balance on delivery, payment within fourteen days of the invoice, late payment pausing the work. Four figures, one paragraph, and no ambiguity for anyone in accounts to interpret differently.",
       ],
     },
     {
       heading: "The approver",
       paragraphs: [
-        "Four: who signs off each type of decision, and who has final say. One name for the design, one for the copy, one for the budget. If the answer is the whole team, ask who breaks a tie. Projects with collective approval are the ones that stall, and knowing that in week one changes how you schedule feedback.",
-        "Five: what the response time will be. Not a promise, an expectation: I will send drafts on Tuesdays and I plan for feedback by Thursday. If the client needs a week, the schedule reflects a week. Written down, this prevents the silent week that turns into a missed deadline you get blamed for.",
-        "Six: the escalation route when something goes wrong. Who do you message if the approver is away, and what happens if a decision is needed within 24 hours. A client who cannot answer this is telling you that the project has one point of failure, and that point may go on holiday.",
+        "One person with the authority to sign off each deliverable, named in writing. If feedback comes from a committee, agree that the approver consolidates it into one response per round. This single item prevents more revision loops than any clause, because it converts a stream of opinions into a decision.",
+        "Ask for the name rather than the role. The marketing team is not an approver; it is a group of people, some of whom will disagree on a Tuesday. A named person with a stated deadline is an approver, and if that person is on holiday for the week the design is due, you want to know that in week one rather than in week three.",
+        "Say what happens if the approval does not arrive: the date moves by the same number of days, and the next stage starts when the approval does. That is not a penalty, it is arithmetic, and clients accept arithmetic far more readily than they accept a complaint about responsiveness.",
       ],
     },
     {
       heading: "The material",
       paragraphs: [
-        "Seven: access, in a list, with a date. Brand files, the current website, the analytics account, the domain registrar, the ad account, the shared drive. Send the list once and ask for it in one reply rather than five. Every missing access item is a day of waiting disguised as a task.",
-        "Eight: the existing material and its state. What exists that can be reused, what must be rewritten, and who owns the rights. A client who assumes their old photography is usable may discover it was licensed to a previous agency, and that discovery usually happens the week before launch.",
-        "Nine: the content the client must supply, with a deadline and a consequence. If the copy is coming from them, name the date and say what happens if it slips: the launch moves by the same number of days. The most common cause of a late project is client-supplied content arriving late, and the second most common is nobody saying so in advance.",
+        "What you need from them, in what format, by when. Brand assets, logins, copy, product photography, legal pages, any third-party accounts. List it explicitly, name a date, and say what happens if it arrives late: the delivery date moves by the same number of days. Material arriving late is the most common cause of a project that is technically behind but has no villain.",
+        "Be specific enough that the list can be actioned by someone who was not on the call. Logo files in SVG and PNG rather than the logo, please. Access to the analytics account rather than the numbers. Six product photographs at 2000 pixels wide rather than some photos. Vagueness here is read as flexibility, and flexibility is what turns a one-day handover into a two-week scavenger hunt.",
+        "Where the assets already exist somewhere awkward, offer the smallest possible route: a shared folder, a transfer link, or an upload form. The friction in the request is usually the reason it does not happen, and lowering the friction is faster than reminding anyone about it.",
       ],
     },
     {
       heading: "The scope",
       paragraphs: [
-        "Ten: the scope, the exclusions and the revision rounds, confirmed in writing. Not renegotiated, just acknowledged: this is what we agreed, these are the quantities, this is what happens if something new arrives. One reply that says confirmed is enough, and it prevents the week-six conversation about whether the extra page was included.",
-        "Eleven: the definition of done for the first deliverable. What will the client see, in what format, and what are they being asked to judge. A first draft that is judged against an unstated ideal will always fail. A first draft that is judged against three named criteria can be approved.",
+        "Confirm the deliverables, the number of rounds, the exclusions and the change mechanism in the same words the contract used. Ask the client to reply with a one-line confirmation that this matches their expectation. That reply is worth more than the signature, because it is written after they have read the version they will actually remember.",
+        "Use the same wording in all three places: proposal, contract and the brief the client opens in week three. If those documents disagree, the one people open wins, and it will not be the contract. Copying four sentences between documents is a minute of work and removes an entire category of argument.",
       ],
     },
     {
       heading: "The channel and the rhythm",
       paragraphs: [
-        "Twelve: where the work lives and how often you speak. One channel for decisions, one place for files, one weekly update. If the client likes WhatsApp for quick questions and email for formal ones, agree that decisions made in WhatsApp get confirmed in the thread. Otherwise the decisions disappear into a chat history nobody searches.",
-        "The weekly update is the cheapest habit in the list. Three lines on a Friday: what moved, what is waiting on the client, what happens next week. It takes five minutes, it removes most status meetings, and it creates a record that answers the question where are we without anyone having to ask.",
-        "Set the rhythm explicitly in the kickoff message, and then keep it. A rhythm that starts in week one and stops in week three is worse than no rhythm, because the client notices the silence and fills it with worry.",
+        "One channel for decisions, one for files, one for anything urgent. Agree a weekly update, even if it is three sentences on a Friday: done, next, blocked. Clients go quiet when they cannot see progress, and a weekly note costs five minutes while removing most of the where are we messages that interrupt the work.",
+        "Agree the review dates at the same time. A project with dates in the calendar behaves differently from one with dates in an email, because the first creates an expectation that someone will look at the work on a particular day.",
+        "Define urgent while you are at it, because the word will otherwise be used for everything. A good definition is short: urgent means the work cannot continue today without an answer, and it goes in the message channel with the word urgent in the first line. Everything else waits for the weekly note.",
       ],
     },
     {
-      heading: "How to run the checklist without a meeting",
+      heading: "Week one, day by day",
       paragraphs: [
-        "Send it as one message with numbered questions and a request for a single reply. Most clients answer twelve numbered questions in ten minutes, and the answers become a document you can refer to. A meeting to collect the same information costs an hour and produces no record unless you write one.",
-        "If you use a requirement form, put the operational questions in it: the approver, the invoice address, the access list, the content owner, the deadline. A form is better than an email for this because the answers arrive structured, and structured answers are easier to check against the scope. Keep the relationship questions for the call, and the operational ones for the form.",
-        "Then store the answers where you will look for them. The invoice address should be on the client record, not in the third email of the thread. The access list should be somewhere you can check off, not in your head. Onboarding only works if its output is findable in week six.",
+        "Monday: send the form, with the fields you can already complete filled in and a date for the rest. Include the invoice details request in the same message, so finance can start in parallel with the project.",
+        "Tuesday: a twenty-minute call, not an hour, covering only the two items that need discussion. Who approves, and what the client is most worried about. Record the answers in the project record before the call ends, while the client is still there to correct them.",
+        "Wednesday: confirm access and material, and send the one-page project sheet: scope, dates, approver, channel, update day. Ask for a one-line reply confirming it is right. That reply is your real kick-off.",
+        "Thursday: set the recurring update and the review dates in the calendar, with the approver invited rather than merely informed. Then start the work.",
+        "Friday: send the first update even if there is little to report, in the done, next, blocked format. The first update teaches the client what the rhythm will be, and a rhythm established in a quiet week survives a busy one.",
+      ],
+    },
+    {
+      heading: "The twelve fields, written out",
+      paragraphs: [
+        "If you are building the form from scratch, these are the twelve fields in the order that works, with the wording that gets a usable answer.",
+        "One: who signs off each deliverable, and who covers for them when they are away. Two: the legal entity, billing address and any purchase order reference. Three: who in finance receives invoices, and their portal or format requirements. Four: confirmation that the deposit has been sent, with the date. Five: how feedback is consolidated, and by when in each round. Six: the assets and access needed, each with a format and a date.",
+        "Seven: confirmation that the scope, rounds and exclusions match expectations. Eight: what happens when something outside the scope is requested. Nine: the channel for decisions, the channel for files, and what counts as urgent. Ten: the day and format of the weekly update. Eleven: the review dates for each stage. Twelve: what happens if the project pauses, and what notice either side gives.",
+        "Twelve fields is one screen of a form. It takes the client ten minutes and it takes you two to read. The alternative is twelve separate conversations over five weeks, each of which begins with the client wondering why you are asking again.",
+      ],
+    },
+    {
+      heading: "When the client pushes back",
+      paragraphs: [
+        "We do not pay deposits. Then the first invoice is the deposit, due before the start, and the same terms apply. If their process genuinely forbids it, ask for a purchase order instead, which serves a similar purpose: proof that someone with authority has committed money.",
+        "Just start, we will sort the paperwork later. Reply that you will hold the start date for a week while the form comes back, and that the date will move if it does not. This is the point where a project either becomes manageable or becomes a favour, and it is much easier to be firm on day two than in week six.",
+        "Our project manager will send feedback from the team. Ask the project manager to consolidate it into one response per round, and confirm that the named approver has the final say. If nobody has the final say, the rounds are unlimited and the price should reflect it.",
+        "We do not know who the approver is yet. Then the first deliverable is a decision, not a design. Agree a date by which the approver is named, and do not start work that will need reapproval until it is.",
       ],
     },
     {
       heading: "What good onboarding prevents",
       paragraphs: [
-        "It prevents the invoice that goes to the wrong inbox. It prevents the design approved by someone who turns out not to have authority. It prevents the launch that slips because the copy arrived late and nobody agreed what would happen. It prevents the argument about whether the extra page was included. And it prevents the quiet resentment that builds when a freelancer carries risks that were never discussed.",
-        "It also improves the client's experience, which is the part freelancers underestimate. A client who is asked twelve clear questions in week one concludes that they have hired someone organised. That impression buys patience in week four, when something genuinely goes wrong. Onboarding is not only protection; it is the first piece of work the client sees.",
+        "It prevents the invoice that cannot be paid because there is no purchase order. It prevents the fifth round of revisions caused by four people with four opinions. It prevents the late delivery that was caused by assets arriving in week three. And it prevents the worst version of all, where the client is unhappy and neither of you can point to the moment the expectation diverged.",
+        "It also does something less obvious: it sets the tone for every conversation that follows. A client who has been asked clear questions, given clear answers and seen a date hold will treat your next request as reasonable. A client who has never seen the boundary will treat every boundary as a surprise.",
+      ],
+    },
+    {
+      heading: "What to hand over at the end of week one",
+      paragraphs: [
+        "One page, five lines: the scope in the client's words, the dates, the approver, the channel and the update day. Send it as a document or a link, not as a message that will be scrolled past. It is the thing you will both open when memory disagrees, and the effort of writing it is repaid the first time anyone asks what was agreed.",
       ],
     },
     {
       heading: "Frequently asked questions",
       paragraphs: [
-        "How long should onboarding take? An hour of your time and one reply from the client. If it takes longer, the client is either very large or not ready, and both are worth knowing before you start.",
-        "Should onboarding be a call or a form? The operational items work better as a form or a numbered email. The relationship items, such as what success looks like and what has gone wrong before, work better in a conversation.",
-        "What if the client refuses to answer the money questions? That is a signal. A client who will not name an approver or an invoice address is likely to be slow to pay, and you can price or stage the work accordingly.",
-        "Do I need this for a small project? A shortened version, yes. Even a two-day job needs a defined deliverable, a due date and an invoice address. The list shrinks; the principle does not.",
+        "How long should onboarding take? An hour to send, a day or two to come back. If it takes a week, that is a signal about the project rather than the form.",
+        "What if the client will not fill in a form? Send the same questions as a short email and ask for answers in one reply. The medium is negotiable; the written record is not.",
+        "Should onboarding be part of the paid work? Yes, it is project setup and it belongs in the first milestone. Free onboarding invites it to be treated as optional.",
+        "Do I need a call at all? Only for the two questions that involve judgement: who approves, and what the client is worried about. Everything else is data entry.",
+        "What if the client wants to skip straight to work? Start with the part of the work that does not depend on the missing answers, and hold the rest. Momentum is worth keeping; it is not worth promising a date you cannot hold.",
       ],
     },
     {
       heading: "The takeaway",
       paragraphs: [
-        "Onboarding is twelve questions and one reply. Settle the money, the approver, the material, the scope and the channel in week one, write the answers down, and hold the start date until the contract and the deposit arrive. The clients who answer well become easy projects. The ones who cannot answer at all have just saved you a quarter of your year.",
+        "Twelve items, one form, one deadline, before the first deliverable. The list is not bureaucracy; each line is a specific failure that becomes cheap to prevent and expensive to fix. Do it once well and the rest of the project is mostly the work you were hired to do.",
       ],
     },
   ],
