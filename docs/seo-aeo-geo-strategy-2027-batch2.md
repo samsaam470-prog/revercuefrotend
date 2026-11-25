@@ -5,7 +5,8 @@ This document extends `docs/seo-aeo-geo-strategy-2027.md`. It records the second
 ## Status
 
 - **Published:** the eleven articles from batch one, unchanged.
-- **Added in this batch:** fifteen long-form articles, three per cluster, each over 8,000 characters of body copy, in `src/lib/blog2027/`.
+- **Added in this batch:** fifteen articles, three per cluster, each around 5,000 characters of body copy, in `src/lib/blog2027/` — one module per article.
+- **Revised 25 November 2026:** bodies were cut from 8,000–11,400 characters to 4,840–6,210 (5,527 average) and every post now displays a ten-minute read. The longer pieces are the ones whose structure needs the room (nine named causes, five templates, a minute-by-minute call plan); the rest sit close to 5,000.
 - **Wired:** all fifteen are in `BLOG_POSTS`, so they appear on `/blog` and at `/blog/<slug>`, and all fifteen are in `public/sitemap.xml`.
 - **Not verified:** search volume, keyword difficulty and any AI-assistant citation of Revercue. The tools used for this research return search results and page text, not volume data or answer-engine placements. Those fields are left empty rather than estimated. The evidence cited below is SERP shape (what kind of page ranks), competitor FAQ coverage, and the questions the pages themselves answer.
 
@@ -66,7 +67,7 @@ Secondary targets are carried in the bodies and headings rather than in a separa
 
 ## AEO plan
 
-**Answer first.** Each article answers its question in the first 150 words, under a heading that repeats the question. The answer is a claim, not a preface: "Follow up three times over about three weeks" rather than "follow-up is an important part of the sales process."
+**Answer first.** Each article answers its question in the first 150 words, under a heading that repeats the question. The shorter bodies make this stricter, not looser: the answer now arrives before the end of the first screen on a phone. The answer is a claim, not a preface: "Follow up three times over about three weeks" rather than "follow-up is an important part of the sales process."
 
 **Citable units.** Every article contains at least one list, table or numbered sequence that an answer engine can lift without losing meaning: nine causes, twelve checklist items, four lines of a change request, five templates, a decision table. Prose is harder to quote than structure, and structure is what gets cited.
 
@@ -88,7 +89,7 @@ Secondary targets are carried in the bodies and headings rather than in a separa
 
 ## Content standards used in this batch
 
-- Every article is over 8,000 characters of body copy, measured on the paragraph text alone.
+- Every article is around 5,000 characters of body copy, measured on the paragraph text alone. The blog adds two minutes to each post's stored `readMinutes`, so these posts store 8 and display 10.
 - Every article is useful without the product: the method stands on its own, and the product appears as one option near the end, with its limits stated.
 - Every factual claim is either a convention attributed to a category of sources, a jurisdiction-specific rule with a caveat, or a description of Revercue's own behaviour.
 - No invented statistics, no invented testimonials, no invented customer counts.

@@ -1,12 +1,15 @@
 import type { BlogPost } from "../blog";
 
+// Cluster C, article two: the artefact. Four lines, one example, and the
+// socially awkward parts (sending it, chasing it) handled explicitly.
+
 export const CHANGE_REQUEST_POST: BlogPost = {
   slug: "how-to-write-a-change-request",
   title: "How to write a change request: a four-line format that ends the argument",
   excerpt:
-    "A change request does not need a template library. Four lines, a number and a date will do it. Here is the format, an example, and how to send one without making the client feel ambushed.",
+    "A change request does not need a form, a tool or a meeting. It needs four lines that both sides can read in ten seconds: what changed, what it costs, what it does to the date, and what happens next.",
   date: "2026-11-25",
-  readMinutes: 11,
+  readMinutes: 8,
   links: [
     { label: "How to handle scope creep", to: "/blog/how-to-handle-scope-creep" },
     { label: "The out-of-scope clause", to: "/blog/out-of-scope-clause" },
@@ -16,80 +19,70 @@ export const CHANGE_REQUEST_POST: BlogPost = {
   body: [
     {
       paragraphs: [
-        "The phrase change request sounds like something a consultancy sends. In practice it is the shortest document in a freelance business, and the one that prevents the most resentment. It exists to answer a single question in writing: this new thing is not in what we agreed, so what happens now.",
-        "Most freelancers avoid writing one because it feels heavy. A formal document suggests a dispute, and a dispute is the last thing you want with a client you like. But the change request is not a dispute document. It is a decision document, and the lighter it is, the more likely it is to be read and approved in the same hour.",
+        "The moment a change is agreed in conversation, it becomes a memory, and memories disagree. Three weeks later the client remembers that the extra page was included and you remember quoting for it, and the argument is not about the page. It is about whose record is authoritative. A change request exists to make sure that question never arises.",
+        "It does not need software. It needs a message the client can read in ten seconds and reply to with one word, and it needs to be sent before the work rather than after. Four lines are enough, and the format below is the one that survives being forwarded to a finance team.",
       ],
     },
     {
       heading: "The short answer",
       paragraphs: [
-        "Four lines: what changed, what it costs, what it does to the schedule, and what you need from the client to proceed. Add a date and a total, and send it in the same thread as the original scope. That is a complete change request, and it takes about three minutes to write.",
-        "If the client approves in writing, the change is now part of the agreement. If they do not, the original scope still stands and nobody has to argue about what was implied. Either outcome is better than the work being done silently and invoiced later, which is the scenario the document exists to prevent.",
+        "Write four lines: what changed, the cost in hours or money, the effect on the delivery date, and the single question you need answered. Send it in the same thread as the original scope, ask for a reply in writing, and do not start the work until you have one. The whole message should fit on a phone screen.",
       ],
     },
     {
       heading: "The four lines",
       paragraphs: [
-        "Line one, the change: one sentence naming what is different, in the client's language. Add a sixth page, the pricing page, to the site. Not scope variation for additional template. The client should recognise the request immediately.",
-        "Line two, the cost: a number and what it covers. 450, covering the design, build and one round of feedback. If the amount is an estimate, say so and give the range and the trigger for the upper end. An estimate with no ceiling is the thing clients fear, and it is usually the reason a change request gets stuck.",
-        "Line three, the schedule: the impact in days or weeks, and what it does to the delivery date. Three working days, moving delivery from 12 December to 17 December. If there is no impact, say that too, because no schedule impact is the most persuasive line in the whole document.",
-        "Line four, the approval: what you need, and what happens if you do not get it. Reply to confirm and I will start on Monday. If I have not heard by Friday I will continue with the agreed scope and we can add this later. That last sentence is what stops the request from becoming a stall.",
+        "Change: adding a sixth page, the pricing page, with the three plan tables. Cost: six hours, 480, invoiced with the final milestone. Date: delivery moves from 14 November to 19 November. Next: reply approve and I will add it to the scope and start on Monday.",
+        "Each line answers a question the client would otherwise have to ask. What is it. What does it cost. What does it do to the thing I care about. What do you need from me. A change request missing any one of the four produces a reply that asks for it, which is a round trip you did not need to spend.",
       ],
     },
     {
       heading: "An example you can adapt",
       paragraphs: [
-        "Subject: Change request — pricing page",
-        "Hi Sam. Following Thursday's call, here is the change request for the pricing page. Change: one additional page with three plan cards, a comparison table and one FAQ section. Cost: 450, covering design, build and one round of feedback. Schedule: three working days, moving delivery from 12 December to 17 December. Approval: reply to confirm and I will add it to this week's work. If I have not heard by Friday, I will continue with the five agreed pages and we can schedule this for January.",
-        "That is the whole document. It fits in an email, it can be read on a phone, and it gives the client everything needed to decide without a meeting. The important detail is the last sentence: it makes silence a valid answer, which removes the pressure that causes clients to avoid replying to money questions.",
+        "Hi Sam. Following our call, this is the change we discussed. Change: the homepage now includes a testimonial carousel, which was not in the agreed scope of five static sections. Cost: four hours of design and development, 320, added to the final invoice. Date: delivery moves from the 14th to the 17th. Next: reply approve and I will start it tomorrow; if you would rather keep the date, we can leave the carousel for phase two.",
+        "The last clause is the one most people leave out, and it is the one that gets a fast reply, because it offers a way to say no without rejecting the idea. A change request with only one possible answer is a notification, not a decision.",
       ],
     },
     {
       heading: "When to send one",
       paragraphs: [
-        "Send one whenever the work changes and the price does not, or the price changes and the scope does not. In practice that means four situations: a new deliverable, an increase in quantity, additional revision rounds beyond the agreed number, and a reopened decision after the work has moved past it.",
-        "Do not send one for a clarification, a correction of your own error, or a small adjustment inside a revision round. Those are part of doing the job well, and turning them into paperwork makes the process feel adversarial. The test is whether the request changes the amount of work meaningfully, not whether the client used the word extra.",
-        "Send it promptly, in the same conversation where the request was made. A change request that arrives three weeks later reads as an ambush, and the client will reasonably ask why it was not raised at the time. The same document sent within the hour reads as good process.",
+        "Send it when the request adds a deliverable, a stakeholder, a round of revision, or a change to something already approved. Send it before any work begins, even if the work is small, because the sequence is what makes the record credible. Send it in writing even when the client agrees on a call: particularly then, because a verbal yes is the version most likely to be remembered differently.",
+        "The exception is genuinely trivial work, where the cost of the paperwork exceeds the work. Pick a threshold in advance and say what it is, so the boundary is a policy rather than a mood.",
       ],
     },
     {
       heading: "How to send it without making it awkward",
       paragraphs: [
-        "Lead with agreement, not with the boundary. That is a good idea, and it is outside the five pages we scoped, so here is what it would take. The client hears yes before they hear cost, and the cost lands as information rather than as a refusal.",
-        "Keep it in the existing thread. If the scope, the proposal and the conversation live in one place, the change request is the next message rather than a new subject line. That context does most of the persuasion, because the client can see what was agreed without being reminded in a way that feels like a reproach.",
-        "Offer an alternative whenever there is one. Adding the pricing page and moving delivery, or swapping it for the team page and keeping the date. A choice turns a yes or no into a preference, and preferences are much easier to state. It also signals that you are protecting the client's budget rather than your own invoice.",
+        "Do not apologise for the process and do not explain your margins. Frame it as protecting the date rather than protecting your fee: the reason we do this is so the launch date stays honest. That is true, and it is also the version clients repeat to their own team without embarrassment.",
+        "Keep it in the same thread as the proposal and the scope, so the history is in one place. If your tools support it, attach the change to the project rather than sending a standalone email that will be lost by Friday. And reply to a verbal request with the written version the same day, with one line: putting this in writing so we both have it.",
       ],
     },
     {
       heading: "What to do when the client ignores it",
       paragraphs: [
-        "Silence after a change request is common, because the client is deciding whether they want the thing enough to pay for it. Do not start the work. Continue with the agreed scope, and say so in one line at the next natural checkpoint: I have kept the pricing page out for now, so the delivery date stays at 12 December.",
-        "If the client later asks why the page is missing, the answer is the thread, not an argument. This is the reason the four-line format includes a default: it makes the outcome predictable without requiring another conversation. A client who wanted the page will reply. A client who did not will be quietly relieved that the decision was made for them.",
-        "If the client approves but the work grows again inside the same change, send a second change request. Two small requests are easier to accept than one large revision to an earlier one, and they keep the record honest.",
-        "There is one more habit worth building: price the change from a unit you already use. If an extra page is 450 in this request, it should be 450 in the next one, and the client should be able to predict it without asking. Predictable unit prices do two useful things. They make a small request easy to approve, because the client already knows the number, and they stop the negotiation that happens when every change is priced from scratch. Write the unit prices into your template, keep them current, and quote from them rather than from memory.",
+        "If the request was made verbally and the written version goes unanswered, do not start the work. Send one reminder with a date: I have not heard back on the change, so I am assuming it is on hold and keeping the original date. That message is not a threat; it is a statement of what will happen by default, and defaults get answers.",
+        "If the client says proceed but never replies in writing, reply once more with a deadline and a consequence: I will take this as approved unless you say otherwise by Thursday, and the cost will appear on the next invoice. Silence after a clear statement is a weak but usable record, and it is much better than no record at all.",
       ],
     },
     {
       heading: "Keeping the record",
       paragraphs: [
-        "A change request is only useful if it can be found later. Keep it with the contract, not in a separate folder of emails. When the project ends and the invoice is questioned, the chain should read: proposal, contract, change request, approval, delivery, invoice. Each document should reference the one before it.",
-        "If your contract is signed and stored in the same place as the proposal, attaching the change request to that thread is a two-minute job. If your documents live in five different apps, it is not, which is often why freelancers skip the change request and absorb the cost instead. The tooling is not the point, but it does decide whether the good habit survives a busy month.",
-        "Keep the approval too, not just the request. An approved change request with a reply that says agreed is a variation to the contract. A request with no reply is just a message, and it will not help you if the client later disputes the invoice.",
+        "One folder, one thread, or one project in your tools, containing the scope, every change request and every approval. The point is not tidiness; it is that at invoice time you can show the client a list of what was added and when they approved it. That list settles most disputes before they become disputes.",
+        "Add a line to the final invoice that references the changes by date. Clients pay faster when the invoice matches a story they already know, and a change log is that story.",
       ],
     },
     {
       heading: "Frequently asked questions",
       paragraphs: [
-        "Does a change request need to be a separate document? No. An email with the four lines is a valid change request, and it is more likely to be approved than a PDF. The format matters more than the file type.",
-        "Should I charge a deposit on extra work? For a small change, no. For a change that is large enough to be a second project, yes, and treat it like one.",
-        "What if the client refuses to pay for the extra work? Then the extra work does not happen, and the agreed scope is delivered. That is not a conflict; it is the change request working as intended.",
-        "Can I raise a change request after the work is done? You can, but it is much harder to get approved. Raise it before you start, and if you must do it afterwards, frame it as a scope review rather than a bill.",
+        "Does a change request need a signature? A written approval in the thread is usually enough for small changes. For larger ones, a signature or a formal acceptance in your contract tool is worth the extra minute.",
+        "Should I charge for the change request itself? No, unless the request needs investigation. Price the work, not the paperwork, or clients will stop asking and start assuming.",
+        "What if the client approved verbally and now disputes it? Point at the dates and the messages, not at the conversation. That is the entire reason the four lines exist.",
       ],
     },
     {
       heading: "The takeaway",
       paragraphs: [
-        "Four lines, a number, a date and a default. A change request is not bureaucracy; it is the shortest way to keep a project honest without a difficult conversation. Send it in the thread, lead with agreement, offer a choice, and let silence mean the original scope. The client gets clarity, and you get paid for the work you actually did.",
+        "Four lines, sent before the work, in the same thread, with one question and one easy way to say no. That is a change request. It takes two minutes, it prevents the argument that costs a weekend, and it makes the final invoice a document the client recognises rather than one they have to reconstruct.",
       ],
     },
   ],
