@@ -5,6 +5,7 @@ export interface BlogPost {
   date: string;
   readMinutes: number;
   body: { heading?: string; paragraphs: string[] }[];
+  links?: { label: string; to: string }[];
 }
 
 const BASE_POSTS: BlogPost[] = [
@@ -279,6 +280,179 @@ const BASE_POSTS: BlogPost[] = [
         paragraphs: [
           "Send the link, watch what happens, and let the document do the follow-up. If it is opened three times and not answered, the message you send should reference the thing they kept returning to, not a reminder that time has passed.",
           "Everything else — the serif, the gold, the clean page — exists so nothing in the way of that decision is ugly. Design is not the argument. It is the absence of friction around it.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "freelance-client-management-software",
+    title: "Freelance client management software: what to check before you choose",
+    excerpt: "A buyer's checklist for freelancers comparing client management tools: where the client record lives, how messages get logged, what is attached to a client, how billing shows up, and what you actually pay.",
+    date: "2026-11-25",
+    readMinutes: 8,
+    links: [
+      { label: "Client management for freelancers", to: "/features/crm" },
+      { label: "Compare the tools by criteria", to: "/compare/criteria" },
+      { label: "Plans and pricing", to: "/pricing" },
+    ],
+    body: [
+      {
+        paragraphs: [
+          "Searches for freelance client management software mostly land on long lists of tools, each ranked by a different reviewer. The lists are useful for names, but they rarely tell you what you will be doing in the software every week. This guide is a checklist for that question: what a client record has to hold, what to ask before you commit, and what the common options cost when you check the vendors' own pricing pages.",
+          "A client management tool is only useful if it answers three questions in under a minute: what did we agree, what did I send, and what happens next. If a tool cannot answer those for every client, it is a contact list with a nicer design.",
+        ],
+      },
+      {
+        heading: "What a freelancer's client record has to hold",
+        paragraphs: [
+          "A working record for one client needs contact details, the projects you are doing for them, the documents you have sent and signed, the messages and calls that matter, the money you have invoiced and received, and a next follow-up date. Notes are useful for the things that do not belong in a document, such as who makes the final decision or how the client prefers to be contacted.",
+          "Most of the work of a freelance client record is keeping the thread current. A tool that makes you retype the same name, price and project into three places will fall out of date within a month.",
+        ],
+      },
+      {
+        heading: "Six things to check before you choose",
+        paragraphs: [
+          "First, where the record lives. Check whether proposals, contracts and invoices attach to the client automatically, or whether you link them by hand.",
+          "Second, how messages get into the log. Some tools read your inbox; others rely on you to log each conversation. Ask which one it is before you assume the log is complete. Revercue's communication log is filled in by hand: messages and replies appear only when you add them.",
+          "Third, what can be attached to a client: files, signed documents, and form responses. Fourth, how billing shows up on the client page: sent, pending and paid amounts. Fifth, how you get your data out: an export of clients and documents matters if you ever leave. Sixth, what you pay once you need the features you actually use, not the entry price.",
+        ],
+      },
+      {
+        heading: "What the main options cost (checked 24 November 2026)",
+        paragraphs: [
+          "Bonsai is listed at $15 a month (Basic, $9 billed annually), Essentials at $25 ($19), Premium at $39 ($29) and Elite at $59 ($49), with a 3-user minimum on Elite. Moxie lists Starter at $12 ($10 annually), Pro at $25 ($20) and Teams at $40 ($32). Plutio lists Core at $19 a month ($190 a year), Pro at $49 ($490) and Max at $199 ($1,990).",
+          "Dubsado publishes annual prices only: Starter at $335 a year and Premier at $525 a year. HoneyBook's help article, effective 4 February 2025, lists Starter at $36 monthly or $29 billed annually, Essentials at $59 or $49, and Premium at $129 or $109. Agiled's annual prices are $24, $59, $99 and $199 per month. These figures change, so check the vendor's page before you buy.",
+        ],
+      },
+      {
+        heading: "Where Revercue fits, and where it does not",
+        paragraphs: [
+          "Revercue is built around the client thread: proposals, contracts, requirement forms, invoices and a client record that links them. The Free plan is available now. Starter is $12 a month, Growth $29 and Scale $49, and Teams is in beta.",
+          "Revercue does not connect to your inbox, calendar or accounting software yet. There is no public API and no integrations directory. Information leaves the product through a CSV export of clients and a PDF of each document. If your work depends on a tool sending messages from the client record, Revercue is not that tool yet. If you want one place for the proposal, the contract, the form and the invoice, it is built for that.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "how-freelancers-send-proposals-contracts-and-invoices",
+    title: "How do freelancers send proposals, contracts and invoices without switching tools?",
+    excerpt: "Direct answers to the questions freelancers ask about proposals, contracts and invoices: what each one needs, the order to send them, and what a single tool can and cannot do.",
+    date: "2026-11-25",
+    readMinutes: 7,
+    links: [
+      { label: "Proposals in Revercue", to: "/features/proposals" },
+      { label: "Contracts in Revercue", to: "/features/contracts" },
+      { label: "Invoices in Revercue", to: "/features/invoices" },
+      { label: "Electronic signatures explained", to: "/guides/electronic-signatures" },
+    ],
+    body: [
+      {
+        paragraphs: [
+          "Freelancers search for this in the same words they would use with a colleague. This page answers those questions directly, in the order the work usually happens: the proposal wins the work, the contract confirms the terms, and the invoice gets the money. Each section gives the short answer first, then the detail.",
+        ],
+      },
+      {
+        heading: "How do I create a business proposal?",
+        paragraphs: [
+          "Short answer: start with the client's goal, then the scope, then the price, then one clear next step. A proposal that a client can act on states what they will get, when they will get it, what it costs, what is not included, and what to do to go ahead.",
+          "Put the packages side by side if you offer more than one option, and keep the explanations in a short FAQ rather than inside each package. Two or three options are usually easier to decide between than a long list.",
+        ],
+      },
+      {
+        heading: "How do I make a contract agreement for a freelancer?",
+        paragraphs: [
+          "Short answer: write down the scope, the payment schedule, the number of revisions included, and how either side can cancel. Make sure the contract matches the proposal the client accepted, then send it for signature before work starts.",
+          "This is general guidance rather than legal advice. A typed name with an explicit consent tick and a recorded date is a practical record for many freelance agreements, but it is not a certified or advanced electronic signature. If a contract needs stronger proof, use a specialist signing service.",
+        ],
+      },
+      {
+        heading: "How do I set up an invoice?",
+        paragraphs: [
+          "Short answer: list each piece of work as a line item, add tax and the total, give a unique invoice number, state the due date, and show exactly how to pay. Clients pay faster when the invoice tells them what to do without asking.",
+          "Invoice the same names and prices that appear in the accepted proposal, so the client can match one to the other.",
+        ],
+      },
+      {
+        heading: "Can I send a proposal, contract and invoice from one place?",
+        paragraphs: [
+          "Yes, if the tool keeps them on the same client record. In Revercue, a proposal, contract, requirement form and invoice are created for the same client, so the names, projects and agreed prices carry forward instead of being typed again. Revercue invoices are numbered automatically in the format INV-YEAR-NNNN, and payment goes through a payment link or account details that you provide, with confirmation recorded in the product.",
+          "A single tool does not remove the need to check your figures. Compare the invoice with the accepted proposal before you send it.",
+        ],
+      },
+      {
+        heading: "Common questions",
+        paragraphs: [
+          "Do clients need an account to open a proposal? In Revercue they do not. The proposal opens from a private link.",
+          "Can a client decline a contract? Yes. A decline can include an optional reason, and the decision is recorded on the contract.",
+          "Can I see whether an invoice has been paid? Revercue shows invoice status, and you confirm payment when it arrives, which updates the revenue overview.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "freelance-client-management-tools-compared",
+    title: "Freelance client management tools compared: prices and what each is built for",
+    excerpt: "A factual comparison of seven tools freelancers look at, with prices checked against vendor pages on 24 November 2026 and a plain description of what each one is built around. No rankings.",
+    date: "2026-11-25",
+    readMinutes: 7,
+    links: [
+      { label: "Full comparison criteria", to: "/compare/criteria" },
+      { label: "Compare Bonsai, HoneyBook and Dubsado", to: "/compare" },
+      { label: "Revercue pricing", to: "/pricing" },
+    ],
+    body: [
+      {
+        heading: "How this comparison was built",
+        paragraphs: [
+          "Each price below was checked against the vendor's own pricing page on 24 November 2026, or, where the vendor's page did not list the figure, against the cited source. Figures are per month in US dollars unless stated, and before tax. This page does not rank the tools, and it does not claim how well any of them works for you. Use it to narrow the list, then test the one that fits.",
+        ],
+      },
+      {
+        heading: "Bonsai",
+        paragraphs: [
+          "Prices: Basic $15 a month or $9 billed annually; Essentials $25 or $19; Premium $39 or $29; Elite $59 or $49 with a 3-user minimum. There is no free plan, and a 7-day trial is offered.",
+        ],
+      },
+      {
+        heading: "HoneyBook",
+        paragraphs: [
+          "Prices, from HoneyBook's help article effective 4 February 2025: Starter $36 monthly or $29 billed annually; Essentials $59 or $49; Premium $129 or $109. Check the current page before you commit, because the figures in older articles differ.",
+        ],
+      },
+      {
+        heading: "Dubsado",
+        paragraphs: [
+          "Prices, from Dubsado's pricing page: Starter $335 a year and Premier $525 a year, billed annually. The page lists no monthly prices. Premier adds scheduling, automated workflows, public proposals, Zapier, bookkeeping integration and unlimited lead capture forms. Add-ons are $10 a month per additional brand and $25 a month for 4 to 10 users.",
+        ],
+      },
+      {
+        heading: "Moxie",
+        paragraphs: [
+          "Prices, from Moxie's pricing page: Starter $12 a month or $10 billed annually; Pro $25 or $20; Teams $40 or $32 for up to five members. Moxie's own product materials list connections to PayPal, Stripe, QuickBooks, Zapier, Make, webhooks and a public API.",
+        ],
+      },
+      {
+        heading: "Plutio",
+        paragraphs: [
+          "Prices, from Plutio's pricing page: Core $19 a month or $190 a year; Pro $49 or $490; Max $199 or $1,990. A 7-day trial is listed. Core is limited to nine active clients.",
+        ],
+      },
+      {
+        heading: "Agiled",
+        paragraphs: [
+          "Annual prices, from Agiled's pricing page: Starter $24, Pro $59, Business $99 and Scale $199 per month billed annually. The monthly figures are from a secondary reading of the monthly view and are not confirmed on Agiled's own page.",
+        ],
+      },
+      {
+        heading: "Google Workspace and Microsoft 365",
+        paragraphs: [
+          "These are business suites rather than client management tools. Google Workspace Business Starter is $7 a month on annual billing or $8.40 flexible, Standard $14 or $16.80, and Plus $22 or $26.40 per user, from Google's own support page. Microsoft 365 prices come from secondary sources, which agree with each other but are not confirmed on Microsoft's own page.",
+        ],
+      },
+      {
+        heading: "Revercue",
+        paragraphs: [
+          "Revercue is free to start. Starter is $12 a month, Growth $29 and Scale $49, with Teams in beta. It is built around the client thread: proposals, contracts, requirement forms, invoices and a client record that links them. It does not connect to an inbox, calendar or accounting software yet, and it offers a CSV export of clients and PDF downloads of documents rather than an API.",
         ],
       },
     ],
