@@ -48,6 +48,15 @@ export const FOLLOW_UP_ANNOYING_POST: BlogPost = {
       ],
     },
     {
+      heading: "The three messages, written out",
+      paragraphs: [
+        "First, day two: Hi Sam. One thing I should have said in the proposal, the start date can move to the week of the 8th if that helps the trade show, and the price stays the same. If it is easier to talk it through, I have twenty minutes on Thursday.",
+        "Second, day eight: Hi Sam. If the full build is more than you want to commit to now, I can do the homepage and the pricing page first for 2,900, with the rest in January. Would that be a better place to start?",
+        "Third, day eighteen: Hi Sam. I have not heard back, so I am assuming the timing has moved and I will close this off for now. The proposal is saved and the price holds for thirty days from today. If it comes back onto the agenda, just reply here and I will pick it up.",
+        "Read them together and the difference from a chase is obvious. Each message contains a decision the client can make in one word, and none of them asks the client to explain themselves.",
+      ],
+    },
+    {
       heading: "What every follow-up should contain",
       paragraphs: [
         "Three jobs, three lines. Restate the decision in one clause: the proposal for the rebuild, the two packages at 4,200 and 6,800. Add something: a date, an answer, a smaller option. Name a default: if I do not hear back by Friday I will assume the timing has moved. What it must not do is apologise for existing. Sorry to bother you, just checking in and I know you are busy all signal that the message has no value, and they invite the client to treat it as noise.",
@@ -55,9 +64,53 @@ export const FOLLOW_UP_ANNOYING_POST: BlogPost = {
       ],
     },
     {
+      heading: "The subject line matters more than you think",
+      paragraphs: [
+        "Replies to a thread come faster than replies to a new email, so reply to your own proposal email rather than starting a new one. The subject keeps the context and the history in one place, which is what you want when the invoice is eventually questioned.",
+        "When you must start a new thread, name the project and the decision: Kingsway site, two options, decision by the 12th. A subject that states the decision is easier to act on than one that says following up, which tells the client only that the message is about you.",
+      ],
+    },
+    {
+      heading: "If they say the price is too high",
+      paragraphs: [
+        "Do not discount immediately, and do not defend the number. Ask one question: is it the total, or the timing of the payments? The answer decides everything. If it is the total, offer a smaller scope at a lower price, and keep the rate intact. If it is the timing, offer a deposit and two instalments.",
+        "If the client names a budget below your floor, say what that budget buys rather than what it does not. For 3,000 I can do the homepage and the contact page well, or the whole site at template quality. That is honest, it preserves your rate, and it gives the client a real choice instead of a rejection.",
+      ],
+    },
+    {
+      heading: "If they say they will get back to you",
+      paragraphs: [
+        "That sentence is the most common way a decision is deferred indefinitely. Accept it and attach a date: of course, when should I check in? If the client will not name a date, name one yourself and ask them to correct it: I will follow up on the 12th unless that is too soon.",
+        "Put the date in your calendar and in the client record, and keep it to one message on that date. The point of the date is that the loop has an owner, and after the date you can close it without ambiguity.",
+      ],
+    },
+    {
       heading: "The stopping rule",
       paragraphs: [
         "Stop earlier if the client says the timing is wrong, and immediately if they say no. Go later only if they gave you a real date: we decide after the board meeting on the 12th is an invitation to follow up on the 13th. When you stop, say so in one short message and leave the door open. A surprising number of projects come back through it months later, with a new budget.",
+        "Write the outcome in your notes either way. Three follow-ups and no reply is a fact about the pipeline, and a quarter of those facts tells you whether your proposals are reaching the wrong person or describing the wrong project.",
+      ],
+    },
+    {
+      heading: "What not to do",
+      paragraphs: [
+        "Do not follow up on a different channel because email went unanswered. Moving to a direct message or a phone call reads as escalation, and escalation is what makes a follow-up annoying even when the content is fine.",
+        "Do not send a read receipt request, a calendar invite for a call nobody agreed to, or a message that begins with a question about whether they are still interested. All three ask the client to do emotional work, and the client's alternative is to ignore them.",
+        "Do not let the follow-up contradict the proposal. If the proposal said the price holds until the 14th, do not quietly change it on the 10th. Consistency is the reason the client believes the rest of the document.",
+      ],
+    },
+    {
+      heading: "When the silence is your fault",
+      paragraphs: [
+        "Some proposals go quiet because of something you did. You promised a follow-up and forgot. You sent a revised price and never confirmed it. You missed the call you proposed. The client is not avoiding you; they are waiting for you to do what you said, and the silence is the gap between your words and your calendar.",
+        "Fix it in one message that owns the gap without over-explaining: I said I would send the revised scope on Friday and I did not, so here it is. No apology paragraph, no excuses about workload, and no request for sympathy. Clients forgive a missed date much faster than they forgive a long explanation of one.",
+      ],
+    },
+    {
+      heading: "The four-line check before you send",
+      paragraphs: [
+        "Read the draft and answer four questions. Does it name the specific project? Does it add one thing the client did not already have? Does it contain exactly one request? Does it end with a date or a default? If any answer is no, the message is not ready, and the missing line is usually the one that makes the client able to act.",
+        "Then cut it by a third. Almost every draft follow-up is improved by removing the sentence that explains why the client should reply, because that sentence is about your need and the client can hear it.",
       ],
     },
     {
@@ -66,6 +119,8 @@ export const FOLLOW_UP_ANNOYING_POST: BlogPost = {
         "Is three follow-ups too many? Three short messages over three weeks is less contact than one newsletter, and the client asked you for a price. What reads as too many is repetition without value.",
         "Should I lower the price in a follow-up? Only if you learned something that justifies it, such as a reduced scope. A discount sent into silence teaches the client that waiting produces a better price.",
         "What if the client asks something the proposal already answers? Answer it again in one line and point to the section. They skimmed, which is normal. Correcting them is not the job.",
+        "Should I follow up on a Friday? Tuesday to Thursday mornings get the best replies. A Friday afternoon message is read on Monday with everything else, or not at all.",
+        "What if they reply after I have closed the loop? Pick it up as though no time had passed, and confirm the price and the dates before restarting. The gap is not a reason to reopen the negotiation.",
       ],
     },
     {

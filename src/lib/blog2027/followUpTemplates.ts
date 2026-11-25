@@ -27,6 +27,7 @@ export const FOLLOW_UP_TEMPLATES_POST: BlogPost = {
       heading: "What all five have in common",
       paragraphs: [
         "Every one is under 120 words, names the specific proposal, contains exactly one request, and ends with a date or a default. None begins with an apology, none uses the word just, and none asks whether the client has had a chance to look. That question asks the client to admit they have not, which is a small social cost many people avoid by not replying at all. The replacement is a statement plus a small question.",
+        "They also share a shape worth remembering when you write without a template: context in one clause, new information in one sentence, a small request in one question, and a default if nobody answers. Four moves, four sentences, and the message stops being a chase.",
       ],
     },
     {
@@ -60,15 +61,53 @@ export const FOLLOW_UP_TEMPLATES_POST: BlogPost = {
       ],
     },
     {
+      heading: "Template 6: the answer to a no",
+      paragraphs: [
+        "Subject: Thanks, and one thing. Body: Thanks for telling me, that is genuinely more useful than silence. If it is not confidential, was it the price, the scope or the timing? I ask because it changes what I do next, not to reopen it. Either way, if something smaller comes up later, the door is open. Why it works: it asks one precise question, makes clear you are not negotiating, and leaves the client feeling good about having said no. A client who answers that question once is a client who refers you twice.",
+      ],
+    },
+    {
+      heading: "A thread, end to end",
+      paragraphs: [
+        "Seeing them in sequence helps, because the failure mode is not a bad sentence; it is five versions of the same message. Day zero: the proposal, with a line naming the decision date. Day two: template one, adding a fact and offering a call. Day nine: template two or a smaller package, naming the likely objection.",
+        "Day eighteen: template four, with an exit. Day twenty-five: template five, closing the loop. Five touches over three and a half weeks, each one different, each one ending with something the client can do in a single reply. The client's inbox sees a professional managing a pipeline, which is a very different impression from someone waiting to be noticed.",
+      ],
+    },
+    {
       heading: "Subject lines that get opened",
       paragraphs: [
         "The subject has one job: to say what the message is about without making the client feel chased. Specific beats clever. The website proposal — one thing I should have said is specific. Quick question is not; it could be anything, and it smells like a sales email. Avoid urgency you cannot support, because final reminder implies a consequence that usually does not exist and clients learn to ignore it. If there is a real date, put it in the subject: Holding the 8th until Friday. A deadline that can be checked is more persuasive than a dramatic word.",
+        "Reply in the original thread where you can. The proposal subject is already in the client's head, the history is attached, and the message arrives as part of a conversation rather than as a new demand on their attention.",
       ],
     },
     {
       heading: "Making a template sound like you",
       paragraphs: [
         "Change four things and the message becomes yours: the greeting, which should match how you already write to that client; the one added fact, which should come from this project rather than a generic claim; the rhythm, which should be the sentence length you use when you are not trying; and the sign-off. Then read it out loud. The most common offender is enthusiasm with nowhere to go. Replace it with a fact, because the most persuasive line in a follow-up is usually the smallest true one.",
+        "The second most common offender is length. If a draft runs past 150 words, it is usually carrying an explanation of why the client should reply, which is the part that makes it feel like pressure. Cut the explanation and keep the fact.",
+      ],
+    },
+    {
+      heading: "When not to use a template",
+      paragraphs: [
+        "Do not use one when the client has given you a real reason for the delay. If they wrote to say a parent is ill or a funding round collapsed, the next message is a human sentence, not a structure with a slot for new information. The same applies after a difficult call: a template at that moment reads as indifference.",
+        "Do not use one for the first message after a referral. Referred clients arrive with a warm introduction behind them, and the follow-up should sound like the person who was recommended rather than a process. Those two exceptions aside, the structures will serve you for years, which is exactly why they are worth learning rather than pasting.",
+      ],
+    },
+    {
+      heading: "When the reply is hostile",
+      paragraphs: [
+        "Occasionally a follow-up lands badly. The client writes back that they are busy, that they never asked for three messages, or that they have already said no to somebody. The instinct is to apologise at length or to defend the process, and both make it worse.",
+        "Reply once, briefly, and take the temperature out: understood, I will stop chasing and leave the proposal with you. If anything changes, reply here and I will pick it up. No explanation of why you wrote, no summary of the value you offer, no question that requires another answer. You have achieved the thing the follow-up was for, which is clarity about where the decision stands.",
+        "Then change one thing on your side. If the client felt chased, the messages were probably too frequent or too similar, which is exactly the pattern these structures exist to break. A hostile reply is useful feedback about the rhythm, even when it is unfair about the content.",
+      ],
+    },
+    {
+      heading: "Which template actually works",
+      paragraphs: [
+        "Track them for a quarter and the pattern is usually blunt. The day-two message gets read and rarely answered, because nothing is at stake yet. The decision date gets answered, because it contains a real consequence. The graceful close gets answered more than any other, because it removes an obligation rather than adding one.",
+        "The nudge after silence is the weakest, and it is the one freelancers send most often. It asks the client to explain themselves without offering anything in return, which is why it sits in inboxes. If you only keep two, keep the decision date and the close, and use the day-two message to add a fact rather than to ask for attention.",
+        "Write the result in your notes each time: which message, which client, what came back, how many days. Ten proposals later you will know your own reply rate better than any article can tell you, and you can delete the templates that never work for your clients.",
       ],
     },
     {
@@ -77,6 +116,8 @@ export const FOLLOW_UP_TEMPLATES_POST: BlogPost = {
         "Should the follow-up include the proposal again? If it is a link, yes, in one line, because it removes a search. If it is an attachment, no, unless delivery failed; a second PDF makes the thread heavier.",
         "How long should a follow-up be? Under 120 words. If it needs more, it is a new proposal rather than a follow-up, and it should be sent as one.",
         "Can I reuse the same template for every client? Use the same structure and change the specific sentence. The structure is what makes it work; the specific sentence is what makes it credible.",
+        "What if English is not the client's first language? Keep the sentences shorter and drop the idioms. The structures survive translation better than the phrasing does.",
+        "Do emojis help? Not in a proposal follow-up. They read as either overfamiliar or nervous, and the message has to do a job that neither improves.",
       ],
     },
     {

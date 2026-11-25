@@ -51,10 +51,33 @@ export const PAYMENTS_DEPOSIT_POST: BlogPost = {
       ],
     },
     {
+      heading: "How the deposit interacts with milestones",
+      paragraphs: [
+        "A deposit plus milestones is a different schedule from a deposit plus a final invoice, and the second is where freelancers get caught. A 40 percent deposit with the remaining 60 percent on delivery means you carry 60 percent of the value for the whole project. Three payments of 40, 30 and 30 means you are never more than a third behind.",
+        "Set the milestones at points where the client receives something they can see: the design approved, the build on staging, the site live. Milestones attached to your own internal phases invite arguments about whether the phase is finished; milestones attached to something the client can look at do not.",
+        "The last payment should never be conditional on the client publishing, launching or using the work. Handover is the moment your job ends, and tying the final invoice to their internal deadline gives someone else control of your cash flow.",
+      ],
+    },
+    {
+      heading: "A worked example",
+      paragraphs: [
+        "A 6,000 website over six weeks with 900 of stock photography and two days of a subcontractor. Your costs before the first milestone are roughly 1,400 plus about 30 hours of your own time, so the floor is comfortably above 2,000.",
+        "A schedule that works: 3,000 on signature, 1,800 when the site is on staging, 1,200 on go-live, with the photography billed at cost in the middle invoice. You are never more than three weeks of your own time exposed, the client always has something to see before paying, and the final invoice is small enough that it is not worth delaying.",
+        "A schedule that does not work: 1,200 on signature, 4,800 on delivery. It looks gentler to the client and it means you finance the project. If the launch slips by a month, so does most of your fee, and the delay is the moment you can least afford it.",
+      ],
+    },
+    {
       heading: "How to ask without making it awkward",
       paragraphs: [
         "Put it in the proposal, not in a separate conversation after the yes. One line is enough: the project starts with a 40 percent deposit, which covers the research and setup, with the balance on delivery. The invoice goes out with the contract, and work begins when it clears. Saying when work begins is the part that makes the request feel like a process rather than a favour.",
         "If the client asks to reduce it, do not simply agree. Reduce the scope to match, or move the first milestone earlier so the money arrives sooner. What you are protecting is not the percentage but the principle that you are never far ahead of your invoices.",
+      ],
+    },
+    {
+      heading: "When procurement blocks it",
+      paragraphs: [
+        "Large organisations sometimes cannot pay a deposit at all: their system will only pay against a delivered invoice. In that case, ask for a purchase order before you start, since a purchase order is the corporate version of a deposit, and split the work into two invoices where the first is delivered in week two rather than week six.",
+        "If neither is possible and the amount is significant, price the risk: a slightly higher fee for extended terms, or a shorter first phase that limits your exposure. What you should not do is start a large project with no commitment and hope the invoices behave, and certainly not on the strength of an email from someone who cannot approve spending.",
       ],
     },
     {
@@ -65,9 +88,30 @@ export const PAYMENTS_DEPOSIT_POST: BlogPost = {
       ],
     },
     {
+      heading: "When the client asks for the deposit back",
+      paragraphs: [
+        "It happens most often when a project is cancelled in the first fortnight, and the fair answer usually depends on what has already been done. If you have spent two days on research and the client cancels, the deposit covers that work and the remainder is returned; if you have delivered nothing and spent nothing, returning it is reasonable and protects your reputation.",
+        "Say what you are doing and why in one short message, with the hours listed. A partial refund explained in three lines ends the conversation; a refund argued over does not, and a refund refused without explanation invites a chargeback and a review. The clause you wrote in week one is what makes this paragraph short.",
+      ],
+    },
+    {
       heading: "What the deposit does not fix",
       paragraphs: [
         "It does not fix a client who will not pay the balance, a scope that was never defined, or a project with no written agreement. It is one control among several: payment terms, a change process and an approval step do the rest. Treat the deposit as the first of those controls rather than the whole safety net.",
+      ],
+    },
+    {
+      heading: "Deposits for products as well as services",
+      paragraphs: [
+        "If you sell a physical product alongside your services, the deposit has a second job: it funds materials. In that case the percentage should follow the bill of materials rather than the project length, and the deposit should be at least the cost of anything you cannot return.",
+        "Say when the deposit stops being refundable, because it usually converts into materials at a specific moment: on the date the order is placed with the printer, or when the fabric is cut. A deposit with a stated conversion point is easy to explain and easy to defend, and it removes the argument about whether the work had started.",
+      ],
+    },
+    {
+      heading: "A one-line clause library",
+      paragraphs: [
+        "Four sentences cover most small projects, and they can be pasted into a proposal with the numbers changed. The project starts with a deposit of X percent, which covers the work up to the first milestone. Work begins when the deposit clears and the signed agreement is returned. The deposit is refundable in full until work starts and non-refundable afterwards, less any hours already spent. The balance is due within 14 days of the final invoice.",
+        "Read those four sentences as a client and nothing is ambiguous: what to pay, when, what it buys, and when the rest is due. That clarity is the whole product of this article, and it takes less time to write than the first email asking for the deposit would take to compose.",
       ],
     },
     {
@@ -76,6 +120,8 @@ export const PAYMENTS_DEPOSIT_POST: BlogPost = {
         "Is 50 percent too much to ask? No, for project work under a month it is common and easy to justify. It becomes too much when it is asked for without explaining what it covers.",
         "Should the deposit be non-refundable? It should be non-refundable once work has started, which protects the time you have already spent. Before work starts, a refund is usually the fair outcome.",
         "What if the client is a large company that only pays on 60-day terms? Ask for the deposit to be paid by card or on a separate shorter invoice, and get the payment route agreed before the contract is signed.",
+        "Do I charge tax on a deposit? Usually the same treatment as the final invoice, because it is a payment towards the same supply. Check your local rules once rather than guessing per project.",
+        "What if the client wants to pay the whole project up front? Take it, and say what happens if the project expands: the extra work is quoted separately rather than absorbed into a fee already paid.",
       ],
     },
     {

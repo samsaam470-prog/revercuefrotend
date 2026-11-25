@@ -33,6 +33,7 @@ export const PAYMENT_TERMS_POST: BlogPost = {
       heading: "What the abbreviations mean",
       paragraphs: [
         "Net 30 means the full amount is due 30 days after the invoice date, with no discount. Due on receipt means immediately. 2/10 net 30 means a 2 percent discount if paid within 10 days, otherwise the full amount in 30; it is a real incentive for large invoices and rarely worth it for small ones. End of month terms, sometimes written EOM, mean the clock starts at the end of the month of invoicing, which can add another 30 days. If a client's purchase order says EOM, your 30 days is really 45 to 60.",
+        "Two more worth knowing: net 7, which is short enough to signal that you are a small supplier with real costs, and a payment run, which is not a term at all but the date on which a finance department pays everything it owes. Knowing the payment run is often more useful than negotiating the term, because it tells you when the money will actually move.",
       ],
     },
     {
@@ -64,9 +65,48 @@ export const PAYMENT_TERMS_POST: BlogPost = {
       ],
     },
     {
+      heading: "The first time an invoice is late",
+      paragraphs: [
+        "The first late invoice sets the pattern for the account, which is why it deserves attention even when the amount is small. The escalation has four steps, each a day or two apart. Day one after the due date: a short, warm message confirming the invoice details and asking whether anything is needed. Day four: the same message with the due date restated and a named person copied.",
+        "Day eight: a message that names the consequence in the terms, calmly: the invoice is now a week overdue, and per our terms I will need to pause the next milestone until it clears, which moves the date by the same number of days. Day fourteen: pause, and say so in writing. If the work stops without a message, the client remembers a silent freelancer; if it stops after three clear messages, the client remembers a process.",
+        "Almost every late payment is resolved before the third step, and the ones that are not are the accounts you want to know about early. What you must not do is send the final warning first, or absorb three late invoices and then become suddenly strict, because that change reads as a crisis rather than a rule.",
+      ],
+    },
+    {
+      heading: "When their purchase order overrides your terms",
+      paragraphs: [
+        "A purchase order often carries its own terms, and it may say 60 days, or payment on completion, or payment after their own client pays. Read it before you sign or accept it, and if it conflicts with your terms say which one applies. Silence is treated as acceptance.",
+        "Where their terms are fixed and the amount is modest, the practical answer is usually to date the invoice early in their cycle and to keep the exposure small with milestones. Where the amount is large, ask for a deposit or a shorter first phase, and get the payment route agreed in writing before the work begins.",
+        "This article is general information, not legal advice. Late payment law differs by country and by whether the client is a business or a consumer, so if an amount is large enough to hurt, have a professional read the terms once rather than relying on a template.",
+      ],
+    },
+    {
+      heading: "Terms for retainers and small jobs",
+      paragraphs: [
+        "A retainer is paid in advance for the month, on a fixed date, and the work happens inside it. Say what happens if the month is not paid by that date: the retainer pauses, the hours do not roll over, and the slot is released after a stated grace period. Retainers fail when the payment date is vague, because the whole product is availability and availability has a calendar.",
+        "Small jobs are the opposite problem: the paperwork costs more than the terms are worth. For anything under a few hundred, invoice on delivery with a seven-day term, and skip the late fee. The goal there is speed, not enforcement.",
+      ],
+    },
+    {
       heading: "What to avoid",
       paragraphs: [
         "Avoid terms that depend on approval you cannot see, such as payable on client sign-off, because sign-off can be postponed forever. Avoid discounts offered after the fact to get paid, which train the client to be late. Avoid clauses copied from another country's template without checking them, and avoid any sentence you would not be willing to enforce on the day it matters.",
+        "Avoid, too, the habit of invoicing late. If the terms say invoices go out on the first working day, then a project delivered on the 20th still gets invoiced on the first, for the work completed. A freelancer who invoices when the work is finished has quietly extended their own payment terms by however long the work took.",
+      ],
+    },
+    {
+      heading: "A checklist before you accept a purchase order",
+      paragraphs: [
+        "Read the purchase order before the work, not after. Check the amount matches your quote including tax, the payment term, whether it requires a signed contract as well, and whether it mentions pay-when-paid or payment on client acceptance. Those four items are where the surprises live.",
+        "Check the entity too: a purchase order from a parent company with an invoice addressed to a subsidiary is a quiet way to delay payment while everyone works out who owes what. If the names differ, ask which entity is contracting and invoice that one.",
+        "Finally, check the reference number and put it on the invoice exactly as written, including spaces and punctuation. Finance systems match on references, and a reference that is nearly right is a payment that sits in a suspense account until someone calls you about it.",
+      ],
+    },
+    {
+      heading: "When a client asks for 90 days",
+      paragraphs: [
+        "Say yes to the relationship and no to the risk, separately. The relationship answer is that you are happy to work with their process. The risk answer is that 90 days means you finance three months of work, so the schedule changes: a larger deposit, monthly milestones, or a small percentage for extended terms.",
+        "Most clients asking for 90 days have never been told what it costs a small supplier, and the conversation is usually short and reasonable. The ones who refuse every adjustment are telling you something worth hearing before you start, which is cheaper to learn now than in the third month.",
       ],
     },
     {
@@ -75,6 +115,8 @@ export const PAYMENT_TERMS_POST: BlogPost = {
         "Is net 30 legally required? No, it is a convention. Many jurisdictions set a default or a maximum for commercial payments, and some allow interest on late payment by law, but the specifics vary. This is general information, not legal advice.",
         "Should I charge a late fee? Yes, if you will apply it. A fee you waive every time is worse than no fee, because it tells the client the terms are decorative.",
         "Can I pause work over one late invoice? If your terms say so, yes, and a short message is better than a silent stoppage: the invoice is nine days overdue, so I am pausing until it clears, and here is what that does to the dates.",
+        "Should I ask for a deposit as well as terms? Yes, for project work. Terms govern the balance; the deposit limits how much of the balance exists before you are paid anything.",
+        "What if the client pays late but always pays? Then they are a good client with a cash-flow cost, and the answer is a price or a schedule that reflects it, not a fight every month.",
       ],
     },
     {
