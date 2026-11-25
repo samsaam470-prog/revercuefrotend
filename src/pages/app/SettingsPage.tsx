@@ -1294,12 +1294,14 @@ function RevenueSection() {
       {data && (
         <>
           <div className="two-up" style={{ marginBottom: 16 }}>
-            <div>
-              <div className="muted" style={{ fontSize: 12 }}>Invoices sent</div>
-              <div style={{ fontSize: 20, fontWeight: 600 }}>
-                {formatCurrency(data.sent ?? 0)} ({data.sent_count ?? 0})
+            {data.sent !== undefined && (
+              <div>
+                <div className="muted" style={{ fontSize: 12 }}>Invoices sent</div>
+                <div style={{ fontSize: 20, fontWeight: 600 }}>
+                  {formatCurrency(data.sent)} ({data.sent_count ?? 0})
+                </div>
               </div>
-            </div>
+            )}
             <div>
               <div className="muted" style={{ fontSize: 12 }}>Pending payments</div>
               <div style={{ fontSize: 20, fontWeight: 600 }}>
