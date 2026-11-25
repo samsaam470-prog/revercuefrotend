@@ -111,9 +111,6 @@
   .grid-4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .plan-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
   .module-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -122,6 +119,21 @@
   }
   .card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  /* Log in and Start Free live in the mobile menu at this size. */
+  .pub-header {
+    padding: 0 16px;
+    gap: 12px;
+  }
+  .pub-actions > .btn {
+    display: none;
+  }
+  .logo-word {
+    font-size: 11px;
+    letter-spacing: 0.22em;
   }
 }
 
@@ -142,7 +154,6 @@
   .two-up,
   .module-grid,
   .card-grid,
-  .plan-grid,
   .grid-2,
   .grid-3,
   .grid-4 {

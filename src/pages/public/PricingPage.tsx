@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { Check, Minus, X } from "lucide-react";
 import { PLANS, formatStorage } from "../../lib/constants";
 import { PUBLIC_EMAILS, mailto } from "../../lib/contact";
@@ -85,32 +84,39 @@ export function PricingPage() {
 
   return (
     <div className="page page-wide">
-      <div className="page-head text-center" style={{ margin: "0 auto 48px" }}>
+      <div className="pricing-hero">
         <p className="eyebrow">Pricing</p>
         <h1>Start free. Upgrade when the thread pays for itself.</h1>
-        <p>
-          Free is available now. Starter, Growth and Scale are available through Whop checkout. Buy Growth and your
-          first 14 days include Scale access free — then Growth continues at $29/month. Teams is in beta.
+        <p className="pricing-hero-sub">
+          Free forever, or from $12 a month. Every plan is available today except Teams, which is in beta.
         </p>
       </div>
 
+      <div className="pricing-trial-banner">
+        <span className="trial-badge">
+          <span className="trial-badge-dot" />
+          Growth welcome
+        </span>
+        <div className="pricing-trial-banner-copy">
+          <strong>14 days of Scale access, free with Growth</strong>
+          <p>
+            Growth opens with the full Scale feature set — interest level, advanced tracking and the custom thank-you
+            page — then continues as Growth at $29/month. No extra charge for the trial.
+          </p>
+        </div>
+      </div>
+
       <div className="plan-grid">
-        {PLANS.map((plan) => {
+        {PLANS.filter((plan) => plan.id !== "teams").map((plan) => {
+          const features = plan.id === "growth" ? plan.features.slice(1, 6) : plan.features.slice(0, 5);
           return (
-            <div
-              key={plan.id}
-              className={`plan-card${plan.status === "beta" ? " dimmed" : ""}${plan.id === "growth" ? " featured" : ""}`}
-            >
+            <div key={plan.id} className={`plan-card${plan.id === "growth" ? " featured" : ""}`}>
               <div className="plan-card-heading">
                 <strong>{plan.name}</strong>
-                {plan.id === "growth" && (
-                  <span className="trial-badge">
-                    <span className="trial-badge-dot" />
-                    14 days of Scale free
-                  </span>
-                )}
+                {plan.id === "growth" && <span className="plan-ribbon">14 days of Scale free</span>}
               </div>
-              <div>
+
+              <div className="plan-price">
                 <div className="price">
                   {plan.price == null ? (
                     <>
@@ -124,24 +130,21 @@ export function PricingPage() {
                     </>
                   )}
                 </div>
-                <div className="role">{plan.role}</div>
-                <p className="plan-availability">
-                  {plan.id === "growth"
-                    ? "Buy Growth, get Scale access free for 14 days — price suggestion, interest level, advanced tracking and the custom thank-you page."
-                    : plan.status === "available"
-                      ? "Ready to use today"
-                      : "Early access — join the beta"}
-                </p>
+                <p className="role">{plan.role}</p>
               </div>
+
               <ul>
-                {plan.features.slice(0, 5).map((feature) => (
+                {features.map((feature) => (
                   <li key={feature}>
                     <Check size={13} /> <span>{feature}</span>
                   </li>
                 ))}
               </ul>
-              <div className="stack-2">
-                <span className={`badge plan-status-badge ${plan.status === "available" ? "badge-green" : plan.status === "beta" ? "badge-amber" : "badge-muted"}`}>
+
+              <div className="plan-card-foot">
+                <span
+                  className={`badge plan-status-badge ${plan.status === "available" ? "badge-green" : "badge-amber"}`}
+                >
                   {plan.statusLabel}
                 </span>
                 {plan.id === "free" ? (
@@ -159,14 +162,14 @@ export function PricingPage() {
                 ) : isAuthenticated ? (
                   <button
                     type="button"
-                    className="btn btn-primary btn-sm btn-full"
+                    className="btn btn-primary btn-sm btn-full pricing-cta"
                     disabled={checkingOut}
                     onClick={() => void startCheckout(plan.id)}
                   >
                     {checkingOut ? "Starting..." : `Choose ${plan.name}`}
                   </button>
                 ) : (
-                  <AuthActionStart className="btn btn-primary btn-sm btn-full">
+                  <AuthActionStart className="btn btn-primary btn-sm btn-full pricing-cta">
                     Choose {plan.name}
                   </AuthActionStart>
                 )}
@@ -176,10 +179,26 @@ export function PricingPage() {
         })}
       </div>
 
-      <p className="caption text-center" style={{ marginTop: 16 }}>
-        Prices are in US dollars, per month. Starter, Growth and Scale are available via Whop checkout. Growth starts
-        with 14 days of Scale access at no extra cost and then continues at $29/month. Teams is in beta; no charge
-        applies while it remains in beta.
+      <div className="plan-beta-strip">
+        <div className="plan-beta-strip-copy">
+          <strong>Teams</strong>
+          <p>
+            Everything on Scale plus the handoff dashboard, roles and attribution, bulk transfer and audit log. In beta
+            and free while it stays in beta.
+          </p>
+        </div>
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm pricing-cta pricing-cta-secondary"
+          onClick={() => setWaitlist({ plan: "teams" })}
+        >
+          Join the beta
+        </button>
+      </div>
+
+      <p className="pricing-footnote">
+        Prices are in US dollars, billed monthly through Whop. Cancel any time; downgrades take effect at the end of the
+        cycle. Teams is free while it stays in beta.
       </p>
 
       <section className="section">

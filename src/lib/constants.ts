@@ -90,7 +90,7 @@ export const PLANS: PlanDefinition[] = [
     price: 29,
     role: "Solo, power user.",
     status: "available",
-    statusLabel: "Available now — 14 days of Scale free",
+    statusLabel: "Available now",
     features: [
       "14 days of Scale access free, then Growth",
       "100 active documents",
