@@ -1761,6 +1761,208 @@ const BASE_GUIDES: Guide[] = [
     ],
   },
 
+  {
+    slug: "14-days-of-scale",
+    title: "Your 14 Days of Scale Access: Everything You Need to Know",
+    excerpt:
+      "Growth starts with fourteen days of normal Scale limits at no extra charge. Here is exactly what happens on day one, on day fourteen, and every day after.",
+    category: "Pricing",
+    readMinutes: 11,
+    updated: "2026-11-25",
+    visual: "PricingVisual",
+    sections: [
+      {
+        heading: "What the 14-day Scale bonus is",
+        paragraphs: [
+          "Every Growth subscription begins with fourteen days of Scale access at no additional charge. You pay the Growth price of $29 once, and for the first fourteen days you use Scale: its limits, its features, its retention. There is no second payment, no top-up and no hidden charge during the bonus.",
+          "The bonus is not a discount code and it is not a separate trial you have to remember to activate. It starts by itself when Whop confirms your Growth payment, and it ends by itself fourteen days later.",
+        ],
+        bullets: [
+          "You buy Growth at $29/month.",
+          "For fourteen days you have normal Scale limits.",
+          "Nothing extra is charged during those fourteen days.",
+          "On day fifteen the account continues on Growth unless you start a Scale subscription.",
+        ],
+      },
+      {
+        heading: "Who qualifies",
+        paragraphs: [
+          "The bonus belongs to a Growth purchase. If you buy Growth, you get it. Starter does not include it, and Scale does not need it because Scale is the plan the bonus gives you access to.",
+          "Each account can use the bonus once. It is attached to your first Growth subscription, so cancelling and buying Growth again does not restart a fresh fourteen days. This keeps the offer honest for the customers who are paying for it.",
+        ],
+      },
+      {
+        heading: "When the fourteen days start",
+        paragraphs: [
+          "The clock starts when Whop confirms the payment, not when you open the checkout and not when you click through the redirect. That matters: a checkout you abandon costs nothing and starts nothing.",
+          "The exact start and end times are stored in UTC on Revercue's servers. Your billing screen shows them in your own local time, along with how many days remain, so you never have to count on your fingers.",
+        ],
+      },
+      {
+        heading: "What you can use during the bonus",
+        paragraphs: [
+          "You get normal Scale limits, not a small sample of them. On Scale that means 300 active documents, 5 GB of storage, 24-month document retention, advanced tracking with the session timeline, custom thank-you pages, and the higher allowances for saved FAQs, saved templates, saved packages, protected documents and adaptive forms.",
+          "Your Growth allowance is not added on top during these fourteen days. The bonus is a clean swap to Scale: Scale limits, nothing combined, nothing stacked. Combining happens later, and only if you upgrade in the right window — that is the next part of this guide.",
+        ],
+        bullets: [
+          "300 active documents (Scale), not 100 + 300.",
+          "5 GB storage (Scale), not 1 GB + 5 GB.",
+          "24-month retention and the Scale feature set.",
+        ],
+      },
+      {
+        heading: "What happens when the fourteen days end",
+        paragraphs: [
+          "On day fifteen your account continues on the plan you actually bought: Growth. Your allowance returns to the Growth limits — 100 active documents and 1 GB of storage — and your documents are not deleted, not archived and not hidden. If you are using more than the Growth allowance, you keep access to what you already have and you are shown what is over the limit before anything new is blocked.",
+          "Nothing is charged on day fifteen beyond the $29 Growth renewal that Whop already schedules. The bonus ending is not an upsell trap and it does not create a surprise invoice.",
+        ],
+      },
+      {
+        heading: "How to continue using Scale",
+        paragraphs: [
+          "If you want to stay on Scale, start a Scale subscription from your billing screen. Revercue creates a new $49/month Whop checkout, you confirm it, and Scale becomes your plan. You keep the Scale limits you have been using, so there is no moment where your allowance drops and then comes back.",
+          "The button is labelled with the price and the fact that it is a new subscription. Nothing is charged until you complete the checkout.",
+        ],
+      },
+      {
+        heading: "Why continuing with Scale needs a new $49 checkout",
+        paragraphs: [
+          "Whop runs a trial on the plan that was bought, not on a different plan. Growth with a fourteen-day trial is one product, and Scale is another product with its own price and its own billing cycle. There is no documented way to move an existing membership from one product to another, so Revercue does the honest thing: it starts a new Scale subscription and then closes the old Growth one.",
+          "That is also why you may be asked for payment details again. Each separate checkout is its own payment authorisation. Nothing in this guide promises that your card will carry across automatically, and you should not assume it will.",
+        ],
+        bullets: [
+          "$49/month, billed by Whop on Scale's normal 30-day cycle.",
+          "A new checkout, with its own payment authorisation.",
+          "Your old Growth subscription is cancelled only after Scale is confirmed.",
+        ],
+      },
+      {
+        heading: "What happens to your original Growth subscription",
+        paragraphs: [
+          "The order is fixed, and it exists to protect you: Whop confirms the Scale payment first, Scale is activated in Revercue, and only then is the Growth membership cancelled. If the Scale checkout fails, is abandoned, or Whop does not confirm it, your Growth subscription is left exactly as it was. You never lose the plan you already paid for because a second checkout did not work.",
+          "Growth is cancelled at the end of its current billing period, not instantly, so the time you have already paid for is not thrown away. Revercue records the cancellation and the billing screen shows that the old plan will not renew.",
+        ],
+      },
+      {
+        heading: "The extra bonus: combined limits after you upgrade",
+        paragraphs: [
+          "If you upgrade to Scale while more than five days remain in your Growth billing period, you get a second, different bonus: for the rest of that original Growth period, your Growth capacity is added to your Scale capacity.",
+          "This is the only time limits are combined, and it is deliberately not the same thing as the fourteen-day bonus. During the first fourteen days you had Scale limits. After a Scale purchase with more than five days left, you have Scale limits plus Growth capacity, until the date your Growth period would have ended.",
+        ],
+        bullets: [
+          "Day 1: buy Growth, start 14 days of normal Scale limits.",
+          "Day 14: upgrade to Scale, with about 16 days left in the Growth period.",
+          "Days 14–30: combined Growth + Scale capacity.",
+          "Day 30: normal Scale limits.",
+        ],
+      },
+      {
+        heading: "Combined limits in numbers",
+        paragraphs: [
+          "The combination is simple addition, using the published plan allowances. Growth gives 1 GB of storage and 100 active documents. Scale gives 5 GB and 300 active documents. Together, for the remainder of the Growth period, you have 6 GB and 400 active documents.",
+          "The same principle applies to the other quantitative allowances, such as archive slots, protected documents and adaptive forms. The billing screen shows the combined number and the exact date it ends, so you are never guessing which limit is in force.",
+        ],
+        bullets: [
+          "Storage: 1 GB (Growth) + 5 GB (Scale) = 6 GB.",
+          "Active documents: 100 (Growth) + 300 (Scale) = 400.",
+          "The combined figures last only until the original Growth period end date.",
+        ],
+      },
+      {
+        heading: "If less than five days remain when you upgrade",
+        paragraphs: [
+          "In the last few days of a billing period, combining capacity for two or three days would be noise. Instead, Revercue lines the new Scale subscription up with the end of your Growth period: Whop starts Scale when the Growth period ends, so your first $49 charge lands on the normal renewal date rather than on top of a period you have already paid for.",
+          "During those few remaining days your Growth subscription keeps working as normal. The billing screen tells you the date Scale starts, so the handover is visible rather than implied.",
+        ],
+      },
+      {
+        heading: "When the combined allowance ends",
+        paragraphs: [
+          "The combined window ends at the original Growth billing-period end, in UTC, to the second. It is not extended because a payment webhook arrived late, and it is not extended because you did not open the app. The end date is stored when the upgrade completes and it does not move.",
+          "When the window closes, your limits return to normal Scale. The change is a capacity change only: your plan stays Scale, your billing stays $49/month, and nothing is deleted.",
+        ],
+      },
+      {
+        heading: "What happens if you exceed normal Scale limits",
+        paragraphs: [
+          "During the combined period you might create more than normal Scale allows. When the combined window ends, Revercue does not delete the difference. Deleting a customer's work to fit a limit would be the worst possible behaviour, so it does not happen.",
+          "What does happen: existing documents stay in your account and stay viewable and downloadable, and you are shown exactly how much you are over — how many active documents and how many megabytes. New publishing and new uploads are blocked until your usage is back inside the Scale allowance. Archiving is always available and always free, and archiving is usually the cheapest way back inside the limit.",
+        ],
+        bullets: [
+          "Nothing is deleted automatically.",
+          "Existing content stays readable and downloadable.",
+          "New usage over the limit is blocked, not silently accepted.",
+          "Archiving frees active slots immediately.",
+        ],
+      },
+      {
+        heading: "The two capacity options, if you need them",
+        paragraphs: [
+          "When you are over the Scale allowance, your billing screen shows two optional ways to protect what you have made. They are not shown to everyone, they are not public add-ons, and nothing is bought automatically. They appear only when your usage is actually over the limit.",
+          "Option A is Data Protection at $5, paid once and never renewed. It keeps the documents and files you already created beyond the Scale allowance, so nothing you have made is at risk, but it does not add ongoing capacity: new publishing still follows the Scale limit.",
+          "Option B is Data Protection + Extra Capacity at $12 per month. It keeps what you already created and adds 2 GB of storage and 100 active documents on top of Scale. It renews monthly and you can cancel it like any other subscription in Whop.",
+        ],
+        bullets: [
+          "Option A: $5 one-time, protects existing data only.",
+          "Option B: $12/month, protects existing data and adds 2 GB + 100 active documents.",
+          "Both are shown with their exact entitlements before you reach Whop.",
+        ],
+      },
+      {
+        heading: "If you decline both options",
+        paragraphs: [
+          "Declining is allowed and nothing bad happens to your files. Your existing documents remain in the account, viewable and downloadable, and you can archive them to get back inside the limit. What you cannot do is publish new documents or upload new files while you are over the allowance.",
+          "Revercue will not tell you your data is protected when it is not. If you decline both options, the billing screen says plainly that new usage is blocked and that existing content is kept.",
+        ],
+      },
+      {
+        heading: "How monthly Scale billing works",
+        paragraphs: [
+          "Scale is $49 per month, billed by Whop on its normal 30-day cycle from the date the subscription starts. The renewal date is shown in your billing screen. If a renewal fails, Whop retries, and Revercue keeps your plan while the retry is in progress rather than cutting you off over a temporary card problem.",
+          "Prices are in US dollars. Whop shows the final amount, currency handling and any applicable tax at checkout; Revercue does not add charges of its own.",
+        ],
+      },
+      {
+        heading: "How to downgrade",
+        paragraphs: [
+          "Downgrading follows the same principle as upgrading, in reverse: Revercue cancels the higher plan first and then shows you a Whop checkout for the lower one. The lower plan is activated only after Whop confirms the new payment, and you keep the access you have already paid for until the end of the current period.",
+          "Cancelling first is what prevents two active paid subscriptions at once. If the new checkout fails, you keep the higher plan until its paid period ends; you do not lose access mid-period because a replacement payment failed.",
+        ],
+        bullets: [
+          "The higher subscription is cancelled first.",
+          "A new checkout for the lower plan follows.",
+          "The lower plan activates only after payment is confirmed.",
+          "Nothing is repriced in place, and no partial refund is invented.",
+        ],
+      },
+      {
+        heading: "How to cancel",
+        paragraphs: [
+          "Cancelling from the billing screen stops the renewal at the end of the period you have paid for. You keep access until that date, and the screen says clearly that the plan will not renew. Your documents are kept; cancelling is not a delete button.",
+          "Changed your mind during the period? Use “Keep my subscription”, which reverses the pending cancellation with Whop as well as in Revercue, so the next renewal goes ahead. If the period has already ended, reactivating is a new subscription and a new checkout.",
+        ],
+      },
+      {
+        heading: "How pausing and resuming work",
+        paragraphs: [
+          "Pausing is a different action from cancelling. A pause stops billing and pauses your Revercue access; the subscription still exists and can be resumed. You can pause without choosing a resume date, and you can also set a date if you know when you will be back.",
+          "Resuming restarts the subscription and billing on Whop's next cycle. Your documents are untouched while you are paused, and they are waiting when you return. A pause is never treated as a disguised cancellation, and a cancellation is never quietly turned into a pause.",
+        ],
+      },
+      {
+        heading: "Frequently asked questions",
+        paragraphs: [
+          "Do I pay twice during the fourteen days? No. The bonus is included in the $29 Growth price. The first time a Scale charge can appear is when you deliberately start a Scale subscription after the bonus, or during it if you choose to upgrade early.",
+          "Will my Scale checkout use the card from Growth? Sometimes Whop offers a saved payment method, but you should expect to enter details again. Revercue does not promise that payment details carry between separate checkouts.",
+          "What if I upgrade on day 13 with 17 days left? You get the combined window for those 17 days after Scale activates, and then normal Scale limits. You do not get the Growth allowance added during the initial fourteen-day bonus.",
+          "What if I cancel Growth during the bonus? The bonus ends with the subscription, because it belongs to the Growth purchase. If you cancel at the end of a paid period, the bonus runs to that same date.",
+          "What if a payment fails? Whop retries and Revercue keeps your plan while it does. Access is only settled when the membership is actually cancelled or expires, not on the first failed attempt.",
+          "Does the combined window ever renew? No. It is a one-off window tied to the original Growth period, and it never repeats or extends.",
+          "Where can I see all of this? Settings → Plan & Billing shows the active bonus or combined window, the dates, the days remaining, your exact limits and any over-limit state, with the options available to you.",
+        ],
+      },
+    ],
+  },
 ];
 
 /*

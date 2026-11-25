@@ -16,6 +16,7 @@ import { ConfirmDialog } from "../../components/ui/ConfirmDialog";
 import { SkeletonLines } from "../../components/ui/Skeleton";
 import { PlanBadge } from "../../components/shared/PlanBadge";
 import { WaitlistModal } from "../../components/shared/WaitlistModal";
+import { SubscriptionLifecyclePanel } from "../../components/billing/SubscriptionLifecyclePanel";
 import { useAuth } from "../../hooks/useAuth";
 import { usePlanGate } from "../../hooks/usePlanGate";
 import { useToast } from "../../hooks/useToast";
@@ -317,10 +318,13 @@ function PlanSection() {
   const { user } = useAuth();
   const { plan, limits } = usePlanGate();
   const toast = useToast();
-  const queryClient = useQueryClient();
   const [waitlist, setWaitlist] = useState<PlanName | null>(null);
   const query = useQuery({ queryKey: ["settings", "plan"], queryFn: () => settingsApi.getPlan() });
   const subQuery = useQuery({ queryKey: ["settings", "billing-sub"], queryFn: () => settingsApi.billingSubscription() });
+  const lifecycleQuery = useQuery({
+    queryKey: ["settings", "billing-entitlements"],
+    queryFn: () => settingsApi.billingEntitlements(),
+  });
   const definition = PLANS.find((item) => item.id === plan)!;
 
   const usage = [
@@ -374,31 +378,62 @@ function PlanSection() {
         )}
       </div>
 
-      <div className="settings-card">
-        <h2>Subscription</h2>
-        {subQuery.isLoading && <SkeletonLines count={2} />}
-        {subQuery.data?.subscription ? (
-          <div className="stack-2">
-            <p className="muted" style={{ fontSize: 14 }}>
-              Plan: {subQuery.data.subscription.plan_key} · Status: {subQuery.data.subscription.status}
-              {subQuery.data.subscription.cancel_at_period_end ? " · Cancels at period end" : ""}
-            </p>
-            <div className="inline">
-              {subQuery.data.subscription.cancel_at_period_end ? (
-                <Button variant="secondary" onClick={async () => { await settingsApi.billingReactivate(); await queryClient.invalidateQueries({ queryKey: ["settings", "billing-sub"] }); toast.success("Reactivated."); }}>
-                  Reactivate
-                </Button>
-              ) : (
-                <Button variant="secondary" onClick={async () => { await settingsApi.billingCancel(); await queryClient.invalidateQueries({ queryKey: ["settings", "billing-sub"] }); toast.success("Cancellation scheduled."); }}>
-                  Cancel at period end
-                </Button>
-              )}
-            </div>
+      {lifecycleQuery.isLoading && (
+        <div className="settings-card">
+          <SkeletonLines count={3} />
+        </div>
+      )}
+      {lifecycleQuery.data && (
+        <SubscriptionLifecyclePanel
+          data={lifecycleQuery.data}
+          subscription={subQuery.data?.subscription}
+          onRefresh={() => {
+            void lifecycleQuery.refetch();
+            void subQuery.refetch();
+            void query.refetch();
+          }}
+        />
+      )}
+
+      {subQuery.data?.subscription && (
+        <div className="settings-card">
+          <h2>Manage subscription</h2>
+          <p className="muted" style={{ fontSize: 14 }}>
+            Plan: {subQuery.data.subscription.plan_key} · Status: {subQuery.data.subscription.status}
+            {subQuery.data.subscription.cancel_at_period_end ? " · Cancels at period end" : ""}
+          </p>
+          <div className="inline" style={{ marginTop: 10 }}>
+            {subQuery.data.subscription.cancel_at_period_end ? (
+              <Button
+                variant="secondary"
+                onClick={async () => {
+                  await settingsApi.billingReactivate();
+                  await subQuery.refetch();
+                  await lifecycleQuery.refetch();
+                  toast.success("Cancellation reversed. Billing continues.");
+                }}
+              >
+                Keep my subscription
+              </Button>
+            ) : (
+              <Button
+                variant="secondary"
+                onClick={async () => {
+                  await settingsApi.billingCancel();
+                  await subQuery.refetch();
+                  await lifecycleQuery.refetch();
+                  toast.success("Cancellation scheduled for the end of this period.");
+                }}
+              >
+                Cancel at period end
+              </Button>
+            )}
           </div>
-        ) : (
-          <p className="muted" style={{ fontSize: 14 }}>No subscription yet. Choose a plan on the pricing page.</p>
-        )}
-      </div>
+          <p className="caption" style={{ marginTop: 8 }}>
+            Cancelling keeps the access you have already paid for until the period ends, and never deletes your documents.
+          </p>
+        </div>
+      )}
 
       <div className="settings-card">
         <h2>Usage this month</h2>
@@ -478,19 +513,6 @@ function PlanSection() {
         )}
       </div>
 
-      <div className="settings-card">
-        <h2>Downgrade</h2>
-        <p className="muted" style={{ fontSize: 14 }}>
-          Downgrades take effect at the end of the billing cycle. You choose which documents to keep
-          within the new limit; the rest are archived with a PDF emailed to you and a 7-day grace
-          period before the new archive retention applies.
-        </p>
-        <div>
-          <Button variant="secondary" onClick={() => setWaitlist(null)} disabled>
-            Downgrade is handled by the team
-          </Button>
-        </div>
-      </div>
 
       <WaitlistModal
         open={Boolean(waitlist)}

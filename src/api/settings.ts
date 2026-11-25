@@ -1,4 +1,5 @@
 import { api } from "./client";
+import type { BillingEntitlements, EntitlementSnapshot } from "../types/billing";
 import type {
   PaymentRow,
   PlanName,
@@ -26,7 +27,9 @@ export interface PlanUsage {
     storage_gb: number;
     archive_count: number;
     password_protected: number;
+    bonus_active?: boolean;
   };
+  entitlements?: EntitlementSnapshot;
   payments: PaymentRow[];
 }
 
@@ -80,6 +83,39 @@ export const settingsApi = {
   billingReactivate: () => api.post<{ success: true }>("/api/settings/billing/reactivate", {}),
   billingChangePlan: (plan: string) => api.post<{ success: true; scheduled: boolean }>("/api/settings/billing/change-plan", { plan }),
   billingPayments: () => api.get<{ payments: any[] }>("/api/settings/billing/payments"),
+
+  billingEntitlements: () => api.get<BillingEntitlements>("/api/settings/billing/entitlements"),
+  billingUpgrade: (plan: string) =>
+    api.post<{
+      success: true;
+      transition_id: string;
+      checkout_url: string;
+      trial_days: number;
+      mode: "immediate" | "short_cycle";
+      starts_at: string;
+      combined_ends_at: string | null;
+    }>("/api/settings/billing/upgrade", { plan }),
+  billingDowngrade: (plan: string) =>
+    api.post<{ success: true; transition_id: string; checkout_url: string; canceled_membership: boolean }>(
+      "/api/settings/billing/downgrade",
+      { plan },
+    ),
+  billingVerify: (transition_id: string, membership_id?: string, payment_id?: string) =>
+    api.post<{ verified: boolean; pending: boolean }>("/api/settings/billing/verify", {
+      transition_id,
+      membership_id,
+      payment_id,
+    }),
+  billingCancelTransition: (id: string) =>
+    api.post<{ success: true }>(`/api/settings/billing/transition/${id}/cancel`, {}),
+  billingPause: (until?: string) =>
+    api.post<{ success: true; paused: boolean; resume_at: string | null }>("/api/settings/billing/pause", { until }),
+  billingResume: () => api.post<{ success: true; paused: boolean }>("/api/settings/billing/resume", {}),
+  billingCapacityCheckout: (offer: string) =>
+    api.post<{ success: true; addon_id: string; transition_id: string; checkout_url: string }>(
+      "/api/settings/billing/capacity/checkout",
+      { offer },
+    ),
 
   changePassword: (body: { current_password: string; new_password: string }) =>
     api.post<{ success: true }>("/api/settings/security/change-password", body),

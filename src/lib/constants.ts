@@ -230,6 +230,23 @@ export function planHasFeature(plan: PlanName, feature: Feature): boolean {
   return PLAN_ORDER.indexOf(plan) >= PLAN_ORDER.indexOf(FEATURE_MIN_PLAN[feature]);
 }
 
+/**
+ * The commercial facts about the Scale bonus, kept in one place so the pricing
+ * page, the billing screen and the guide cannot drift. These mirror
+ * revercuebackend/src/config/billing.ts.
+ */
+export const SCALE_BONUS = {
+  days: 14,
+  growthPrice: 29,
+  scalePrice: 49,
+  shortCycleDays: 5,
+  protectPrice: 5,
+  protectPlusPrice: 12,
+  protectPlusStorageGb: 2,
+  protectPlusDocuments: 100,
+  guidePath: "/guides/14-days-of-scale",
+} as const;
+
 export const SUBSCRIPTION_CREDIT = "Revercue";
 export const TOS_VERSION = "2026-01";
 
