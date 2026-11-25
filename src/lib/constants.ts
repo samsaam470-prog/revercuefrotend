@@ -210,7 +210,7 @@ const FEATURE_MIN_PLAN: Record<Feature, PlanName> = {
   password_protected: "growth",
   email_notifications: "growth",
   adaptive_forms: "growth",
-  basic_suggestions: "growth",
+  basic_suggestions: "free",
   advanced_tracking: "scale",
   interest_level: "scale",
   revenue_tracker: "scale",
