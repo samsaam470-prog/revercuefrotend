@@ -779,5 +779,73 @@
         ]
       }
     ]
+  },
+  {
+    "slug": "public-launch-date-announced",
+    "date": "2026-11-08",
+    "status": "Announced",
+    "title": "Public launch date announced: 25 November 2026",
+    "summary": "On 8 November 2026 the founder announced the date of Revercue's public launch: 25 November 2026. Until then Revercue is in beta with a small group of users. On the launch date Revercue opens to everyone, and the core features that work today will be available to any freelancer who signs up. Teams stays in beta, and integrations remain in planning. This announcement explains what the date means, what it does not mean, and how we will keep you informed if anything changes before it arrives. The date was chosen to give the team time to finish the open work and to let the beta group check the most important paths once more. Anything that changes before 25 November will be posted on this page first, with the new date and the reason for it, so the date stays a commitment rather than a hope.",
+    "links": [
+      {
+        "label": "Beta page",
+        "to": "/beta"
+      },
+      {
+        "label": "Why Teams is in beta",
+        "to": "/guides/why-teams-is-in-beta"
+      },
+      {
+        "label": "Pricing",
+        "to": "/pricing"
+      }
+    ],
+    "body": [
+      {
+        "heading": "A founder's message",
+        "paragraphs": [
+          "Today I am giving you a date. Revercue will launch publicly on 25 November 2026.",
+          "This is the first time I have given a public date for Revercue, and I want to be careful with it. A date is a promise, and I would rather make one we can keep than a bold one we miss. I have chosen 25 November because it gives the team time to finish the work that is still open, and because it lets the people in beta help us check the important paths one more time before we open the doors.",
+          "Until the launch, Revercue stays in beta. The people using it now are a small group, and their reports have already changed the product in ways I did not expect. That is the reason beta exists, and it is the reason I am grateful to everyone who has used it so far.",
+          "If something changes before the date, I will say so here. I would rather you hear about a change from me than find it out on the day.",
+          "— Founder, Revercue"
+        ]
+      },
+      {
+        "heading": "What the date means",
+        "paragraphs": [
+          "On 25 November 2026 Revercue is open to everyone. Anyone who signs up can use the core path from proposal to contract to requirement form to invoice to the client record. The features that work today are the ones we plan to open, and we will describe each plan and its limits on the pricing page so you can check what you are buying before you pay.",
+          "The public launch is also the point where we stop describing the product as a beta for new users. Existing beta users keep their accounts and their documents. Nothing you have built in beta is removed by the launch."
+        ]
+      },
+      {
+        "heading": "What the date does not mean",
+        "paragraphs": [
+          "The launch does not mean every feature is finished. Teams is still in beta, and it will stay in beta after the launch date until it is ready for the public plans. Integrations with other tools are still in planning, and there is no public API today, so the launch does not change that.",
+          "It also does not mean we will never change anything. Revercue will keep changing after 25 November, because the reports from real use keep showing us what to improve. We will record every change on the changelog, with what it does and what it does not do."
+        ]
+      },
+      {
+        "heading": "What is already in place",
+        "paragraphs": [
+          "Several parts of Revercue have already been used by people outside the team. Proposals can be shared as a link, and clients can approve or decline from the page without an account. Contracts are signed with a typed full name, an explicit consent tick and a recorded date. Requirement forms collect what you need before work starts. Invoices are numbered automatically and tracked until they are paid, and the client record keeps the thread in one place.",
+          "These are the parts I am most confident in, because they have been used on real client work. The parts I am less certain about are the ones still in planning or beta, and I will say so wherever it matters."
+        ]
+      },
+      {
+        "heading": "How we will keep you informed",
+        "paragraphs": [
+          "Announcements will record each dated change, including any change to the launch date. The changelog will record each product change, and the guides will describe how each feature works. If you want to follow the work closely, the announcements page is the place to start, and the contact form reaches a person who reads the messages.",
+          "If the date moves, you will see it here first, with the new date and the reason for it."
+        ]
+      },
+      {
+        "heading": "What we want from you before 25 November",
+        "paragraphs": [
+          "Use the product for a real piece of work if you can, and tell us where it gets in your way. The most useful feedback is specific: what you were trying to do, what you expected, and what happened instead. Send it through the contact form, and include the page or document you were working on.",
+          "Thank you for trusting a product that is still being built. The date is a commitment to you, and I intend to keep it."
+        ]
+      }
+    ]
   }
 ]
