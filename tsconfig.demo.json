@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["vite/client"]
+  },
+  "include": ["demo", "src", "vite.demo.config.ts"]
+}
