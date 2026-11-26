@@ -101,7 +101,7 @@ export function PricingPage() {
           <strong>14 days of Scale access, free with Growth</strong>
           <p>
             Growth opens with the full Scale feature set — interest level, advanced tracking and the custom thank-you
-            page — then continues as Growth at $29/month. No extra charge for the trial.
+            page — then continues as Growth at $29/month. No extra charge for the 14 days of Scale access.
           </p>
         </div>
       </div>

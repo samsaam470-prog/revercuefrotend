@@ -258,7 +258,8 @@
       {
         "heading": "What proof of payment does",
         "paragraphs": [
-          "The client's upload is evidence, and it is attached to the invoice so you can see it next to the amount. Revercue does not verify the upload automatically. You review it, and when you are satisfied the money has arrived, you confirm the payment. Only the confirmation moves the invoice from pending to paid in the revenue overview."
+          "The client's upload is evidence, and it is attached to the invoice so you can see it next to the amount. Revercue does not verify the upload automatically. You review it, and when you are satisfied the money has arrived, you confirm the payment. Only the confirmation moves the invoice from pending to paid in the revenue overview.",
+          "In both methods you confirm the payment yourself. Opening a payment link does not prove that money moved, and an uploaded proof is a document, not a bank record. Revercue cannot see your bank account, so the confirmation is your check against the money that actually arrived."
         ]
       },
       {

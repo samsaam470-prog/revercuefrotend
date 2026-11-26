@@ -1391,7 +1391,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "Growth: project costs, profit and all-time profit",
         paragraphs: [
           "Growth adds the cost side. You record project expenses with an amount, a date, a category such as hosting, editing or building, the platform or provider where you paid for it, and an optional note. Recording starts on Growth, so Free and Starter do not show the expense form.",
-          "The first fourteen days of Growth also open the Scale side of the overview: the price suggestion reads the same costs and confirmed payments while the trial runs, so the first fortnight is the time to price real work with it. When the fourteen days end the expenses and the profit stay; the price suggestion waits until you upgrade to Scale.",
+          "The first fourteen days of Growth also open the Scale side of the overview: the price suggestion reads the same costs and confirmed payments while the 14 days run, so the first fortnight is the time to price real work with it. When the fourteen days end the expenses and the profit stay; the price suggestion waits until you upgrade to Scale.",
           "With costs recorded, the overview shows the project expenses, the profit and the all-time profit. Profit is the confirmed revenue minus the recorded expenses. The expense list under the figures keeps each recorded cost with its category, platform, date and note, so a high month can be checked against the tools and suppliers that produced it. The all-time profit is the same calculation across every date, which is the number to watch when you decide where to spend your time.",
         ],
       },
@@ -1827,7 +1827,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Why continuing with Scale needs a new $49 checkout",
         paragraphs: [
-          "Whop runs a trial on the plan that was bought, not on a different plan. Growth with a fourteen-day trial is one product, and Scale is another product with its own price and its own billing cycle. There is no documented way to move an existing membership from one product to another, so Revercue does the honest thing: it starts a new Scale subscription and then closes the old Growth one.",
+          "Whop applies the fourteen days to the plan that was bought, not to a different plan. Growth with its fourteen days of Scale access is one product, and Scale is another product with its own price and its own billing cycle. There is no documented way to move an existing membership from one product to another, so Revercue does the honest thing: it starts a new Scale subscription and then closes the old Growth one.",
           "That is also why you may be asked for payment details again. Each separate checkout is its own payment authorisation. Nothing in this guide promises that your card will carry across automatically, and you should not assume it will.",
         ],
         bullets: [

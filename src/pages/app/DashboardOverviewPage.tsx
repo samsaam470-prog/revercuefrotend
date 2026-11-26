@@ -144,7 +144,7 @@ export function DashboardOverviewPage() {
             </strong>
             <p style={{ fontSize: 13, marginTop: 4 }}>
               Your first 14 days include the price suggestion, interest level, advanced tracking and the custom
-              thank-you page. {user.trial.days_left} {user.trial.days_left === 1 ? "day" : "days"} left, until{" "}
+              thank-you page. {user.trial.days_left} {user.trial.days_left === 1 ? "day" : "days"} of Scale access left, until{" "}
               {new Date(user.trial.ends_at).toLocaleDateString()}. After that the account continues on Growth.
             </p>
           </div>
