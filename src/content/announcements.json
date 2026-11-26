@@ -143,7 +143,8 @@
       {
         "heading": "What was introduced",
         "paragraphs": [
-          "On 18 November 2026 Revercue introduced e-signature for contracts. The signature step asks the signer to type their full name, to tick an explicit consent box that says they agree to the terms shown, and the date of signing is recorded. The record keeps the exact version of the contract that was signed, so it is clear what the signer agreed to."
+          "On 18 November 2026 Revercue introduced e-signature for contracts. The signature step asks the signer to type their full name, to tick an explicit consent box that says they agree to the terms shown, and the date of signing is recorded. The record keeps the exact version of the contract that was signed, so it is clear what the signer agreed to.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
         ]
       },
       {
@@ -198,7 +199,8 @@
       {
         "heading": "What the overview shows",
         "paragraphs": [
-          "The revenue overview is a record of the money connected to your client work. It does not connect to your bank and it does not match payments automatically. A payment counts as confirmed only when you confirm it on the invoice, so the figures are as current as your confirmations."
+          "The revenue overview is a record of the money connected to your client work. It does not connect to your bank and it does not match payments automatically. A payment counts as confirmed only when you confirm it on the invoice, so the figures are as current as your confirmations.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
         ]
       },
       {
@@ -254,7 +256,8 @@
       {
         "heading": "What was introduced",
         "paragraphs": [
-          "On 21 November 2026 Revercue added a second way for clients to pay an invoice. You can show your bank details on the invoice, and the client can upload proof of payment, such as a transfer confirmation, to the invoice page. The first way, an external payment link that you provide, is still available."
+          "On 21 November 2026 Revercue added a second way for clients to pay an invoice. You can show your bank details on the invoice, and the client can upload proof of payment, such as a transfer confirmation, to the invoice page. The first way, an external payment link that you provide, is still available.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
         ]
       },
       {
@@ -552,7 +555,8 @@
         "heading": "What was introduced",
         "paragraphs": [
           "On 13 November 2026 Revercue introduced the communication log and the writing helper. Neither one is gated by plan, so Free, Starter, Growth, Scale and Teams users all have the same access to both.",
-          "Introducing both on the same day was deliberate. The log keeps the record of what was said, and the helper helps with how a message or document is worded. They are separate tools, and neither depends on the other, so you can use either one without the other."
+          "Introducing both on the same day was deliberate. The log keeps the record of what was said, and the helper helps with how a message or document is worded. They are separate tools, and neither depends on the other, so you can use either one without the other.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
         ]
       },
       {
@@ -609,7 +613,8 @@
       {
         "heading": "What was announced",
         "paragraphs": [
-          "On 15 November 2026 Revercue made visual intelligence and UI elements available on the Growth and Scale plans. It is not available on Free or Starter on this date. It will be available to every plan on 19 November 2026, as described in a separate announcement."
+          "On 15 November 2026 Revercue made visual intelligence and UI elements available on the Growth and Scale plans. It is not available on Free or Starter on this date. It will be available to every plan on 19 November 2026, as described in a separate announcement.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
         ]
       },
       {
@@ -679,7 +684,8 @@
         "heading": "What changed on 19 November",
         "paragraphs": [
           "On 19 November 2026 visual intelligence and UI elements became available on every plan. On 15 November they were limited to Growth and Scale. Free and Starter users can now place visuals and use UI elements in proposals, contracts and invoices in the same way as Growth and Scale users.",
-          "Ask the helper is also available on every plan. It is the writing helper inside the builders, and it was introduced on 13 November, when it was not gated by plan."
+          "Ask the helper is also available on every plan. It is the writing helper inside the builders, and it was introduced on 13 November, when it was not gated by plan.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
         ]
       },
       {
@@ -746,7 +752,8 @@
       {
         "heading": "What was introduced",
         "paragraphs": [
-          "On 22 November 2026 Revercue introduced the interest level for each client. It is available on Scale, and Teams includes everything on Scale. Growth, Starter and Free do not show the interest level."
+          "On 22 November 2026 Revercue introduced the interest level for each client. It is available on Scale, and Teams includes everything on Scale. Growth, Starter and Free do not show the interest level.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
         ]
       },
       {
