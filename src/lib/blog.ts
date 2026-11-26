@@ -898,11 +898,14 @@ const CLOSERS_TWO: Record<string, { heading?: string; paragraphs: string[] }[]> 
   ],
 };
 
-export const BLOG_POSTS: BlogPost[] = [...BASE_POSTS, ...BLOG_2027_POSTS].map((post) => ({
-  ...post,
-  readMinutes: post.readMinutes + 2,
-  body: [...post.body, ...(CLOSERS[post.slug] ?? []), ...(CLOSERS_TWO[post.slug] ?? [])],
-}));
+export const BLOG_POSTS: BlogPost[] = [...BASE_POSTS, ...BLOG_2027_POSTS]
+  .map((post) => ({
+    ...post,
+    readMinutes: post.readMinutes + 2,
+    body: [...post.body, ...(CLOSERS[post.slug] ?? []), ...(CLOSERS_TWO[post.slug] ?? [])],
+  }))
+  // Newest first: the index uses the first entry as the featured article.
+  .sort((a, b) => b.date.localeCompare(a.date));
 
 export function postBySlug(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((post) => post.slug === slug);
