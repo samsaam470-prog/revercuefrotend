@@ -424,7 +424,7 @@ function ContractCanvas({ id }: { id: string }) {
       blocks,
       brief: briefRef.current,
       kind: "contract",
-      withVisuals: false,
+      withVisuals: true,
       onStage: step,
     })
       .then(async (result) => {
@@ -586,6 +586,7 @@ function ContractCanvas({ id }: { id: string }) {
           { type: "divider", label: "Divider", hint: "A line" },
           { type: "two_column", label: "Two columns", hint: "Side by side" },
           { type: "timeline", label: "Timeline", hint: "Milestones" },
+          { type: "diagram", label: "Process diagram", hint: "Editable steps" },
           { type: "signature", label: "Signature", hint: "Two signature lines" },
         ]}
         clientName={contract.client_name || "the client"}

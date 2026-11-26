@@ -7,7 +7,15 @@ import {
   type ResearchFacts,
 } from "./brief";
 import { isAvailable, organize as helperOrganize, visualize } from "./webllm";
+import {
+  filterVisualSuggestions,
+  insertVisuals,
+  pipelineVisualCount,
+  planVisualRequests,
+  readVisualAssets,
+} from "./visual-document";
 import type { Block } from "../types";
+import type { VisualRequestPayload } from "../types/visuals";
 
 export interface ResearchNote {
   title: string;
@@ -281,12 +289,18 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
       : "Draft copy assembled locally with deterministic patterns.";
   await stage("writing", "done", organizeWarnings.length ? `${writingDetail} ${organizeWarnings.join(" ")}` : writingDetail);
 
-  await stage("visuals", "running", "Resolving real image assets; no synthetic charts or placeholder images.");
-  const visuals = withVisuals ? await placeVisuals(id, written, enriched) : written;
-  const visualCount = visuals.filter((block) => block.meta?.fromPipeline).length;
-  await stage("visuals", visualCount > 0 ? "done" : "skipped", visualCount > 0
-    ? `${visualCount} real visual asset(s) added.`
-    : "No suitable visual asset was available; the document remains text-first.");
+  await stage("visuals", "running", "Finding visuals that fit each section; charts need real data.");
+  const visualResult = withVisuals
+    ? await placeVisuals(id, written, enriched, input.kind)
+    : { blocks: written, inserted: 0, attempted: 0, skipped: 0 };
+  const visuals = visualResult.blocks;
+  const visualCount = pipelineVisualCount(visuals);
+  const visualDetail = visualCount > 0
+    ? `${visualCount} visual asset(s) added as editable ${visualCount === 1 ? "block" : "blocks"}.`
+    : visualResult.attempted > 0
+      ? "No suitable visual asset could be resolved, so the document stayed text-first. Nothing was invented."
+      : "No section needed a visual; the document remains text-first.";
+  await stage("visuals", visualCount > 0 ? "done" : "skipped", visualDetail);
 
   await stage("checks", "running", "Checking editable blocks and preserving missing facts as prompts.");
   const finalBlocks = visuals.length ? visuals : written;
@@ -303,90 +317,47 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
   };
 }
 
-/** A deterministic visual plan, used when the helper cannot decide. */
-function patternRequests(blocks: Block[], brief: Brief) {
-  const requests: { afterBlockId: string; kind: string; type?: string; query: string; section_id?: string }[] = [];
-  const intro = blocks.find((block) => block.type === "paragraph");
 
-  const subject = brief.service || brief.industry || "the work";
-  if (intro && !blocks.some((block) => block.type === "image" && block.url)) {
-    requests.push({ afterBlockId: intro.id, type: "image", kind: "image", query: subject, section_id: intro.id });
-  }
+/**
+ * Resolves the visual plan once, then converts each returned asset into the
+ * block type it actually is. An empty or failed response leaves the written
+ * document untouched: visuals are an enhancement, never a dependency.
+ */
+async function placeVisuals(
+  id: string,
+  blocks: Block[],
+  brief: Brief,
+  kind: "proposal" | "contract",
+): Promise<{ blocks: Block[]; inserted: number; attempted: number; skipped: number }> {
+  const planned = planVisualRequests({ blocks, brief, kind });
+  const requests: VisualRequestPayload[] = [...planned];
 
-  return requests;
-}
-
-function assetUrl(asset: unknown): string | undefined {
-  if (typeof asset === "string") return asset || undefined;
-  if (!asset || typeof asset !== "object") return undefined;
-  const record = asset as Record<string, unknown>;
-  for (const key of ["url", "src", "image_url", "imageUrl", "file_url"]) {
-    const value = record[key];
-    if (typeof value === "string" && value) return value;
-  }
-  return undefined;
-}
-
-/** Ask the backend's element engine for the visuals, then place them. */
-async function placeVisuals(id: string, blocks: Block[], brief: Brief): Promise<Block[]> {
-  let requests: any[] = [];
-  if (isAvailable()) {
+  if (isAvailable() && planned.length < 6) {
     try {
-      requests = await visualize({ blocks }, brief.sections);
+      const suggestions = await visualize({ blocks }, brief.sections);
+      requests.push(
+        ...filterVisualSuggestions(suggestions, { blocks, kind, existing: planned }),
+      );
     } catch {
-      // Fall back to deterministic image requests when on-device suggestions fail.
+      // On-device suggestions are optional; the deterministic plan stands.
     }
   }
-  if (!requests.length) requests = patternRequests(blocks, brief);
-  if (!requests.length) return blocks;
 
-  const normalized: any[] = requests.map((r: any) => ({
-    afterBlockId: r.afterBlockId,
-    type: r.type || r.kind,
-    kind: r.kind || r.type,
-    query: r.query,
-    section_id: r.afterBlockId,
-  }));
-  let assets: Record<string, unknown> = {};
+  if (!requests.length) return { blocks, inserted: 0, attempted: 0, skipped: 0 };
+
+  let assets = [];
   try {
-    const response = await pipelineApi.visuals({ document: { blocks }, requests: normalized });
-    assets = response.assets ?? {};
+    const response = await pipelineApi.visuals({ document: { blocks }, requests });
+    assets = readVisualAssets(response);
   } catch {
-    /* the draft still stands without the extra visuals */
+    return { blocks, inserted: 0, attempted: requests.length, skipped: requests.length };
   }
 
-  const stamp = Date.now().toString(36);
-  const next = [...blocks];
-
-  normalized.forEach((request, index) => {
-    if (!request.afterBlockId) return;
-    const at = next.findIndex((block) => block.id === request.afterBlockId);
-    if (at < 0) return;
-    if (next.some((block) => block.meta?.fromPipeline === request.query)) return;
-
-    const rawAsset = assets[request.afterBlockId];
-    const url = assetUrl(rawAsset);
-    const asset = rawAsset && typeof rawAsset === "object" ? rawAsset as Record<string, unknown> : {};
-    const kind = request.kind || request.type;
-    const attribution = typeof asset.attribution === "string"
-      ? asset.attribution
-      : [asset.creator, asset.license, asset.source].filter((value): value is string => typeof value === "string" && Boolean(value)).join(" · ");
-
-    // Only a real asset becomes a visual. A chart drawn from invented bars is
-    // worse than no chart: it looks like data when it is decoration.
-    const visual: Block | null = url
-      ? {
-          id: `${stamp}_v${index}`,
-          type: "image",
-          url,
-          alt: request.query,
-          caption: attribution || undefined,
-          meta: { fromPipeline: request.query, visual: kind, ...(typeof asset.license === "string" ? { license: asset.license } : {}), ...(typeof asset.source === "string" ? { source: asset.source } : {}) },
-        }
-      : null;
-
-    if (visual) next.splice(at + 1, 0, visual);
-  });
-
-  return next.map((block) => ({ ...block, meta: { ...block.meta, pipelineId: id } }));
+  const result = insertVisuals(blocks, assets, { stamp: `${id}_${Date.now().toString(36)}` });
+  return {
+    blocks: result.blocks.map((block) => ({ ...block, meta: { ...block.meta, pipelineId: id } })),
+    inserted: result.inserted,
+    attempted: requests.length,
+    skipped: result.skipped,
+  };
 }

@@ -29,6 +29,22 @@ export function PropertyPanel({
   const [uploadError, setUploadError] = useState("");
 
   const setItems = (items: Block["items"]) => onChange({ items });
+  const setMeta = (patch: Record<string, string | number | boolean>) =>
+    onChange({ meta: { ...block?.meta, ...patch } });
+  const chart = block?.chart ?? null;
+  const updateChart = (next: { labels?: string[]; values?: number[]; kind?: "bar" | "line"; unit?: string }) => {
+    const labels = next.labels ?? chart?.labels ?? [];
+    const values = next.values ?? chart?.values ?? [];
+    onChange({
+      chart: {
+        kind: next.kind ?? chart?.kind ?? "bar",
+        labels,
+        values,
+        unit: next.unit !== undefined ? next.unit : chart?.unit,
+        title: chart?.title,
+      },
+    });
+  };
 
   if (!block) {
     return (
@@ -180,6 +196,172 @@ export function PropertyPanel({
             placeholder="https://"
           />
           <Input id="block-alt" label="Alt text" value={block.alt || ""} onChange={(value) => onChange({ alt: value })} helper="Describe what the image shows." />
+          <Input id="block-caption" label="Caption" value={block.caption || ""} onChange={(value) => onChange({ caption: value })} />
+          <div className="input-group">
+            <label htmlFor="image-width">Width: {Number(block.meta?.width ?? 100)}%</label>
+            <input
+              id="image-width"
+              type="range"
+              min={25}
+              max={100}
+              step={5}
+              value={Number(block.meta?.width ?? 100)}
+              onChange={(event) => setMeta({ width: Number(event.target.value) })}
+            />
+          </div>
+        </>
+      )}
+
+      {block.type === "icon" && (
+        <>
+          <Input
+            id="icon-id"
+            label="Icon id"
+            value={block.icon || ""}
+            onChange={(value) => {
+              const icon = value.trim();
+              onChange({ icon });
+              setMeta({ icon });
+            }}
+            helper="An Iconify id, for example mdi:handshake."
+          />
+          <div className="input-group">
+            <label htmlFor="icon-color">Colour</label>
+            <input
+              id="icon-color"
+              type="color"
+              value={block.color || "#c9a961"}
+              onChange={(event) => onChange({ color: event.target.value })}
+              style={{ height: 38, padding: 4 }}
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="icon-size">Size: {Number(block.meta?.size ?? 44)}px</label>
+            <input
+              id="icon-size"
+              type="range"
+              min={16}
+              max={96}
+              step={4}
+              value={Number(block.meta?.size ?? 44)}
+              onChange={(event) => setMeta({ size: Number(event.target.value) })}
+            />
+          </div>
+          <Input id="icon-alt" label="Alt text" value={block.alt || ""} onChange={(value) => onChange({ alt: value })} />
+          <Input id="icon-caption" label="Caption" value={block.caption || ""} onChange={(value) => onChange({ caption: value })} />
+        </>
+      )}
+
+      {block.type === "graph" && (
+        <>
+          <Select
+            id="chart-kind"
+            label="Chart type"
+            value={chart?.kind || "bar"}
+            options={[
+              { value: "bar", label: "Bar" },
+              { value: "line", label: "Line" },
+            ]}
+            onChange={(value) => updateChart({ kind: value as "bar" | "line" })}
+          />
+          <Input id="chart-title" label="Chart title" value={block.text || ""} onChange={(value) => onChange({ text: value })} />
+          <Input id="chart-unit" label="Unit" value={chart?.unit || ""} onChange={(value) => updateChart({ unit: value })} helper="Shown next to each value." />
+          {(chart?.labels ?? []).map((label, index) => (
+            <div className="two-up" key={index} style={{ gap: 8 }}>
+              <Input
+                id={`chart-label-${index}`}
+                label={`Point ${index + 1}`}
+                value={label}
+                onChange={(value) => updateChart({ labels: (chart?.labels ?? []).map((entry, i) => (i === index ? value : entry)) })}
+              />
+              <Input
+                id={`chart-value-${index}`}
+                label="Value"
+                type="number"
+                value={String(chart?.values[index] ?? 0)}
+                onChange={(value) => updateChart({ values: (chart?.values ?? []).map((entry, i) => (i === index ? Number(value) : entry)) })}
+              />
+            </div>
+          ))}
+          <div className="inline" style={{ gap: 8 }}>
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              onClick={() =>
+                updateChart({
+                  labels: [...(chart?.labels ?? []), `Point ${(chart?.labels?.length ?? 0) + 1}`],
+                  values: [...(chart?.values ?? []), 0],
+                })
+              }
+            >
+              + Add point
+            </button>
+            {(chart?.labels?.length ?? 0) > 2 && (
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                onClick={() =>
+                  updateChart({
+                    labels: (chart?.labels ?? []).slice(0, -1),
+                    values: (chart?.values ?? []).slice(0, -1),
+                  })
+                }
+              >
+                Remove last
+              </button>
+            )}
+          </div>
+          <p className="caption">A chart is drawn from these numbers only; at least two points are needed.</p>
+          <Input id="chart-caption" label="Caption" value={block.caption || ""} onChange={(value) => onChange({ caption: value })} />
+        </>
+      )}
+
+      {block.type === "diagram" && (
+        <>
+          <Textarea
+            id="diagram-steps"
+            label="Steps"
+            value={(block.diagram?.steps ?? []).join("\n")}
+            onChange={(value) =>
+              onChange({ diagram: { steps: value.split("\n").map((step) => step.trim()).filter(Boolean), direction: block.diagram?.direction, source: block.diagram?.source } })
+            }
+            helper="One step per line, in order. At least two."
+            rows={6}
+          />
+          <Select
+            id="diagram-direction"
+            label="Direction"
+            value={block.diagram?.direction || "LR"}
+            options={[
+              { value: "LR", label: "Left to right" },
+              { value: "TB", label: "Top to bottom" },
+            ]}
+            onChange={(value) => onChange({ diagram: { steps: block.diagram?.steps ?? [], direction: value as "LR" | "TB", source: block.diagram?.source } })}
+          />
+          <Input id="diagram-caption" label="Caption" value={block.text || ""} onChange={(value) => onChange({ text: value })} />
+        </>
+      )}
+
+      {block.type === "svg" && (
+        <>
+          {block.svg ? (
+            <img
+              src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(block.svg)}`}
+              alt={block.alt || "Illustration"}
+              style={{ width: "100%", borderRadius: 6, border: "1px solid var(--border)" }}
+            />
+          ) : null}
+          <Input id="svg-url" label="SVG URL" value={block.url || ""} onChange={(value) => onChange({ url: value })} placeholder="https://" />
+          <Textarea
+            id="svg-source"
+            label="SVG source"
+            value={block.svg || ""}
+            onChange={(value) => onChange({ svg: value })}
+            helper="Paste the <svg> element. Scripts and event handlers are removed."
+            rows={5}
+          />
+          <Input id="svg-alt" label="Alt text" value={block.alt || ""} onChange={(value) => onChange({ alt: value })} />
+          <Input id="svg-caption" label="Caption" value={block.caption || ""} onChange={(value) => onChange({ caption: value })} />
         </>
       )}
 

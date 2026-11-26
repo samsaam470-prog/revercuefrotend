@@ -23,8 +23,8 @@ function editableText(block: Block): { value: string; write: (next: string) => P
       write: (answer) => ({ faqs: [{ question: block.faqs?.[0]?.question || "", answer }] }),
     };
   }
-  if (block.type === "image" || block.type === "graph" || block.type === "file_upload") {
-    return { value: block.alt || block.text || "", write: (value) => ({ alt: value }) };
+  if (["image", "graph", "icon", "svg", "diagram", "file_upload"].includes(block.type)) {
+    return { value: block.alt || block.caption || block.text || "", write: (value) => ({ alt: value, caption: value }) };
   }
   if (block.type === "question") {
     return {

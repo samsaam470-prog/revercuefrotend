@@ -328,7 +328,9 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
           { type: "timeline", label: "Timeline", hint: "Milestones" },
           { type: "list", label: "List", hint: "Bulleted" },
           { type: "image", label: "Image", hint: "Upload or URL" },
-          { type: "graph", label: "Graph", hint: "Bar chart" },
+          { type: "icon", label: "Icon", hint: "Iconify id" },
+          { type: "graph", label: "Chart", hint: "Real data only" },
+          { type: "diagram", label: "Diagram", hint: "Editable steps" },
           { type: "button", label: "Button", hint: "Call to action" },
           { type: "divider", label: "Divider", hint: "A line" },
         ]}

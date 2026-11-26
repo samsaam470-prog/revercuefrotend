@@ -1,5 +1,6 @@
 import { api } from "./client";
 import type { Paginated } from "../types/api";
+import type { VisualRequestPayload, VisualsResponse } from "../types/visuals";
 import type {
   Contract,
   DocContent,
@@ -90,12 +91,10 @@ export interface OrganizePayload {
   };
 }
 
-export interface VisualRequest {
-  afterBlockId: string;
+/** @deprecated Use VisualRequestPayload from types/visuals. */
+export interface VisualRequest extends Omit<VisualRequestPayload, "type"> {
   type: string;
   kind?: string;
-  query: string;
-  section_id?: string;
 }
 
 export const proposalsApi = {
@@ -183,8 +182,8 @@ export const pipelineApi = {
       };
     }>("/api/organize", body),
 
-  visuals: (body: { document: unknown; requests: VisualRequest[] }) =>
-    api.post<{ assets: Record<string, unknown>; rejected?: unknown[] }>("/api/organize/visuals", body),
+  visuals: (body: { document: unknown; requests: VisualRequestPayload[] }) =>
+    api.post<VisualsResponse>("/api/organize/visuals", body),
 
   extractVisuals: (body: { requests: VisualRequest[] }) =>
     api.post<{ success: true; assets: unknown[] }>("/api/extract/visuals", body),

@@ -342,7 +342,10 @@ export type BlockType =
   | "quote"
   | "list"
   | "image"
+  | "icon"
   | "graph"
+  | "diagram"
+  | "svg"
   | "shape"
   | "pricing_table"
   | "packages"
@@ -359,6 +362,23 @@ export type BlockType =
   | "signature"
   | "next_step";
 
+/** Real numbers behind a chart. A chart without this is never rendered as data. */
+export interface ChartData {
+  kind: "bar" | "line";
+  labels: string[];
+  values: number[];
+  unit?: string;
+  title?: string;
+}
+
+/** The editable structure behind a diagram, plus the source it came from. */
+export interface DiagramData {
+  steps: string[];
+  direction?: "LR" | "TB";
+  /** Mermaid source, kept so an imported diagram can be re-rendered elsewhere. */
+  source?: string;
+}
+
 export interface Block {
   id: string;
   type: BlockType;
@@ -370,6 +390,12 @@ export interface Block {
   url?: string;
   alt?: string;
   caption?: string;
+  /** Iconify id, e.g. `mdi:handshake`. */ 
+  icon?: string;
+  /** Inline SVG source for a vector illustration. */
+  svg?: string;
+  chart?: ChartData;
+  diagram?: DiagramData;
   faqs?: { question: string; answer: string }[];
   question?: publicQuestion;
   columns?: string[][];

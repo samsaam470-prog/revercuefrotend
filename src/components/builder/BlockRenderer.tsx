@@ -122,20 +122,20 @@ export function BlockRenderer({
         );
       case "graph":
         return (
-          <div>
-            <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 80 }}>
-              {[40, 65, 52, 80, 70].map((height, index) => (
-                <span
-                  key={index}
-                  style={{ flex: 1, height: `${height}%`, background: brandPrimary, borderRadius: "2px 2px 0 0", opacity: 0.85 }}
-                />
-              ))}
-            </div>
-            <p className="caption" style={{ color: "#8a857a", marginTop: 6 }}>
-              {typeable(block.text, "Chart caption", { multiline: false })}
-            </p>
-          </div>
+          <ChartBlock
+            block={block}
+            brandPrimary={brandPrimary}
+            canEdit={canType}
+            onChange={(patch) => onPatch?.(patch)}
+            typeable={typeable}
+          />
         );
+      case "icon":
+        return <IconBlock block={block} brandPrimary={brandPrimary} />;
+      case "diagram":
+        return <DiagramBlock block={block} brandPrimary={brandPrimary} />;
+      case "svg":
+        return <SvgBlock block={block} />;
       case "pricing_table":
         return (
           <table className="doc-table" style={{ margin: "8px 0" }}>
@@ -406,11 +406,13 @@ function ImageBlock({
         <img
           src={block.url}
           alt={block.alt || "Document image"}
-          style={{ width: "100%", borderRadius: 6, display: "block" }}
+          style={{ width: `${Number(block.meta?.width ?? 100)}%`, borderRadius: 6, display: "block" }}
           loading="lazy"
         />
-        {block.alt ? (
-          <figcaption style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>{block.alt}</figcaption>
+        {block.caption || block.alt ? (
+          <figcaption style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>
+            <RichText value={block.caption || block.alt || ""} />
+          </figcaption>
         ) : null}
       </figure>
     );
@@ -443,5 +445,156 @@ function ImageBlock({
       </button>
       {error ? <span className="caption" style={{ color: "var(--red)" }}>{error}</span> : null}
     </div>
+  );
+}
+
+/* --------------------------------------------------------- typed visuals */
+
+const ICON_CDN = "https://api.iconify.design";
+
+function iconUrl(icon: string, color?: string, size = 44): string {
+  const path = icon.replace(":", "/");
+  const query = new URLSearchParams();
+  if (color && /^#[0-9a-f]{3,8}$/i.test(color)) query.set("color", color.replace("#", ""));
+  query.set("height", String(Math.round(size)));
+  return `${ICON_CDN}/${path}.svg?${query.toString()}`;
+}
+
+function IconBlock({ block, brandPrimary }: { block: Block; brandPrimary: string }) {
+  const icon = block.icon || (typeof block.meta?.icon === "string" ? block.meta.icon : "");
+  const size = Number(block.meta?.size ?? 44);
+  if (!/^[a-z0-9-]+:[a-z0-9-]+$/i.test(icon)) {
+    return (
+      <div style={{ border: "1px dashed #d8d2c4", borderRadius: 6, padding: 12, color: "#8a857a", fontSize: 12 }}>
+        Icon — choose an icon id in the properties panel.
+      </div>
+    );
+  }
+  return (
+    <figure style={{ margin: "10px 0", display: "flex", alignItems: "center", gap: 10 }}>
+      <img
+        src={iconUrl(icon, block.color || brandPrimary, Number.isFinite(size) ? size : 44)}
+        alt={block.alt || block.caption || icon}
+        width={Number.isFinite(size) ? size : 44}
+        height={Number.isFinite(size) ? size : 44}
+        loading="lazy"
+        style={{ display: "block" }}
+      />
+      {(block.alt || block.caption) && (
+        <figcaption style={{ fontSize: 12, color: "#3a3a3a" }}>{block.caption || block.alt}</figcaption>
+      )}
+    </figure>
+  );
+}
+
+function ChartBlock({
+  block,
+  brandPrimary,
+  canEdit,
+  onChange,
+  typeable,
+}: {
+  block: Block;
+  brandPrimary: string;
+  canEdit: boolean;
+  onChange: (patch: Partial<Block>) => void;
+  typeable: (value: string | undefined, placeholder: string, options?: { multiline?: boolean }) => JSX.Element;
+}) {
+  const chart = block.chart;
+  const title = typeable(block.text, "Chart title", { multiline: false });
+
+  if (!chart || chart.values.length < 2) {
+    return (
+      <div style={{ border: "1px dashed #d8d2c4", borderRadius: 6, padding: 14 }}>
+        <b style={{ fontSize: 12 }}>{title}</b>
+        <p style={{ fontSize: 11, color: "#8a857a", marginTop: 4 }}>
+          {canEdit
+            ? "Add at least two labelled values in the properties panel. A chart without numbers is not drawn."
+            : "No chart data."}
+        </p>
+      </div>
+    );
+  }
+
+  const max = Math.max(...chart.values.map((value) => Math.abs(value)), 1);
+  const unit = chart.unit ? ` ${chart.unit}` : "";
+
+  return (
+    <figure style={{ margin: "12px 0" }}>
+      <figcaption style={{ fontSize: 11, color: "#8a857a", marginBottom: 6 }}>
+        <b style={{ color: "#1a1a1a" }}>{chart.title || block.text || "Chart"}</b>
+      </figcaption>
+      {chart.kind === "line" ? (
+        <svg viewBox="0 0 100 40" role="img" aria-label={chart.title || block.text || "Line chart"} style={{ width: "100%", height: 96 }}>
+          <polyline
+            fill="none"
+            stroke={brandPrimary}
+            strokeWidth={1.6}
+            points={chart.values
+              .map((value, index) => `${(index / Math.max(chart.values.length - 1, 1)) * 96 + 2},${38 - (Math.abs(value) / max) * 34}`)
+              .join(" ")}
+          />
+        </svg>
+      ) : (
+        <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 96 }}>
+          {chart.values.map((value, index) => (
+            <span key={index} title={`${chart.labels[index]}: ${value}${unit}`} style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+              <span style={{ fontSize: 9, color: "#8a857a", textAlign: "center" }}>{value}{unit}</span>
+              <span style={{ height: `${Math.max((Math.abs(value) / max) * 100, 2)}%`, background: brandPrimary, borderRadius: "2px 2px 0 0", opacity: 0.9 }} />
+            </span>
+          ))}
+        </div>
+      )}
+      <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
+        {chart.labels.map((label, index) => (
+          <span key={index} style={{ flex: 1, fontSize: 9, color: "#8a857a", textAlign: "center" }}>{label}</span>
+        ))}
+      </div>
+      {block.caption ? <p style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>{block.caption}</p> : null}
+    </figure>
+  );
+}
+
+function DiagramBlock({ block, brandPrimary }: { block: Block; brandPrimary: string }) {
+  const steps = block.diagram?.steps?.filter(Boolean) ?? [];
+  if (steps.length < 2) {
+    return (
+      <div style={{ border: "1px dashed #d8d2c4", borderRadius: 6, padding: 12, color: "#8a857a", fontSize: 12 }}>
+        Diagram — add at least two steps in the properties panel.
+      </div>
+    );
+  }
+  const horizontal = (block.diagram?.direction ?? "LR") === "LR";
+  return (
+    <figure style={{ margin: "12px 0" }}>
+      <div style={{ display: "flex", flexDirection: horizontal ? "row" : "column", flexWrap: "wrap", alignItems: horizontal ? "center" : "flex-start", gap: 6 }}>
+        {steps.map((step, index) => (
+          <div key={`${step}-${index}`} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span style={{ border: `1px solid ${brandPrimary}`, borderRadius: 6, padding: "6px 10px", fontSize: 11, color: "#1a1a1a", background: "#faf8f4" }}>
+              {step}
+            </span>
+            {index < steps.length - 1 ? <span style={{ color: brandPrimary, fontSize: 12 }}>{horizontal ? "→" : "↓"}</span> : null}
+          </div>
+        ))}
+      </div>
+      {block.text || block.caption ? <figcaption style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>{block.text || block.caption}</figcaption> : null}
+    </figure>
+  );
+}
+
+function SvgBlock({ block }: { block: Block }) {
+  const source = block.svg ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(block.svg)}` : block.url;
+  if (!source) {
+    return (
+      <div style={{ border: "1px dashed #d8d2c4", borderRadius: 6, padding: 12, color: "#8a857a", fontSize: 12 }}>
+        Illustration — add SVG source in the properties panel.
+      </div>
+    );
+  }
+  return (
+    <figure style={{ margin: "12px 0" }}>
+      <img src={source} alt={block.alt || "Vector illustration"} style={{ maxWidth: "100%", display: "block" }} loading="lazy" />
+      {block.caption ? <figcaption style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>{block.caption}</figcaption> : null}
+    </figure>
   );
 }

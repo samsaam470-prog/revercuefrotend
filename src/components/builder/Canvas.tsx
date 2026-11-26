@@ -50,6 +50,10 @@ export function Canvas({
       type,
       text: type === "heading" ? "Section heading" : type === "paragraph" ? "" : undefined,
       level: type === "heading" ? "h2" : undefined,
+      ...(type === "icon" ? { icon: "mdi:star-outline", alt: "Icon", meta: { size: 44 } } : {}),
+      ...(type === "diagram"
+        ? { text: "Process", diagram: { steps: ["Step one", "Step two", "Step three"], direction: "LR" as const } }
+        : {}),
     };
     const next = [...blocks, block];
     onBlocksChange(next);
