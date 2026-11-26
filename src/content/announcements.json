@@ -916,5 +916,73 @@
         ]
       }
     ]
+  },
+  {
+    "slug": "mcp-and-integrations-beta-date",
+    "date": "2026-11-26",
+    "status": "Announced",
+    "title": "Revercue MCP, Stripe and Gmail integrations: the beta date",
+    "summary": "Today I am giving you a date for something I have not been able to give before. Revercue plans to introduce a Model Context Protocol (MCP) connection, and integrations with Stripe and Gmail, in beta on 13 December 2026. These are not available today. This announcement is the first time a date has been given for them, and it explains what the beta will and will not include, why the date may still move, and how you will hear about any change before it arrives. The reason for giving the date now is to set a clear expectation: the beta is planned for a limited group, the scope is still being settled, and no one should build a workflow around these connections until they are open. The announcement also says what is available today, so the difference between the plan and the product is visible from the start.",
+    "links": [
+      {
+        "label": "Why Teams is in beta: integrations",
+        "to": "/guides/why-teams-is-in-beta"
+      },
+      {
+        "label": "API and integrations: back to planning",
+        "to": "/announcements/api-and-integrations-back-to-planning"
+      },
+      {
+        "label": "Contact",
+        "to": "/contact"
+      }
+    ],
+    "body": [
+      {
+        "heading": "A founder's message",
+        "paragraphs": [
+          "Today I am giving a date for the first time for Revercue's MCP connection and for integrations with Stripe and Gmail. The planned beta date is 13 December 2026.",
+          "I have been careful about dates for integrations, because the last time we tested them with a small group, the work was not finished and we moved it back to planning. I would rather tell you a date that is hard to hit than a date that is easy to forget. So this is a planned date, not a promise I am certain of, and I will say so if anything moves.",
+          "Here is what the date means. On 13 December we plan to open the beta for these connections to a limited group. It will be a beta: some parts will work, some will not, and the people in it will tell us what is missing. Nothing here is available to everyone yet, and it is not part of any public plan.",
+          "I want to be specific about why these three matter. An MCP connection lets an AI assistant you already use read and act on your Revercue information with your permission. Stripe is where many freelancers already take card payments. Gmail is where most client conversations start. Each one removes a manual step, and each one carries risk if it goes wrong, which is why it is taking longer than I would like.",
+          "If something changes before 13 December, you will see it here first, with the new date and the reason.",
+          "— Founder, Revercue"
+        ]
+      },
+      {
+        "heading": "What is available today",
+        "paragraphs": [
+          "Nothing in this announcement is available today. You can export clients as a CSV and download each document as a PDF. Clients open proposals, contracts and invoices from a private link. Messages in the communication log are added by hand. Revercue does not read your inbox, does not connect to Stripe or Gmail, and has no public API or MCP connection.",
+          "If you need one of these connections for your work now, the manual route is still the safe one: keep your accounting software as the record of your books, and record payments in Revercue when you confirm them."
+        ]
+      },
+      {
+        "heading": "What the 13 December beta is planned to include",
+        "paragraphs": [
+          "The beta is planned to open an MCP connection so that a compatible AI assistant can read and act on your Revercue information with your permission, and to open integrations with Stripe and Gmail for a limited group. The exact scope is still being settled, and the beta will start with the parts we have tested most carefully.",
+          "We will publish what each connection does, what it reads, what it writes and what it does not do, before the beta opens. A connection that writes to your records or sends messages on your behalf will be described plainly, because those are the actions that matter most."
+        ]
+      },
+      {
+        "heading": "What the beta will not include",
+        "paragraphs": [
+          "The beta will not be open to everyone, and it will not be part of the public plans on 13 December. It will not change how the communication log works, and Revercue will still not read your inbox or send messages without you choosing to. It is not a replacement for your accounting software or your bank.",
+          "It also will not be finished. Expect gaps, changes and problems, and tell us about them."
+        ]
+      },
+      {
+        "heading": "Why the date may still move",
+        "paragraphs": [
+          "Integrations with payments and email are not something to rush. A connection to Stripe handles money, and a connection to Gmail handles client conversations. If testing finds a failure that could lose information or send the wrong thing, we will fix it before the beta opens, even if that moves the date.",
+          "The date is a plan, not a guarantee. I would rather tell you that now than explain a missed date later."
+        ]
+      },
+      {
+        "heading": "How you will hear about changes",
+        "paragraphs": [
+          "Changes to this date will be posted on this announcements page first, with the new date and the reason, then on the changelog and in the integrations guide. If you want to ask about a connection you need, use the contact form. Requests help decide what comes first in the beta, although they do not guarantee a place in it."
+        ]
+      }
+    ]
   }
 ]
