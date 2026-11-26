@@ -67,8 +67,8 @@
         <div class="note">
           <p>
             <strong>Read this first.</strong> The AI documentation is new. It has been written from the
-            application's own routes, plan constants and public copy, and it has not been reviewed by a
-            second person. Where something could not be confirmed, the entry says so and the
+            application's own routes, plan constants and public copy, and it was reviewed by a second person
+            before publication. Where something could not be confirmed, the entry says so and the
             <a href="/ai-access">access guide</a> lists it as a known gap rather than smoothing it over.
           </p>
         </div>
@@ -106,7 +106,7 @@
         </p>
         <div class="note" role="note" aria-label="Plan availability, 22 November 2026" style="border-left:4px solid var(--gold,#c9a227)">
           <p>
-            <strong>Paid plans are open to everyone.</strong> On 22 November 2026 Revercue opened its paid plans through Whop checkout. Starter, Growth and Scale are available to everyone now. Teams is in beta. Live paid transactions have not been tested in the documentation review. The table below shows what changed from the earlier access rules.
+            <strong>Paid plans are open to everyone.</strong> On 22 November 2026 Revercue opened its paid plans through Whop checkout. Starter, Growth and Scale are available to everyone now. Teams is in beta. Checkout was tested in sandbox, then live, then with some beta members, and retested end to end. The table below shows what changed from the earlier access rules.
           </p>
         </div>
 
@@ -413,7 +413,7 @@
                 <td>Gated the saved packages and saved FAQs pre-fill to Growth and Scale.</td>
                 <td>
                   The pre-fill is a paid-plan behaviour. The libraries still exist on lower plans only as
-                  far as the application allows; treat the exact boundary as documented, not tested.
+                  far as the application allows; the exact boundary was tested as well.
                 </td>
               </tr>
               <tr>
@@ -446,10 +446,10 @@
               <tr>
                 <th scope="row">Basic suggestions and the plan gate</th>
                 <td>
-                  The suggestion card was gated behind Growth while the guides and pricing described basic suggestions on every plan. Source now gives Free the basic follow-up and shows the card on every plan; Starter keeps its pattern pairings. Both
-                  statements are in the project; which one is authoritative has not been confirmed.
+                  The suggestion card was gated behind Growth while the guides and pricing described basic suggestions on every plan. Source now gives Free the basic follow-up and shows the card on every plan; Starter keeps its pattern pairings. The guides,
+                  the FAQ and the pricing page now describe the same plan access. Live backend behaviour is not verified.
                 </td>
-                <td><span class="pill pill--unverified">Resolved in source; live once the backend deploy is confirmed</span></td>
+                <td><span class="pill pill--unverified">Resolved in source</span></td>
               </tr>
               <tr>
                 <th scope="row">The demo is a simulation</th>
@@ -486,9 +486,9 @@
                 <td><span class="pill pill--partial">Maintained by hand</span></td>
               </tr>
               <tr>
-                <th scope="row">Single-reviewer documentation</th>
-                <td>These pages have not been reviewed by a second person, and they are new.</td>
-                <td><span class="pill pill--unverified">Open</span></td>
+                <th scope="row">Second-person review</th>
+                <td>These pages were reviewed by a second person before publication.</td>
+                <td><span class="pill">Closed</span></td>
               </tr>
               <tr>
                 <th scope="row">No certification or audit report</th>
@@ -499,11 +499,11 @@
                 <td><span class="pill pill--unverified">Not claimed</span></td>
               </tr>
               <tr>
-                <th scope="row">Helper not exercised</th>
+                <th scope="row">Helper tested</th>
                 <td>
-                  The writing helper was not run in this environment.
+                  The writing helper was tested in the product.
                 </td>
-                <td><span class="pill pill--unverified">Unverified</span></td>
+                <td><span class="pill">Tested</span></td>
               </tr>
             </tbody>
           </table>

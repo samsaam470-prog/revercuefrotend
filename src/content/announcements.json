@@ -1,0 +1,866 @@
+[
+  {
+    "slug": "revercue-moves-from-alpha-to-beta",
+    "date": "2026-11-11",
+    "status": "Beta",
+    "title": "Revercue moves from alpha to beta",
+    "summary": "Today Revercue moves from alpha to beta. Alpha was a small group of people using Revercue while we worked out what it needed to do. Beta means more people can use it, the core features work, and we are still changing things based on what you tell us. This announcement explains what the change means for you, what is ready, what is still in planning, and how to tell us what is getting in your way. The change matters most for the people using Revercue on real client work: it means the core path from proposal to payment has been used by people outside the team, and the feedback from those uses is now shaping each stage of the product. Read the sections below for the detail, and use the contact form to tell us what you find.",
+    "links": [
+      {
+        "label": "Why Teams is in beta",
+        "to": "/guides/why-teams-is-in-beta"
+      },
+      {
+        "label": "Features",
+        "to": "/features"
+      }
+    ],
+    "body": [
+      {
+        "heading": "A founder's message",
+        "paragraphs": [
+          "Today Revercue moves from alpha to beta.",
+          "Alpha was the stage where a small number of people used Revercue while we worked out what it needed to do. Beta means more people can use it, the core features work, and we are still changing things based on what you tell us. It does not mean everything is finished.",
+          "I started building Revercue because the work of a freelancer does not happen in one place. A proposal lives in one tool, the contract in another, the invoice in a third, and the details about the client in your head. Every handoff means retyping the same information and hoping nothing was lost. Revercue is my attempt to keep that thread in one place, from the first proposal to the final payment.",
+          "In beta you can use proposals, contracts, requirement forms, invoices and the client record together. You will also see what is not ready yet: integrations with other tools are still in planning, and the team features are still in beta. I would rather tell you where we are than promise a date.",
+          "If something gets in your way, send it through the contact form. I read those messages myself, and they shape what we build next.",
+          "Thank you for trying it while it was still rough.",
+          "— Founder, Revercue"
+        ]
+      },
+      {
+        "heading": "How testing reached this point",
+        "paragraphs": [
+          "Internal testing started on 27 October 2026. The team used Revercue on the same paths a freelancer would use, from the first proposal to the final invoice, and fixed what broke before anyone outside the team saw it.",
+          "After 14 days of internal testing, on 11 November 2026, Revercue opened to a wider group of beta testers and to a wider audience. The small group had already used the product in its early stages, so the wider group started with a product that had been tested end to end.",
+          "Opening to more people is when the most useful problems show up, because every freelancer works a little differently. Thank you to everyone who has tested Revercue since 27 October, and to everyone who is joining now."
+        ]
+      },
+      {
+        "heading": "What beta means in practice",
+        "paragraphs": [
+          "Beta is a stage, not a promise. The product is used by real freelancers on real client work, so the things that matter most are the parts that already work end to end: a proposal sent as a link, a contract signed with a typed name and consent, a requirement form that collects what you need before work starts, and an invoice that is numbered automatically and tracked until it is paid.",
+          "It also means some parts are not finished. Anything marked as in beta or in planning may change, and we will say so on the page where it appears. We would rather you know that now than discover it in the middle of a project."
+        ]
+      },
+      {
+        "heading": "What is ready today",
+        "paragraphs": [
+          "Proposals are shareable pages with packages, FAQs and client questions. Clients can approve or decline from the page. Contracts cover scope, payment terms, revisions and cancellation. Requirement forms use seven question types. Invoices carry line items, tax and totals. The client record links the documents you create for each client, and the communication log holds the messages you add by hand.",
+          "Free is available now, and Starter, Growth and Scale can be bought through checkout."
+        ]
+      },
+      {
+        "heading": "What is still in planning or beta",
+        "paragraphs": [
+          "Integrations with other tools are in planning. There is no public API and no integrations directory today. Teams is in beta: you can join the beta, and the team reaches out with the next steps. Revercue does not read your inbox or send messages for you, so the communication log is filled in by hand."
+        ]
+      },
+      {
+        "heading": "How to tell us what gets in your way",
+        "paragraphs": [
+          "Use the contact form. Describe the task you were trying to finish, what you expected, and what happened instead. The more specific the description, the more useful it is. Feedback from beta changes what we build next, and some of the most useful changes so far started as one sentence in a message."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "growth-and-scale-plans-announced",
+    "date": "2026-11-15",
+    "status": "Live",
+    "title": "Growth and Scale plans announced",
+    "summary": "Revercue now has four public plans: Free, Starter, Growth and Scale. Growth adds the cost side of a project, with expense recording, project profit and all-time profit. Scale adds the intelligence layer, including the price suggestion, interest level, advanced tracking and expense categories. This announcement sets out what each plan includes, what it costs, and how to choose between them without paying for features you will not use. The plans are designed so that each one adds something you can point to: Starter adds the templates and limits you need to run more clients, Growth adds the cost and profit view, and Scale adds the pricing guidance and client engagement. Nothing is hidden behind a feature you did not know you were paying for, and the pricing page lists the limits for each plan side by side.",
+    "links": [
+      {
+        "label": "Plans explained",
+        "to": "/guides/plans-explained"
+      },
+      {
+        "label": "Pricing",
+        "to": "/pricing"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What was announced",
+        "paragraphs": [
+          "On 15 November 2026 Revercue announced its Growth and Scale plans. Growth is $29 a month and Scale is $49 a month. Starter is $12 a month, and Free stays free. Each paid plan includes everything on the plan below it, so Scale includes everything on Growth and Starter. Teams is in beta and is priced separately."
+        ]
+      },
+      {
+        "heading": "What Growth adds",
+        "paragraphs": [
+          "Growth is for freelancers who need to see what work costs them as well as what it earns. From Growth you can record project expenses: an amount, a date, a category such as hosting, editing or building, the platform or provider where you paid, the client the cost belongs to, and an optional note.",
+          "With costs recorded, the revenue overview shows the profit for the period and the all-time profit, with a breakdown by client. The overview itself is available on every plan, so Free and Starter users still see invoices sent, pending payments and what is confirmed as paid."
+        ]
+      },
+      {
+        "heading": "What Scale adds",
+        "paragraphs": [
+          "Scale adds the intelligence layer. The price suggestion is the main addition: when you are pricing a proposal, contract or invoice for a client, it reads the client's own history and states what happened before, such as what you spent on them and what you earned, then suggests a price for the next pricing document.",
+          "Scale also adds the interest level for each client, advanced tracking on documents, and expense categories. Everything on Growth is included, so you do not need to choose between them."
+        ]
+      },
+      {
+        "heading": "How to choose",
+        "paragraphs": [
+          "Start with Free if you are sending your first proposals and want to learn the workflow. Move to Starter when you need custom templates, more active documents and longer retention. Move to Growth when you need to see project costs and profit. Move to Scale when you want pricing guidance and the detail of client engagement.",
+          "You can change plans at any time from Settings. The plan comparison on the pricing page lists the limits for active documents, retention, storage and adaptive forms for each plan."
+        ]
+      },
+      {
+        "heading": "What has not changed",
+        "paragraphs": [
+          "Free remains free, with limits. Starter, Growth and Scale are bought through checkout. Teams is in beta. Revercue does not charge for the revenue overview separately, and it does not take a percentage of your invoices."
+        ]
+      },
+      {
+        "heading": "Which plan fits how you work today",
+        "paragraphs": [
+          "If you send a few proposals a month and invoice them yourself, Free or Starter is enough, and you do not need to pay for the cost or pricing features. If you run several clients at once and want to know which ones are paying off, Growth gives you the cost and profit view that answers that question. If you set prices for new work often, and want the history of each client to inform the next quote, Scale is built for that.",
+          "The honest test is simple. Look at the last three projects you finished, and ask whether you knew what each one cost and earned. If you did not, Growth is the first plan worth paying for. If you did, and you still struggle to price the next project, Scale is the one to try."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "e-signature-introduced",
+    "date": "2026-11-18",
+    "status": "Live",
+    "title": "E-signature introduced: typed name, explicit consent, recorded date",
+    "summary": "Contracts in Revercue can now be signed. The freelancer signs the exact version first, then the client signs the same version by typing their full name, ticking an explicit consent box, and confirming the date is recorded. This is a practical record of agreement. It is not a certified or advanced electronic signature, and it does not verify the identity of the signer. This announcement explains what the signature records, what it does not prove, and when you need a specialist service. The record is designed to be honest about what it is. It captures who signed, what they agreed to, and when, and it states clearly that it is not a qualified or advanced electronic signature. Where a contract needs stronger proof, the guide explains when to use a specialist service instead of relying on the typed-name record.",
+    "links": [
+      {
+        "label": "Electronic signatures guide",
+        "to": "/guides/electronic-signatures"
+      },
+      {
+        "label": "Contracts feature",
+        "to": "/features/contracts"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What was introduced",
+        "paragraphs": [
+          "On 18 November 2026 Revercue introduced e-signature for contracts. The signature step asks the signer to type their full name, to tick an explicit consent box that says they agree to the terms shown, and the date of signing is recorded. The record keeps the exact version of the contract that was signed, so it is clear what the signer agreed to.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
+        ]
+      },
+      {
+        "heading": "The order of signing",
+        "paragraphs": [
+          "The freelancer signs the exact version first, before the client is asked to sign, and publishing is blocked until the freelancer's own signature is recorded. The client then signs the same version. Any later change should be a new version that the client reviews and signs, rather than an edit to text they have already agreed."
+        ]
+      },
+      {
+        "heading": "What the signature records",
+        "paragraphs": [
+          "The record contains the typed full name, the consent tick, the date and time of signing, and the version that was signed. Those four things together are a practical record that a named person agreed to specific terms on a specific date. Clients can decline with an optional reason, and the decision is recorded on the contract."
+        ]
+      },
+      {
+        "heading": "What the signature does not prove",
+        "paragraphs": [
+          "This is not a qualified electronic signature and not an advanced electronic signature as defined in many legal systems. It does not include a certificate from a trust service provider, it does not verify the signer's identity, and it does not produce an audit certificate. A typed name can be typed by anyone, so the record is only as strong as the context around it: the contract the client actually received, the date, and the communication around it."
+        ]
+      },
+      {
+        "heading": "When to use a specialist service",
+        "paragraphs": [
+          "If a contract is high-value, regulated, cross-border, or if your jurisdiction requires a specific form of signature, use a dedicated signing service that provides the proof you need. This announcement is general information about the product, not legal advice. For contracts with significant risk, check the terms with a qualified adviser before you rely on any signature."
+        ]
+      },
+      {
+        "heading": "Why we shipped it this way",
+        "paragraphs": [
+          "Many freelance agreements are short, low-value and signed by people who would rather not install another tool. A typed name with consent and a recorded date is a reasonable record for those agreements, and it removes the step where a contract sits in an inbox. Shipping it honestly, with its limits stated, is better than implying a stronger proof than the product provides."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "revenue-overview",
+    "date": "2026-11-19",
+    "status": "Live",
+    "title": "Revenue overview: sent, pending and what you have been paid",
+    "summary": "The revenue overview shows the money side of the client thread. It reads the invoices you have sent and the payments you have confirmed, and it shows what is still waiting to be paid. The overview is on every plan. Growth adds project expenses, profit and all-time profit. Scale adds the expense categories and the price suggestion. This announcement explains each figure and how it changes when you confirm a payment. The overview is built to help you see the work and the money together, without replacing your accounting software. Each figure is defined in the guide, and each one changes only when you take an action you can see, such as publishing an invoice or confirming a payment. Use it as a weekly check: the figures show what is sent, what is still owed, and what you have confirmed, so you can follow up before a payment becomes a long delay.",
+    "links": [
+      {
+        "label": "Revenue overview guide",
+        "to": "/guides/revenue-overview"
+      },
+      {
+        "label": "Invoices feature",
+        "to": "/features/invoices"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What the overview shows",
+        "paragraphs": [
+          "The revenue overview is a record of the money connected to your client work. It does not connect to your bank and it does not match payments automatically. A payment counts as confirmed only when you confirm it on the invoice, so the figures are as current as your confirmations.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
+        ]
+      },
+      {
+        "heading": "On every plan",
+        "paragraphs": [
+          "Invoices sent is the total of invoices you have published, with the count. Pending payments is the total still owed, with the count of invoices waiting for payment. Confirmed as paid is what you have marked as received. Remaining pending is the pending total after your confirmations, so when a client pays part of an invoice and you confirm it, the remaining figure drops by that amount."
+        ]
+      },
+      {
+        "heading": "From Growth",
+        "paragraphs": [
+          "Growth adds the cost side. You record project expenses with a category, a date, the platform or provider, and the client the cost belongs to. The overview then shows project expenses, profit for the period, and all-time profit, with each client's figures side by side. Profit is confirmed revenue minus recorded expenses, so an expense you do not record makes the profit look better than it is."
+        ]
+      },
+      {
+        "heading": "On Scale",
+        "paragraphs": [
+          "Scale adds expense categories for more detailed reporting and the price suggestion. The price suggestion reads the same costs and confirmed payments as the overview, and it states those figures when it suggests a price for your next proposal, contract or invoice."
+        ]
+      },
+      {
+        "heading": "What it does not do",
+        "paragraphs": [
+          "The overview does not calculate tax, file anything, or connect to your bank or accounting software. Keep your accounting software as the book of record, and use the overview to see the work and the money together."
+        ]
+      },
+      {
+        "heading": "Using the overview week to week",
+        "paragraphs": [
+          "Check the overview once a week, at the same time, so the figures become a habit rather than a surprise. Look at pending payments first, then the remaining pending figure, and follow up any invoice that is overdue before it becomes a long delay. On Growth, look at profit by client and ask which clients need a different price on the next piece of work.",
+          "The overview is most useful when it is current. Confirm each payment on the day it arrives, record each cost when you pay it, and publish each invoice when the work is delivered. Those three habits keep every figure honest without any extra work."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "bank-details-with-proof-of-payment",
+    "date": "2026-11-21",
+    "status": "Live",
+    "title": "Second way to pay an invoice: bank details with proof of payment",
+    "summary": "Invoices in Revercue can now be paid in a second way: the freelancer shows their bank details on the invoice, and the client uploads proof of payment on the invoice page. The first way, a payment link you provide, is still available. In both cases you confirm the payment yourself before it is recorded. Proof uploads are reviewed by you, not verified automatically by Revercue. This announcement explains how the two methods work and what each one asks of you. The method you choose is up to you. Both methods end in the same place: you confirm the payment, and the revenue overview updates. The proof is kept with the invoice, so the record of what was paid stays with the work it belongs to. Whichever method your client uses, the same confirmation step applies, so the revenue overview always reflects money you have actually checked.",
+    "links": [
+      {
+        "label": "Invoices feature",
+        "to": "/features/invoices"
+      },
+      {
+        "label": "Invoice builder guide",
+        "to": "/guides/invoice-builder"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What was introduced",
+        "paragraphs": [
+          "On 21 November 2026 Revercue added a second way for clients to pay an invoice. You can show your bank details on the invoice, and the client can upload proof of payment, such as a transfer confirmation, to the invoice page. The first way, an external payment link that you provide, is still available.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
+        ]
+      },
+      {
+        "heading": "How the client pays",
+        "paragraphs": [
+          "With a payment link, the client pays through the method behind that link. With bank details, the client pays by transfer using the account and the reference shown on the invoice. The reference matters: asking the client to quote the invoice number makes the payment easier to match on your side."
+        ]
+      },
+      {
+        "heading": "What proof of payment does",
+        "paragraphs": [
+          "The client's upload is evidence, and it is attached to the invoice so you can see it next to the amount. Revercue does not verify the upload automatically. You review it, and when you are satisfied the money has arrived, you confirm the payment. Only the confirmation moves the invoice from pending to paid in the revenue overview.",
+          "In both methods you confirm the payment yourself. Opening a payment link does not prove that money moved, and an uploaded proof is a document, not a bank record. Revercue cannot see your bank account, so the confirmation is your check against the money that actually arrived."
+        ]
+      },
+      {
+        "heading": "What you need to do",
+        "paragraphs": [
+          "Check your bank account before you confirm. If the proof does not match the amount or the reference, follow up with the client using the invoice number and the amount, rather than confirming. Keep the proof with the invoice, since it is part of your record of what was paid."
+        ]
+      },
+      {
+        "heading": "Which method to choose",
+        "paragraphs": [
+          "Use a payment link when the method is simpler for the client, such as a card. Use bank details when the client prefers transfers, or when you want the money to go straight to your own account without a payment provider in between. You can show either method on the same invoice, depending on your setup."
+        ]
+      },
+      {
+        "heading": "Keeping your records clean",
+        "paragraphs": [
+          "Give every invoice a clear reference that the client can quote. Check the proof against your bank account on the same day it arrives, and confirm the payment only when the money is there. If a payment arrives in a different amount, record what actually arrived, and send the client a short note with the invoice number so both sides agree on the balance.",
+          "Keep the proof attached to the invoice rather than in your email. When an accountant or a client asks what was paid and when, the invoice page should answer that question on its own."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "paid-plans-open-through-checkout",
+    "date": "2026-11-22",
+    "status": "Live",
+    "title": "Paid plans open through checkout; Teams in beta",
+    "summary": "On 22 November 2026 Revercue opened its paid plans through checkout, and Starter, Growth and Scale are available to everyone. Checkout was tested in our sandbox first, then live, then with some beta members, and then end to end again. Teams is in beta, which means you can join the beta and the team reaches out with the next steps. This announcement explains what you can buy, how checkout was tested, and what Teams includes today. Checkout is open to everyone, so the plans you read about in the pricing and guides pages are the plans you can buy today. The testing was done in stages so that the first real purchases would be as smooth as we could make them, and the contact form is open if a purchase does not go through as you expect.",
+    "links": [
+      {
+        "label": "Why Teams is in beta",
+        "to": "/guides/why-teams-is-in-beta"
+      },
+      {
+        "label": "Pricing",
+        "to": "/pricing"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What opened",
+        "paragraphs": [
+          "On 22 November 2026 Revercue opened its paid plans through checkout. Starter, Growth and Scale can be bought now, and Free is available without a card. Teams is in beta and is not one of the public plans yet."
+        ]
+      },
+      {
+        "heading": "How checkout was tested",
+        "paragraphs": [
+          "Checkout was tested in four stages. First in our sandbox, where no real money moves. Then live, with a real checkout. Then with some beta members using the production flow. Then end to end again, after the changes from those tests. Each stage found something that changed, and we would rather tell you that plainly than present checkout as if it had worked from the start."
+        ]
+      },
+      {
+        "heading": "What you can buy",
+        "paragraphs": [
+          "Starter is $12 a month, Growth is $29 a month and Scale is $49 a month. Each paid plan is bought through checkout, and billing continues on the plan you chose. Growth starts with 14 days of Scale access included. You can change plans from Settings at any time."
+        ]
+      },
+      {
+        "heading": "What Teams is",
+        "paragraphs": [
+          "Teams is for businesses that need shared access for more than one person. It is in beta, which means you can join the beta and the team reaches out to talk about the next steps. It is not finished, so the team features may change before Teams is offered on the public plans."
+        ]
+      },
+      {
+        "heading": "What to do if checkout does not work for you",
+        "paragraphs": [
+          "Use the contact form and say which plan you were buying, what you saw, and at what step it failed. A clear report at that point is the most useful thing you can send, and it is how the testing above found the problems that were fixed."
+        ]
+      },
+      {
+        "heading": "What to check after you buy",
+        "paragraphs": [
+          "After a purchase, check that the plan shown in Settings matches the one you chose, and that the features on the pricing page are the ones you now see in the product. If the plan is not what you expected, contact us before you use it for client work, so the difference can be explained and fixed.",
+          "If you upgrade later, the new plan takes effect from the change. Your documents, clients and history stay where they are, so there is nothing to export and import when you move up a plan."
+        ]
+      },
+      {
+        "heading": "Why the staged testing matters to you",
+        "paragraphs": [
+          "Payment is the one part of the product where a fault costs someone money, so it was tested before it was opened. The sandbox stage checked the flow without moving any money. The live stage checked a real purchase. The beta stage used the production flow with people outside the team, which is where the most useful problems appeared. The final end-to-end test confirmed that the fixes from those stages worked together.",
+          "If you find a difference between what you expect at checkout and what you see, that is exactly the kind of report that helps. Say which plan, which step and what you saw, and we will check it against the same flow we tested."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "api-and-integrations-back-to-planning",
+    "date": "2026-11-23",
+    "status": "Planning",
+    "title": "API and integrations: tested in beta with a small group, then back to planning",
+    "summary": "We tested the API and integrations in beta with a small group. The work was not complete, so we are not offering it to everyone, and we have moved it back to planning. A connection to someone else's system is only useful if it works every time, and when it fails it can lose information you were relying on. This announcement explains why we stopped, what works today, what you can use instead, and how we will tell you when the work returns. The decision to move this work back to planning was made to protect the people who depend on Revercue. It is not a reflection on the people who tested it, whose reports are the reason the work is being redone properly rather than shipped early. Until the work returns, the changelog and the integrations guide are the places to check for updates, and they will be updated together.",
+    "links": [
+      {
+        "label": "Why Teams is in beta: integrations",
+        "to": "/guides/why-teams-is-in-beta"
+      },
+      {
+        "label": "Compare tools by criteria",
+        "to": "/compare/criteria"
+      }
+    ],
+    "body": [
+      {
+        "heading": "A founder's message",
+        "paragraphs": [
+          "We tested the API and integrations in beta with a small group. The work was not complete, so we are not offering it to everyone, and we have moved it back to planning.",
+          "A label on its own does not tell you much, so here is why. A connection to someone else's system is only useful if it works every time, and when it fails it can lose information you were relying on. That is a higher bar than the parts of Revercue that run entirely inside the product. Rather than release something half-finished, we would rather finish the design first.",
+          "Nothing changes for you today. You can export clients as a CSV and download each document as a PDF. There is no public API and no integrations directory. Messages in the communication log are added by hand, and Revercue does not read your inbox.",
+          "When we return to this, the changelog will say so, along with what it covers and what it does not. Thank you to the small group who tested it while it was rough.",
+          "— Founder, Revercue"
+        ]
+      },
+      {
+        "heading": "What works today",
+        "paragraphs": [
+          "You can export clients as a CSV and download each document as a PDF. Clients open proposals, contracts and invoices from a private link. Messages in the communication log are added by hand, and Revercue does not read your inbox or send messages on your behalf."
+        ]
+      },
+      {
+        "heading": "What to do in the meantime",
+        "paragraphs": [
+          "Keep your accounting software as the book of record, and use the CSV export when you need to move client details into another system. Do not build a workflow that depends on an integration that is not offered. If you need one, tell us through the contact form, so the request counts when the work returns."
+        ]
+      },
+      {
+        "heading": "How we will tell you",
+        "paragraphs": [
+          "When this work returns, the changelog will say so, with what it covers and what it does not. The guide on integrations will be updated at the same time. Thank you to the small group who tested it while it was rough, and to everyone who has asked about it."
+        ]
+      },
+      {
+        "heading": "How to plan around the gap",
+        "paragraphs": [
+          "If an integration is important to your work, plan for the manual step for now. Export your clients as a CSV on a regular schedule, keep the PDF of each signed document with the client record, and record payments in your accounting software at the same time you confirm them here. The overhead is small, and it keeps your records correct while the integration is in planning.",
+          "Tell us which connection you need and why, through the contact form. We do not promise a date, but a clear list of requests is one of the things that decides what the team works on first."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "revercue-publicly-launches",
+    "date": "2026-11-25",
+    "status": "Live",
+    "title": "Revercue is publicly launched, with Teams in beta",
+    "summary": "Today Revercue is open to everyone. Starter, Growth and Scale can be bought now through checkout, and Free is available without a card. Teams is still in beta. This announcement is the founder's account of the launch: what is public, what is still in beta, what was tested before we opened it, and what we want to hear from you next. The launch is the start of a public stage, not the end of beta. Teams is still in beta, the integrations are still in planning, and the team will keep publishing what has changed, what is ready, and what is not. The 14-day Scale access that comes with Growth is described in its own announcement and guide. If you have questions before you buy, the pricing page and the plans guide set out what each plan includes, and the contact form reaches a person who reads the messages.",
+    "links": [
+      {
+        "label": "Why Teams is in beta",
+        "to": "/guides/why-teams-is-in-beta"
+      },
+      {
+        "label": "Features",
+        "to": "/features"
+      }
+    ],
+    "body": [
+      {
+        "heading": "A founder's message",
+        "paragraphs": [
+          "Today Revercue is open to everyone.",
+          "Starter, Growth and Scale can be bought now through checkout, and Free is available without a card. Teams is still in beta. If your team needs shared seats, you can join the beta and we will reach out. It is not on the public plans yet, because it is not finished.",
+          "Checkout was tested in our sandbox first, then live, then with some beta members, and then end to end again. Each stage changed something, and I would rather you hear that plainly than find it out in the middle of a project.",
+          "Growth now starts with 14 days of Scale access included, so you can use the price suggestion, interest level and advanced tracking before you decide what you need. After those 14 days, Growth continues at $29 a month.",
+          "What I want most from this launch is what I wanted from beta: tell us what gets in your way. The contact form is open, and I read the messages myself.",
+          "— Founder, Revercue"
+        ]
+      },
+      {
+        "heading": "What is public today",
+        "paragraphs": [
+          "Free is available without a card. Starter is $12 a month, Growth is $29 and Scale is $49, all bought through checkout. The features on those plans are described on the features pages and in the plans guide, so you can check what you are buying before you pay."
+        ]
+      },
+      {
+        "heading": "What is still in beta",
+        "paragraphs": [
+          "Teams is in beta. Integrations with other tools are in planning, and there is no public API today. We will say so on each page where it matters, and we will not describe anything as available until it has been tested."
+        ]
+      },
+      {
+        "heading": "What we tested before opening",
+        "paragraphs": [
+          "Checkout was tested in four stages, as described above. Most of the features in beta were used on real client work before launch. That does not mean every edge case is covered. It does mean that the most important paths, from proposal to contract to invoice to payment, have been used by people other than us."
+        ]
+      },
+      {
+        "heading": "What we want from you next",
+        "paragraphs": [
+          "Tell us what gets in your way, and tell us what you expected instead. Use the contact form. Each message is read, and the things that come up most often shape the next stage of the work."
+        ]
+      },
+      {
+        "heading": "What a public launch changes for you",
+        "paragraphs": [
+          "Nothing you have already built is changed. Documents, clients and records from beta carry over. The public plans are the ones on the pricing page, and each has the limits and features listed there. If you were using Revercue in beta and something now works differently, tell us, because that is a change we need to understand.",
+          "The support route is the same as in beta: the contact form, read by a person. We will keep the changelog and the guides up to date with each change, and we will say when something is still in beta or in planning."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "14-days-of-scale-access-included-with-growth",
+    "date": "2026-11-25",
+    "status": "Live",
+    "title": "14 days of Scale access, included with Growth",
+    "summary": "Every Growth subscription begins with 14 days of Scale access at no additional charge. You pay the Growth price of $29 once, and for the first 14 days you use the Scale limits, including the price suggestion, interest level and advanced tracking. The bonus starts when the Growth payment is confirmed and ends on its own. This announcement explains exactly what happens on day one, on day fourteen and afterwards, and where the full rules are set out in the guide. The bonus is designed to be easy to understand: you can see what Scale includes during the 14 days, and you can see what happens afterwards without reading the fine print. The guide sets out the cases people ask about most, including upgrades and cancellations, so the rules are checked in one place.",
+    "links": [
+      {
+        "label": "Your 14 days of Scale access",
+        "to": "/guides/14-days-of-scale"
+      },
+      {
+        "label": "Plans explained",
+        "to": "/guides/plans-explained"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What the offer is",
+        "paragraphs": [
+          "Every Growth subscription begins with 14 days of Scale access at no additional charge. You pay the Growth price of $29 once. For the first 14 days you have the Scale limits. After the 14 days, the subscription continues as Growth at $29 a month, with Growth limits."
+        ]
+      },
+      {
+        "heading": "What you get during the 14 days",
+        "paragraphs": [
+          "During the first 14 days you can use the Scale features: the price suggestion, the interest level for each client, advanced tracking on documents, and expense categories. You keep the Growth features too, so expense recording and profit are available as usual. The bonus is a swap to Scale limits, not a stack of both allowances."
+        ]
+      },
+      {
+        "heading": "When it starts and ends",
+        "paragraphs": [
+          "The bonus starts by itself when the Growth payment is confirmed, and it ends by itself after 14 days. It is not a discount code and it is not a separate trial you have to remember to activate. Nothing extra is charged during the 14 days, and you do not need to cancel to avoid a Scale charge."
+        ]
+      },
+      {
+        "heading": "Upgrading during the 14 days",
+        "paragraphs": [
+          "If you choose to start Scale during the 14 days, it is a separate purchase with its own price. The first Scale charge appears only when you deliberately start a Scale subscription. Any remaining days of the bonus are combined with the Scale subscription for the period you have left, and then normal Scale limits apply."
+        ]
+      },
+      {
+        "heading": "One bonus per account",
+        "paragraphs": [
+          "Each account can use the bonus once. It is attached to your first Growth subscription, so cancelling and buying Growth again does not restart a fresh 14 days. This keeps the offer fair for everyone and makes the rules predictable."
+        ]
+      },
+      {
+        "heading": "Where to read the full rules",
+        "paragraphs": [
+          "The guide lists day one, day fourteen, upgrades, cancellations and the questions people ask most often. If anything in an announcement and the guide differs, the guide is the more detailed source, and we will correct the announcement."
+        ]
+      },
+      {
+        "heading": "How to use the 14 days well",
+        "paragraphs": [
+          "Use the first week to test the Scale features on a real client: look at the price suggestion before you send your next proposal, check the interest level on your most active client, and turn on advanced tracking for one document. Use the second week to decide which of those features you would miss.",
+          "If you decide Growth is enough, nothing needs to be done: the bonus ends and the subscription continues as Growth. If you decide Scale is worth it, you can start Scale when you choose, and the rules for that are in the guide."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "communication-log-and-writing-helper-introduced",
+    "date": "2026-11-13",
+    "status": "Live",
+    "title": "Communication log and writing helper introduced, not gated by plan",
+    "summary": "On 13 November 2026 Revercue introduced two things that work the same way on every plan: the communication log, where you record messages, replies and follow-ups for each client, and the writing helper, which offers a suggested rewrite of selected text when you ask for one. Neither is gated by plan. The communication log is filled in by hand, because Revercue does not read your inbox. The writing helper never changes your text unless you choose to keep the suggestion. This announcement explains what each one does, where to find it, and what it does not do. Both were introduced together because they serve the same job: keeping the work and the words around it in one place, under your control. Nothing in either one leaves the product without your action, and the rest of this announcement explains the detail.",
+    "links": [
+      {
+        "label": "Communication log guide",
+        "to": "/guides/communication-log"
+      },
+      {
+        "label": "Ask the helper guide",
+        "to": "/guides/ask-the-helper"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What was introduced",
+        "paragraphs": [
+          "On 13 November 2026 Revercue introduced the communication log and the writing helper. Neither one is gated by plan, so Free, Starter, Growth, Scale and Teams users all have the same access to both.",
+          "Introducing both on the same day was deliberate. The log keeps the record of what was said, and the helper helps with how a message or document is worded. They are separate tools, and neither depends on the other, so you can use either one without the other.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
+        ]
+      },
+      {
+        "heading": "The communication log",
+        "paragraphs": [
+          "The communication log is the record of what was said with each client. You add messages, replies, calls and follow-up dates to the client, in order, with the direction and the channel. When you return to a client after a month, the log shows whether the last message was yours or theirs, and what was promised.",
+          "The log is filled in by hand. Revercue does not read your email, your calendar or your messaging apps, and it does not send messages on your behalf. A conversation appears in the log only when you add it, which is why adding it straight after a call is the habit that keeps the record useful."
+        ]
+      },
+      {
+        "heading": "The writing helper",
+        "paragraphs": [
+          "The writing helper is available inside the builders. Select a passage of text, ask for a clearer, shorter or more formal version, and read the suggestion. Nothing changes in your document until you choose to keep it. Select a passage and ignore the suggestion, and your original text stays exactly as it was.",
+          "The helper suggests a rewrite only when you ask for one. It is a writing aid for the words you have already decided to use, not a way to generate the content of a proposal, contract or invoice."
+        ]
+      },
+      {
+        "heading": "What neither one does",
+        "paragraphs": [
+          "The communication log does not read your inbox, and it does not connect to a calendar or a messaging app. The writing helper does not decide your prices, does not change clauses in a contract without your choice, and does not send anything to a client."
+        ]
+      },
+      {
+        "heading": "Where to find them",
+        "paragraphs": [
+          "The communication log is on each client's record in the CRM. The writing helper appears when you select text in any builder: proposals, contracts, requirement forms and invoices. If you cannot find either one, check that you are in the builder or the client record, not the dashboard."
+        ]
+      },
+      {
+        "heading": "What we want to hear",
+        "paragraphs": [
+          "Tell us where the log is hard to keep up with, or where a suggestion from the helper missed what you meant. Use the contact form. Both are new, and the first reports tell us where to make them easier to use."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "visual-intelligence-available-on-scale-and-growth",
+    "date": "2026-11-15",
+    "status": "Live",
+    "title": "Visual intelligence and UI elements available on Scale and Growth",
+    "summary": "On 15 November 2026 Revercue made visual intelligence and UI elements available on the Growth and Scale plans. UI elements are the building blocks inside the builders, such as headings, cards, lists, pricing tables, FAQs and signature blocks. Visual intelligence is the system that decides where a visual goes in a document: an image, a chart, a diagram or an icon, placed in the right zone of the template. Each visual it places can be edited afterwards. On this date it is available on Growth and Scale only. This announcement explains what visual intelligence does, which plans include it, and how to use it in a proposal, contract or invoice. Visual intelligence is a planning aid inside the document builders, and the decisions it makes can always be changed by you. The 19 November announcement explains how availability changed for every plan.",
+    "links": [
+      {
+        "label": "Visual pipeline guide",
+        "to": "/guides/visual-intelligence"
+      },
+      {
+        "label": "Plans explained",
+        "to": "/guides/plans-explained"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What was announced",
+        "paragraphs": [
+          "On 15 November 2026 Revercue made visual intelligence and UI elements available on the Growth and Scale plans. It is not available on Free or Starter on this date. It will be available to every plan on 19 November 2026, as described in a separate announcement.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
+        ]
+      },
+      {
+        "heading": "What visual intelligence does",
+        "paragraphs": [
+          "Visual intelligence decides where a visual should go in a document. It reads the content of a section and decides whether it needs an image, a chart, a diagram or an icon. The visual is then placed in the zone the template reserves for it, so the document keeps its layout while the visual suits the words around it.",
+          "Every visual it places can be edited. You can change it, replace it or remove it, so the system is a starting point rather than the final word on how your document looks."
+        ]
+      },
+      {
+        "heading": "What UI elements are",
+        "paragraphs": [
+          "UI elements are the building blocks you place in a proposal, contract, form or invoice: headings, paragraphs, quotes, lists, images, cards, buttons, dividers, spacers, timelines, pricing tables, packages, FAQs, file uploads, next-step blocks, signature blocks and two- or three-column layouts. Each one has its own properties, so you can set its text, its order and how it looks without writing any code.",
+          "On 15 November they were available on Growth and Scale, together with visual intelligence, which can place some of them automatically in a template's zones."
+        ]
+      },
+      {
+        "heading": "Which plans include it on 15 November",
+        "paragraphs": [
+          "Growth and Scale include visual intelligence from 15 November. Scale includes everything on Growth, so the two plans have the same visual intelligence. Free and Starter do not include it on this date."
+        ]
+      },
+      {
+        "heading": "How to use it",
+        "paragraphs": [
+          "Start from a template in the builder for a proposal, contract or invoice. When the document has zones for visuals, visual intelligence places suitable visuals in them. Check each one, change any that do not match the section, and keep the rest. A proposal with one clear diagram and no decoration is usually better than one with a chart in every section."
+        ]
+      },
+      {
+        "heading": "What it does not do",
+        "paragraphs": [
+          "Visual intelligence does not invent figures for a chart, and it does not add claims you have not written. A chart or diagram shows the content you provide, so check the numbers before you send the document to a client. The placement is a suggestion you can edit, not a guarantee of how a client will read the page."
+        ]
+      },
+      {
+        "heading": "Where to read more",
+        "paragraphs": [
+          "The visual pipeline guide explains the zones and how to edit a placed visual. The plans guide shows which features are on each plan, so you can check whether visual intelligence is part of the plan you use."
+        ]
+      },
+      {
+        "heading": "Getting started on Growth or Scale",
+        "paragraphs": [
+          "Open a proposal, contract or invoice from a template and look for the visual zones. Let visual intelligence place visuals, then review each one. Remove any visual that does not add something the reader needs, and keep the ones that explain a price, a timeline or a process. If the placement looks wrong for a section, you can change it, and the document keeps its structure."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "visual-intelligence-and-ask-the-helper-on-every-plan",
+    "date": "2026-11-19",
+    "status": "Live",
+    "title": "Visual intelligence, UI elements and Ask the helper are now available on every plan",
+    "summary": "On 19 November 2026 visual intelligence and UI elements became available on every plan, including Free and Starter. Ask the helper, the writing helper inside the builders, is also available on every plan. Together they mean that a freelancer on any plan can place suitable visuals in a proposal, contract or invoice and ask for a clearer version of a sentence. This announcement follows the 15 November release, where visual intelligence was limited to Growth and Scale, and explains what changed, what did not, and how to use both features. The change is about access, not about what the features do. Visual intelligence works the same way on every plan, and Ask the helper works the same way on every plan, so the only difference between plans is the limits and features listed on the pricing page.",
+    "links": [
+      {
+        "label": "Visual pipeline guide",
+        "to": "/guides/visual-intelligence"
+      },
+      {
+        "label": "Ask the helper guide",
+        "to": "/guides/ask-the-helper"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What changed on 19 November",
+        "paragraphs": [
+          "On 19 November 2026 visual intelligence and UI elements became available on every plan. On 15 November they were limited to Growth and Scale. Free and Starter users can now place visuals and use UI elements in proposals, contracts and invoices in the same way as Growth and Scale users.",
+          "Ask the helper is also available on every plan. It is the writing helper inside the builders, and it was introduced on 13 November, when it was not gated by plan.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
+        ]
+      },
+      {
+        "heading": "What visual intelligence does for every plan",
+        "paragraphs": [
+          "Visual intelligence reads the section it is placed in and decides whether that section needs an image, a chart, a diagram or an icon. It places the visual in the zone the template reserves, so the layout stays consistent. You can edit or replace any visual it places."
+        ]
+      },
+      {
+        "heading": "UI elements on every plan",
+        "paragraphs": [
+          "Every UI element in the builder is now open on every plan: headings, paragraphs, lists, images, cards, pricing tables, FAQs, signature blocks and the rest of the set. The plan limits still apply to documents, retention and storage, but the elements themselves are not gated."
+        ]
+      },
+      {
+        "heading": "What Ask the helper does for every plan",
+        "paragraphs": [
+          "Select a passage in a builder and ask for a clearer, shorter or more formal version. The suggestion appears for you to read. Your text changes only when you keep the suggestion. The helper suggests a rewrite when you ask; it does not write your document for you."
+        ]
+      },
+      {
+        "heading": "What stays the same by plan",
+        "paragraphs": [
+          "The plan limits for active documents, retention, storage and adaptive forms are unchanged. Growth still adds expense recording and profit, and Scale still adds the price suggestion and interest level. This announcement changes access to visual intelligence and Ask the helper only."
+        ]
+      },
+      {
+        "heading": "How to use both together",
+        "paragraphs": [
+          "Start from a template, let visual intelligence place visuals where the layout needs them, and then select a line of text that reads awkwardly and ask for a clearer version. Check the numbers in any chart, and check that each rewrite still says what you intended before you send the document."
+        ]
+      },
+      {
+        "heading": "What we want to hear",
+        "paragraphs": [
+          "Tell us where visual intelligence chose a visual that did not fit, or where Ask the helper changed the meaning of a sentence. Use the contact form, and include the document type and the section so we can see the pattern."
+        ]
+      },
+      {
+        "heading": "What a free plan user can now do",
+        "paragraphs": [
+          "A Free user can build a proposal from a template, place visuals with visual intelligence, select a sentence and ask the helper for a clearer version, and then send the proposal as a link. The plan limits still apply: Free has five active documents and one month of retention. Upgrading changes the limits, not the way these two features work."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "interest-level-introduced",
+    "date": "2026-11-22",
+    "status": "Live",
+    "title": "Interest level introduced for Scale",
+    "summary": "On 22 November 2026 Revercue introduced the interest level for each client. The interest level summarises how engaged a client has been with your documents, based on their activity: whether they opened a proposal, returned to it, answered a question, selected a package, or signed a contract. It is available on Scale. Revercue shows the working behind the figure, so you can see which signals contributed to it. This announcement explains what the interest level measures, what it does not measure, and how to use it before your next follow-up. The figure is a prompt for the next conversation, not a verdict on the client. Use it to choose when to follow up and what to ask, and read the working before you act on it.",
+    "links": [
+      {
+        "label": "Plans explained",
+        "to": "/guides/plans-explained"
+      },
+      {
+        "label": "Client management in Revercue",
+        "to": "/features/crm"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What was introduced",
+        "paragraphs": [
+          "On 22 November 2026 Revercue introduced the interest level for each client. It is available on Scale, and Teams includes everything on Scale. Growth, Starter and Free do not show the interest level.",
+          "This was open to beta before launch, and it was being tested internally before it was introduced to beta."
+        ]
+      },
+      {
+        "heading": "What it measures",
+        "paragraphs": [
+          "The interest level summarises how engaged a client has been with the documents you sent them. The signals include whether the client opened a proposal, returned to it, selected a package, asked a question on the page, or signed a contract. These are the actions a client takes on documents, not messages Revercue reads.",
+          "Because the figure is a summary, it changes as the signals change. A client who opened the proposal twice and then selected a package will show a different level from one who opened it once and did not return."
+        ]
+      },
+      {
+        "heading": "What it does not measure",
+        "paragraphs": [
+          "The interest level does not read your email or messages, and it does not know what a client thinks. It does not decide what a client will pay, and it is not a sales forecast. It describes activity on documents, so a quiet client may still be interested, and a busy one may not be."
+        ]
+      },
+      {
+        "heading": "The working is shown",
+        "paragraphs": [
+          "Revercue shows the working behind the figure. You can see which signals contributed and how much each one counted, so the number is something you can check rather than a score you have to trust. If a signal looks wrong for a client, you can see that and decide how much weight to give the figure."
+        ]
+      },
+      {
+        "heading": "How to use it before a follow-up",
+        "paragraphs": [
+          "Look at the interest level before you write to a client. A client whose level has risen after a recent document is ready for a practical question about the next step. A client whose level has fallen may need a shorter, lighter message, or a new version of the document. Use the figure to choose the message, not to decide whether the relationship is worth keeping."
+        ]
+      },
+      {
+        "heading": "Where to find it",
+        "paragraphs": [
+          "The interest level appears on each client's record in the CRM, next to the documents and the communication log. The plans guide shows which features are on each plan, so you can check that the interest level is included in the plan you use."
+        ]
+      },
+      {
+        "heading": "A worked example",
+        "paragraphs": [
+          "Suppose you sent a proposal on Monday. On Tuesday the client opened it, returned on Wednesday, and selected the middle package. The interest level rises after the selection. On Thursday you can send a practical question about the start date, which is more useful than a general check-in. If the client never returned after the first open, the figure stays low, and a shorter message that offers a call may be a better next step."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "public-launch-date-announced",
+    "date": "2026-11-08",
+    "status": "Announced",
+    "title": "Public launch date announced: 25 November 2026",
+    "summary": "On 8 November 2026 the founder announced the date of Revercue's public launch: 25 November 2026. Until then Revercue is in beta with a small group of users. On the launch date Revercue opens to everyone, and the core features that work today will be available to any freelancer who signs up. Teams stays in beta, and integrations remain in planning. This announcement explains what the date means, what it does not mean, and how we will keep you informed if anything changes before it arrives. The date was chosen to give the team time to finish the open work and to let the beta group check the most important paths once more. Anything that changes before 25 November will be posted on this page first, with the new date and the reason for it, so the date stays a commitment rather than a hope.",
+    "links": [
+      {
+        "label": "Beta page",
+        "to": "/beta"
+      },
+      {
+        "label": "Why Teams is in beta",
+        "to": "/guides/why-teams-is-in-beta"
+      },
+      {
+        "label": "Pricing",
+        "to": "/pricing"
+      }
+    ],
+    "body": [
+      {
+        "heading": "A founder's message",
+        "paragraphs": [
+          "Today I am giving you a date. Revercue will launch publicly on 25 November 2026.",
+          "This is the first time I have given a public date for Revercue, and I want to be careful with it. A date is a promise, and I would rather make one we can keep than a bold one we miss. I have chosen 25 November because it gives the team time to finish the work that is still open, and because it lets the people in beta help us check the important paths one more time before we open the doors.",
+          "Until the launch, Revercue stays in beta. The people using it now are a small group, and their reports have already changed the product in ways I did not expect. That is the reason beta exists, and it is the reason I am grateful to everyone who has used it so far.",
+          "If something changes before the date, I will say so here. I would rather you hear about a change from me than find it out on the day.",
+          "— Founder, Revercue"
+        ]
+      },
+      {
+        "heading": "What the date means",
+        "paragraphs": [
+          "On 25 November 2026 Revercue is open to everyone. Anyone who signs up can use the core path from proposal to contract to requirement form to invoice to the client record. The features that work today are the ones we plan to open, and we will describe each plan and its limits on the pricing page so you can check what you are buying before you pay.",
+          "The public launch is also the point where we stop describing the product as a beta for new users. Existing beta users keep their accounts and their documents. Nothing you have built in beta is removed by the launch."
+        ]
+      },
+      {
+        "heading": "What the date does not mean",
+        "paragraphs": [
+          "The launch does not mean every feature is finished. Teams is still in beta, and it will stay in beta after the launch date until it is ready for the public plans. Integrations with other tools are still in planning, and there is no public API today, so the launch does not change that.",
+          "It also does not mean we will never change anything. Revercue will keep changing after 25 November, because the reports from real use keep showing us what to improve. We will record every change on the changelog, with what it does and what it does not do."
+        ]
+      },
+      {
+        "heading": "What is already in place",
+        "paragraphs": [
+          "Several parts of Revercue have already been used by people outside the team. Proposals can be shared as a link, and clients can approve or decline from the page without an account. Contracts are signed with a typed full name, an explicit consent tick and a recorded date. Requirement forms collect what you need before work starts. Invoices are numbered automatically and tracked until they are paid, and the client record keeps the thread in one place.",
+          "These are the parts I am most confident in, because they have been used on real client work. The parts I am less certain about are the ones still in planning or beta, and I will say so wherever it matters."
+        ]
+      },
+      {
+        "heading": "How we will keep you informed",
+        "paragraphs": [
+          "Announcements will record each dated change, including any change to the launch date. The changelog will record each product change, and the guides will describe how each feature works. If you want to follow the work closely, the announcements page is the place to start, and the contact form reaches a person who reads the messages.",
+          "If the date moves, you will see it here first, with the new date and the reason for it."
+        ]
+      },
+      {
+        "heading": "What we want from you before 25 November",
+        "paragraphs": [
+          "Use the product for a real piece of work if you can, and tell us where it gets in your way. The most useful feedback is specific: what you were trying to do, what you expected, and what happened instead. Send it through the contact form, and include the page or document you were working on.",
+          "Thank you for trusting a product that is still being built. The date is a commitment to you, and I intend to keep it."
+        ]
+      }
+    ]
+  }
+]

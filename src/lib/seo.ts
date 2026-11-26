@@ -1,3 +1,4 @@
+import announcementsData from "../content/announcements.json";
 import { postBySlug } from "./blog";
 /**
  * Per-route metadata for Revercue's client-rendered public site.
@@ -75,6 +76,15 @@ const FEATURE_META: Record<string, RouteMeta> = Object.fromEntries(
 );
 
 export function routeMeta(pathname: string): RouteMeta {
+  if (pathname === "/announcements") {
+    return { title: "Announcements — Revercue", description: "Dated notes on Revercue releases, plans, checkout, and what is still in beta or planning." };
+  }
+  if (pathname.startsWith("/announcements/")) {
+    const item = (announcementsData as { slug: string; title: string; summary: string }[]).find(
+      (a) => a.slug === pathname.split("/")[2],
+    );
+    if (item) return { title: `${item.title} | Revercue`, description: item.summary.slice(0, 300) };
+  }
   if (pathname.startsWith("/blog/") && pathname.split("/")[2]) {
     const post = postBySlug(pathname.split("/")[2]);
     if (post) return { title: `${post.title} | Revercue`, description: post.excerpt };

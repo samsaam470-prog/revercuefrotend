@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { AnnouncementsPage } from "./pages/public/AnnouncementsPage";
+import { AnnouncementPage } from "./pages/public/AnnouncementPage";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { ScrollToTop } from "./components/shared/ScrollToTop";
 import { applyRouteMetadata } from "./lib/seo";
@@ -68,6 +70,8 @@ export function App() {
             <Route path="/guides/:slug" element={<GuideDetailPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/announcements" element={<AnnouncementsPage />} />
+            <Route path="/announcements/:slug" element={<AnnouncementPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="/beta" element={<BetaPage />} />
