@@ -522,5 +522,262 @@
         ]
       }
     ]
+  },
+  {
+    "slug": "communication-log-and-writing-helper-introduced",
+    "date": "2026-11-13",
+    "status": "Live",
+    "title": "Communication log and writing helper introduced, not gated by plan",
+    "summary": "On 13 November 2026 Revercue introduced two things that work the same way on every plan: the communication log, where you record messages, replies and follow-ups for each client, and the writing helper, which offers a suggested rewrite of selected text when you ask for one. Neither is gated by plan. The communication log is filled in by hand, because Revercue does not read your inbox. The writing helper never changes your text unless you choose to keep the suggestion. This announcement explains what each one does, where to find it, and what it does not do. Both were introduced together because they serve the same job: keeping the work and the words around it in one place, under your control. Nothing in either one leaves the product without your action, and the rest of this announcement explains the detail.",
+    "links": [
+      {
+        "label": "Communication log guide",
+        "to": "/guides/communication-log"
+      },
+      {
+        "label": "Ask the helper guide",
+        "to": "/guides/ask-the-helper"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What was introduced",
+        "paragraphs": [
+          "On 13 November 2026 Revercue introduced the communication log and the writing helper. Neither one is gated by plan, so Free, Starter, Growth, Scale and Teams users all have the same access to both.",
+          "Introducing both on the same day was deliberate. The log keeps the record of what was said, and the helper helps with how a message or document is worded. They are separate tools, and neither depends on the other, so you can use either one without the other."
+        ]
+      },
+      {
+        "heading": "The communication log",
+        "paragraphs": [
+          "The communication log is the record of what was said with each client. You add messages, replies, calls and follow-up dates to the client, in order, with the direction and the channel. When you return to a client after a month, the log shows whether the last message was yours or theirs, and what was promised.",
+          "The log is filled in by hand. Revercue does not read your email, your calendar or your messaging apps, and it does not send messages on your behalf. A conversation appears in the log only when you add it, which is why adding it straight after a call is the habit that keeps the record useful."
+        ]
+      },
+      {
+        "heading": "The writing helper",
+        "paragraphs": [
+          "The writing helper is available inside the builders. Select a passage of text, ask for a clearer, shorter or more formal version, and read the suggestion. Nothing changes in your document until you choose to keep it. Select a passage and ignore the suggestion, and your original text stays exactly as it was.",
+          "The helper suggests a rewrite only when you ask for one. It is a writing aid for the words you have already decided to use, not a way to generate the content of a proposal, contract or invoice."
+        ]
+      },
+      {
+        "heading": "What neither one does",
+        "paragraphs": [
+          "The communication log does not read your inbox, and it does not connect to a calendar or a messaging app. The writing helper does not decide your prices, does not change clauses in a contract without your choice, and does not send anything to a client."
+        ]
+      },
+      {
+        "heading": "Where to find them",
+        "paragraphs": [
+          "The communication log is on each client's record in the CRM. The writing helper appears when you select text in any builder: proposals, contracts, requirement forms and invoices. If you cannot find either one, check that you are in the builder or the client record, not the dashboard."
+        ]
+      },
+      {
+        "heading": "What we want to hear",
+        "paragraphs": [
+          "Tell us where the log is hard to keep up with, or where a suggestion from the helper missed what you meant. Use the contact form. Both are new, and the first reports tell us where to make them easier to use."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "visual-intelligence-available-on-scale-and-growth",
+    "date": "2026-11-15",
+    "status": "Live",
+    "title": "Visual intelligence and UI elements available on Scale and Growth",
+    "summary": "On 15 November 2026 Revercue made visual intelligence and UI elements available on the Growth and Scale plans. UI elements are the building blocks inside the builders, such as headings, cards, lists, pricing tables, FAQs and signature blocks. Visual intelligence is the system that decides where a visual goes in a document: an image, a chart, a diagram or an icon, placed in the right zone of the template. Each visual it places can be edited afterwards. On this date it is available on Growth and Scale only. This announcement explains what visual intelligence does, which plans include it, and how to use it in a proposal, contract or invoice. Visual intelligence is a planning aid inside the document builders, and the decisions it makes can always be changed by you. The 19 November announcement explains how availability changed for every plan.",
+    "links": [
+      {
+        "label": "Visual pipeline guide",
+        "to": "/guides/visual-intelligence"
+      },
+      {
+        "label": "Plans explained",
+        "to": "/guides/plans-explained"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What was announced",
+        "paragraphs": [
+          "On 15 November 2026 Revercue made visual intelligence and UI elements available on the Growth and Scale plans. It is not available on Free or Starter on this date. It will be available to every plan on 19 November 2026, as described in a separate announcement."
+        ]
+      },
+      {
+        "heading": "What visual intelligence does",
+        "paragraphs": [
+          "Visual intelligence decides where a visual should go in a document. It reads the content of a section and decides whether it needs an image, a chart, a diagram or an icon. The visual is then placed in the zone the template reserves for it, so the document keeps its layout while the visual suits the words around it.",
+          "Every visual it places can be edited. You can change it, replace it or remove it, so the system is a starting point rather than the final word on how your document looks."
+        ]
+      },
+      {
+        "heading": "What UI elements are",
+        "paragraphs": [
+          "UI elements are the building blocks you place in a proposal, contract, form or invoice: headings, paragraphs, quotes, lists, images, cards, buttons, dividers, spacers, timelines, pricing tables, packages, FAQs, file uploads, next-step blocks, signature blocks and two- or three-column layouts. Each one has its own properties, so you can set its text, its order and how it looks without writing any code.",
+          "On 15 November they were available on Growth and Scale, together with visual intelligence, which can place some of them automatically in a template's zones."
+        ]
+      },
+      {
+        "heading": "Which plans include it on 15 November",
+        "paragraphs": [
+          "Growth and Scale include visual intelligence from 15 November. Scale includes everything on Growth, so the two plans have the same visual intelligence. Free and Starter do not include it on this date."
+        ]
+      },
+      {
+        "heading": "How to use it",
+        "paragraphs": [
+          "Start from a template in the builder for a proposal, contract or invoice. When the document has zones for visuals, visual intelligence places suitable visuals in them. Check each one, change any that do not match the section, and keep the rest. A proposal with one clear diagram and no decoration is usually better than one with a chart in every section."
+        ]
+      },
+      {
+        "heading": "What it does not do",
+        "paragraphs": [
+          "Visual intelligence does not invent figures for a chart, and it does not add claims you have not written. A chart or diagram shows the content you provide, so check the numbers before you send the document to a client. The placement is a suggestion you can edit, not a guarantee of how a client will read the page."
+        ]
+      },
+      {
+        "heading": "Where to read more",
+        "paragraphs": [
+          "The visual pipeline guide explains the zones and how to edit a placed visual. The plans guide shows which features are on each plan, so you can check whether visual intelligence is part of the plan you use."
+        ]
+      },
+      {
+        "heading": "Getting started on Growth or Scale",
+        "paragraphs": [
+          "Open a proposal, contract or invoice from a template and look for the visual zones. Let visual intelligence place visuals, then review each one. Remove any visual that does not add something the reader needs, and keep the ones that explain a price, a timeline or a process. If the placement looks wrong for a section, you can change it, and the document keeps its structure."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "visual-intelligence-and-ask-the-helper-on-every-plan",
+    "date": "2026-11-19",
+    "status": "Live",
+    "title": "Visual intelligence, UI elements and Ask the helper are now available on every plan",
+    "summary": "On 19 November 2026 visual intelligence and UI elements became available on every plan, including Free and Starter. Ask the helper, the writing helper inside the builders, is also available on every plan. Together they mean that a freelancer on any plan can place suitable visuals in a proposal, contract or invoice and ask for a clearer version of a sentence. This announcement follows the 15 November release, where visual intelligence was limited to Growth and Scale, and explains what changed, what did not, and how to use both features. The change is about access, not about what the features do. Visual intelligence works the same way on every plan, and Ask the helper works the same way on every plan, so the only difference between plans is the limits and features listed on the pricing page.",
+    "links": [
+      {
+        "label": "Visual pipeline guide",
+        "to": "/guides/visual-intelligence"
+      },
+      {
+        "label": "Ask the helper guide",
+        "to": "/guides/ask-the-helper"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What changed on 19 November",
+        "paragraphs": [
+          "On 19 November 2026 visual intelligence and UI elements became available on every plan. On 15 November they were limited to Growth and Scale. Free and Starter users can now place visuals and use UI elements in proposals, contracts and invoices in the same way as Growth and Scale users.",
+          "Ask the helper is also available on every plan. It is the writing helper inside the builders, and it was introduced on 13 November, when it was not gated by plan."
+        ]
+      },
+      {
+        "heading": "What visual intelligence does for every plan",
+        "paragraphs": [
+          "Visual intelligence reads the section it is placed in and decides whether that section needs an image, a chart, a diagram or an icon. It places the visual in the zone the template reserves, so the layout stays consistent. You can edit or replace any visual it places."
+        ]
+      },
+      {
+        "heading": "UI elements on every plan",
+        "paragraphs": [
+          "Every UI element in the builder is now open on every plan: headings, paragraphs, lists, images, cards, pricing tables, FAQs, signature blocks and the rest of the set. The plan limits still apply to documents, retention and storage, but the elements themselves are not gated."
+        ]
+      },
+      {
+        "heading": "What Ask the helper does for every plan",
+        "paragraphs": [
+          "Select a passage in a builder and ask for a clearer, shorter or more formal version. The suggestion appears for you to read. Your text changes only when you keep the suggestion. The helper suggests a rewrite when you ask; it does not write your document for you."
+        ]
+      },
+      {
+        "heading": "What stays the same by plan",
+        "paragraphs": [
+          "The plan limits for active documents, retention, storage and adaptive forms are unchanged. Growth still adds expense recording and profit, and Scale still adds the price suggestion and interest level. This announcement changes access to visual intelligence and Ask the helper only."
+        ]
+      },
+      {
+        "heading": "How to use both together",
+        "paragraphs": [
+          "Start from a template, let visual intelligence place visuals where the layout needs them, and then select a line of text that reads awkwardly and ask for a clearer version. Check the numbers in any chart, and check that each rewrite still says what you intended before you send the document."
+        ]
+      },
+      {
+        "heading": "What we want to hear",
+        "paragraphs": [
+          "Tell us where visual intelligence chose a visual that did not fit, or where Ask the helper changed the meaning of a sentence. Use the contact form, and include the document type and the section so we can see the pattern."
+        ]
+      },
+      {
+        "heading": "What a free plan user can now do",
+        "paragraphs": [
+          "A Free user can build a proposal from a template, place visuals with visual intelligence, select a sentence and ask the helper for a clearer version, and then send the proposal as a link. The plan limits still apply: Free has five active documents and one month of retention. Upgrading changes the limits, not the way these two features work."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "interest-level-introduced",
+    "date": "2026-11-22",
+    "status": "Live",
+    "title": "Interest level introduced for Scale",
+    "summary": "On 22 November 2026 Revercue introduced the interest level for each client. The interest level summarises how engaged a client has been with your documents, based on their activity: whether they opened a proposal, returned to it, answered a question, selected a package, or signed a contract. It is available on Scale. Revercue shows the working behind the figure, so you can see which signals contributed to it. This announcement explains what the interest level measures, what it does not measure, and how to use it before your next follow-up. The figure is a prompt for the next conversation, not a verdict on the client. Use it to choose when to follow up and what to ask, and read the working before you act on it.",
+    "links": [
+      {
+        "label": "Plans explained",
+        "to": "/guides/plans-explained"
+      },
+      {
+        "label": "Client management in Revercue",
+        "to": "/features/crm"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What was introduced",
+        "paragraphs": [
+          "On 22 November 2026 Revercue introduced the interest level for each client. It is available on Scale, and Teams includes everything on Scale. Growth, Starter and Free do not show the interest level."
+        ]
+      },
+      {
+        "heading": "What it measures",
+        "paragraphs": [
+          "The interest level summarises how engaged a client has been with the documents you sent them. The signals include whether the client opened a proposal, returned to it, selected a package, asked a question on the page, or signed a contract. These are the actions a client takes on documents, not messages Revercue reads.",
+          "Because the figure is a summary, it changes as the signals change. A client who opened the proposal twice and then selected a package will show a different level from one who opened it once and did not return."
+        ]
+      },
+      {
+        "heading": "What it does not measure",
+        "paragraphs": [
+          "The interest level does not read your email or messages, and it does not know what a client thinks. It does not decide what a client will pay, and it is not a sales forecast. It describes activity on documents, so a quiet client may still be interested, and a busy one may not be."
+        ]
+      },
+      {
+        "heading": "The working is shown",
+        "paragraphs": [
+          "Revercue shows the working behind the figure. You can see which signals contributed and how much each one counted, so the number is something you can check rather than a score you have to trust. If a signal looks wrong for a client, you can see that and decide how much weight to give the figure."
+        ]
+      },
+      {
+        "heading": "How to use it before a follow-up",
+        "paragraphs": [
+          "Look at the interest level before you write to a client. A client whose level has risen after a recent document is ready for a practical question about the next step. A client whose level has fallen may need a shorter, lighter message, or a new version of the document. Use the figure to choose the message, not to decide whether the relationship is worth keeping."
+        ]
+      },
+      {
+        "heading": "Where to find it",
+        "paragraphs": [
+          "The interest level appears on each client's record in the CRM, next to the documents and the communication log. The plans guide shows which features are on each plan, so you can check that the interest level is included in the plan you use."
+        ]
+      },
+      {
+        "heading": "A worked example",
+        "paragraphs": [
+          "Suppose you sent a proposal on Monday. On Tuesday the client opened it, returned on Wednesday, and selected the middle package. The interest level rises after the selection. On Thursday you can send a practical question about the start date, which is more useful than a general check-in. If the client never returned after the first open, the figure stays low, and a shorter message that offers a call may be a better next step."
+        ]
+      }
+    ]
   }
 ]
