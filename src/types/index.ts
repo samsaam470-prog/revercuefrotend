@@ -342,6 +342,10 @@ export type BlockType =
   | "quote"
   | "list"
   | "image"
+  | "icon"
+  | "chart"
+  | "diagram"
+  | "svg"
   | "graph"
   | "shape"
   | "pricing_table"
@@ -359,6 +363,43 @@ export type BlockType =
   | "signature"
   | "next_step";
 
+/** One labelled figure. Charts hold real data or they are not charts. */
+export interface ChartPoint {
+  label: string;
+  value: number;
+}
+
+export interface ChartSpec {
+  kind?: "bar" | "line";
+  title?: string;
+  unit?: string;
+  source?: string;
+  series: ChartPoint[];
+}
+
+/** A step in a process diagram. The title is what the reader sees. */
+export interface DiagramStep {
+  title: string;
+  detail?: string;
+}
+
+export interface DiagramSpec {
+  title?: string;
+  source?: string;
+  steps: DiagramStep[];
+  /** Portable source, kept so the flow can be re-rendered or exported. */
+  mermaid?: string;
+}
+
+export interface IconSpec {
+  /** Iconify identifier, e.g. `mdi:calendar-check`. */
+  name: string;
+  /** The icon's own markup, kept so it renders without another request. */
+  svg?: string;
+  label?: string;
+  color?: string;
+}
+
 export interface Block {
   id: string;
   type: BlockType;
@@ -373,6 +414,14 @@ export interface Block {
   faqs?: { question: string; answer: string }[];
   question?: publicQuestion;
   columns?: string[][];
+  /** Structured visual payloads. Each keeps its own type and editability. */
+  chart?: ChartSpec;
+  diagram?: DiagramSpec;
+  icon?: IconSpec;
+  svg?: string;
+  /** Where the visual came from and what its licence allows. */
+  attribution?: string;
+  source?: string;
   meta?: Record<string, string | number | boolean>;
 }
 

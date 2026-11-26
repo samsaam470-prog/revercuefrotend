@@ -26,6 +26,18 @@ function editableText(block: Block): { value: string; write: (next: string) => P
   if (block.type === "image" || block.type === "graph" || block.type === "file_upload") {
     return { value: block.alt || block.text || "", write: (value) => ({ alt: value }) };
   }
+  if (block.type === "icon") {
+    return {
+      value: block.icon?.label || block.alt || "",
+      write: (value) => ({ alt: value, icon: { ...block.icon, name: block.icon?.name || "custom", label: value } }),
+    };
+  }
+  if (block.type === "chart" || block.type === "diagram") {
+    return { value: block.caption || "", write: (value) => ({ caption: value }) };
+  }
+  if (block.type === "svg") {
+    return { value: block.alt || "", write: (value) => ({ alt: value }) };
+  }
   if (block.type === "question") {
     return {
       value: block.question?.text || "",

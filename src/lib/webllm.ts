@@ -122,14 +122,21 @@ export interface VisualRequest {
 export async function visualize(
   document: Pick<DocContent, "blocks">,
   sections: string[],
-): Promise<Array<{ afterBlockId: string; kind: string; query: string }>> {
+): Promise<Array<{ afterBlockId: string; kind: string; query: string; data?: unknown }>> {
   const outline = document.blocks
-    .map((block) => `${block.id}: ${block.type} — ${block.text || ""}`)
+    .map((block) => {
+      if (block.type === "chart" || block.type === "diagram") return `${block.id}: ${block.type} — already has a visual`;
+      const label = block.text || block.items?.map((item) => item.label).join(", ") || "";
+      return `${block.id}: ${block.type} — ${label}`;
+    })
     .join("\n");
 
   const text = await complete(
-    "You choose illustrations for a business document. Answer only as JSON. Prefer a chart for numbers, a diagram for process, an icon set for lists, and a photograph only for a place or a product.",
-    `Sections: ${sections.join(", ")}\nBlocks:\n${outline}\n\nReturn JSON: [{"afterBlockId": "id", "kind": "image|chart|diagram|icon", "query": "short search phrase"}].`,
+    "You choose illustrations for a business document. Answer only as JSON. Prefer a chart for numbers that are already in the document, a diagram for a process that is already described, an icon for a single concept, and a photograph only for a place, product or team. Never invent figures or steps.",
+    `Sections: ${sections.join(", ")}\nBlocks:\n${outline}\n\nReturn JSON: [{"afterBlockId": "id", "kind": "image|chart|diagram|icon", "query": "short search phrase"}]. ` +
+      `For a chart add "data": {"title": "", "unit": "", "series": [{"label": "", "value": 0}]} using only numbers written in the document (at least two). ` +
+      `For a diagram add "data": {"title": "", "steps": [{"title": "", "detail": ""}]} describing the process in this document (at least two steps). ` +
+      `If the document has no numbers or no described process, do not request a chart or diagram. Return [] if no visual would help.`,
     500,
   );
 

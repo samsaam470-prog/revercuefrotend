@@ -4,6 +4,7 @@ import { ElementToolbar } from "./ElementToolbar";
 import { InlineText } from "./InlineText";
 import { RichText } from "./RichText";
 import { imageToDataUrl } from "../../lib/images";
+import { ChartBlock, DiagramBlock, IconBlock, SvgBlock } from "./VisualBlocks";
 import type { Block } from "../../types";
 
 export interface BlockRendererProps {
@@ -120,22 +121,19 @@ export function BlockRenderer({
             onChange={(patch) => onPatch?.(patch)}
           />
         );
+      case "icon":
+        return <IconBlock block={block} editable={canType} />;
+      case "chart":
+        return <ChartBlock block={block} brandPrimary={brandPrimary} editable={canType} />;
+      case "diagram":
+        return <DiagramBlock block={block} brandPrimary={brandPrimary} editable={canType} />;
+      case "svg":
+        return <SvgBlock block={block} editable={canType} />;
       case "graph":
-        return (
-          <div>
-            <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 80 }}>
-              {[40, 65, 52, 80, 70].map((height, index) => (
-                <span
-                  key={index}
-                  style={{ flex: 1, height: `${height}%`, background: brandPrimary, borderRadius: "2px 2px 0 0", opacity: 0.85 }}
-                />
-              ))}
-            </div>
-            <p className="caption" style={{ color: "#8a857a", marginTop: 6 }}>
-              {typeable(block.text, "Chart caption", { multiline: false })}
-            </p>
-          </div>
-        );
+        // Older documents used a `graph` block whose bars were hard-coded. It
+        // now renders the real chart when the block carries one, and otherwise
+        // asks for data instead of drawing five invented bars.
+        return <ChartBlock block={block} brandPrimary={brandPrimary} editable={canType} />;
       case "pricing_table":
         return (
           <table className="doc-table" style={{ margin: "8px 0" }}>
@@ -401,15 +399,23 @@ function ImageBlock({
   };
 
   if (block.url) {
+    const width = Number(block.meta?.width);
+    const maxWidth = Number.isFinite(width) && width > 0 && width <= 100 ? `${width}%` : undefined;
     return (
-      <figure style={{ margin: "12px 0" }}>
+      <figure style={{ margin: "12px 0", maxWidth }}>
         <img
           src={block.url}
           alt={block.alt || "Document image"}
           style={{ width: "100%", borderRadius: 6, display: "block" }}
           loading="lazy"
         />
-        {block.alt ? (
+        {block.caption || block.source ? (
+          <figcaption style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>
+            {block.caption}
+            {block.caption && block.source ? " · " : ""}
+            {block.source ? `Source: ${block.source}` : ""}
+          </figcaption>
+        ) : block.alt ? (
           <figcaption style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>{block.alt}</figcaption>
         ) : null}
       </figure>

@@ -51,6 +51,11 @@ export function Canvas({
       text: type === "heading" ? "Section heading" : type === "paragraph" ? "" : undefined,
       level: type === "heading" ? "h2" : undefined,
     };
+    // A new visual starts empty and asks for its own data; it never ships
+    // with sample figures or a placeholder picture.
+    if (type === "icon") block.icon = { name: "mdi:circle" };
+    if (type === "chart") block.chart = { kind: "bar", series: [] };
+    if (type === "diagram") block.diagram = { steps: [] };
     const next = [...blocks, block];
     onBlocksChange(next);
     onSelect(block.id);

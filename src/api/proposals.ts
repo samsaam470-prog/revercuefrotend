@@ -91,11 +91,41 @@ export interface OrganizePayload {
 }
 
 export interface VisualRequest {
+  /** The id the backend returns this asset under. */
+  id?: string;
   afterBlockId: string;
+  /** `image` | `icon` | `chart` | `diagram` | `svg`. */
   type: string;
   kind?: string;
   query: string;
   section_id?: string;
+  /** Chart series, diagram steps or SVG markup for the structured types. */
+  data?: unknown;
+}
+
+export interface VisualAssetPayload {
+  id?: string;
+  type: string;
+  query?: string;
+  afterBlockId?: string;
+  section_id?: string;
+  url?: string;
+  icon?: string;
+  svg?: string;
+  mermaid?: string;
+  chart?: { kind?: "bar" | "line"; title?: string; unit?: string; source?: string; series: { label: string; value: number }[] };
+  diagram?: { title?: string; source?: string; steps: { title: string; detail?: string }[] };
+  license?: string | null;
+  creator?: string | null;
+  source?: string | null;
+  attribution?: string | null;
+}
+
+export interface VisualRejection {
+  id: string;
+  type: string | null;
+  query: string | null;
+  reason: string;
 }
 
 export const proposalsApi = {
@@ -184,10 +214,23 @@ export const pipelineApi = {
     }>("/api/organize", body),
 
   visuals: (body: { document: unknown; requests: VisualRequest[] }) =>
-    api.post<{ assets: Record<string, unknown>; rejected?: unknown[] }>("/api/organize/visuals", body),
+    api.post<{
+      success?: boolean;
+      /** Keyed by the request id. */
+      assets: Record<string, VisualAssetPayload>;
+      items?: VisualAssetPayload[];
+      rejected?: VisualRejection[];
+      warnings?: string[];
+    }>("/api/organize/visuals", body),
 
   extractVisuals: (body: { requests: VisualRequest[] }) =>
-    api.post<{ success: true; assets: unknown[] }>("/api/extract/visuals", body),
+    api.post<{
+      success?: boolean;
+      assets: Record<string, VisualAssetPayload>;
+      items?: VisualAssetPayload[];
+      rejected?: VisualRejection[];
+      warnings?: string[];
+    }>("/api/extract/visuals", body),
 };
 
 export type { Contract };
