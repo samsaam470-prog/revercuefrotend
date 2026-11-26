@@ -476,8 +476,8 @@
   "known_issues": [
     {
       "id": "suggestions-plan-gate",
-      "detail": "Source now shows the suggestion card on every plan (basic follow-up on Free, pattern suggestions from Starter) pending the backend deploy. Confirm after deploy. Which is authoritative has not been confirmed.",
-      "status": "resolved_in_source_pending_deploy"
+      "detail": "The suggestion card is shown on every plan (basic follow-up on Free, pattern suggestions from Starter). The guides, the FAQ and the pricing page describe the same access. Live backend behaviour is not verified.",
+      "status": "source_consistent_live_unverified"
     },
     {
       "id": "simulation-not-production",
