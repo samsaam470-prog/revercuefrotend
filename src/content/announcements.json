@@ -4,7 +4,7 @@
     "date": "2026-11-11",
     "status": "Beta",
     "title": "Revercue moves from alpha to beta",
-    "summary": "Today Revercue moves from alpha to beta. Alpha was a small group of people using Revercue while we worked out what it needed to do. Beta means more people can use it, the core features work, and we are still changing things based on what you tell us. This announcement explains what the change means for you, what is ready, what is still in planning, and how to tell us what is getting in your way. The change matters most for the people using Revercue on real client work: it means the core path from proposal to payment has been used by people outside the team, and the feedback from those uses is now shaping each stage of the product. Read the sections below for the detail, and use the contact form to tell us what you find.",
+    "summary": "Today Revercue moves from alpha to beta. Alpha was a small group of people using Revercue while we worked out what it needed to do. Beta means more people can use it, the core features work, and we are still changing things based on what you tell us. This announcement explains what the change means for you, what is ready, what is still in planning, and how to tell us what is getting in your way. The change matters most for the people using Revercue on real client work: it means the core path from proposal to payment has been used by people outside the team, and the feedback from those uses is now shaping each stage of the product. Read the sections below for the detail, and use the contact form to tell us what you find. Internal testing started on 27 October 2026, and after 14 days of it, on 11 November 2026, Revercue opened to a wider group of beta testers and to a wider audience.",
     "links": [
       {
         "label": "Why Teams is in beta",
@@ -859,6 +859,60 @@
         "paragraphs": [
           "Use the product for a real piece of work if you can, and tell us where it gets in your way. The most useful feedback is specific: what you were trying to do, what you expected, and what happened instead. Send it through the contact form, and include the page or document you were working on.",
           "Thank you for trusting a product that is still being built. The date is a commitment to you, and I intend to keep it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "internal-testing-started",
+    "date": "2026-10-27",
+    "status": "Testing",
+    "title": "Internal testing started: 27 October 2026",
+    "summary": "On 27 October 2026 the Revercue team started internal testing. The team used the product on the same paths a freelancer would use: a proposal shared as a link, a contract signed with a typed name and consent, a requirement form, an invoice, and the client record that holds them together. Anything that broke was fixed before anyone outside the team saw it. After 14 days of internal testing, on 11 November 2026, Revercue opened to a wider group of beta testers and to a wider audience. This announcement records when the testing began and why it came first. The team tested the paths in the order a client experiences them, and each fix was checked again on the same path. The beta that followed started with a product that had already been used end to end, and the record of what was changed is in the changelog.",
+    "links": [
+      {
+        "label": "Revercue moves from alpha to beta",
+        "to": "/announcements/revercue-moves-from-alpha-to-beta"
+      },
+      {
+        "label": "Beta page",
+        "to": "/beta"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What started on 27 October",
+        "paragraphs": [
+          "On 27 October 2026 the team began internal testing of Revercue. Internal testing means people who build Revercue use it on real work: writing proposals, sending them as links, turning accepted proposals into contracts, collecting requirements through forms, issuing invoices and keeping the client record up to date.",
+          "The aim was to find the problems that are obvious only to someone who has to finish a piece of client work with the product. A broken link, a confusing step or a missing confirmation is easy to miss when you are building the feature, and easy to notice when you try to get paid."
+        ]
+      },
+      {
+        "heading": "What the team tested",
+        "paragraphs": [
+          "The testing followed the path a freelancer takes from first contact to payment. A proposal was built and shared as a link. The client's choices, questions and approvals were checked on the public page. An accepted proposal was turned into a contract, and the typed-name signature, the consent tick and the recorded date were checked against the version that was signed.",
+          "Requirement forms were filled in and their answers were checked on the client record. Invoices were numbered, sent, followed up and marked as paid. Each step was tested again after a fix, because a change in one part of the thread can affect the next part."
+        ]
+      },
+      {
+        "heading": "What testing changed",
+        "paragraphs": [
+          "Internal testing produced a long list of small problems and a few large ones. Several were wording that confused a reader about what a button would do. Some were steps that worked in one order and failed in another. A few were places where the product did not make clear what the client had seen or agreed to.",
+          "Each of those was fixed before the product was opened more widely. The changes were made in the product itself, and the decisions behind them are recorded in the changelog."
+        ]
+      },
+      {
+        "heading": "Why it came before beta",
+        "paragraphs": [
+          "A beta with outside testers is only useful if the basics work. Asking a freelancer to try a product that fails at the first step wastes their time and damages their trust. Internal testing was the stage where we could find those failures without costing anyone real work.",
+          "It also meant the beta testers who joined later saw a product that had already been used end to end by the team. Their feedback could then go to the harder questions: whether the flow matched how they actually work, and what was still missing."
+        ]
+      },
+      {
+        "heading": "What happened next",
+        "paragraphs": [
+          "After 14 days of internal testing, on 11 November 2026, Revercue opened to a wider group of beta testers and to a wider audience. That announcement, Revercue moves from alpha to beta, records the change in access and includes a founder's message on what beta means.",
+          "Internal testing did not stop when beta opened. The team continues to use the product on real work, and the changelog records each change that comes out of that use."
         ]
       }
     ]
