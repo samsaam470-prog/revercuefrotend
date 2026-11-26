@@ -29,6 +29,14 @@
         ]
       },
       {
+        "heading": "How testing reached this point",
+        "paragraphs": [
+          "Internal testing started on 27 October 2026. The team used Revercue on the same paths a freelancer would use, from the first proposal to the final invoice, and fixed what broke before anyone outside the team saw it.",
+          "After 14 days of internal testing, on 11 November 2026, Revercue opened to a wider group of beta testers and to a wider audience. The small group had already used the product in its early stages, so the wider group started with a product that had been tested end to end.",
+          "Opening to more people is when the most useful problems show up, because every freelancer works a little differently. Thank you to everyone who has tested Revercue since 27 October, and to everyone who is joining now."
+        ]
+      },
+      {
         "heading": "What beta means in practice",
         "paragraphs": [
           "Beta is a stage, not a promise. The product is used by real freelancers on real client work, so the things that matter most are the parts that already work end to end: a proposal sent as a link, a contract signed with a typed name and consent, a requirement form that collects what you need before work starts, and an invoice that is numbered automatically and tracked until it is paid.",
