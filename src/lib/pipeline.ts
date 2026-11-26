@@ -106,11 +106,23 @@ export type DraftStage = "context" | "research" | "structure" | "writing" | "vis
 export type DraftStageStatus = "pending" | "running" | "done" | "skipped";
 export const DRAFT_STAGES: DraftStage[] = ["context", "research", "structure", "writing", "visuals", "checks"];
 
+export interface PipelineTemplate {
+  id: string;
+  name: string;
+  category: string;
+  audience: string;
+  useCase: string;
+  complexity: string;
+  design: string;
+}
+
 export interface DraftPipelineInput {
   id: string;
   blocks: Block[];
   brief: Brief;
   kind: "proposal" | "contract";
+  /** The chosen template, so the copy stage knows what the document is for. */
+  template?: PipelineTemplate;
   withVisuals?: boolean;
   onStage?: (stage: DraftStage, status: DraftStageStatus, detail?: string) => Promise<void> | void;
   /** How long to wait for the brief's research before drafting without it. */
@@ -287,7 +299,7 @@ export async function extractResearch(input: ResearchInput): Promise<Research> {
  * still leaves a readable document.
  */
 export async function runDraftPipeline(input: DraftPipelineInput): Promise<DraftPipelineResult> {
-  const { id, blocks, brief, withVisuals = true, onStage, researchTimeoutMs = 12000 } = input;
+  const { id, blocks, brief, kind, template, withVisuals = true, onStage, researchTimeoutMs = 12000 } = input;
   const stage = async (name: DraftStage, status: DraftStageStatus, detail?: string) => {
     if (onStage) await onStage(name, status, detail);
   };
@@ -348,6 +360,19 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
       service: brief.service,
       tone: brief.tone || "formal",
       sections,
+      document_type: kind,
+      template: template
+        ? {
+            id: template.id,
+            name: template.name,
+            type: kind,
+            category: template.category,
+            audience: template.audience,
+            use_case: template.useCase,
+            complexity: template.complexity,
+            design: template.design,
+          }
+        : undefined,
       research: { notes: research.notes, facts: research.facts },
       document: { blocks },
       brief: {
@@ -394,7 +419,7 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
 
   await stage("visuals", "running", "Finding visuals that fit each section; charts need real data.");
   const visualResult = withVisuals
-    ? await placeVisuals(id, written, enriched, input.kind)
+    ? await placeVisuals(id, written, enriched, kind)
     : { blocks: written, inserted: 0, attempted: 0, skipped: 0 };
   const visuals = visualResult.blocks;
   const visualCount = pipelineVisualCount(visuals);

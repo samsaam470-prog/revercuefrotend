@@ -1,26 +1,62 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link2, Plus, Upload } from "lucide-react";
+import { ArrowRight, Eye, Link2, Plus, Search, ShieldCheck, Upload } from "lucide-react";
 import { templatesApi } from "../../api/templates";
-import { BUILT_IN_TEMPLATES, blocksForTemplate, type BuiltInTemplate } from "../../lib/templates";
+import {
+  TEMPLATE_CATEGORIES,
+  TEMPLATE_LIBRARY,
+  TEMPLATE_COMPLEXITIES,
+  blocksForTemplate,
+  industriesFor,
+  searchTemplates,
+  type LibraryTemplate,
+  type TemplateComplexity,
+  type TemplateType,
+} from "../../lib/templates";
+import { clearTemplateChoice, saveTemplateChoice } from "../../lib/template-choice";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { Modal } from "../ui/Modal";
+import { Select } from "../ui/Select";
 import { Skeleton } from "../ui/Skeleton";
+import { TemplatePagePreview } from "./TemplatePagePreview";
 import { usePlanGate } from "../../hooks/usePlanGate";
 import { useToast } from "../../hooks/useToast";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
 
 export interface TemplatePickerProps {
-  type: "proposal" | "contract";
-  onPick: (choice: { templateId: string | null; blocks?: BuiltInTemplate["blocks"] }) => void;
+  type: TemplateType;
+  onPick: (choice: { templateId: string | null; blocks?: LibraryTemplate["blocks"] }) => void;
   onBack: () => void;
+  /** Switching to the other library starts a new document of that type. */
+  onSwitchLibrary?: () => void;
+  /** When set, the chosen structure and theme are stored for this document. */
+  documentId?: string;
 }
 
-export function TemplatePicker({ type, onPick, onBack }: TemplatePickerProps) {
+const COMPLEXITY_LABELS: Record<TemplateComplexity, string> = {
+  simple: "Simple",
+  standard: "Standard",
+  detailed: "Detailed",
+};
+
+export function TemplatePicker({
+  type,
+  onPick,
+  onBack,
+  onSwitchLibrary,
+  documentId,
+}: TemplatePickerProps) {
   const { hasFeature } = usePlanGate();
   const toast = useToast();
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [complexity, setComplexity] = useState<TemplateComplexity | "">("");
+  const [preview, setPreview] = useState<LibraryTemplate | null>(null);
+  const [compare, setCompare] = useState<string[]>([]);
+  const [compareOpen, setCompareOpen] = useState(false);
   const [uploadOpen, setUploadOpen] = useState(false);
   const [mode, setMode] = useState<"file" | "url">("file");
   const [file, setFile] = useState<File | null>(null);
@@ -28,13 +64,50 @@ export function TemplatePicker({ type, onPick, onBack }: TemplatePickerProps) {
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
 
-  const query = useQuery({ queryKey: ["templates", type], queryFn: () => templatesApi.list(type) });
+  const serverTemplates = useQuery({ queryKey: ["templates", type], queryFn: () => templatesApi.list(type) });
   const canUpload = hasFeature("custom_templates");
 
-  const builtIn = BUILT_IN_TEMPLATES[type];
-  const templates = [...(query.data?.built_in ?? []), ...(query.data?.custom ?? [])].sort(
-    (a, b) => Number(Boolean(b.suggested)) - Number(Boolean(a.suggested)),
+  const results = useMemo(
+    () => searchTemplates(type, { query, category, industry, complexity }),
+    [type, query, category, industry, complexity],
   );
+  const industries = useMemo(() => industriesFor(type), [type]);
+  const total = TEMPLATE_LIBRARY[type].length;
+  const filtered = Boolean(query.trim() || category || industry || complexity);
+
+  const uploaded = [
+    ...(serverTemplates.data?.built_in ?? []).filter((template) => !template.id.startsWith("builtin-")),
+    ...(serverTemplates.data?.custom ?? []),
+  ];
+
+  const choose = (template: LibraryTemplate) => {
+    const blocks = blocksForTemplate(template);
+    if (documentId) saveTemplateChoice(documentId, template, blocks);
+    onPick({ templateId: template.id, blocks });
+  };
+
+  const chooseBlank = () => {
+    if (documentId) clearTemplateChoice(documentId);
+    onPick({ templateId: null });
+  };
+
+  const compared = compare
+    .map((id) => TEMPLATE_LIBRARY[type].find((template) => template.id === id))
+    .filter((template): template is LibraryTemplate => Boolean(template));
+
+  const toggleCompare = (id: string) => {
+    setCompare((current) => {
+      if (current.includes(id)) return current.filter((item) => item !== id);
+      return [...current, id].slice(-2);
+    });
+  };
+
+  const clearFilters = () => {
+    setQuery("");
+    setCategory("");
+    setIndustry("");
+    setComplexity("");
+  };
 
   const upload = async () => {
     if (!name.trim() || (mode === "file" ? !file : !url)) return;
@@ -57,6 +130,9 @@ export function TemplatePicker({ type, onPick, onBack }: TemplatePickerProps) {
     }
   };
 
+  const libraryName = type === "proposal" ? "proposal" : "contract";
+  const otherLibrary = type === "proposal" ? "contracts" : "proposals";
+
   return (
     <>
       <div className="builder">
@@ -64,165 +140,375 @@ export function TemplatePicker({ type, onPick, onBack }: TemplatePickerProps) {
           <Button variant="ghost" size="sm" onClick={onBack}>
             ← Back
           </Button>
-          <span className="caption">Step 2 of 3 — Choose a template</span>
+          <span className="caption">Step 2 of 3 — Choose a {libraryName} template</span>
           <span />
         </div>
-        <div style={{ maxWidth: 1120, margin: "0 auto", padding: 32, width: "100%" }}>
-          <p className="eyebrow">Template</p>
-          <h1 className="serif" style={{ fontSize: 32, margin: "8px 0" }}>
-            Choose a starting point.
-          </h1>
-          <p className="muted" style={{ marginBottom: 24 }}>
-            Pick a template, or start from blank. You can change everything later.
-          </p>
 
-          {query.isLoading && (
-            <div className="card-grid">
-              {Array.from({ length: 3 }).map((_, index) => (
-                <div className="card card-md" key={index}>
-                  <Skeleton height={120} />
-                  <div className="mt-4">
-                    <Skeleton height={14} width="60%" />
+        <div className="tpl-picker">
+          <header className="tpl-picker-head">
+            <p className="eyebrow">Template library</p>
+            <h1 className="serif">Choose a starting point.</h1>
+            <p className="muted">
+              {total} {type} templates, each with its own structure and layout. The draft is written from
+              the template you choose, and everything stays editable.
+            </p>
+
+            <div className="tpl-library-switch">
+              <div className="segmented" role="group" aria-label="Template library">
+                <button type="button" aria-pressed={type === "proposal"}>
+                  Proposals
+                </button>
+                <button type="button" aria-pressed={type === "contract"} onClick={onSwitchLibrary}>
+                  Contracts
+                </button>
+              </div>
+              <span className="caption">You are creating a {libraryName}.</span>
+            </div>
+          </header>
+
+          {type === "contract" && (
+            <p className="tpl-legal-note" role="note">
+              <ShieldCheck size={16} aria-hidden="true" />
+              <span>
+                Contracts here are drafting aids, not legal advice. Choose the governing law for this
+                agreement and have a qualified lawyer review it before signing. No wording is guaranteed
+                to be enforceable in every jurisdiction.
+              </span>
+            </p>
+          )}
+
+          <div className="tpl-controls">
+            <div className="tpl-search">
+              <Search size={16} aria-hidden="true" />
+              <Input
+                id="template-search"
+                label="Search templates"
+                hideLabel
+                value={query}
+                onChange={setQuery}
+                placeholder="Search by name, industry, audience or use case"
+                type="search"
+              />
+            </div>
+            <Select
+              id="template-industry"
+              label="Industry"
+              value={industry}
+              onChange={setIndustry}
+              placeholder="All industries"
+              options={industries.map((value) => ({ value, label: value }))}
+            />
+            <Select
+              id="template-complexity"
+              label="Complexity"
+              value={complexity}
+              onChange={(value) => setComplexity(value as TemplateComplexity | "")}
+              placeholder="Any complexity"
+              options={TEMPLATE_COMPLEXITIES.map((value) => ({
+                value,
+                label: COMPLEXITY_LABELS[value],
+              }))}
+            />
+          </div>
+
+          <div className="tpl-chips" role="group" aria-label="Template categories">
+            <button type="button" aria-pressed={!category} onClick={() => setCategory("")}>
+              All categories
+            </button>
+            {TEMPLATE_CATEGORIES[type].map((value) => (
+              <button
+                type="button"
+                key={value}
+                aria-pressed={category === value}
+                onClick={() => setCategory(category === value ? "" : value)}
+              >
+                {value}
+              </button>
+            ))}
+          </div>
+
+          <div className="tpl-results-bar">
+            <span className="caption">
+              {results.length} {results.length === 1 ? "template" : "templates"}
+              {filtered ? " match your filters" : ""}
+            </span>
+            <div className="tpl-results-actions">
+              {compared.length === 2 && (
+                <Button size="sm" variant="secondary" onClick={() => setCompareOpen(true)}>
+                  Compare 2
+                </Button>
+              )}
+              {filtered && (
+                <Button size="sm" variant="ghost" onClick={clearFilters}>
+                  Clear filters
+                </Button>
+              )}
+              <Button size="sm" variant="secondary" onClick={chooseBlank}>
+                <Plus size={14} aria-hidden="true" /> Start from blank
+              </Button>
+            </div>
+          </div>
+
+          {results.length === 0 ? (
+            <div className="tpl-empty">
+              <p>No {libraryName} template matches those filters.</p>
+              <Button size="sm" variant="secondary" onClick={clearFilters}>
+                Show all {total} templates
+              </Button>
+            </div>
+          ) : (
+            <div className="tpl-grid">
+              {results.map((template) => (
+                <article className="tpl-card" key={template.id}>
+                  <button
+                    type="button"
+                    className="tpl-card-preview"
+                    onClick={() => setPreview(template)}
+                    aria-label={`Preview the ${template.name} template`}
+                  >
+                    <TemplatePagePreview template={template} />
+                  </button>
+                  <div className="tpl-card-body">
+                    <div className="tpl-card-badges">
+                      <span className="badge badge-muted">{template.category}</span>
+                      {template.suggested && <span className="badge badge-gold">Suggested</span>}
+                      <span className="badge badge-default">{COMPLEXITY_LABELS[template.complexity]}</span>
+                    </div>
+                    <h2>{template.name}</h2>
+                    <p className="tpl-card-description">{template.description}</p>
+                    <p className="tpl-card-audience">
+                      <span>For</span> {template.audience}
+                    </p>
+                    <ul className="tpl-tags" aria-label="Template tags">
+                      {template.tags.slice(0, 3).map((tag) => (
+                        <li key={tag}>{tag}</li>
+                      ))}
+                    </ul>
+                    <button
+                      type="button"
+                      className="tpl-compare-toggle"
+                      aria-pressed={compare.includes(template.id)}
+                      onClick={() => toggleCompare(template.id)}
+                    >
+                      {compare.includes(template.id) ? "Selected to compare" : "Add to compare"}
+                    </button>
+                    <div className="tpl-card-actions">
+                      <Button size="sm" variant="ghost" onClick={() => setPreview(template)}>
+                        <Eye size={14} aria-hidden="true" /> Preview
+                      </Button>
+                      <Button size="sm" variant="secondary" onClick={() => choose(template)}>
+                        Use template <ArrowRight size={14} aria-hidden="true" />
+                      </Button>
+                    </div>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           )}
 
-          {query.isError && (
-            <p className="caption" style={{ marginBottom: 12 }}>
-              Your uploaded templates could not be loaded. The built-in layouts below still work.
-            </p>
-          )}
-
-          {(
-            <div className="card-grid">
-              <button
-                type="button"
-                className="link-card"
-                style={{ borderStyle: "dashed", textAlign: "left" }}
-                onClick={() => onPick({ templateId: null })}
-              >
-                <Plus size={20} color="var(--gold)" />
-                <h3 style={{ marginTop: 10 }}>Start from blank</h3>
-                <p>An empty canvas. The details you entered appear in the suggestions panel.</p>
-              </button>
-
+          <section className="tpl-uploads" aria-labelledby="tpl-uploads-title">
+            <div className="between">
+              <h2 id="tpl-uploads-title">Your uploaded templates</h2>
               {canUpload && (
-                <>
-                  <button
-                    type="button"
-                    className="link-card"
-                    style={{ textAlign: "left" }}
+                <div className="tpl-upload-actions">
+                  <Button
+                    size="sm"
+                    variant="ghost"
                     onClick={() => {
                       setMode("file");
                       setUploadOpen(true);
                     }}
                   >
-                    <Upload size={20} color="var(--gold)" />
-                    <h3 style={{ marginTop: 10 }}>Upload your own template</h3>
-                    <p>An HTML file. Private to your account.</p>
-                  </button>
-                  <button
-                    type="button"
-                    className="link-card"
-                    style={{ textAlign: "left" }}
+                    <Upload size={14} aria-hidden="true" /> Upload HTML
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
                     onClick={() => {
                       setMode("url");
                       setUploadOpen(true);
                     }}
                   >
-                    <Link2 size={20} color="var(--gold)" />
-                    <h3 style={{ marginTop: 10 }}>Use a template from a URL</h3>
-                    <p>Revercue fetches and caches it for your account.</p>
-                  </button>
-                </>
+                    <Link2 size={14} aria-hidden="true" /> Use a URL
+                  </Button>
+                </div>
               )}
-
-              {builtIn.map((template) => (
-                <div className="link-card" key={template.id}>
-                  <div
-                    style={{
-                      height: 120,
-                      borderRadius: 6,
-                      background: "linear-gradient(135deg, #1c1c1c, #262626)",
-                      border: "1px solid var(--border)",
-                      display: "grid",
-                      placeItems: "center",
-                      fontFamily: "var(--font-display)",
-                      fontSize: 18,
-                      color: "var(--text-tertiary)",
-                    }}
-                  >
-                    {template.name}
-                  </div>
-                  <div className="between" style={{ marginTop: 12 }}>
-                    <h3>{template.name}</h3>
-                    {template.suggested ? (
-                      <span className="badge badge-gold">Suggested</span>
-                    ) : (
-                      <span className="badge badge-muted">Built-in</span>
-                    )}
-                  </div>
-                  <p>{template.description}</p>
-                  <div className="mt-4">
+            </div>
+            {serverTemplates.isLoading && <Skeleton height={48} />}
+            {!serverTemplates.isLoading && uploaded.length === 0 && (
+              <p className="caption">
+                Nothing uploaded yet. The {total} built-in {libraryName} templates above are always
+                available.
+              </p>
+            )}
+            {uploaded.length > 0 && (
+              <ul className="tpl-upload-list">
+                {uploaded.map((template) => (
+                  <li key={template.id}>
+                    <div>
+                      <strong>{template.name}</strong>
+                      <span className="caption">{template.description || "Your uploaded template."}</span>
+                    </div>
                     <Button
                       size="sm"
                       variant="secondary"
-                      onClick={() => onPick({ templateId: template.id, blocks: blocksForTemplate(template) })}
+                      onClick={() => onPick({ templateId: template.id })}
                     >
-                      Use this template
+                      Use template
                     </Button>
-                  </div>
-                </div>
-              ))}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {serverTemplates.isError && (
+              <p className="caption">Your uploaded templates could not be loaded. The built-in library still works.</p>
+            )}
+          </section>
 
-              {query.isLoading && (
-                <div className="link-card">
-                  <Skeleton height={120} />
-                  <div className="mt-4">
-                    <Skeleton height={14} width="60%" />
-                  </div>
-                </div>
-              )}
-
-              {!query.isLoading && templates.map((template) => (
-                <div className="link-card" key={template.id}>
-                  <div
-                    style={{
-                      height: 120,
-                      borderRadius: 6,
-                      background: "linear-gradient(135deg, #1c1c1c, #262626)",
-                      border: "1px solid var(--border)",
-                      display: "grid",
-                      placeItems: "center",
-                      fontFamily: "var(--font-display)",
-                      fontSize: 18,
-                      color: "var(--text-tertiary)",
-                    }}
-                  >
-                    {template.name}
-                  </div>
-                  <div className="between" style={{ marginTop: 12 }}>
-                    <h3>{template.name}</h3>
-                    {template.suggested && <span className="badge badge-gold">Suggested</span>}
-                  </div>
-                  <p>{template.description || "A built-in starting layout."}</p>
-                  <div className="mt-4">
-                    <Button size="sm" variant="secondary" onClick={() => onPick({ templateId: template.id })}>
-                      Use this template
-                    </Button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {!query.isLoading && !query.isError && templates.length === 0 && (
-            <p className="caption mt-4">No uploaded templates yet. The two built-in layouts above are always available.</p>
-          )}
+          <p className="caption tpl-switch-hint">
+            Looking for {otherLibrary}?{" "}
+            <button type="button" className="tpl-link" onClick={onSwitchLibrary}>
+              Start a {otherLibrary.slice(0, -1)} instead
+            </button>
+          </p>
         </div>
       </div>
+
+      <Modal
+        open={Boolean(preview)}
+        onClose={() => setPreview(null)}
+        title={preview ? preview.name : "Template preview"}
+        size="lg"
+        footer={
+          preview ? (
+            <>
+              <Button variant="ghost" onClick={() => setPreview(null)}>
+                Close
+              </Button>
+              <Button onClick={() => choose(preview)}>Use this template</Button>
+            </>
+          ) : null
+        }
+      >
+        {preview && (
+          <div className="tpl-preview-body">
+            <div className="tpl-preview-page">
+              <TemplatePagePreview template={preview} detail />
+            </div>
+            <div className="tpl-preview-info">
+              <p className="tpl-preview-description">{preview.longDescription}</p>
+              <dl className="tpl-preview-meta">
+                <div>
+                  <dt>Document</dt>
+                  <dd>{preview.type === "proposal" ? "Proposal" : "Contract"}</dd>
+                </div>
+                <div>
+                  <dt>Category</dt>
+                  <dd>{preview.category}</dd>
+                </div>
+                <div>
+                  <dt>Industry</dt>
+                  <dd>{preview.industry}</dd>
+                </div>
+                <div>
+                  <dt>Best for</dt>
+                  <dd>{preview.audience}</dd>
+                </div>
+                <div>
+                  <dt>Use case</dt>
+                  <dd>{preview.useCase}</dd>
+                </div>
+                <div>
+                  <dt>Complexity</dt>
+                  <dd>{COMPLEXITY_LABELS[preview.complexity]}</dd>
+                </div>
+                <div>
+                  <dt>Design</dt>
+                  <dd style={{ textTransform: "capitalize" }}>{preview.design.replace(/-/g, " ")}</dd>
+                </div>
+                <div>
+                  <dt>Business types</dt>
+                  <dd>{preview.businessTypes.join(", ")}</dd>
+                </div>
+              </dl>
+              <div>
+                <p className="tpl-preview-label">Sections ({preview.sections.length})</p>
+                <ol className="tpl-section-list">
+                  {preview.sections.map((section) => (
+                    <li key={section.key}>{section.title}</li>
+                  ))}
+                </ol>
+              </div>
+              <ul className="tpl-tags" aria-label="Template tags">
+                {preview.tags.map((tag) => (
+                  <li key={tag}>{tag}</li>
+                ))}
+              </ul>
+              {preview.type === "contract" && (
+                <p className="tpl-legal-note" role="note">
+                  <ShieldCheck size={16} aria-hidden="true" />
+                  <span>
+                    A drafting aid, not legal advice. Complete the governing law and have the agreement
+                    reviewed by a qualified lawyer before signing.
+                  </span>
+                </p>
+              )}
+              <p className="caption">
+                The preview uses sample wording to show the layout. Your draft is written from your
+                brief, research and any details you enter.
+              </p>
+            </div>
+          </div>
+        )}
+      </Modal>
+
+      <Modal
+        open={compareOpen}
+        onClose={() => setCompareOpen(false)}
+        title="Compare templates"
+        size="lg"
+        footer={
+          <Button variant="ghost" onClick={() => setCompareOpen(false)}>
+            Close
+          </Button>
+        }
+      >
+        <div className="tpl-compare-grid">
+          {compared.map((template) => (
+            <div className="tpl-compare-col" key={template.id}>
+              <h3>{template.name}</h3>
+              <p className="caption">{template.category} · {COMPLEXITY_LABELS[template.complexity]}</p>
+              <dl className="tpl-preview-meta">
+                <div>
+                  <dt>Best for</dt>
+                  <dd>{template.audience}</dd>
+                </div>
+                <div>
+                  <dt>Use case</dt>
+                  <dd>{template.useCase}</dd>
+                </div>
+                <div>
+                  <dt>Design</dt>
+                  <dd style={{ textTransform: "capitalize" }}>{template.design.replace(/-/g, " ")}</dd>
+                </div>
+                <div>
+                  <dt>Sections</dt>
+                  <dd>{template.sections.length}</dd>
+                </div>
+              </dl>
+              <p className="tpl-preview-label">Structure</p>
+              <ol className="tpl-section-list">
+                {template.sections.map((section) => (
+                  <li key={section.key}>{section.title}</li>
+                ))}
+              </ol>
+              <Button size="sm" variant="secondary" onClick={() => choose(template)}>
+                Use {template.name}
+              </Button>
+            </div>
+          ))}
+        </div>
+      </Modal>
 
       <Modal
         open={uploadOpen}

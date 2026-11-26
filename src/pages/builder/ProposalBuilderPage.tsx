@@ -20,7 +20,8 @@ import {
   type DraftStage,
   type Research,
 } from "../../lib/pipeline";
-import { isBuiltIn } from "../../lib/templates";
+import { templateById } from "../../lib/templates";
+import { readTemplateChoice } from "../../lib/template-choice";
 import { Button } from "../../components/ui/Button";
 import { Spinner } from "../../components/ui/Spinner";
 import { SkeletonLines } from "../../components/ui/Skeleton";
@@ -48,17 +49,23 @@ export function ProposalBuilderPage() {
   return params.get("step") === "template" ? (
     <TemplatePicker
       type="proposal"
+      documentId={id}
       onBack={() => navigate("/proposals/new")}
-      onPick={async ({ templateId, blocks }) => {
-        if (templateId && !isBuiltIn(templateId)) {
+      onSwitchLibrary={() => navigate("/contracts/new")}
+      onPick={async ({ templateId }) => {
+        const chosen = templateId ? templateById("proposal", templateId) : undefined;
+        if (chosen) {
+          /* Persist the chosen structure so a reload drafts the same document. */
+          await proposalsApi
+            .update(id, {
+              content: {
+                sections: chosen.sections.map((section) => section.title),
+                template_id: chosen.id,
+              } as unknown as DocContent,
+            })
+            .catch(() => undefined);
+        } else if (templateId) {
           await proposalsApi.update(id, { template_id: templateId }).catch(() => undefined);
-        }
-        if (blocks) {
-          try {
-            sessionStorage.setItem(`revercue_template_${id}`, JSON.stringify(blocks));
-          } catch {
-            /* the picker still opens the canvas with the generated skeleton */
-          }
         }
         navigate(`/proposals/${id}/edit`, { replace: true });
       }}
@@ -94,25 +101,24 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     const content = contentOf(proposal);
     const savedBlocks = Array.isArray(content.blocks) ? (content.blocks as Block[]) : [];
     const images = readResearch(id).images;
+    const choice = readTemplateChoice(id);
     const brief = briefOf(proposal, images);
+    /* The template's own sections are what the draft organizes and writes. */
+    if (choice?.sections.length) brief.sections = choice.sections;
     briefRef.current = brief;
 
-    setDoc({ ...EMPTY_DOC, ...(content as Partial<DocContent>), blocks: [] });
-
-    let templateBlocks: Block[] | null = null;
-    try {
-      const stored = sessionStorage.getItem(`revercue_template_${id}`);
-      if (stored) templateBlocks = JSON.parse(stored) as Block[];
-    } catch {
-      templateBlocks = null;
+    const storedDoc = { ...EMPTY_DOC, ...(choice?.theme ?? {}), ...(content as Partial<DocContent>), blocks: [] };
+    if (!Array.isArray(storedDoc.sections) || storedDoc.sections.length === 0) {
+      if (brief.sections.length) storedDoc.sections = brief.sections;
     }
+    setDoc(storedDoc);
 
     const initial = savedBlocks.length
       ? savedBlocks
       : blank
         ? []
-        : templateBlocks?.length
-          ? templateBlocks
+        : choice?.blocks.length
+          ? choice.blocks
           : skeletonForBrief(brief, "proposal");
 
     setBlocks(initial);
@@ -167,6 +173,10 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     }
 
     let cancelled = false;
+    const chosen = readTemplateChoice(id);
+    const chosenTemplate = chosen?.templateId
+      ? templateById("proposal", chosen.templateId)
+      : undefined;
 
     const step = (next: DraftStage, status: "pending" | "running" | "done" | "skipped", detail?: string) => {
       if (cancelled) return;
@@ -179,6 +189,7 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
       blocks,
       brief: briefRef.current,
       kind: "proposal",
+      template: chosenTemplate,
       onStage: step,
     })
       .then(async (result) => {

@@ -248,10 +248,19 @@ export function scopeFor(brief: Brief): string {
 }
 
 export function deliverablesFor(brief: Brief): string[] {
-  return brief.packages
+  const lines = brief.packages
     .map((item) => item.deliverables)
     .flatMap((value) => (value ? value.split(/\\r?\\n|;|•/).map((line) => line.trim()) : []))
-    .filter(Boolean)
+    .filter(Boolean);
+  /* The same deliverable listed in two packages is one deliverable. */
+  const seen = new Set<string>();
+  return lines
+    .filter((line) => {
+      const key = line.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
     .slice(0, 6);
 }
 
@@ -296,6 +305,16 @@ export function partiesFor(brief: Brief): string {
 
 const KEY_ALIASES: Record<string, string> = {
   intro: "introduction",
+  opening: "introduction",
+  about_you: "about",
+  about_us: "about",
+  who_we_are: "about",
+  deliverables: "what_is_included",
+  included: "what_is_included",
+  what_s_included: "what_is_included",
+  how_it_works: "process",
+  approach: "process",
+  schedule: "timeline",
   hero: "hero_image",
   heroimage: "hero_image",
   price: "pricing",
@@ -313,7 +332,22 @@ export function normaliseKey(key: string): string {
 
 export function fillsFor(brief: Brief): Record<string, string> {
   const deliverables = deliverablesFor(brief);
+  const yourBusiness = brief.businessName ? brief.businessName : "Add your business name";
   const fills: Record<string, string> = {
+    client_name: brief.clientName,
+    business_name: yourBusiness,
+    business_website: brief.businessWebsite ?? "",
+    project_title: brief.service || brief.industry || "this project",
+    project_description: brief.problem || "Add a short description of the project.",
+    effective_date: "Add the effective date",
+    total_fee: brief.paymentTerms ? sentence(brief.paymentTerms) : "Add the agreed fee",
+    payment_schedule: brief.paymentTerms
+      ? sentence(brief.paymentTerms)
+      : "Add the agreed payment schedule",
+    governing_law: "Choose the governing law",
+    jurisdiction: "Choose the jurisdiction",
+    notice_period: "Add the agreed notice period",
+    currency: brief.currency,
     introduction: introductionFor(brief),
     scope: brief.scope ? sentence(brief.scope) : scopeFor(brief),
     timeline: timelineFor(brief),
@@ -365,11 +399,16 @@ function fallbackForKey(key: string, rawKey: string): string {
   if (deliverable) return `Add confirmed details for deliverable ${deliverable[1]}.`;
   const packageKey = /^(package|tier|line_item)_(\d+)$/.exec(key);
   if (packageKey) return `Option ${packageKey[2]}`;
+  const phase = /^phase_(\d+)$/.exec(key);
+  if (phase) return `Phase ${phase[1]}`;
+  if (/^phase_\d+_detail$/.test(key)) return "Add the agreed dates and outcome";
   if (key === "hero_image") return "";
   if (key === "pricing") return "Add confirmed pricing";
   if (key === "next_step") return "Add the next step";
   const words = rawKey.replace(/_/g, " ").replace(/\s+/g, " ").trim();
-  return words ? words.charAt(0).toUpperCase() + words.slice(1) : "";
+  if (!words) return "";
+  /* An unresolved section token is a prompt, not a heading fragment. */
+  return `${words.charAt(0).toUpperCase() + words.slice(1)} — add the agreed details before sharing.`;
 }
 
 function isUnresolvedHeroImage(block: Block): boolean {
@@ -428,7 +467,10 @@ export function applyBrief(blocks: Block[], brief: Brief): Block[] {
         next.push({
           id: `${block.id}_pricing`,
           type: "paragraph",
-          text: "Add confirmed package names, prices, and deliverables before sharing this proposal.",
+          text:
+            block.type === "pricing_table"
+              ? "Add confirmed line items, quantities and prices before sharing."
+              : "Add confirmed package names, prices, and deliverables before sharing.",
         });
         continue;
       }

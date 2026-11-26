@@ -78,6 +78,18 @@ export interface OrganizePayload {
   research: { notes: ExtractNote[]; facts?: ResearchFacts };
   sections: string[];
   tone: string;
+  /** The template the author chose: it sets the structure and the intent. */
+  template?: {
+    id: string;
+    name: string;
+    type: "proposal" | "contract";
+    category: string;
+    audience: string;
+    use_case: string;
+    complexity: string;
+    design: string;
+  };
+  document_type?: "proposal" | "contract";
   document: { blocks: unknown[] };
   /** The brief's first-hand content: preferred over generic research. */
   brief?: {

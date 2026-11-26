@@ -22,7 +22,8 @@ import {
 } from "../../lib/pipeline";
 import { DraftProgress, type DraftProgressState } from "../../components/builder/DraftProgress";
 import { briefOf, contentOf, hasPlaceholders, skeletonForBrief, type Brief } from "../../lib/brief";
-import { isBuiltIn } from "../../lib/templates";
+import { templateById } from "../../lib/templates";
+import { readTemplateChoice } from "../../lib/template-choice";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { Textarea } from "../../components/ui/Textarea";
@@ -58,14 +59,23 @@ export function ContractBuilderPage() {
   return params.get("step") === "template" ? (
     <TemplatePicker
       type="contract"
+      documentId={id}
       onBack={() => navigate("/contracts/new")}
-      onPick={async ({ templateId, blocks }) => {
-        if (templateId && isBuiltIn(templateId)) {
-          try {
-            sessionStorage.setItem(`revercue_template_${id}`, JSON.stringify(blocks ?? []));
-          } catch {
-            /* the canvas falls back to the generated skeleton */
-          }
+      onSwitchLibrary={() => navigate("/proposals/new")}
+      onPick={async ({ templateId }) => {
+        const chosen = templateId ? templateById("contract", templateId) : undefined;
+        if (chosen) {
+          const sections = chosen.sections.map((section) => section.title);
+          await contractsApi
+            .update(id, {
+              sections,
+              content: { sections, template_id: chosen.id } as unknown as DocContent,
+            })
+            .catch(() => undefined);
+        } else if (templateId) {
+          await contractsApi
+            .update(id, { content: { template_id: templateId } as unknown as DocContent })
+            .catch(() => undefined);
         }
         navigate(`/contracts/${id}/edit`, { replace: true });
       }}
@@ -381,22 +391,21 @@ function ContractCanvas({ id }: { id: string }) {
     setTitle(contract.title);
     const content = contentOf(contract);
     const savedBlocks = Array.isArray(content.blocks) ? (content.blocks as Block[]) : [];
+    const choice = readTemplateChoice(id);
     const brief = briefOf(contract);
+    if (choice?.sections.length) brief.sections = choice.sections;
     briefRef.current = brief;
-    setDoc({ ...EMPTY_DOC, ...(content as Partial<DocContent>), blocks: [] });
 
-    let templateBlocks: Block[] | null = null;
-    try {
-      const stored = sessionStorage.getItem(`revercue_template_${id}`);
-      if (stored) templateBlocks = JSON.parse(stored) as Block[];
-    } catch {
-      templateBlocks = null;
+    const storedDoc = { ...EMPTY_DOC, ...(choice?.theme ?? {}), ...(content as Partial<DocContent>), blocks: [] };
+    if (!Array.isArray(storedDoc.sections) || storedDoc.sections.length === 0) {
+      if (brief.sections.length) storedDoc.sections = brief.sections;
     }
+    setDoc(storedDoc);
 
     const initial = savedBlocks.length
       ? savedBlocks
-      : templateBlocks?.length
-        ? templateBlocks
+      : choice?.blocks.length
+        ? choice.blocks
         : skeletonForBrief(brief, "contract");
     setBlocks(initial);
 
@@ -432,6 +441,11 @@ function ContractCanvas({ id }: { id: string }) {
     }
 
     let cancelled = false;
+    const chosen = readTemplateChoice(id);
+    const chosenTemplate = chosen?.templateId
+      ? templateById("contract", chosen.templateId)
+      : undefined;
+
     const step = (next: DraftStage, status: "pending" | "running" | "done" | "skipped", detail?: string) => {
       if (cancelled) return;
       setStage(next);
@@ -443,6 +457,7 @@ function ContractCanvas({ id }: { id: string }) {
       blocks,
       brief: briefRef.current,
       kind: "contract",
+      template: chosenTemplate,
       withVisuals: true,
       onStage: step,
     })
