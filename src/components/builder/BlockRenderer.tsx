@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { ImageUp, Pencil, Trash2, ArrowUp, ArrowDown, Copy } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ImageUp, ImageOff, RefreshCw, Pencil, Trash2, ArrowUp, ArrowDown, Copy } from "lucide-react";
 import { ElementToolbar } from "./ElementToolbar";
 import { InlineText } from "./InlineText";
 import { RichText } from "./RichText";
@@ -385,6 +385,16 @@ function ImageBlock({
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  /* A URL can go stale: the host disappears, the object is deleted, or a
+     hotlink is refused. The block keeps its data and the document keeps its
+     shape instead of showing a broken-image icon. */
+  const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+
+  useEffect(() => {
+    setFailed(false);
+    setAttempt(0);
+  }, [block.url]);
 
   const pick = async (file?: File | null) => {
     if (!file) return;
@@ -400,14 +410,66 @@ function ImageBlock({
     }
   };
 
+  if (block.url && failed) {
+    return (
+      <figure style={{ margin: "12px 0" }}>
+        <div className="doc-image-fallback" role="img" aria-label={block.alt || "The image could not be loaded"}>
+          <ImageOff size={18} />
+          <b>This image could not be loaded.</b>
+          <span>The block and its caption are kept, so the rest of the document is unaffected.</span>
+          {canEdit ? (
+            <span className="doc-image-fallback-actions">
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={() => {
+                  setFailed(false);
+                  setAttempt((value) => value + 1);
+                }}
+              >
+                <RefreshCw size={12} /> Try again
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={() => inputRef.current?.click()}
+                disabled={busy}
+              >
+                <ImageUp size={12} /> {busy ? "Adding…" : "Replace image"}
+              </button>
+            </span>
+          ) : null}
+        </div>
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/*"
+          hidden
+          onChange={(event) => {
+            void pick(event.target.files?.[0]);
+            event.target.value = "";
+          }}
+        />
+        {error ? <span className="caption" style={{ color: "var(--red)" }}>{error}</span> : null}
+        {block.caption || block.alt ? (
+          <figcaption style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>
+            <RichText value={block.caption || block.alt || ""} />
+          </figcaption>
+        ) : null}
+      </figure>
+    );
+  }
+
   if (block.url) {
     return (
       <figure style={{ margin: "12px 0" }}>
         <img
+          key={attempt}
           src={block.url}
           alt={block.alt || "Document image"}
           style={{ width: `${Number(block.meta?.width ?? 100)}%`, borderRadius: 6, display: "block" }}
           loading="lazy"
+          onError={() => setFailed(true)}
         />
         {block.caption || block.alt ? (
           <figcaption style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>
@@ -462,7 +524,13 @@ function iconUrl(icon: string, color?: string, size = 44): string {
 
 function IconBlock({ block, brandPrimary }: { block: Block; brandPrimary: string }) {
   const icon = block.icon || (typeof block.meta?.icon === "string" ? block.meta.icon : "");
-  const size = Number(block.meta?.size ?? 44);
+  const size = Math.max(Number(block.meta?.size ?? 44), 16);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    setFailed(false);
+  }, [icon, block.color, size]);
+
   if (!/^[a-z0-9-]+:[a-z0-9-]+$/i.test(icon)) {
     return (
       <div style={{ border: "1px dashed #d8d2c4", borderRadius: 6, padding: 12, color: "#8a857a", fontSize: 12 }}>
@@ -470,16 +538,33 @@ function IconBlock({ block, brandPrimary }: { block: Block; brandPrimary: string
       </div>
     );
   }
+
+  const label = block.caption || block.alt || icon;
   return (
     <figure style={{ margin: "10px 0", display: "flex", alignItems: "center", gap: 10 }}>
-      <img
-        src={iconUrl(icon, block.color || brandPrimary, Number.isFinite(size) ? size : 44)}
-        alt={block.alt || block.caption || icon}
-        width={Number.isFinite(size) ? size : 44}
-        height={Number.isFinite(size) ? size : 44}
-        loading="lazy"
-        style={{ display: "block" }}
-      />
+      {failed ? (
+        /* The Iconify CDN can be unreachable or the id can be retired. The
+           icon's own name is the fallback, so the meaning survives. */
+        <span
+          className="doc-icon-fallback"
+          style={{ minWidth: size, minHeight: size, borderColor: brandPrimary }}
+          role="img"
+          aria-label={`Icon ${icon} could not be loaded`}
+          title={`Icon ${icon} could not be loaded`}
+        >
+          {icon.split(":")[1] || "icon"}
+        </span>
+      ) : (
+        <img
+          src={iconUrl(icon, block.color || brandPrimary, Number.isFinite(size) ? size : 44)}
+          alt={label}
+          width={Number.isFinite(size) ? size : 44}
+          height={Number.isFinite(size) ? size : 44}
+          loading="lazy"
+          style={{ display: "block", maxWidth: "100%" }}
+          onError={() => setFailed(true)}
+        />
+      )}
       {(block.alt || block.caption) && (
         <figcaption style={{ fontSize: 12, color: "#3a3a3a" }}>{block.caption || block.alt}</figcaption>
       )}
@@ -584,6 +669,12 @@ function DiagramBlock({ block, brandPrimary }: { block: Block; brandPrimary: str
 
 function SvgBlock({ block }: { block: Block }) {
   const source = block.svg ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(block.svg)}` : block.url;
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    setFailed(false);
+  }, [source]);
+
   if (!source) {
     return (
       <div style={{ border: "1px dashed #d8d2c4", borderRadius: 6, padding: 12, color: "#8a857a", fontSize: 12 }}>
@@ -591,9 +682,29 @@ function SvgBlock({ block }: { block: Block }) {
       </div>
     );
   }
+
+  if (failed) {
+    return (
+      <figure style={{ margin: "12px 0" }}>
+        <div className="doc-image-fallback" role="img" aria-label={block.alt || "The illustration could not be displayed"}>
+          <ImageOff size={18} />
+          <b>This illustration could not be displayed.</b>
+          <span>{block.alt || "The SVG source is kept, so you can correct it in the properties panel."}</span>
+        </div>
+        {block.caption ? <figcaption style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>{block.caption}</figcaption> : null}
+      </figure>
+    );
+  }
+
   return (
     <figure style={{ margin: "12px 0" }}>
-      <img src={source} alt={block.alt || "Vector illustration"} style={{ maxWidth: "100%", display: "block" }} loading="lazy" />
+      <img
+        src={source}
+        alt={block.alt || "Vector illustration"}
+        style={{ maxWidth: "100%", display: "block" }}
+        loading="lazy"
+        onError={() => setFailed(true)}
+      />
       {block.caption ? <figcaption style={{ fontSize: 11, color: "#8a857a", marginTop: 6 }}>{block.caption}</figcaption> : null}
     </figure>
   );

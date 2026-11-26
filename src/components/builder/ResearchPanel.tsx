@@ -2,6 +2,17 @@ import { useState } from "react";
 import { ChevronDown, ExternalLink, Globe } from "lucide-react";
 import type { Research } from "../../lib/pipeline";
 
+/** A candidate image whose host refuses the request simply disappears. */
+function ResearchThumb({ src }: { src: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) return null;
+  return (
+    <a href={src} target="_blank" rel="noreferrer noopener">
+      <img src={src} alt="" loading="lazy" onError={() => setFailed(true)} />
+    </a>
+  );
+}
+
 export interface ResearchPanelProps {
   research: Research;
   source?: "helper" | "backend" | "pattern";
@@ -54,9 +65,7 @@ export function ResearchPanel({ research, source, running }: ResearchPanelProps)
           {research.images.length > 0 && (
             <div className="research-images">
               {research.images.map((image) => (
-                <a key={image} href={image} target="_blank" rel="noreferrer noopener">
-                  <img src={image} alt="" loading="lazy" />
-                </a>
+                <ResearchThumb key={image} src={image} />
               ))}
             </div>
           )}

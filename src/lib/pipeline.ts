@@ -28,6 +28,22 @@ export interface Research {
   notes: ResearchNote[];
   images: string[];
   facts?: ResearchFacts;
+  /** The brief form already asked for this research and is waiting on it. */
+  pending?: boolean;
+  /** When the extract call ran, so a draft never repeats the same request. */
+  attemptedAt?: number;
+}
+
+/** The brief fields the extract call needs; the same shape a brief provides. */
+export interface ResearchInput {
+  clientName?: string;
+  clientWebsite?: string;
+  businessWebsite?: string;
+  businessName?: string;
+  industry?: string;
+  service?: string;
+  problem?: string;
+  targetAudience?: string;
 }
 
 const researchKey = (id: string) => `revercue_research_${id}`;
@@ -40,7 +56,13 @@ export function readResearch(id: string): Research {
     if (!raw) return { notes: [], images: [] };
     const parsed = JSON.parse(raw) as Research | ResearchNote[];
     if (Array.isArray(parsed)) return { notes: parsed, images: [] };
-    return { notes: parsed.notes ?? [], images: parsed.images ?? [], facts: parsed.facts };
+    return {
+      notes: parsed.notes ?? [],
+      images: parsed.images ?? [],
+      facts: parsed.facts,
+      pending: parsed.pending,
+      attemptedAt: parsed.attemptedAt,
+    };
   } catch {
     return { notes: [], images: [] };
   }
@@ -60,6 +82,15 @@ export function pipelineDone(id: string): boolean {
   } catch {
     return false;
   }
+}
+
+/**
+ * Records that this draft's research is already in flight. The builder's
+ * research stage waits for the answer instead of starting a second call, and a
+ * request that never lands cannot make the draft re-request it.
+ */
+export function markResearchPending(id: string): void {
+  saveResearch(id, { notes: [], images: [], pending: true });
 }
 
 export function markPipelineDone(id: string): void {
@@ -96,15 +127,68 @@ export interface DraftPipelineResult {
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-/** The research request starts on the brief form; give it a moment to land. */
+/** How long a single extract call may take before the draft moves on without it. */
+const EXTRACT_TIMEOUT_MS = 15000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => {
+      timer = setTimeout(() => reject(new Error("research_timeout")), ms);
+    }),
+  ]).finally(() => {
+    if (timer) clearTimeout(timer);
+  });
+}
+
+/** Research that has an answer, even an empty one, needs no second request. */
+function researchSettled(research: Research): boolean {
+  return (
+    research.notes.length > 0 ||
+    research.images.length > 0 ||
+    typeof research.attemptedAt === "number"
+  );
+}
+
+function researchHasFacts(research: Research): boolean {
+  const facts = research.facts;
+  if (!facts) return false;
+  return Boolean(
+    facts.business_name ||
+      facts.value_prop ||
+      facts.author_business_name ||
+      facts.author_description ||
+      facts.author_website ||
+      facts.location ||
+      (facts.key_points && facts.key_points.length > 0),
+  );
+}
+
+/**
+ * The research request starts on the brief form; give it a moment to land so the
+ * draft is organized from it rather than written and enriched afterwards.
+ */
 async function waitForResearch(id: string, timeoutMs: number): Promise<Research> {
   const deadline = Date.now() + timeoutMs;
   let research = readResearch(id);
-  while (!research.notes.length && !research.images.length && Date.now() < deadline) {
-    await sleep(350);
+  while (!researchSettled(research) && Date.now() < deadline) {
+    await sleep(300);
     research = readResearch(id);
   }
   return research;
+}
+
+/**
+ * The draft's research stage: use the brief form's research when it exists or
+ * is still in flight, and ask the extract route exactly once when it does not.
+ */
+async function ensureResearch(id: string, input: ResearchInput, timeoutMs: number): Promise<Research> {
+  const research = await waitForResearch(id, timeoutMs);
+  if (researchSettled(research) || research.pending) return research;
+  const fresh = await extractResearch(input);
+  saveResearch(id, fresh);
+  return fresh;
 }
 
 function faqsFromPatterns(value: unknown): { question: string; answer: string }[] {
@@ -142,41 +226,58 @@ function packagesFromPatterns(value: unknown): BriefPackage[] {
   return packages;
 }
 
-async function extractResearch(brief: Brief): Promise<Research> {
-  const response = await pipelineApi.extract({
-    client_name: brief.clientName && brief.clientName !== "the client" ? brief.clientName : undefined,
-    client_website: brief.clientWebsite,
-    user_website: brief.businessWebsite,
-    business_name: brief.businessName,
-    industry: brief.industry || undefined,
-    service: brief.service || undefined,
-  });
-  const data = (response.result ?? {}) as {
-    notes?: ExtractNote[];
-    images?: string[];
-    business_name?: string;
-    value_prop?: string;
-    key_points?: string[];
-    location?: string | null;
-    author_business_name?: string;
-    author_description?: string;
-    author_website?: string;
-  };
-  const notes: ExtractNote[] = data.notes ?? response.notes ?? [];
-  const images: string[] = data.images ?? response.images ?? [];
-  return {
-    notes,
-    images,
-    facts: {
-      business_name: data.business_name,
-      value_prop: data.value_prop,
-      key_points: data.key_points,
-      location: data.location ?? undefined,
-      author_business_name: data.author_business_name ?? undefined,
-      author_description: data.author_description ?? undefined,
-      author_website: data.author_website ?? undefined,
-    },
-  };
+/**
+ * Layer 1 research for one brief. It never throws: a timeout, a rate limit or
+ * an offline network returns an empty, timestamped answer so the draft is not
+ * held hostage by a public source. The timestamp also stops the same brief from
+ * being researched twice.
+ */
+export async function extractResearch(input: ResearchInput): Promise<Research> {
+  const attemptedAt = Date.now();
+  try {
+    const response = await withTimeout(
+      pipelineApi.extract({
+        client_name: input.clientName && input.clientName !== "the client" ? input.clientName : undefined,
+        client_website: input.clientWebsite || undefined,
+        user_website: input.businessWebsite || undefined,
+        business_name: input.businessName || undefined,
+        industry: input.industry || undefined,
+        service: input.service || undefined,
+        problem: input.problem || undefined,
+        target_audience: input.targetAudience || undefined,
+      }),
+      EXTRACT_TIMEOUT_MS,
+    );
+    const data = (response.result ?? {}) as {
+      notes?: ExtractNote[];
+      images?: string[];
+      business_name?: string;
+      value_prop?: string;
+      key_points?: string[];
+      location?: string | null;
+      author_business_name?: string;
+      author_description?: string;
+      author_website?: string;
+    };
+    const notes: ExtractNote[] = data.notes ?? response.notes ?? [];
+    const images: string[] = data.images ?? response.images ?? [];
+    return {
+      notes,
+      images,
+      attemptedAt,
+      facts: {
+        business_name: data.business_name,
+        value_prop: data.value_prop,
+        key_points: data.key_points,
+        location: data.location ?? undefined,
+        author_business_name: data.author_business_name ?? undefined,
+        author_description: data.author_description ?? undefined,
+        author_website: data.author_website ?? undefined,
+      },
+    };
+  } catch {
+    return { notes: [], images: [], attemptedAt };
+  }
 }
 
 /**
@@ -186,7 +287,7 @@ async function extractResearch(brief: Brief): Promise<Research> {
  * still leaves a readable document.
  */
 export async function runDraftPipeline(input: DraftPipelineInput): Promise<DraftPipelineResult> {
-  const { id, blocks, brief, withVisuals = true, onStage, researchTimeoutMs = 4000 } = input;
+  const { id, blocks, brief, withVisuals = true, onStage, researchTimeoutMs = 12000 } = input;
   const stage = async (name: DraftStage, status: DraftStageStatus, detail?: string) => {
     if (onStage) await onStage(name, status, detail);
   };
@@ -196,20 +297,22 @@ export async function runDraftPipeline(input: DraftPipelineInput): Promise<Draft
   await stage("context", "done", "Brief and template loaded.");
 
   await stage("research", "running", "Checking client, industry, and business-profile sources.");
-  let research = await waitForResearch(id, researchTimeoutMs);
+  const research = await ensureResearch(
+    id,
+    {
+      clientName: brief.clientName,
+      clientWebsite: brief.clientWebsite,
+      businessWebsite: brief.businessWebsite,
+      businessName: brief.businessName,
+      industry: brief.industry,
+      service: brief.service,
+      problem: brief.problem,
+      targetAudience: brief.targetAudience,
+    },
+    researchTimeoutMs,
+  );
 
-  // When the brief form's research has not arrived (slow network, a reopened
-  // draft), the draft asks the extract route itself instead of writing blind.
-  if (!research.notes.length && !research.images.length) {
-    try {
-      research = await extractResearch(brief);
-      saveResearch(id, research);
-    } catch {
-      research = { notes: [], images: [] };
-    }
-  }
-
-  const hasResearch = research.notes.length > 0 || research.images.length > 0 || Boolean(research.facts?.value_prop || research.facts?.author_business_name || research.facts?.author_description);
+  const hasResearch = research.notes.length > 0 || research.images.length > 0 || researchHasFacts(research);
   const clientNoteCount = research.notes.filter((note) => note.kind === "client").length;
   const backgroundNoteCount = research.notes.filter((note) => note.kind === "background" || note.kind === "web").length;
   enriched.heroImage = enriched.heroImage || research.images[0];

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../ui/Input";
 import { Textarea } from "../ui/Textarea";
 import { AskHelperTextarea } from "./AskHelperTextarea";
@@ -27,6 +27,11 @@ export function PropertyPanel({
   onAfterApprovalChange,
 }: PropertyPanelProps) {
   const [uploadError, setUploadError] = useState("");
+  const [previewFailed, setPreviewFailed] = useState(false);
+
+  useEffect(() => {
+    setPreviewFailed(false);
+  }, [block?.url, block?.svg]);
 
   const setItems = (items: Block["items"]) => onChange({ items });
   const setMeta = (patch: Record<string, string | number | boolean>) =>
@@ -161,12 +166,19 @@ export function PropertyPanel({
 
       {block.type === "image" && (
         <>
-          {block.url ? (
+          {block.url && !previewFailed ? (
             <img
               src={block.url}
               alt={block.alt || "Image"}
               style={{ width: "100%", borderRadius: 6, border: "1px solid var(--border)" }}
+              onError={() => setPreviewFailed(true)}
             />
+          ) : null}
+          {block.url && previewFailed ? (
+            <span className="caption">
+              This preview could not be loaded. The block keeps its URL and caption; replace it below or try
+              another address.
+            </span>
           ) : null}
           <label className="btn btn-secondary btn-sm upload-device">
             {block.url ? "Replace image" : "Upload from device"}
@@ -344,12 +356,18 @@ export function PropertyPanel({
 
       {block.type === "svg" && (
         <>
-          {block.svg ? (
+          {block.svg && !previewFailed ? (
             <img
               src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(block.svg)}`}
               alt={block.alt || "Illustration"}
               style={{ width: "100%", borderRadius: 6, border: "1px solid var(--border)" }}
+              onError={() => setPreviewFailed(true)}
             />
+          ) : null}
+          {block.svg && previewFailed ? (
+            <span className="caption">
+              This illustration could not be displayed. The SVG source below is unchanged.
+            </span>
           ) : null}
           <Input id="svg-url" label="SVG URL" value={block.url || ""} onChange={(value) => onChange({ url: value })} placeholder="https://" />
           <Textarea

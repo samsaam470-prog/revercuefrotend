@@ -12,7 +12,14 @@ import { PreviewPane } from "../../components/builder/PreviewPane";
 import { ShareModal } from "../../components/builder/ShareModal";
 import { DocumentReview } from "../../components/builder/DocumentReview";
 import { analyzeDocument, type Review } from "../../lib/analysis";
-import { markPipelineDone, runDraftPipeline, type DraftStage } from "../../lib/pipeline";
+import {
+  extractResearch,
+  markPipelineDone,
+  markResearchPending,
+  runDraftPipeline,
+  saveResearch,
+  type DraftStage,
+} from "../../lib/pipeline";
 import { DraftProgress, type DraftProgressState } from "../../components/builder/DraftProgress";
 import { briefOf, contentOf, hasPlaceholders, skeletonForBrief, type Brief } from "../../lib/brief";
 import { isBuiltIn } from "../../lib/templates";
@@ -123,9 +130,18 @@ function ContractRequirementForm() {
     if (Object.keys(next).length > 0) return;
 
     setLoading(true);
+    const selectedClient = mode === "existing" ? clients.data?.data.find((client) => client.id === clientId) : undefined;
+    const clientLabel = selectedClient?.name || clientName.trim() || "Client";
+    /* Contract research runs with the draft record so the clauses are written
+       from it, not enriched after the fact. */
+    const researchPromise = extractResearch({
+      clientName: clientLabel !== "Client" ? clientLabel : undefined,
+      clientWebsite: (selectedClient as unknown as { website_url?: string } | undefined)?.website_url,
+      businessWebsite: profile.data?.profile.website || undefined,
+      businessName: profile.data?.profile.business_name || undefined,
+      service: scope.trim().slice(0, 160) || undefined,
+    });
     try {
-      const selectedClient = mode === "existing" ? clients.data?.data.find((client) => client.id === clientId) : undefined;
-      const clientLabel = selectedClient?.name || clientName.trim() || "Client";
       const response = await contractsApi.draft({
         client_id: mode === "existing" ? clientId : undefined,
         client_name: mode === "new" ? clientName.trim() : undefined,
@@ -145,6 +161,9 @@ function ContractRequirementForm() {
         currency,
         sections,
       });
+      markResearchPending(response.id);
+      void researchPromise.then((research) => saveResearch(response.id, research));
+
       navigate(`/contracts/${response.id}/edit?step=template`);
     } catch (cause) {
       const apiError = cause as ApiError;

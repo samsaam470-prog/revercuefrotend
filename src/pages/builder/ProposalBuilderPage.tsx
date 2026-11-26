@@ -123,13 +123,18 @@ function ProposalCanvas({ id, blank }: { id: string; blank: boolean }) {
     setInitialised(true);
   }, [proposal, blank, id, initialised]);
 
-  /* The research lands a moment after the draft is created; pick it up here. */
+  /* The brief form's research is in flight while the first draft runs; show it
+     when it lands, and stop polling once the request settles either way. */
   useEffect(() => {
     if (research.notes.length || research.images.length) return;
+    let attempts = 0;
     const timer = setInterval(() => {
+      attempts += 1;
       const next = readResearch(id);
       if (next.notes.length || next.images.length) {
         setResearch(next);
+        clearInterval(timer);
+      } else if (!next.pending || attempts >= 40) {
         clearInterval(timer);
       }
     }, 1500);

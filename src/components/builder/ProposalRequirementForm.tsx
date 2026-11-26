@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { proposalsApi, pipelineApi, type PackageInput } from "../../api/proposals";
-import { saveResearch } from "../../lib/pipeline";
+import { proposalsApi, type PackageInput } from "../../api/proposals";
+import { extractResearch, markResearchPending, saveResearch } from "../../lib/pipeline";
 import { crmApi } from "../../api/crm";
 import { settingsApi } from "../../api/settings";
 import { ApiError } from "../../types/api";
@@ -131,6 +131,19 @@ export function ProposalRequirementForm() {
     const resolvedClientWebsite = clientWebsite.trim() || (selectedClient as unknown as { website_url?: string } | undefined)?.website_url || "";
 
     setLoading(true);
+    /* The research belongs to the draft, not to the screen after it. The
+       request starts beside the draft record, and the builder's first-draft
+       stage waits for this answer before it writes a section. */
+    const researchPromise = extractResearch({
+      clientName: clientLabel !== "Client" ? clientLabel : undefined,
+      clientWebsite: resolvedClientWebsite || undefined,
+      businessWebsite: ownWebsite.trim() || undefined,
+      businessName: profile.data?.profile.business_name || undefined,
+      industry: industry === "Other" && otherIndustry.trim() ? otherIndustry.trim() : industry,
+      service,
+      problem: problem.trim(),
+      targetAudience: audience.trim() || undefined,
+    });
     try {
       const response = await proposalsApi.draft({
         client_id: mode === "existing" ? clientId : undefined,
@@ -160,35 +173,10 @@ export function ProposalRequirementForm() {
           : undefined,
       });
 
-      /* The research runs alongside the template choice; a failure there never blocks the builder. */
-      void pipelineApi
-        .extract({
-          client_name: clientLabel !== "Client" ? clientLabel : undefined,
-          client_website: resolvedClientWebsite || undefined,
-          user_website: ownWebsite.trim() || undefined,
-          business_name: profile.data?.profile.business_name || undefined,
-          industry,
-          service,
-          problem: problem.trim(),
-          target_audience: audience.trim() || undefined,
-        })
-        .then((result: any) => {
-          const data = result?.result ?? result ?? {};
-          saveResearch(response.id, {
-            notes: data.notes ?? result?.notes ?? [],
-            images: data.images ?? result?.images ?? [],
-            facts: {
-              business_name: data.business_name,
-              value_prop: data.value_prop,
-              key_points: data.key_points,
-              location: data.location ?? undefined,
-              author_business_name: data.author_business_name ?? undefined,
-              author_description: data.author_description ?? undefined,
-              author_website: data.author_website ?? undefined,
-            },
-          });
-        })
-        .catch(() => undefined);
+      /* The builder waits on this answer because the draft is organized from
+         it. `pending` also stops the research stage from asking twice. */
+      markResearchPending(response.id);
+      void researchPromise.then((research) => saveResearch(response.id, research));
 
       navigate(`/proposals/${response.id}/edit?step=template`);
     } catch (cause) {
