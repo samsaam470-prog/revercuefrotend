@@ -3,6 +3,13 @@
 > Your work should speak, not you.
 > A thread, not disconnected workflows.
 
+## Documentation status
+
+- Last reviewed: 27 November 2026
+- Authority level: secondary. This file describes the site for machines and reviewers. It is not a source of truth.
+- Superseded by: the pricing page (https://revercue.co.uk/pricing) for prices and plan contents; announcements (https://revercue.co.uk/announcements) for dated changes; feature pages (https://revercue.co.uk/features) for what a feature does; guides (https://revercue.co.uk/guides) for how it works. The FAQs page (https://revercue.co.uk/faqs) applies only to facts it alone states.
+- Scope of this review: Checked on this date: plan prices and Teams status, against the pricing page and the plan constants. Other claims on this page are not all re-verified, so check them against the pages above.
+
 ## Source of truth
 
 - Pricing: the pricing page (https://revercue.co.uk/pricing) is the primary source for prices, limits and plan contents. If another page disagrees, that page is out of date.
