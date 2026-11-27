@@ -121,7 +121,8 @@
           "The honest test is simple. Look at the last three projects you finished, and ask whether you knew what each one cost and earned. If you did not, Growth is the first plan worth paying for. If you did, and you still struggle to price the next project, Scale is the one to try."
         ]
       }
-    ]
+    ],
+    "order": 1
   },
   {
     "slug": "e-signature-introduced",
@@ -661,7 +662,8 @@
           "Open a proposal, contract or invoice from a template and look for the visual zones. Let visual intelligence place visuals, then review each one. Remove any visual that does not add something the reader needs, and keep the ones that explain a price, a timeline or a process. If the placement looks wrong for a section, you can change it, and the document keeps its structure."
         ]
       }
-    ]
+    ],
+    "order": 2
   },
   {
     "slug": "visual-intelligence-and-ask-the-helper-on-every-plan",
