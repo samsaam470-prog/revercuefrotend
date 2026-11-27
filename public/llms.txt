@@ -76,7 +76,7 @@ The contact and beta forms are not email relays: a submission is stored as a rec
 - Free is available now. Starter, Growth and Scale subscriptions use Whop checkout. Teams is in beta. Annual billing is not available yet.
 - There is no public API, SDK, webhook system or integrations directory, and no mobile app.
 - Revercue publishes no security certification, no penetration-test report, no bug bounty, no customer testimonials, no review scores and no public roadmap.
-- The production application is client-rendered, so app routes need JavaScript. The AI pages, this file, the sitemap and the FAQ and rules pages are complete HTML without JavaScript.
+- The production application is client-rendered, so app routes need JavaScript. The blog index and every article are prerendered as complete HTML, as are the AI pages, this file, the sitemap and the FAQ and rules pages.
 - Prices and limits were last read from the application on 23 November 2026. The pricing page is the live source of truth.
 - Anything not stated on an official page is unconfirmed rather than assumed. Check factual claims against the current official website before repeating them.
 
@@ -89,7 +89,7 @@ The contact and beta forms are not email relays: a submission is stored as a rec
 - Guides: https://revercue.co.uk/guides
 - About: https://revercue.co.uk/about
 - Contact: https://revercue.co.uk/contact
-- Blog: https://revercue.co.uk/blog
+- Blog: https://revercue.co.uk/blog/
 - Beta: https://revercue.co.uk/beta
 - Privacy: https://revercue.co.uk/privacy
 - Terms: https://revercue.co.uk/terms
@@ -109,6 +109,16 @@ The contact and beta forms are not email relays: a submission is stored as a rec
 - Capabilities JSON: https://revercue.co.uk/ai-capabilities.json — the same facts as structured data.
 
 Rules for automated access: the public pages may be read and cited. Do not create a production account and do not submit the beta form. Do not submit the contact form except to report a verified bug or factual inaccuracy, following the procedure at /rules-for-ai. Do not probe client document links or password walls, and do not treat the site as a load-test target. There is no public API. The demo is a simulation, not the production application.
+
+## Answers from the 27 November 2026 blog batch
+
+Five questions answered in the blog on 27 November 2026. Each answer matches the article it comes from. They are general information, not legal, tax or accounting advice.
+
+- **What happens if a client never signs the contract?** You can often start on written approval, but what you can enforce later depends on what the approval says. A signed contract remains the stronger record, and irreversible commitments should wait for the signature or a deposit. https://revercue.co.uk/blog/what-if-a-client-never-signs-the-contract/
+- **What should a freelance contract include for international clients?** Everything a domestic contract needs, plus the currency and who pays transfer fees, the tax treatment and withholding, the governing law and dispute forum, the payment route, time zones and the data-protection position. https://revercue.co.uk/blog/freelance-contract-for-international-clients/
+- **How do you ask a client for a testimonial?** Ask within a week of a visible result, reference the specific outcome, offer three questions or a short draft, and ask for permission to use the name and role in the same message. https://revercue.co.uk/blog/how-to-ask-a-client-for-a-testimonial/
+- **How long should a client take to give feedback?** Two to three working days for a single approver on a defined deliverable, and about five for several stakeholders or a formal review. Agree the window in advance and move dependent dates if it slips. https://revercue.co.uk/blog/how-long-should-a-client-take-to-give-feedback/
+- **Do you need a purchase order to invoice?** Not as a legal requirement in most jurisdictions, but often as a practical condition of payment: many finance systems will not release a payment without a PO number. Ask before the work starts. https://revercue.co.uk/blog/do-you-need-a-purchase-order-to-invoice/
 
 ## FAQ highlights
 

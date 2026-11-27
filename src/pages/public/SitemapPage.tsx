@@ -52,8 +52,10 @@ const TREE: Node[] = [
       },
       {
         label: "Blog",
-        to: "/blog",
-        children: BLOG_POSTS.map((p) => ({ label: p.title, to: `/blog/${p.slug}` })),
+        to: "/blog/",
+        // Directory-index URLs: the trailing slash is the URL the host serves and
+        // the canonical form, so the sitemap page links to it directly.
+        children: BLOG_POSTS.map((p) => ({ label: p.title, to: `/blog/${p.slug}/` })),
       },
       {
         label: "Announcements",
