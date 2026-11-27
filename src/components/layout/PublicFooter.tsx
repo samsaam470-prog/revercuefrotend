@@ -109,6 +109,7 @@ export function PublicFooter() {
           <Link to="/about">About</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/solutions">Solutions</Link>
+          <Link to="/sitemap">Sitemap</Link>
           <Link to="/announcements">Announcements</Link>
           <Link to="/faqs">FAQs</Link>
           <Link to="/contact">Contact</Link>
