@@ -984,5 +984,75 @@
         ]
       }
     ]
+  },
+  {
+    "slug": "template-pack-73-released",
+    "date": "2026-11-26",
+    "status": "Live",
+    "title": "A new template pack: 73 proposal and contract templates",
+    "summary": "On 26 November 2026 Revercue released a new template pack of 73 professional blueprints: 35 proposal templates and 38 contract templates. They replace the earlier starting templates. Each one has its own structure, sections and layout, grouped by industry and by the kind of work it covers, from freelance and marketing projects to technology, construction, commercial agreements and employment. Each template is marked simple, standard or detailed so you can choose the one that matches the size of the job. Built-in templates are open on every plan. The pack was built to give you a starting point that already fits the work: each template is complete, each one is labelled by complexity, and the library is searchable by category, industry and complexity, so you can find a close match in a few seconds rather than building a document from a blank page.",
+    "links": [
+      {
+        "label": "Proposals in Revercue",
+        "to": "/features/proposals"
+      },
+      {
+        "label": "Contracts in Revercue",
+        "to": "/features/contracts"
+      },
+      {
+        "label": "Templates guide",
+        "to": "/guides/templates"
+      }
+    ],
+    "body": [
+      {
+        "heading": "What was released",
+        "paragraphs": [
+          "On 26 November 2026 Revercue released a new template pack. It contains 73 blueprints: 35 for proposals and 38 for contracts. The pack replaces the earlier starting templates, so the template picker in the builder now shows the new library.",
+          "Each template is a complete starting document, not a single blank page. It has a structure, sections, and a layout that suits the kind of work it describes, so you start from a document that already knows what a proposal or contract for that work usually needs."
+        ]
+      },
+      {
+        "heading": "Proposal templates",
+        "paragraphs": [
+          "There are 35 proposal templates across four groups. Business and professional services has 6 templates. Marketing and creative work has 8. Commercial and specialist work has 7. Construction and operations has 3, and freelance and independent work has 5. Technology and software has 6 more, which makes 35 in total.",
+          "Each proposal template sets out the outcome, the scope, the packages and the price, with the sections that matter for that kind of work. You adapt the wording to the client, and the structure stays in place."
+        ]
+      },
+      {
+        "heading": "Contract templates",
+        "paragraphs": [
+          "There are 38 contract templates across three groups. Freelance and professional services has 9 templates and general business has 6, which makes 15 in the first set. Commercial and operational agreements have 12 templates, employment and collaboration has 4, and technology and intellectual property has 7, which makes 23 in the second set.",
+          "Each contract template covers the terms that most often cause disagreements, such as scope, payment, revisions, ownership and cancellation, arranged so the sections read in the order a client expects. Read the terms against your own situation before you send one, because a template is a starting point, not legal advice."
+        ]
+      },
+      {
+        "heading": "Simple, standard and detailed",
+        "paragraphs": [
+          "Every template is marked by complexity. Simple templates are 14 in total, for short, low-risk work with few sections. Standard templates are 35, the most common size, with the sections most engagements need. Detailed templates are 24, for larger or more involved work with more sections and terms.",
+          "Use the complexity filter in the template picker to narrow the list. A simple job rarely needs a detailed template, and a detailed template is easier to cut down than to build from scratch, so choose the one closest to the work and adapt it."
+        ]
+      },
+      {
+        "heading": "Who can use them",
+        "paragraphs": [
+          "The built-in templates are open on every plan, including Free. Uploading your own template is a plan feature, and the pricing page lists which plans include it. Built-in templates are the same on every plan, so you can build a proposal or contract from the library without upgrading."
+        ]
+      },
+      {
+        "heading": "How to start",
+        "paragraphs": [
+          "Open the builder for a proposal or a contract and choose a template from the picker. Use the search, the category and the complexity filters to find the closest match, then open the preview before you choose. Once you have chosen, the template becomes your document: change the wording, the sections and the price, and keep only what the client needs.",
+          "The templates guide explains the structure of each document type and how to adapt a template without losing the sections that protect you."
+        ]
+      },
+      {
+        "heading": "What we want to hear",
+        "paragraphs": [
+          "Tell us which templates you use most, which ones are missing for your work, and where a template's wording does not match how you talk to clients. Use the contact form, and include the template name so we can find it. The next pack will be shaped by what you ask for."
+        ]
+      }
+    ]
   }
 ]
