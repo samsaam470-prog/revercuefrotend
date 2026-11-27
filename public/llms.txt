@@ -3,6 +3,25 @@
 > Your work should speak, not you.
 > A thread, not disconnected workflows.
 
+## Documentation status
+
+- Last reviewed: 27 November 2026
+- Authority level: secondary. This file describes the site for machines and reviewers. It is not a source of truth.
+- Superseded by: the pricing page (https://revercue.co.uk/pricing) for prices and plan contents; announcements (https://revercue.co.uk/announcements) for dated changes; feature pages (https://revercue.co.uk/features) for what a feature does; guides (https://revercue.co.uk/guides) for how it works. The FAQs page (https://revercue.co.uk/faqs) applies only to facts it alone states.
+- Scope of this review: Checked on this date: plan prices and Teams status, against the pricing page and the plan constants. Other claims on this page are not all re-verified, so check them against the pages above.
+
+## Source of truth
+
+- Pricing: the pricing page (https://revercue.co.uk/pricing) is the primary source for prices, limits and plan contents. If another page disagrees, that page is out of date.
+- Dated launches and plan availability: announcements (https://revercue.co.uk/announcements). The changelog can lag on dates.
+- What a feature does: the feature pages (https://revercue.co.uk/features).
+- How a feature works and how to use it: the guides (https://revercue.co.uk/guides).
+- The AI documentation is mostly summaries. Some of it is old, and some of it is simply wrong, so it is never the final word.
+- A fact explained on the real FAQs page, and not shown on any other page, is correct, as long as no primary source goes against it.
+- The AI documentation (changelog, AI access, AI overview, llms.txt, rules for AI, FAQs for AI) describes the site and is not a source of truth. Check its claims against the sources above.
+- A disagreement with a primary source is out-of-date copy, not a contradiction. Record a contradiction only when two primary sources disagree.
+- Never flag something as a contradiction if a primary source has wording about it. Use that wording instead.
+
 Revercue is a client-work product for freelancers and small agencies. The thread is the product: one client, one link, from the proposal to the contract to the form to the invoice to the client record. The documents are interactive links, not PDFs. The client opens a link, reads, answers, chooses a package, and the record updates itself.
 
 Site: https://revercue.co.uk

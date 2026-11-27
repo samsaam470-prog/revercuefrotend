@@ -240,7 +240,7 @@
       "name": "What do the paid plans cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Prices are in US dollars per month, as published on /pricing: Starter $12, Growth $29 and Scale $49. Teams is priced from a $99 base per team and is in beta, with seats handled manually. Starter, Growth and Scale are available through Whop checkout. Whop processes the payment details submitted during checkout; Revercue receives subscription and payment-status records needed to manage the plan. Annual billing is not available yet. The pricing page is the live source of truth if these figures ever change."
+        "text": "Prices are in US dollars per month, as published on /pricing: Starter $12, Growth $29 and Scale $49. Teams is free while it stays in beta, with seats handled manually. Starter, Growth and Scale are available through Whop checkout. Whop processes the payment details submitted during checkout; Revercue receives subscription and payment-status records needed to manage the plan. Annual billing is not available yet. The pricing page is the live source of truth if these figures ever change."
       }
     },
     {
@@ -509,6 +509,80 @@
     </header>
 
     <main id="main" class="wrap">
+        <section class="documentation-status" aria-labelledby="doc-status-title">
+          <h2 id="doc-status-title">Documentation status</h2>
+          <dl>
+            <dt>Last reviewed</dt>
+            <dd>27 November 2026</dd>
+            <dt>Authority level</dt>
+            <dd>Secondary. Answers written for AI systems. It is not a source of truth.</dd>
+            <dt>Superseded by</dt>
+            <dd>Pricing page (/pricing) for prices and plan contents; announcements (/announcements) for dated changes; feature pages (/features) for what a feature does; guides (/guides) for how it works. The FAQs page (/faqs) applies only to facts it alone states.</dd>
+            <dt>Scope of this review</dt>
+            <dd>Checked on this date: plan prices and Teams status, against the pricing page and the plan constants. Other claims on this page are not all re-verified, so check them against the pages above.</dd>
+          </dl>
+        </section>
+        <p class="note">
+          For verified answers, read the real FAQ page at <a href="/faqs">/faqs</a>. It is worth checking any fact on this page against <a href="/faqs">/faqs</a> and the pages it names before relying on it.
+        </p>
+
+        <section class="source-of-truth" aria-labelledby="sot-title">
+          <h2 id="sot-title">Source of truth</h2>
+          <p>
+            When two pages disagree, use the source for that kind of fact. A page that disagrees with its
+            source is out of date. It is corrected, not recorded as a contradiction.
+          </p>
+          <p>
+            The AI documentation is mostly summaries. Some of it is old, and some of it is simply wrong, so it is never the final word.
+          </p>
+          <table>
+            <thead>
+              <tr><th scope="col">Topic</th><th scope="col">Source of truth</th><th scope="col">Where copy can lag</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Plan prices, limits and what each plan includes</th>
+                <td>The pricing page, <a href="/pricing">/pricing</a>. It is the primary source for prices.</td>
+                <td>Changelog, AI pages, llms.txt, FAQs for AI, FAQs.</td>
+              </tr>
+              <tr>
+                <th scope="row">Dated launches, plan availability, and what changed when</th>
+                <td>Announcements, <a href="/announcements">/announcements</a>.</td>
+                <td>The changelog can lag on dates and wording.</td>
+              </tr>
+              <tr>
+                <th scope="row">What a feature does</th>
+                <td>Feature pages, <a href="/features">/features</a> and <a href="/features">/features/&lt;slug&gt;</a>.</td>
+                <td>AI pages, FAQs for AI, FAQs.</td>
+              </tr>
+              <tr>
+                <th scope="row">How a feature works and how to use it</th>
+                <td>Guides, <a href="/guides">/guides</a>.</td>
+                <td>AI pages, FAQs for AI, FAQs.</td>
+              </tr>
+              <tr>
+                <th scope="row">Wording on the FAQs page</th>
+                <td>A fact that appears only on the FAQs page is treated as correct, as long as no primary source goes against it.</td>
+                <td>The FAQs page can keep older wording where another page now says something different.</td>
+              </tr>
+              <tr>
+                <th scope="row">The AI documentation itself</th>
+                <td>Not a source of truth. It describes the site for machines and reviewers.</td>
+                <td>Changelog, AI access, AI overview, llms.txt, rules for AI, FAQs for AI. Check each claim against the rows above.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>How to resolve a disagreement</h3>
+          <ol>
+            <li>If an AI page disagrees with the pricing page, announcements, feature pages or guides, the AI page is out of date. Fix it. Do not record it as a contradiction.</li>
+            <li>Record a contradiction only when two primary sources disagree with each other. Name both pages and say what each one says.</li>
+            <li>For dated changes, the most recent announcement that covers the topic wins over older copy.</li>
+            <li>Never settle a conflict by inventing a fact. If no primary source covers the point, say it is unverified.</li>
+            <li>A fact explained on the real FAQs page, and not shown on any other page, is correct, as long as no primary source goes against it.</li>
+            <li>Never flag something as a contradiction if a primary source has wording about it. Use that wording instead.</li>
+          </ol>
+        </section>
+
       <div class="page-head">
         <p class="eyebrow">For AI assistants, answer engines and search engines</p>
         <h1>Revercue: 50 questions, answered.</h1>
@@ -803,7 +877,7 @@
             <p>
               Prices are in US dollars per month, as published on
               <a href="/pricing">/pricing</a>: Starter $12, Growth $29 and Scale $49. Teams is priced
-              from a $99 base per team and is in beta, with seats handled manually.
+              free while it stays in beta, with seats handled manually.
             </p>
             <p>
               Starter, Growth and Scale are available through Whop checkout. Annual billing is not available yet.

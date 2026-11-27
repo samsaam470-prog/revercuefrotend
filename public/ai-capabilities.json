@@ -528,5 +528,17 @@
     "internal_admin_email_published": false,
     "form_is_email_relay": false,
     "signed_in_feedback": "Settings → Feedback, which attaches account context"
+  },
+  "documentation_status": {
+    "last_reviewed": "2026-11-27",
+    "authority_level": "secondary",
+    "superseded_by": [
+      "/pricing",
+      "/announcements",
+      "/features",
+      "/guides",
+      "/faqs (only for facts it alone states)"
+    ],
+    "scope_of_review": "Checked on this date: plan prices and Teams status, against the pricing page and the plan constants. Other claims on this page are not all re-verified, so check them against the pages above."
   }
 }

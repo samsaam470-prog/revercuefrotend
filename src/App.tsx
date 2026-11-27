@@ -71,6 +71,7 @@ export function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/announcements" element={<AnnouncementsPage />} />
+            <Route path="/announcements/template-pack-73-released" element={<Navigate to="/announcements/new-template-pack-available-in-revercue" replace />} />
             <Route path="/announcements/:slug" element={<AnnouncementPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
