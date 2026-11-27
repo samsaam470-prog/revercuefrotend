@@ -3,6 +3,16 @@
 > Your work should speak, not you.
 > A thread, not disconnected workflows.
 
+## Source of truth
+
+- Pricing: the pricing page (https://revercue.co.uk/pricing) is the primary source for prices, limits and plan contents. If another page disagrees, that page is out of date.
+- Dated launches and plan availability: announcements (https://revercue.co.uk/announcements). The changelog can lag on dates.
+- What a feature does: the feature pages (https://revercue.co.uk/features).
+- How a feature works and how to use it: the guides (https://revercue.co.uk/guides).
+- The FAQs page is mostly current but can keep older wording; confirm it against the sources above.
+- The AI documentation (changelog, AI access, AI overview, llms.txt, rules for AI, FAQs for AI) describes the site and is not a source of truth. Check its claims against the sources above.
+- A disagreement with a primary source is out-of-date copy, not a contradiction. Record a contradiction only when two primary sources disagree.
+
 Revercue is a client-work product for freelancers and small agencies. The thread is the product: one client, one link, from the proposal to the contract to the form to the invoice to the client record. The documents are interactive links, not PDFs. The client opens a link, reads, answers, chooses a package, and the record updates itself.
 
 Site: https://revercue.co.uk

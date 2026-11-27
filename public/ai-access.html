@@ -44,6 +44,58 @@
     </header>
 
     <main id="main" class="wrap">
+        <section class="source-of-truth" aria-labelledby="sot-title">
+          <h2 id="sot-title">Source of truth</h2>
+          <p>
+            When two pages disagree, use the source for that kind of fact. A page that disagrees with its
+            source is out of date. It is corrected, not recorded as a contradiction.
+          </p>
+          <table>
+            <thead>
+              <tr><th scope="col">Topic</th><th scope="col">Source of truth</th><th scope="col">Where copy can lag</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Plan prices, limits and what each plan includes</th>
+                <td>The pricing page, <a href="/pricing">/pricing</a>. It is the primary source for prices.</td>
+                <td>Changelog, AI pages, llms.txt, FAQs for AI, FAQs.</td>
+              </tr>
+              <tr>
+                <th scope="row">Dated launches, plan availability, and what changed when</th>
+                <td>Announcements, <a href="/announcements">/announcements</a>.</td>
+                <td>The changelog can lag on dates and wording.</td>
+              </tr>
+              <tr>
+                <th scope="row">What a feature does</th>
+                <td>Feature pages, <a href="/features">/features</a> and <a href="/features">/features/&lt;slug&gt;</a>.</td>
+                <td>AI pages, FAQs for AI, FAQs.</td>
+              </tr>
+              <tr>
+                <th scope="row">How a feature works and how to use it</th>
+                <td>Guides, <a href="/guides">/guides</a>.</td>
+                <td>AI pages, FAQs for AI, FAQs.</td>
+              </tr>
+              <tr>
+                <th scope="row">Wording on the FAQs page</th>
+                <td>Confirm against pricing, features and guides before relying on it.</td>
+                <td>The FAQs page is mostly current but can keep older wording.</td>
+              </tr>
+              <tr>
+                <th scope="row">The AI documentation itself</th>
+                <td>Not a source of truth. It describes the site for machines and reviewers.</td>
+                <td>Changelog, AI access, AI overview, llms.txt, rules for AI, FAQs for AI. Check each claim against the rows above.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>How to resolve a disagreement</h3>
+          <ol>
+            <li>If an AI page disagrees with the pricing page, announcements, feature pages or guides, the AI page is out of date. Fix it. Do not record it as a contradiction.</li>
+            <li>Record a contradiction only when two primary sources disagree with each other. Name both pages and say what each one says.</li>
+            <li>For dated changes, the most recent announcement that covers the topic wins over older copy.</li>
+            <li>Never settle a conflict by inventing a fact. If no primary source covers the point, say it is unverified.</li>
+          </ol>
+        </section>
+
       <div class="page-head">
         <p class="eyebrow">AI access guide</p>
         <h1>Where to find everything in Revercue.</h1>
