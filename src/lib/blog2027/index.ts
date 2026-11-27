@@ -29,14 +29,30 @@ import { PROPOSAL_APPROVAL_POST } from "./proposalApproval";
 import { CONTRACT_VERSIONS_POST } from "./contractVersions";
 import { CLIENT_RED_FLAGS_POST } from "./clientRedFlags";
 import { CONTRACT_TEMPLATE_POST } from "./contractTemplateChoice";
+import { INVOICE_CONTENTS_POST } from "./invoiceContents";
+import { CANCEL_PROJECT_POST } from "./cancelProject";
+import { RAISE_RATES_POST } from "./raiseRates";
+import { DISCOUNT_REQUEST_POST } from "./discountRequest";
+import { SUBCONTRACTOR_POST } from "./subcontractor";
+import { UNSIGNED_CONTRACT_POST } from "./unsignedContract";
+import { INTERNATIONAL_CLIENTS_POST } from "./internationalClients";
+import { TESTIMONIAL_POST } from "./testimonial";
+import { FEEDBACK_TURNAROUND_POST } from "./feedbackTurnaround";
+import { PURCHASE_ORDER_POST } from "./purchaseOrder";
+import { PROJECT_STATUSES_POST } from "./projectStatuses";
+import { HANDOVER_CHECKLIST_POST } from "./handoverChecklist";
+import { COMMUNICATION_LOG_POST } from "./communicationLog";
+import { DOCUMENT_RETENTION_POST } from "./documentRetention";
+import { FOLDER_STRUCTURE_POST } from "./folderStructure";
 
 /**
  * The November 2026 content batches. The first fifteen are five clusters of
  * three articles; the second fifteen are a five-per-discipline SEO, AEO and GEO
  * set. One module per article, so each piece stays easy to rewrite.
  * Strategy and keyword mapping:
- * docs/seo-aeo-geo-strategy-2027-batch2.md and
- * docs/seo-aeo-geo-strategy-2026-11-26.md
+ * docs/seo-aeo-geo-strategy-2027-batch2.md,
+ * docs/seo-aeo-geo-strategy-2026-11-26.md and
+ * docs/seo-aeo-geo-strategy-2026-11-27.md
  */
 export const BLOG_2027_POSTS: BlogPost[] = [
   FOLLOW_UP_ANNOYING_POST,
@@ -69,4 +85,19 @@ export const BLOG_2027_POSTS: BlogPost[] = [
   CONTRACT_VERSIONS_POST,
   CLIENT_RED_FLAGS_POST,
   CONTRACT_TEMPLATE_POST,
+  INVOICE_CONTENTS_POST,
+  CANCEL_PROJECT_POST,
+  RAISE_RATES_POST,
+  DISCOUNT_REQUEST_POST,
+  SUBCONTRACTOR_POST,
+  UNSIGNED_CONTRACT_POST,
+  INTERNATIONAL_CLIENTS_POST,
+  TESTIMONIAL_POST,
+  FEEDBACK_TURNAROUND_POST,
+  PURCHASE_ORDER_POST,
+  PROJECT_STATUSES_POST,
+  HANDOVER_CHECKLIST_POST,
+  COMMUNICATION_LOG_POST,
+  DOCUMENT_RETENTION_POST,
+  FOLDER_STRUCTURE_POST,
 ];
