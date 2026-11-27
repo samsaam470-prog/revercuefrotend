@@ -1,5 +1,5 @@
 import announcementsData from "../content/announcements.json";
-import { postBySlug } from "./blog";
+import { BLOG_POSTS, postBySlug, type BlogPost } from "./blog";
 /**
  * Per-route metadata for Revercue's client-rendered public site.
  */
@@ -18,7 +18,13 @@ function isUnder(pathname: string, prefix: string): boolean {
 
 export function canonicalUrl(pathname: string): string | null {
   if (PRIVATE_ROUTES.some((prefix) => isUnder(pathname, prefix))) return null;
-  return `${PUBLIC_ORIGIN}${pathname === "/" ? "/" : pathname.replace(/\/$/, "")}`;
+  const path = pathname.replace(/\/+$/, "");
+  if (path === "") return `${PUBLIC_ORIGIN}/`;
+  // Blog pages are written to disk as directory indexes, so the host answers the
+  // trailing-slash URL and redirects the bare path. A canonical that points at a
+  // redirect is discarded, so emit the URL that actually returns 200.
+  if (path === "/blog" || path.startsWith("/blog/")) return `${PUBLIC_ORIGIN}${path}/`;
+  return `${PUBLIC_ORIGIN}${path}`;
 }
 
 export const DEFAULT_META: RouteMeta = {
@@ -109,6 +115,97 @@ function setMeta(attribute: "name" | "property", key: string, content: string) {
   element.setAttribute("content", content);
 }
 
+const ROUTE_SCHEMA_ID = "revercue-route-schema";
+
+function blogPostingSchema(post: BlogPost) {
+  const url = canonicalUrl(`/blog/${post.slug}`);
+  const indexUrl = canonicalUrl("/blog");
+  if (!url || !indexUrl) return null;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${url}#article`,
+        headline: post.title,
+        description: post.excerpt,
+        url,
+        mainEntityOfPage: url,
+        datePublished: post.date,
+        dateModified: post.date,
+        author: { "@type": "Organization", name: "Revercue", url: `${PUBLIC_ORIGIN}/` },
+        publisher: { "@type": "Organization", name: "Revercue", url: `${PUBLIC_ORIGIN}/` },
+        isPartOf: { "@id": `${indexUrl}#blog` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Revercue", item: `${PUBLIC_ORIGIN}/` },
+          { "@type": "ListItem", position: 2, name: "Blog", item: indexUrl },
+          { "@type": "ListItem", position: 3, name: post.title, item: url },
+        ],
+      },
+    ],
+  };
+}
+
+function blogIndexSchema() {
+  const url = canonicalUrl("/blog");
+  if (!url) return null;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Blog",
+        "@id": `${url}#blog`,
+        name: "Freelance business blog — Revercue",
+        description: ROUTES["/blog"].description,
+        url,
+        isPartOf: { "@type": "WebSite", name: "Revercue", url: `${PUBLIC_ORIGIN}/` },
+      },
+      {
+        "@type": "ItemList",
+        itemListElement: BLOG_POSTS.map((post, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: canonicalUrl(`/blog/${post.slug}`),
+          name: post.title,
+        })),
+      },
+    ],
+  };
+}
+
+/**
+ * Own the blog route schema: there is exactly one node, and it is the one the
+ * prerender wrote when it already describes the current URL. Navigating within
+ * the app rewrites that node in place, so hydration can never leave a second
+ * BlogPosting (or a stale one from the previous article) in the head.
+ */
+function applyRouteSchema(pathname: string) {
+  const path = pathname.replace(/\/+$/, "") || "/";
+  const post = path.startsWith("/blog/") ? postBySlug(path.slice("/blog/".length)) : undefined;
+  const schema = path === "/blog" ? blogIndexSchema() : post ? blogPostingSchema(post) : null;
+  const url = post ? canonicalUrl(`/blog/${post.slug}`) : path === "/blog" ? canonicalUrl("/blog") : null;
+
+  const nodes = Array.from(
+    document.head.querySelectorAll<HTMLScriptElement>(`script#${ROUTE_SCHEMA_ID}`),
+  );
+  if (!schema || !url) {
+    nodes.forEach((node) => node.remove());
+    return;
+  }
+  nodes.slice(1).forEach((node) => node.remove());
+  const existing = nodes[0];
+  if (existing?.dataset.routeUrl === url) return;
+  const node = existing ?? document.createElement("script");
+  node.type = "application/ld+json";
+  node.id = ROUTE_SCHEMA_ID;
+  node.dataset.routeUrl = url;
+  node.textContent = JSON.stringify(schema).replace(/</g, "\\u003c");
+  if (!existing) document.head.appendChild(node);
+}
+
 export function applyRouteMetadata(pathname: string) {
   const meta = routeMeta(pathname);
   document.title = meta.title;
@@ -117,6 +214,7 @@ export function applyRouteMetadata(pathname: string) {
   setMeta("property", "og:description", meta.description);
   setMeta("name", "twitter:title", meta.title);
   setMeta("name", "twitter:description", meta.description);
+  applyRouteSchema(pathname);
 
   const canonical = isPublicPage(pathname) ? canonicalUrl(pathname) : null;
   const existing = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');

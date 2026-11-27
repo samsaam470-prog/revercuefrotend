@@ -45,10 +45,14 @@ function withMeta(html, { title, description, url, type }) {
   return out;
 }
 
-function withSchema(html, schema) {
+// One schema node per page, tagged with its URL. The client SEO layer reuses
+// this node instead of appending a second copy after hydration.
+function withSchema(html, schema, url) {
   return html.replace(
     "</head>",
-    "<script type=\"application/ld+json\">" +
+    "<script type=\"application/ld+json\" id=\"revercue-route-schema\" data-route-url=\"" +
+      esc(url) +
+      "\">" +
       JSON.stringify(schema).replace(/</g, "\\u003c") +
       "</script></head>",
   );
@@ -71,7 +75,7 @@ function articleBody(post) {
     .join("");
   return (
     "<main style=\"max-width:760px;margin:0 auto;padding:48px 24px;font-family:Inter,Arial,sans-serif;line-height:1.7\">" +
-    "<nav aria-label=\"Breadcrumb\"><a href=\"/\">Revercue</a> / <a href=\"/blog\">Blog</a> / " +
+    "<nav aria-label=\"Breadcrumb\"><a href=\"/\">Revercue</a> / <a href=\"/blog/\">Blog</a> / " +
     esc(post.title) +
     "</nav>" +
     "<article><header><h1>" +
@@ -87,7 +91,7 @@ function articleBody(post) {
     "</p></header>" +
     sections +
     (links ? "<section><h2>Related on Revercue</h2><ul>" + links + "</ul></section>" : "") +
-    "<p><a href=\"/blog\">All posts</a></p></article></main>"
+    "<p><a href=\"/blog/\">All posts</a></p></article></main>"
   );
 }
 
@@ -123,7 +127,9 @@ try {
     throw new Error("BLOG_POSTS was empty; refusing to write empty blog pages.");
   }
 
-  const indexUrl = origin + "/blog";
+  // Canonical form matches what the host serves: directory indexes answer at the
+  // trailing slash and redirect the bare path, so the bare path cannot be canonical.
+  const indexUrl = origin + "/blog/";
   const indexTitle = "Freelance business blog — Revercue";
   const indexDescription =
     "Practical essays on proposals, contracts, scope and getting paid, for freelancers who would rather do the work than chase it.";
@@ -132,7 +138,7 @@ try {
     (post) =>
       "<article><h2><a href=\"/blog/" +
       esc(post.slug) +
-      "\">" +
+      "/\">" +
       esc(post.title) +
       "</a></h2><p>" +
       esc(post.excerpt) +
@@ -171,7 +177,7 @@ try {
         itemListElement: BLOG_POSTS.map((post, i) => ({
           "@type": "ListItem",
           position: i + 1,
-          url: origin + "/blog/" + post.slug,
+          url: origin + "/blog/" + post.slug + "/",
           name: post.title,
         })),
       },
@@ -184,14 +190,14 @@ try {
     url: indexUrl,
     type: "website",
   });
-  indexHtml = withSchema(indexHtml, indexSchema);
+  indexHtml = withSchema(indexHtml, indexSchema, indexUrl);
   indexHtml = withBody(indexHtml, indexBody);
   await mkdir(resolve(dist, "blog"), { recursive: true });
   await writeFile(resolve(dist, "blog", "index.html"), indexHtml, "utf8");
   console.log("Pre-rendered /blog");
 
   for (const post of BLOG_POSTS) {
-    const url = origin + "/blog/" + post.slug;
+    const url = origin + "/blog/" + post.slug + "/";
     const faqs = faqsFor(post);
     const graph = [
       {
@@ -234,7 +240,7 @@ try {
       type: "article",
     });
     html = setMeta(html, "property", "article:published_time", post.date);
-    html = withSchema(html, { "@context": "https://schema.org", "@graph": graph });
+    html = withSchema(html, { "@context": "https://schema.org", "@graph": graph }, url);
     html = withBody(html, articleBody(post));
     const dir = resolve(dist, "blog", post.slug);
     await mkdir(dir, { recursive: true });
