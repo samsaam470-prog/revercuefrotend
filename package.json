@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build && node scripts/prerender-seo.mjs",
+    "build": "tsc --noEmit && vite build && node scripts/prerender-seo.mjs && node scripts/prerender-blog.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "prerender:seo": "node scripts/prerender-seo.mjs",
+    "prerender:blog": "node scripts/prerender-blog.mjs",
     "test": "vitest run"
   },
   "dependencies": {
