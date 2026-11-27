@@ -25,7 +25,7 @@ export function SolutionLandingPage() {
 
   if (!solution) {
     return (
-      <div className="page page-wide">
+      <div className="page page-wide feature-doc">
         <div className="page-head">
           <p className="eyebrow">Freelancer tools</p>
           <h1>Find the right way to manage client work.</h1>
@@ -37,7 +37,7 @@ export function SolutionLandingPage() {
   }
 
   return (
-    <div className="page page-wide">
+    <div className="page page-wide feature-doc">
       <header className="page-head">
         <p className="eyebrow">{solution.eyebrow}</p>
         <h1>{solution.title}</h1>

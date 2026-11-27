@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { SolutionsIndexPage } from "./pages/public/SolutionsIndexPage";
 import { AnnouncementsPage } from "./pages/public/AnnouncementsPage";
 import { AnnouncementPage } from "./pages/public/AnnouncementPage";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
@@ -61,6 +62,7 @@ export function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/features" element={<FeaturesPage />} />
             <Route path="/features/:slug" element={<FeatureDetailPage />} />
+            <Route path="/solutions" element={<SolutionsIndexPage />} />
             <Route path="/solutions/:slug" element={<SolutionLandingPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/compare" element={<ComparePage />} />
