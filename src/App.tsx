@@ -80,6 +80,8 @@ export function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/announcements" element={<AnnouncementsPage />} />
             <Route path="/announcements/template-pack-73-released" element={<Navigate to="/announcements/new-template-pack-available-in-revercue" replace />} />
+            <Route path="/guides/shareable-builder" element={<Navigate to="/guides/shareable-builder-guide" replace />} />
+            <Route path="/guides/offline-builder" element={<Navigate to="/guides/offline-builder-guide" replace />} />
             <Route path="/announcements/:slug" element={<AnnouncementPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
