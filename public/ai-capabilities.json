@@ -1,7 +1,7 @@
 {
   "name": "Revercue",
-  "documentation_version": "1.1.0",
-  "last_updated": "2026-11-22",
+  "documentation_version": "1.2.0",
+  "last_updated": "2026-11-28",
   "canonical_origin": "https://revercue.co.uk",
   "document": {
     "language": "en",
@@ -55,7 +55,10 @@
     "terms": "https://revercue.co.uk/terms",
     "contact": "https://revercue.co.uk/contact",
     "beta": "https://revercue.co.uk/beta",
-    "compare_criteria": "https://revercue.co.uk/compare/criteria"
+    "compare_criteria": "https://revercue.co.uk/compare/criteria",
+    "shareable_builder_guide": "https://revercue.co.uk/guides/shareable-builder-guide",
+    "offline_builder_guide": "https://revercue.co.uk/guides/offline-builder-guide",
+    "announcement_shareable_and_offline": "https://revercue.co.uk/announcements/shareable-builder-and-offline-builder"
   },
   "workflow": [
     {
@@ -158,6 +161,24 @@
       "status": "available",
       "access": "account",
       "summary": "Shared document editor with undo and redo, preview and visible auto-save; built-in templates everywhere, saved templates from Starter."
+    },
+    {
+      "id": "shareable_builder",
+      "name": "Shareable Builder",
+      "status": "available",
+      "access": "scale; the invited contributor needs no account",
+      "summary": "One contributor per document through a single-use, expiring, revocable link and a restricted editor; owner visibility with contributor email and last saved time; temporary chat deleted at session end; Complete from either side; server-enforced single-editor lock across proposals, contracts, invoices and forms.",
+      "guide": "https://revercue.co.uk/guides/shareable-builder-guide",
+      "limits": "Owner saves are refused while a contributor holds the document. Live visibility is polling every few seconds, not pushed events. Chat content is not written to document history, analytics or logs; screenshots, browser caches and provider backups are outside Revercue's control."
+    },
+    {
+      "id": "offline_builder",
+      "name": "Offline Builder",
+      "status": "available",
+      "access": "scale; same device and same browser",
+      "summary": "Prepare online, edit with no connection from a local copy, Complete, then Sync. The server lock keeps the online document read-only everywhere until the new version is stored and confirmed.",
+      "guide": "https://revercue.co.uk/guides/offline-builder-guide",
+      "limits": "Offline editing is not available to contributors. Sync is offered only after Complete. A failed sync keeps the local copy and the lock. A lost device loses the unsynced copy; recovery is Release the lock without syncing."
     },
     {
       "id": "client_pages",

@@ -155,6 +155,7 @@
             <li><a href="#ai-2026-11-16">22 November 2026 — AI resources</a></li>
             <li><a href="#site-2026-11-16">22 November 2026 — content and covers</a></li>
             <li><a href="#site-2026-11-15">22 November 2026 — guides and FAQs</a></li>
+            <li><a href="#collab-2026-11-28">28 November 2026 — Shareable Builder and Offline Builder</a></li>
             <li><a href="#known">Known issues</a></li>
             <li><a href="#notifications">Staying current</a></li>
           </ol>
@@ -502,8 +503,110 @@
         </div>
       </section>
 
+      <section class="section" id="collab-2026-11-28">
+        <h2>6. 28 November 2026 — Shareable Builder and Offline Builder</h2>
+        <p>
+          Two Scale features ship together: one external contributor per document without a Revercue
+          account, and offline editing of a prepared document on the same device. Both use one
+          server-enforced editing authority, so a document has a single editor at a time.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <caption>What changed and what it means for an evaluator.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Area</th>
+                <th scope="col">What changed</th>
+                <th scope="col">Effect on a reviewer or agent</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Contributor invitations</th>
+                <td>
+                  Add Contributor in every builder creates a single-use, expiring, revocable link for
+                  one email address; previous addresses are offered again.
+                </td>
+                <td>
+                  The contributor needs no account. The email is a label and a history entry, not proof
+                  of identity; access comes from the token.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Contributor editing</th>
+                <td>
+                  A restricted builder at <code>/contribute/{token}</code> for sections, formatting,
+                  pricing, timelines, FAQs, invoice line items and form questions, with preview and
+                  auto-save.
+                </td>
+                <td>
+                  No publishing, client links, sending, tracking, settings, billing or other documents.
+                  Those refusals are server-side, not hidden buttons.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Single-editor lock</th>
+                <td>
+                  While a contributor holds a document the owner's saves are refused; while Offline
+                  Mode holds it the online copy is read-only everywhere and invitations are refused.
+                </td>
+                <td>
+                  One document, one editor, one source of truth. Only the copy in the holder's hands is
+                  editable.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Temporary chat</th>
+                <td>
+                  A messaging panel beside the document while a contribution is active; messages are
+                  deleted when either side completes or the invitation is revoked.
+                </td>
+                <td>
+                  No permanent conversation record, and nothing from the chat enters the document
+                  history. Screenshots and provider backups are outside Revercue's control.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Offline editing</th>
+                <td>
+                  Prepare online, then edit in the same browser and device at
+                  <code>/offline-editor/{type}/{id}</code> from IndexedDB, with local auto-save.
+                </td>
+                <td>
+                  Online-only features are switched off with an explanation. A section that depends on
+                  an external service may not render offline.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Complete and Sync</th>
+                <td>
+                  Complete freezes the offline copy; Sync is offered only afterwards and releases the
+                  server lock only once the new version is stored and confirmed.
+                </td>
+                <td>
+                  A failed sync keeps the local copy and the lock. A lost device loses the unsynced
+                  copy; recovery is Release the lock without syncing.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Documentation</th>
+                <td>
+                  Two guides (<a href="/guides/shareable-builder-guide">Shareable Builder</a>,
+                  <a href="/guides/offline-builder-guide">Offline Builder</a>), six new FAQs, and the
+                  <a href="/announcements/shareable-builder-and-offline-builder">28 November announcement</a>.
+                </td>
+                <td>
+                  The guides are the how-to source; this changelog records what shipped and when.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section class="section" id="known">
-        <h2>6. Known issues</h2>
+        <h2>7. Known issues</h2>
         <p>Open as of 22 November 2026. Each is acknowledged, not hidden.</p>
 
         <div class="table-wrap">
@@ -585,7 +688,7 @@
       </section>
 
       <section class="section" id="notifications">
-        <h2>7. Staying current</h2>
+        <h2>8. Staying current</h2>
         <ul>
           <li>There is no feed and no subscription for agents. Check the <code>last_updated</code> field in <a href="/ai-capabilities.json">/ai-capabilities.json</a>.</li>
           <li>The page's "Last reviewed" date changes only when the content is re-read against the application, not on every deploy.</li>

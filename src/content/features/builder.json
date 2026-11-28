@@ -57,6 +57,20 @@
         "Use the preview as the client's view. Check the document at the width of a phone as well as a laptop, look at the order of the sections, and read each price and date aloud. A document that reads well in the preview is far more likely to read well when the client opens it.",
         "Run the post-document review before sharing, then fix the items it flags. The review is quick and catches the small gaps that create questions later, such as a missing date, an empty section or an unclear next step."
       ]
+    },
+    {
+      "heading": "Working with one other person, without giving them an account",
+      "paragraphs": [
+        "Shareable Builder on Scale adds a Work together button to every builder. You enter a contributor's email address, Revercue creates a single-use link that expires and can be revoked, and they open a restricted editor for that document only. They can edit sections, formatting, pricing, timelines, FAQs, invoice line items and form questions, and preview the result.",
+        "They cannot publish, create a client link, send anything to a client, see tracking, invite anyone else, or reach your dashboard, CRM, settings or billing. While they hold the document your own saves are refused by the server, and the panel shows their email, their activity and the last saved time. A temporary chat sits beside the document; its messages are deleted when either side completes the contribution or you revoke the link."
+      ]
+    },
+    {
+      "heading": "Editing the same document with no connection",
+      "paragraphs": [
+        "Offline Builder on Scale prepares a document while you are online: it saves, captures the version, writes a local copy in this browser and takes a server lock. The online document is then read-only everywhere and no contributor can be invited, so there is never a second editable version.",
+        "The offline editor works from local storage with auto-save, and the document stays locked until a sync succeeds. Complete makes the offline copy read-only, Sync appears only after that, and the lock is released only once the new version is stored and confirmed. A failed sync keeps the local copy and the lock; a lost device loses the unsynced copy, and the recovery path is to release the lock and start again."
+      ]
     }
   ],
   "includes": [
@@ -92,6 +106,14 @@
     {
       "question": "Is the builder the same for proposals, contracts and forms?",
       "answer": "The builder uses the same three-panel layout across document types, but each type offers its own set of blocks. A proposal offers twelve blocks and a contract offers seven, so the tools match the job."
+    },
+    {
+      "question": "Can a contributor edit any document other than the one I invited them to?",
+      "answer": "No. The invitation token is tied to one document and one session, and every contributor request is checked against that session on the server. The contributor editor has no route to your other documents, clients, CRM, settings or billing."
+    },
+    {
+      "question": "Can I edit a document while it is offline on my own device?",
+      "answer": "No. While Offline Mode holds the document, the online copy is read-only everywhere, including this tab and any other device. The offline copy on the prepared device is the only editable version until a sync succeeds."
     }
   ],
   "related": [

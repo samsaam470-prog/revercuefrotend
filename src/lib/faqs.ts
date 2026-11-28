@@ -800,6 +800,42 @@ export const FAQS: Faq[] = [
     question: "How should signed contracts be stored?",
     answer: "Both parties should save their own copy of the signed PDF. Revercue provides the download link, but the parties are responsible for keeping their own records. Signed contracts are retained according to the retention policy and are not automatically deleted.",
   },
+  {
+    id: 116,
+    group: "documents",
+    question: "What is Shareable Builder?",
+    answer: "Shareable Builder lets you invite one other person to edit a single document — a proposal, contract, invoice or form — without giving them a Revercue account. You generate a secure link, they edit that one document in a restricted editor, and you watch their changes from the Work together panel. It is part of Scale. Only one contributor can hold a document at a time.",
+  },
+  {
+    id: 117,
+    group: "documents",
+    question: "Does a contributor need an account, and what can they do?",
+    answer: "No account is needed: the link is the access. A contributor can edit text, sections, formatting, pricing, timelines, FAQs, invoice line items and form questions, and preview the document. They cannot publish, create a client link, send anything to a client, see tracking, invite anyone else, or reach your dashboard, CRM, settings or billing. Those limits are enforced on the server.",
+  },
+  {
+    id: 118,
+    group: "documents",
+    question: "Can I edit the document while a contributor is working on it?",
+    answer: "No. One document has one active editor. While a contributor holds the document, your saves are refused by the server with a clear message, so a second tab cannot overwrite their work. The lock ends when either you or the contributor completes the contribution, and their last saved version becomes the version you inherit.",
+  },
+  {
+    id: 119,
+    group: "documents",
+    question: "Are collaboration chat messages kept?",
+    answer: "No. The chat inside Shareable Builder is temporary. Messages exist only while the contribution is active, and Revercue deletes the ones it holds when either side completes the contribution or you revoke the invitation. Nothing from the chat is written into the document history, analytics or error reports. Screenshots, browser caches and infrastructure-provider backups are outside Revercue's control, so the chat is a working conversation rather than a confidential archive.",
+  },
+  {
+    id: 120,
+    group: "documents",
+    question: "What happens to the online document when I enable Offline Mode?",
+    answer: "It becomes read-only everywhere: this tab, another tab, another device and any contributor. The lock is enforced on the server, contributor invitations are refused while it is held, and the document stays locked until a sync succeeds. Editing happens in the offline copy on the same device and browser. On Scale, Offline Builder works with proposals, contracts, invoices and forms.",
+  },
+  {
+    id: 121,
+    group: "documents",
+    question: "What happens if an offline sync fails, or the device is lost?",
+    answer: "A failed sync keeps the offline copy and the lock in place, explains the reason, and allows a retry; nothing unsynced is discarded. If the device is lost or its storage is cleared, the offline copy cannot be recovered because it was never uploaded. The online document still holds the version from before preparation, so you reopen it, choose Release the lock without syncing, and start again.",
+  },
 
 ];
 

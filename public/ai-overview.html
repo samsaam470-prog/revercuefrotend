@@ -81,7 +81,7 @@
           <h2 id="doc-status-title">Documentation status</h2>
           <dl>
             <dt>Last reviewed</dt>
-            <dd>27 November 2026</dd>
+            <dd>28 November 2026</dd>
             <dt>Authority level</dt>
             <dd>Secondary. A summary for machines and reviewers. It is not a source of truth.</dd>
             <dt>Superseded by</dt>
@@ -482,6 +482,26 @@
                 <td>Account</td>
               </tr>
               <tr>
+                <th scope="row">Shareable Builder</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>
+                  One account-free contributor per document through an expiring, revocable link; a
+                  restricted editor; owner visibility with contributor email and last saved time; a
+                  temporary chat; Complete from either side; server-enforced single-editor lock.
+                </td>
+                <td>Scale; invitee needs no account</td>
+              </tr>
+              <tr>
+                <th scope="row">Offline Builder</th>
+                <td><span class="pill pill--available">Available</span></td>
+                <td>
+                  Prepare online, edit the same document with no connection in the same browser,
+                  Complete, then Sync. The server lock keeps the online copy read-only until a sync
+                  stores the new version.
+                </td>
+                <td>Scale; same device and browser</td>
+              </tr>
+              <tr>
                 <th scope="row">Client-facing pages</th>
                 <td><span class="pill pill--available">Available</span></td>
                 <td>
@@ -548,6 +568,41 @@
             </tbody>
           </table>
         </div>
+
+        <h3>One document, one editor</h3>
+        <p>
+          Shareable Builder and Offline Builder are two expressions of one rule: a document has a
+          single editing authority at a time. The states are
+          <code>normal_online_editing</code>, <code>contributor_invited</code>,
+          <code>contributor_editing</code>, <code>offline_preparing</code>,
+          <code>offline_editing</code>, <code>offline_completed</code>, <code>syncing</code>,
+          <code>sync_failed</code> and <code>conflict_review</code>, and the transitions are enforced
+          on the server rather than by hiding buttons.
+        </p>
+        <ul>
+          <li>
+            While a contributor edits, the owner's saves are refused and the owner's panel shows the
+            contributor, their activity and the last saved time.
+          </li>
+          <li>
+            While an offline session holds the lock, the online document is read-only everywhere and
+            no contributor can be invited.
+          </li>
+          <li>
+            Offline editing must be completed before Sync is offered, and the lock is released only
+            after the new version is stored and confirmed.
+          </li>
+          <li>
+            Both features work with proposals, contracts, invoices and forms through one shared
+            document adapter. The temporary collaboration chat is deleted when the session ends and is
+            never written into the document history.
+          </li>
+          <li>
+            How-to detail: <a href="/guides/shareable-builder-guide">Shareable Builder guide</a> and
+            <a href="/guides/offline-builder-guide">Offline Builder guide</a>; dated announcement:
+            <a href="/announcements/shareable-builder-and-offline-builder">28 November 2026</a>.
+          </li>
+        </ul>
 
         <h3>What the client sees, by document</h3>
         <div class="table-wrap">
@@ -1050,6 +1105,16 @@
                 <th scope="row">Writing helper</th>
                 <td>Available inside the builders, on request</td>
                 <td>No — needs an account</td>
+              </tr>
+              <tr>
+                <th scope="row">Shareable Builder</th>
+                <td>Available on Scale</td>
+                <td>No — needs an account to invite; the contributor side needs no account</td>
+              </tr>
+              <tr>
+                <th scope="row">Offline Builder</th>
+                <td>Available on Scale</td>
+                <td>No — needs an account, and a prepared document on the device</td>
               </tr>
               <tr>
                 <th scope="row">Public API</th>

@@ -48,7 +48,7 @@
           <h2 id="doc-status-title">Documentation status</h2>
           <dl>
             <dt>Last reviewed</dt>
-            <dd>27 November 2026</dd>
+            <dd>28 November 2026</dd>
             <dt>Authority level</dt>
             <dd>Secondary. A guide to what can be accessed and how. It is not a source of truth.</dd>
             <dt>Superseded by</dt>
@@ -464,6 +464,15 @@
                   delete account. <code>/settings</code> redirects to <code>/settings/profile</code>.
                 </td>
               </tr>
+              <tr>
+                <th scope="row">Offline editor<br /><code>/offline-editor/{type}/{id}</code></th>
+                <td>
+                  The offline copy of a prepared document. It reads and writes IndexedDB on this device
+                  and browser, works with the network down, offers Complete and Reopen, and enables Sync
+                  only after completion. Online-only features are switched off here, with an explanation
+                  instead of a silent failure.
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -505,6 +514,16 @@
               <tr>
                 <th scope="row">Public form<br /><code>/f/{publicId}</code></th>
                 <td>The requirement form as the client fills it: the question set, branching, progress and the thank-you page.</td>
+              </tr>
+              <tr>
+                <th scope="row">Contributor builder<br /><code>/contribute/{token}</code></th>
+                <td>
+                  The restricted editor an invited contributor opens without an account: the same blocks
+                  and fields as the builder for that document type, preview, auto-save and Complete.
+                  No publishing, client links, sending, tracking, settings or other documents. The token
+                  is single-use, expiring and revocable; an invalid, expired or completed link shows an
+                  explanation instead of a half-open document.
+                </td>
               </tr>
             </tbody>
           </table>
@@ -694,6 +713,42 @@
               render.
             </p>
           </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--available">Available</span><span>Scale · invitee needs no account</span></p>
+            <h3>Shareable Builder</h3>
+            <p>
+              One external contributor per document, through an expiring, revocable link. The contributor
+              edits sections, pricing, timelines, FAQs, invoice line items or form questions in a
+              restricted editor; the owner follows the changes in the Work together panel with the
+              contributor's email and the last saved time. A temporary chat sits beside the document.
+            </p>
+            <p class="small muted">
+              The owner's saves are refused server-side while the contributor holds the document, and the
+              contributor's saves are refused once either side completes the contribution or the
+              invitation is revoked. Live visibility refreshes every few seconds; it is polling, not
+              pushed events. Chat messages are deleted at the end of the session, with no claim about
+              screenshots or provider backups. Guide: <a href="/guides/shareable-builder-guide">/guides/shareable-builder-guide</a>.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="meta"><span class="pill pill--available">Available</span><span>Scale · same device and browser</span></p>
+            <h3>Offline Builder</h3>
+            <p>
+              Prepare a document while online, then edit it with no connection in the same browser:
+              sections, formatting, pricing, timelines, FAQs, contract clauses, invoice line items and
+              form questions, with local auto-save. Complete makes the offline copy read-only; Sync
+              appears only after that and releases the server lock only when the new version is stored.
+            </p>
+            <p class="small muted">
+              While Offline Mode holds the document the online copy is read-only everywhere and
+              contributor invitations are refused. A failed sync keeps the offline copy and the lock.
+              Losing the device loses the unsynced copy by design; recovery is Release the lock without
+              syncing. Guide: <a href="/guides/offline-builder-guide">/guides/offline-builder-guide</a>.
+            </p>
+          </article>
+
 
           <article class="card">
             <p class="meta"><span class="pill pill--partial">Partial</span><span>Plan-gated</span></p>
