@@ -111,8 +111,15 @@ export function App() {
             {(["profile", "appearance", "plan", "security", "notifications", "saved-faqs", "saved-packages", "templates", "template-library", "revision-prices", "revenue", "what-revercue-knows", "delete-account"] as SettingsSection[]).map((section) => (
               <Route key={section} path={`/settings/${section}`} element={<SettingsPage section={section} />} />
             ))}
-            <Route path="/settings/shared-template/:token" element={<SharedTemplatePage />} />
           </Route>
+          {/*
+            A shared template link is opened by people who are usually signed
+            out, so it gates itself: it shows a sign-in card and returns here
+            after the AuthAction round trip. Inside AppLayout it would sit
+            behind the app's loading state, which is wrong for a link someone
+            just received.
+          */}
+          <Route path="/settings/shared-template/:token" element={<SharedTemplatePage />} />
           <Route path="/proposals/new" element={<ProposalBuilderPage />} />
           <Route path="/proposals/:id/edit" element={<ProposalBuilderPage />} />
           <Route path="/contracts/new" element={<ContractBuilderPage />} />

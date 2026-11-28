@@ -1,9 +1,14 @@
-import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useAuthAction } from "@authaction/web-sdk/react";
 import { templatesApi } from "../../api/templates";
 import { TEMPLATE_LIBRARY, type TemplateComplexity } from "../../lib/templates";
 import { TemplatePagePreview } from "../../components/builder/TemplatePagePreview";
 import { SkeletonLines } from "../../components/ui/Skeleton";
+import { Button } from "../../components/ui/Button";
+import { useAuth } from "../../hooks/useAuth";
+import { rememberReturnTo } from "../../lib/authaction";
 import { errorMessage } from "../../lib/errors";
 import { ApiError } from "../../types/api";
 
@@ -14,20 +19,29 @@ const COMPLEXITY_LABELS: Record<TemplateComplexity, string> = {
 };
 
 /**
- * The receiving end of a shared template link. It sits inside the authenticated
- * app layout, so an anonymous visitor is sent to sign in and brought back here:
- * a shared template is not a client document and never gets a public URL.
+ * The receiving end of a shared template link.
+ *
+ * A shared template is not a client document and never gets a public URL, so
+ * the link is only useful to someone with an account. Because the recipient is
+ * usually signed out, this page gates itself rather than sitting behind the app
+ * layout: it offers one clear sign-in action, remembers this exact URL, and
+ * renders the template once the session is back.
  *
  * Bundle templates render from the local library. Templates published from the
  * admin portal exist only on the server, so they render from their stored HTML.
  */
 export function SharedTemplatePage() {
   const { token = "" } = useParams<{ token: string }>();
+  const { user } = useAuth();
+  const { loginWithRedirect } = useAuthAction();
+  const location = useLocation();
+  const [starting, setStarting] = useState(false);
+  const [startError, setStartError] = useState("");
 
   const query = useQuery({
     queryKey: ["shared-template", token],
     queryFn: () => templatesApi.sharedTemplate(token),
-    enabled: Boolean(token),
+    enabled: Boolean(token) && Boolean(user),
     retry: false,
   });
 
@@ -42,6 +56,50 @@ export function SharedTemplatePage() {
     enabled: Boolean(data && !template),
     retry: false,
   });
+
+  if (!user) {
+    const start = async () => {
+      setStartError("");
+      setStarting(true);
+      try {
+        rememberReturnTo(`${location.pathname}${location.search}`);
+        await loginWithRedirect({ authorizationParams: { prompt: "login" } });
+      } catch (cause) {
+        setStarting(false);
+        setStartError((cause as Error)?.message || "Sign-in could not start. Please try again.");
+      }
+    };
+
+    return (
+      <div className="auth-split">
+        <div className="panel">
+          <p className="eyebrow">Shared template</p>
+          <h1>Sign in to open this template.</h1>
+          <p className="lede">
+            Someone shared a Revercue template with you. A shared template is a reference layout, not a
+            client document, so it opens inside a Revercue account rather than on a public link.
+          </p>
+          <p className="caption">
+            Sign in and you will come straight back to this template, ready to preview it and start your
+            own proposal or contract from it.
+          </p>
+          {startError && (
+            <p className="notice notice-red" role="alert">
+              {startError}
+            </p>
+          )}
+          <div className="inline" style={{ gap: 10, flexWrap: "wrap" }}>
+            <Button onClick={() => void start()} loading={starting}>
+              Sign in to view it
+            </Button>
+            <Link className="btn btn-ghost btn-sm" to="/">
+              Back to Revercue
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (query.isLoading) {
     return (
