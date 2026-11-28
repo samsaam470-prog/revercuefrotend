@@ -150,7 +150,13 @@ const sortedAnnouncements = [...announcementsList].sort((a, b) => b.date.localeC
 const annStyle = "max-width:960px;margin:0 auto;padding:48px 24px;font-family:Inter,Arial,sans-serif;line-height:1.7;color:#1a1a1a";
 const annDate = (iso) => new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
+const slashUrl = (u) => {
+  const path = u.replace(/^https?:\/\/[^/]+/, "");
+  if (path === "" || path === "/" || path.endsWith("/") || /\.[a-z0-9]+$/i.test(path)) return u;
+  return u + "/";
+};
 function setHead(html, { title, description, url, type }) {
+  url = slashUrl(url);
   let out = html.replace(/<title>[^<]*<\/title>/i, "<title>" + esc(title) + "</title>");
   out = setMeta(out, "name", "description", description);
   out = setMeta(out, "property", "og:title", title);
