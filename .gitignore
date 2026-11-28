@@ -5,3 +5,8 @@ dist
 .DS_Store
 *.log
 /freebuff-sites-build/
+.content-cache/
+.content-export.entry.ts
+.content-export.mjs
+.pages-export.entry.tsx
+.pages-export.cjs

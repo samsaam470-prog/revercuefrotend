@@ -129,7 +129,7 @@ try {
 
   // Canonical form matches what the host serves: directory indexes answer at the
   // trailing slash and redirect the bare path, so the bare path cannot be canonical.
-  const indexUrl = origin + "/blog/";
+  const indexUrl = origin + "/blog";
   const indexTitle = "Freelance business blog — Revercue";
   const indexDescription =
     "Practical essays on proposals, contracts, scope and getting paid, for freelancers who would rather do the work than chase it.";
@@ -177,7 +177,7 @@ try {
         itemListElement: BLOG_POSTS.map((post, i) => ({
           "@type": "ListItem",
           position: i + 1,
-          url: origin + "/blog/" + post.slug + "/",
+          url: origin + "/blog/" + post.slug,
           name: post.title,
         })),
       },
@@ -193,11 +193,11 @@ try {
   indexHtml = withSchema(indexHtml, indexSchema, indexUrl);
   indexHtml = withBody(indexHtml, indexBody);
   await mkdir(resolve(dist, "blog"), { recursive: true });
-  await writeFile(resolve(dist, "blog", "index.html"), indexHtml, "utf8");
+  await writeFile(resolve(dist, "blog.html"), indexHtml, "utf8");
   console.log("Pre-rendered /blog");
 
   for (const post of BLOG_POSTS) {
-    const url = origin + "/blog/" + post.slug + "/";
+    const url = origin + "/blog/" + post.slug;
     const faqs = faqsFor(post);
     const graph = [
       {

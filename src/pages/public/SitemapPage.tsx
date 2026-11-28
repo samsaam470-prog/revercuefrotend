@@ -4,14 +4,17 @@ import { BLOG_POSTS } from "../../lib/blog";
 import { COMPETITORS } from "../../lib/competitors";
 import solutions from "../../content/solutions.json";
 import announcements from "../../content/announcements.json";
+import feature_builder from "../../content/features/builder.json";
+import feature_contracts from "../../content/features/contracts.json";
+import feature_crm from "../../content/features/crm.json";
+import feature_invoices from "../../content/features/invoices.json";
+import feature_proposals from "../../content/features/proposals.json";
+import feature_requirement_forms from "../../content/features/requirement-forms.json";
+import feature_suggestions from "../../content/features/suggestions.json";
 
 type Node = { label: string; to?: string; children?: Node[] };
 
-const featureModules = import.meta.glob<{ slug: string; title: string }>("../../content/features/*.json", {
-  eager: true,
-  import: "default",
-});
-const FEATURE_SLUGS: { slug: string; title: string }[] = Object.values(featureModules);
+const FEATURE_SLUGS: { slug: string; title: string }[] = [feature_builder, feature_contracts, feature_crm, feature_invoices, feature_proposals, feature_requirement_forms, feature_suggestions];
 
 const TREE: Node[] = [
   { label: "Home", to: "/" },
@@ -118,7 +121,7 @@ export function SitemapPage() {
       <header className="page-head">
         <p className="eyebrow">Sitemap</p>
         <h1>Every page on Revercue.</h1>
-        <p>A map of the whole site, grouped by section. Each name links to its page.</p>
+        <p>A map of the whole site, grouped by section. Each name links to its page. The machine-readable list is <a href="/sitemap.xml">sitemap.xml</a>.</p>
       </header>
       <section className="section">
         <Tree nodes={TREE} />
