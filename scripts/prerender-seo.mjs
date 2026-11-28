@@ -152,8 +152,8 @@ const annDate = (iso) => new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB"
 
 const slashUrl = (u) => {
   const path = u.replace(/^https?:\/\/[^/]+/, "");
-  if (path === "" || path === "/" || path.endsWith("/") || /\.[a-z0-9]+$/i.test(path)) return u;
-  return u + "/";
+  if (path === "" || path === "/") return u;
+  return u.replace(/\/$/, "");
 };
 function setHead(html, { title, description, url, type }) {
   url = slashUrl(url);
