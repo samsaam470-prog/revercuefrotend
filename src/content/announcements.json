@@ -1117,5 +1117,69 @@
         ]
       }
     ]
+  },
+  {
+    "slug": "contribution-chat-safety-notice",
+    "date": "2026-11-28",
+    "status": "Notice",
+    "title": "Safety notice: what the temporary chat keeps, and what happens if it is misused",
+    "summary": "When you invite a contributor through Shareable Builder, the temporary chat sits beside the document so you can settle short questions. Messages travel over an encrypted connection and are stored encrypted at rest. They are deleted when the contribution ends or the link is revoked, and they never enter the document history. The chat is still a channel between two people, so it must be used for the work only. If it is used for anything harmful, Revercue can revoke the link and suspend the account under the Terms. This notice explains what is kept, what is deleted, and what to do if something goes wrong. The notice is written to be read before you invite anyone, and it is kept on the announcements page so the rules stay in one place. If the rules change, this page will say so with the date of the change. Read the Shareable Builder guide for the steps of an invitation, and the Terms for the full acceptable-use rules that apply.",
+    "links": [
+      {
+        "label": "Shareable Builder guide",
+        "to": "/guides/shareable-builder"
+      },
+      {
+        "label": "Security",
+        "to": "/security"
+      },
+      {
+        "label": "Terms",
+        "to": "/terms"
+      }
+    ],
+    "body": [
+      {
+        "heading": "Why this notice",
+        "paragraphs": [
+          "Shareable Builder lets you bring one outside person into a document, and the temporary chat lets the two of you talk while you work. That is useful, and it also creates a channel that someone could misuse. We would rather tell you the limits now than leave you to find them when something goes wrong.",
+          "This notice covers the temporary chat that comes with Shareable Builder. It does not change how the rest of Revercue works."
+        ]
+      },
+      {
+        "heading": "What the chat keeps, and for how long",
+        "paragraphs": [
+          "Messages in the temporary chat are held by the server only while the contribution is active. They are deleted when the contribution ends, and they are deleted when you revoke the link. They are never added to the document history, so a message in the chat is not part of the document's record.",
+          "Messages travel over an encrypted connection, and they are stored encrypted at rest, as described on the Security page. Encryption protects the messages from people outside the connection. It does not stop either of the two people in the chat from copying or repeating what was written."
+        ]
+      },
+      {
+        "heading": "What you should not use the chat for",
+        "paragraphs": [
+          "Use the chat for the work: a price to confirm, a section to cut, a question about a deadline. Do not use it to send content that is abusive, threatening, illegal or deceptive, to pressure anyone, to share someone else's private information, or to move the work into a channel that bypasses the agreed terms.",
+          "If a message would be a problem if a client, a regulator or a court read it, do not send it in the chat. Put the decision in the document, where it belongs."
+        ]
+      },
+      {
+        "heading": "What Revercue can do if the chat is misused",
+        "paragraphs": [
+          "If the chat is used for something harmful, Revercue can revoke the contribution link, which closes the chat and deletes its messages. Revercue can also suspend an account that breaks the acceptable-use rules in the Terms, and it can end the account for a serious breach.",
+          "Where the situation allows, we will give notice before we act. Where it does not, we act first and explain afterwards, as the Terms describe."
+        ]
+      },
+      {
+        "heading": "What to do if something goes wrong",
+        "paragraphs": [
+          "If a contributor sends something harmful, revoke the link straight away. That closes the chat and deletes its messages. Then use the contact form to tell us what happened, with the date and the document, so the report can be looked at.",
+          "If you receive something harmful from a contributor you do not know, do the same, and do not reply to the message."
+        ]
+      },
+      {
+        "heading": "Your part",
+        "paragraphs": [
+          "Invite only people you trust, to one document at a time. Set a link to expire, rather than leaving it open. Review the document yourself before it reaches a client. The safest contribution is one where you know who is inside it and when it ends."
+        ]
+      }
+    ]
   }
 ]
