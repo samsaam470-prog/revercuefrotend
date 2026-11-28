@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const dist = resolve(process.cwd(), "dist");
@@ -224,3 +225,137 @@ for (const a of sortedAnnouncements) {
   await writeFile(resolve(dist, "announcements", a.slug, "index.html"), html, "utf8");
 }
 console.log("Pre-rendered " + sortedAnnouncements.length + " announcement pages.");
+
+const FEATURE_FILES = () => readdirSync(resolve(process.cwd(), "src/content/features")).filter((f) => f.endsWith(".json")).map((f) => JSON.parse(readFileSync(resolve(process.cwd(), "src/content/features", f), "utf8")));
+// ---- Crawlable content: features overview, pricing, FAQs, guides, compare ----
+const content = JSON.parse(await readFile(resolve(process.cwd(), ".content-cache/content.json"), "utf8"));
+const wrapPage = (inner) => "<main style=\"" + annStyle + "\">" + inner + "</main>";
+const h2 = (t) => "<h2 style=\"font-size:24px;margin-top:28px\">" + esc(t) + "</h2>";
+const ps = (arr) => (arr || []).map((p) => "<p>" + esc(p) + "</p>").join("");
+const ul = (arr) => arr && arr.length ? "<ul>" + arr.map((x) => "<li>" + esc(x) + "</li>").join("") + "</ul>" : "";
+const navTrail = (items) => "<nav aria-label=\"Breadcrumb\">" + items.map((i) => i.to ? "<a href=\"" + esc(i.to) + "\">" + esc(i.label) + "</a>" : esc(i.label)).join(" / ") + "</nav>";
+const writePage = async (route, html) => {
+  const dir = resolve(dist, ...route.split("/").filter(Boolean));
+  await mkdir(dir, { recursive: true });
+  await writeFile(resolve(dir, "index.html"), html, "utf8");
+};
+const pageHtml = (route, { title, description, type = "website", schema, body }) => {
+  const url = origin + route;
+  let html = setHead(shell, { title, description, url, type });
+  html = addSchema(html, schema);
+  return html.replace("<div id=\"root\"></div>", "<div id=\"root\">" + body + "</div>");
+};
+const trailHome = { label: "Revercue", to: "/" };
+
+// features overview
+{
+  const feats = FEATURE_FILES().map((f) => f);
+  const title = "All Revercue features";
+  const description = "Proposals, contracts, requirement forms, invoices, the CRM, the document builder and suggestions, in one client workflow.";
+  const body = wrapPage(navTrail([trailHome, { label: "Features" }]) +
+    "<header><h1 style=\"font-size:36px\">Seven features, one client thread.</h1><p>" + esc(description) + "</p></header>" +
+    feats.map((f) => "<section><h2 style=\"font-size:24px\"><a href=\"/features/" + esc(f.slug) + "\">" + esc(f.title) + "</a></h2><p>" + esc(f.intro) + "</p>" + "<p><a href=\"/features/" + esc(f.slug) + "\">Read the full guide</a></p></section>").join(""));
+  await writePage("/features", pageHtml("/features", { title: title + " | Revercue", description, schema: [
+    { "@type": "CollectionPage", "@id": origin + "/features#page", name: title, description, url: origin + "/features" },
+    { "@type": "ItemList", itemListElement: feats.map((f, i) => ({ "@type": "ListItem", position: i + 1, url: origin + "/features/" + f.slug, name: f.title })) },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Revercue", item: origin + "/" }, { "@type": "ListItem", position: 2, name: "Features", item: origin + "/features" }] },
+  ], body }));
+  console.log("Pre-rendered /features overview");
+}
+
+// pricing
+{
+  const plans = content.PLANS;
+  const title = "Pricing: Free, Starter, Growth and Scale | Revercue";
+  const description = "Revercue plans: Free to start, Starter at $12, Growth at $29 and Scale at $49 a month. Teams is in beta.";
+  const body = wrapPage(navTrail([trailHome, { label: "Pricing" }]) +
+    "<header><h1 style=\"font-size:36px\">Plans and pricing</h1><p>" + esc(description) + "</p></header>" +
+    plans.map((p) => "<section><h2 style=\"font-size:24px\">" + esc(p.name) + " · " + esc(p.statusLabel) + "</h2>" +
+      "<p>" + esc(p.role) + "</p>" +
+      "<p>" + (p.price == null ? "Price: not yet set (beta)" : "Price: $" + p.price + " a month") + "</p>" +
+      ul(p.features) + "</section>").join(""));
+  await writePage("/pricing", pageHtml("/pricing", { title, description, schema: [
+    { "@type": "WebPage", "@id": origin + "/pricing#page", name: title, description, url: origin + "/pricing" },
+    { "@type": "ItemList", itemListElement: plans.map((p, i) => ({ "@type": "ListItem", position: i + 1, name: p.name, description: p.role })) },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Revercue", item: origin + "/" }, { "@type": "ListItem", position: 2, name: "Pricing", item: origin + "/pricing" }] },
+  ], body }));
+  console.log("Pre-rendered /pricing");
+}
+
+// FAQs (all entries, grouped)
+{
+  const title = "FAQs | Revercue";
+  const description = "Answers to common questions about Revercue: documents, plans, tracking, data and the CRM.";
+  const groups = [...new Set(content.FAQS.map((f) => f.group))];
+  const body = wrapPage(navTrail([trailHome, { label: "FAQs" }]) +
+    "<header><h1 style=\"font-size:36px\">Frequently asked questions</h1><p>" + esc(description) + "</p></header>" +
+    groups.map((g) => "<section><h2 style=\"font-size:24px;text-transform:capitalize\">" + esc(g) + "</h2>" +
+      content.FAQS.filter((f) => f.group === g).map((f) => "<details><summary>" + esc(f.question) + "</summary><p>" + esc(f.answer) + "</p></details>").join("") + "</section>").join(""));
+  await writePage("/faqs", pageHtml("/faqs", { title, description, schema: [
+    { "@type": "FAQPage", mainEntity: content.FAQS.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })) },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Revercue", item: origin + "/" }, { "@type": "ListItem", position: 2, name: "FAQs", item: origin + "/faqs" }] },
+  ], body }));
+  console.log("Pre-rendered /faqs (" + content.FAQS.length + " answers)");
+}
+
+// guides index and each guide
+{
+  const guides = content.GUIDES;
+  const idxTitle = "Revercue guides";
+  const idxDesc = "Practical guides to proposals, contracts, invoices, the CRM, pricing and every Revercue feature.";
+  await writePage("/guides", pageHtml("/guides", { title: idxTitle + " | Revercue", description: idxDesc, schema: [
+    { "@type": "CollectionPage", "@id": origin + "/guides#page", name: idxTitle, description: idxDesc, url: origin + "/guides" },
+    { "@type": "ItemList", itemListElement: guides.map((g, i) => ({ "@type": "ListItem", position: i + 1, url: origin + "/guides/" + g.slug, name: g.title })) },
+  ], body: wrapPage(navTrail([trailHome, { label: "Guides" }]) + "<header><h1 style=\"font-size:36px\">Guides</h1><p>" + esc(idxDesc) + "</p></header>" +
+    guides.map((g) => "<section><h2 style=\"font-size:22px\"><a href=\"/guides/" + esc(g.slug) + "\">" + esc(g.title) + "</a></h2><p>" + esc(g.excerpt) + "</p></section>").join("")) }));
+  for (const g of guides) {
+    const route = "/guides/" + g.slug;
+    const url = origin + route;
+    const desc = g.excerpt.length > 300 ? g.excerpt.slice(0, 297).replace(/\s+\S*$/, "") + "…" : g.excerpt;
+    const body = wrapPage(navTrail([trailHome, { label: "Guides", to: "/guides" }, { label: g.title }]) +
+      "<article><p style=\"font-size:14px;color:#555\">" + esc(g.category) + " · " + g.readMinutes + " min read · Updated " + esc(g.updated) + "</p>" +
+      "<h1 style=\"font-size:36px;line-height:1.2\">" + esc(g.title) + "</h1><p>" + esc(g.excerpt) + "</p>" +
+      g.sections.map((s) => h2(s.heading) + ps(s.paragraphs) + ul(s.bullets)).join("") + "</article>");
+    await writePage(route, pageHtml(route, { title: g.title + " | Revercue", description: desc, type: "article", schema: [
+      { "@type": "Article", "@id": url + "#article", headline: g.title, description: desc, dateModified: g.updated, mainEntityOfPage: url, author: organization, publisher: organization, articleSection: g.category },
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Revercue", item: origin + "/" }, { "@type": "ListItem", position: 2, name: "Guides", item: origin + "/guides" }, { "@type": "ListItem", position: 3, name: g.title, item: url }] },
+    ], body }));
+  }
+  console.log("Pre-rendered /guides and " + guides.length + " guides");
+}
+
+// compare index, each competitor, criteria
+{
+  const comps = content.COMPETITORS;
+  const idxDesc = "Factual comparisons of freelancer client tools: what each is built around, and the prices checked on vendor pages.";
+  await writePage("/compare", pageHtml("/compare", { title: "Compare freelancer client tools | Revercue", description: idxDesc, schema: [
+    { "@type": "CollectionPage", name: "Compare freelancer client tools", description: idxDesc, url: origin + "/compare" },
+    { "@type": "ItemList", itemListElement: comps.map((c, i) => ({ "@type": "ListItem", position: i + 1, url: origin + "/compare/" + c.slug, name: c.name })) },
+  ], body: wrapPage(navTrail([trailHome, { label: "Compare" }]) + "<header><h1 style=\"font-size:36px\">Compare freelancer client tools</h1><p>" + esc(idxDesc) + "</p>" +
+    "<p><a href=\"/compare/criteria\">How the comparison criteria work</a></p></header>" +
+    comps.map((c) => "<section><h2 style=\"font-size:22px\"><a href=\"/compare/" + esc(c.slug) + "\">" + esc(c.name) + "</a></h2><p>" + esc(c.summary) + "</p></section>").join("")) }));
+  for (const c of comps) {
+    const route = "/compare/" + c.slug;
+    const desc = c.summary.length > 300 ? c.summary.slice(0, 297).replace(/\s+\S*$/, "") + "…" : c.summary;
+    const body = wrapPage(navTrail([trailHome, { label: "Compare", to: "/compare" }, { label: c.name }]) +
+      "<article><h1 style=\"font-size:36px;line-height:1.2\">" + esc(c.name) + "</h1><p>" + esc(c.summary) + "</p><p>" + esc(c.intro) + "</p>" +
+      c.sections.map((s) => h2(s.heading) + ps(s.paragraphs)).join("") +
+      h2("Where it differs") + ul(c.differences) + h2("Who it fits") + "<p>" + esc(c.fits) + "</p></article>");
+    await writePage(route, pageHtml(route, { title: c.name + " compared | Revercue", description: desc, schema: [
+      { "@type": "WebPage", "@id": origin + route + "#page", name: c.name + " compared", description: desc, url: origin + route },
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Revercue", item: origin + "/" }, { "@type": "ListItem", position: 2, name: "Compare", item: origin + "/compare" }, { "@type": "ListItem", position: 3, name: c.name, item: origin + route }] },
+    ], body }));
+  }
+  const crit = content.CRITERIA; const rows = content.PLATFORM_CRITERIA;
+  const critDesc = "The criteria behind the comparison: what each tool is rated on, and the note for each rating.";
+  const critBody = wrapPage(navTrail([trailHome, { label: "Compare", to: "/compare" }, { label: "Criteria" }]) +
+    "<header><h1 style=\"font-size:36px\">How the comparison works</h1><p>" + esc(critDesc) + "</p></header>" +
+    h2("Criteria") + crit.map((k) => "<h3>" + esc(k.label) + "</h3><p>" + esc(k.question) + "</p>").join("") +
+    rows.map((r) => "<section><h2 style=\"font-size:22px\">" + esc(r.name) + "</h2><p>" + esc(r.summary) + "</p>" +
+      crit.map((k) => { const v = r.ratings[k.id]; return v ? "<p><strong>" + esc(k.label) + ":</strong> " + esc(content.RATING_LABEL[v.rating] || v.rating) + ". " + esc(v.note) + "</p>" : ""; }).join("") + "</section>").join(""));
+  await writePage("/compare/criteria", pageHtml("/compare/criteria", { title: "Comparison criteria | Revercue", description: critDesc, schema: [
+    { "@type": "WebPage", "@id": origin + "/compare/criteria#page", name: "Comparison criteria", description: critDesc, url: origin + "/compare/criteria" },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Revercue", item: origin + "/" }, { "@type": "ListItem", position: 2, name: "Compare", item: origin + "/compare" }, { "@type": "ListItem", position: 3, name: "Criteria", item: origin + "/compare/criteria" }] },
+  ], body: critBody }));
+  console.log("Pre-rendered /compare, " + comps.length + " comparisons and criteria");
+}
