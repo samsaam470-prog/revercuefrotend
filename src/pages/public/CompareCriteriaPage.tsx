@@ -97,16 +97,16 @@ export function CompareCriteriaPage() {
           <p className="eyebrow">New on Scale</p>
           <h2>Two Scale features that sit outside the criteria above.</h2>
         </div>
-        <div className="module-grid">
-          <Link className="module-card" to="/announcements/shareable-builder-and-offline-builder">
+        <div className="module-grid" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))" }}>
+          <Link className="module-card" to="/guides/shareable-builder">
             <h3>Shareable Builder</h3>
             <p>Invite one contributor to a proposal, contract, invoice or form by secure link. No account needed. Watch their edits live, use a temporary chat, and take back control when they finish.</p>
-            <span className="inline">Read the announcement</span>
+            <span className="inline">Read the guide</span>
           </Link>
-          <Link className="module-card" to="/announcements/shareable-builder-and-offline-builder">
+          <Link className="module-card" to="/guides/offline-builder">
             <h3>Offline Builder</h3>
             <p>Prepare a document while online, keep editing it offline in the same browser, and sync when you are back online. Nothing reaches your workspace until you complete the document.</p>
-            <span className="inline">Read the announcement</span>
+            <span className="inline">Read the guide</span>
           </Link>
         </div>
       </section>

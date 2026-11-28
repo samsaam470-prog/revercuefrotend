@@ -127,6 +127,8 @@ export const PLANS: PlanDefinition[] = [
       "24-month document retention",
       "Advanced tracking and session timeline",
       "Interest level and expense categories",
+      "Shareable Builder: invite one contributor by secure link",
+      "Offline Builder: keep editing with no signal",
       "Custom thank-you page",
       "Custom templates (15), saved FAQs (30), saved packages (15)",
     ],
