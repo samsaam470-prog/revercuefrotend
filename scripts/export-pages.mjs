@@ -15,8 +15,9 @@ import { ContactPage } from "./src/pages/public/ContactPage.tsx";
 import { BetaPage } from "./src/pages/public/BetaPage.tsx";
 import { PrivacyPage, TermsPage, SecurityPage } from "./src/pages/public/LegalPages.tsx";
 import { SolutionsIndexPage } from "./src/pages/public/SolutionsIndexPage.tsx";
+import { SitemapPage } from "./src/pages/public/SitemapPage.tsx";
 import { AuthActionProvider } from "@authaction/web-sdk/react";
-const pages = { about: AboutPage, contact: ContactPage, beta: BetaPage, privacy: PrivacyPage, terms: TermsPage, security: SecurityPage, solutions: SolutionsIndexPage };
+const pages = { about: AboutPage, contact: ContactPage, beta: BetaPage, privacy: PrivacyPage, terms: TermsPage, security: SecurityPage, solutions: SolutionsIndexPage, sitemap: SitemapPage };
 export const rendered = {};
 for (const [name, Component] of Object.entries(pages)) {
   rendered[name] = renderToStaticMarkup(React.createElement(AuthActionProvider, { domain: "static.invalid", clientId: "static", redirectUri: "https://revercue.co.uk/callback", audience: "static" }, React.createElement(MemoryRouter, { initialEntries: ["/"] }, React.createElement(Component))));

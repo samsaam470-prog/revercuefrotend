@@ -376,6 +376,7 @@ const trailHome = { label: "Revercue", to: "/" };
     { name: "terms", route: "/terms/", title: "Terms of service | Revercue", description: "The terms that apply when you use Revercue." },
     { name: "security", route: "/security/", title: "Security | Revercue", description: "The security practices behind Revercue, and what the product does and does not certify." },
     { name: "solutions", route: "/solutions/", title: "Freelancer workflow solutions | Revercue", description: "Revercue tools for proposals, client management, contracts and invoices, by the job you need done." },
+    { name: "sitemap", route: "/sitemap/", title: "Sitemap | Revercue", description: "A map of every page on Revercue, grouped by section, with the machine-readable sitemap.xml." },
   ];
   for (const page of staticPages) {
     const markup = await readFile(resolve(process.cwd(), ".content-cache/pages", page.name + ".html"), "utf8");

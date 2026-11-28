@@ -198,6 +198,7 @@ export function PublicFooter() {
       </div>
       <div className="foot-ai">
         <span className="foot-ai-label">For AI agents</span>
+        <a href="/sitemap.xml">sitemap.xml</a>
         <a href="/faqs-for-ai">AI FAQs</a>
         <a href="/rules-for-ai">Rules for AI</a>
         <a href="/ai-access">Access guide</a>
