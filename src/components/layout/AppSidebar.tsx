@@ -38,6 +38,7 @@ const SETTINGS_NAV = [
   { to: "/settings/notifications", label: "Notifications" },
   { to: "/settings/saved-faqs", label: "Saved FAQs" },
   { to: "/settings/saved-packages", label: "Saved Packages" },
+  { to: "/settings/template-library", label: "Template Library" },
   { to: "/settings/templates", label: "Custom Templates" },
   { to: "/settings/revision-prices", label: "Revision Prices" },
   { to: "/settings/revenue", label: "Revenue & Expenses" },

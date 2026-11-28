@@ -28,6 +28,7 @@ import {
 import { ProposalBuilderPage } from "./pages/builder/ProposalBuilderPage";
 import { ContractBuilderPage } from "./pages/builder/ContractBuilderPage";
 import { FormEditorPage } from "./pages/builder/FormEditorPage";
+import { SharedTemplatePage } from "./pages/app/SharedTemplatePage";
 import { InvoiceBuilderPage } from "./pages/builder/InvoiceBuilderPage";
 import { CrmListPage } from "./pages/crm/CrmListPage";
 import { ClientDetailPage } from "./pages/crm/ClientDetailPage";
@@ -107,9 +108,10 @@ export function App() {
             <Route path="/crm/:id" element={<ClientDetailPage />} />
             <Route path="/notifications" element={<NotificationsPage />} />
             <Route path="/settings" element={<Navigate to="/settings/profile" replace />} />
-            {(["profile", "appearance", "plan", "security", "notifications", "saved-faqs", "saved-packages", "templates", "revision-prices", "revenue", "what-revercue-knows", "delete-account"] as SettingsSection[]).map((section) => (
+            {(["profile", "appearance", "plan", "security", "notifications", "saved-faqs", "saved-packages", "templates", "template-library", "revision-prices", "revenue", "what-revercue-knows", "delete-account"] as SettingsSection[]).map((section) => (
               <Route key={section} path={`/settings/${section}`} element={<SettingsPage section={section} />} />
             ))}
+            <Route path="/settings/shared-template/:token" element={<SharedTemplatePage />} />
           </Route>
           <Route path="/proposals/new" element={<ProposalBuilderPage />} />
           <Route path="/proposals/:id/edit" element={<ProposalBuilderPage />} />

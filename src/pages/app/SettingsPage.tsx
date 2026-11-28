@@ -16,6 +16,7 @@ import { ConfirmDialog } from "../../components/ui/ConfirmDialog";
 import { SkeletonLines } from "../../components/ui/Skeleton";
 import { PlanBadge } from "../../components/shared/PlanBadge";
 import { WaitlistModal } from "../../components/shared/WaitlistModal";
+import { TemplateLibrary } from "../../components/settings/TemplateLibrary";
 import { SubscriptionLifecyclePanel } from "../../components/billing/SubscriptionLifecyclePanel";
 import { useAuth } from "../../hooks/useAuth";
 import { usePlanGate } from "../../hooks/usePlanGate";
@@ -38,6 +39,7 @@ export type SettingsSection =
   | "saved-faqs"
   | "saved-packages"
   | "templates"
+  | "template-library"
   | "revision-prices"
   | "revenue"
   | "what-revercue-knows"
@@ -52,6 +54,10 @@ const TITLES: Record<SettingsSection, { title: string; subtitle: string }> = {
   "saved-faqs": { title: "Saved FAQs", subtitle: "The FAQ library the builder pre-fills from." },
   "saved-packages": { title: "Saved Packages", subtitle: "Reusable packages for the proposal builder." },
   templates: { title: "Custom Templates", subtitle: "The layouts your builder can start from." },
+  "template-library": {
+    title: "Template Library",
+    subtitle: "Every built-in proposal and contract template, with search, preview and share.",
+  },
   "revision-prices": { title: "Revision Prices", subtitle: "A price per revision category, shown to the client." },
   revenue: { title: "Revenue & Expenses", subtitle: "Earned revenue, pending invoices and recorded expenses." },
   "what-revercue-knows": { title: "What Revercue Knows", subtitle: "The read-only transparency page." },
@@ -76,6 +82,7 @@ export function SettingsPage({ section }: { section: SettingsSection }) {
       {section === "saved-faqs" && <SavedFaqsSection />}
       {section === "saved-packages" && <SavedPackagesSection />}
       {section === "templates" && <TemplatesSection />}
+      {section === "template-library" && <TemplateLibrary />}
       {section === "revision-prices" && <RevisionPricesSection />}
       {section === "revenue" && <RevenueSection />}
       {section === "what-revercue-knows" && <WhatRevercueKnowsSection />}

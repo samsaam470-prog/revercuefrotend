@@ -1043,6 +1043,13 @@
         ]
       },
       {
+        "heading": "See all of them in one place",
+        "paragraphs": [
+          "You can see all templates in the template library through Settings: open Settings, then Template Library. It lists every built-in proposal and contract template in one place, with search, the same category and complexity filters, a full preview and a share link for each one. Any template added to Revercue after this release appears there too, so the library stays current without waiting for a new release.",
+          "The library is for browsing and sharing, not choosing. To start a document, pick a template in the builder's template step, which is still the place where a template becomes your proposal or contract."
+        ]
+      },
+      {
         "heading": "How to start",
         "paragraphs": [
           "Open the builder for a proposal or a contract and choose a template from the picker. Use the search, the category and the complexity filters to find the closest match, then open the preview before you choose. Once you have chosen, the template becomes your document: change the wording, the sections and the price, and keep only what the client needs.",

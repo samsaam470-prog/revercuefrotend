@@ -18,4 +18,17 @@ export const templatesApi = {
   },
 
   remove: (id: string) => api.del<{ success: true }>(`/api/templates/${id}`),
+
+  /**
+   * Built-in library shares carry a signed token instead of a database row.
+   * The link only works for a signed-in Revercue user: a shared template is a
+   * reference layout, not a client document.
+   */
+  shareLibraryTemplate: (body: { template_type: "proposal" | "contract"; template_id: string }) =>
+    api.post<{ success: true; token: string; path: string }>("/api/templates/library/share", body),
+
+  sharedTemplate: (token: string) =>
+    api.get<{ template_type: "proposal" | "contract"; template_id: string; shared_by: string | null }>(
+      `/api/templates/library/shared/${encodeURIComponent(token)}`,
+    ),
 };
