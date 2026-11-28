@@ -1082,6 +1082,15 @@
     ],
     "body": [
       {
+        "heading": "A founder's message",
+        "paragraphs": [
+          "Making contribution public is one of the steps of shipping Teams to you.",
+          "Shareable Builder and Offline Builder are a step in that direction. They let one person outside your account work on one document with you, under your control, so you can see how contribution works before a whole team depends on it. Teams will need that to work well for real client work, and we are shipping these two features to Scale first so we can learn from real use before we ask a team to rely on them.",
+          "If something does not work the way you expected, tell us through the contact form. I read those messages myself, and the feedback from people using these features shapes how Teams is built.",
+          "— Founder, Revercue"
+        ]
+      },
+      {
         "heading": "A contributor, without an account",
         "paragraphs": [
           "Shareable Builder lets you invite one person to edit one document. You enter their email, Revercue creates a secure link you can revoke or let expire, and they open it in a browser with no sign-up. They can edit text, sections, pricing, timelines, FAQs, invoice line items and form questions, and preview the result. They cannot publish, send to a client, see tracking, or reach your account, CRM or billing.",

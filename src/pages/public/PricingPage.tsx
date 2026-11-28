@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Check, Minus, X } from "lucide-react";
 import { PLANS, formatStorage } from "../../lib/constants";
@@ -200,6 +201,25 @@ export function PricingPage() {
         Prices are in US dollars, billed monthly through Whop. Cancel any time; downgrades take effect at the end of the
         cycle. Teams is free while it stays in beta.
       </p>
+
+      <section className="section">
+        <div className="section-head">
+          <p className="eyebrow">New on Scale</p>
+          <h2>Two features for working with others and offline.</h2>
+        </div>
+        <div className="module-grid">
+          <Link className="module-card" to="/announcements/shareable-builder-and-offline-builder">
+            <h3>Shareable Builder</h3>
+            <p>Invite one contributor to a proposal, contract, invoice or form by secure link. No account needed. Watch their edits live, use a temporary chat, and take back control when they finish.</p>
+            <span className="inline">Read the announcement</span>
+          </Link>
+          <Link className="module-card" to="/announcements/shareable-builder-and-offline-builder">
+            <h3>Offline Builder</h3>
+            <p>Prepare a document while online, keep editing it offline in the same browser, and sync when you are back online. Nothing reaches your workspace until you complete the document.</p>
+            <span className="inline">Read the announcement</span>
+          </Link>
+        </div>
+      </section>
 
       <section className="section">
         <div className="section-head">
