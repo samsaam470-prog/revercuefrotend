@@ -30,6 +30,9 @@ import { ContractBuilderPage } from "./pages/builder/ContractBuilderPage";
 import { FormEditorPage } from "./pages/builder/FormEditorPage";
 import { SharedTemplatePage } from "./pages/app/SharedTemplatePage";
 import { InvoiceBuilderPage } from "./pages/builder/InvoiceBuilderPage";
+import { OfflineEditorPage } from "./pages/builder/OfflineEditorPage";
+import { ContributorBuilderPage } from "./pages/public/ContributorBuilderPage";
+import { CollaborationDock } from "./components/collaboration/CollaborationDock";
 import { CrmListPage } from "./pages/crm/CrmListPage";
 import { ClientDetailPage } from "./pages/crm/ClientDetailPage";
 import {
@@ -128,6 +131,10 @@ export function App() {
           <Route path="/forms/:id/edit" element={<FormEditorPage />} />
           <Route path="/invoices/new" element={<InvoiceBuilderPage />} />
           <Route path="/invoices/:id/edit" element={<InvoiceBuilderPage />} />
+          {/* Offline Builder: works from IndexedDB, so it sits outside the app shell. */}
+          <Route path="/offline-editor/:type/:id" element={<OfflineEditorPage />} />
+          {/* Shareable Builder: opened by a contributor with no Revercue account. */}
+          <Route path="/contribute/:token" element={<ContributorBuilderPage />} />
           <Route path="/p/:publicId" element={<PublicProposalPage />} />
           <Route path="/c/:publicId" element={<PublicContractPage />} />
           <Route path="/i/:publicId" element={<PublicInvoicePage />} />
@@ -139,6 +146,7 @@ export function App() {
           <Route path="/500" element={<ServerErrorPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        <CollaborationDock />
       </div>
     </>
   );

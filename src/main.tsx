@@ -18,6 +18,9 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import "./styles/tokens.css";
 import "./styles/global.css";
 import "./styles/utilities.css";
+import { registerOfflineWorker } from "./lib/offline-store";
+
+registerOfflineWorker();
 
 const queryClient = new QueryClient({
   defaultOptions: {

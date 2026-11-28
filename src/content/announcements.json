@@ -1063,5 +1063,50 @@
         ]
       }
     ]
+  },
+  {
+    "slug": "shareable-builder-and-offline-builder",
+    "date": "2026-11-28",
+    "status": "Announced",
+    "title": "Introducing Shareable Builder and Offline Builder in Revercue Scale",
+    "summary": "Revercue Scale now includes Shareable Builder and Offline Builder. Invite one contributor to a proposal, contract, invoice or form by secure link, with no Revercue account needed, watch their edits live, talk in a temporary chat, then take back control when they finish. Or prepare a document while online and keep editing it offline in the same browser, complete the work deliberately, and sync it when you are back online.",
+    "links": [
+      {
+        "label": "Guide: Shareable Builder",
+        "to": "/guides/shareable-builder-guide"
+      },
+      {
+        "label": "Guide: Offline Builder",
+        "to": "/guides/offline-builder-guide"
+      }
+    ],
+    "body": [
+      {
+        "heading": "A contributor, without an account",
+        "paragraphs": [
+          "Shareable Builder lets you invite one person to edit one document. You enter their email, Revercue creates a secure link you can revoke or let expire, and they open it in a browser with no sign-up. They can edit text, sections, pricing, timelines, FAQs, invoice line items and form questions, and preview the result. They cannot publish, send to a client, see tracking, or reach your account, CRM or billing.",
+          "While they work, your panel shows their email, their activity and the last saved time, so you can follow the document without touching it."
+        ]
+      },
+      {
+        "heading": "A short conversation, not a record",
+        "paragraphs": [
+          "A temporary chat sits beside the document for the questions that always come up: a price to confirm, a section to cut. It closes and its messages are deleted when either side completes the contribution or you revoke the link. Nothing from it is written into your document history."
+        ]
+      },
+      {
+        "heading": "Editing where there is no signal",
+        "paragraphs": [
+          "Offline Builder prepares a document while you are online, stores it in this browser, and lets you keep editing on the same device with no connection: on a train, in a basement meeting room, on a site with no signal. An explicit Complete action freezes the offline version, and Sync appears only after that, so a half-finished document never lands in your workspace."
+        ]
+      },
+      {
+        "heading": "One document, one editor",
+        "paragraphs": [
+          "Both features use the same lock. While a contributor holds a document your own saves are refused by the server, and while Offline Mode is active the online copy is read-only everywhere. That is how Revercue keeps a single source of truth instead of two versions that quietly disagree.",
+          "Both are part of Scale and work with proposals, contracts, invoices and forms. Two new guides walk through every step, including what to do when a link expires or a sync fails."
+        ]
+      }
+    ]
   }
 ]

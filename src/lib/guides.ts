@@ -1,4 +1,5 @@
 import type { VisualName } from "../components/visuals";
+import { SCALE_GUIDES } from "../content/scaleGuides";
 
 export interface GuideSection {
   heading: string;
@@ -2658,7 +2659,7 @@ const QUESTIONS: Record<string, GuideSection[]> = {
   ],
 };
 
-export const GUIDES: Guide[] = BASE_GUIDES.map((guide) => ({
+export const GUIDES: Guide[] = [...BASE_GUIDES, ...SCALE_GUIDES].map((guide) => ({
   ...guide,
   readMinutes: guide.readMinutes + 4,
   sections: [
