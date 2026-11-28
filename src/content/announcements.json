@@ -1180,6 +1180,7 @@
           "Invite only people you trust, to one document at a time. Set a link to expire, rather than leaving it open. Review the document yourself before it reaches a client. The safest contribution is one where you know who is inside it and when it ends."
         ]
       }
-    ]
+    ],
+    "order": 2
   }
 ]
