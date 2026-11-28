@@ -142,3 +142,85 @@ for (const file of featureFiles) {
   featureCount++;
 }
 console.log("Pre-rendered " + featureCount + " feature pages.");
+
+// ---- Announcements: list page and one static page per announcement ----
+const announcementsList = JSON.parse(await readFile(resolve(process.cwd(), "src/content/announcements.json"), "utf8"));
+const sortedAnnouncements = [...announcementsList].sort((a, b) => b.date.localeCompare(a.date) || (b.order ?? 0) - (a.order ?? 0));
+const annStyle = "max-width:960px;margin:0 auto;padding:48px 24px;font-family:Inter,Arial,sans-serif;line-height:1.7;color:#1a1a1a";
+const annDate = (iso) => new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+
+function setHead(html, { title, description, url, type }) {
+  let out = html.replace(/<title>[^<]*<\/title>/i, "<title>" + esc(title) + "</title>");
+  out = setMeta(out, "name", "description", description);
+  out = setMeta(out, "property", "og:title", title);
+  out = setMeta(out, "property", "og:description", description);
+  out = setMeta(out, "property", "og:url", url);
+  out = setMeta(out, "property", "og:type", type);
+  out = setMeta(out, "name", "twitter:title", title);
+  out = setMeta(out, "name", "twitter:description", description);
+  const canonical = "<link rel=\"canonical\" href=\"" + url + "\" />";
+  out = /<link[^>]+rel=["']canonical["']/i.test(out)
+    ? out.replace(/<link[^>]+rel=["']canonical["'][^>]*>/i, canonical)
+    : out.replace("</head>", canonical + "</head>");
+  return out;
+}
+function addSchema(html, graph) {
+  return html.replace("</head>", "<script type=\"application/ld+json\">" + JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c") + "</script></head>");
+}
+const organization = { "@type": "Organization", name: "Revercue", url: origin + "/" };
+
+// list page
+{
+  const listUrl = origin + "/announcements";
+  const listTitle = "Announcements — Revercue";
+  const listDesc = "Dated notes on Revercue releases, plans, checkout and what is still in beta or planning.";
+  let html = setHead(shell, { title: listTitle, description: listDesc, url: listUrl, type: "website" });
+  html = addSchema(html, [
+    { "@type": "CollectionPage", "@id": listUrl + "#page", name: listTitle, description: listDesc, url: listUrl, isPartOf: { "@type": "WebSite", name: "Revercue", url: origin + "/" } },
+    { "@type": "ItemList", itemListElement: sortedAnnouncements.map((a, i) => ({ "@type": "ListItem", position: i + 1, url: origin + "/announcements/" + a.slug, name: a.title })) },
+    { "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Revercue", item: origin + "/" },
+      { "@type": "ListItem", position: 2, name: "Announcements", item: listUrl },
+    ] },
+  ]);
+  const items = sortedAnnouncements.map((a) =>
+    "<article style=\"border-top:1px solid #e5e5e5;padding:20px 0\"><p style=\"margin:0;font-size:14px;color:#555\">" + esc(annDate(a.date)) + " · " + esc(a.status) + "</p>" +
+    "<h2 style=\"margin:6px 0 8px;font-size:22px\"><a href=\"/announcements/" + esc(a.slug) + "\">" + esc(a.title) + "</a></h2>" +
+    "<p style=\"margin:0\">" + esc(a.summary) + "</p></article>").join("");
+  const body = "<main style=\"" + annStyle + "\"><nav aria-label=\"Breadcrumb\"><a href=\"/\">Revercue</a> / Announcements</nav>" +
+    "<header><p style=\"text-transform:uppercase;letter-spacing:.08em;font-size:13px\">Announcements</p><h1 style=\"font-size:36px;line-height:1.2\">What changed at Revercue, and when.</h1>" +
+    "<p>Dated notes on releases, plans, checkout and what is still in beta or planning. Newest first.</p></header>" + items + "</main>";
+  html = html.replace("<div id=\"root\"></div>", "<div id=\"root\">" + body + "</div>");
+  await mkdir(resolve(dist, "announcements"), { recursive: true });
+  await writeFile(resolve(dist, "announcements", "index.html"), html, "utf8");
+  console.log("Pre-rendered /announcements (" + sortedAnnouncements.length + " entries)");
+}
+
+// one page per announcement
+for (const a of sortedAnnouncements) {
+  const url = origin + "/announcements/" + a.slug;
+  const description = a.summary.length > 300 ? a.summary.slice(0, 297).replace(/\s+\S*$/, "") + "…" : a.summary;
+  let html = setHead(shell, { title: a.title + " | Revercue", description, url, type: "article" });
+  const related = (a.links || []).map((l) => "<li><a href=\"" + esc(l.to) + "\">" + esc(l.label) + "</a></li>").join("");
+  html = addSchema(html, [
+    { "@type": "NewsArticle", "@id": url + "#article", headline: a.title, description, datePublished: a.date, dateModified: a.date,
+      mainEntityOfPage: { "@type": "WebPage", "@id": url }, author: organization, publisher: organization,
+      articleSection: a.status, url, inLanguage: "en-GB" },
+    { "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Revercue", item: origin + "/" },
+      { "@type": "ListItem", position: 2, name: "Announcements", item: origin + "/announcements" },
+      { "@type": "ListItem", position: 3, name: a.title, item: url },
+    ] },
+  ]);
+  const sections = a.body.map((sec) => "<section><h2 style=\"font-size:24px;margin-top:28px\">" + esc(sec.heading) + "</h2>" +
+    sec.paragraphs.map((p) => "<p>" + esc(p) + "</p>").join("") + "</section>").join("");
+  const body = "<main style=\"" + annStyle + "\"><nav aria-label=\"Breadcrumb\"><a href=\"/\">Revercue</a> / <a href=\"/announcements\">Announcements</a> / " + esc(a.title) + "</nav>" +
+    "<article><p style=\"font-size:14px;color:#555\"><time datetime=\"" + esc(a.date) + "\">" + esc(annDate(a.date)) + "</time> · " + esc(a.status) + "</p>" +
+    "<h1 style=\"font-size:36px;line-height:1.2;margin:10px 0 16px\">" + esc(a.title) + "</h1><p>" + esc(a.summary) + "</p>" + sections +
+    (related ? "<section><h2 style=\"font-size:20px\">Related on Revercue</h2><ul>" + related + "</ul></section>" : "") +
+    "</article></main>";
+  html = html.replace("<div id=\"root\"></div>", "<div id=\"root\">" + body + "</div>");
+  await mkdir(resolve(dist, "announcements", a.slug), { recursive: true });
+  await writeFile(resolve(dist, "announcements", a.slug, "index.html"), html, "utf8");
+}
+console.log("Pre-rendered " + sortedAnnouncements.length + " announcement pages.");
