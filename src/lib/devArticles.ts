@@ -84,7 +84,7 @@ export const DEV_ARTICLES: DevArticle[] = [
     excerpt:
       "Six artefacts every project needs, a four-touch follow-up cadence that does not read as nagging, and an honest look at the tooling routes.",
     date: "2026-11-25",
-    readMinutes: 6,
+    readMinutes: 7,
     cover: "/blog/covers/paper-trail.jpg",
     series: DEV_SERIES,
   },
