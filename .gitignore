@@ -8,3 +8,5 @@ dist
 .content-cache/
 .content-export.entry.ts
 .content-export.mjs
+.pages-export.entry.tsx
+.pages-export.cjs

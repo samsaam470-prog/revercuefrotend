@@ -365,3 +365,32 @@ const trailHome = { label: "Revercue", to: "/" };
   ], body: critBody }));
   console.log("Pre-rendered /compare, " + comps.length + " comparisons and criteria");
 }
+
+// ---- Pages that were client-only: About, Contact, Beta, Privacy, Terms, Security, Solutions index ----
+{
+  const staticPages = [
+    { name: "about", route: "/about/", title: "About Revercue", description: "Who builds Revercue, why it exists, and how the product fits freelance client work." },
+    { name: "contact", route: "/contact/", title: "Contact Revercue", description: "Send a product question, a security report, an accessibility problem or a documentation error." },
+    { name: "beta", route: "/beta/", title: "Join the Revercue beta", description: "What the Revercue beta includes, what is still in beta, and how to join." },
+    { name: "privacy", route: "/privacy/", title: "Privacy policy | Revercue", description: "How Revercue collects, uses and protects personal information." },
+    { name: "terms", route: "/terms/", title: "Terms of service | Revercue", description: "The terms that apply when you use Revercue." },
+    { name: "security", route: "/security/", title: "Security | Revercue", description: "The security practices behind Revercue, and what the product does and does not certify." },
+    { name: "solutions", route: "/solutions/", title: "Freelancer workflow solutions | Revercue", description: "Revercue tools for proposals, client management, contracts and invoices, by the job you need done." },
+  ];
+  for (const page of staticPages) {
+    const markup = await readFile(resolve(process.cwd(), ".content-cache/pages", page.name + ".html"), "utf8");
+    const url = origin + page.route;
+    let html = setHead(shell, { title: page.title, description: page.description, url, type: "website" });
+    html = addSchema(html, [
+      { "@type": "WebPage", "@id": url + "#page", name: page.title, description: page.description, url, isPartOf: { "@type": "WebSite", name: "Revercue", url: origin + "/" } },
+      { "@type": "BreadcrumbList", itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Revercue", item: origin + "/" },
+        { "@type": "ListItem", position: 2, name: page.title, item: url },
+      ] },
+    ]);
+    html = html.replace("<div id=\"root\"></div>", "<div id=\"root\">" + markup + "</div>");
+    await mkdir(resolve(dist, page.route.replace(/^\/|\/$/g, "")), { recursive: true });
+    await writeFile(resolve(dist, page.route.replace(/^\/|\/$/g, ""), "index.html"), html, "utf8");
+    console.log("Pre-rendered " + page.route);
+  }
+}
