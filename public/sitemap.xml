@@ -79,25 +79,25 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://revercue.co.uk/ai-access/</loc>
+    <loc>https://revercue.co.uk/ai-access</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://revercue.co.uk/ai-overview/</loc>
+    <loc>https://revercue.co.uk/ai-overview</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://revercue.co.uk/ai-demo/</loc>
+    <loc>https://revercue.co.uk/ai-demo</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://revercue.co.uk/ai-changelog/</loc>
+    <loc>https://revercue.co.uk/ai-changelog</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -277,13 +277,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://revercue.co.uk/faqs-for-ai/</loc>
+    <loc>https://revercue.co.uk/faqs-for-ai</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://revercue.co.uk/rules-for-ai/</loc>
+    <loc>https://revercue.co.uk/rules-for-ai</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
